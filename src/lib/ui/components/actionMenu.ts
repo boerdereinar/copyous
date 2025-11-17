@@ -31,6 +31,7 @@ import { Color } from '../../common/color.js';
 import { getActionsConfigPath } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { ClipboardEntry } from '../../misc/db.js';
+import { trim } from './label.js';
 import { QrCodeDialog } from './qrCodeDialog.js';
 import { ShortcutLabel } from './shortcutLabel.js';
 
@@ -219,15 +220,15 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 			token.cancel();
 
 			if (process.get_successful()) {
-				const output = stdout.trim();
+				const output = trim(stdout);
 				if (output.length === 0) return;
 
 				switch (action.output) {
 					case ActionOutput.Copy:
-						this.emit('copy', stdout.trim());
+						this.emit('copy', output);
 						break;
 					case ActionOutput.Paste:
-						this.emit('paste', stdout.trim());
+						this.emit('paste', output);
 						break;
 				}
 			} else {
