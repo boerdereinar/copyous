@@ -268,7 +268,7 @@ export class SearchEntry extends St.Entry {
 
 	constructor(private ext: CopyousExtension) {
 		super({
-			style_class: 'search-entry',
+			style_class: 'clipboard-search-entry',
 			hint_text: _('Type to search'),
 			can_focus: true,
 			x_align: Clutter.ActorAlign.CENTER,
