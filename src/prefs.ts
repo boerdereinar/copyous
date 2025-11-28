@@ -15,6 +15,7 @@ import { HeaderCustomization } from './lib/preferences/customization/headerCusto
 import { ItemCustomization } from './lib/preferences/customization/itemCustomization.js';
 import { ItemsCustomization } from './lib/preferences/customization/itemsCustomization.js';
 import { Profiles } from './lib/preferences/customization/profiles.js';
+import { ThemeCustomization } from './lib/preferences/customization/themeCustomization.js';
 import { DependenciesWarningButton } from './lib/preferences/dependencies/dependencies.js';
 import { DependenciesSettings } from './lib/preferences/dependencies/dependenciesSettings.js';
 import { AppExclusionSettings } from './lib/preferences/general/appExclusionSettings.js';
@@ -100,6 +101,7 @@ export default class Preferences extends ExtensionPreferences {
 		const items = new ItemsCustomization(this, window);
 		dependenciesButton.bind_property('hljs', items, 'hljs', GObject.BindingFlags.SYNC_CREATE);
 		customization.add(items);
+		customization.add(new ThemeCustomization(this));
 
 		// Shortcuts page
 		const shortcuts = new Adw.PreferencesPage({

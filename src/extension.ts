@@ -13,6 +13,7 @@ import { ClipboardManager } from './lib/misc/clipboard.js';
 import { ClipboardEntry, ClipboardEntryTracker } from './lib/misc/db.js';
 import { NotificationManager } from './lib/misc/notifications.js';
 import { ShortcutManager } from './lib/misc/shortcuts.js';
+import { ThemeManager } from './lib/misc/theme.js';
 import { ClipboardDialog } from './lib/ui/clipboardDialog.js';
 import { ClipboardIndicator } from './lib/ui/indicator.js';
 
@@ -24,6 +25,8 @@ export default class CopyousExtension extends Extension {
 	private hljsMonitor: Gio.FileMonitor | undefined;
 	private hljsLanguages: Map<string, boolean> | undefined;
 	private hljsCallbacks: (() => void)[] | undefined;
+
+	public themeManager: ThemeManager | undefined;
 
 	private clipboardDialog: ClipboardDialog | undefined;
 	private indicator: ClipboardIndicator | undefined;
@@ -48,6 +51,9 @@ export default class CopyousExtension extends Extension {
 
 		// Highlight.js
 		this.initHljs().catch(error);
+
+		// Theme
+		this.themeManager = new ThemeManager(this);
 
 		// UI
 		this.clipboardDialog = new ClipboardDialog(this);
@@ -232,6 +238,12 @@ export default class CopyousExtension extends Extension {
 	}
 
 	override disable() {
+		// UI
+		this.clipboardDialog?.destroy();
+		this.indicator?.destroy();
+		this.clipboardDialog = undefined;
+		this.indicator = undefined;
+
 		// Highlight.js
 		this.hljs = undefined;
 		this.hljsMonitor?.cancel();
@@ -239,11 +251,9 @@ export default class CopyousExtension extends Extension {
 		this.hljsLanguages = undefined;
 		this.hljsCallbacks = undefined;
 
-		// UI
-		this.clipboardDialog?.destroy();
-		this.indicator?.destroy();
-		this.clipboardDialog = undefined;
-		this.indicator = undefined;
+		// Theme
+		this.themeManager?.destroy();
+		this.themeManager = undefined;
 
 		// DBus
 		this.dbus?.destroy();

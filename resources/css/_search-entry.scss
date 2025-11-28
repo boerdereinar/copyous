@@ -1,10 +1,11 @@
-@use 'sass:color';
+$search_bg_color: $card_bg_color;
 
 @mixin item_button_color($color) {
 	color: $color;
 
 	&:focus {
-		@include focus_ring($fc: color.adjust($color, $alpha: -0.5));
+		$fc: transparentize($color, 0.5);
+		@include focus_ring($fc: $fc);
 	}
 
 	&:hover .search-entry-icon {
@@ -14,27 +15,35 @@
 
 .clipboard-dialog {
 	// Search entry
-	.search-entry {
-		width: auto;
+	.clipboard-search-entry {
+		// prettier-ignore
+		& {
+			@extend %entry_common;
+			@include button(normal, $c:$search_bg_color, $style: default);
+			&:hover { @include button(hover, $c:$search_bg_color, $style: default);}
+			&:focus { @include button(focus, $c:$search_bg_color, $style: default);}
+			&:insensitive { @include button(insensitive, $c:$search_bg_color, $style: default);}
+
+			StLabel.hint-text {
+				color: transparentize($fg_color, 0.3);
+			}
+		}
+
 		margin: 0;
 		padding: $base_padding - 2px;
 		max-width: 24em;
+		border: 1px solid $card_shadow_border_color;
+		border-radius: $forced_circular_radius;
+		box-shadow: 0 1px 2px 0 $card_shadow_color;
 
 		StLabel {
 			padding: 0;
 		}
 
-		// prettier-ignore
-		@if $variant == 'light' {
-			border: 1px solid $card_shadow_border_color;
-			box-shadow: 0 1px 2px 0 $card_shadow_color;
-
-			@include button(normal, $style: card);
-			&:hover { @include button(hover, $style: card);}
-			&:focus { @include button(focus, $style: card);}
-			&:insensitive { @include button(insensitive, $style: card);}
-
-			StLabel.hint-text { color: color.adjust($fg_color, $alpha:-0.3); }
+		.search-entry-icon {
+			icon-size: $scalable_icon_size;
+			margin-top: 2px;
+			padding: 0 $base_margin;
 		}
 
 		.search-entry-button {
@@ -62,7 +71,6 @@
 				}
 
 				.search-entry-icon {
-					icon-size: $scalable_icon_size;
 					padding-bottom: 2px;
 				}
 
@@ -83,7 +91,6 @@
 					.search-entry-icon {
 						margin: 0;
 						padding: $scalable_icon_size * 0.1;
-						icon-size: $scalable_icon_size;
 					}
 				}
 

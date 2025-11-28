@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/main/gio/gresource.dtd?ref_type=heads"?>
+<gresources>
+	<gresource prefix="/org/gnome/shell/extensions/copyous">
+		<file alias="stylesheet-dark.css">css/stylesheet-dark.css</file>
+		<file alias="stylesheet-light.css">css/stylesheet-light.css</file>
+		<file alias="template-dark.css">css/template-dark.css</file>
+		<file alias="template-light.css">css/template-light.css</file>
+	</gresource>
+</gresources>

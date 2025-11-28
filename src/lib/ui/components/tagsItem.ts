@@ -121,7 +121,7 @@ export class TagsItem extends PopupMenu.PopupBaseMenuItem {
 		// Left arrow
 		this._leftArrow = new St.Button({
 			icon_name: Icon.Left,
-			style_class: 'arrow-button',
+			style_class: 'popup-menu-item arrow-button',
 			reactive: false,
 		});
 		this.actor.add_child(this._leftArrow);
@@ -143,7 +143,7 @@ export class TagsItem extends PopupMenu.PopupBaseMenuItem {
 		// Right arrow
 		this._rightArrow = new St.Button({
 			icon_name: Icon.Right,
-			style_class: 'arrow-button',
+			style_class: 'popup-menu-item arrow-button',
 		});
 		this.actor.add_child(this._rightArrow);
 
@@ -211,6 +211,9 @@ export class TagsItem extends PopupMenu.PopupBaseMenuItem {
 		const hadjustment = this._tagsBox.hadjustment;
 		this._leftArrow.reactive = hadjustment.value > 0;
 		this._rightArrow.reactive = hadjustment.value < hadjustment.upper - hadjustment.page_size;
+
+		if (!this._leftArrow.reactive) this._leftArrow.remove_style_pseudo_class('hover');
+		if (!this._rightArrow.reactive) this._rightArrow.remove_style_pseudo_class('hover');
 	}
 
 	override vfunc_key_focus_in(): void {
