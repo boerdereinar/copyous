@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-30 15:39+0000\n"
-"PO-Revision-Date: 2025-11-29 19:52+0100\n"
+"PO-Revision-Date: 2025-11-30 18:06+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -845,7 +845,7 @@ msgstr "Integrierte Aktionen wiederherstellen"
 
 #: src/lib/preferences/actions/actionsPage.ts:101
 msgid "Reset Actions"
-msgstr "Aktionen zurücksetzen?"
+msgstr "Aktionen zurücksetzen"
 
 #: src/lib/preferences/actions/actionsPage.ts:121
 msgid "Restore Built-In Actions?"
