@@ -4,8 +4,6 @@ import GObject from 'gi://GObject';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
 
-import * as Main from 'resource:///org/gnome/shell/ui/main.js';
-
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Language } from '../../misc/db.js';
@@ -396,7 +394,7 @@ export class CodeLabel extends St.Label {
 
 		if (this.showLineNumbers && lines.length > 1) {
 			// Add line numbers
-			const color = Main.getStyleVariant() === 'dark' ? Colors.light_1 : Colors.dark_7;
+			const color = this.ext.themeManager?.colorScheme ? Colors.dark_7 : Colors.light_1;
 			const span = `<span color="${color}" alpha="50%">`;
 			text = lines.map((l, i) => `${span}${i.toString().padEnd(2, ' ')}</span> ${l}`).join('\n');
 		}
