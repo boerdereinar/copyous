@@ -1,0 +1,1749 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Copyous
+# This file is distributed under the same license as the Copyous package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copyous\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-26 16:04+0000\n"
+"PO-Revision-Date: 2025-11-30 10:43+0100\n"
+"Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.8\n"
+
+#: src/lib/preferences/customization/itemCustomization.ts:14
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:16
+msgid "Item"
+msgstr "Element"
+
+#: src/lib/preferences/customization/itemCustomization.ts:18
+msgid "Item Width"
+msgstr "Szerokość elementu"
+
+#: src/lib/preferences/customization/itemCustomization.ts:19
+msgid "Change the width of the clipboard items"
+msgstr "Zmień szerokość elementów schowka"
+
+#: src/lib/preferences/customization/itemCustomization.ts:31
+msgid "Item Height"
+msgstr "Wysokość elementu"
+
+#: src/lib/preferences/customization/itemCustomization.ts:32
+msgid "Change the height of the clipboard items"
+msgstr "Zmień wysokość elementów schowka"
+
+#: src/lib/preferences/customization/itemCustomization.ts:44
+msgid "Tab Width"
+msgstr "Szerokość zakładki"
+
+#: src/lib/preferences/customization/itemCustomization.ts:45
+msgid "Change the width of a tab character in the clipboard items"
+msgstr "Zmień szerokość znaku tabulacji w elementach schowka"
+
+#: src/lib/preferences/customization/itemsCustomization.ts:22
+msgid "Items"
+msgstr "Elementy"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:24
+#: src/lib/preferences/shortcuts/dialogShortcuts.ts:14
+msgid "Dialog"
+msgstr "Okno"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:28
+msgid "Position"
+msgstr "Pozycja"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:29
+msgid "Change the position of the clipboard dialog"
+msgstr "Zmień położenie okna dialogowego schowka"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:34
+msgid "Show at Pointer"
+msgstr "Pokaż przy wskaźniku"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:35
+msgid "Show the clipboard dialog at the pointer position"
+msgstr "Pokaż okno dialogowe schowka w pozycji wskaźnika"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:41
+msgid "Show at Text Cursor"
+msgstr "Pokaż przy kursorze tekstowym"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:43
+msgid ""
+"Show the clipboard dialog at the text cursor position whenever possible, "
+"otherwise at the pointer position"
+msgstr ""
+"Pokaż okno dialogowe schowka w pozycji kursora tekstowego, jeśli to możliwe, "
+"w przeciwnym razie w pozycji wskaźnika"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:49
+msgid "Orientation"
+msgstr "Orientacja"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:50
+msgid "Select the orientation of the clipboard dialog"
+msgstr "Wybierz orientację okna dialogowego schowka"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:51
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:91
+msgid "Horizontal"
+msgstr "Poziomo"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:51
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:91
+msgid "Vertical"
+msgstr "Pionowo"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:56
+#: src/lib/preferences/customization/dialogCustomization.ts:86
+msgid "Top"
+msgstr "U góry"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:56
+#: src/lib/preferences/customization/dialogCustomization.ts:65
+msgid "Center"
+msgstr "Na środku"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:56
+#: src/lib/preferences/customization/dialogCustomization.ts:100
+msgid "Bottom"
+msgstr "Na dole"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:56
+#: src/lib/preferences/customization/dialogCustomization.ts:65
+#: src/lib/preferences/customization/dialogCustomization.ts:187
+#: src/lib/preferences/customization/dialogCustomization.ts:191
+msgid "Fill"
+msgstr "Wypełnienie"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:58
+msgid "Vertical Position"
+msgstr "Położenie pionowe"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:59
+msgid "Select the vertical position of the clipboard dialog"
+msgstr "Wybierz pozycję pionową okna dialogowego schowka"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:65
+#: src/lib/preferences/customization/dialogCustomization.ts:107
+msgid "Left"
+msgstr "Po lewej"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:65
+#: src/lib/preferences/customization/dialogCustomization.ts:93
+msgid "Right"
+msgstr "Po prawej"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:67
+msgid "Horizontal Position"
+msgstr "Położenie poziome"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:68
+msgid "Select the horizontal position of the clipboard dialog"
+msgstr "Wybierz pozycję poziomą okna dialogowego schowka"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:80
+msgid "Margins"
+msgstr "Marginesy"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:81
+msgid "Change the distance of the dialog from the screen edges"
+msgstr "Zmień odstęp okna dialogowego od krawędzi ekranu"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:87
+msgid "Distance from the top of the screen"
+msgstr "Odstęp od górnej krawędzi ekranu"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:94
+msgid "Distance from the right of the screen"
+msgstr "Odstęp od prawej krawędzi ekranu"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:101
+msgid "Distance from the bottom of the screen"
+msgstr "Odstęp od dolnej krawędzi ekranu"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:108
+msgid "Distance from the left of the screen"
+msgstr "Odstęp od lewej krawędzi ekranu"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:114
+msgid "Auto Hide Search"
+msgstr "Automatycznie ukrywaj wyszukiwanie"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:115
+msgid "Automatically hide the search bar when not focused"
+msgstr "Automatycznie ukrywaj pasek wyszukiwania, gdy nie jest aktywny"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:120
+msgid "Show Scrollbar"
+msgstr "Pokaż pasek przewijania"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:121
+msgid "Show a scrollbar when items overflow"
+msgstr "Pokaż pasek przewijania, gdy elementy przepełniają widok"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:205
+msgid "Width"
+msgstr "Szerokość"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:206
+msgid "Change the width of the clipboard dialog"
+msgstr "Zmień szerokość okna dialogowego schowka"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:208
+msgid "Height"
+msgstr "Wysokość"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:209
+msgid "Change the height of the clipboard dialog"
+msgstr "Zmień wysokość okna dialogowego schowka"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:15
+msgid "Text Item"
+msgstr "Element tekstowy"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:16
+msgid "Configure text clipboard items"
+msgstr "Konfiguruj elementy tekstowe schowka"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:20
+msgid "Show Text Info"
+msgstr "Pokaż informacje tekstowe"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:21
+msgid "Show extra information in the text item"
+msgstr "Pokaż dodatkowe informacje w elemencie tekstowym"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:26
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:38
+msgid "Text Count Mode"
+msgstr "Tryb liczenia tekstu"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:27
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:39
+msgid "Show the number of characters, words or lines"
+msgstr "Pokaż liczbę znaków, słów lub linii"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+msgid "Characters"
+msgstr "Znaki"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+msgid "Words"
+msgstr "Słowa"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+msgid "Lines"
+msgstr "Linie"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:14
+msgid "Image Item"
+msgstr "Element graficzny"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:15
+msgid "Configure image clipboard items"
+msgstr "Konfiguruj elementy graficzne schowka"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:19
+msgid "Show Image Info"
+msgstr "Pokaż informacje o obrazie"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:20
+msgid "Show extra information in the image item"
+msgstr "Pokaż dodatkowe informacje w elemencie graficznym"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:25
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:171
+msgid "Background Size"
+msgstr "Rozmiar tła"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:26
+msgid "Background size of the image"
+msgstr "Rozmiar tła obrazu"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:84
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
+msgid "Cover"
+msgstr "Pokryj"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:84
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
+msgid "Contain"
+msgstr "Dopasuj"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:15
+msgid "Code Item"
+msgstr "Element kodu"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:16
+msgid "Configure code clipboard items"
+msgstr "Konfiguruj elementy kodu programu schowka"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:20
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:178
+msgid "Syntax Highlighting"
+msgstr "Podświetlanie składni"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:21
+msgid "Enable or disable syntax highlighting in the code item"
+msgstr "Włącz lub wyłącz podświetlanie składni w elemencie kodu"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:26
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:184
+msgid "Show Line Numbers"
+msgstr "Pokaż numery linii"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:27
+msgid "Show line numbers in the code item"
+msgstr "Pokaż numery linii w elemencie kodu"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:32
+msgid "Show Code Info"
+msgstr "Pokaż informacje o kodzie"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:33
+msgid "Show extra information in the code item"
+msgstr "Pokaż dodatkowe informacje w elemencie kodu"
+
+#: src/lib/preferences/customization/items/exclusions.ts:33
+msgid "Zero or More Characters"
+msgstr "Zero lub więcej znaków"
+
+#: src/lib/preferences/customization/items/exclusions.ts:39
+msgid "One Character"
+msgstr "Jeden znak"
+
+#: src/lib/preferences/customization/items/exclusions.ts:45
+msgid "Recursive Wildcard"
+msgstr "Rekurencyjny symbol wieloznaczny"
+
+#: src/lib/preferences/customization/items/exclusions.ts:51
+msgid "List"
+msgstr "Lista"
+
+#: src/lib/preferences/customization/items/exclusions.ts:57
+msgid "Range"
+msgstr "Zakres"
+
+#: src/lib/preferences/customization/items/exclusions.ts:63
+msgid "Not in Range"
+msgstr "Nie jest w zakresie"
+
+#: src/lib/preferences/customization/items/exclusions.ts:90
+#: src/lib/preferences/dependencies/dependencies.ts:203
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:34
+#: src/lib/preferences/actions/actionsPage.ts:27
+#: src/lib/preferences/actions/actionsPage.ts:40
+#: src/lib/preferences/actions/actionDialog.ts:234
+#: src/lib/preferences/actions/actionsGroup.ts:33
+#: src/lib/preferences/general/appExclusionSettings.ts:174
+#: src/lib/preferences/shortcuts/shortcutRow.ts:131
+#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:40
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: src/lib/preferences/customization/items/exclusions.ts:92
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
+#: src/lib/preferences/actions/actionDialog.ts:655
+#: src/lib/preferences/actions/actionsGroup.ts:550
+#: src/lib/preferences/general/appExclusionSettings.ts:176
+msgid "Add"
+msgstr "Dodaj"
+
+#: src/lib/preferences/customization/items/exclusions.ts:107
+msgid "Pattern"
+msgstr "Wzór"
+
+#: src/lib/preferences/customization/items/exclusions.ts:124
+msgid "You can test your pattern below"
+msgstr "Możesz przetestować swój wzorzec poniżej"
+
+#: src/lib/preferences/customization/items/exclusions.ts:158
+msgid "Invalid Pattern"
+msgstr "Błędny wzór"
+
+#: src/lib/preferences/customization/items/exclusions.ts:163
+msgid "Preview Shown"
+msgstr "Podgląd wyświetlony"
+
+#: src/lib/preferences/customization/items/exclusions.ts:168
+msgid "Preview Hidden"
+msgstr "Podgląd ukryty"
+
+#: src/lib/preferences/customization/items/exclusions.ts:291
+msgid "No Exclusion Patterns"
+msgstr "Brak wzorców wykluczających"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:13
+msgid "Character Item"
+msgstr "Element znaku"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:14
+msgid "Configure character clipboard items"
+msgstr "Konfiguruj elementy znaków schowka"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:18
+msgid "Maximum Characters"
+msgstr "Maksymalna liczba znaków"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:19
+msgid "Maximum number of characters that are recognized as a character item"
+msgstr "Maksymalna liczba znaków rozpoznawana jako element znaku"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:25
+msgid "Show Unicode"
+msgstr "Pokaż Unicode"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:26
+msgid "Show the Unicode of the character"
+msgstr "Pokaż kod Unicode znaku"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:29
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:98
+msgid "Link Exclusions"
+msgstr "Wykluczenia odnośników"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:42
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:100
+msgid "Add Pattern"
+msgstr "Dodaj wzór"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:43
+msgid ""
+"Enter a regular expression to exclude links that should not have a preview."
+msgstr ""
+"Wprowadź wyrażenie regularne, aby wykluczyć odnośniki, dla których nie ma "
+"być podglądu."
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:44
+#: src/lib/preferences/actions/actionDialog.ts:180
+#: src/lib/preferences/actions/actionDialog.ts:379
+#: src/lib/preferences/actions/actionDefaults.ts:152
+#: src/lib/ui/items/linkItem.ts:293
+msgid "Link"
+msgstr "Odnośnik"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:47
+msgid "Link Exclusion Patterns"
+msgstr "Wzorce wykluczające odnośniki"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:48
+msgid "Links matching these patterns will not have a preview"
+msgstr "Odnośniki pasujące do tych wzorców nie będą miały podglądu"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:65
+msgid "Link Item"
+msgstr "Element odnośnika"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:66
+msgid "Configure link clipboard items"
+msgstr "Konfiguruj elementy odnośników schowka"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:70
+msgid "Show Link Preview"
+msgstr "Pokaż podgląd odnośnika"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:71
+msgid "Show link preview in the link item"
+msgstr "Pokaż podgląd odnośnika w elemencie odnośnika"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:76
+msgid "Show Link Preview Image"
+msgstr "Pokaż obraz podglądu odnośnika"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:77
+msgid "Show link preview image in the link item"
+msgstr "Pokaż obraz podglądu odnośnika w elemencie odnośnika"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:82
+msgid "Link Preview Image Background Size"
+msgstr "Rozmiar tła obrazu podglądu odnośnika"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:83
+msgid "Background size of the link preview image"
+msgstr "Rozmiar tła obrazu podglądu odnośnika"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:89
+msgid "Link Preview Orientation"
+msgstr "Orientacja podglądu odnośnika"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:90
+msgid "Orientation of the link preview"
+msgstr "Orientacja podglądu odnośnika"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:99
+msgid "Configure link exclusions for link previews"
+msgstr "Konfiguruj wykluczenia odnośników dla podglądów odnośników"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:51
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:190
+msgid "File Exclusions"
+msgstr "Wykluczenia plików"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:63
+msgid "File Preview Type"
+msgstr "Typ podglądu pliku"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:68
+#: src/lib/preferences/actions/actionDialog.ts:175
+#: src/lib/preferences/actions/actionDialog.ts:364
+#: src/lib/preferences/actions/actionDefaults.ts:132
+#: src/lib/ui/items/textItem.ts:24
+msgid "Text"
+msgstr "Tekst"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:69
+msgid "Enable file previews for all text files"
+msgstr "Włącz podglądy plików dla wszystkich plików tekstowych"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:78
+#: src/lib/preferences/actions/actionDialog.ts:177
+#: src/lib/preferences/actions/actionDialog.ts:370
+#: src/lib/preferences/actions/actionDefaults.ts:140
+#: src/lib/ui/items/imageItem.ts:37
+msgid "Image"
+msgstr "Obraz"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:79
+msgid "Enable file previews for all image files"
+msgstr "Włącz podglądy plików dla wszystkich plików graficznych"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:88
+msgid "Thumbnail"
+msgstr "Miniatura"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:89
+msgid "Enable file previews for all files with generated thumbnails"
+msgstr ""
+"Włącz podglądy plików dla wszystkich plików z wygenerowanymi miniaturami"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:101
+msgid "Enter a glob pattern to exclude files that should not have a preview."
+msgstr ""
+"Wprowadź wzorzec typu 'glob', aby wykluczyć pliki, dla których nie ma być "
+"podglądu."
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:102
+msgid "Path"
+msgstr "Ścieżka"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:105
+msgid "File Exclusion Patterns"
+msgstr "Wzorce wykluczające pliki"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:106
+msgid "Files matching these patterns will not have a preview"
+msgstr "Pliki pasujące do tych wzorców nie będą miały podglądu"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:149
+msgid "File Item"
+msgstr "Element pliku"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:150
+msgid "Configure file clipboard items"
+msgstr "Konfiguruj elementy plików schowka"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:154
+msgid "File Preview Visibility"
+msgstr "Widoczność podglądu pliku"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:156
+msgid ""
+"File preview shows a preview of the contents of a file.\n"
+"File info shows some information about the file."
+msgstr ""
+"Podgląd pliku wyświetla podgląd zawartości pliku.\n"
+"Informacje o pliku wyświetlają pewne informacje o pliku."
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:159
+msgid "File Preview"
+msgstr "Podgląd pliku"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:160
+msgid "File Info"
+msgstr "Informacje o pliku"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:161
+msgid "File Preview or File Info"
+msgstr "Podgląd pliku lub Informacje o pliku"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:162
+msgid "File Preview and File Info"
+msgstr "Podgląd pliku i Informacje o pliku"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:163
+#: src/lib/preferences/customization/headerCustomization.ts:33
+msgid "Hidden"
+msgstr "Ukryte"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:172
+msgid "Background size of the image preview"
+msgstr "Rozmiar tła podglądu obrazu"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:179
+msgid "Enable or disable syntax highlighting in the text preview"
+msgstr "Włącz lub wyłącz podświetlanie składni w podglądzie tekstu"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:185
+msgid "Show line numbers in the text preview"
+msgstr "Pokaż numery wierszy w podglądzie tekstu"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:191
+msgid "Configure file exclusions for file previews"
+msgstr "Konfiguruj wykluczenia plików dla podglądów plików"
+
+#: src/lib/preferences/customization/headerCustomization.ts:15
+msgid "Header"
+msgstr "Nagłówek"
+
+#: src/lib/preferences/customization/headerCustomization.ts:19
+msgid "Show Header"
+msgstr "Pokaż nagłówek"
+
+#: src/lib/preferences/customization/headerCustomization.ts:20
+msgid "Show the header"
+msgstr "Pokaż nagłówek"
+
+#: src/lib/preferences/customization/headerCustomization.ts:25
+msgid "Show Item Title"
+msgstr "Pokaż tytuł elementu"
+
+#: src/lib/preferences/customization/headerCustomization.ts:26
+msgid "Show the title of the item"
+msgstr "Pokaż tytuł elementu"
+
+#: src/lib/preferences/customization/headerCustomization.ts:31
+msgid "Header Controls Visibility"
+msgstr "Widoczność kontrolek nagłówka"
+
+#: src/lib/preferences/customization/headerCustomization.ts:32
+msgid "The visibility of the header controls"
+msgstr "Widoczność kontrolek nagłówka"
+
+#: src/lib/preferences/customization/headerCustomization.ts:33
+msgid "Visible"
+msgstr "Widoczne"
+
+#: src/lib/preferences/customization/headerCustomization.ts:33
+msgid "Visible on Hover"
+msgstr "Widoczne po najechaniu"
+
+#: src/lib/preferences/customization/profiles.ts:179
+msgid "Profiles"
+msgstr "Profile"
+
+#: src/lib/preferences/customization/profiles.ts:180
+msgid "Choose between pre-defined profiles"
+msgstr "Wybierz spośród predefiniowanych profili"
+
+#: src/lib/preferences/customization/profiles.ts:188
+msgid "Default"
+msgstr "Domyślny"
+
+#: src/lib/preferences/customization/profiles.ts:194
+msgid "Compact"
+msgstr "Kompaktowy"
+
+#: src/lib/preferences/customization/profiles.ts:200
+msgid "Custom"
+msgstr "Własny"
+
+#: src/lib/preferences/dependencies/dependencies.ts:151
+#: src/lib/preferences/dependencies/dependencies.ts:433
+msgid "Highlight.js Not Installed"
+msgstr "Highlight.js nie jest zainstalowane"
+
+#: src/lib/preferences/dependencies/dependencies.ts:152
+msgid "Highlight.js is required to display syntax highlighted code."
+msgstr ""
+"Wymagana jest biblioteka Highlight.js, aby wyświetlać kod z podświetloną "
+"składnią."
+
+#: src/lib/preferences/dependencies/dependencies.ts:156
+msgid "Manual Installation"
+msgstr "Instalacja ręczna"
+
+#: src/lib/preferences/dependencies/dependencies.ts:170
+msgid ""
+"You can manually install highlight.js by downloading highlight.min.js from "
+"\"Url\" to \"Install Location\"."
+msgstr ""
+"Możesz ręcznie zainstalować highlight.js, pobierając 'highlight.min.js' z "
+"\"URL\" do \"Lokalizacja instalacji\"."
+
+#: src/lib/preferences/dependencies/dependencies.ts:187
+msgid "Url"
+msgstr "URL"
+
+#: src/lib/preferences/dependencies/dependencies.ts:196
+msgid "Install Location"
+msgstr "Lokalizacja instalacji"
+
+#: src/lib/preferences/dependencies/dependencies.ts:205
+msgid "Install"
+msgstr "Zainstaluj"
+
+#: src/lib/preferences/dependencies/dependencies.ts:332
+#: src/lib/preferences/dependencies/dependencies.ts:431
+msgid "Libgda Not Installed"
+msgstr "Libgda nie jest zainstalowane"
+
+#: src/lib/preferences/dependencies/dependencies.ts:334
+msgid ""
+"Libgda is required to store clipboard history between sessions. Install "
+"either libgda 5.0 or 6.0 with SQLite support to use this feature. After "
+"installing libgda you will need to log out or restart your system."
+msgstr ""
+"Wymagana jest biblioteka Libgda, aby przechowywać historię schowka pomiędzy "
+"sesjami. Zainstaluj Libgda w wersji 5.0 lub 6.0 z obsługą SQLite, aby móc "
+"korzystać z tej funkcji. Po zainstalowaniu Libgda konieczne będzie "
+"wylogowanie się lub ponowne uruchomienie systemu."
+
+#: src/lib/preferences/dependencies/dependencies.ts:338
+msgid "Install Libgda"
+msgstr "Zainstaluj Libgda"
+
+#: src/lib/preferences/dependencies/dependencies.ts:346
+#: src/lib/preferences/dependencies/dependencies.ts:432
+msgid "GSound Not Installed"
+msgstr "GSound nie jest zainstalowane"
+
+#: src/lib/preferences/dependencies/dependencies.ts:348
+msgid ""
+"GSound is required to play sound effects. Install GSound to use this "
+"feature. After installing GSound you will need to log out or restart your "
+"system."
+msgstr ""
+"Wymagana jest biblioteka GSound, aby odtwarzać efekty dźwiękowe. Zainstaluj "
+"GSound, aby korzystać z tej funkcji. Po zainstalowaniu GSound konieczne "
+"będzie wylogowanie się lub ponowne uruchomienie systemu."
+
+#: src/lib/preferences/dependencies/dependencies.ts:351
+msgid "Install GSound"
+msgstr "Zainstaluj GSound"
+
+#: src/lib/preferences/dependencies/dependencies.ts:364
+msgid "Starting Highlight.js Download"
+msgstr "Rozpoczynanie pobierania Highlight.js"
+
+#: src/lib/preferences/dependencies/dependencies.ts:384
+msgid "Successfully Installed Highlight.js"
+msgstr "Pomyślnie zainstalowano Highlight.js"
+
+#: src/lib/preferences/dependencies/dependencies.ts:384
+msgid "Error Installing Highlight.js"
+msgstr "Błąd instalacji Highlight.js"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:240
+#, javascript-format
+msgid "Successfully Installed %s"
+msgstr "Pomyślnie zainstalowano %s"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:241
+#, javascript-format
+msgid "Error Installing %s"
+msgstr "Błąd instalacji %s"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:261
+#, javascript-format
+msgid "Successfully Uninstalled %s"
+msgstr "Pomyślnie odinstalowano %s"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:262
+#, javascript-format
+msgid "Error Uninstalling %s"
+msgstr "Błąd odinstalowania %s"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:288
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:382
+msgid "Manage Highlight.js"
+msgstr "Zarządzaj Highlight.js"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:300
+msgid "Languages"
+msgstr "Języki"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:321
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:47
+msgid "Search"
+msgstr "Szukaj"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:375
+msgid "Dependencies"
+msgstr "Zależności"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:383
+msgid "Manage the Highlight.js installation"
+msgstr "Zarządzaj instalacją Highlight.js"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:47
+#: src/lib/preferences/actions/actionDialog.ts:441
+#: src/lib/preferences/actions/actionDialog.ts:523
+#: src/lib/preferences/actions/actionDialog.ts:611
+msgid "Name"
+msgstr "Nazwa"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
+#: src/lib/preferences/actions/actionsGroup.ts:569
+msgid "Add Submenu"
+msgstr "Dodaj podmenu"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
+msgid "Edit Submenu"
+msgstr "Edytuj podmenu"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
+#: src/lib/preferences/actions/actionsGroup.ts:125
+#: src/lib/preferences/actions/actionsGroup.ts:423
+#: src/lib/ui/components/clipboardItemMenu.ts:94
+msgid "Edit"
+msgstr "Edytuj"
+
+#: src/lib/preferences/actions/actionsPage.ts:28
+msgid "Reset"
+msgstr "Zresetuj"
+
+#: src/lib/preferences/actions/actionsPage.ts:41
+msgid "Restore"
+msgstr "Przywróć"
+
+#: src/lib/preferences/actions/actionsPage.ts:62
+#: src/lib/preferences/actions/actionsGroup.ts:518
+msgid "Actions"
+msgstr "Akcje"
+
+#: src/lib/preferences/actions/actionsPage.ts:74
+#: src/lib/preferences/actions/actionDefaults.ts:113
+#: src/lib/preferences/actions/actionDefaults.ts:128
+msgid "Default Actions"
+msgstr "Domyślne akcje"
+
+#: src/lib/preferences/actions/actionsPage.ts:75
+msgid "Set default actions that trigger when holding control"
+msgstr "Ustaw domyślne czynności wyzwalane po przytrzymaniu klawisza Ctrl"
+
+#: src/lib/preferences/actions/actionsPage.ts:92
+msgid "Restore Built-In Actions"
+msgstr "Przywróć wbudowane akcje"
+
+#: src/lib/preferences/actions/actionsPage.ts:101
+msgid "Reset Actions"
+msgstr "Zresetuj akcje"
+
+#: src/lib/preferences/actions/actionsPage.ts:121
+msgid "Restore Built-In Actions?"
+msgstr "Przywrócić wbudowane akcje?"
+
+#: src/lib/preferences/actions/actionsPage.ts:123
+msgid ""
+"Restoring the built-in actions will restore built-in actions that were "
+"removed. Custom actions will remain unchanged"
+msgstr ""
+"Przywrócenie wbudowanych akcji przywróci wbudowane akcje, które zostały "
+"usunięte. Akcje niestandardowe pozostaną niezmienione"
+
+#: src/lib/preferences/actions/actionsPage.ts:140
+msgid "Reset Actions?"
+msgstr "Zresetować akcje?"
+
+#: src/lib/preferences/actions/actionsPage.ts:141
+msgid "Resetting the actions will delete all custom actions"
+msgstr "Zresetowanie akcji usunie wszystkie akcje niestandardowe"
+
+#: src/lib/preferences/actions/actionDialog.ts:38
+msgid "All"
+msgstr "Wszystko"
+
+#: src/lib/preferences/actions/actionDialog.ts:131
+msgid "Types"
+msgstr "Typy"
+
+#: src/lib/preferences/actions/actionDialog.ts:132
+msgid "Select which types are allowed"
+msgstr "Wybierz dozwolone typy"
+
+#: src/lib/preferences/actions/actionDialog.ts:176
+#: src/lib/preferences/actions/actionDialog.ts:367
+#: src/lib/preferences/actions/actionDefaults.ts:136
+#: src/lib/ui/items/codeItem.ts:23
+msgid "Code"
+msgstr "Kod"
+
+#: src/lib/preferences/actions/actionDialog.ts:178
+#: src/lib/preferences/actions/actionDialog.ts:373
+#: src/lib/preferences/actions/actionDefaults.ts:144
+#: src/lib/ui/items/fileItem.ts:63
+msgid "File"
+msgstr "Plik"
+
+#: src/lib/preferences/actions/actionDialog.ts:179
+#: src/lib/preferences/actions/actionDialog.ts:376
+#: src/lib/preferences/actions/actionDefaults.ts:148
+#: src/lib/ui/items/filesItem.ts:134
+msgid "Files"
+msgstr "Pliki"
+
+#: src/lib/preferences/actions/actionDialog.ts:181
+#: src/lib/preferences/actions/actionDialog.ts:382
+#: src/lib/preferences/actions/actionDefaults.ts:158
+msgid "Character"
+msgstr "Znak"
+
+#: src/lib/preferences/actions/actionDialog.ts:182
+#: src/lib/preferences/actions/actionDialog.ts:257
+#: src/lib/preferences/actions/actionDialog.ts:385
+#: src/lib/preferences/actions/actionDefaults.ts:165
+#: src/lib/ui/items/colorItem.ts:71
+msgid "Color"
+msgstr "Kolor"
+
+#: src/lib/preferences/actions/actionDialog.ts:256
+msgid "Kind"
+msgstr "Rodzaj"
+
+#: src/lib/preferences/actions/actionDialog.ts:257
+#: src/lib/preferences/actions/actionDialog.ts:401
+msgid "Command"
+msgstr "Polecenie"
+
+#: src/lib/preferences/actions/actionDialog.ts:257
+#: src/lib/common/actions.ts:242
+msgid "QR Code"
+msgstr "Kod QR"
+
+#: src/lib/preferences/actions/actionDialog.ts:347
+msgid ""
+"The regular expression does not use any flags for matching. Leaving this "
+"empty will match everything."
+msgstr ""
+"Wyrażenie regularne nie używa żadnych flag do dopasowania. Pozostawienie tej "
+"opcji pustej spowoduje dopasowanie wszystkiego."
+
+#: src/lib/preferences/actions/actionDialog.ts:361
+msgid "Type"
+msgstr "Typ"
+
+#: src/lib/preferences/actions/actionDialog.ts:362
+msgid "Example"
+msgstr "Przykład"
+
+#: src/lib/preferences/actions/actionDialog.ts:393
+msgid "Regular Expression"
+msgstr "Wyrażenie regularne"
+
+#: src/lib/preferences/actions/actionDialog.ts:406
+msgid ""
+"Clipboard content will be provided via stdin. Capture groups of the regular "
+"expression will be passed as positional parameters $1, $2, $3, ..."
+msgstr ""
+"Zawartość schowka zostanie dostarczona za pośrednictwem stdin. Grupy "
+"przechwytywania wyrażenia regularnego zostaną przekazane jako parametry "
+"pozycyjne $1, $2, $3, ..."
+
+#: src/lib/preferences/actions/actionDialog.ts:459
+#: src/lib/preferences/actions/actionDialog.ts:550
+msgid "Output"
+msgstr "Wyjście"
+
+#: src/lib/preferences/actions/actionDialog.ts:460
+#: src/lib/preferences/actions/actionDialog.ts:551
+msgid "Select how to handle the output"
+msgstr "Wybierz sposób obsługi wyjścia"
+
+#: src/lib/preferences/actions/actionDialog.ts:461
+msgid "Ignore"
+msgstr "Ignoruj"
+
+#: src/lib/preferences/actions/actionDialog.ts:461
+#: src/lib/preferences/actions/actionDialog.ts:552
+#: src/lib/ui/components/qrCodeDialog.ts:154
+msgid "Copy"
+msgstr "Skopiuj"
+
+#: src/lib/preferences/actions/actionDialog.ts:461
+#: src/lib/preferences/actions/actionDialog.ts:552
+msgid "Paste"
+msgstr "Wklej"
+
+#: src/lib/preferences/actions/actionDialog.ts:466
+#: src/lib/preferences/actions/actionDialog.ts:557
+#: src/lib/preferences/actions/actionDialog.ts:621
+msgid "Shortcut"
+msgstr "Skrót klawiszowy"
+
+#: src/lib/preferences/actions/actionDialog.ts:530
+msgid "Color Space"
+msgstr "Przestrzeń barw"
+
+#: src/lib/preferences/actions/actionDialog.ts:531
+msgid "Select which color space to convert to"
+msgstr "Wybierz przestrzeń barw do konwersji"
+
+#: src/lib/preferences/actions/actionDialog.ts:533
+#: src/lib/common/actions.ts:227
+msgid "Rgb"
+msgstr "RGB"
+
+#: src/lib/preferences/actions/actionDialog.ts:534
+#: src/lib/common/actions.ts:228
+msgid "Hex"
+msgstr "HEX"
+
+#: src/lib/preferences/actions/actionDialog.ts:535
+#: src/lib/common/actions.ts:229
+msgid "Hsl"
+msgstr "HSL"
+
+#: src/lib/preferences/actions/actionDialog.ts:536
+msgid "Hwb"
+msgstr "HWB"
+
+#: src/lib/preferences/actions/actionDialog.ts:537
+msgid "Linear Rgb"
+msgstr "Liniowe RGB"
+
+#: src/lib/preferences/actions/actionDialog.ts:538
+msgid "Xyz"
+msgstr "XYZ"
+
+#: src/lib/preferences/actions/actionDialog.ts:539
+msgid "Lab"
+msgstr "LAB"
+
+#: src/lib/preferences/actions/actionDialog.ts:540
+msgid "Lch"
+msgstr "LCH"
+
+#: src/lib/preferences/actions/actionDialog.ts:541
+msgid "Oklab"
+msgstr "Oklab"
+
+#: src/lib/preferences/actions/actionDialog.ts:542
+#: src/lib/common/actions.ts:236
+msgid "Oklch"
+msgstr "Oklch"
+
+#: src/lib/preferences/actions/actionDialog.ts:655
+#: src/lib/preferences/actions/actionsGroup.ts:100
+#: src/lib/preferences/actions/actionsGroup.ts:568
+msgid "Add Action"
+msgstr "Dodaj akcję"
+
+#: src/lib/preferences/actions/actionDialog.ts:662
+msgid "Edit Action"
+msgstr "Edytuj akcję"
+
+#: src/lib/preferences/actions/actionDialog.ts:662
+#: src/lib/ui/components/editDialog.ts:317
+msgid "Save"
+msgstr "Zapisz"
+
+#: src/lib/preferences/actions/actionDefaults.ts:72
+#: src/lib/preferences/general/feedbackSettings.ts:155
+#: src/lib/preferences/general/feedbackSettings.ts:251
+#: src/lib/preferences/general/feedbackSettings.ts:292
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+#: src/lib/ui/components/editDialog.ts:231
+#: src/lib/ui/components/editDialog.ts:258
+msgid "None"
+msgstr "Brak"
+
+#: src/lib/preferences/actions/actionsGroup.ts:34
+#: src/lib/preferences/actions/actionsGroup.ts:126
+#: src/lib/preferences/actions/actionsGroup.ts:424
+msgid "Delete"
+msgstr "Usuń"
+
+#: src/lib/preferences/actions/actionsGroup.ts:91
+#: src/lib/preferences/actions/actionsGroup.ts:529
+msgid "No Actions"
+msgstr "Brak akcji"
+
+#: src/lib/preferences/actions/actionsGroup.ts:180
+msgid "Delete Submenu?"
+msgstr "Usunąć podmenu?"
+
+#: src/lib/preferences/actions/actionsGroup.ts:181
+msgid "Deleting the submenu will delete all actions in the submenu"
+msgstr "Usunięcie podmenu spowoduje usunięcie wszystkich akcji w tym podmenu"
+
+#: src/lib/preferences/actions/actionsGroup.ts:446
+msgid "Delete Action?"
+msgstr "Usunąć akcję?"
+
+#: src/lib/preferences/general/historySettings.ts:38
+msgid "History"
+msgstr "Historia"
+
+#: src/lib/preferences/general/historySettings.ts:44
+msgid "Use In-Memory Database"
+msgstr "Użyj bazy danych w pamięci"
+
+#: src/lib/preferences/general/historySettings.ts:45
+msgid "Store clipboard history in memory instead of on disk"
+msgstr "Przechowuj historię schowka w pamięci zamiast na dysku"
+
+#: src/lib/preferences/general/historySettings.ts:52
+msgid "Database Location"
+msgstr "Lokalizacja bazy danych"
+
+#: src/lib/preferences/general/historySettings.ts:60
+msgid "Clipboard History"
+msgstr "Historia schowka"
+
+#: src/lib/preferences/general/historySettings.ts:62
+msgid ""
+"Choose what to do with your clipboard history when you restart, log out, or "
+"shut down your system"
+msgstr ""
+"Wybierz, co zrobić z historią schowka podczas ponownego uruchamiania, "
+"wylogowywania lub zamykania systemu"
+
+#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:47
+msgid "Clear"
+msgstr "Wyczyść"
+
+#: src/lib/preferences/general/historySettings.ts:64
+msgid "Keep Pinned/Tagged"
+msgstr "Zachowaj przypięte/oznaczone"
+
+#: src/lib/preferences/general/historySettings.ts:64
+msgid "Keep All"
+msgstr "Zachowaj wszystko"
+
+#: src/lib/preferences/general/historySettings.ts:70
+msgid "History Length"
+msgstr "Długość historii"
+
+#: src/lib/preferences/general/historySettings.ts:71
+msgid "Select how many items to keep in the clipboard history"
+msgstr "Wybierz, ile elementów ma być przechowywanych w historii schowka"
+
+#: src/lib/preferences/general/historySettings.ts:77
+msgid "History Time Limit"
+msgstr "Limit czasu historii"
+
+#: src/lib/preferences/general/historySettings.ts:79
+msgid ""
+"Select how many minutes to keep items in the clipboard history. Set to 0 to "
+"disable the time limit"
+msgstr ""
+"Wybierz, ile minut mają być przechowywane elementy w historii schowka. Ustaw "
+"0, aby wyłączyć limit czasu"
+
+#: src/lib/preferences/general/feedbackSettings.ts:129
+#: src/lib/preferences/general/feedbackSettings.ts:243
+msgid "Sound"
+msgstr "Dźwięk"
+
+#: src/lib/preferences/general/feedbackSettings.ts:160
+#: src/lib/preferences/general/feedbackSettings.ts:294
+msgid "Click"
+msgstr "Klik"
+
+#: src/lib/preferences/general/feedbackSettings.ts:161
+#: src/lib/preferences/general/feedbackSettings.ts:296
+msgid "Hum"
+msgstr "Brum"
+
+#: src/lib/preferences/general/feedbackSettings.ts:162
+#: src/lib/preferences/general/feedbackSettings.ts:298
+msgid "String"
+msgstr "Plum"
+
+#: src/lib/preferences/general/feedbackSettings.ts:163
+#: src/lib/preferences/general/feedbackSettings.ts:300
+msgid "Swing"
+msgstr "Buczenie"
+
+#: src/lib/preferences/general/feedbackSettings.ts:164
+#: src/lib/preferences/general/feedbackSettings.ts:302
+msgid "Message"
+msgstr "Wiadomość"
+
+#: src/lib/preferences/general/feedbackSettings.ts:165
+#: src/lib/preferences/general/feedbackSettings.ts:304
+msgid "Message New Instant"
+msgstr "Nowa natychmiastowa wiadomość"
+
+#: src/lib/preferences/general/feedbackSettings.ts:166
+#: src/lib/preferences/general/feedbackSettings.ts:306
+msgid "Bell"
+msgstr "Dzwonek"
+
+#: src/lib/preferences/general/feedbackSettings.ts:167
+#: src/lib/preferences/general/feedbackSettings.ts:308
+msgid "Dialog Warning"
+msgstr "Komunikat ostrzegawczy"
+
+#: src/lib/preferences/general/feedbackSettings.ts:221
+msgid "Feedback"
+msgstr "Opinie"
+
+#: src/lib/preferences/general/feedbackSettings.ts:225
+msgid "Show Indicator"
+msgstr "Pokaż wskaźnik"
+
+#: src/lib/preferences/general/feedbackSettings.ts:226
+msgid "Show an indicator on the top panel"
+msgstr "Pokaż wskaźnik na górnym panelu"
+
+#: src/lib/preferences/general/feedbackSettings.ts:231
+msgid "Wiggle Indicator"
+msgstr "Wskaźnik drgający"
+
+#: src/lib/preferences/general/feedbackSettings.ts:232
+msgid "Wiggle the indicator when a clipboard item is copied"
+msgstr "Włącz drganie wskaźnika, gdy element zostanie skopiowany do schowka"
+
+#: src/lib/preferences/general/feedbackSettings.ts:237
+msgid "Send Notification"
+msgstr "Wyślij powiadomienie"
+
+#: src/lib/preferences/general/feedbackSettings.ts:238
+msgid "Send a notification when a clipboard item is copied"
+msgstr "Wyślij powiadomienie, gdy element zostanie skopiowany do schowka"
+
+#: src/lib/preferences/general/feedbackSettings.ts:244
+msgid "Sound to play when a clipboard item is copied"
+msgstr "Dźwięk odtwarzany po skopiowaniu elementu do schowka"
+
+#: src/lib/preferences/general/locationsGroup.ts:13
+msgid "Locations"
+msgstr "Lokalizacje"
+
+#: src/lib/preferences/general/locationsGroup.ts:19
+msgid "Data"
+msgstr "Dane"
+
+#: src/lib/preferences/general/locationsGroup.ts:29
+msgid "Config"
+msgstr "Konfiguracja"
+
+#: src/lib/preferences/general/locationsGroup.ts:39
+msgid "Cache"
+msgstr "Pamięć podręczna"
+
+#: src/lib/preferences/general/behaviorSettings.ts:12
+msgid "Behavior"
+msgstr "Zachowanie"
+
+#: src/lib/preferences/general/behaviorSettings.ts:16
+msgid "Remember Search Query"
+msgstr "Zapamiętaj zapytanie wyszukiwania"
+
+#: src/lib/preferences/general/behaviorSettings.ts:17
+msgid ""
+"Remember the search query when closing and reopening the clipboard dialog"
+msgstr ""
+"Zapamiętaj zapytanie wyszukiwania przy zamykaniu i ponownym otwieraniu okna "
+"dialogowego schowka"
+
+#: src/lib/preferences/general/behaviorSettings.ts:22
+msgid "Exclude Pinned Items from Main View"
+msgstr "Wyklucz przypięte elementy z widoku głównego"
+
+#: src/lib/preferences/general/behaviorSettings.ts:23
+msgid "Pinned items appear only when searching for pinned items"
+msgstr ""
+"Przypięte elementy pojawią się tylko podczas wyszukiwania przypiętych "
+"elementów"
+
+#: src/lib/preferences/general/behaviorSettings.ts:28
+msgid "Exclude Tagged Items from Main View"
+msgstr "Wyklucz oznaczone elementy z widoku głównego"
+
+#: src/lib/preferences/general/behaviorSettings.ts:29
+msgid "Tagged items appear only when searching for tagged items"
+msgstr ""
+"Oznaczone elementy pojawią się tylko podczas wyszukiwania otagowanych "
+"elementów"
+
+#: src/lib/preferences/general/behaviorSettings.ts:34
+msgid "Protect Pinned Items"
+msgstr "Chroń przypięte elementy"
+
+#: src/lib/preferences/general/behaviorSettings.ts:35
+msgid "Prevents pinned clipboard items from being deleted"
+msgstr "Zapobiega usunięciu przypiętych elementów schowka"
+
+#: src/lib/preferences/general/behaviorSettings.ts:40
+msgid "Protect Tagged Items"
+msgstr "Chroń oznaczone elementy"
+
+#: src/lib/preferences/general/behaviorSettings.ts:41
+msgid "Prevents tagged clipboard items from being deleted"
+msgstr "Zapobiega usunięciu oznaczonych elementów schowka"
+
+#: src/lib/preferences/general/behaviorSettings.ts:46
+msgid "Paste on Copy"
+msgstr "Wklejaj przy kopiowaniu"
+
+#: src/lib/preferences/general/behaviorSettings.ts:47
+msgid ""
+"Automatically paste clipboard items when selected from clipboard history"
+msgstr ""
+"Automatyczne wklejanie elementów schowka po wybraniu ich z historii schowka"
+
+#: src/lib/preferences/general/behaviorSettings.ts:52
+msgid "Sync Primary Clipboard"
+msgstr "Synchronizuj schowek podstawowy"
+
+#: src/lib/preferences/general/behaviorSettings.ts:53
+msgid "Also copy clipboard items to the primary clipboard"
+msgstr "Kopiuj również elementy schowka do schowka podstawowego"
+
+#: src/lib/preferences/general/behaviorSettings.ts:58
+msgid "Update Date on Copy"
+msgstr "Aktualizuj datę przy kopiowaniu"
+
+#: src/lib/preferences/general/behaviorSettings.ts:59
+msgid ""
+"Update the copied date of clipboard items when selected from clipboard "
+"history"
+msgstr ""
+"Aktualizuj datę skopiowania elementów schowka po wybraniu ich z historii "
+"schowka"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:43
+msgid "Search apps"
+msgstr "Szukaj programów"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:78
+msgid "No Apps Found"
+msgstr "Nie znaleziono programów"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:170
+msgid "Add App Exclusion"
+msgstr "Dodaj wykluczenie programu"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:171
+msgid "Enter the WM Class of the application you want to exclude:"
+msgstr "Wprowadź klasę WM programu, który chcesz wykluczyć:"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:185
+msgid "WM Class"
+msgstr "Klasa WM"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:261
+msgid "No Exclusions"
+msgstr "Brak wykluczeń"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:291
+#: src/lib/preferences/general/appExclusionSettings.ts:302
+msgid "App Exclusions"
+msgstr "Wykluczenia programów"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:315
+msgid "Exclusions"
+msgstr "Wykluczenia"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:321
+msgid "Manage App Exclusions"
+msgstr "Zarządzaj wykluczonymi programami"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:322
+msgid "Manage apps that will be excluded from clipboard history"
+msgstr "Zarządzaj programami wykluczonymi z historii schowka"
+
+#: src/lib/preferences/shortcuts/shortcutRow.ts:78
+msgid "Set Shortcut"
+msgstr "Ustaw skrót klawiszowy"
+
+#: src/lib/preferences/shortcuts/shortcutRow.ts:126
+msgid "Disable Shortcut"
+msgstr "Wyłącz skrót klawiszowy"
+
+#: src/lib/preferences/shortcuts/shortcutRow.ts:219
+msgid "Disabled"
+msgstr "Wyłączono"
+
+#: src/lib/preferences/shortcuts/dialogShortcuts.ts:17
+msgid "Open Clipboard Dialog"
+msgstr "Otwórz okno dialogowe schowka"
+
+#: src/lib/preferences/shortcuts/dialogShortcuts.ts:20
+msgid "Toggle Incognito Mode"
+msgstr "Włącz tryb prywatny"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:31
+msgid "Scroll"
+msgstr "Przewiń"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:49
+msgid "Toggle Pinned Search"
+msgstr "Włącz wyszukiwanie przypiętych elementów"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:50
+msgid "Clear Item Tag/Type"
+msgstr "Wyczyść typ/oznaczenie elementu"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:51
+msgid "Activate First Item"
+msgstr "Aktywny pierwszy element"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:60
+msgid "Next Item Type"
+msgstr "Następny typ elementu"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:61
+msgid "Previous Item Type"
+msgstr "Poprzedni typ elementu"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:62
+msgid "Next Item Tag"
+msgstr "Następny oznaczony element"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:63
+msgid "Previous Item Tag"
+msgstr "Poprzedni oznaczony element"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:64
+msgid "Select Item Tag"
+msgstr "Wybierz oznaczenie elementu"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:74
+msgid "Swap Scroll Shortcut"
+msgstr "Zamień skrót klawiszowy przewijania"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:75
+msgid "Swaps scroll shortcuts of cycling item types and item tags"
+msgstr ""
+"Zamienia skróty przewijania przełączania typów elementów i oznaczeń elementów"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:79
+msgid "Cycle Item Type"
+msgstr "Przełącz typ elementu"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:81
+msgid "Cycle Item Tag"
+msgstr "Przełącz oznaczenie elementu"
+
+#: src/lib/preferences/shortcuts/popupMenuShortcuts.ts:11
+msgid "Popup Menu"
+msgstr "Wyskakujące menu"
+
+#: src/lib/preferences/shortcuts/popupMenuShortcuts.ts:13
+msgid "Select Item Type"
+msgstr "Wybierz typ elementu"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:19
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+msgid "Pin Item"
+msgstr "Przypnij element"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:22
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+msgid "Delete Item"
+msgstr "Usuń element"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:23
+msgid "Holding shift force deletes"
+msgstr "Przytrzymanie Shift wymusza usunięcie"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:26
+msgid "Edit Item"
+msgstr "Edytuj element"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:27
+msgid "Only supported for text and code items"
+msgstr "Wspierane tylko elementy kodu i tekstu"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:30
+msgid "Open Menu"
+msgstr "Otwórz menu"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:34
+msgid "Middle Click Action"
+msgstr "Akcja środkowego kliknięcia"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:60
+msgid "Copy Item"
+msgstr "Skopiuj element"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:61
+msgid "Activate Default Action"
+msgstr "Aktywuj domyślną akcję"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:12
+msgid "Navigation"
+msgstr "Nawigacja"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:15
+msgid "Navigate"
+msgstr "Nawiguj"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:16
+msgid "Jump to Item"
+msgstr "Skocz do elementu"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:17
+msgid "Jump to Start"
+msgstr "Skocz na początek"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:18
+msgid "Jump to End"
+msgstr "Skocz na koniec"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:19
+msgid "Jump to Search"
+msgstr "Skocz do wyszukiwanej wartości"
+
+#: src/lib/misc/notifications.ts:63 src/lib/misc/notifications.ts:114
+msgid "Copied Text"
+msgstr "Skopiowano tekst"
+
+#: src/lib/misc/notifications.ts:98 src/lib/misc/notifications.ts:123
+msgid "Copied Image"
+msgstr "Skopiowano obraz"
+
+#: src/lib/misc/notifications.ts:99 src/lib/misc/notifications.ts:129
+#, javascript-format
+msgid "Size: %d×%d px"
+msgstr "Rozmiar: %d×%d px"
+
+#: src/lib/misc/notifications.ts:118
+msgid "Copied Code"
+msgstr "Skopiowano kod"
+
+#: src/lib/misc/notifications.ts:142
+#, javascript-format
+msgid "Copied %d File"
+msgid_plural "Copied %d Files"
+msgstr[0] "Skopiowany %d plik"
+msgstr[1] "Skopiowano %d pliki"
+msgstr[2] "Skopiowany %d plików"
+
+#: src/lib/misc/notifications.ts:148
+msgid "Copied Link"
+msgstr "Skopiowany odnośnik"
+
+#: src/lib/misc/notifications.ts:152
+msgid "Copied Character"
+msgstr "Skopiowany znak"
+
+#: src/lib/misc/notifications.ts:156
+msgid "Copied Color"
+msgstr "Skopiowany kolor"
+
+#: src/lib/misc/db.ts:128
+msgid "Failed to load Gda"
+msgstr "Błąd podczas ładowania GDA"
+
+#: src/lib/misc/db.ts:129 src/lib/misc/db.ts:154
+msgid "Clipboard history will be disabled"
+msgstr "Historia schowka zostanie wyłączona"
+
+#: src/lib/misc/db.ts:130
+msgid "Disable Warning"
+msgstr "Wyłącz ostrzeżenie"
+
+#: src/lib/misc/db.ts:153
+msgid "Failed to load database"
+msgstr "Błąd podczas ładowania bazy danych"
+
+#: src/lib/ui/components/contentInfo.ts:39
+#, javascript-format
+msgid "%dh"
+msgstr "%dgodz"
+
+#: src/lib/ui/components/contentInfo.ts:40
+#, javascript-format
+msgid "%dm"
+msgstr "%dm"
+
+#: src/lib/ui/components/contentInfo.ts:41
+#, javascript-format
+msgid "%ds"
+msgstr "%ds"
+
+#: src/lib/ui/components/contentInfo.ts:113
+#, javascript-format
+msgid "%d char"
+msgid_plural "%d chars"
+msgstr[0] "%d znak"
+msgstr[1] "%d znaki"
+msgstr[2] "%d znaków"
+
+#: src/lib/ui/components/contentInfo.ts:121
+#, javascript-format
+msgid "%d word"
+msgid_plural "%d words"
+msgstr[0] "%d słowo"
+msgstr[1] "%d słowa"
+msgstr[2] "%d słów"
+
+#: src/lib/ui/components/contentInfo.ts:124
+#, javascript-format
+msgid "%d line"
+msgid_plural "%d lines"
+msgstr[0] "%d linia"
+msgstr[1] "%d linie"
+msgstr[2] "%d linii"
+
+#: src/lib/ui/components/contentInfo.ts:184
+msgid "Missing File"
+msgstr "Brakujący plik"
+
+#: src/lib/ui/components/contentInfo.ts:196
+msgid "Error"
+msgstr "Błąd"
+
+#: src/lib/ui/components/editDialog.ts:283
+msgid "Edit Clipboard Item"
+msgstr "Edytuj element schowka"
+
+#: src/lib/ui/components/qrCodeDialog.ts:146
+msgid "Close"
+msgstr "Zamknij"
+
+#: src/lib/ui/searchEntry.ts:148
+msgid "__All"
+msgstr "__Wszystko"
+
+#: src/lib/ui/searchEntry.ts:152
+msgid "__Text"
+msgstr "__Tekst"
+
+#: src/lib/ui/searchEntry.ts:153
+msgid "__Code"
+msgstr "__Kod"
+
+#: src/lib/ui/searchEntry.ts:154
+msgid "__Image"
+msgstr "__Obraz"
+
+#: src/lib/ui/searchEntry.ts:155
+msgid "__File"
+msgstr "__Plik"
+
+#: src/lib/ui/searchEntry.ts:156
+msgid "File__s"
+msgstr "Plik_i"
+
+#: src/lib/ui/searchEntry.ts:157
+msgid "__Link"
+msgstr "__Odnośnik"
+
+#: src/lib/ui/searchEntry.ts:158
+msgid "C__haracter"
+msgstr "Z_nak"
+
+#: src/lib/ui/searchEntry.ts:159
+msgid "Colo__r"
+msgstr "Kolo_r"
+
+#: src/lib/ui/searchEntry.ts:272
+msgid "Type to search"
+msgstr "Wpisz, aby wyszukać"
+
+#: src/lib/ui/items/linkItem.ts:93
+msgid "No Title"
+msgstr "Brak tytułu"
+
+#: src/lib/ui/items/linkItem.ts:95
+msgid "No Description"
+msgstr "Brak opisu"
+
+#: src/lib/ui/items/characterItem.ts:22
+msgid "Char"
+msgstr "Znak"
+
+#: src/lib/ui/items/statusItem.ts:70 src/lib/ui/items/statusItem.ts:104
+msgid "Clipboard is Empty"
+msgstr "Schowek jest pusty"
+
+#: src/lib/ui/items/statusItem.ts:107
+msgid "No Items Found"
+msgstr "Nie znaleziono elementów"
+
+#: src/lib/ui/items/filesItem.ts:114
+#, javascript-format
+msgid "%d more file"
+msgid_plural "%d more files"
+msgstr[0] "%d plik więcej"
+msgstr[1] "%d pliki więcej"
+msgstr[2] "%d plików więcej"
+
+#: src/lib/ui/items/filesItem.ts:115
+#, javascript-format
+msgid "%d file"
+msgid_plural "%d files"
+msgstr[0] "%d plik"
+msgstr[1] "%d pliki"
+msgstr[2] "%d plików"
+
+#: src/lib/ui/indicator.ts:31
+msgid "Clear Clipboard History?"
+msgstr "Wyczyścić historię schowka?"
+
+#: src/lib/ui/indicator.ts:32
+msgid "Are you sure you want to clear your clipboard history?"
+msgstr "Czy na pewno chcesz wyczyścić historię schowka?"
+
+#: src/lib/ui/indicator.ts:36
+msgid "Clear Pinned/Tagged Items"
+msgstr "Wyczyść przypięte/oznaczone elementy"
+
+#: src/lib/ui/indicator.ts:86
+msgid "Incognito Mode"
+msgstr "Tryb prywatny"
+
+#: src/lib/ui/indicator.ts:89
+msgid "Clear History"
+msgstr "Wyczyść historię"
+
+#: src/lib/ui/indicator.ts:90
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: src/lib/common/actions.ts:180
+msgid "Open"
+msgstr "Otwórz"
+
+#: src/lib/common/actions.ts:185
+msgid "Open with Default"
+msgstr "Otwórz używając domyślnego programu"
+
+#: src/lib/common/actions.ts:195
+msgid "Open with Files"
+msgstr "Otwórz w Pliki"
+
+#: src/lib/common/actions.ts:205
+msgid "Open with Browser"
+msgstr "Otwórz w Przeglądarka"
+
+#: src/lib/common/actions.ts:217
+msgid "Paste as Path"
+msgstr "Wklej jako ścieżkę"
+
+#: src/lib/common/actions.ts:225
+msgid "Convert"
+msgstr "Konwertuj"
+
+#: src/prefs.ts:69
+msgid "General"
+msgstr "Ogólne"
+
+#: src/prefs.ts:91
+msgid "Customization"
+msgstr "Personalizacja"
+
+#: src/prefs.ts:107
+msgid "Shortcuts"
+msgstr "Skróty klawiszowe"
