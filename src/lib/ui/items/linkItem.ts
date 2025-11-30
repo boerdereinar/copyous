@@ -161,9 +161,8 @@ export class LinkPreview extends St.Widget {
 				.catch(() => {});
 		}
 
-		const show = this._metadata?.title != null || this._metadata?.description != null;
-		this._title.visible = show;
-		this._description.visible = show;
+		this._title.visible = this._metadata?.title != null || this._metadata?.description != null;
+		this._description.visible = this._metadata?.title != null && this._metadata?.description != null;
 
 		this.queue_relayout();
 	}
