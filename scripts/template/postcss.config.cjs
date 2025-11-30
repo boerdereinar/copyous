@@ -2,6 +2,13 @@ const fs = require('fs');
 const postcss = require('postcss');
 
 const generateTemplate = (opts = { variant: 'dark', contrast: 'normal' }) => {
+	const variables = ['bg_color', 'fg_color', 'card_bg_color', 'search_bg_color'];
+
+	// var -> {$var: '#{"$"}var'}
+	const decls = Object.fromEntries(
+		variables.map((variable) => [`$${variable}`, (decl) => (decl.value = `#{"$"}${variable}`)]),
+	);
+
 	return {
 		postcssPlugin: 'generate-template',
 		Once: (root) => {
@@ -15,10 +22,7 @@ const generateTemplate = (opts = { variant: 'dark', contrast: 'normal' }) => {
 			comment.remove();
 		},
 		Declaration: {
-			'$bg_color': (decl) => (decl.value = '#{"$"}bg_color'),
-			'$fg_color': (decl) => (decl.value = '#{"$"}fg_color'),
-			'$card_bg_color': (decl) => (decl.value = '#{"$"}card_bg_color'),
-			'$search_bg_color': (decl) => (decl.value = '#{"$"}search_bg_color'),
+			...decls,
 			'*': (decl) => {
 				decl.value = decl.value
 					.replace(/(?<![{_-])lighten/g, 'st-lighten')

@@ -289,30 +289,7 @@
 		<child name="character-item" schema="org.gnome.shell.extensions.copyous.character-item"/>
 
 		<!-- Theme -->
-		<key name="theme" enum="org.gnome.shell.extensions.copyous.Theme">
-			<default>'system'</default>
-			<summary>The preferred theme</summary>
-		</key>
-		<key name="custom-color-scheme" enum="org.gnome.shell.extensions.copyous.ColorScheme">
-			<default>'dark'</default>
-			<summary>The color scheme of the custom theme</summary>
-		</key>
-		<key name="custom-bg-color" type="s">
-			<default>''</default>
-			<summary>The background color of the clipboard dialog</summary>
-		</key>
-		<key name="custom-fg-color" type="s">
-			<default>''</default>
-			<summary>The text color of the clipboard dialog</summary>
-		</key>
-		<key name="custom-card-bg-color" type="s">
-			<default>''</default>
-			<summary>The background color of clipboard items</summary>
-		</key>
-		<key name="custom-search-bg-color" type="s">
-			<default>''</default>
-			<summary>The background color of the search bar</summary>
-		</key>
+		<child name="theme" schema="org.gnome.shell.extensions.copyous.theme"/>
 
 		<!-- Shortcuts -->
 		<key name="open-clipboard-dialog-shortcut" type="as">
@@ -451,6 +428,33 @@
 		<key name="show-unicode" type="b">
 			<default>false</default>
 			<summary>Show the Unicode of the character</summary>
+		</key>
+	</schema>
+
+	<schema id="org.gnome.shell.extensions.copyous.theme" path="/org/gnome/shell/extensions/copyous/theme/">
+		<key name="theme" enum="org.gnome.shell.extensions.copyous.Theme">
+			<default>'system'</default>
+			<summary>The preferred theme</summary>
+		</key>
+		<key name="custom-color-scheme" enum="org.gnome.shell.extensions.copyous.ColorScheme">
+			<default>'dark'</default>
+			<summary>The color scheme of the custom theme</summary>
+		</key>
+		<key name="custom-bg-color" type="s">
+			<default>''</default>
+			<summary>The background color of the clipboard dialog</summary>
+		</key>
+		<key name="custom-fg-color" type="s">
+			<default>''</default>
+			<summary>The text color of the clipboard dialog</summary>
+		</key>
+		<key name="custom-card-bg-color" type="s">
+			<default>''</default>
+			<summary>The background color of clipboard items</summary>
+		</key>
+		<key name="custom-search-bg-color" type="s">
+			<default>''</default>
+			<summary>The background color of the search bar</summary>
 		</key>
 	</schema>
 </schemalist>

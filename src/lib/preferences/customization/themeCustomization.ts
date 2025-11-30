@@ -6,6 +6,7 @@ import Gtk from 'gi://Gtk';
 
 import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import { DefaultColors } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { bind_enum } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
@@ -42,22 +43,15 @@ class ColorRow extends Adw.ActionRow {
 	}
 }
 
-const DefaultColors = {
-	'custom-bg-color': ['rgb(54,54,58)', 'rgb(250,250,251)'],
-	'custom-fg-color': ['rgb(255,255,255)', 'rgb(34,34,38)'],
-	'custom-card-bg-color': ['rgb(71,71,76)', 'rgb(255,255,255)'],
-	'custom-search-bg-color': ['rgb(71,71,76)', 'rgb(255,255,255)'],
-} as const;
-
 function bind_color(settings: Gio.Settings, key: keyof typeof DefaultColors, target: ColorRow) {
 	function setColor() {
-		const colorScheme = settings.get_enum('custom-color-scheme') as 0 | 1;
+		const colorScheme = Math.min(settings.get_enum('custom-color-scheme'), DefaultColors[key].length - 1);
 		const color = settings.get_string(key);
-		target.color = color ? color : DefaultColors[key][colorScheme];
+		target.color = color ? color : DefaultColors[key][colorScheme]!;
 	}
 
 	function getColor() {
-		const colorScheme = settings.get_enum('custom-color-scheme') as 0 | 1;
+		const colorScheme = Math.min(settings.get_enum('custom-color-scheme'), DefaultColors[key].length - 1);
 		const color = target.color;
 		settings.set_string(key, color === DefaultColors[key][colorScheme] ? '' : color);
 	}
@@ -127,7 +121,8 @@ export class ThemeCustomization extends Adw.PreferencesGroup {
 		this.add(searchBgColor);
 
 		// Bind properties
-		const settings = prefs.getSettings();
+		const settings = prefs.getSettings().get_child('theme');
+
 		bind_enum(settings, 'theme', theme, 'selected');
 		bind_enum(settings, 'custom-color-scheme', colorScheme, 'selected');
 		bind_color(settings, 'custom-bg-color', bgColor);

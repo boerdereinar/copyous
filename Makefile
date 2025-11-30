@@ -123,7 +123,7 @@ $(DIST_DIR)/css/stylesheet-%.css: resources/css/%.scss resources/css/_*.scss | $
 	sed -i -re ':a; s%(.*)/\*.*\*/%\1%; ta; /\/\*/ !b; N; ba' $@ # Remove multiline comments
 	sed -i -e '/stage {/,/}/d' -e '/^$$/d' $@
 
-$(DIST_DIR)/css/template-%.css: resources/css/_main.scss resources/css/_*.scss | $(DIST_DIR)
+$(DIST_DIR)/css/template-%.css: resources/css/_main.scss resources/css/_*.scss scripts/template/postcss.config.cjs | $(DIST_DIR)
 	@mkdir -p $(DIST_DIR)/css
 	VARIANT=$* pnpm exec postcss $< --config scripts/template | pnpm exec sass --no-source-map --stdin $@
 

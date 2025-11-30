@@ -3,7 +3,7 @@ import Gio from 'gi://Gio';
 import St from 'gi://St';
 
 import CopyousExtension from '../../extension.js';
-import { getDataPath } from '../common/constants.js';
+import { DefaultColors, getDataPath } from '../common/constants.js';
 import { enumParamSpec, registerClass } from '../common/gjs.js';
 
 Gio._promisify(Gio.File.prototype, 'load_contents_async');
@@ -25,13 +25,6 @@ export const ColorScheme = {
 
 export type ColorScheme = (typeof ColorScheme)[keyof typeof ColorScheme];
 
-const DefaultColors = {
-	'custom-bg-color': ['rgb(54,54,58)', 'rgb(250,250,251)'],
-	'custom-fg-color': ['rgb(255,255,255)', 'rgb(34,34,38)'],
-	'custom-card-bg-color': ['rgb(71,71,76)', 'rgb(255,255,255)'],
-	'custom-search-bg-color': ['rgb(71,71,76)', 'rgb(255,255,255)'],
-} as const;
-
 @registerClass({
 	Properties: {
 		'color-scheme': enumParamSpec('color-scheme', GObject.ParamFlags.READABLE, ColorScheme, ColorScheme.Dark),
@@ -39,6 +32,7 @@ const DefaultColors = {
 })
 export class ThemeManager extends GObject.Object {
 	private readonly _resource: Gio.Resource;
+	private readonly _themeSettings: Gio.Settings;
 	private readonly _theme: St.Theme;
 	private readonly _settings: St.Settings;
 	private readonly _colorSchemeChangedId: number;
@@ -52,21 +46,8 @@ export class ThemeManager extends GObject.Object {
 		this._resource = Gio.resource_load(`${this.ext.path}/theme.gresource`);
 		Gio.resources_register(this._resource);
 
-		this.ext.settings.connectObject(
-			'changed::theme',
-			this.updateTheme.bind(this),
-			'changed::custom-color-scheme',
-			this.updateTheme.bind(this),
-			'changed::custom-bg-color',
-			this.updateTheme.bind(this),
-			'changed::custom-fg-color',
-			this.updateTheme.bind(this),
-			'changed::custom-card-bg-color',
-			this.updateTheme.bind(this),
-			'changed::custom-search-bg-color',
-			this.updateTheme.bind(this),
-			this,
-		);
+		this._themeSettings = this.ext.settings.get_child('theme');
+		this._themeSettings.connectObject('changed', this.updateTheme.bind(this), this);
 
 		this._theme = St.ThemeContext.get_for_stage(global.stage).get_theme();
 
@@ -89,18 +70,18 @@ export class ThemeManager extends GObject.Object {
 
 	destroy() {
 		Gio.resources_unregister(this._resource);
-		this.ext.settings.disconnectObject(this);
+		this._themeSettings.disconnectObject(this);
 		this._settings.disconnect(this._colorSchemeChangedId);
 	}
 
 	private async updateTheme() {
-		const theme = this.ext.settings.get_enum('theme') as Theme;
+		const theme = this._themeSettings.get_enum('theme') as Theme;
 
 		const systemColorScheme: ColorScheme =
 			this._settings.get_color_scheme() === St.SystemColorScheme.PREFER_LIGHT
 				? ColorScheme.Light
 				: ColorScheme.Dark;
-		const customColorScheme: ColorScheme = this.ext.settings.get_enum('custom-color-scheme') as ColorScheme;
+		const customColorScheme: ColorScheme = this._themeSettings.get_enum('custom-color-scheme') as ColorScheme;
 
 		this.colorScheme = (() => {
 			switch (theme) {
@@ -127,22 +108,15 @@ export class ThemeManager extends GObject.Object {
 				const text = new TextDecoder().decode(contents);
 
 				// Fill template
-				const i = this.colorScheme;
+				const css = Object.entries(DefaultColors).reduce((s, [key, colors]) => {
+					const i = Math.min(this.colorScheme, colors.length - 1);
+					let color = this._themeSettings.get_string(key);
+					color = color ? color : colors[i]!;
 
-				let bgColor = this.ext.settings.get_string('custom-bg-color');
-				bgColor = bgColor ? bgColor : DefaultColors['custom-bg-color'][i];
-				let fgColor = this.ext.settings.get_string('custom-fg-color');
-				fgColor = fgColor ? fgColor : DefaultColors['custom-fg-color'][i];
-				let cardBgColor = this.ext.settings.get_string('custom-card-bg-color');
-				cardBgColor = cardBgColor ? cardBgColor : DefaultColors['custom-card-bg-color'][i];
-				let searchBgColor = this.ext.settings.get_string('custom-search-bg-color');
-				searchBgColor = searchBgColor ? searchBgColor : DefaultColors['custom-search-bg-color'][i];
-
-				const css = text
-					.replace(/\$bg_color/g, bgColor)
-					.replace(/\$fg_color/g, fgColor)
-					.replace(/\$card_bg_color/g, cardBgColor)
-					.replace(/\$search_bg_color/g, searchBgColor);
+					// custom-var-foo-bar -> var_foo_bar
+					const variable = key.substring('custom-'.length).replace(/-/g, '_');
+					return s.replaceAll(`$${variable}`, color);
+				}, text);
 
 				// Save theme
 				const path = getDataPath(this.ext);
