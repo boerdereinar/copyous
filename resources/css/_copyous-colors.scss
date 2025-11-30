@@ -7,3 +7,9 @@ $tag_color_red: #e62d42;
 $tag_color_pink: #d56199;
 $tag_color_purple: #9c3cbe;
 $tag_color_slate: #6f8396;
+
+$card_insensitive_fg_color: if(
+	$variant == 'light',
+	mix($fg_color, $card_bg_color, 60%),
+	mix($fg_color, $card_bg_color, 50%)
+);

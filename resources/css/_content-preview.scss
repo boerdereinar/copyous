@@ -7,7 +7,7 @@
 		padding: $base_padding * 0.75 $base_padding * 1.5;
 		border-radius: $base_border_radius;
 		background-color: if($variant == 'light', rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.11));
-		color: $insensitive_fg_color;
+		color: $card_insensitive_fg_color;
 
 		@if $variant == 'dark' {
 			border: none;

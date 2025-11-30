@@ -19,12 +19,6 @@
 	}
 }
 
-$card_insensitive_fg_color: if(
-	$variant == 'light',
-	mix($fg_color, $card_bg_color, 60%),
-	mix($fg_color, $card_bg_color, 50%)
-);
-
 .clipboard-item {
 	@extend %card;
 	border-radius: $base_border_radius * 2;
