@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-26 16:04+0000\n"
+"POT-Creation-Date: 2025-11-30 18:36+0000\n"
 "PO-Revision-Date: 2025-11-29 19:52+0100\n"
 "Last-Translator: Philippe Charlanes\n"
 "Language-Team: \n"
@@ -46,7 +46,9 @@ msgstr "Largeur de tabulation"
 
 #: src/lib/preferences/customization/itemCustomization.ts:45
 msgid "Change the width of a tab character in the clipboard items"
-msgstr "Modifie la largeur d'un caractère de tabulation dans les éléments du presse-papiers"
+msgstr ""
+"Modifie la largeur d'un caractère de tabulation dans les éléments du presse-"
+"papiers"
 
 #: src/lib/preferences/customization/itemsCustomization.ts:22
 msgid "Items"
@@ -71,7 +73,8 @@ msgstr "Afficher au niveau du pointeur"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:35
 msgid "Show the clipboard dialog at the pointer position"
-msgstr "Affiche la boîte de dialogue du presse-papiers à la position du pointeur"
+msgstr ""
+"Affiche la boîte de dialogue du presse-papiers à la position du pointeur"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:41
 msgid "Show at Text Cursor"
@@ -131,7 +134,8 @@ msgstr "Position verticale"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:59
 msgid "Select the vertical position of the clipboard dialog"
-msgstr "Sélectionnez la position verticale de la boîte de dialogue du presse-papiers"
+msgstr ""
+"Sélectionnez la position verticale de la boîte de dialogue du presse-papiers"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:65
 #: src/lib/preferences/customization/dialogCustomization.ts:107
@@ -149,7 +153,9 @@ msgstr "Position horizontale"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:68
 msgid "Select the horizontal position of the clipboard dialog"
-msgstr "Sélectionnez la position horizontale de la boîte de dialogue du presse-papiers"
+msgstr ""
+"Sélectionnez la position horizontale de la boîte de dialogue du presse-"
+"papiers"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:80
 msgid "Margins"
@@ -157,7 +163,8 @@ msgstr "Marges"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:81
 msgid "Change the distance of the dialog from the screen edges"
-msgstr "Modifie la distance de la boîte de dialogue par rapport aux bords de l'écran"
+msgstr ""
+"Modifie la distance de la boîte de dialogue par rapport aux bords de l'écran"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:87
 msgid "Distance from the top of the screen"
@@ -181,7 +188,9 @@ msgstr "Masquer automatiquement la recherche"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:115
 msgid "Automatically hide the search bar when not focused"
-msgstr "Masquer automatiquement la barre de recherche lorsqu'elle n'est pas sélectionnée"
+msgstr ""
+"Masquer automatiquement la barre de recherche lorsqu'elle n'est pas "
+"sélectionnée"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:120
 msgid "Show Scrollbar"
@@ -433,7 +442,7 @@ msgstr ""
 #: src/lib/preferences/actions/actionDialog.ts:180
 #: src/lib/preferences/actions/actionDialog.ts:379
 #: src/lib/preferences/actions/actionDefaults.ts:152
-#: src/lib/ui/items/linkItem.ts:293
+#: src/lib/ui/items/linkItem.ts:292
 msgid "Link"
 msgstr "Lien"
 
@@ -443,8 +452,7 @@ msgstr "Motifs d'exclusion de liens"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:48
 msgid "Links matching these patterns will not have a preview"
-msgstr ""
-"Les liens correspondant à ces motifs n'auront pas d'aperçu"
+msgstr "Les liens correspondant à ces motifs n'auront pas d'aperçu"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:65
 msgid "Link Item"
@@ -549,8 +557,7 @@ msgstr "Motifs d'exclusion de fichiers"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:106
 msgid "Files matching these patterns will not have a preview"
-msgstr ""
-"Les fichiers correspondant à ces motifs n'auront pas d'aperçu"
+msgstr "Les fichiers correspondant à ces motifs n'auront pas d'aperçu"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:149
 msgid "File Item"
@@ -684,8 +691,8 @@ msgid ""
 "You can manually install highlight.js by downloading highlight.min.js from "
 "\"Url\" to \"Install Location\"."
 msgstr ""
-"Vous pouvez installer manuellement highlight.js en téléchargeant "
-"highlight.min.js de \"Url\" vers \"Emplacement d'installation\"."
+"Vous pouvez installer manuellement highlight.js en téléchargeant highlight."
+"min.js de \"Url\" vers \"Emplacement d'installation\"."
 
 #: src/lib/preferences/dependencies/dependencies.ts:187
 msgid "Url"
@@ -935,8 +942,8 @@ msgid ""
 "The regular expression does not use any flags for matching. Leaving this "
 "empty will match everything."
 msgstr ""
-"L'expression régulière n'utilise aucun drapeau pour la correspondance. Laisser "
-"ce champ vide correspondra à tout."
+"L'expression régulière n'utilise aucun drapeau pour la correspondance. "
+"Laisser ce champ vide correspondra à tout."
 
 #: src/lib/preferences/actions/actionDialog.ts:361
 msgid "Type"
@@ -1138,8 +1145,8 @@ msgstr "Longueur de l'historique"
 #: src/lib/preferences/general/historySettings.ts:71
 msgid "Select how many items to keep in the clipboard history"
 msgstr ""
-"Sélectionnez le nombre d'éléments à conserver dans l'historique du "
-"presse-papiers"
+"Sélectionnez le nombre d'éléments à conserver dans l'historique du presse-"
+"papiers"
 
 #: src/lib/preferences/general/historySettings.ts:77
 msgid "History Time Limit"
@@ -1217,8 +1224,7 @@ msgstr "Agiter l'indicateur"
 
 #: src/lib/preferences/general/feedbackSettings.ts:232
 msgid "Wiggle the indicator when a clipboard item is copied"
-msgstr ""
-"Agite l'indicateur lorsqu'un élément du presse-papiers est copié"
+msgstr "Agite l'indicateur lorsqu'un élément du presse-papiers est copié"
 
 #: src/lib/preferences/general/feedbackSettings.ts:237
 msgid "Send Notification"
@@ -1271,8 +1277,8 @@ msgstr "Exclure les éléments épinglés de la vue principale"
 #: src/lib/preferences/general/behaviorSettings.ts:23
 msgid "Pinned items appear only when searching for pinned items"
 msgstr ""
-"Les éléments épinglés apparaissent uniquement lors de la recherche d'éléments "
-"épinglés"
+"Les éléments épinglés apparaissent uniquement lors de la recherche "
+"d'éléments épinglés"
 
 #: src/lib/preferences/general/behaviorSettings.ts:28
 msgid "Exclude Tagged Items from Main View"
@@ -1317,7 +1323,9 @@ msgstr "Synchroniser le presse-papiers primaire"
 
 #: src/lib/preferences/general/behaviorSettings.ts:53
 msgid "Also copy clipboard items to the primary clipboard"
-msgstr "Copie également les éléments du presse-papiers vers le presse-papiers primaire"
+msgstr ""
+"Copie également les éléments du presse-papiers vers le presse-papiers "
+"primaire"
 
 #: src/lib/preferences/general/behaviorSettings.ts:58
 msgid "Update Date on Copy"
@@ -1345,8 +1353,7 @@ msgstr "Ajouter une exclusion d'application"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:171
 msgid "Enter the WM Class of the application you want to exclude:"
-msgstr ""
-"Entrez la classe WM de l'application que vous souhaitez exclure :"
+msgstr "Entrez la classe WM de l'application que vous souhaitez exclure :"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:185
 msgid "WM Class"
@@ -1356,20 +1363,20 @@ msgstr "Classe WM"
 msgid "No Exclusions"
 msgstr "Aucune exclusion"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:291
-#: src/lib/preferences/general/appExclusionSettings.ts:302
+#: src/lib/preferences/general/appExclusionSettings.ts:296
+#: src/lib/preferences/general/appExclusionSettings.ts:307
 msgid "App Exclusions"
 msgstr "Exclusions d'applications"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:315
+#: src/lib/preferences/general/appExclusionSettings.ts:320
 msgid "Exclusions"
 msgstr "Exclusions"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:321
+#: src/lib/preferences/general/appExclusionSettings.ts:326
 msgid "Manage App Exclusions"
 msgstr "Gérer les exclusions d'applications"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:322
+#: src/lib/preferences/general/appExclusionSettings.ts:327
 msgid "Manage apps that will be excluded from clipboard history"
 msgstr ""
 "Gérer les applications qui seront exclues de l'historique du presse-papiers"
@@ -1436,7 +1443,9 @@ msgstr "Échanger le raccourci de défilement"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:75
 msgid "Swaps scroll shortcuts of cycling item types and item tags"
-msgstr "Échange les raccourcis de défilement pour faire défiler les types et les étiquettes d'éléments"
+msgstr ""
+"Échange les raccourcis de défilement pour faire défiler les types et les "
+"étiquettes d'éléments"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:79
 msgid "Cycle Item Type"
