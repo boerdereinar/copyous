@@ -148,7 +148,10 @@ export class ClipboardIndicator extends PanelMenu.Button {
 			this.emit('open-dialog');
 			return Clutter.EVENT_STOP;
 		}
-
+		if (event.type() === Clutter.EventType.BUTTON_PRESS && event.get_button() === Clutter.BUTTON_MIDDLE) {
+			this.ext.openPreferences();
+			return Clutter.EVENT_STOP;
+		}
 		return super.vfunc_event(event);
 	}
 
