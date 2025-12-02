@@ -12,6 +12,15 @@
 @import '_edit-dialog';
 @import '_qr-dialog';
 
-.clipboard-indicator-icon {
-	icon-size: $scalable_icon_size;
+.copyous-indicator-box {
+	spacing: 6px;
+
+	.indicator-icon,
+	.indicator-image {
+		icon-size: $scalable_icon_size;
+	}
+
+	.indicator-label {
+		max-width: 10em;
+	}
 }

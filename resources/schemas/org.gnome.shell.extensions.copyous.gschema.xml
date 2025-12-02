@@ -148,6 +148,10 @@
 			<default>true</default>
 			<summary>Show an indicator on the top panel</summary>
 		</key>
+		<key name="show-content-indicator" type="b">
+			<default>false</default>
+			<summary>Show the current clipboard content in the indicator</summary>
+		</key>
 		<key name="wiggle-indicator" type="b">
 			<default>true</default>
 			<summary>Wiggle the indicator when a clipboard item is copied</summary>

@@ -63,6 +63,10 @@ export default class CopyousExtension extends Extension {
 				await this.entryTracker?.deleteOldest();
 			}
 		});
+		this.clipboardDialog.connect('paste', async (_, entry: ClipboardEntry) => {
+			await this.clipboardManager?.pasteEntry(entry);
+			this.indicator?.showEntry(entry);
+		});
 
 		this.indicator = new ClipboardIndicator(this);
 		this.indicator.connect('open-dialog', () => this.clipboardDialog?.open());
@@ -109,16 +113,19 @@ export default class CopyousExtension extends Extension {
 		this.clipboardManager = new ClipboardManager(this, this.entryTracker);
 		this.clipboardManager.connect('clipboard', (_, entry: ClipboardEntry) => {
 			this.clipboardDialog?.addEntry(entry);
+			this.indicator?.showEntry(entry);
 			this.indicator?.animate();
 			this.notificationManager?.notification(entry);
 			this.soundManager?.playSound();
 		});
 		this.clipboardManager.connect('text', (_, text: string) => {
+			this.indicator?.showText(text);
 			this.indicator?.animate();
 			this.notificationManager?.textNotification(text);
 			this.soundManager?.playSound();
 		});
 		this.clipboardManager.connect('image', (_, image: Uint8Array, width: number, height: number) => {
+			this.indicator?.showImageBytes(image);
 			this.indicator?.animate();
 			this.notificationManager?.imageNotification(image, width, height);
 			this.soundManager?.playSound();

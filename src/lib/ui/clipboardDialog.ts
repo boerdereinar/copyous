@@ -36,6 +36,11 @@ const ANIMATION_TIME = 150;
 	Properties: {
 		opened: GObject.ParamSpec.boolean('opened', null, null, GObject.ParamFlags.READABLE, false),
 	},
+	Signals: {
+		paste: {
+			param_types: [GObject.TYPE_JSOBJECT],
+		},
+	},
 })
 export class ClipboardDialog extends St.Widget {
 	private _grab: Clutter.Grab | null = null;
@@ -373,8 +378,8 @@ export class ClipboardDialog extends St.Widget {
 		});
 
 		// Connect activation
-		item.connect('activate', async () => {
-			await this.ext.clipboardManager?.pasteEntry(entry);
+		item.connect('activate', () => {
+			this.emit('paste', entry);
 			this.close();
 		});
 		item.connect('activate-default', () => {
