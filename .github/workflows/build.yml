@@ -3,7 +3,7 @@ name: Build CI
 on:
   push:
     branches:
-      - '**'
+      - main
   pull_request:
 
 env:
@@ -48,7 +48,7 @@ jobs:
           path: dist/${{ env.UUID }}/*
 
   localization:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
 
     permissions:
