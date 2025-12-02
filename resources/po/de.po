@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-02 16:43+0000\n"
-"PO-Revision-Date: 2025-12-01 20:03+0100\n"
+"PO-Revision-Date: 2025-12-02 19:16+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -210,25 +210,25 @@ msgstr "Ändern Sie die Höhe des Zwischenablage-Dialogs"
 #: src/lib/preferences/customization/themeCustomization.ts:69
 #: src/lib/preferences/customization/themeCustomization.ts:73
 msgid "Theme"
-msgstr ""
+msgstr "Design"
 
 #: src/lib/preferences/customization/themeCustomization.ts:74
 msgid "Set the preferred theme"
-msgstr ""
+msgstr "Das bevorzugte Design festlegen"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 #: src/lib/preferences/customization/themeCustomization.ts:90
 msgid "Dark"
-msgstr ""
+msgstr "Dunkel"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 #: src/lib/preferences/customization/themeCustomization.ts:90
 msgid "Light"
-msgstr ""
+msgstr "Hell"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 #: src/lib/preferences/customization/profiles.ts:200
@@ -237,43 +237,43 @@ msgstr "Benutzerdefiniert"
 
 #: src/lib/preferences/customization/themeCustomization.ts:88
 msgid "Color Scheme"
-msgstr ""
+msgstr "Farbschema"
 
 #: src/lib/preferences/customization/themeCustomization.ts:89
 msgid "Set the color scheme of the custom theme"
-msgstr ""
+msgstr "Legen Sie das Farbschema des benutzerdefinierten Designs fest"
 
 #: src/lib/preferences/customization/themeCustomization.ts:96
 msgid "Background Color"
-msgstr ""
+msgstr "Hintergrundfarbe"
 
 #: src/lib/preferences/customization/themeCustomization.ts:97
 msgid "Set the background color of the clipboard dialog"
-msgstr ""
+msgstr "Hintergrundfarbe des Zwischenablage-Dialogfelds festlegen"
 
 #: src/lib/preferences/customization/themeCustomization.ts:103
 msgid "Text Color"
-msgstr ""
+msgstr "Textfarbe"
 
 #: src/lib/preferences/customization/themeCustomization.ts:104
 msgid "Set the text color of the clipboard dialog"
-msgstr ""
+msgstr "Textfarbe des Zwischenablage-Dialogfelds festlegen"
 
 #: src/lib/preferences/customization/themeCustomization.ts:110
 msgid "Item Color"
-msgstr ""
+msgstr "Elementfarbe"
 
 #: src/lib/preferences/customization/themeCustomization.ts:111
 msgid "Set the background color of clipboard items"
-msgstr ""
+msgstr "Hintergrundfarbe des Zwischenablage-Dialogfelds festlegen"
 
 #: src/lib/preferences/customization/themeCustomization.ts:117
 msgid "Search Color"
-msgstr ""
+msgstr "Suche Farbe"
 
 #: src/lib/preferences/customization/themeCustomization.ts:118
 msgid "Set the background color of the search bar"
-msgstr ""
+msgstr "Hintergrundfarbe der Suchleiste festlegen"
 
 #: src/lib/preferences/customization/items/textItemCustomization.ts:15
 msgid "Text Item"
@@ -1278,11 +1278,11 @@ msgstr "Zeige einen Indikator auf dem oberen Bedienfeld an"
 
 #: src/lib/preferences/general/feedbackSettings.ts:231
 msgid "Show Clipboard Content in Indicator"
-msgstr ""
+msgstr "Inhalt der Zwischenablage in Indikator anzeigen"
 
 #: src/lib/preferences/general/feedbackSettings.ts:232
 msgid "Show the current clipboard content in the indicator"
-msgstr ""
+msgstr "Zeige den aktuellen Inhalt der Zwischenablage im Indikator an"
 
 #: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
@@ -1797,8 +1797,8 @@ msgstr "Einstellungen"
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Datei"
+msgstr[1] "%d Dateien"
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
