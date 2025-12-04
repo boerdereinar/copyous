@@ -1,8 +1,11 @@
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
+import GdkPixbuf from 'gi://GdkPixbuf';
+import Gio from 'gi://Gio';
+import Pango from 'gi://Pango';
 import St from 'gi://St';
 
-import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
+import { gettext as _, ngettext } from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as animationUtils from 'resource:///org/gnome/shell/misc/animationUtils.js';
 import * as CheckBox from 'resource:///org/gnome/shell/ui/checkBox.js';
 import * as Dialog from 'resource:///org/gnome/shell/ui/dialog.js';
@@ -12,9 +15,11 @@ import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 
 import type CopyousExtension from '../../extension.js';
-import { ClipboardHistory } from '../common/constants.js';
+import { Color } from '../common/color.js';
+import { ClipboardHistory, ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
+import { ClipboardEntry } from '../misc/db.js';
 
 @registerClass({
 	Signals: {
@@ -71,17 +76,25 @@ export class ClipboardIndicator extends PanelMenu.Button {
 	private _incognito: boolean = false;
 
 	declare menu: PopupMenu.PopupMenu;
+	private readonly _box: St.BoxLayout;
 	private readonly _icon: St.Icon;
 	private readonly _incognitoSwitch: PopupMenu.PopupSwitchMenuItem;
+	private _previewWidget?: St.Widget;
 
 	constructor(private ext: CopyousExtension) {
 		super(0.5, ext.metadata.name, false);
 
+		this._box = new St.BoxLayout({
+			style_class: 'copyous-indicator-box',
+			orientation: Clutter.Orientation.HORIZONTAL,
+		});
+		this.add_child(this._box);
+
 		this._icon = new St.Icon({
 			gicon: loadIcon(ext, Icon.Clipboard),
-			style_class: 'clipboard-indicator-icon',
+			style_class: 'indicator-icon',
 		});
-		this.add_child(this._icon);
+		this._box.add_child(this._icon);
 
 		this._incognitoSwitch = new PopupMenu.PopupSwitchMenuItem(_('Incognito Mode'), false);
 		this.menu.addMenuItem(this._incognitoSwitch);
@@ -95,6 +108,8 @@ export class ClipboardIndicator extends PanelMenu.Button {
 		// Bind properties
 		this.ext.settings.connectObject(
 			'changed::show-indicator',
+			this.updateSettings.bind(this),
+			'changed::show-content-indicator',
 			this.updateSettings.bind(this),
 			'changed::incognito',
 			this.updateSettings.bind(this),
@@ -119,8 +134,16 @@ export class ClipboardIndicator extends PanelMenu.Button {
 		this.notify('incognito');
 	}
 
+	private set previewWidget(widget: St.Widget) {
+		this._previewWidget?.destroy();
+		widget.visible = this.ext.settings.get_boolean('show-content-indicator');
+		this._previewWidget = widget;
+		this._box.add_child(widget);
+	}
+
 	private updateSettings() {
 		this.visible = this.ext.settings.get_boolean('show-indicator');
+		if (this._previewWidget) this._previewWidget.visible = this.ext.settings.get_boolean('show-content-indicator');
 		this.incognito = this.ext.settings.get_boolean('incognito');
 	}
 
@@ -132,6 +155,67 @@ export class ClipboardIndicator extends PanelMenu.Button {
 		if (this.ext.settings.get_boolean('wiggle-indicator')) {
 			animationUtils.wiggle(this._icon, { offset: 2, duration: 65, wiggleCount: 3 });
 		}
+	}
+
+	showEntry(entry: ClipboardEntry) {
+		switch (entry.type) {
+			case ItemType.Text:
+			case ItemType.Code:
+			case ItemType.Link:
+			case ItemType.Character:
+				this.showText(entry.content.split('\n')[0] ?? '');
+				break;
+			case ItemType.Image:
+				this.showImageFile(Gio.File.new_for_uri(entry.content));
+				break;
+			case ItemType.File: {
+				const file = Gio.File.new_for_uri(entry.content).get_basename();
+				this.showText(file ?? '', true);
+				break;
+			}
+			case ItemType.Files: {
+				const n = entry.content.split('\n').length;
+				this.showText(ngettext('%d File', '%d Files', n).format(n));
+				break;
+			}
+			case ItemType.Color: {
+				const color = Color.parse(entry.content)?.hex();
+				if (!color) return;
+
+				const pixbuf = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, false, 8, 32, 32);
+				pixbuf.fill(parseInt(color.toString().padEnd(9, 'f').replace('#', '0x')));
+				const [, buffer] = pixbuf.save_to_bufferv('png', null, null);
+				this.showImageBytes(buffer);
+				break;
+			}
+		}
+	}
+
+	showText(text: string, start: boolean = false) {
+		const label = new St.Label({
+			style_class: 'indicator-label',
+			y_align: Clutter.ActorAlign.CENTER,
+			text,
+		});
+		label.clutter_text.ellipsize = start ? Pango.EllipsizeMode.START : Pango.EllipsizeMode.END;
+		this.previewWidget = label;
+	}
+
+	showImageFile(file: Gio.File) {
+		if (!file.query_exists(null)) return;
+		this.previewWidget = new St.Icon({
+			style_class: 'indicator-image',
+			gicon: Gio.FileIcon.new(file),
+			y_align: Clutter.ActorAlign.CENTER,
+		});
+	}
+
+	showImageBytes(bytes: Uint8Array) {
+		this.previewWidget = new St.Icon({
+			style_class: 'indicator-image',
+			gicon: Gio.BytesIcon.new(bytes),
+			y_align: Clutter.ActorAlign.CENTER,
+		});
 	}
 
 	private confirmClearHistory() {
@@ -148,7 +232,10 @@ export class ClipboardIndicator extends PanelMenu.Button {
 			this.emit('open-dialog');
 			return Clutter.EVENT_STOP;
 		}
-
+		if (event.type() === Clutter.EventType.BUTTON_PRESS && event.get_button() === Clutter.BUTTON_MIDDLE) {
+			this.ext.openPreferences();
+			return Clutter.EVENT_STOP;
+		}
 		return super.vfunc_event(event);
 	}
 

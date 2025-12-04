@@ -1,7 +1,7 @@
 .clipboard-item {
 	// Content info
 	.content-info {
-		color: $insensitive_fg_color;
+		color: $card_insensitive_fg_color;
 
 		StIcon {
 			icon-size: $scalable_icon_size - to_em(4px);

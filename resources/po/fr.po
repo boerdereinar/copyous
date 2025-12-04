@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-30 18:36+0000\n"
+"POT-Creation-Date: 2025-12-02 16:43+0000\n"
 "PO-Revision-Date: 2025-11-29 19:52+0100\n"
 "Last-Translator: Philippe Charlanes\n"
 "Language-Team: \n"
@@ -216,6 +216,74 @@ msgstr "Hauteur"
 msgid "Change the height of the clipboard dialog"
 msgstr "Modifie la hauteur de la boîte de dialogue du presse-papiers"
 
+#: src/lib/preferences/customization/themeCustomization.ts:69
+#: src/lib/preferences/customization/themeCustomization.ts:73
+msgid "Theme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:74
+msgid "Set the preferred theme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "System"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/themeCustomization.ts:90
+msgid "Dark"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/themeCustomization.ts:90
+msgid "Light"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/profiles.ts:200
+msgid "Custom"
+msgstr "Personnalisé"
+
+#: src/lib/preferences/customization/themeCustomization.ts:88
+msgid "Color Scheme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:89
+msgid "Set the color scheme of the custom theme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:96
+msgid "Background Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:97
+msgid "Set the background color of the clipboard dialog"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:103
+msgid "Text Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:104
+msgid "Set the text color of the clipboard dialog"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:110
+msgid "Item Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:111
+msgid "Set the background color of clipboard items"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:117
+msgid "Search Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:118
+msgid "Set the background color of the search bar"
+msgstr ""
+
 #: src/lib/preferences/customization/items/textItemCustomization.ts:15
 msgid "Text Item"
 msgstr "Élément de texte"
@@ -361,7 +429,7 @@ msgstr "Pas dans la plage"
 #: src/lib/preferences/actions/actionsGroup.ts:33
 #: src/lib/preferences/general/appExclusionSettings.ts:174
 #: src/lib/preferences/shortcuts/shortcutRow.ts:131
-#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:40
+#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:45
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -667,10 +735,6 @@ msgstr "Par défaut"
 #: src/lib/preferences/customization/profiles.ts:194
 msgid "Compact"
 msgstr "Compact"
-
-#: src/lib/preferences/customization/profiles.ts:200
-msgid "Custom"
-msgstr "Personnalisé"
 
 #: src/lib/preferences/dependencies/dependencies.ts:151
 #: src/lib/preferences/dependencies/dependencies.ts:433
@@ -1066,8 +1130,8 @@ msgstr "Enregistrer"
 
 #: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/general/feedbackSettings.ts:155
-#: src/lib/preferences/general/feedbackSettings.ts:251
-#: src/lib/preferences/general/feedbackSettings.ts:292
+#: src/lib/preferences/general/feedbackSettings.ts:259
+#: src/lib/preferences/general/feedbackSettings.ts:301
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:35
 #: src/lib/ui/components/editDialog.ts:231
 #: src/lib/ui/components/editDialog.ts:258
@@ -1126,7 +1190,7 @@ msgstr ""
 "Choisissez ce qu'il advient de votre historique du presse-papiers lorsque "
 "vous redémarrez, vous déconnectez ou éteignez votre système"
 
-#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:47
+#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:52
 msgid "Clear"
 msgstr "Effacer"
 
@@ -1162,47 +1226,47 @@ msgstr ""
 "temps"
 
 #: src/lib/preferences/general/feedbackSettings.ts:129
-#: src/lib/preferences/general/feedbackSettings.ts:243
+#: src/lib/preferences/general/feedbackSettings.ts:251
 msgid "Sound"
 msgstr "Son"
 
 #: src/lib/preferences/general/feedbackSettings.ts:160
-#: src/lib/preferences/general/feedbackSettings.ts:294
+#: src/lib/preferences/general/feedbackSettings.ts:303
 msgid "Click"
 msgstr "Clic"
 
 #: src/lib/preferences/general/feedbackSettings.ts:161
-#: src/lib/preferences/general/feedbackSettings.ts:296
+#: src/lib/preferences/general/feedbackSettings.ts:305
 msgid "Hum"
 msgstr "Bourdonnement"
 
 #: src/lib/preferences/general/feedbackSettings.ts:162
-#: src/lib/preferences/general/feedbackSettings.ts:298
+#: src/lib/preferences/general/feedbackSettings.ts:307
 msgid "String"
 msgstr "Corde"
 
 #: src/lib/preferences/general/feedbackSettings.ts:163
-#: src/lib/preferences/general/feedbackSettings.ts:300
+#: src/lib/preferences/general/feedbackSettings.ts:309
 msgid "Swing"
 msgstr "Balançoire"
 
 #: src/lib/preferences/general/feedbackSettings.ts:164
-#: src/lib/preferences/general/feedbackSettings.ts:302
+#: src/lib/preferences/general/feedbackSettings.ts:311
 msgid "Message"
 msgstr "Message"
 
 #: src/lib/preferences/general/feedbackSettings.ts:165
-#: src/lib/preferences/general/feedbackSettings.ts:304
+#: src/lib/preferences/general/feedbackSettings.ts:313
 msgid "Message New Instant"
 msgstr "Message Nouveau Instantané"
 
 #: src/lib/preferences/general/feedbackSettings.ts:166
-#: src/lib/preferences/general/feedbackSettings.ts:306
+#: src/lib/preferences/general/feedbackSettings.ts:315
 msgid "Bell"
 msgstr "Cloche"
 
 #: src/lib/preferences/general/feedbackSettings.ts:167
-#: src/lib/preferences/general/feedbackSettings.ts:308
+#: src/lib/preferences/general/feedbackSettings.ts:317
 msgid "Dialog Warning"
 msgstr "Avertissement de boîte de dialogue"
 
@@ -1219,23 +1283,31 @@ msgid "Show an indicator on the top panel"
 msgstr "Affiche un indicateur sur le panneau supérieur"
 
 #: src/lib/preferences/general/feedbackSettings.ts:231
+msgid "Show Clipboard Content in Indicator"
+msgstr ""
+
+#: src/lib/preferences/general/feedbackSettings.ts:232
+msgid "Show the current clipboard content in the indicator"
+msgstr ""
+
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr "Agiter l'indicateur"
 
-#: src/lib/preferences/general/feedbackSettings.ts:232
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr "Agite l'indicateur lorsqu'un élément du presse-papiers est copié"
 
-#: src/lib/preferences/general/feedbackSettings.ts:237
+#: src/lib/preferences/general/feedbackSettings.ts:245
 msgid "Send Notification"
 msgstr "Envoyer une notification"
 
-#: src/lib/preferences/general/feedbackSettings.ts:238
+#: src/lib/preferences/general/feedbackSettings.ts:246
 msgid "Send a notification when a clipboard item is copied"
 msgstr ""
 "Envoie une notification lorsqu'un élément est copié dans le presse-papiers"
 
-#: src/lib/preferences/general/feedbackSettings.ts:244
+#: src/lib/preferences/general/feedbackSettings.ts:252
 msgid "Sound to play when a clipboard item is copied"
 msgstr "Son à jouer lorsqu'un élément du presse-papiers est copié"
 
@@ -1703,29 +1775,36 @@ msgid_plural "%d files"
 msgstr[0] "%d fichier"
 msgstr[1] "%d fichiers"
 
-#: src/lib/ui/indicator.ts:31
+#: src/lib/ui/indicator.ts:36
 msgid "Clear Clipboard History?"
 msgstr "Effacer l'historique du presse-papiers ?"
 
-#: src/lib/ui/indicator.ts:32
+#: src/lib/ui/indicator.ts:37
 msgid "Are you sure you want to clear your clipboard history?"
 msgstr "Êtes-vous sûr de vouloir effacer votre historique du presse-papiers ?"
 
-#: src/lib/ui/indicator.ts:36
+#: src/lib/ui/indicator.ts:41
 msgid "Clear Pinned/Tagged Items"
 msgstr "Effacer les éléments épinglés/marqués"
 
-#: src/lib/ui/indicator.ts:86
+#: src/lib/ui/indicator.ts:99
 msgid "Incognito Mode"
 msgstr "Mode Incognito"
 
-#: src/lib/ui/indicator.ts:89
+#: src/lib/ui/indicator.ts:102
 msgid "Clear History"
 msgstr "Effacer l'historique"
 
-#: src/lib/ui/indicator.ts:90
+#: src/lib/ui/indicator.ts:103
 msgid "Settings"
 msgstr "Paramètres"
+
+#: src/lib/ui/indicator.ts:178
+#, javascript-format
+msgid "%d File"
+msgid_plural "%d Files"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
@@ -1751,14 +1830,14 @@ msgstr "Coller comme chemin"
 msgid "Convert"
 msgstr "Convertir"
 
-#: src/prefs.ts:69
+#: src/prefs.ts:70
 msgid "General"
 msgstr "Général"
 
-#: src/prefs.ts:91
+#: src/prefs.ts:92
 msgid "Customization"
 msgstr "Personnalisation"
 
-#: src/prefs.ts:107
+#: src/prefs.ts:109
 msgid "Shortcuts"
 msgstr "Raccourcis"

@@ -227,6 +227,14 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 		});
 		this.add(showIndicator);
 
+		const showContentIndicator = new Adw.SwitchRow({
+			title: _('Show Clipboard Content in Indicator'),
+			subtitle: _('Show the current clipboard content in the indicator'),
+		});
+		this.add(showContentIndicator);
+		showIndicator.bind_property('active', showContentIndicator, 'sensitive', null);
+		this.connect('map', () => (showContentIndicator.sensitive = showIndicator.active));
+
 		const wiggleIndicator = new Adw.SwitchRow({
 			title: _('Wiggle Indicator'),
 			subtitle: _('Wiggle the indicator when a clipboard item is copied'),
@@ -260,6 +268,7 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 		// Bind properties
 		const settings = prefs.getSettings();
 		settings.bind('show-indicator', showIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
+		settings.bind('show-content-indicator', showContentIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('wiggle-indicator', wiggleIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('send-notification', sendNotification, 'active', Gio.SettingsBindFlags.DEFAULT);
 

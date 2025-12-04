@@ -1,5 +1,3 @@
-@use 'sass:color';
-
 @mixin header_color($color) {
 	color: $color;
 
@@ -41,7 +39,7 @@
 		spacing: $base_padding;
 		padding-left: $base_padding * 1.5;
 		padding-right: $base_padding * 1.5 - 2px;
-		color: $insensitive_fg_color;
+		color: $card_insensitive_fg_color;
 
 		&:rtl {
 			padding-left: $base_padding * 1.5 - 2px;
@@ -81,7 +79,7 @@
 			// Time label
 			.event-time {
 				@extend %caption;
-				color: $insensitive_fg_color;
+				color: $card_insensitive_fg_color;
 				// Add bottom padding to align the title with the time horizontally
 				padding-bottom: to_em(1px);
 			}
@@ -149,7 +147,7 @@
 
 		.status-item-content {
 			spacing: $base_padding * 3;
-			color: color.adjust($fg_color, $alpha: -0.75);
+			color: transparentize($fg_color, 0.75);
 
 			.status-item-icon {
 				icon-size: $scalable_icon_size * 4;
@@ -221,7 +219,7 @@
 				@extend %heading;
 
 				&.no-title {
-					color: $insensitive_fg_color;
+					color: $card_insensitive_fg_color;
 				}
 			}
 
@@ -229,7 +227,7 @@
 				padding-bottom: $base_padding * 0.5;
 
 				&.no-description {
-					color: $insensitive_fg_color;
+					color: $card_insensitive_fg_color;
 				}
 			}
 
@@ -247,7 +245,7 @@
 
 		.character-item-chars {
 			@extend %heading;
-			color: $insensitive_fg_color;
+			color: $card_insensitive_fg_color;
 		}
 	}
 

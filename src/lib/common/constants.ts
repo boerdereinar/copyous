@@ -72,6 +72,13 @@ export const ClipboardHistory = {
 
 export type ClipboardHistory = (typeof ClipboardHistory)[keyof typeof ClipboardHistory];
 
+export const DefaultColors = {
+	'custom-bg-color': ['rgb(54,54,58)', 'rgb(250,250,251)'],
+	'custom-fg-color': ['rgb(255,255,255)', 'rgb(34,34,38)'],
+	'custom-card-bg-color': ['rgb(71,71,76)', 'rgb(255,255,255)'],
+	'custom-search-bg-color': ['rgb(71,71,76)', 'rgb(255,255,255)'],
+} as const;
+
 export const UserAgent = 'Mozilla/5.0 (compatible; CopyousBot/1.0; +https://github.com/boerdereinar/copyous)';
 
 export const HljsCdns = [

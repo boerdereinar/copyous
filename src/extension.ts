@@ -13,6 +13,7 @@ import { ClipboardManager } from './lib/misc/clipboard.js';
 import { ClipboardEntry, ClipboardEntryTracker } from './lib/misc/db.js';
 import { NotificationManager } from './lib/misc/notifications.js';
 import { ShortcutManager } from './lib/misc/shortcuts.js';
+import { ThemeManager } from './lib/misc/theme.js';
 import { ClipboardDialog } from './lib/ui/clipboardDialog.js';
 import { ClipboardIndicator } from './lib/ui/indicator.js';
 
@@ -24,6 +25,8 @@ export default class CopyousExtension extends Extension {
 	private hljsMonitor: Gio.FileMonitor | undefined;
 	private hljsLanguages: Map<string, boolean> | undefined;
 	private hljsCallbacks: (() => void)[] | undefined;
+
+	public themeManager: ThemeManager | undefined;
 
 	private clipboardDialog: ClipboardDialog | undefined;
 	private indicator: ClipboardIndicator | undefined;
@@ -49,6 +52,9 @@ export default class CopyousExtension extends Extension {
 		// Highlight.js
 		this.initHljs().catch(error);
 
+		// Theme
+		this.themeManager = new ThemeManager(this);
+
 		// UI
 		this.clipboardDialog = new ClipboardDialog(this);
 		this.clipboardDialog.connect('notify::opened', async () => {
@@ -56,6 +62,10 @@ export default class CopyousExtension extends Extension {
 			if (!this.clipboardDialog?.opened && this.updateHistory) {
 				await this.entryTracker?.deleteOldest();
 			}
+		});
+		this.clipboardDialog.connect('paste', async (_, entry: ClipboardEntry) => {
+			await this.clipboardManager?.pasteEntry(entry);
+			this.indicator?.showEntry(entry);
 		});
 
 		this.indicator = new ClipboardIndicator(this);
@@ -103,16 +113,19 @@ export default class CopyousExtension extends Extension {
 		this.clipboardManager = new ClipboardManager(this, this.entryTracker);
 		this.clipboardManager.connect('clipboard', (_, entry: ClipboardEntry) => {
 			this.clipboardDialog?.addEntry(entry);
+			this.indicator?.showEntry(entry);
 			this.indicator?.animate();
 			this.notificationManager?.notification(entry);
 			this.soundManager?.playSound();
 		});
 		this.clipboardManager.connect('text', (_, text: string) => {
+			this.indicator?.showText(text);
 			this.indicator?.animate();
 			this.notificationManager?.textNotification(text);
 			this.soundManager?.playSound();
 		});
 		this.clipboardManager.connect('image', (_, image: Uint8Array, width: number, height: number) => {
+			this.indicator?.showImageBytes(image);
 			this.indicator?.animate();
 			this.notificationManager?.imageNotification(image, width, height);
 			this.soundManager?.playSound();
@@ -232,6 +245,12 @@ export default class CopyousExtension extends Extension {
 	}
 
 	override disable() {
+		// UI
+		this.clipboardDialog?.destroy();
+		this.indicator?.destroy();
+		this.clipboardDialog = undefined;
+		this.indicator = undefined;
+
 		// Highlight.js
 		this.hljs = undefined;
 		this.hljsMonitor?.cancel();
@@ -239,11 +258,9 @@ export default class CopyousExtension extends Extension {
 		this.hljsLanguages = undefined;
 		this.hljsCallbacks = undefined;
 
-		// UI
-		this.clipboardDialog?.destroy();
-		this.indicator?.destroy();
-		this.clipboardDialog = undefined;
-		this.indicator = undefined;
+		// Theme
+		this.themeManager?.destroy();
+		this.themeManager = undefined;
 
 		// DBus
 		this.dbus?.destroy();
