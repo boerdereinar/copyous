@@ -302,43 +302,43 @@ msgstr "Ativar ou desativar o destaque de sintaxe no item de código"
 #: src/lib/preferences/customization/items/codeItemCustomization.ts:26
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:184
 msgid "Show Line Numbers"
-msgstr ""
+msgstr "Mostrar Números das Linhas"
 
 #: src/lib/preferences/customization/items/codeItemCustomization.ts:27
 msgid "Show line numbers in the code item"
-msgstr ""
+msgstr "Mostrar números das linhas no item de código"
 
 #: src/lib/preferences/customization/items/codeItemCustomization.ts:32
 msgid "Show Code Info"
-msgstr ""
+msgstr "Mostrar informações do código"
 
 #: src/lib/preferences/customization/items/codeItemCustomization.ts:33
 msgid "Show extra information in the code item"
-msgstr ""
+msgstr "Mostrar informações extras no item de código"
 
 #: src/lib/preferences/customization/items/exclusions.ts:33
 msgid "Zero or More Characters"
-msgstr ""
+msgstr "Zero ou mais caracteres"
 
 #: src/lib/preferences/customization/items/exclusions.ts:39
 msgid "One Character"
-msgstr ""
+msgstr "Um caractere"
 
 #: src/lib/preferences/customization/items/exclusions.ts:45
 msgid "Recursive Wildcard"
-msgstr ""
+msgstr "Coringa recursivo"
 
 #: src/lib/preferences/customization/items/exclusions.ts:51
 msgid "List"
-msgstr ""
+msgstr "Lista"
 
 #: src/lib/preferences/customization/items/exclusions.ts:57
 msgid "Range"
-msgstr ""
+msgstr "Intervalo"
 
 #: src/lib/preferences/customization/items/exclusions.ts:63
 msgid "Not in Range"
-msgstr ""
+msgstr "Fora do intervalo"
 
 #: src/lib/preferences/customization/items/exclusions.ts:90
 #: src/lib/preferences/dependencies/dependencies.ts:203
@@ -351,7 +351,7 @@ msgstr ""
 #: src/lib/preferences/shortcuts/shortcutRow.ts:131
 #: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:40
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/lib/preferences/customization/items/exclusions.ts:92
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:73
@@ -359,70 +359,70 @@ msgstr ""
 #: src/lib/preferences/actions/actionsGroup.ts:550
 #: src/lib/preferences/general/appExclusionSettings.ts:176
 msgid "Add"
-msgstr ""
+msgstr "Adicionar"
 
 #: src/lib/preferences/customization/items/exclusions.ts:107
 msgid "Pattern"
-msgstr ""
+msgstr "Template"
 
 #: src/lib/preferences/customization/items/exclusions.ts:124
 msgid "You can test your pattern below"
-msgstr ""
+msgstr "Você pode testar seu template abaixo"
 
 #: src/lib/preferences/customization/items/exclusions.ts:158
 msgid "Invalid Pattern"
-msgstr ""
+msgstr "Template inválido"
 
 #: src/lib/preferences/customization/items/exclusions.ts:163
 msgid "Preview Shown"
-msgstr ""
+msgstr "Visualização exibida"
 
 #: src/lib/preferences/customization/items/exclusions.ts:168
 msgid "Preview Hidden"
-msgstr ""
+msgstr "Prévia oculta"
 
 #: src/lib/preferences/customization/items/exclusions.ts:291
 msgid "No Exclusion Patterns"
-msgstr ""
+msgstr "Sem templates de exclusão"
 
 #: src/lib/preferences/customization/items/characterItemCustomization.ts:13
 msgid "Character Item"
-msgstr ""
+msgstr "Item de Caractere"
 
 #: src/lib/preferences/customization/items/characterItemCustomization.ts:14
 msgid "Configure character clipboard items"
-msgstr ""
+msgstr "Configure itens de caractere da área de transferência"
 
 #: src/lib/preferences/customization/items/characterItemCustomization.ts:18
 msgid "Maximum Characters"
-msgstr ""
+msgstr "Máximo de Caracteres"
 
 #: src/lib/preferences/customization/items/characterItemCustomization.ts:19
 msgid "Maximum number of characters that are recognized as a character item"
-msgstr ""
+msgstr "Número máximo de caracteres que são reconhecidos como um item de caractere"
 
 #: src/lib/preferences/customization/items/characterItemCustomization.ts:25
 msgid "Show Unicode"
-msgstr ""
+msgstr "Mostrar Unicode"
 
 #: src/lib/preferences/customization/items/characterItemCustomization.ts:26
 msgid "Show the Unicode of the character"
-msgstr ""
+msgstr "Mostrar o Unicode do caractere"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:29
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:98
 msgid "Link Exclusions"
-msgstr ""
+msgstr "Exclusões de Links"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:42
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:100
 msgid "Add Pattern"
-msgstr ""
+msgstr "Adicionar Template"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:43
 msgid ""
 "Enter a regular expression to exclude links that should not have a preview."
-msgstr ""
+msgstr "Coloque uma expressão regular para excluir links que não devem ter uma prévia."
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:44
 #: src/lib/preferences/actions/actionDialog.ts:180
@@ -430,27 +430,27 @@ msgstr ""
 #: src/lib/preferences/actions/actionDefaults.ts:152
 #: src/lib/ui/items/linkItem.ts:292
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:47
 msgid "Link Exclusion Patterns"
-msgstr ""
+msgstr "Exclusões de Links"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:48
 msgid "Links matching these patterns will not have a preview"
-msgstr ""
+msgstr "Links que correspondem a essas expressões regular não terão uma prévia"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:65
 msgid "Link Item"
-msgstr ""
+msgstr "Item de Link"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:66
 msgid "Configure link clipboard items"
-msgstr ""
+msgstr "Configure os itens de link da área de transferência"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:70
 msgid "Show Link Preview"
-msgstr ""
+msgstr "Mostrar Prévia de Link"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:71
 msgid "Show link preview in the link item"
@@ -458,27 +458,27 @@ msgstr ""
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:76
 msgid "Show Link Preview Image"
-msgstr ""
+msgstr "Mostrar imagem de prévia de link"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:77
 msgid "Show link preview image in the link item"
-msgstr ""
+msgstr "Mostrar imagem de prévia de link no item de link"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:82
 msgid "Link Preview Image Background Size"
-msgstr ""
+msgstr "Tamanho de fundo da imagem de prévia de link"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:83
 msgid "Background size of the link preview image"
-msgstr ""
+msgstr "Tamanho de fundo da imagem de prévia de link"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:89
 msgid "Link Preview Orientation"
-msgstr ""
+msgstr "Orientação da prévia de link"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:90
 msgid "Orientation of the link preview"
-msgstr ""
+msgstr "Orientação da prévia de link"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:99
 msgid "Configure link exclusions for link previews"
@@ -487,11 +487,11 @@ msgstr ""
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:51
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:190
 msgid "File Exclusions"
-msgstr ""
+msgstr "Exclusões de arquivo"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:63
 msgid "File Preview Type"
-msgstr ""
+msgstr "Tipo de prévia de arquivo"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:68
 #: src/lib/preferences/actions/actionDialog.ts:175
@@ -499,11 +499,11 @@ msgstr ""
 #: src/lib/preferences/actions/actionDefaults.ts:132
 #: src/lib/ui/items/textItem.ts:24
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:69
 msgid "Enable file previews for all text files"
-msgstr ""
+msgstr "Habilitar prévia de arquivo para todos os arquivos de texto"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:78
 #: src/lib/preferences/actions/actionDialog.ts:177
@@ -511,213 +511,219 @@ msgstr ""
 #: src/lib/preferences/actions/actionDefaults.ts:140
 #: src/lib/ui/items/imageItem.ts:37
 msgid "Image"
-msgstr ""
+msgstr "Imagem"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:79
 msgid "Enable file previews for all image files"
-msgstr ""
+msgstr "Habilitar prévia de arquivo para todos os arquivos de imagem"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:88
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatura"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:89
 msgid "Enable file previews for all files with generated thumbnails"
-msgstr ""
+msgstr "Habilitar prévia de arquivo para todos os arquivos com miniaturas geradas"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:101
 msgid "Enter a glob pattern to exclude files that should not have a preview."
-msgstr ""
+msgstr "Coloque um padrão glob para excluir arquivos que não devem ter uma prévia."
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:102
 msgid "Path"
-msgstr ""
+msgstr "Caminho"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:105
 msgid "File Exclusion Patterns"
-msgstr ""
+msgstr "Templates de Exclusão de Arquivos"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:106
 msgid "Files matching these patterns will not have a preview"
-msgstr ""
+msgstr "Arquivos que correspondem a esses templates não terão uma prévia"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:149
 msgid "File Item"
-msgstr ""
+msgstr "Item de Arquivo"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:150
 msgid "Configure file clipboard items"
-msgstr ""
+msgstr "Configure os itens de arquivo da área de transferência"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:154
 msgid "File Preview Visibility"
-msgstr ""
+msgstr "Visibilidade da Prévia de Arquivo"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:156
 msgid ""
 "File preview shows a preview of the contents of a file.\n"
 "File info shows some information about the file."
-msgstr ""
+msgstr "Prévias de arquivo mostram uma prévia do conteúdo do arquivo.\n"
+"Informações de arquivo mostram algumas informações sobre o arquivo."
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:159
 msgid "File Preview"
-msgstr ""
+msgstr "Prévia de Arquivo"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:160
 msgid "File Info"
-msgstr ""
+msgstr "Informações de Arquivo"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:161
 msgid "File Preview or File Info"
-msgstr ""
+msgstr "Prévia de Arquivo ou Informações de Arquivo"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:162
 msgid "File Preview and File Info"
-msgstr ""
+msgstr "Prévia de Arquivo e Informações de Arquivo"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:163
 #: src/lib/preferences/customization/headerCustomization.ts:33
 msgid "Hidden"
-msgstr ""
+msgstr "Oculto"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:172
 msgid "Background size of the image preview"
-msgstr ""
+msgstr "Tamanho de fundo da prévia de imagem"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:179
 msgid "Enable or disable syntax highlighting in the text preview"
-msgstr ""
+msgstr "Ativar ou desativar destaque de sintaxe na prévia de texto"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:185
 msgid "Show line numbers in the text preview"
-msgstr ""
+msgstr "Mostrar números de linha na prévia de texto"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:191
 msgid "Configure file exclusions for file previews"
-msgstr ""
+msgstr "Configurar exclusões de arquivo para prévias de arquivo"
 
 #: src/lib/preferences/customization/headerCustomization.ts:15
 msgid "Header"
-msgstr ""
+msgstr "Cabeçalho"
 
 #: src/lib/preferences/customization/headerCustomization.ts:19
 msgid "Show Header"
-msgstr ""
+msgstr "Mostrar Cabeçalho"
 
 #: src/lib/preferences/customization/headerCustomization.ts:20
 msgid "Show the header"
-msgstr ""
+msgstr "Mostrar o cabeçalho"
 
 #: src/lib/preferences/customization/headerCustomization.ts:25
 msgid "Show Item Title"
-msgstr ""
+msgstr "Mostrar Título do Item"
 
 #: src/lib/preferences/customization/headerCustomization.ts:26
 msgid "Show the title of the item"
-msgstr ""
+msgstr "Mostrar o título do item"
 
 #: src/lib/preferences/customization/headerCustomization.ts:31
 msgid "Header Controls Visibility"
-msgstr ""
+msgstr "Controle de Visibilidade do Cabeçalho"
 
 #: src/lib/preferences/customization/headerCustomization.ts:32
 msgid "The visibility of the header controls"
-msgstr ""
+msgstr "O controle de visibilidade do cabeçalho"
 
 #: src/lib/preferences/customization/headerCustomization.ts:33
 msgid "Visible"
-msgstr ""
+msgstr "Visível"
 
 #: src/lib/preferences/customization/headerCustomization.ts:33
 msgid "Visible on Hover"
-msgstr ""
+msgstr "Visível ao passar o mouse"
 
 #: src/lib/preferences/customization/profiles.ts:179
 msgid "Profiles"
-msgstr ""
+msgstr "Perfis"
 
 #: src/lib/preferences/customization/profiles.ts:180
 msgid "Choose between pre-defined profiles"
-msgstr ""
+msgstr "Escolha entre perfis pré-definidos"
 
 #: src/lib/preferences/customization/profiles.ts:188
 msgid "Default"
-msgstr ""
+msgstr "Padrão"
 
 #: src/lib/preferences/customization/profiles.ts:194
 msgid "Compact"
-msgstr ""
+msgstr "Compacto"
 
 #: src/lib/preferences/customization/profiles.ts:200
 msgid "Custom"
-msgstr ""
+msgstr "Customizado"
 
 #: src/lib/preferences/dependencies/dependencies.ts:151
 #: src/lib/preferences/dependencies/dependencies.ts:433
 msgid "Highlight.js Not Installed"
-msgstr ""
+msgstr "Highlight.js não instalado"
 
 #: src/lib/preferences/dependencies/dependencies.ts:152
 msgid "Highlight.js is required to display syntax highlighted code."
-msgstr ""
+msgstr "Highlight.js é necessário para exibir código sintaticamente destacado."
 
 #: src/lib/preferences/dependencies/dependencies.ts:156
 msgid "Manual Installation"
-msgstr ""
+msgstr "Instalação Manual"
 
 #: src/lib/preferences/dependencies/dependencies.ts:170
 msgid ""
 "You can manually install highlight.js by downloading highlight.min.js from "
 "\"Url\" to \"Install Location\"."
-msgstr ""
+msgstr "Você pode instalar manualmente highlight.js baixando highlight.min.js de "
+"\"Url\" para \"Local de Instalação\"."
 
 #: src/lib/preferences/dependencies/dependencies.ts:187
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #: src/lib/preferences/dependencies/dependencies.ts:196
 msgid "Install Location"
-msgstr ""
+msgstr "Local de Instalação"
 
 #: src/lib/preferences/dependencies/dependencies.ts:205
 msgid "Install"
-msgstr ""
+msgstr "Instalar"
 
 #: src/lib/preferences/dependencies/dependencies.ts:332
 #: src/lib/preferences/dependencies/dependencies.ts:431
 msgid "Libgda Not Installed"
-msgstr ""
+msgstr "Libgda Não Instalado"
 
 #: src/lib/preferences/dependencies/dependencies.ts:334
 msgid ""
 "Libgda is required to store clipboard history between sessions. Install "
 "either libgda 5.0 or 6.0 with SQLite support to use this feature. After "
 "installing libgda you will need to log out or restart your system."
-msgstr ""
+msgstr "Libgda é necessário para armazenar o histórico da área de transferência entre sessões."
+"Instale libgda 5.0 ou 6.0 com suporte a SQLite para usar essa funcionalidade."
+"Após instalar libgda, você precisará fazer logout ou reiniciar seu sistema."
 
 #: src/lib/preferences/dependencies/dependencies.ts:338
 msgid "Install Libgda"
-msgstr ""
+msgstr "Instalar Libgda"
 
 #: src/lib/preferences/dependencies/dependencies.ts:346
 #: src/lib/preferences/dependencies/dependencies.ts:432
 msgid "GSound Not Installed"
-msgstr ""
+msgstr "GSound Não Instalado"
 
 #: src/lib/preferences/dependencies/dependencies.ts:348
 msgid ""
 "GSound is required to play sound effects. Install GSound to use this "
 "feature. After installing GSound you will need to log out or restart your "
 "system."
-msgstr ""
+msgstr "GSound é necessário para reproduzir efeitos sonoros. "
+"Instale GSound para usar essa funcionalidade. "
+"Após instalar GSound, você precisará fazer logout ou reiniciar seu sistema."
 
 #: src/lib/preferences/dependencies/dependencies.ts:351
 msgid "Install GSound"
-msgstr ""
+msgstr "Instalar GSound"
 
 #: src/lib/preferences/dependencies/dependencies.ts:364
 msgid "Starting Highlight.js Download"
-msgstr ""
+msgstr "Inicializando Download de Highlight.js"
 
 #: src/lib/preferences/dependencies/dependencies.ts:384
 msgid "Successfully Installed Highlight.js"
