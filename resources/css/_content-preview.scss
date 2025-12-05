@@ -29,13 +29,16 @@
 			border-radius: $base_border_radius + 2px;
 
 			.image-box {
-				padding: $base_padding;
 				border-radius: $base_border_radius;
 				background-size: cover;
 			}
 
 			&.contain .image-box {
 				background-size: contain;
+			}
+
+			&.missing-image {
+				padding: $base_padding;
 			}
 		}
 
@@ -78,13 +81,14 @@
 			border-radius: $base_border_radius + 2px;
 
 			.color-box {
-				padding: $base_padding;
 				border-radius: $base_border_radius;
-			}
 
-			.color-label {
-				font-weight: 800;
-				@include fontsize(13pt);
+				.color-label {
+					font-weight: 800;
+					@include fontsize(13pt);
+
+					padding: $base_padding 2 * $base_padding;
+				}
 			}
 		}
 	}

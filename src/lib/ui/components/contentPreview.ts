@@ -1,6 +1,7 @@
 import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
+import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
 import St from 'gi://St';
 
@@ -65,6 +66,7 @@ export class ContentPreview extends St.BoxLayout {
 })
 export class ImagePreview extends ContentPreview {
 	private _backgroundSize: BackgroundSize = BackgroundSize.Cover;
+	private readonly _ratio: number | null;
 	private readonly _effect?: Clutter.BrightnessContrastEffect;
 
 	constructor(ext: Extension, image: Gio.File) {
@@ -73,31 +75,40 @@ export class ImagePreview extends ContentPreview {
 		this.add_style_class_name('image-preview');
 
 		if (image.query_exists(null)) {
-			const imageBox = new St.Widget({
-				style_class: 'image-box',
-				x_align: Clutter.ActorAlign.FILL,
-				y_align: Clutter.ActorAlign.FILL,
-				x_expand: true,
-				y_expand: true,
-				style: `background-image: url("${image.get_uri()}");`,
-			});
-			this.add_child(imageBox);
+			try {
+				const [, width, height] = GdkPixbuf.Pixbuf.get_file_info(image.get_path()!);
+				this._ratio = height / width;
 
-			this._effect = new Clutter.BrightnessContrastEffect();
-			imageBox.add_effect(this._effect);
-		} else {
-			this.add_child(
-				new St.Icon({
-					style_class: 'missing-image',
-					gicon: loadIcon(ext, Icon.MissingImage),
-					x_align: Clutter.ActorAlign.CENTER,
-					y_align: Clutter.ActorAlign.CENTER,
+				const imageBox = new St.Widget({
+					style_class: 'image-box',
+					x_align: Clutter.ActorAlign.FILL,
+					y_align: Clutter.ActorAlign.FILL,
 					x_expand: true,
 					y_expand: true,
-					min_height: 0,
-				}),
-			);
+					style: `background-image: url("${image.get_uri()}");`,
+				});
+				this.add_child(imageBox);
+
+				this._effect = new Clutter.BrightnessContrastEffect();
+				imageBox.add_effect(this._effect);
+				return;
+			} catch {
+				// Ignore
+			}
 		}
+
+		this._ratio = null;
+		this.add_style_class_name('missing-image');
+		this.add_child(
+			new St.Icon({
+				gicon: loadIcon(ext, Icon.MissingImage),
+				x_align: Clutter.ActorAlign.CENTER,
+				y_align: Clutter.ActorAlign.CENTER,
+				x_expand: true,
+				y_expand: true,
+				min_height: 0,
+			}),
+		);
 	}
 
 	get backgroundSize() {
@@ -130,6 +141,13 @@ export class ImagePreview extends ContentPreview {
 		}
 
 		this._effect.enabled = true;
+	}
+
+	override vfunc_get_preferred_height(for_width: number): [number, number] {
+		if (this._ratio === null) return super.vfunc_get_preferred_height(for_width);
+
+		const [min] = super.vfunc_get_preferred_height(for_width);
+		return [min, Math.round(for_width * Math.clamp(this._ratio, 0.3, 1))];
 	}
 }
 
