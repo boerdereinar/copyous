@@ -134,15 +134,15 @@ export class ClipboardManager extends GObject.Object {
 			if (this.keyboard.purpose === Clutter.InputContentPurpose.TERMINAL) {
 				this.keyboard.press(Clutter.KEY_Control_L);
 				this.keyboard.press(Clutter.KEY_Shift_L);
-				this.keyboard.press(Clutter.KEY_V);
-				this.keyboard.release(Clutter.KEY_V);
+				this.keyboard.press(Clutter.KEY_Insert);
+				this.keyboard.release(Clutter.KEY_Insert);
 				this.keyboard.release(Clutter.KEY_Shift_L);
 				this.keyboard.release(Clutter.KEY_Control_L);
 			} else {
-				this.keyboard.press(Clutter.KEY_Control_L);
-				this.keyboard.press(Clutter.KEY_v);
-				this.keyboard.release(Clutter.KEY_v);
-				this.keyboard.release(Clutter.KEY_Control_L);
+				this.keyboard.press(Clutter.KEY_Shift_L);
+				this.keyboard.press(Clutter.KEY_Insert);
+				this.keyboard.release(Clutter.KEY_Insert);
+				this.keyboard.release(Clutter.KEY_Shift_L);
 			}
 
 			this.pasteSignalId = -1;
