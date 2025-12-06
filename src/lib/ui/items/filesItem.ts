@@ -75,8 +75,14 @@ export class FilesPreview extends ContentPreview {
 		this.add_child(this._moreFiles);
 	}
 
+	override vfunc_get_preferred_height(for_width: number): [number, number] {
+		const [min] = super.vfunc_get_preferred_height(for_width);
+		const nat = this._files.get_children().reduce((a, f) => a + f.get_preferred_height(-1)[1], 0);
+		return [min, nat];
+	}
+
 	override vfunc_allocate(box: Clutter.ActorBox): void {
-		const nat = this._files.get_children().reduce((a, f) => a + f.get_preferred_height(box.get_width())[0], 0);
+		const nat = this._files.get_children().reduce((a, f) => a + f.get_preferred_height(-1)[1], 0);
 		const [, borderNat] = this._border.get_preferred_height(box.get_width());
 		const [, moreNat] = this._moreFiles.get_preferred_height(box.get_width());
 

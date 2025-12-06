@@ -264,6 +264,10 @@
 			<range min="50" max="1000"/>
 			<summary>Height of a clipboard item</summary>
 		</key>
+		<key name="dynamic-item-height" type="b">
+			<default>false</default>
+			<summary>Dynamically adjust the height of the clipboard items based on their content</summary>
+		</key>
 		<key name="tab-width" type="i">
 			<default>4</default>
 			<range min="1" max="8"/>

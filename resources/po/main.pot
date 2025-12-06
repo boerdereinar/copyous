@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-02 16:43+0000\n"
+"POT-Creation-Date: 2025-12-05 19:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,10 +40,20 @@ msgid "Change the height of the clipboard items"
 msgstr ""
 
 #: src/lib/preferences/customization/itemCustomization.ts:44
+msgid "Dynamic Item Height"
+msgstr ""
+
+#: src/lib/preferences/customization/itemCustomization.ts:46
+msgid ""
+"Dynamically adjust the height of the clipboard items based on their content. "
+"Only works in vertical orientation"
+msgstr ""
+
+#: src/lib/preferences/customization/itemCustomization.ts:53
 msgid "Tab Width"
 msgstr ""
 
-#: src/lib/preferences/customization/itemCustomization.ts:45
+#: src/lib/preferences/customization/itemCustomization.ts:54
 msgid "Change the width of a tab character in the clipboard items"
 msgstr ""
 
@@ -228,7 +238,7 @@ msgid "Light"
 msgstr ""
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
-#: src/lib/preferences/customization/profiles.ts:200
+#: src/lib/preferences/customization/profiles.ts:202
 msgid "Custom"
 msgstr ""
 
@@ -496,7 +506,7 @@ msgstr ""
 #: src/lib/preferences/actions/actionDialog.ts:180
 #: src/lib/preferences/actions/actionDialog.ts:379
 #: src/lib/preferences/actions/actionDefaults.ts:152
-#: src/lib/ui/items/linkItem.ts:292
+#: src/lib/ui/items/linkItem.ts:302
 msgid "Link"
 msgstr ""
 
@@ -700,19 +710,19 @@ msgstr ""
 msgid "Visible on Hover"
 msgstr ""
 
-#: src/lib/preferences/customization/profiles.ts:179
+#: src/lib/preferences/customization/profiles.ts:181
 msgid "Profiles"
 msgstr ""
 
-#: src/lib/preferences/customization/profiles.ts:180
+#: src/lib/preferences/customization/profiles.ts:182
 msgid "Choose between pre-defined profiles"
 msgstr ""
 
-#: src/lib/preferences/customization/profiles.ts:188
+#: src/lib/preferences/customization/profiles.ts:190
 msgid "Default"
 msgstr ""
 
-#: src/lib/preferences/customization/profiles.ts:194
+#: src/lib/preferences/customization/profiles.ts:196
 msgid "Compact"
 msgstr ""
 
@@ -934,7 +944,7 @@ msgstr ""
 #: src/lib/preferences/actions/actionDialog.ts:179
 #: src/lib/preferences/actions/actionDialog.ts:376
 #: src/lib/preferences/actions/actionDefaults.ts:148
-#: src/lib/ui/items/filesItem.ts:134
+#: src/lib/ui/items/filesItem.ts:140
 msgid "Files"
 msgstr ""
 
@@ -1677,11 +1687,11 @@ msgstr ""
 msgid "Type to search"
 msgstr ""
 
-#: src/lib/ui/items/linkItem.ts:93
+#: src/lib/ui/items/linkItem.ts:94
 msgid "No Title"
 msgstr ""
 
-#: src/lib/ui/items/linkItem.ts:95
+#: src/lib/ui/items/linkItem.ts:96
 msgid "No Description"
 msgstr ""
 
@@ -1697,14 +1707,14 @@ msgstr ""
 msgid "No Items Found"
 msgstr ""
 
-#: src/lib/ui/items/filesItem.ts:114
+#: src/lib/ui/items/filesItem.ts:120
 #, javascript-format
 msgid "%d more file"
 msgid_plural "%d more files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/lib/ui/items/filesItem.ts:115
+#: src/lib/ui/items/filesItem.ts:121
 #, javascript-format
 msgid "%d file"
 msgid_plural "%d files"
