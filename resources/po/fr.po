@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-05 19:35+0000\n"
-"PO-Revision-Date: 2025-11-29 19:52+0100\n"
-"Last-Translator: Philippe Charlanes\n"
+"PO-Revision-Date: 2025-12-06 04:59+0100\n"
+"Last-Translator: Axel Haustant <noirbizarre@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #: src/lib/preferences/customization/itemCustomization.ts:14
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:16
@@ -42,13 +42,15 @@ msgstr "Modifie la hauteur des éléments du presse-papiers"
 
 #: src/lib/preferences/customization/itemCustomization.ts:44
 msgid "Dynamic Item Height"
-msgstr ""
+msgstr "Hauteur dynamique des éléments"
 
 #: src/lib/preferences/customization/itemCustomization.ts:46
 msgid ""
 "Dynamically adjust the height of the clipboard items based on their content. "
 "Only works in vertical orientation"
 msgstr ""
+"Ajuste dynamiquement la hauteur des éléments du presse-papiers en fonction "
+"de leur contenu. Fonctionne uniquement en orientation verticale"
 
 #: src/lib/preferences/customization/itemCustomization.ts:53
 msgid "Tab Width"
@@ -229,25 +231,25 @@ msgstr "Modifie la hauteur de la boîte de dialogue du presse-papiers"
 #: src/lib/preferences/customization/themeCustomization.ts:69
 #: src/lib/preferences/customization/themeCustomization.ts:73
 msgid "Theme"
-msgstr ""
+msgstr "Theme"
 
 #: src/lib/preferences/customization/themeCustomization.ts:74
 msgid "Set the preferred theme"
-msgstr ""
+msgstr "Definir le thème préféré"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 msgid "System"
-msgstr ""
+msgstr "Système"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 #: src/lib/preferences/customization/themeCustomization.ts:90
 msgid "Dark"
-msgstr ""
+msgstr "Sombre"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 #: src/lib/preferences/customization/themeCustomization.ts:90
 msgid "Light"
-msgstr ""
+msgstr "Lumineux"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 #: src/lib/preferences/customization/profiles.ts:202
@@ -256,43 +258,43 @@ msgstr "Personnalisé"
 
 #: src/lib/preferences/customization/themeCustomization.ts:88
 msgid "Color Scheme"
-msgstr ""
+msgstr "Schéma de couleurs"
 
 #: src/lib/preferences/customization/themeCustomization.ts:89
 msgid "Set the color scheme of the custom theme"
-msgstr ""
+msgstr "Définit le schéma de couleurs du thème personnalisé"
 
 #: src/lib/preferences/customization/themeCustomization.ts:96
 msgid "Background Color"
-msgstr ""
+msgstr "Couleur de fond"
 
 #: src/lib/preferences/customization/themeCustomization.ts:97
 msgid "Set the background color of the clipboard dialog"
-msgstr ""
+msgstr "Définit la couleur de fond de la boîte de dialogue du presse-papiers"
 
 #: src/lib/preferences/customization/themeCustomization.ts:103
 msgid "Text Color"
-msgstr ""
+msgstr "Couleur du texte"
 
 #: src/lib/preferences/customization/themeCustomization.ts:104
 msgid "Set the text color of the clipboard dialog"
-msgstr ""
+msgstr "Définit la couleur du texte de la boîte de dialogue du presse-papiers"
 
 #: src/lib/preferences/customization/themeCustomization.ts:110
 msgid "Item Color"
-msgstr ""
+msgstr "Couleur de l'élément"
 
 #: src/lib/preferences/customization/themeCustomization.ts:111
 msgid "Set the background color of clipboard items"
-msgstr ""
+msgstr "Définit la couleur de fond des éléments du presse-papiers"
 
 #: src/lib/preferences/customization/themeCustomization.ts:117
 msgid "Search Color"
-msgstr ""
+msgstr "Couleur de la recherche"
 
 #: src/lib/preferences/customization/themeCustomization.ts:118
 msgid "Set the background color of the search bar"
-msgstr ""
+msgstr "Définit la couleur de fond de la barre de recherche"
 
 #: src/lib/preferences/customization/items/textItemCustomization.ts:15
 msgid "Text Item"
@@ -765,8 +767,8 @@ msgid ""
 "You can manually install highlight.js by downloading highlight.min.js from "
 "\"Url\" to \"Install Location\"."
 msgstr ""
-"Vous pouvez installer manuellement highlight.js en téléchargeant highlight."
-"min.js de \"Url\" vers \"Emplacement d'installation\"."
+"Vous pouvez installer manuellement highlight.js en téléchargeant "
+"highlight.min.js de \"Url\" vers \"Emplacement d'installation\"."
 
 #: src/lib/preferences/dependencies/dependencies.ts:187
 msgid "Url"
@@ -927,7 +929,7 @@ msgstr "Restaurer les actions intégrées"
 
 #: src/lib/preferences/actions/actionsPage.ts:101
 msgid "Reset Actions"
-msgstr "Réinitialiser les actions ?"
+msgstr "Réinitialiser les actions"
 
 #: src/lib/preferences/actions/actionsPage.ts:121
 msgid "Restore Built-In Actions?"
@@ -1294,11 +1296,11 @@ msgstr "Affiche un indicateur sur le panneau supérieur"
 
 #: src/lib/preferences/general/feedbackSettings.ts:231
 msgid "Show Clipboard Content in Indicator"
-msgstr ""
+msgstr "Affiche le contenu du presse-papiers dans l'indicateur"
 
 #: src/lib/preferences/general/feedbackSettings.ts:232
 msgid "Show the current clipboard content in the indicator"
-msgstr ""
+msgstr "Affiche le contenu actuel du presse-papier dans l'indicateur"
 
 #: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
@@ -1813,8 +1815,8 @@ msgstr "Paramètres"
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Fichier"
+msgstr[1] "%d Fichiers"
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
