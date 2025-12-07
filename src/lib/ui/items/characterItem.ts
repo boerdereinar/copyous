@@ -72,7 +72,7 @@ export class CharacterItem extends ClipboardItem {
 		// Calculate max font size
 		const [, extents] = this._character.clutter_text.get_layout().get_pixel_extents();
 		const size = this._character.get_theme_node().get_font().get_size() / Pango.SCALE;
-		const fontFactor = extents ? (extents.height * scale) / scale / size : 1;
+		const fontFactor = extents ? extents.height / scale / size : 1;
 		const width = this._content.allocation.get_width() - padding;
 		const maxSize = extents ? Math.min(Math.floor((width / extents.width) * scale * size), 80) : 80;
 

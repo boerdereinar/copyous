@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-05 19:35+0000\n"
-"PO-Revision-Date: 2025-12-02 19:16+0100\n"
+"PO-Revision-Date: 2025-12-06 20:29+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -42,13 +42,15 @@ msgstr "Ändert die Höhe von Zwischenablage-Elementen"
 
 #: src/lib/preferences/customization/itemCustomization.ts:44
 msgid "Dynamic Item Height"
-msgstr ""
+msgstr "Dynamische Elementhöhe"
 
 #: src/lib/preferences/customization/itemCustomization.ts:46
 msgid ""
 "Dynamically adjust the height of the clipboard items based on their content. "
 "Only works in vertical orientation"
 msgstr ""
+"Passt die Höhe der Zwischenablageelemente dynamisch an ihren Inhalt an. "
+"Funktioniert nur im Hochformat"
 
 #: src/lib/preferences/customization/itemCustomization.ts:53
 msgid "Tab Width"
@@ -1301,8 +1303,7 @@ msgstr "Indikator bewegen"
 #: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr ""
-"Bewegen Sie den Indikator, wenn ein Element aus der Zwischenablage kopiert "
-"wird"
+"Bewege den Indikator, wenn ein Element aus der Zwischenablage kopiert wird"
 
 #: src/lib/preferences/general/feedbackSettings.ts:245
 msgid "Send Notification"
