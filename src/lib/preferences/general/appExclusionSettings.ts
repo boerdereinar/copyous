@@ -11,17 +11,12 @@ import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 
-// GLib 2.86.0 moves DesktopAppInfo to GioUnix
-const DesktopAppInfo = (
-	'DesktopAppInfo' in Gio && !('DesktopAppInfo' in GioUnix) ? Gio.DesktopAppInfo : GioUnix.DesktopAppInfo
-) as typeof GioUnix.DesktopAppInfo;
-
 Gio._promisify(Adw.AlertDialog.prototype, 'choose');
 
 @registerClass({
 	Signals: {
 		activate: {
-			param_types: [DesktopAppInfo.$gtype],
+			param_types: [Gio.AppInfo.$gtype],
 		},
 	},
 })
@@ -85,7 +80,7 @@ class AppSelectionPopover extends Gtk.Popover {
 		// Bind model
 		const model = new Gio.ListStore({ item_type: Gio.AppInfo.$gtype });
 		const apps = Gio.AppInfo.get_all()
-			.filter((info) => info.should_show() && info instanceof DesktopAppInfo)
+			.filter((info) => info.should_show() && 'get_startup_wm_class' in info)
 			.sort((info1, info2) => info1.get_display_name().localeCompare(info2.get_display_name()));
 		model.splice(0, 0, apps);
 
