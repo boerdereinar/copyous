@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-05 19:35+0000\n"
-"PO-Revision-Date: 2025-11-30 10:43+0100\n"
+"PO-Revision-Date: 2025-12-07 09:47+0100\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -43,13 +43,15 @@ msgstr "Zmień wysokość elementów schowka"
 
 #: src/lib/preferences/customization/itemCustomization.ts:44
 msgid "Dynamic Item Height"
-msgstr ""
+msgstr "Dynamiczna wysokość elementu"
 
 #: src/lib/preferences/customization/itemCustomization.ts:46
 msgid ""
 "Dynamically adjust the height of the clipboard items based on their content. "
 "Only works in vertical orientation"
 msgstr ""
+"Dynamicznie dostosuj wysokość elementów schowka na podstawie ich zawartości. "
+"Działa tylko w orientacji pionowej"
 
 #: src/lib/preferences/customization/itemCustomization.ts:53
 msgid "Tab Width"
@@ -221,25 +223,25 @@ msgstr "Zmień wysokość okna dialogowego schowka"
 #: src/lib/preferences/customization/themeCustomization.ts:69
 #: src/lib/preferences/customization/themeCustomization.ts:73
 msgid "Theme"
-msgstr ""
+msgstr "Motyw"
 
 #: src/lib/preferences/customization/themeCustomization.ts:74
 msgid "Set the preferred theme"
-msgstr ""
+msgstr "Ustaw preferowany motyw"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 #: src/lib/preferences/customization/themeCustomization.ts:90
 msgid "Dark"
-msgstr ""
+msgstr "Ciemny"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 #: src/lib/preferences/customization/themeCustomization.ts:90
 msgid "Light"
-msgstr ""
+msgstr "Jasny"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 #: src/lib/preferences/customization/profiles.ts:202
@@ -248,43 +250,43 @@ msgstr "Własny"
 
 #: src/lib/preferences/customization/themeCustomization.ts:88
 msgid "Color Scheme"
-msgstr ""
+msgstr "Schemat kolorów"
 
 #: src/lib/preferences/customization/themeCustomization.ts:89
 msgid "Set the color scheme of the custom theme"
-msgstr ""
+msgstr "Ustaw schemat kolorów niestandardowego motywu"
 
 #: src/lib/preferences/customization/themeCustomization.ts:96
 msgid "Background Color"
-msgstr ""
+msgstr "Kolor tła"
 
 #: src/lib/preferences/customization/themeCustomization.ts:97
 msgid "Set the background color of the clipboard dialog"
-msgstr ""
+msgstr "Ustaw kolor tła okna dialogowego schowka"
 
 #: src/lib/preferences/customization/themeCustomization.ts:103
 msgid "Text Color"
-msgstr ""
+msgstr "Kolor tekstu"
 
 #: src/lib/preferences/customization/themeCustomization.ts:104
 msgid "Set the text color of the clipboard dialog"
-msgstr ""
+msgstr "Ustaw kolor tekstu okna dialogowego schowka"
 
 #: src/lib/preferences/customization/themeCustomization.ts:110
 msgid "Item Color"
-msgstr ""
+msgstr "Kolor elementu"
 
 #: src/lib/preferences/customization/themeCustomization.ts:111
 msgid "Set the background color of clipboard items"
-msgstr ""
+msgstr "Ustaw kolor tła elementów schowka"
 
 #: src/lib/preferences/customization/themeCustomization.ts:117
 msgid "Search Color"
-msgstr ""
+msgstr "Kolor wyszukiwania"
 
 #: src/lib/preferences/customization/themeCustomization.ts:118
 msgid "Set the background color of the search bar"
-msgstr ""
+msgstr "Ustaw kolor tła paska wyszukiwania"
 
 #: src/lib/preferences/customization/items/textItemCustomization.ts:15
 msgid "Text Item"
@@ -1279,11 +1281,11 @@ msgstr "Pokaż wskaźnik na górnym panelu"
 
 #: src/lib/preferences/general/feedbackSettings.ts:231
 msgid "Show Clipboard Content in Indicator"
-msgstr ""
+msgstr "Pokaż zawartość schowka we wskaźniku"
 
 #: src/lib/preferences/general/feedbackSettings.ts:232
 msgid "Show the current clipboard content in the indicator"
-msgstr ""
+msgstr "Pokaż bieżącą zawartość schowka we wskaźniku"
 
 #: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
@@ -1798,9 +1800,9 @@ msgstr "Ustawienia"
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d plik"
+msgstr[1] "%d pliki"
+msgstr[2] "%d plików"
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
