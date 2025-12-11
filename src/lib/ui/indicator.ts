@@ -92,7 +92,7 @@ export class ClipboardIndicator extends PanelMenu.Button {
 
 		this._icon = new St.Icon({
 			gicon: loadIcon(ext, Icon.Clipboard),
-			style_class: 'indicator-icon',
+			style_class: 'system-status-icon',
 		});
 		this._box.add_child(this._icon);
 
@@ -204,7 +204,7 @@ export class ClipboardIndicator extends PanelMenu.Button {
 	showImageFile(file: Gio.File) {
 		if (!file.query_exists(null)) return;
 		this.previewWidget = new St.Icon({
-			style_class: 'indicator-image',
+			style_class: 'system-status-icon',
 			gicon: Gio.FileIcon.new(file),
 			y_align: Clutter.ActorAlign.CENTER,
 		});
@@ -212,7 +212,7 @@ export class ClipboardIndicator extends PanelMenu.Button {
 
 	showImageBytes(bytes: Uint8Array) {
 		this.previewWidget = new St.Icon({
-			style_class: 'indicator-image',
+			style_class: 'system-status-icon',
 			gicon: Gio.BytesIcon.new(bytes),
 			y_align: Clutter.ActorAlign.CENTER,
 		});

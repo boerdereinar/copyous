@@ -15,9 +15,9 @@
 .copyous-indicator-box {
 	spacing: 6px;
 
-	.indicator-icon,
-	.indicator-image {
-		icon-size: $scalable_icon_size;
+	.system-status-icon {
+		padding: 0;
+		margin: 0;
 	}
 
 	.indicator-label {
