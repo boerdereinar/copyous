@@ -727,164 +727,165 @@ msgstr "Inicializando Download de Highlight.js"
 
 #: src/lib/preferences/dependencies/dependencies.ts:384
 msgid "Successfully Installed Highlight.js"
-msgstr ""
+msgstr "Highlight.js Instalado com Sucesso"
 
 #: src/lib/preferences/dependencies/dependencies.ts:384
 msgid "Error Installing Highlight.js"
-msgstr ""
+msgstr "Erro ao Instalar Highlight.js"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:240
 #, javascript-format
 msgid "Successfully Installed %s"
-msgstr ""
+msgstr "Instalado com Sucesso %s"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:241
 #, javascript-format
 msgid "Error Installing %s"
-msgstr ""
+msgstr "Erro ao Instalar %s"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:261
 #, javascript-format
 msgid "Successfully Uninstalled %s"
-msgstr ""
+msgstr "Desinstalado com Sucesso %s"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:262
 #, javascript-format
 msgid "Error Uninstalling %s"
-msgstr ""
+msgstr "Erro ao Desinstalar %s"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:288
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:382
 msgid "Manage Highlight.js"
-msgstr ""
+msgstr "Gerenciar Highlight.js"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:300
 msgid "Languages"
-msgstr ""
+msgstr "Línguas"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:321
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:47
 msgid "Search"
-msgstr ""
+msgstr "Pesquisar"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:375
 msgid "Dependencies"
-msgstr ""
+msgstr "Dependências"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:383
 msgid "Manage the Highlight.js installation"
-msgstr ""
+msgstr "Gerenciar a instalação do Highlight.js"
 
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:47
 #: src/lib/preferences/actions/actionDialog.ts:441
 #: src/lib/preferences/actions/actionDialog.ts:523
 #: src/lib/preferences/actions/actionDialog.ts:611
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:73
 #: src/lib/preferences/actions/actionsGroup.ts:569
 msgid "Add Submenu"
-msgstr ""
+msgstr "Adicionar Submenu"
 
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:80
 msgid "Edit Submenu"
-msgstr ""
+msgstr "Editar Submenu"
 
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:80
 #: src/lib/preferences/actions/actionsGroup.ts:125
 #: src/lib/preferences/actions/actionsGroup.ts:423
 #: src/lib/ui/components/clipboardItemMenu.ts:94
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: src/lib/preferences/actions/actionsPage.ts:28
 msgid "Reset"
-msgstr ""
+msgstr "Redefinir"
 
 #: src/lib/preferences/actions/actionsPage.ts:41
 msgid "Restore"
-msgstr ""
+msgstr "Restaurar"
 
 #: src/lib/preferences/actions/actionsPage.ts:62
 #: src/lib/preferences/actions/actionsGroup.ts:518
 msgid "Actions"
-msgstr ""
+msgstr "Ações"
 
 #: src/lib/preferences/actions/actionsPage.ts:74
 #: src/lib/preferences/actions/actionDefaults.ts:113
 #: src/lib/preferences/actions/actionDefaults.ts:128
 msgid "Default Actions"
-msgstr ""
+msgstr "Ações Padrão"
 
 #: src/lib/preferences/actions/actionsPage.ts:75
 msgid "Set default actions that trigger when holding control"
-msgstr ""
+msgstr "Defina as ações padrão que são acionadas ao manter o controle"
 
 #: src/lib/preferences/actions/actionsPage.ts:92
 msgid "Restore Built-In Actions"
-msgstr ""
+msgstr "Restaurar Ações Padrão"
 
 #: src/lib/preferences/actions/actionsPage.ts:101
 msgid "Reset Actions"
-msgstr ""
+msgstr "Redefinir Ações"
 
 #: src/lib/preferences/actions/actionsPage.ts:121
 msgid "Restore Built-In Actions?"
-msgstr ""
+msgstr "Restaurar Ações Padrão?"
 
 #: src/lib/preferences/actions/actionsPage.ts:123
 msgid ""
 "Restoring the built-in actions will restore built-in actions that were "
 "removed. Custom actions will remain unchanged"
-msgstr ""
+msgstr "Restaurando as ações padrão restaurará as ações padrão que foram "
+"removidas. As ações personalizadas permanecerão inalteradas"
 
 #: src/lib/preferences/actions/actionsPage.ts:140
 msgid "Reset Actions?"
-msgstr ""
+msgstr "Redefinir Ações?"
 
 #: src/lib/preferences/actions/actionsPage.ts:141
 msgid "Resetting the actions will delete all custom actions"
-msgstr ""
+msgstr "Redefinindo as ações irá excluir todas as ações personalizadas"
 
 #: src/lib/preferences/actions/actionDialog.ts:38
 msgid "All"
-msgstr ""
+msgstr "Todos"
 
 #: src/lib/preferences/actions/actionDialog.ts:131
 msgid "Types"
-msgstr ""
+msgstr "Tipos"
 
 #: src/lib/preferences/actions/actionDialog.ts:132
 msgid "Select which types are allowed"
-msgstr ""
+msgstr "Selecione quais tipos são permitidos"
 
 #: src/lib/preferences/actions/actionDialog.ts:176
 #: src/lib/preferences/actions/actionDialog.ts:367
 #: src/lib/preferences/actions/actionDefaults.ts:136
 #: src/lib/ui/items/codeItem.ts:23
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #: src/lib/preferences/actions/actionDialog.ts:178
 #: src/lib/preferences/actions/actionDialog.ts:373
 #: src/lib/preferences/actions/actionDefaults.ts:144
 #: src/lib/ui/items/fileItem.ts:63
 msgid "File"
-msgstr ""
+msgstr "Arquivo"
 
 #: src/lib/preferences/actions/actionDialog.ts:179
 #: src/lib/preferences/actions/actionDialog.ts:376
 #: src/lib/preferences/actions/actionDefaults.ts:148
 #: src/lib/ui/items/filesItem.ts:134
 msgid "Files"
-msgstr ""
+msgstr "Arquivos"
 
 #: src/lib/preferences/actions/actionDialog.ts:181
 #: src/lib/preferences/actions/actionDialog.ts:382
 #: src/lib/preferences/actions/actionDefaults.ts:158
 msgid "Character"
-msgstr ""
+msgstr "Caracter"
 
 #: src/lib/preferences/actions/actionDialog.ts:182
 #: src/lib/preferences/actions/actionDialog.ts:257
@@ -892,143 +893,145 @@ msgstr ""
 #: src/lib/preferences/actions/actionDefaults.ts:165
 #: src/lib/ui/items/colorItem.ts:71
 msgid "Color"
-msgstr ""
+msgstr "Cor"
 
 #: src/lib/preferences/actions/actionDialog.ts:256
 msgid "Kind"
-msgstr ""
+msgstr "Tipo"
 
 #: src/lib/preferences/actions/actionDialog.ts:257
 #: src/lib/preferences/actions/actionDialog.ts:401
 msgid "Command"
-msgstr ""
+msgstr "Comando"
 
 #: src/lib/preferences/actions/actionDialog.ts:257
 #: src/lib/common/actions.ts:242
 msgid "QR Code"
-msgstr ""
+msgstr "Código QR"
 
 #: src/lib/preferences/actions/actionDialog.ts:347
 msgid ""
 "The regular expression does not use any flags for matching. Leaving this "
 "empty will match everything."
-msgstr ""
+msgstr "A expressão regular não usa nenhum sinalizador para correspondência. Deixar isso "
+"vazio corresponderá a tudo."
 
 #: src/lib/preferences/actions/actionDialog.ts:361
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: src/lib/preferences/actions/actionDialog.ts:362
 msgid "Example"
-msgstr ""
+msgstr "Exemplo"
 
 #: src/lib/preferences/actions/actionDialog.ts:393
 msgid "Regular Expression"
-msgstr ""
+msgstr "Expressão Regular"
 
 #: src/lib/preferences/actions/actionDialog.ts:406
 msgid ""
 "Clipboard content will be provided via stdin. Capture groups of the regular "
 "expression will be passed as positional parameters $1, $2, $3, ..."
-msgstr ""
+msgstr "O conteúdo da Área de Transferência será fornecido via stdin. Os grupos de captura da expressão"
+"regular serão passados como parâmetros posicionais $1, $2, $3, ..."
 
 #: src/lib/preferences/actions/actionDialog.ts:459
 #: src/lib/preferences/actions/actionDialog.ts:550
 msgid "Output"
-msgstr ""
+msgstr "Saída"
 
 #: src/lib/preferences/actions/actionDialog.ts:460
 #: src/lib/preferences/actions/actionDialog.ts:551
 msgid "Select how to handle the output"
-msgstr ""
+msgstr "Selecione como lidar com a saída"
 
 #: src/lib/preferences/actions/actionDialog.ts:461
 msgid "Ignore"
-msgstr ""
+msgstr "Ignorar"
 
 #: src/lib/preferences/actions/actionDialog.ts:461
 #: src/lib/preferences/actions/actionDialog.ts:552
 #: src/lib/ui/components/qrCodeDialog.ts:154
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: src/lib/preferences/actions/actionDialog.ts:461
 #: src/lib/preferences/actions/actionDialog.ts:552
 msgid "Paste"
-msgstr ""
+msgstr "Colar"
 
 #: src/lib/preferences/actions/actionDialog.ts:466
 #: src/lib/preferences/actions/actionDialog.ts:557
 #: src/lib/preferences/actions/actionDialog.ts:621
 msgid "Shortcut"
-msgstr ""
+msgstr "Atalho"
 
 #: src/lib/preferences/actions/actionDialog.ts:530
 msgid "Color Space"
-msgstr ""
+msgstr "Espaço de Cor"
 
 #: src/lib/preferences/actions/actionDialog.ts:531
 msgid "Select which color space to convert to"
-msgstr ""
+msgstr "Seleciona o espaço de cor para converter"
 
 #: src/lib/preferences/actions/actionDialog.ts:533
 #: src/lib/common/actions.ts:227
 msgid "Rgb"
-msgstr ""
+msgstr "Rgb"
 
 #: src/lib/preferences/actions/actionDialog.ts:534
 #: src/lib/common/actions.ts:228
 msgid "Hex"
-msgstr ""
+msgstr "Hex"
 
 #: src/lib/preferences/actions/actionDialog.ts:535
 #: src/lib/common/actions.ts:229
 msgid "Hsl"
-msgstr ""
+msgstr "Hsl"
 
 #: src/lib/preferences/actions/actionDialog.ts:536
 msgid "Hwb"
-msgstr ""
+msgstr "Hwb"
 
 #: src/lib/preferences/actions/actionDialog.ts:537
 msgid "Linear Rgb"
-msgstr ""
+msgstr "Rgb Linear"
 
 #: src/lib/preferences/actions/actionDialog.ts:538
 msgid "Xyz"
-msgstr ""
+msgstr "Xyz"
 
 #: src/lib/preferences/actions/actionDialog.ts:539
 msgid "Lab"
-msgstr ""
+msgstr "Lab"
 
 #: src/lib/preferences/actions/actionDialog.ts:540
 msgid "Lch"
-msgstr ""
+msgstr "Lch"
 
 #: src/lib/preferences/actions/actionDialog.ts:541
 msgid "Oklab"
-msgstr ""
+msgstr "Oklab"
 
 #: src/lib/preferences/actions/actionDialog.ts:542
 #: src/lib/common/actions.ts:236
 msgid "Oklch"
-msgstr ""
+msgstr "Oklch"
 
 #: src/lib/preferences/actions/actionDialog.ts:655
 #: src/lib/preferences/actions/actionsGroup.ts:100
 #: src/lib/preferences/actions/actionsGroup.ts:568
 msgid "Add Action"
-msgstr ""
+msgstr "Adicionar Ação"
 
 #: src/lib/preferences/actions/actionDialog.ts:662
 msgid "Edit Action"
-msgstr ""
+msgstr "Editar Ação"
 
 #: src/lib/preferences/actions/actionDialog.ts:662
 #: src/lib/ui/components/editDialog.ts:317
 msgid "Save"
-msgstr ""
+msgstr "Salvar"
 
 #: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/general/feedbackSettings.ts:155
@@ -1038,669 +1041,671 @@ msgstr ""
 #: src/lib/ui/components/editDialog.ts:231
 #: src/lib/ui/components/editDialog.ts:258
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 #: src/lib/preferences/actions/actionsGroup.ts:34
 #: src/lib/preferences/actions/actionsGroup.ts:126
 #: src/lib/preferences/actions/actionsGroup.ts:424
 msgid "Delete"
-msgstr ""
+msgstr "Excluir"
 
 #: src/lib/preferences/actions/actionsGroup.ts:91
 #: src/lib/preferences/actions/actionsGroup.ts:529
 msgid "No Actions"
-msgstr ""
+msgstr "Nenhuma Ação"
 
 #: src/lib/preferences/actions/actionsGroup.ts:180
 msgid "Delete Submenu?"
-msgstr ""
+msgstr "Excluir Submenu?"
 
 #: src/lib/preferences/actions/actionsGroup.ts:181
 msgid "Deleting the submenu will delete all actions in the submenu"
-msgstr ""
+msgstr "Excluir o submenu irá excluir todas as ações no submenu"
 
 #: src/lib/preferences/actions/actionsGroup.ts:446
 msgid "Delete Action?"
-msgstr ""
+msgstr "Excluir Ação?"
 
 #: src/lib/preferences/general/historySettings.ts:38
 msgid "History"
-msgstr ""
+msgstr "Histórico"
 
 #: src/lib/preferences/general/historySettings.ts:44
 msgid "Use In-Memory Database"
-msgstr ""
+msgstr "Usar Banco de Dados em Memória"
 
 #: src/lib/preferences/general/historySettings.ts:45
 msgid "Store clipboard history in memory instead of on disk"
-msgstr ""
+msgstr "Armazenar histórico de clipboard em memória em vez de em disco"
 
 #: src/lib/preferences/general/historySettings.ts:52
 msgid "Database Location"
-msgstr ""
+msgstr "Local do Banco de Dados"
 
 #: src/lib/preferences/general/historySettings.ts:60
 msgid "Clipboard History"
-msgstr ""
+msgstr "Histórico de Clipboard"
 
 #: src/lib/preferences/general/historySettings.ts:62
 msgid ""
 "Choose what to do with your clipboard history when you restart, log out, or "
 "shut down your system"
-msgstr ""
+msgstr "Escolha o que fazer com o histórico de clipboard quando reiniciar, sair ou "
+"desligar o sistema"
 
 #: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:47
 msgid "Clear"
-msgstr ""
+msgstr "Limpar"
 
 #: src/lib/preferences/general/historySettings.ts:64
 msgid "Keep Pinned/Tagged"
-msgstr ""
+msgstr "Manter Marcados"
 
 #: src/lib/preferences/general/historySettings.ts:64
 msgid "Keep All"
-msgstr ""
+msgstr "Manter Todos"
 
 #: src/lib/preferences/general/historySettings.ts:70
 msgid "History Length"
-msgstr ""
+msgstr "Tamanho do Histórico"
 
 #: src/lib/preferences/general/historySettings.ts:71
 msgid "Select how many items to keep in the clipboard history"
-msgstr ""
+msgstr "Selecione quantos itens manter no histórico da área de transferência"
 
 #: src/lib/preferences/general/historySettings.ts:77
 msgid "History Time Limit"
-msgstr ""
+msgstr "Tempo Limite do Histórico"
 
 #: src/lib/preferences/general/historySettings.ts:79
 msgid ""
 "Select how many minutes to keep items in the clipboard history. Set to 0 to "
 "disable the time limit"
-msgstr ""
+msgstr "Seleciona quantos minutos manter itens no histórico da área de transferência. Defina como 0 "
+"para desativar o limite de tempo"
 
 #: src/lib/preferences/general/feedbackSettings.ts:129
 #: src/lib/preferences/general/feedbackSettings.ts:243
 msgid "Sound"
-msgstr ""
+msgstr "Som"
 
 #: src/lib/preferences/general/feedbackSettings.ts:160
 #: src/lib/preferences/general/feedbackSettings.ts:294
 msgid "Click"
-msgstr ""
+msgstr "Clique"
 
 #: src/lib/preferences/general/feedbackSettings.ts:161
 #: src/lib/preferences/general/feedbackSettings.ts:296
 msgid "Hum"
-msgstr ""
+msgstr "Hum"
 
 #: src/lib/preferences/general/feedbackSettings.ts:162
 #: src/lib/preferences/general/feedbackSettings.ts:298
 msgid "String"
-msgstr ""
+msgstr "String"
 
 #: src/lib/preferences/general/feedbackSettings.ts:163
 #: src/lib/preferences/general/feedbackSettings.ts:300
 msgid "Swing"
-msgstr ""
+msgstr "Swing"
 
 #: src/lib/preferences/general/feedbackSettings.ts:164
 #: src/lib/preferences/general/feedbackSettings.ts:302
 msgid "Message"
-msgstr ""
+msgstr "Mensagem"
 
 #: src/lib/preferences/general/feedbackSettings.ts:165
 #: src/lib/preferences/general/feedbackSettings.ts:304
 msgid "Message New Instant"
-msgstr ""
+msgstr "Mensagem Nova Instantânea"
 
 #: src/lib/preferences/general/feedbackSettings.ts:166
 #: src/lib/preferences/general/feedbackSettings.ts:306
 msgid "Bell"
-msgstr ""
+msgstr "Sino"
 
 #: src/lib/preferences/general/feedbackSettings.ts:167
 #: src/lib/preferences/general/feedbackSettings.ts:308
 msgid "Dialog Warning"
-msgstr ""
+msgstr "Aviso de Diálogo"
 
 #: src/lib/preferences/general/feedbackSettings.ts:221
 msgid "Feedback"
-msgstr ""
+msgstr "Feedback"
 
 #: src/lib/preferences/general/feedbackSettings.ts:225
 msgid "Show Indicator"
-msgstr ""
+msgstr "Mostrar indicador"
 
 #: src/lib/preferences/general/feedbackSettings.ts:226
 msgid "Show an indicator on the top panel"
-msgstr ""
+msgstr "Mostrar um indicador na barra superior"
 
 #: src/lib/preferences/general/feedbackSettings.ts:231
 msgid "Wiggle Indicator"
-msgstr ""
+msgstr "Agitar indicador"
 
 #: src/lib/preferences/general/feedbackSettings.ts:232
 msgid "Wiggle the indicator when a clipboard item is copied"
-msgstr ""
+msgstr "Agitar o indicador quando um item da área de transferência é copiado"
 
 #: src/lib/preferences/general/feedbackSettings.ts:237
 msgid "Send Notification"
-msgstr ""
+msgstr "Enviar notificação"
 
 #: src/lib/preferences/general/feedbackSettings.ts:238
 msgid "Send a notification when a clipboard item is copied"
-msgstr ""
+msgstr "Enviar uma notificação quando um item da área de transferência é copiado"
 
 #: src/lib/preferences/general/feedbackSettings.ts:244
 msgid "Sound to play when a clipboard item is copied"
-msgstr ""
+msgstr "Som a ser reproduzido quando um item da área de transferência é copiado"
 
 #: src/lib/preferences/general/locationsGroup.ts:13
 msgid "Locations"
-msgstr ""
+msgstr "Locais"
 
 #: src/lib/preferences/general/locationsGroup.ts:19
 msgid "Data"
-msgstr ""
+msgstr "Dados"
 
 #: src/lib/preferences/general/locationsGroup.ts:29
 msgid "Config"
-msgstr ""
+msgstr "Configurações"
 
 #: src/lib/preferences/general/locationsGroup.ts:39
 msgid "Cache"
-msgstr ""
+msgstr "Cache"
 
 #: src/lib/preferences/general/behaviorSettings.ts:12
 msgid "Behavior"
-msgstr ""
+msgstr "Comportamento"
 
 #: src/lib/preferences/general/behaviorSettings.ts:16
 msgid "Remember Search Query"
-msgstr ""
+msgstr "Lembrar da consulta de pesquisa"
 
 #: src/lib/preferences/general/behaviorSettings.ts:17
 msgid ""
 "Remember the search query when closing and reopening the clipboard dialog"
-msgstr ""
+msgstr "Relembrar a consulta de pesquisa quando fechar e reabrir o diálogo da área de transferência"
 
 #: src/lib/preferences/general/behaviorSettings.ts:22
 msgid "Exclude Pinned Items from Main View"
-msgstr ""
+msgstr "Excluir itens marcados como favoritos da visualização principal"
 
 #: src/lib/preferences/general/behaviorSettings.ts:23
 msgid "Pinned items appear only when searching for pinned items"
-msgstr ""
+msgstr "Itens marcados como favoritos aparecem apenas quando pesquisando por itens marcados como favoritos"
 
 #: src/lib/preferences/general/behaviorSettings.ts:28
 msgid "Exclude Tagged Items from Main View"
-msgstr ""
+msgstr "Excluir itens marcados como favoritos da visualização principal"
 
 #: src/lib/preferences/general/behaviorSettings.ts:29
 msgid "Tagged items appear only when searching for tagged items"
-msgstr ""
+msgstr "Itens marcados como favoritos aparecem apenas quando pesquisando por itens marcados como favoritos"
 
 #: src/lib/preferences/general/behaviorSettings.ts:34
 msgid "Protect Pinned Items"
-msgstr ""
+msgstr "Proteger itens marcados como favoritos"
 
 #: src/lib/preferences/general/behaviorSettings.ts:35
 msgid "Prevents pinned clipboard items from being deleted"
-msgstr ""
+msgstr "Impede que itens marcados como favoritos sejam excluídos"
 
 #: src/lib/preferences/general/behaviorSettings.ts:40
 msgid "Protect Tagged Items"
-msgstr ""
+msgstr "Proteger itens marcados como favoritos"
 
 #: src/lib/preferences/general/behaviorSettings.ts:41
 msgid "Prevents tagged clipboard items from being deleted"
-msgstr ""
+msgstr "Impede que itens marcados como favoritos sejam excluídos"
 
 #: src/lib/preferences/general/behaviorSettings.ts:46
 msgid "Paste on Copy"
-msgstr ""
+msgstr "Colar ao Copiar"
 
 #: src/lib/preferences/general/behaviorSettings.ts:47
 msgid ""
 "Automatically paste clipboard items when selected from clipboard history"
-msgstr ""
+msgstr "Cola automaticamente itens copiados quando selecionados do histórico de itens copiados"
 
 #: src/lib/preferences/general/behaviorSettings.ts:52
 msgid "Sync Primary Clipboard"
-msgstr ""
+msgstr "Sincronizar "
 
 #: src/lib/preferences/general/behaviorSettings.ts:53
 msgid "Also copy clipboard items to the primary clipboard"
-msgstr ""
+msgstr "Também copiar itens copiados para a área de transferência primária"
 
 #: src/lib/preferences/general/behaviorSettings.ts:58
 msgid "Update Date on Copy"
-msgstr ""
+msgstr "Atualizar Data ao Copiar"
 
 #: src/lib/preferences/general/behaviorSettings.ts:59
 msgid ""
 "Update the copied date of clipboard items when selected from clipboard "
 "history"
-msgstr ""
+msgstr "Atualizar a data de itens copiados quando selecionados do histórico de itens copiados"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:43
 msgid "Search apps"
-msgstr ""
+msgstr "Procurar aplicativos"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:78
 msgid "No Apps Found"
-msgstr ""
+msgstr "Nenhum Aplicativo Encontrado"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:170
 msgid "Add App Exclusion"
-msgstr ""
+msgstr "Adicionar Exclusão de Aplicativo"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:171
 msgid "Enter the WM Class of the application you want to exclude:"
-msgstr ""
+msgstr "Digite a classe WM do aplicativo que deseja excluir:"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:185
 msgid "WM Class"
-msgstr ""
+msgstr "Classe WM"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:261
 msgid "No Exclusions"
-msgstr ""
+msgstr "Sem Exclusões"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:296
 #: src/lib/preferences/general/appExclusionSettings.ts:307
 msgid "App Exclusions"
-msgstr ""
+msgstr "Exclusões de Aplicativos"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:320
 msgid "Exclusions"
-msgstr ""
+msgstr "Exclusões"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:326
 msgid "Manage App Exclusions"
-msgstr ""
+msgstr "Gerenciar Exclusões de Aplicativos"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:327
 msgid "Manage apps that will be excluded from clipboard history"
-msgstr ""
+msgstr "Gerenciar aplicativos que serão excluídos da história da Área de Transferência"
 
 #: src/lib/preferences/shortcuts/shortcutRow.ts:78
 msgid "Set Shortcut"
-msgstr ""
+msgstr "Adicionar Atalho"
 
 #: src/lib/preferences/shortcuts/shortcutRow.ts:126
 msgid "Disable Shortcut"
-msgstr ""
+msgstr "Desativar Atalho"
 
 #: src/lib/preferences/shortcuts/shortcutRow.ts:219
 msgid "Disabled"
-msgstr ""
+msgstr "Desabilitado"
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:17
 msgid "Open Clipboard Dialog"
-msgstr ""
+msgstr "Abrir Caixa de Diálogo da Área de Transferência"
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:20
 msgid "Toggle Incognito Mode"
-msgstr ""
+msgstr "Alternar Modo Incógnito"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:31
 msgid "Scroll"
-msgstr ""
+msgstr "Rolar"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:49
 msgid "Toggle Pinned Search"
-msgstr ""
+msgstr "Alternar Pesquisa Fixada"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:50
 msgid "Clear Item Tag/Type"
-msgstr ""
+msgstr "Limpar Tag/Tipo de Item"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:51
 msgid "Activate First Item"
-msgstr ""
+msgstr "Ativar Primeiro Item"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:60
 msgid "Next Item Type"
-msgstr ""
+msgstr "Próximo Tipo de Item"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:61
 msgid "Previous Item Type"
-msgstr ""
+msgstr "Tipo de Item Anterior"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:62
 msgid "Next Item Tag"
-msgstr ""
+msgstr "Próxima Tag de Item"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:63
 msgid "Previous Item Tag"
-msgstr ""
+msgstr "Tag de Item Anterior"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:64
 msgid "Select Item Tag"
-msgstr ""
+msgstr "Selecionar Tag de Item"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:74
 msgid "Swap Scroll Shortcut"
-msgstr ""
+msgstr "Trocar Atalho de Rolagem"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:75
 msgid "Swaps scroll shortcuts of cycling item types and item tags"
-msgstr ""
+msgstr "Trocar atalhos de rolagem entre tipos de itens e tags de itens"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:79
 msgid "Cycle Item Type"
-msgstr ""
+msgstr "Ciclar Tipo de Item"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:81
 msgid "Cycle Item Tag"
-msgstr ""
+msgstr "Ciclar Tag de Item"
 
 #: src/lib/preferences/shortcuts/popupMenuShortcuts.ts:11
 msgid "Popup Menu"
-msgstr ""
+msgstr "Menu Pop-up"
 
 #: src/lib/preferences/shortcuts/popupMenuShortcuts.ts:13
 msgid "Select Item Type"
-msgstr ""
+msgstr "Selecionar Tipo de Item"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:19
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:35
 msgid "Pin Item"
-msgstr ""
+msgstr "Fixar Item"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:22
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:35
 msgid "Delete Item"
-msgstr ""
+msgstr "Excluir Item"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:23
 msgid "Holding shift force deletes"
-msgstr ""
+msgstr "Pressionando shift força a exclusão"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:26
 msgid "Edit Item"
-msgstr ""
+msgstr "Editar Item"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:27
 msgid "Only supported for text and code items"
-msgstr ""
+msgstr "Apenas suportado para itens de texto e código"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:30
 msgid "Open Menu"
-msgstr ""
+msgstr "Abrir Menu"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:34
 msgid "Middle Click Action"
-msgstr ""
+msgstr "Ação do clique do meio"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:60
 msgid "Copy Item"
-msgstr ""
+msgstr "Copiar Item"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:61
 msgid "Activate Default Action"
-msgstr ""
+msgstr "Ativar ação padrão"
 
 #: src/lib/preferences/shortcuts/navigationShortcuts.ts:12
 msgid "Navigation"
-msgstr ""
+msgstr "Navegação"
 
 #: src/lib/preferences/shortcuts/navigationShortcuts.ts:15
 msgid "Navigate"
-msgstr ""
+msgstr "Navegar"
 
 #: src/lib/preferences/shortcuts/navigationShortcuts.ts:16
 msgid "Jump to Item"
-msgstr ""
+msgstr "Ir para Item"
 
 #: src/lib/preferences/shortcuts/navigationShortcuts.ts:17
 msgid "Jump to Start"
-msgstr ""
+msgstr "Ir para Início"
 
 #: src/lib/preferences/shortcuts/navigationShortcuts.ts:18
 msgid "Jump to End"
-msgstr ""
+msgstr "Ir para Final"
 
 #: src/lib/preferences/shortcuts/navigationShortcuts.ts:19
 msgid "Jump to Search"
-msgstr ""
+msgstr "Ir para Pesquisa"
 
 #: src/lib/misc/notifications.ts:63 src/lib/misc/notifications.ts:114
 msgid "Copied Text"
-msgstr ""
+msgstr "Texto copiado"
 
 #: src/lib/misc/notifications.ts:98 src/lib/misc/notifications.ts:123
 msgid "Copied Image"
-msgstr ""
+msgstr "Imagem copiada"
 
 #: src/lib/misc/notifications.ts:99 src/lib/misc/notifications.ts:129
 #, javascript-format
 msgid "Size: %d×%d px"
-msgstr ""
+msgstr "Tamanho: %d×%d px"
 
 #: src/lib/misc/notifications.ts:118
 msgid "Copied Code"
-msgstr ""
+msgstr "Código copiado"
 
 #: src/lib/misc/notifications.ts:142
 #, javascript-format
 msgid "Copied %d File"
 msgid_plural "Copied %d Files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Arquivo %d copiado"
+msgstr[1] "Arquivos %d copiados"
 
 #: src/lib/misc/notifications.ts:148
 msgid "Copied Link"
-msgstr ""
+msgstr "Link copiado"
 
 #: src/lib/misc/notifications.ts:152
 msgid "Copied Character"
-msgstr ""
+msgstr "Caractere copiado"
 
 #: src/lib/misc/notifications.ts:156
 msgid "Copied Color"
-msgstr ""
+msgstr "Cor copiada"
 
 #: src/lib/misc/db.ts:128
 msgid "Failed to load Gda"
-msgstr ""
+msgstr "Falha ao carregar Gda"
 
 #: src/lib/misc/db.ts:129 src/lib/misc/db.ts:154
 msgid "Clipboard history will be disabled"
-msgstr ""
+msgstr "O histórico da área de transferência será desativado"
 
 #: src/lib/misc/db.ts:130
 msgid "Disable Warning"
-msgstr ""
+msgstr "Desativar aviso"
 
 #: src/lib/misc/db.ts:153
 msgid "Failed to load database"
-msgstr ""
+msgstr "Falha ao carregar banco de dados"
 
 #: src/lib/ui/components/contentInfo.ts:39
 #, javascript-format
 msgid "%dh"
-msgstr ""
+msgstr "%dh"
 
 #: src/lib/ui/components/contentInfo.ts:40
 #, javascript-format
 msgid "%dm"
-msgstr ""
+msgstr "%dm"
 
 #: src/lib/ui/components/contentInfo.ts:41
 #, javascript-format
 msgid "%ds"
-msgstr ""
+msgstr "%ds"
 
 #: src/lib/ui/components/contentInfo.ts:113
 #, javascript-format
 msgid "%d char"
 msgid_plural "%d chars"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d caractere"
+msgstr[1] "%d caracteres"
 
 #: src/lib/ui/components/contentInfo.ts:121
 #, javascript-format
 msgid "%d word"
 msgid_plural "%d words"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d palavra"
+msgstr[1] "%d palavras"
 
 #: src/lib/ui/components/contentInfo.ts:124
 #, javascript-format
 msgid "%d line"
 msgid_plural "%d lines"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d linha"
+msgstr[1] "%d linhas"
 
 #: src/lib/ui/components/contentInfo.ts:184
 msgid "Missing File"
-msgstr ""
+msgstr "Arquivo faltando"
 
 #: src/lib/ui/components/contentInfo.ts:196
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #: src/lib/ui/components/editDialog.ts:283
 msgid "Edit Clipboard Item"
-msgstr ""
+msgstr "Editar Item da Área de Transferência"
 
 #: src/lib/ui/components/qrCodeDialog.ts:146
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 #: src/lib/ui/searchEntry.ts:148
 msgid "__All"
-msgstr ""
+msgstr "__Tudo"
 
 #: src/lib/ui/searchEntry.ts:152
 msgid "__Text"
-msgstr ""
+msgstr "__Texto"
 
 #: src/lib/ui/searchEntry.ts:153
 msgid "__Code"
-msgstr ""
+msgstr "__Código"
 
 #: src/lib/ui/searchEntry.ts:154
 msgid "__Image"
-msgstr ""
+msgstr "__Imagem"
 
 #: src/lib/ui/searchEntry.ts:155
 msgid "__File"
-msgstr ""
+msgstr "__Arquivo"
 
 #: src/lib/ui/searchEntry.ts:156
 msgid "File__s"
-msgstr ""
+msgstr "Arquivos__s"
 
 #: src/lib/ui/searchEntry.ts:157
 msgid "__Link"
-msgstr ""
+msgstr "__Link"
 
 #: src/lib/ui/searchEntry.ts:158
 msgid "C__haracter"
-msgstr ""
+msgstr "C__ractere"
 
 #: src/lib/ui/searchEntry.ts:159
 msgid "Colo__r"
-msgstr ""
+msgstr "Co__r"
 
 #: src/lib/ui/searchEntry.ts:272
 msgid "Type to search"
-msgstr ""
+msgstr "Digite para pesquisar"
 
 #: src/lib/ui/items/linkItem.ts:93
 msgid "No Title"
-msgstr ""
+msgstr "Sem título"
 
 #: src/lib/ui/items/linkItem.ts:95
 msgid "No Description"
-msgstr ""
+msgstr "Sem descrição"
 
 #: src/lib/ui/items/characterItem.ts:22
 msgid "Char"
-msgstr ""
+msgstr "Caractere"
 
 #: src/lib/ui/items/statusItem.ts:70 src/lib/ui/items/statusItem.ts:104
 msgid "Clipboard is Empty"
-msgstr ""
+msgstr "Área de Transferência Vazia"
 
 #: src/lib/ui/items/statusItem.ts:107
 msgid "No Items Found"
-msgstr ""
+msgstr "Nenhum item encontrado"
 
 #: src/lib/ui/items/filesItem.ts:114
 #, javascript-format
 msgid "%d more file"
 msgid_plural "%d more files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d mais arquivo"
+msgstr[1] "%d mais arquivos"
 
 #: src/lib/ui/items/filesItem.ts:115
 #, javascript-format
 msgid "%d file"
 msgid_plural "%d files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d arquivo"
+msgstr[1] "%d arquivos"
 
 #: src/lib/ui/indicator.ts:31
 msgid "Clear Clipboard History?"
-msgstr ""
+msgstr "Limpar Histórico da Área de Transferência?"
 
 #: src/lib/ui/indicator.ts:32
 msgid "Are you sure you want to clear your clipboard history?"
-msgstr ""
+msgstr "Tem certeza de que deseja limpar o histórico da área de transferência?"
 
 #: src/lib/ui/indicator.ts:36
 msgid "Clear Pinned/Tagged Items"
-msgstr ""
+msgstr "Limpar Itens Marcados"
 
 #: src/lib/ui/indicator.ts:86
 msgid "Incognito Mode"
-msgstr ""
+msgstr "Modo Anônimo"
 
 #: src/lib/ui/indicator.ts:89
 msgid "Clear History"
-msgstr ""
+msgstr "Limpar Histórico"
 
 #: src/lib/ui/indicator.ts:90
 msgid "Settings"
-msgstr ""
+msgstr "Configurações"
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
-msgstr ""
+msgstr "Abrir"
 
 #: src/lib/common/actions.ts:185
 msgid "Open with Default"
-msgstr ""
+msgstr "Abrir com o padrão"
 
 #: src/lib/common/actions.ts:195
 msgid "Open with Files"
-msgstr ""
+msgstr "Abrir com Arquivos"
 
 #: src/lib/common/actions.ts:205
 msgid "Open with Browser"
-msgstr ""
+msgstr "Abrir com Navegador"
 
 #: src/lib/common/actions.ts:217
 msgid "Paste as Path"
-msgstr ""
+msgstr "Colar como Caminho"
 
 #: src/lib/common/actions.ts:225
 msgid "Convert"
-msgstr ""
+msgstr "Converter"
 
 #: src/prefs.ts:69
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 #: src/prefs.ts:91
 msgid "Customization"
-msgstr ""
+msgstr "Customização"
 
 #: src/prefs.ts:107
 msgid "Shortcuts"
-msgstr ""
+msgstr "Atalhos"
