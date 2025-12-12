@@ -16,7 +16,8 @@ import { BackgroundSize, ImagePreview } from '../components/contentPreview.js';
 import { SearchQuery } from '../searchEntry.js';
 import { ClipboardItem } from './clipboardItem.js';
 
-const SPACING = 6;
+const SPACING = 3;
+const IMAGE_SPACING = 6;
 
 @registerClass({
 	Properties: {
@@ -169,13 +170,19 @@ export class LinkPreview extends St.Widget {
 
 	override vfunc_get_preferred_height(for_width: number): [number, number] {
 		const [, nat0] = this._image?.visible ? this._image.get_preferred_height(for_width) : [0, 0];
-		const [, nat1] = this._title.get_preferred_height(for_width);
-		const [min2, nat2] = this._description.get_preferred_height(for_width);
-		const [, nat3] = this._url.get_preferred_height(for_width);
-		const [min4] = this._singleUrl.get_preferred_height(for_width);
+		const [, nat1] = this._title.visible ? this._title.get_preferred_height(for_width) : [0, 0];
+		const [min2, nat2] = this._description.visible ? this._description.get_preferred_height(for_width) : [0, 0];
+		const [min3, nat3] = this._url.get_preferred_height(for_width);
+		const [min4, nat4] = this._singleUrl.get_preferred_height(for_width);
+		const vertical = this.orientation === Clutter.Orientation.VERTICAL;
 
-		const nat = nat0 + nat1 + Math.min(nat2, min2 * 2) + nat3;
-		return [min4, nat];
+		if (vertical && nat0 > 0) {
+			const nat = nat0 + nat1 + Math.min(nat2, min2) + min3 + IMAGE_SPACING;
+			return [min4, Math.max(nat, nat4)];
+		}
+
+		const nat = nat1 + Math.min(nat2, min2 * 2) + nat3 + (this._topPadding ? SPACING : 0);
+		return [min4, Math.max(nat, nat4)];
 	}
 
 	override vfunc_allocate(box: Clutter.ActorBox): void {
@@ -188,8 +195,8 @@ export class LinkPreview extends St.Widget {
 		const [, nat0] = this._image?.visible ? this._image.get_preferred_height(width) : [0, 0];
 		let imageWidth, x;
 		if (nat0 > 0) {
-			imageWidth = vertical ? width : Math.min(height, Math.floor(width / 2 - SPACING));
-			x = vertical ? 0 : imageWidth + SPACING * 2;
+			imageWidth = vertical ? width : Math.min(height, Math.floor(width / 2 - IMAGE_SPACING));
+			x = vertical ? 0 : imageWidth + IMAGE_SPACING * 2;
 		} else {
 			imageWidth = 0;
 			x = 0;
@@ -199,15 +206,18 @@ export class LinkPreview extends St.Widget {
 		const [min2, nat2] = this._description.get_preferred_height(width - x);
 		const [min3, nat3] = this._url.get_preferred_height(width - x);
 
+		// Add top padding for when the header is hidden
+		let spacing = this._topPadding ? SPACING : 0;
+
 		// Set minimum height to minimum of url
-		let h = min3;
+		let h = min3 + spacing;
 
 		// Title
 		let h1 = 0;
 		if (this._title.visible) {
-			if (h + nat1 < height) {
+			if (h + nat1 <= height) {
 				h1 = nat1;
-			} else if (h + min1 < height) {
+			} else if (h + min1 <= height) {
 				h1 = min1;
 			}
 		}
@@ -218,11 +228,11 @@ export class LinkPreview extends St.Widget {
 		// Description
 		let h2 = 0;
 		if (this._description.visible) {
-			if (vertical && nat0 > 0 && h + min2 < height) {
+			if (vertical && nat0 > 0 && h + min2 <= height) {
 				h2 = min2;
-			} else if (h + min2 * 2 < height) {
+			} else if (h + min2 * 2 <= height) {
 				h2 = Math.min(nat2, min2 * 2);
-			} else if (h + min2 < height) {
+			} else if (h + min2 <= height) {
 				h2 = min2;
 			}
 		}
@@ -232,12 +242,11 @@ export class LinkPreview extends St.Widget {
 
 		// Image
 		let h0 = 0;
-		let spacing = 0;
 		if (nat0 > 0) {
 			if (!vertical) {
 				h0 = height;
 			} else if (height - h > 30) {
-				spacing = SPACING;
+				spacing = IMAGE_SPACING;
 				h0 = height - h - spacing;
 			}
 		}
@@ -246,10 +255,8 @@ export class LinkPreview extends St.Widget {
 		if (vertical) h += h0;
 
 		// Url
-		const h3 = Math.min(min3 + Math.max(Math.floor((height - h) / min3) * min3, 0), nat3);
-
-		// Add top padding for when the header is hidden
-		if (this._topPadding) spacing = SPACING;
+		const line3 = min3 - this._url.get_theme_node().get_vertical_padding();
+		const h3 = Math.min(min3 + Math.max(Math.floor((height - h) / line3) * line3, 0), nat3);
 
 		// Allocate
 		this._image?.allocate(Clutter.ActorBox.new(0, 0, imageWidth, h0));
@@ -267,6 +274,9 @@ export class LinkPreview extends St.Widget {
 			this._singleUrl.opacity = 0;
 			this._url.allocate(Clutter.ActorBox.new(x, y, width, y + h3));
 		} else {
+			// Add extra top padding for same alignment as text item
+			if (this._topPadding) y += SPACING;
+
 			this._url.opacity = 0;
 			this._singleUrl.opacity = 255;
 			this._singleUrl.allocate(Clutter.ActorBox.new(x, y, width, height));

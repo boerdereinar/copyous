@@ -21,16 +21,22 @@
 		<value nick="fill" value="3" />
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.HeaderVisibility">
+	<enum id="org.gnome.shell.extensions.copyous.HeaderControlsVisibility">
 		<value nick="visible" value="0"/>
 		<value nick="visible-on-hover" value="1"/>
 		<value nick="hidden" value="2"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.HeaderControlsVisibility">
-		<value nick="visible" value="0"/>
-		<value nick="visible-on-hover" value="1"/>
-		<value nick="hidden" value="2"/>
+	<enum id="org.gnome.shell.extensions.copyous.Theme">
+		<value nick="system" value="0"/>
+		<value nick="dark" value="1"/>
+		<value nick="light" value="2"/>
+		<value nick="custom" value="3"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.copyous.ColorScheme">
+		<value nick="dark" value="0"/>
+		<value nick="light" value="1"/>
 	</enum>
 
 	<enum id="org.gnome.shell.extensions.copyous.MiddleClickAction">
@@ -141,6 +147,10 @@
 		<key name="show-indicator" type="b">
 			<default>true</default>
 			<summary>Show an indicator on the top panel</summary>
+		</key>
+		<key name="show-content-indicator" type="b">
+			<default>false</default>
+			<summary>Show the current clipboard content in the indicator</summary>
 		</key>
 		<key name="wiggle-indicator" type="b">
 			<default>true</default>
@@ -254,6 +264,10 @@
 			<range min="50" max="1000"/>
 			<summary>Height of a clipboard item</summary>
 		</key>
+		<key name="dynamic-item-height" type="b">
+			<default>false</default>
+			<summary>Dynamically adjust the height of the clipboard items based on their content</summary>
+		</key>
 		<key name="tab-width" type="i">
 			<default>4</default>
 			<range min="1" max="8"/>
@@ -281,6 +295,9 @@
 		<child name="file-item" schema="org.gnome.shell.extensions.copyous.file-item"/>
 		<child name="link-item" schema="org.gnome.shell.extensions.copyous.link-item"/>
 		<child name="character-item" schema="org.gnome.shell.extensions.copyous.character-item"/>
+
+		<!-- Theme -->
+		<child name="theme" schema="org.gnome.shell.extensions.copyous.theme"/>
 
 		<!-- Shortcuts -->
 		<key name="open-clipboard-dialog-shortcut" type="as">
@@ -419,6 +436,33 @@
 		<key name="show-unicode" type="b">
 			<default>false</default>
 			<summary>Show the Unicode of the character</summary>
+		</key>
+	</schema>
+
+	<schema id="org.gnome.shell.extensions.copyous.theme" path="/org/gnome/shell/extensions/copyous/theme/">
+		<key name="theme" enum="org.gnome.shell.extensions.copyous.Theme">
+			<default>'system'</default>
+			<summary>The preferred theme</summary>
+		</key>
+		<key name="custom-color-scheme" enum="org.gnome.shell.extensions.copyous.ColorScheme">
+			<default>'dark'</default>
+			<summary>The color scheme of the custom theme</summary>
+		</key>
+		<key name="custom-bg-color" type="s">
+			<default>''</default>
+			<summary>The background color of the clipboard dialog</summary>
+		</key>
+		<key name="custom-fg-color" type="s">
+			<default>''</default>
+			<summary>The text color of the clipboard dialog</summary>
+		</key>
+		<key name="custom-card-bg-color" type="s">
+			<default>''</default>
+			<summary>The background color of clipboard items</summary>
+		</key>
+		<key name="custom-search-bg-color" type="s">
+			<default>''</default>
+			<summary>The background color of the search bar</summary>
 		</key>
 	</schema>
 </schemalist>

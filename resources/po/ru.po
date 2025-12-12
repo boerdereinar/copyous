@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-30 18:36+0000\n"
+"POT-Creation-Date: 2025-12-07 17:29+0000\n"
 "PO-Revision-Date: 2025-11-30 20:29+0700\n"
 "Last-Translator: Victor <firephantom303@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -42,10 +42,20 @@ msgid "Change the height of the clipboard items"
 msgstr "Изменить высоту элементов буфера обмена"
 
 #: src/lib/preferences/customization/itemCustomization.ts:44
+msgid "Dynamic Item Height"
+msgstr ""
+
+#: src/lib/preferences/customization/itemCustomization.ts:46
+msgid ""
+"Dynamically adjust the height of the clipboard items based on their content. "
+"Only works in vertical orientation"
+msgstr ""
+
+#: src/lib/preferences/customization/itemCustomization.ts:53
 msgid "Tab Width"
 msgstr "Ширина табуляции"
 
-#: src/lib/preferences/customization/itemCustomization.ts:45
+#: src/lib/preferences/customization/itemCustomization.ts:54
 msgid "Change the width of a tab character in the clipboard items"
 msgstr "Изменить ширину символа табуляции в элементах буфера обмена"
 
@@ -208,6 +218,74 @@ msgstr "Высота"
 msgid "Change the height of the clipboard dialog"
 msgstr "Изменить высоту диалогового окна буфера обмена"
 
+#: src/lib/preferences/customization/themeCustomization.ts:69
+#: src/lib/preferences/customization/themeCustomization.ts:73
+msgid "Theme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:74
+msgid "Set the preferred theme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "System"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/themeCustomization.ts:90
+msgid "Dark"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/themeCustomization.ts:90
+msgid "Light"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/profiles.ts:202
+msgid "Custom"
+msgstr "Пользовательский"
+
+#: src/lib/preferences/customization/themeCustomization.ts:88
+msgid "Color Scheme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:89
+msgid "Set the color scheme of the custom theme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:96
+msgid "Background Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:97
+msgid "Set the background color of the clipboard dialog"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:103
+msgid "Text Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:104
+msgid "Set the text color of the clipboard dialog"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:110
+msgid "Item Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:111
+msgid "Set the background color of clipboard items"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:117
+msgid "Search Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:118
+msgid "Set the background color of the search bar"
+msgstr ""
+
 #: src/lib/preferences/customization/items/textItemCustomization.ts:15
 msgid "Text Item"
 msgstr "Текстовый элемент"
@@ -351,9 +429,9 @@ msgstr "Вне диапазона"
 #: src/lib/preferences/actions/actionsPage.ts:40
 #: src/lib/preferences/actions/actionDialog.ts:234
 #: src/lib/preferences/actions/actionsGroup.ts:33
-#: src/lib/preferences/general/appExclusionSettings.ts:174
+#: src/lib/preferences/general/appExclusionSettings.ts:169
 #: src/lib/preferences/shortcuts/shortcutRow.ts:131
-#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:40
+#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:45
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -361,7 +439,7 @@ msgstr "Отмена"
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:73
 #: src/lib/preferences/actions/actionDialog.ts:655
 #: src/lib/preferences/actions/actionsGroup.ts:550
-#: src/lib/preferences/general/appExclusionSettings.ts:176
+#: src/lib/preferences/general/appExclusionSettings.ts:171
 msgid "Add"
 msgstr "Добавить"
 
@@ -432,7 +510,7 @@ msgstr "Введите регулярное выражение для исклю
 #: src/lib/preferences/actions/actionDialog.ts:180
 #: src/lib/preferences/actions/actionDialog.ts:379
 #: src/lib/preferences/actions/actionDefaults.ts:152
-#: src/lib/ui/items/linkItem.ts:292
+#: src/lib/ui/items/linkItem.ts:302
 msgid "Link"
 msgstr "Ссылка"
 
@@ -638,25 +716,21 @@ msgstr "Видимо"
 msgid "Visible on Hover"
 msgstr "Видимо при наведении"
 
-#: src/lib/preferences/customization/profiles.ts:179
+#: src/lib/preferences/customization/profiles.ts:181
 msgid "Profiles"
 msgstr "Профили"
 
-#: src/lib/preferences/customization/profiles.ts:180
+#: src/lib/preferences/customization/profiles.ts:182
 msgid "Choose between pre-defined profiles"
 msgstr "Выберите один из предопределённых профилей"
 
-#: src/lib/preferences/customization/profiles.ts:188
+#: src/lib/preferences/customization/profiles.ts:190
 msgid "Default"
 msgstr "По умолчанию"
 
-#: src/lib/preferences/customization/profiles.ts:194
+#: src/lib/preferences/customization/profiles.ts:196
 msgid "Compact"
 msgstr "Компактный"
-
-#: src/lib/preferences/customization/profiles.ts:200
-msgid "Custom"
-msgstr "Пользовательский"
 
 #: src/lib/preferences/dependencies/dependencies.ts:151
 #: src/lib/preferences/dependencies/dependencies.ts:433
@@ -886,7 +960,7 @@ msgstr "Файл"
 #: src/lib/preferences/actions/actionDialog.ts:179
 #: src/lib/preferences/actions/actionDialog.ts:376
 #: src/lib/preferences/actions/actionDefaults.ts:148
-#: src/lib/ui/items/filesItem.ts:134
+#: src/lib/ui/items/filesItem.ts:140
 msgid "Files"
 msgstr "Файлы"
 
@@ -1047,8 +1121,8 @@ msgstr "Сохранить"
 
 #: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/general/feedbackSettings.ts:155
-#: src/lib/preferences/general/feedbackSettings.ts:251
-#: src/lib/preferences/general/feedbackSettings.ts:292
+#: src/lib/preferences/general/feedbackSettings.ts:259
+#: src/lib/preferences/general/feedbackSettings.ts:301
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:35
 #: src/lib/ui/components/editDialog.ts:231
 #: src/lib/ui/components/editDialog.ts:258
@@ -1106,7 +1180,7 @@ msgstr ""
 "Выберите, что делать с историей буфера обмена при перезапуске, выходе из "
 "системы или её завершении"
 
-#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:47
+#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:52
 msgid "Clear"
 msgstr "Очистить"
 
@@ -1139,47 +1213,47 @@ msgstr ""
 "отключает ограничение по времени"
 
 #: src/lib/preferences/general/feedbackSettings.ts:129
-#: src/lib/preferences/general/feedbackSettings.ts:243
+#: src/lib/preferences/general/feedbackSettings.ts:251
 msgid "Sound"
 msgstr "Звук"
 
 #: src/lib/preferences/general/feedbackSettings.ts:160
-#: src/lib/preferences/general/feedbackSettings.ts:294
+#: src/lib/preferences/general/feedbackSettings.ts:303
 msgid "Click"
 msgstr "Щелчок"
 
 #: src/lib/preferences/general/feedbackSettings.ts:161
-#: src/lib/preferences/general/feedbackSettings.ts:296
+#: src/lib/preferences/general/feedbackSettings.ts:305
 msgid "Hum"
 msgstr "Гудок"
 
 #: src/lib/preferences/general/feedbackSettings.ts:162
-#: src/lib/preferences/general/feedbackSettings.ts:298
+#: src/lib/preferences/general/feedbackSettings.ts:307
 msgid "String"
 msgstr "Струна"
 
 #: src/lib/preferences/general/feedbackSettings.ts:163
-#: src/lib/preferences/general/feedbackSettings.ts:300
+#: src/lib/preferences/general/feedbackSettings.ts:309
 msgid "Swing"
 msgstr "Свинг"
 
 #: src/lib/preferences/general/feedbackSettings.ts:164
-#: src/lib/preferences/general/feedbackSettings.ts:302
+#: src/lib/preferences/general/feedbackSettings.ts:311
 msgid "Message"
 msgstr "Сообщение"
 
 #: src/lib/preferences/general/feedbackSettings.ts:165
-#: src/lib/preferences/general/feedbackSettings.ts:304
+#: src/lib/preferences/general/feedbackSettings.ts:313
 msgid "Message New Instant"
 msgstr "Новое мгновенное сообщение"
 
 #: src/lib/preferences/general/feedbackSettings.ts:166
-#: src/lib/preferences/general/feedbackSettings.ts:306
+#: src/lib/preferences/general/feedbackSettings.ts:315
 msgid "Bell"
 msgstr "Звонок"
 
 #: src/lib/preferences/general/feedbackSettings.ts:167
-#: src/lib/preferences/general/feedbackSettings.ts:308
+#: src/lib/preferences/general/feedbackSettings.ts:317
 msgid "Dialog Warning"
 msgstr "Предупреждение диалогового окна"
 
@@ -1196,22 +1270,30 @@ msgid "Show an indicator on the top panel"
 msgstr "Показывать индикатор на верхней панели"
 
 #: src/lib/preferences/general/feedbackSettings.ts:231
+msgid "Show Clipboard Content in Indicator"
+msgstr ""
+
+#: src/lib/preferences/general/feedbackSettings.ts:232
+msgid "Show the current clipboard content in the indicator"
+msgstr ""
+
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr "Анимировать индикатор"
 
-#: src/lib/preferences/general/feedbackSettings.ts:232
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr "Анимировать индикатор при копировании элемента буфера обмена"
 
-#: src/lib/preferences/general/feedbackSettings.ts:237
+#: src/lib/preferences/general/feedbackSettings.ts:245
 msgid "Send Notification"
 msgstr "Отправлять уведомление"
 
-#: src/lib/preferences/general/feedbackSettings.ts:238
+#: src/lib/preferences/general/feedbackSettings.ts:246
 msgid "Send a notification when a clipboard item is copied"
 msgstr "Отправлять уведомление при копировании элемента буфера обмена"
 
-#: src/lib/preferences/general/feedbackSettings.ts:244
+#: src/lib/preferences/general/feedbackSettings.ts:252
 msgid "Sound to play when a clipboard item is copied"
 msgstr "Звук при копировании элемента буфера обмена"
 
@@ -1306,44 +1388,44 @@ msgid ""
 msgstr ""
 "Обновлять дату копирования элементов при выборе их из истории буфера обмена"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:43
+#: src/lib/preferences/general/appExclusionSettings.ts:38
 msgid "Search apps"
 msgstr "Поиск приложений"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:78
+#: src/lib/preferences/general/appExclusionSettings.ts:73
 msgid "No Apps Found"
 msgstr "Приложения не найдены"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:170
+#: src/lib/preferences/general/appExclusionSettings.ts:165
 msgid "Add App Exclusion"
 msgstr "Добавить исключение приложения"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:171
+#: src/lib/preferences/general/appExclusionSettings.ts:166
 msgid "Enter the WM Class of the application you want to exclude:"
 msgstr "Введите WM-класс приложения, которое нужно исключить:"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:185
+#: src/lib/preferences/general/appExclusionSettings.ts:180
 msgid "WM Class"
 msgstr "WM-класс"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:261
+#: src/lib/preferences/general/appExclusionSettings.ts:256
 msgid "No Exclusions"
 msgstr "Нет исключений"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:296
-#: src/lib/preferences/general/appExclusionSettings.ts:307
+#: src/lib/preferences/general/appExclusionSettings.ts:291
+#: src/lib/preferences/general/appExclusionSettings.ts:302
 msgid "App Exclusions"
 msgstr "Исключения приложений"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:320
+#: src/lib/preferences/general/appExclusionSettings.ts:315
 msgid "Exclusions"
 msgstr "Исключения"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:326
+#: src/lib/preferences/general/appExclusionSettings.ts:321
 msgid "Manage App Exclusions"
 msgstr "Управление исключениями приложений"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:327
+#: src/lib/preferences/general/appExclusionSettings.ts:322
 msgid "Manage apps that will be excluded from clipboard history"
 msgstr "Управлять приложениями, исключёнными из истории буфера обмена"
 
@@ -1637,11 +1719,11 @@ msgstr "Цв__ет"
 msgid "Type to search"
 msgstr "Введите текст для поиска"
 
-#: src/lib/ui/items/linkItem.ts:93
+#: src/lib/ui/items/linkItem.ts:94
 msgid "No Title"
 msgstr "Без заголовка"
 
-#: src/lib/ui/items/linkItem.ts:95
+#: src/lib/ui/items/linkItem.ts:96
 msgid "No Description"
 msgstr "Без описания"
 
@@ -1657,7 +1739,7 @@ msgstr "Буфер обмена пуст"
 msgid "No Items Found"
 msgstr "Элементы не найдены"
 
-#: src/lib/ui/items/filesItem.ts:114
+#: src/lib/ui/items/filesItem.ts:120
 #, javascript-format
 msgid "%d more file"
 msgid_plural "%d more files"
@@ -1665,7 +1747,7 @@ msgstr[0] "ещё %d файл"
 msgstr[1] "ещё %d файла"
 msgstr[2] "ещё %d файлов"
 
-#: src/lib/ui/items/filesItem.ts:115
+#: src/lib/ui/items/filesItem.ts:121
 #, javascript-format
 msgid "%d file"
 msgid_plural "%d files"
@@ -1673,29 +1755,37 @@ msgstr[0] "%d файл"
 msgstr[1] "%d файла"
 msgstr[2] "%d файлов"
 
-#: src/lib/ui/indicator.ts:31
+#: src/lib/ui/indicator.ts:36
 msgid "Clear Clipboard History?"
 msgstr "Очистить историю буфера обмена?"
 
-#: src/lib/ui/indicator.ts:32
+#: src/lib/ui/indicator.ts:37
 msgid "Are you sure you want to clear your clipboard history?"
 msgstr "Действительно очистить историю буфера обмена?"
 
-#: src/lib/ui/indicator.ts:36
+#: src/lib/ui/indicator.ts:41
 msgid "Clear Pinned/Tagged Items"
 msgstr "Очистить закреплённые/помеченные элементы"
 
-#: src/lib/ui/indicator.ts:86
+#: src/lib/ui/indicator.ts:99
 msgid "Incognito Mode"
 msgstr "Режим инкогнито"
 
-#: src/lib/ui/indicator.ts:89
+#: src/lib/ui/indicator.ts:102
 msgid "Clear History"
 msgstr "Очистить историю"
 
-#: src/lib/ui/indicator.ts:90
+#: src/lib/ui/indicator.ts:103
 msgid "Settings"
 msgstr "Настройки"
+
+#: src/lib/ui/indicator.ts:178
+#, javascript-format
+msgid "%d File"
+msgid_plural "%d Files"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
@@ -1721,14 +1811,14 @@ msgstr "Вставить как путь"
 msgid "Convert"
 msgstr "Преобразовать"
 
-#: src/prefs.ts:69
+#: src/prefs.ts:70
 msgid "General"
 msgstr "Общие"
 
-#: src/prefs.ts:91
+#: src/prefs.ts:92
 msgid "Customization"
 msgstr "Настройка вида"
 
-#: src/prefs.ts:107
+#: src/prefs.ts:109
 msgid "Shortcuts"
 msgstr "Сочетания клавиш"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-30 18:36+0000\n"
-"PO-Revision-Date: 2025-11-30 18:06+0100\n"
+"POT-Creation-Date: 2025-12-07 17:29+0000\n"
+"PO-Revision-Date: 2025-12-06 20:29+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -41,10 +41,22 @@ msgid "Change the height of the clipboard items"
 msgstr "Ändert die Höhe von Zwischenablage-Elementen"
 
 #: src/lib/preferences/customization/itemCustomization.ts:44
+msgid "Dynamic Item Height"
+msgstr "Dynamische Elementhöhe"
+
+#: src/lib/preferences/customization/itemCustomization.ts:46
+msgid ""
+"Dynamically adjust the height of the clipboard items based on their content. "
+"Only works in vertical orientation"
+msgstr ""
+"Passt die Höhe der Zwischenablageelemente dynamisch an ihren Inhalt an. "
+"Funktioniert nur im Hochformat"
+
+#: src/lib/preferences/customization/itemCustomization.ts:53
 msgid "Tab Width"
 msgstr "Tabulatorbreite"
 
-#: src/lib/preferences/customization/itemCustomization.ts:45
+#: src/lib/preferences/customization/itemCustomization.ts:54
 msgid "Change the width of a tab character in the clipboard items"
 msgstr "Ändert die Breite eines Zeichens in den Zwischenablage-Elementen"
 
@@ -207,6 +219,74 @@ msgstr "Höhe"
 msgid "Change the height of the clipboard dialog"
 msgstr "Ändern Sie die Höhe des Zwischenablage-Dialogs"
 
+#: src/lib/preferences/customization/themeCustomization.ts:69
+#: src/lib/preferences/customization/themeCustomization.ts:73
+msgid "Theme"
+msgstr "Design"
+
+#: src/lib/preferences/customization/themeCustomization.ts:74
+msgid "Set the preferred theme"
+msgstr "Das bevorzugte Design festlegen"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "System"
+msgstr "System"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/themeCustomization.ts:90
+msgid "Dark"
+msgstr "Dunkel"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/themeCustomization.ts:90
+msgid "Light"
+msgstr "Hell"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/profiles.ts:202
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+#: src/lib/preferences/customization/themeCustomization.ts:88
+msgid "Color Scheme"
+msgstr "Farbschema"
+
+#: src/lib/preferences/customization/themeCustomization.ts:89
+msgid "Set the color scheme of the custom theme"
+msgstr "Legen Sie das Farbschema des benutzerdefinierten Designs fest"
+
+#: src/lib/preferences/customization/themeCustomization.ts:96
+msgid "Background Color"
+msgstr "Hintergrundfarbe"
+
+#: src/lib/preferences/customization/themeCustomization.ts:97
+msgid "Set the background color of the clipboard dialog"
+msgstr "Hintergrundfarbe des Zwischenablage-Dialogfelds festlegen"
+
+#: src/lib/preferences/customization/themeCustomization.ts:103
+msgid "Text Color"
+msgstr "Textfarbe"
+
+#: src/lib/preferences/customization/themeCustomization.ts:104
+msgid "Set the text color of the clipboard dialog"
+msgstr "Textfarbe des Zwischenablage-Dialogfelds festlegen"
+
+#: src/lib/preferences/customization/themeCustomization.ts:110
+msgid "Item Color"
+msgstr "Elementfarbe"
+
+#: src/lib/preferences/customization/themeCustomization.ts:111
+msgid "Set the background color of clipboard items"
+msgstr "Hintergrundfarbe des Zwischenablage-Dialogfelds festlegen"
+
+#: src/lib/preferences/customization/themeCustomization.ts:117
+msgid "Search Color"
+msgstr "Suche Farbe"
+
+#: src/lib/preferences/customization/themeCustomization.ts:118
+msgid "Set the background color of the search bar"
+msgstr "Hintergrundfarbe der Suchleiste festlegen"
+
 #: src/lib/preferences/customization/items/textItemCustomization.ts:15
 msgid "Text Item"
 msgstr "Text-Element"
@@ -350,9 +430,9 @@ msgstr "Nicht in Reichweite"
 #: src/lib/preferences/actions/actionsPage.ts:40
 #: src/lib/preferences/actions/actionDialog.ts:234
 #: src/lib/preferences/actions/actionsGroup.ts:33
-#: src/lib/preferences/general/appExclusionSettings.ts:174
+#: src/lib/preferences/general/appExclusionSettings.ts:169
 #: src/lib/preferences/shortcuts/shortcutRow.ts:131
-#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:40
+#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:45
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -360,7 +440,7 @@ msgstr "Abbrechen"
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:73
 #: src/lib/preferences/actions/actionDialog.ts:655
 #: src/lib/preferences/actions/actionsGroup.ts:550
-#: src/lib/preferences/general/appExclusionSettings.ts:176
+#: src/lib/preferences/general/appExclusionSettings.ts:171
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -433,7 +513,7 @@ msgstr ""
 #: src/lib/preferences/actions/actionDialog.ts:180
 #: src/lib/preferences/actions/actionDialog.ts:379
 #: src/lib/preferences/actions/actionDefaults.ts:152
-#: src/lib/ui/items/linkItem.ts:292
+#: src/lib/ui/items/linkItem.ts:302
 msgid "Link"
 msgstr "Link"
 
@@ -645,25 +725,21 @@ msgstr "Sichtbar"
 msgid "Visible on Hover"
 msgstr "Bei Mausberührung sichtbar"
 
-#: src/lib/preferences/customization/profiles.ts:179
+#: src/lib/preferences/customization/profiles.ts:181
 msgid "Profiles"
 msgstr "Profile"
 
-#: src/lib/preferences/customization/profiles.ts:180
+#: src/lib/preferences/customization/profiles.ts:182
 msgid "Choose between pre-defined profiles"
 msgstr "Wählen Sie zwischen vordefinierten Profilen"
 
-#: src/lib/preferences/customization/profiles.ts:188
+#: src/lib/preferences/customization/profiles.ts:190
 msgid "Default"
 msgstr "Standard"
 
-#: src/lib/preferences/customization/profiles.ts:194
+#: src/lib/preferences/customization/profiles.ts:196
 msgid "Compact"
 msgstr "Kompakt"
-
-#: src/lib/preferences/customization/profiles.ts:200
-msgid "Custom"
-msgstr "Benutzerdefiniert"
 
 #: src/lib/preferences/dependencies/dependencies.ts:151
 #: src/lib/preferences/dependencies/dependencies.ts:433
@@ -899,7 +975,7 @@ msgstr "Datei"
 #: src/lib/preferences/actions/actionDialog.ts:179
 #: src/lib/preferences/actions/actionDialog.ts:376
 #: src/lib/preferences/actions/actionDefaults.ts:148
-#: src/lib/ui/items/filesItem.ts:134
+#: src/lib/ui/items/filesItem.ts:140
 msgid "Files"
 msgstr "Dateien"
 
@@ -919,7 +995,7 @@ msgstr "Farbe"
 
 #: src/lib/preferences/actions/actionDialog.ts:256
 msgid "Kind"
-msgstr ""
+msgstr "Art"
 
 #: src/lib/preferences/actions/actionDialog.ts:257
 #: src/lib/preferences/actions/actionDialog.ts:401
@@ -1060,8 +1136,8 @@ msgstr "Speichern"
 
 #: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/general/feedbackSettings.ts:155
-#: src/lib/preferences/general/feedbackSettings.ts:251
-#: src/lib/preferences/general/feedbackSettings.ts:292
+#: src/lib/preferences/general/feedbackSettings.ts:259
+#: src/lib/preferences/general/feedbackSettings.ts:301
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:35
 #: src/lib/ui/components/editDialog.ts:231
 #: src/lib/ui/components/editDialog.ts:258
@@ -1120,7 +1196,7 @@ msgstr ""
 "Wählen Sie aus, was mit Ihrem Zwischenablageverlauf geschehen soll, wenn Sie "
 "Ihr System neu starten, sich abmelden oder herunterfahren"
 
-#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:47
+#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:52
 msgid "Clear"
 msgstr "Leeren"
 
@@ -1156,47 +1232,47 @@ msgstr ""
 "Begrenzung zu deaktivieren"
 
 #: src/lib/preferences/general/feedbackSettings.ts:129
-#: src/lib/preferences/general/feedbackSettings.ts:243
+#: src/lib/preferences/general/feedbackSettings.ts:251
 msgid "Sound"
 msgstr "Ton"
 
 #: src/lib/preferences/general/feedbackSettings.ts:160
-#: src/lib/preferences/general/feedbackSettings.ts:294
+#: src/lib/preferences/general/feedbackSettings.ts:303
 msgid "Click"
 msgstr "Klick"
 
 #: src/lib/preferences/general/feedbackSettings.ts:161
-#: src/lib/preferences/general/feedbackSettings.ts:296
+#: src/lib/preferences/general/feedbackSettings.ts:305
 msgid "Hum"
 msgstr "Hum"
 
 #: src/lib/preferences/general/feedbackSettings.ts:162
-#: src/lib/preferences/general/feedbackSettings.ts:298
+#: src/lib/preferences/general/feedbackSettings.ts:307
 msgid "String"
 msgstr "Zeichenfolge"
 
 #: src/lib/preferences/general/feedbackSettings.ts:163
-#: src/lib/preferences/general/feedbackSettings.ts:300
+#: src/lib/preferences/general/feedbackSettings.ts:309
 msgid "Swing"
 msgstr "Schwung"
 
 #: src/lib/preferences/general/feedbackSettings.ts:164
-#: src/lib/preferences/general/feedbackSettings.ts:302
+#: src/lib/preferences/general/feedbackSettings.ts:311
 msgid "Message"
 msgstr "Nachricht"
 
 #: src/lib/preferences/general/feedbackSettings.ts:165
-#: src/lib/preferences/general/feedbackSettings.ts:304
+#: src/lib/preferences/general/feedbackSettings.ts:313
 msgid "Message New Instant"
 msgstr "Nachricht Neu Sofort"
 
 #: src/lib/preferences/general/feedbackSettings.ts:166
-#: src/lib/preferences/general/feedbackSettings.ts:306
+#: src/lib/preferences/general/feedbackSettings.ts:315
 msgid "Bell"
 msgstr "Glocke"
 
 #: src/lib/preferences/general/feedbackSettings.ts:167
-#: src/lib/preferences/general/feedbackSettings.ts:308
+#: src/lib/preferences/general/feedbackSettings.ts:317
 msgid "Dialog Warning"
 msgstr "Dialog Warnung"
 
@@ -1213,25 +1289,32 @@ msgid "Show an indicator on the top panel"
 msgstr "Zeige einen Indikator auf dem oberen Bedienfeld an"
 
 #: src/lib/preferences/general/feedbackSettings.ts:231
+msgid "Show Clipboard Content in Indicator"
+msgstr "Inhalt der Zwischenablage in Indikator anzeigen"
+
+#: src/lib/preferences/general/feedbackSettings.ts:232
+msgid "Show the current clipboard content in the indicator"
+msgstr "Zeige den aktuellen Inhalt der Zwischenablage im Indikator an"
+
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr "Indikator bewegen"
 
-#: src/lib/preferences/general/feedbackSettings.ts:232
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr ""
-"Bewegen Sie den Indikator, wenn ein Element aus der Zwischenablage kopiert "
-"wird"
+"Bewege den Indikator, wenn ein Element aus der Zwischenablage kopiert wird"
 
-#: src/lib/preferences/general/feedbackSettings.ts:237
+#: src/lib/preferences/general/feedbackSettings.ts:245
 msgid "Send Notification"
 msgstr "Benachrichtigung senden"
 
-#: src/lib/preferences/general/feedbackSettings.ts:238
+#: src/lib/preferences/general/feedbackSettings.ts:246
 msgid "Send a notification when a clipboard item is copied"
 msgstr ""
 "Benachrichtigung senden, wenn ein Element in die Zwischenablage kopiert wird"
 
-#: src/lib/preferences/general/feedbackSettings.ts:244
+#: src/lib/preferences/general/feedbackSettings.ts:252
 msgid "Sound to play when a clipboard item is copied"
 msgstr "Ton, der beim Kopieren eines Clipboard-Elements abgespielt wird"
 
@@ -1333,45 +1416,45 @@ msgstr ""
 "Aktualisieren Sie das Kopie-Datum von Zwischenablageelementen, wenn diese "
 "aus dem Zwischenablageverlauf ausgewählt werden"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:43
+#: src/lib/preferences/general/appExclusionSettings.ts:38
 msgid "Search apps"
 msgstr "Apps suchen"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:78
+#: src/lib/preferences/general/appExclusionSettings.ts:73
 msgid "No Apps Found"
 msgstr "Keine Apps gefunden"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:170
+#: src/lib/preferences/general/appExclusionSettings.ts:165
 msgid "Add App Exclusion"
 msgstr "App-Ausschlüsse hinzufügen"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:171
+#: src/lib/preferences/general/appExclusionSettings.ts:166
 msgid "Enter the WM Class of the application you want to exclude:"
 msgstr ""
 "Geben Sie die WM-Klasse der Anwendung ein, die Sie ausschließen möchten:"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:185
+#: src/lib/preferences/general/appExclusionSettings.ts:180
 msgid "WM Class"
 msgstr "WM Klasse"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:261
+#: src/lib/preferences/general/appExclusionSettings.ts:256
 msgid "No Exclusions"
 msgstr "Keine Ausschlüsse"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:296
-#: src/lib/preferences/general/appExclusionSettings.ts:307
+#: src/lib/preferences/general/appExclusionSettings.ts:291
+#: src/lib/preferences/general/appExclusionSettings.ts:302
 msgid "App Exclusions"
 msgstr "App-Ausschlüsse"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:320
+#: src/lib/preferences/general/appExclusionSettings.ts:315
 msgid "Exclusions"
 msgstr "Ausschlüsse"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:326
+#: src/lib/preferences/general/appExclusionSettings.ts:321
 msgid "Manage App Exclusions"
 msgstr "App-Ausschlüsse verwalten"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:327
+#: src/lib/preferences/general/appExclusionSettings.ts:322
 msgid "Manage apps that will be excluded from clipboard history"
 msgstr ""
 "Verwalten Sie Apps, die aus dem Verlauf der Zwischenablage ausgeschlossen "
@@ -1663,11 +1746,11 @@ msgstr "Fa__rbe"
 msgid "Type to search"
 msgstr "Zum Suchen tippen"
 
-#: src/lib/ui/items/linkItem.ts:93
+#: src/lib/ui/items/linkItem.ts:94
 msgid "No Title"
 msgstr "Kein Titel"
 
-#: src/lib/ui/items/linkItem.ts:95
+#: src/lib/ui/items/linkItem.ts:96
 msgid "No Description"
 msgstr "Keine Beschreibung"
 
@@ -1683,43 +1766,50 @@ msgstr "Zwischenablage ist leer"
 msgid "No Items Found"
 msgstr "Keine Elemente gefunden"
 
-#: src/lib/ui/items/filesItem.ts:114
+#: src/lib/ui/items/filesItem.ts:120
 #, javascript-format
 msgid "%d more file"
 msgid_plural "%d more files"
 msgstr[0] "%d mehr Dateien"
 msgstr[1] "%d mehre Dateien"
 
-#: src/lib/ui/items/filesItem.ts:115
+#: src/lib/ui/items/filesItem.ts:121
 #, javascript-format
 msgid "%d file"
 msgid_plural "%d files"
 msgstr[0] "%d Datei"
 msgstr[1] "%d Dateien"
 
-#: src/lib/ui/indicator.ts:31
+#: src/lib/ui/indicator.ts:36
 msgid "Clear Clipboard History?"
 msgstr "Zwischenablage-Verlauf löschen?"
 
-#: src/lib/ui/indicator.ts:32
+#: src/lib/ui/indicator.ts:37
 msgid "Are you sure you want to clear your clipboard history?"
 msgstr "Möchten Sie wirklich den Verlauf Ihrer Zwischenablage löschen?"
 
-#: src/lib/ui/indicator.ts:36
+#: src/lib/ui/indicator.ts:41
 msgid "Clear Pinned/Tagged Items"
 msgstr "Fixierte/markierte Elemente löschen"
 
-#: src/lib/ui/indicator.ts:86
+#: src/lib/ui/indicator.ts:99
 msgid "Incognito Mode"
 msgstr "Inkognito-Modus"
 
-#: src/lib/ui/indicator.ts:89
+#: src/lib/ui/indicator.ts:102
 msgid "Clear History"
 msgstr "Verlauf löschen"
 
-#: src/lib/ui/indicator.ts:90
+#: src/lib/ui/indicator.ts:103
 msgid "Settings"
 msgstr "Einstellungen"
+
+#: src/lib/ui/indicator.ts:178
+#, javascript-format
+msgid "%d File"
+msgid_plural "%d Files"
+msgstr[0] "%d Datei"
+msgstr[1] "%d Dateien"
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
@@ -1745,14 +1835,14 @@ msgstr "Als Pfad einfügen"
 msgid "Convert"
 msgstr "Konvertieren"
 
-#: src/prefs.ts:69
+#: src/prefs.ts:70
 msgid "General"
 msgstr "Allgemein"
 
-#: src/prefs.ts:91
+#: src/prefs.ts:92
 msgid "Customization"
 msgstr "Anpassung"
 
-#: src/prefs.ts:107
+#: src/prefs.ts:109
 msgid "Shortcuts"
 msgstr "Tastenkürzel"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-30 18:36+0000\n"
-"PO-Revision-Date: 2025-11-30 10:43+0100\n"
+"POT-Creation-Date: 2025-12-07 17:29+0000\n"
+"PO-Revision-Date: 2025-12-07 09:47+0100\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -42,10 +42,22 @@ msgid "Change the height of the clipboard items"
 msgstr "Zmień wysokość elementów schowka"
 
 #: src/lib/preferences/customization/itemCustomization.ts:44
+msgid "Dynamic Item Height"
+msgstr "Dynamiczna wysokość elementu"
+
+#: src/lib/preferences/customization/itemCustomization.ts:46
+msgid ""
+"Dynamically adjust the height of the clipboard items based on their content. "
+"Only works in vertical orientation"
+msgstr ""
+"Dynamicznie dostosuj wysokość elementów schowka na podstawie ich zawartości. "
+"Działa tylko w orientacji pionowej"
+
+#: src/lib/preferences/customization/itemCustomization.ts:53
 msgid "Tab Width"
 msgstr "Szerokość zakładki"
 
-#: src/lib/preferences/customization/itemCustomization.ts:45
+#: src/lib/preferences/customization/itemCustomization.ts:54
 msgid "Change the width of a tab character in the clipboard items"
 msgstr "Zmień szerokość znaku tabulacji w elementach schowka"
 
@@ -208,6 +220,74 @@ msgstr "Wysokość"
 msgid "Change the height of the clipboard dialog"
 msgstr "Zmień wysokość okna dialogowego schowka"
 
+#: src/lib/preferences/customization/themeCustomization.ts:69
+#: src/lib/preferences/customization/themeCustomization.ts:73
+msgid "Theme"
+msgstr "Motyw"
+
+#: src/lib/preferences/customization/themeCustomization.ts:74
+msgid "Set the preferred theme"
+msgstr "Ustaw preferowany motyw"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "System"
+msgstr "System"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/themeCustomization.ts:90
+msgid "Dark"
+msgstr "Ciemny"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/themeCustomization.ts:90
+msgid "Light"
+msgstr "Jasny"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/profiles.ts:202
+msgid "Custom"
+msgstr "Własny"
+
+#: src/lib/preferences/customization/themeCustomization.ts:88
+msgid "Color Scheme"
+msgstr "Schemat kolorów"
+
+#: src/lib/preferences/customization/themeCustomization.ts:89
+msgid "Set the color scheme of the custom theme"
+msgstr "Ustaw schemat kolorów niestandardowego motywu"
+
+#: src/lib/preferences/customization/themeCustomization.ts:96
+msgid "Background Color"
+msgstr "Kolor tła"
+
+#: src/lib/preferences/customization/themeCustomization.ts:97
+msgid "Set the background color of the clipboard dialog"
+msgstr "Ustaw kolor tła okna dialogowego schowka"
+
+#: src/lib/preferences/customization/themeCustomization.ts:103
+msgid "Text Color"
+msgstr "Kolor tekstu"
+
+#: src/lib/preferences/customization/themeCustomization.ts:104
+msgid "Set the text color of the clipboard dialog"
+msgstr "Ustaw kolor tekstu okna dialogowego schowka"
+
+#: src/lib/preferences/customization/themeCustomization.ts:110
+msgid "Item Color"
+msgstr "Kolor elementu"
+
+#: src/lib/preferences/customization/themeCustomization.ts:111
+msgid "Set the background color of clipboard items"
+msgstr "Ustaw kolor tła elementów schowka"
+
+#: src/lib/preferences/customization/themeCustomization.ts:117
+msgid "Search Color"
+msgstr "Kolor wyszukiwania"
+
+#: src/lib/preferences/customization/themeCustomization.ts:118
+msgid "Set the background color of the search bar"
+msgstr "Ustaw kolor tła paska wyszukiwania"
+
 #: src/lib/preferences/customization/items/textItemCustomization.ts:15
 msgid "Text Item"
 msgstr "Element tekstowy"
@@ -351,9 +431,9 @@ msgstr "Nie jest w zakresie"
 #: src/lib/preferences/actions/actionsPage.ts:40
 #: src/lib/preferences/actions/actionDialog.ts:234
 #: src/lib/preferences/actions/actionsGroup.ts:33
-#: src/lib/preferences/general/appExclusionSettings.ts:174
+#: src/lib/preferences/general/appExclusionSettings.ts:169
 #: src/lib/preferences/shortcuts/shortcutRow.ts:131
-#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:40
+#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:45
 msgid "Cancel"
 msgstr "Anuluj"
 
@@ -361,7 +441,7 @@ msgstr "Anuluj"
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:73
 #: src/lib/preferences/actions/actionDialog.ts:655
 #: src/lib/preferences/actions/actionsGroup.ts:550
-#: src/lib/preferences/general/appExclusionSettings.ts:176
+#: src/lib/preferences/general/appExclusionSettings.ts:171
 msgid "Add"
 msgstr "Dodaj"
 
@@ -434,7 +514,7 @@ msgstr ""
 #: src/lib/preferences/actions/actionDialog.ts:180
 #: src/lib/preferences/actions/actionDialog.ts:379
 #: src/lib/preferences/actions/actionDefaults.ts:152
-#: src/lib/ui/items/linkItem.ts:292
+#: src/lib/ui/items/linkItem.ts:302
 msgid "Link"
 msgstr "Odnośnik"
 
@@ -643,25 +723,21 @@ msgstr "Widoczne"
 msgid "Visible on Hover"
 msgstr "Widoczne po najechaniu"
 
-#: src/lib/preferences/customization/profiles.ts:179
+#: src/lib/preferences/customization/profiles.ts:181
 msgid "Profiles"
 msgstr "Profile"
 
-#: src/lib/preferences/customization/profiles.ts:180
+#: src/lib/preferences/customization/profiles.ts:182
 msgid "Choose between pre-defined profiles"
 msgstr "Wybierz spośród predefiniowanych profili"
 
-#: src/lib/preferences/customization/profiles.ts:188
+#: src/lib/preferences/customization/profiles.ts:190
 msgid "Default"
 msgstr "Domyślny"
 
-#: src/lib/preferences/customization/profiles.ts:194
+#: src/lib/preferences/customization/profiles.ts:196
 msgid "Compact"
 msgstr "Kompaktowy"
-
-#: src/lib/preferences/customization/profiles.ts:200
-msgid "Custom"
-msgstr "Własny"
 
 #: src/lib/preferences/dependencies/dependencies.ts:151
 #: src/lib/preferences/dependencies/dependencies.ts:433
@@ -894,7 +970,7 @@ msgstr "Plik"
 #: src/lib/preferences/actions/actionDialog.ts:179
 #: src/lib/preferences/actions/actionDialog.ts:376
 #: src/lib/preferences/actions/actionDefaults.ts:148
-#: src/lib/ui/items/filesItem.ts:134
+#: src/lib/ui/items/filesItem.ts:140
 msgid "Files"
 msgstr "Pliki"
 
@@ -1055,8 +1131,8 @@ msgstr "Zapisz"
 
 #: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/general/feedbackSettings.ts:155
-#: src/lib/preferences/general/feedbackSettings.ts:251
-#: src/lib/preferences/general/feedbackSettings.ts:292
+#: src/lib/preferences/general/feedbackSettings.ts:259
+#: src/lib/preferences/general/feedbackSettings.ts:301
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:35
 #: src/lib/ui/components/editDialog.ts:231
 #: src/lib/ui/components/editDialog.ts:258
@@ -1114,7 +1190,7 @@ msgstr ""
 "Wybierz, co zrobić z historią schowka podczas ponownego uruchamiania, "
 "wylogowywania lub zamykania systemu"
 
-#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:47
+#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:52
 msgid "Clear"
 msgstr "Wyczyść"
 
@@ -1147,47 +1223,47 @@ msgstr ""
 "0, aby wyłączyć limit czasu"
 
 #: src/lib/preferences/general/feedbackSettings.ts:129
-#: src/lib/preferences/general/feedbackSettings.ts:243
+#: src/lib/preferences/general/feedbackSettings.ts:251
 msgid "Sound"
 msgstr "Dźwięk"
 
 #: src/lib/preferences/general/feedbackSettings.ts:160
-#: src/lib/preferences/general/feedbackSettings.ts:294
+#: src/lib/preferences/general/feedbackSettings.ts:303
 msgid "Click"
 msgstr "Klik"
 
 #: src/lib/preferences/general/feedbackSettings.ts:161
-#: src/lib/preferences/general/feedbackSettings.ts:296
+#: src/lib/preferences/general/feedbackSettings.ts:305
 msgid "Hum"
 msgstr "Brum"
 
 #: src/lib/preferences/general/feedbackSettings.ts:162
-#: src/lib/preferences/general/feedbackSettings.ts:298
+#: src/lib/preferences/general/feedbackSettings.ts:307
 msgid "String"
 msgstr "Plum"
 
 #: src/lib/preferences/general/feedbackSettings.ts:163
-#: src/lib/preferences/general/feedbackSettings.ts:300
+#: src/lib/preferences/general/feedbackSettings.ts:309
 msgid "Swing"
 msgstr "Buczenie"
 
 #: src/lib/preferences/general/feedbackSettings.ts:164
-#: src/lib/preferences/general/feedbackSettings.ts:302
+#: src/lib/preferences/general/feedbackSettings.ts:311
 msgid "Message"
 msgstr "Wiadomość"
 
 #: src/lib/preferences/general/feedbackSettings.ts:165
-#: src/lib/preferences/general/feedbackSettings.ts:304
+#: src/lib/preferences/general/feedbackSettings.ts:313
 msgid "Message New Instant"
 msgstr "Nowa natychmiastowa wiadomość"
 
 #: src/lib/preferences/general/feedbackSettings.ts:166
-#: src/lib/preferences/general/feedbackSettings.ts:306
+#: src/lib/preferences/general/feedbackSettings.ts:315
 msgid "Bell"
 msgstr "Dzwonek"
 
 #: src/lib/preferences/general/feedbackSettings.ts:167
-#: src/lib/preferences/general/feedbackSettings.ts:308
+#: src/lib/preferences/general/feedbackSettings.ts:317
 msgid "Dialog Warning"
 msgstr "Komunikat ostrzegawczy"
 
@@ -1204,22 +1280,30 @@ msgid "Show an indicator on the top panel"
 msgstr "Pokaż wskaźnik na górnym panelu"
 
 #: src/lib/preferences/general/feedbackSettings.ts:231
+msgid "Show Clipboard Content in Indicator"
+msgstr "Pokaż zawartość schowka we wskaźniku"
+
+#: src/lib/preferences/general/feedbackSettings.ts:232
+msgid "Show the current clipboard content in the indicator"
+msgstr "Pokaż bieżącą zawartość schowka we wskaźniku"
+
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr "Wskaźnik drgający"
 
-#: src/lib/preferences/general/feedbackSettings.ts:232
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr "Włącz drganie wskaźnika, gdy element zostanie skopiowany do schowka"
 
-#: src/lib/preferences/general/feedbackSettings.ts:237
+#: src/lib/preferences/general/feedbackSettings.ts:245
 msgid "Send Notification"
 msgstr "Wyślij powiadomienie"
 
-#: src/lib/preferences/general/feedbackSettings.ts:238
+#: src/lib/preferences/general/feedbackSettings.ts:246
 msgid "Send a notification when a clipboard item is copied"
 msgstr "Wyślij powiadomienie, gdy element zostanie skopiowany do schowka"
 
-#: src/lib/preferences/general/feedbackSettings.ts:244
+#: src/lib/preferences/general/feedbackSettings.ts:252
 msgid "Sound to play when a clipboard item is copied"
 msgstr "Dźwięk odtwarzany po skopiowaniu elementu do schowka"
 
@@ -1320,44 +1404,44 @@ msgstr ""
 "Aktualizuj datę skopiowania elementów schowka po wybraniu ich z historii "
 "schowka"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:43
+#: src/lib/preferences/general/appExclusionSettings.ts:38
 msgid "Search apps"
 msgstr "Szukaj programów"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:78
+#: src/lib/preferences/general/appExclusionSettings.ts:73
 msgid "No Apps Found"
 msgstr "Nie znaleziono programów"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:170
+#: src/lib/preferences/general/appExclusionSettings.ts:165
 msgid "Add App Exclusion"
 msgstr "Dodaj wykluczenie programu"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:171
+#: src/lib/preferences/general/appExclusionSettings.ts:166
 msgid "Enter the WM Class of the application you want to exclude:"
 msgstr "Wprowadź klasę WM programu, który chcesz wykluczyć:"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:185
+#: src/lib/preferences/general/appExclusionSettings.ts:180
 msgid "WM Class"
 msgstr "Klasa WM"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:261
+#: src/lib/preferences/general/appExclusionSettings.ts:256
 msgid "No Exclusions"
 msgstr "Brak wykluczeń"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:296
-#: src/lib/preferences/general/appExclusionSettings.ts:307
+#: src/lib/preferences/general/appExclusionSettings.ts:291
+#: src/lib/preferences/general/appExclusionSettings.ts:302
 msgid "App Exclusions"
 msgstr "Wykluczenia programów"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:320
+#: src/lib/preferences/general/appExclusionSettings.ts:315
 msgid "Exclusions"
 msgstr "Wykluczenia"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:326
+#: src/lib/preferences/general/appExclusionSettings.ts:321
 msgid "Manage App Exclusions"
 msgstr "Zarządzaj wykluczonymi programami"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:327
+#: src/lib/preferences/general/appExclusionSettings.ts:322
 msgid "Manage apps that will be excluded from clipboard history"
 msgstr "Zarządzaj programami wykluczonymi z historii schowka"
 
@@ -1652,11 +1736,11 @@ msgstr "Kolo_r"
 msgid "Type to search"
 msgstr "Wpisz, aby wyszukać"
 
-#: src/lib/ui/items/linkItem.ts:93
+#: src/lib/ui/items/linkItem.ts:94
 msgid "No Title"
 msgstr "Brak tytułu"
 
-#: src/lib/ui/items/linkItem.ts:95
+#: src/lib/ui/items/linkItem.ts:96
 msgid "No Description"
 msgstr "Brak opisu"
 
@@ -1672,7 +1756,7 @@ msgstr "Schowek jest pusty"
 msgid "No Items Found"
 msgstr "Nie znaleziono elementów"
 
-#: src/lib/ui/items/filesItem.ts:114
+#: src/lib/ui/items/filesItem.ts:120
 #, javascript-format
 msgid "%d more file"
 msgid_plural "%d more files"
@@ -1680,7 +1764,7 @@ msgstr[0] "%d plik więcej"
 msgstr[1] "%d pliki więcej"
 msgstr[2] "%d plików więcej"
 
-#: src/lib/ui/items/filesItem.ts:115
+#: src/lib/ui/items/filesItem.ts:121
 #, javascript-format
 msgid "%d file"
 msgid_plural "%d files"
@@ -1688,29 +1772,37 @@ msgstr[0] "%d plik"
 msgstr[1] "%d pliki"
 msgstr[2] "%d plików"
 
-#: src/lib/ui/indicator.ts:31
+#: src/lib/ui/indicator.ts:36
 msgid "Clear Clipboard History?"
 msgstr "Wyczyścić historię schowka?"
 
-#: src/lib/ui/indicator.ts:32
+#: src/lib/ui/indicator.ts:37
 msgid "Are you sure you want to clear your clipboard history?"
 msgstr "Czy na pewno chcesz wyczyścić historię schowka?"
 
-#: src/lib/ui/indicator.ts:36
+#: src/lib/ui/indicator.ts:41
 msgid "Clear Pinned/Tagged Items"
 msgstr "Wyczyść przypięte/oznaczone elementy"
 
-#: src/lib/ui/indicator.ts:86
+#: src/lib/ui/indicator.ts:99
 msgid "Incognito Mode"
 msgstr "Tryb prywatny"
 
-#: src/lib/ui/indicator.ts:89
+#: src/lib/ui/indicator.ts:102
 msgid "Clear History"
 msgstr "Wyczyść historię"
 
-#: src/lib/ui/indicator.ts:90
+#: src/lib/ui/indicator.ts:103
 msgid "Settings"
 msgstr "Ustawienia"
+
+#: src/lib/ui/indicator.ts:178
+#, javascript-format
+msgid "%d File"
+msgid_plural "%d Files"
+msgstr[0] "%d plik"
+msgstr[1] "%d pliki"
+msgstr[2] "%d plików"
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
@@ -1736,14 +1828,14 @@ msgstr "Wklej jako ścieżkę"
 msgid "Convert"
 msgstr "Konwertuj"
 
-#: src/prefs.ts:69
+#: src/prefs.ts:70
 msgid "General"
 msgstr "Ogólne"
 
-#: src/prefs.ts:91
+#: src/prefs.ts:92
 msgid "Customization"
 msgstr "Personalizacja"
 
-#: src/prefs.ts:107
+#: src/prefs.ts:109
 msgid "Shortcuts"
 msgstr "Skróty klawiszowe"

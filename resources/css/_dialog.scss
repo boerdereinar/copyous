@@ -90,4 +90,21 @@
 			padding-top: $base_padding * 0.5;
 		}
 	}
+
+	// Scrollbar
+	StScrollBar {
+		StButton#vhandle,
+		StButton#hhandle,
+		> .vhandle,
+		> .hhandle {
+			background-color: mix($fg_color, $bg_color, 30%);
+
+			&:hover {
+				background-color: mix($fg_color, $bg_color, 50%);
+			}
+			&:active {
+				background-color: mix($fg_color, $bg_color, 40%);
+			}
+		}
+	}
 }

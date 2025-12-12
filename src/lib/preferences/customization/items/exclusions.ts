@@ -296,7 +296,12 @@ export class ExclusionsGroup extends Adw.PreferencesGroup {
 	}
 
 	get exclusionPatterns(): string[] {
-		return this._listModel.strings;
+		const strings: string[] = [];
+		for (let i = 0; i < this._listModel.n_items; i++) {
+			const string = this._listModel.get_string(i);
+			if (string) strings.push(string);
+		}
+		return strings;
 	}
 
 	set exclusionPatterns(patterns: string[]) {

@@ -1,17 +1,4 @@
-@use 'sass:color';
-
-$menu_bg_color: $bg_color;
-$menuitem_bg_color: if(
-	$variant == 'light',
-	color.adjust($menu_bg_color, $lightness: -5%),
-	color.adjust($menu_bg_color, $lightness: 5%)
-);
 $menuitem_border_radius: $base_border_radius * 1.5;
-$submenu_bg_color: if(
-	$variant == 'light',
-	color.adjust($menu_bg_color, $lightness: -17%),
-	color.adjust($menu_bg_color, $lightness: 13%)
-);
 
 // prettier-ignore
 @mixin tag_button($color) {
@@ -19,9 +6,9 @@ $submenu_bg_color: if(
 		background-color: $color;
 	}
 
-	&:focus .inner { border-color: color.adjust($color, $alpha:-0.7); }
+	&:focus .inner { border-color: transparentize($color, 0.7); }
 	&:checked .inner { border-color: $color; }
-	&:checked:focus { border-color: color.adjust($color, $alpha:-0.7); }
+	&:checked:focus { border-color: transparentize($color, 0.7); }
 }
 
 .clipboard-item-menu,
@@ -74,7 +61,6 @@ $submenu_bg_color: if(
 		// prettier-ignore
 		.arrow-button {
 			@extend %menuitem;
-			@include menuitem($bg: $menuitem_bg_color);
 
 			padding-left: $base_padding;
 			padding-right: $base_padding;
@@ -95,36 +81,10 @@ $submenu_bg_color: if(
 }
 
 .clipboard-item-menu {
-	.popup-submenu-menu-item:open {
-		@include button(hover, $c: $submenu_bg_color, $style: flat);
-
-		&:focus,
-		&:hover,
-		&:selected {
-			$hover_color: if(
-				$variant == 'light',
-				color.adjust($submenu_bg_color, $lightness: -5%),
-				color.adjust($submenu_bg_color, $lightness: 5%)
-			);
-			@include button(hover, $c: $hover_color, $style: flat);
-		}
-	}
-
 	// Move original styles to nested element to fix bad animation
 	.clipboard-action-submenu.popup-sub-menu {
 		margin-bottom: 0;
 		border: none;
 		background-color: transparent;
-
-		& > StBoxLayout {
-			border-radius: 0 0 $menuitem_border_radius + 1px $menuitem_border_radius + 1px;
-			margin-bottom: $base_padding;
-			border: 1px solid transparent;
-			background-color: $submenu_bg_color;
-
-			@if $contrast == 'high' {
-				border-color: $hc_inset_color;
-			}
-		}
 	}
 }

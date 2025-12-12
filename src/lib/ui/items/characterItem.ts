@@ -66,19 +66,20 @@ export class CharacterItem extends ClipboardItem {
 
 	private updateHeight() {
 		const themeNode = this._content.get_theme_node();
-		const padding = themeNode.get_padding(St.Side.LEFT) + themeNode.get_padding(St.Side.RIGHT);
+		const padding = themeNode.get_horizontal_padding();
 		const scale = this.get_resource_scale();
 
 		// Calculate max font size
 		const [, extents] = this._character.clutter_text.get_layout().get_pixel_extents();
 		const size = this._character.get_theme_node().get_font().get_size() / Pango.SCALE;
+		const fontFactor = extents ? extents.height / scale / size : 1;
 		const width = this._content.allocation.get_width() - padding;
 		const maxSize = extents ? Math.min(Math.floor((width / extents.width) * scale * size), 80) : 80;
 
 		// Update size
 		const charsHeight = this._chars.has_allocation() ? this._chars.allocation.get_height() : 0;
-		const height = this._content.allocation.get_height() - charsHeight;
-		const characterSize = Math.clamp(Math.floor((200 * height) / (height + 200) - 8), 12, maxSize);
+		const height = (this._content.allocation.get_height() - charsHeight) / fontFactor;
+		const characterSize = Math.clamp(Math.floor((200 * height) / (height + 200)), 20, maxSize);
 		this._character.set_style(`font-size: ${characterSize}px;`);
 	}
 

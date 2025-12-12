@@ -100,6 +100,8 @@ export class ClipboardItem extends St.Button {
 		this.ext.settings.connectObject(
 			'changed::item-width', this.updateSize.bind(this),
 			'changed::item-height', this.updateSize.bind(this),
+			'changed::dynamic-item-height', this.updateSize.bind(this),
+			'changed::clipboard-orientation', this.updateSize.bind(this),
 			'changed::protect-pinned', this.updateProtection.bind(this),
 			'changed::protect-tagged', this.updateProtection.bind(this),
 			'changed::middle-click-action', this.updateMiddleClickAction.bind(this),
@@ -144,6 +146,15 @@ export class ClipboardItem extends St.Button {
 		const width = this.ext.settings.get_int('item-width');
 		const height = this.ext.settings.get_int('item-height');
 		this.set_size(width, height);
+
+		const dynamicHeight = this.ext.settings.get_boolean('dynamic-item-height');
+		const orientation = this.ext.settings.get_enum('clipboard-orientation');
+		if (dynamicHeight && orientation === Clutter.Orientation.VERTICAL) {
+			this.set_height(-1);
+			this.style = `max-height: ${height}px`;
+		} else {
+			this.style = '';
+		}
 	}
 
 	private updateProtection() {
@@ -270,6 +281,16 @@ export class ClipboardItem extends St.Button {
 		if (actionId) this.emit('activate-action', actionId);
 
 		return super.vfunc_key_press_event(event);
+	}
+
+	override vfunc_get_preferred_height(for_width: number): [number, number] {
+		const theme = this.get_theme_node();
+		const border = theme.get_border_width(St.Side.TOP) + theme.get_border_width(St.Side.BOTTOM);
+		const maxHeight = theme.get_max_height();
+
+		const [, nat] = this._box.get_preferred_height(for_width);
+		const height = Math.min(nat + border, maxHeight);
+		return [height, height];
 	}
 
 	override destroy() {

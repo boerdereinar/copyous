@@ -4,11 +4,10 @@ import GObject from 'gi://GObject';
 import Pango from 'gi://Pango';
 import St from 'gi://St';
 
-import * as Main from 'resource:///org/gnome/shell/ui/main.js';
-
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Language } from '../../misc/db.js';
+import { ColorScheme } from '../../misc/theme.js';
 import { normalizeIndentation, trim } from './label.js';
 
 // https://gitlab.gnome.org/GNOME/gtksourceview/-/blob/master/data/styles/Adwaita-dark.xml
@@ -210,10 +209,11 @@ export interface CodeLabelConstructorProps {
 
 /**
  * Applies a theme to highlight.js output
+ * @param colorScheme the color scheme
  * @param highlighted the highlighted highlight.js output
  */
-export function applyTheme(highlighted: string): string {
-	const theme = Main.getStyleVariant() === 'dark' ? Dark : Light;
+export function applyTheme(colorScheme: ColorScheme | undefined, highlighted: string): string {
+	const theme = colorScheme === ColorScheme.Light ? Light : Dark;
 	return highlighted.replace(/class="([^"]*)"/gm, (_, classes: string) => {
 		if (!classes.startsWith('hljs-')) return '';
 
@@ -254,7 +254,6 @@ export function applyTheme(highlighted: string): string {
 	},
 })
 export class CodeLabel extends St.Label {
-	private settings: St.Settings;
 	private readonly _colorSchemeChangedId: number = -1;
 
 	private _code: string = '';
@@ -284,8 +283,12 @@ export class CodeLabel extends St.Label {
 		this._tabWidth = params.tabWidth;
 
 		// Update text when global color scheme changes
-		this.settings = St.Settings.get();
-		this._colorSchemeChangedId = this.settings.connect('notify::color-scheme', this.updateText.bind(this));
+		if (this.ext.themeManager) {
+			this._colorSchemeChangedId = this.ext.themeManager?.connect(
+				'notify::color-scheme',
+				this.updateText.bind(this),
+			);
+		}
 
 		// Update text after hljs is loaded
 		this.ext.connectHljsInit(this.updateText.bind(this));
@@ -294,7 +297,9 @@ export class CodeLabel extends St.Label {
 	}
 
 	override destroy(): void {
-		this.settings.disconnect(this._colorSchemeChangedId);
+		if (this._colorSchemeChangedId >= 0) {
+			this.ext.themeManager?.disconnect(this._colorSchemeChangedId);
+		}
 
 		super.destroy();
 	}
@@ -350,21 +355,21 @@ export class CodeLabel extends St.Label {
 	set tabWidth(tabWidth: number) {
 		if (this._tabWidth === tabWidth) return;
 		this._tabWidth = tabWidth;
-		this.updateLabel();
+		this.updateText();
 		this.notify('tab-width');
 	}
 
 	private updateText() {
 		if (this._code == null) return;
 
-		// Trim leading/trailing lines before highlighting to prevent empty lines
-		let text = trim(this._code);
+		// Trim indentation before highlighting to prevent empty lines
+		let text = normalizeIndentation(trim(this._code), this.tabWidth);
 		if (this.syntaxHighlighting && this.ext.hljs != null) {
 			const language =
 				this.language && this.ext.hljs.getLanguage(this.language.id) != null ? this.language.id : null;
 
 			const result = language ? this.ext.hljs.highlight(text, { language }) : this.ext.hljs.highlightAuto(text);
-			text = applyTheme(result.value);
+			text = applyTheme(this.ext.themeManager?.colorScheme, result.value);
 
 			// Store language
 			if (!language && result.language) {
@@ -383,14 +388,13 @@ export class CodeLabel extends St.Label {
 	}
 
 	private updateLabel() {
-		let text = normalizeIndentation(this._highlighted, this.tabWidth);
-
-		const lines = text.split('\n');
+		let text = this._highlighted;
+		const lines = this._highlighted.split('\n');
 		this.clutter_text.line_wrap = lines.length === 1;
 
 		if (this.showLineNumbers && lines.length > 1) {
 			// Add line numbers
-			const color = Main.getStyleVariant() === 'dark' ? Colors.light_6 : Colors.dark_2;
+			const color = this.ext.themeManager?.colorScheme ? Colors.dark_7 : Colors.light_1;
 			const span = `<span color="${color}" alpha="50%">`;
 			text = lines.map((l, i) => `${span}${i.toString().padEnd(2, ' ')}</span> ${l}`).join('\n');
 		}

@@ -14,9 +14,11 @@ import { Keyboard } from './keyboard.js';
 
 Gio._promisify(Gio.File.prototype, 'load_contents_async');
 Gio._promisify(Gio.File.prototype, 'replace_contents_async');
+Gio._promisify(Gio.MemoryOutputStream.prototype, 'splice_async');
+Gio._promisify(Meta.SelectionSource.prototype, 'read_async');
 
 const MimeTypes = {
-	Text: ['text/plain', 'text/plain;charset=utf-8', 'STRING', 'UTF8_STRING'],
+	Text: ['text/plain;charset=utf-8', 'UTF8_STRING', 'text/plain', 'STRING'],
 	Image: ['image/png', 'image/jxl', 'image/webp', 'image/avif', 'image/jpeg'],
 	File: ['x-special-gnome-copied-files', 'text/uri-list'],
 	Sensitive: ['x-kde-passwordManagerHint'],
@@ -132,15 +134,15 @@ export class ClipboardManager extends GObject.Object {
 			if (this.keyboard.purpose === Clutter.InputContentPurpose.TERMINAL) {
 				this.keyboard.press(Clutter.KEY_Control_L);
 				this.keyboard.press(Clutter.KEY_Shift_L);
-				this.keyboard.press(Clutter.KEY_V);
-				this.keyboard.release(Clutter.KEY_V);
+				this.keyboard.press(Clutter.KEY_Insert);
+				this.keyboard.release(Clutter.KEY_Insert);
 				this.keyboard.release(Clutter.KEY_Shift_L);
 				this.keyboard.release(Clutter.KEY_Control_L);
 			} else {
-				this.keyboard.press(Clutter.KEY_Control_L);
-				this.keyboard.press(Clutter.KEY_v);
-				this.keyboard.release(Clutter.KEY_v);
-				this.keyboard.release(Clutter.KEY_Control_L);
+				this.keyboard.press(Clutter.KEY_Shift_L);
+				this.keyboard.press(Clutter.KEY_Insert);
+				this.keyboard.release(Clutter.KEY_Insert);
+				this.keyboard.release(Clutter.KEY_Shift_L);
 			}
 
 			this.pasteSignalId = -1;
@@ -199,7 +201,14 @@ export class ClipboardManager extends GObject.Object {
 		}
 	}
 
-	private shouldSave(): boolean {
+	private shouldSave(selectionSource: Meta.SelectionSource): boolean {
+		// Mime Type
+		const mimeTypes = selectionSource.get_mimetypes();
+		if (MimeTypes.Sensitive.some((value) => mimeTypes.includes(value))) {
+			return false;
+		}
+
+		// WM Class
 		const window = global.display.focus_window;
 		if (window) {
 			const exclusions = this.ext.settings.get_strv('wmclass-exclusions');
@@ -212,12 +221,13 @@ export class ClipboardManager extends GObject.Object {
 	private async ownerChanged(
 		_selection: Meta.Selection,
 		selectionType: Meta.SelectionType,
-		_selectionSource: Meta.SelectionSource,
+		selectionSource: Meta.SelectionSource | null,
 	) {
 		try {
+			if (selectionSource === null) return;
 			if (selectionType !== Meta.SelectionType.SELECTION_CLIPBOARD) return;
 
-			const content = await this.getContent(St.ClipboardType.CLIPBOARD);
+			const content = await this.getContent(selectionSource);
 			if (!content) return;
 
 			const checksum = contentChecksum(content);
@@ -242,7 +252,7 @@ export class ClipboardManager extends GObject.Object {
 			// Check if history should be saved after setting the previous clipboard item.
 			// This ensures that content copied in incognito mode is not saved to history
 			// after copying an item after exiting incognito mode.
-			if (!this.shouldSave()) return;
+			if (!this.shouldSave(selectionSource)) return;
 
 			const res = await this.convertContent(content);
 			if (!res) return;
@@ -257,70 +267,67 @@ export class ClipboardManager extends GObject.Object {
 		}
 	}
 
-	private async getContent(clipboardType: St.ClipboardType): Promise<ClipboardContent | null> {
-		return new Promise((resolve) => {
-			const mimeTypes = this.clipboard.get_mimetypes(St.ClipboardType.CLIPBOARD);
+	private async getContent(selectionSource: Meta.SelectionSource): Promise<ClipboardContent | null> {
+		async function getBytes(mimeType: string): Promise<Uint8Array<ArrayBufferLike>> {
+			const source = await selectionSource.read_async(mimeType, null);
+			const out = Gio.MemoryOutputStream.new_resizable();
+			await out.splice_async(
+				source,
+				Gio.OutputStreamSpliceFlags.CLOSE_SOURCE | Gio.OutputStreamSpliceFlags.CLOSE_TARGET,
+				GLib.PRIORITY_DEFAULT,
+				null,
+			);
+			return out.steal_as_bytes().toArray();
+		}
 
-			// Sensitive
-			if (MimeTypes.Sensitive.some((value) => mimeTypes.includes(value))) {
-				resolve(null);
-				return;
+		const mimeTypes = selectionSource.get_mimetypes();
+
+		// Image
+		const imageMimeType = MimeTypes.Image.find((value) => mimeTypes.includes(value));
+		if (imageMimeType) {
+			const bytes = await getBytes(imageMimeType);
+			if (bytes.length > 0) {
+				const checksum = GLib.compute_checksum_for_bytes(GLib.ChecksumType.MD5, bytes);
+				if (!checksum) return null;
+				return { type: ContentType.Image, mimetype: imageMimeType, data: bytes, checksum };
+			} else {
+				return null;
 			}
+		}
 
-			// Image
-			const imageMimeType = MimeTypes.Image.find((value) => mimeTypes.includes(value));
-			if (imageMimeType) {
-				this.clipboard.get_content(clipboardType, imageMimeType, (_, bytes) => {
-					bytes = bytes instanceof Uint8Array ? bytes : bytes.toArray();
-					if (bytes.length > 0) {
-						const checksum = GLib.compute_checksum_for_bytes(GLib.ChecksumType.MD5, bytes);
-						if (!checksum) return resolve(null);
-						return resolve({ type: ContentType.Image, mimetype: imageMimeType, data: bytes, checksum });
-					} else {
-						return resolve(null);
-					}
-				});
-				return;
+		// File
+		const fileMimeType = MimeTypes.File.find((value) => mimeTypes.includes(value));
+		if (fileMimeType) {
+			const bytes = await getBytes(fileMimeType);
+			const text = new TextDecoder().decode(bytes).trim();
+			if (text) {
+				const files = text
+					.split('\n')
+					.map((f) => f.trim())
+					.filter((f) => f.length !== 0);
+				if (files[0] === FileOperation.Copy || files[0] === FileOperation.Cut) {
+					return { type: ContentType.File, paths: files.slice(1), operation: files[0] };
+				} else {
+					return { type: ContentType.File, paths: files, operation: FileOperation.Copy };
+				}
+			} else {
+				return null;
 			}
+		}
 
-			// File
-			const fileMimeType = MimeTypes.File.find((value) => mimeTypes.includes(value));
-			if (fileMimeType) {
-				this.clipboard.get_content(clipboardType, fileMimeType, (_, bytes) => {
-					bytes = bytes instanceof Uint8Array ? bytes : bytes.toArray();
-					const text = new TextDecoder().decode(bytes).trim();
-					if (text) {
-						const files = text
-							.split('\n')
-							.map((f) => f.trim())
-							.filter((f) => f.length !== 0);
-						if (files[0] === FileOperation.Copy || files[0] === FileOperation.Cut) {
-							return resolve({ type: ContentType.File, paths: files.slice(1), operation: files[0] });
-						} else {
-							return resolve({ type: ContentType.File, paths: files, operation: FileOperation.Copy });
-						}
-					} else {
-						return resolve(null);
-					}
-				});
-				return;
+		// Text
+		const textMimeType = MimeTypes.Text.find((value) => mimeTypes.includes(value));
+		if (textMimeType) {
+			const bytes = await getBytes(textMimeType);
+			const text = new TextDecoder().decode(bytes);
+			if (text && text.trim()) {
+				return { type: ContentType.Text, text };
+			} else {
+				return null;
 			}
+		}
 
-			// Text
-			const textMimeType = MimeTypes.Text.find((value) => mimeTypes.includes(value));
-			if (textMimeType) {
-				this.clipboard.get_text(clipboardType, (_, text) => {
-					if (text && text.trim()) {
-						return resolve({ type: ContentType.Text, text });
-					} else {
-						return resolve(null);
-					}
-				});
-				return;
-			}
-
-			resolve(null);
-		});
+		return null;
 	}
 
 	private async convertContent(content: ClipboardContent): Promise<[ItemType, string, Metadata | null] | null> {

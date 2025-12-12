@@ -6,6 +6,6 @@
 	"settings-schema": "org.gnome.shell.extensions.copyous",
 	"gettext-domain": "copyous@boerdereinar.dev",
 	"url": "https://github.com/boerdereinar/copyous",
-	"version": 5,
-	"version-name": "1.1.3"
+	"version": 6,
+	"version-name": "1.2.0"
 }

@@ -49,6 +49,7 @@ class ActionSubmenuMenuItem extends PopupMenu.PopupSubMenuMenuItem {
 	constructor(action: ActionSubmenu) {
 		super(action.name);
 		this.menu.actor.add_style_class_name('clipboard-action-submenu');
+		this.menu.box.add_style_class_name('popup-sub-menu'); // Workaround for bad animation
 
 		this.menuActions = action.actions.map((a) => new ActionMenuItem(a));
 		for (const a of this.menuActions) {

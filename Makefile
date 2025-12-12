@@ -80,7 +80,7 @@ POT := resources/po/main.pot
 pot: $(POT)
 
 resources/po/%.po: resources/po/main.pot
-	msgmerge --backup=off -U $@ $<
+	msgmerge --backup=off -N -U $@ $<
 
 PO := $(wildcard resources/po/*.po)
 po: $(PO)
@@ -117,16 +117,21 @@ endif
 TSC := $(DIST_DIR)/extension.js
 
 # CSS
-$(DIST_DIR)/stylesheet-%.css: resources/css/%.scss resources/css/_*.scss | $(DIST_DIR)
+$(DIST_DIR)/css/stylesheet-%.css: resources/css/%.scss resources/css/_*.scss | $(DIST_DIR)
+	@mkdir -p $(DIST_DIR)/css
 	pnpm exec sass --no-source-map --load-path=resources/css/gnome-shell-sass --quiet-deps $<:$@
 	sed -i -re ':a; s%(.*)/\*.*\*/%\1%; ta; /\/\*/ !b; N; ba' $@ # Remove multiline comments
 	sed -i -e '/stage {/,/}/d' -e '/^$$/d' $@
 
-CSS := $(DIST_DIR)/stylesheet-light.css $(DIST_DIR)/stylesheet-dark.css
+$(DIST_DIR)/css/template-%.css: resources/css/_main.scss resources/css/_*.scss scripts/template/postcss.config.cjs | $(DIST_DIR)
+	@mkdir -p $(DIST_DIR)/css
+	VARIANT=$* pnpm exec postcss $< --config scripts/template | pnpm exec sass --no-source-map --stdin $@
+
+CSS := $(DIST_DIR)/css/stylesheet-dark.css $(DIST_DIR)/css/stylesheet-light.css $(DIST_DIR)/css/template-dark.css $(DIST_DIR)/css/template-light.css
 
 # Schemas
 SCHEMAS := $(patsubst resources/schemas/%.gschema.xml,$(DIST_DIR)/schemas/%.gschema.xml,$(wildcard resources/schemas/*.gschema.xml))
-ifeq ($(DEBUG_SCHEMA),1)
+ifneq ($(DEBUG_SCHEMA),)
 DEBUG_SCHEMAS := $(patsubst %.gschema.xml,%.debug.gschema.xml,$(SCHEMAS))
 endif
 
@@ -144,7 +149,10 @@ $(DEBUG_SCHEMAS): $(DIST_DIR)/schemas/%.debug.gschema.xml: resources/schemas/%.g
 $(DIST_DIR)/resources.gresource: resources/resources.gresource.xml resources/css/prefs.css | $(DIST_DIR)
 	glib-compile-resources --target=$@ --sourcedir=resources $<
 
-RESOURCES := $(DIST_DIR)/resources.gresource
+$(DIST_DIR)/theme.gresource: resources/theme.gresource.xml $(CSS) | $(DIST_DIR)
+	glib-compile-resources --target=$@ --sourcedir=$(@D) $<
+
+RESOURCES := $(DIST_DIR)/resources.gresource $(DIST_DIR)/theme.gresource
 
 # Build all
 $(DIST_ZIP): $(DIST_DIR)/metadata.json $(TSC) $(CSS) $(SCHEMAS) $(DEBUG_SCHEMAS) $(RESOURCES) | $(DIST_DIR)
@@ -154,7 +162,8 @@ $(DIST_ZIP): $(DIST_DIR)/metadata.json $(TSC) $(CSS) $(SCHEMAS) $(DEBUG_SCHEMAS)
 		--extra-source="lib" \
 		--extra-source="thirdparty" \
 		--extra-source=$(ICONS_PATH) \
-		--extra-source="resources.gresource"
+		--extra-source="resources.gresource" \
+		--extra-source="theme.gresource"
 	@mv $(DIST_DIR)/$(UUID).shell-extension.zip $@
 
 build: $(DIST_ZIP)

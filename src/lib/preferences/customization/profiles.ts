@@ -144,6 +144,7 @@ class DefaultProfile extends Profile {
 		this.addSetting(null, 'auto-hide-search', false, 'boolean');
 		this.addSetting(null, 'item-width', 250, 'int');
 		this.addSetting(null, 'item-height', 170, 'int');
+		this.addSetting(null, 'dynamic-item-height', false, 'boolean');
 		this.addSetting(null, 'show-header', true, 'boolean');
 		this.addSetting(null, 'header-controls-visibility', 0, 'enum'); // visible
 
@@ -162,7 +163,8 @@ class CompactProfile extends Profile {
 		this.addSetting(null, 'clipboard-size', 500, 'int');
 		this.addSetting(null, 'auto-hide-search', true, 'boolean');
 		this.addSetting(null, 'item-width', 300, 'int');
-		this.addSetting(null, 'item-height', 90, 'int');
+		this.addSetting(null, 'item-height', 100, 'int');
+		this.addSetting(null, 'dynamic-item-height', true, 'boolean');
 		this.addSetting(null, 'show-header', false, 'boolean');
 		this.addSetting(null, 'header-controls-visibility', 1, 'enum'); // visible on hover
 
