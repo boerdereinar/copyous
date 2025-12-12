@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-30 18:36+0000\n"
+"POT-Creation-Date: 2025-12-07 17:29+0000\n"
 "PO-Revision-Date: 2025-12-01 18:02-0300\n"
 "Last-Translator: Murilo Leal <murilormleal@outlook.com>\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -40,10 +40,22 @@ msgid "Change the height of the clipboard items"
 msgstr "Alterar a altura dos itens da área de transferência"
 
 #: src/lib/preferences/customization/itemCustomization.ts:44
+#, fuzzy
+msgid "Dynamic Item Height"
+msgstr "Altura Dinâmica do Item"
+
+#: src/lib/preferences/customization/itemCustomization.ts:46
+msgid ""
+"Dynamically adjust the height of the clipboard items based on their content. "
+"Only works in vertical orientation"
+msgstr "Ajustar a aultura dinamicamente dos itens da área de transferência baseado no conteúdo"
+"Funciona apenas na orientação vertical"
+
+#: src/lib/preferences/customization/itemCustomization.ts:53
 msgid "Tab Width"
 msgstr "Largura da guia"
 
-#: src/lib/preferences/customization/itemCustomization.ts:45
+#: src/lib/preferences/customization/itemCustomization.ts:54
 msgid "Change the width of a tab character in the clipboard items"
 msgstr "Alterar a largura da guia dos itens da área de transferência"
 
@@ -80,7 +92,9 @@ msgstr "Mostrar no cursor de texto"
 msgid ""
 "Show the clipboard dialog at the text cursor position whenever possible, "
 "otherwise at the pointer position"
-msgstr "Mostrar a área de transferência no cursor de texto, quando possível, caso contrário, no ponteiro"
+msgstr ""
+"Mostrar a área de transferência no cursor de texto, quando possível, caso "
+"contrário, no ponteiro"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:49
 msgid "Orientation"
@@ -203,6 +217,83 @@ msgstr "Altura"
 #: src/lib/preferences/customization/dialogCustomization.ts:209
 msgid "Change the height of the clipboard dialog"
 msgstr "Alterar a altura da caixa de área de transferência"
+
+#: src/lib/preferences/customization/themeCustomization.ts:69
+#: src/lib/preferences/customization/themeCustomization.ts:73
+msgid "Theme"
+msgstr "Tema"
+
+#: src/lib/preferences/customization/themeCustomization.ts:74
+msgid "Set the preferred theme"
+msgstr "Selecione o tema preferido"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "System"
+msgstr "Sistema"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/themeCustomization.ts:90
+msgid "Dark"
+msgstr "Escuro"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/themeCustomization.ts:90
+#, fuzzy
+msgid "Light"
+msgstr "Claro"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+#: src/lib/preferences/customization/profiles.ts:202
+msgid "Custom"
+msgstr "Customizado"
+
+#: src/lib/preferences/customization/themeCustomization.ts:88
+#, fuzzy
+msgid "Color Scheme"
+msgstr "Esquema de Cor"
+
+#: src/lib/preferences/customization/themeCustomization.ts:89
+msgid "Set the color scheme of the custom theme"
+msgstr "Seleciona o esquema de cor do tema customizado"
+
+#: src/lib/preferences/customization/themeCustomization.ts:96
+#, fuzzy
+msgid "Background Color"
+msgstr "Cor do plano de fundo"
+
+#: src/lib/preferences/customization/themeCustomization.ts:97
+#, fuzzy
+msgid "Set the background color of the clipboard dialog"
+msgstr "Selecione a cor de fundo da caixa de área de transferência"
+
+#: src/lib/preferences/customization/themeCustomization.ts:103
+#, fuzzy
+msgid "Text Color"
+msgstr "Cor do Texto"
+
+#: src/lib/preferences/customization/themeCustomization.ts:104
+#, fuzzy
+msgid "Set the text color of the clipboard dialog"
+msgstr "Selecione a cor do texto da caixa de área de transferência"
+
+#: src/lib/preferences/customization/themeCustomization.ts:110
+#, fuzzy
+msgid "Item Color"
+msgstr "Cor do Item"
+
+#: src/lib/preferences/customization/themeCustomization.ts:111
+#, fuzzy
+msgid "Set the background color of clipboard items"
+msgstr "Selecione a cor de fundo dos itens da área de transferência"
+
+#: src/lib/preferences/customization/themeCustomization.ts:117
+#, fuzzy
+msgid "Search Color"
+msgstr "Pesquisar Cor"
+
+#: src/lib/preferences/customization/themeCustomization.ts:118
+msgid "Set the background color of the search bar"
+msgstr "Selecione a cor de fundo da barra de pesquisa"
 
 #: src/lib/preferences/customization/items/textItemCustomization.ts:15
 msgid "Text Item"
@@ -347,9 +438,9 @@ msgstr "Fora do intervalo"
 #: src/lib/preferences/actions/actionsPage.ts:40
 #: src/lib/preferences/actions/actionDialog.ts:234
 #: src/lib/preferences/actions/actionsGroup.ts:33
-#: src/lib/preferences/general/appExclusionSettings.ts:174
+#: src/lib/preferences/general/appExclusionSettings.ts:169
 #: src/lib/preferences/shortcuts/shortcutRow.ts:131
-#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:40
+#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:45
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -357,7 +448,7 @@ msgstr "Cancelar"
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:73
 #: src/lib/preferences/actions/actionDialog.ts:655
 #: src/lib/preferences/actions/actionsGroup.ts:550
-#: src/lib/preferences/general/appExclusionSettings.ts:176
+#: src/lib/preferences/general/appExclusionSettings.ts:171
 msgid "Add"
 msgstr "Adicionar"
 
@@ -399,7 +490,8 @@ msgstr "Máximo de Caracteres"
 
 #: src/lib/preferences/customization/items/characterItemCustomization.ts:19
 msgid "Maximum number of characters that are recognized as a character item"
-msgstr "Número máximo de caracteres que são reconhecidos como um item de caractere"
+msgstr ""
+"Número máximo de caracteres que são reconhecidos como um item de caractere"
 
 #: src/lib/preferences/customization/items/characterItemCustomization.ts:25
 msgid "Show Unicode"
@@ -422,13 +514,15 @@ msgstr "Adicionar Template"
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:43
 msgid ""
 "Enter a regular expression to exclude links that should not have a preview."
-msgstr "Coloque uma expressão regular para excluir links que não devem ter uma prévia."
+msgstr ""
+"Coloque uma expressão regular para excluir links que não devem ter uma "
+"prévia."
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:44
 #: src/lib/preferences/actions/actionDialog.ts:180
 #: src/lib/preferences/actions/actionDialog.ts:379
 #: src/lib/preferences/actions/actionDefaults.ts:152
-#: src/lib/ui/items/linkItem.ts:292
+#: src/lib/ui/items/linkItem.ts:302
 msgid "Link"
 msgstr "Link"
 
@@ -523,11 +617,13 @@ msgstr "Miniatura"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:89
 msgid "Enable file previews for all files with generated thumbnails"
-msgstr "Habilitar prévia de arquivo para todos os arquivos com miniaturas geradas"
+msgstr ""
+"Habilitar prévia de arquivo para todos os arquivos com miniaturas geradas"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:101
 msgid "Enter a glob pattern to exclude files that should not have a preview."
-msgstr "Coloque um padrão glob para excluir arquivos que não devem ter uma prévia."
+msgstr ""
+"Coloque um padrão glob para excluir arquivos que não devem ter uma prévia."
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:102
 msgid "Path"
@@ -557,7 +653,8 @@ msgstr "Visibilidade da Prévia de Arquivo"
 msgid ""
 "File preview shows a preview of the contents of a file.\n"
 "File info shows some information about the file."
-msgstr "Prévias de arquivo mostram uma prévia do conteúdo do arquivo.\n"
+msgstr ""
+"Prévias de arquivo mostram uma prévia do conteúdo do arquivo.\n"
 "Informações de arquivo mostram algumas informações sobre o arquivo."
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:159
@@ -633,25 +730,21 @@ msgstr "Visível"
 msgid "Visible on Hover"
 msgstr "Visível ao passar o mouse"
 
-#: src/lib/preferences/customization/profiles.ts:179
+#: src/lib/preferences/customization/profiles.ts:181
 msgid "Profiles"
 msgstr "Perfis"
 
-#: src/lib/preferences/customization/profiles.ts:180
+#: src/lib/preferences/customization/profiles.ts:182
 msgid "Choose between pre-defined profiles"
 msgstr "Escolha entre perfis pré-definidos"
 
-#: src/lib/preferences/customization/profiles.ts:188
+#: src/lib/preferences/customization/profiles.ts:190
 msgid "Default"
 msgstr "Padrão"
 
-#: src/lib/preferences/customization/profiles.ts:194
+#: src/lib/preferences/customization/profiles.ts:196
 msgid "Compact"
 msgstr "Compacto"
-
-#: src/lib/preferences/customization/profiles.ts:200
-msgid "Custom"
-msgstr "Customizado"
 
 #: src/lib/preferences/dependencies/dependencies.ts:151
 #: src/lib/preferences/dependencies/dependencies.ts:433
@@ -670,7 +763,8 @@ msgstr "Instalação Manual"
 msgid ""
 "You can manually install highlight.js by downloading highlight.min.js from "
 "\"Url\" to \"Install Location\"."
-msgstr "Você pode instalar manualmente highlight.js baixando highlight.min.js de "
+msgstr ""
+"Você pode instalar manualmente highlight.js baixando highlight.min.js de "
 "\"Url\" para \"Local de Instalação\"."
 
 #: src/lib/preferences/dependencies/dependencies.ts:187
@@ -695,9 +789,11 @@ msgid ""
 "Libgda is required to store clipboard history between sessions. Install "
 "either libgda 5.0 or 6.0 with SQLite support to use this feature. After "
 "installing libgda you will need to log out or restart your system."
-msgstr "Libgda é necessário para armazenar o histórico da área de transferência entre sessões."
-"Instale libgda 5.0 ou 6.0 com suporte a SQLite para usar essa funcionalidade."
-"Após instalar libgda, você precisará fazer logout ou reiniciar seu sistema."
+msgstr ""
+"Libgda é necessário para armazenar o histórico da área de transferência "
+"entre sessões.Instale libgda 5.0 ou 6.0 com suporte a SQLite para usar essa "
+"funcionalidade.Após instalar libgda, você precisará fazer logout ou "
+"reiniciar seu sistema."
 
 #: src/lib/preferences/dependencies/dependencies.ts:338
 msgid "Install Libgda"
@@ -713,9 +809,10 @@ msgid ""
 "GSound is required to play sound effects. Install GSound to use this "
 "feature. After installing GSound you will need to log out or restart your "
 "system."
-msgstr "GSound é necessário para reproduzir efeitos sonoros. "
-"Instale GSound para usar essa funcionalidade. "
-"Após instalar GSound, você precisará fazer logout ou reiniciar seu sistema."
+msgstr ""
+"GSound é necessário para reproduzir efeitos sonoros. Instale GSound para "
+"usar essa funcionalidade. Após instalar GSound, você precisará fazer logout "
+"ou reiniciar seu sistema."
 
 #: src/lib/preferences/dependencies/dependencies.ts:351
 msgid "Install GSound"
@@ -837,8 +934,9 @@ msgstr "Restaurar Ações Padrão?"
 msgid ""
 "Restoring the built-in actions will restore built-in actions that were "
 "removed. Custom actions will remain unchanged"
-msgstr "Restaurando as ações padrão restaurará as ações padrão que foram "
-"removidas. As ações personalizadas permanecerão inalteradas"
+msgstr ""
+"Restaurando as ações padrão restaurará as ações padrão que foram removidas. "
+"As ações personalizadas permanecerão inalteradas"
 
 #: src/lib/preferences/actions/actionsPage.ts:140
 msgid "Reset Actions?"
@@ -877,7 +975,7 @@ msgstr "Arquivo"
 #: src/lib/preferences/actions/actionDialog.ts:179
 #: src/lib/preferences/actions/actionDialog.ts:376
 #: src/lib/preferences/actions/actionDefaults.ts:148
-#: src/lib/ui/items/filesItem.ts:134
+#: src/lib/ui/items/filesItem.ts:140
 msgid "Files"
 msgstr "Arquivos"
 
@@ -913,8 +1011,9 @@ msgstr "Código QR"
 msgid ""
 "The regular expression does not use any flags for matching. Leaving this "
 "empty will match everything."
-msgstr "A expressão regular não usa nenhum sinalizador para correspondência. Deixar isso "
-"vazio corresponderá a tudo."
+msgstr ""
+"A expressão regular não usa nenhum sinalizador para correspondência. Deixar "
+"isso vazio corresponderá a tudo."
 
 #: src/lib/preferences/actions/actionDialog.ts:361
 msgid "Type"
@@ -932,8 +1031,10 @@ msgstr "Expressão Regular"
 msgid ""
 "Clipboard content will be provided via stdin. Capture groups of the regular "
 "expression will be passed as positional parameters $1, $2, $3, ..."
-msgstr "O conteúdo da Área de Transferência será fornecido via stdin. Os grupos de captura da expressão"
-"regular serão passados como parâmetros posicionais $1, $2, $3, ..."
+msgstr ""
+"O conteúdo da Área de Transferência será fornecido via stdin. Os grupos de "
+"captura da expressãoregular serão passados como parâmetros posicionais $1, "
+"$2, $3, ..."
 
 #: src/lib/preferences/actions/actionDialog.ts:459
 #: src/lib/preferences/actions/actionDialog.ts:550
@@ -1035,8 +1136,8 @@ msgstr "Salvar"
 
 #: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/general/feedbackSettings.ts:155
-#: src/lib/preferences/general/feedbackSettings.ts:251
-#: src/lib/preferences/general/feedbackSettings.ts:292
+#: src/lib/preferences/general/feedbackSettings.ts:259
+#: src/lib/preferences/general/feedbackSettings.ts:301
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:35
 #: src/lib/ui/components/editDialog.ts:231
 #: src/lib/ui/components/editDialog.ts:258
@@ -1090,10 +1191,11 @@ msgstr "Histórico de Clipboard"
 msgid ""
 "Choose what to do with your clipboard history when you restart, log out, or "
 "shut down your system"
-msgstr "Escolha o que fazer com o histórico de clipboard quando reiniciar, sair ou "
+msgstr ""
+"Escolha o que fazer com o histórico de clipboard quando reiniciar, sair ou "
 "desligar o sistema"
 
-#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:47
+#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:52
 msgid "Clear"
 msgstr "Limpar"
 
@@ -1121,51 +1223,52 @@ msgstr "Tempo Limite do Histórico"
 msgid ""
 "Select how many minutes to keep items in the clipboard history. Set to 0 to "
 "disable the time limit"
-msgstr "Seleciona quantos minutos manter itens no histórico da área de transferência. Defina como 0 "
-"para desativar o limite de tempo"
+msgstr ""
+"Seleciona quantos minutos manter itens no histórico da área de "
+"transferência. Defina como 0 para desativar o limite de tempo"
 
 #: src/lib/preferences/general/feedbackSettings.ts:129
-#: src/lib/preferences/general/feedbackSettings.ts:243
+#: src/lib/preferences/general/feedbackSettings.ts:251
 msgid "Sound"
 msgstr "Som"
 
 #: src/lib/preferences/general/feedbackSettings.ts:160
-#: src/lib/preferences/general/feedbackSettings.ts:294
+#: src/lib/preferences/general/feedbackSettings.ts:303
 msgid "Click"
 msgstr "Clique"
 
 #: src/lib/preferences/general/feedbackSettings.ts:161
-#: src/lib/preferences/general/feedbackSettings.ts:296
+#: src/lib/preferences/general/feedbackSettings.ts:305
 msgid "Hum"
 msgstr "Hum"
 
 #: src/lib/preferences/general/feedbackSettings.ts:162
-#: src/lib/preferences/general/feedbackSettings.ts:298
+#: src/lib/preferences/general/feedbackSettings.ts:307
 msgid "String"
 msgstr "String"
 
 #: src/lib/preferences/general/feedbackSettings.ts:163
-#: src/lib/preferences/general/feedbackSettings.ts:300
+#: src/lib/preferences/general/feedbackSettings.ts:309
 msgid "Swing"
 msgstr "Swing"
 
 #: src/lib/preferences/general/feedbackSettings.ts:164
-#: src/lib/preferences/general/feedbackSettings.ts:302
+#: src/lib/preferences/general/feedbackSettings.ts:311
 msgid "Message"
 msgstr "Mensagem"
 
 #: src/lib/preferences/general/feedbackSettings.ts:165
-#: src/lib/preferences/general/feedbackSettings.ts:304
+#: src/lib/preferences/general/feedbackSettings.ts:313
 msgid "Message New Instant"
 msgstr "Mensagem Nova Instantânea"
 
 #: src/lib/preferences/general/feedbackSettings.ts:166
-#: src/lib/preferences/general/feedbackSettings.ts:306
+#: src/lib/preferences/general/feedbackSettings.ts:315
 msgid "Bell"
 msgstr "Sino"
 
 #: src/lib/preferences/general/feedbackSettings.ts:167
-#: src/lib/preferences/general/feedbackSettings.ts:308
+#: src/lib/preferences/general/feedbackSettings.ts:317
 msgid "Dialog Warning"
 msgstr "Aviso de Diálogo"
 
@@ -1182,24 +1285,35 @@ msgid "Show an indicator on the top panel"
 msgstr "Mostrar um indicador na barra superior"
 
 #: src/lib/preferences/general/feedbackSettings.ts:231
-msgid "Wiggle Indicator"
-msgstr "Agitar indicador"
+msgid "Show Clipboard Content in Indicator"
+msgstr "Mostrar o Conteúdo da Área de trasnferência no Ponteiro"
 
 #: src/lib/preferences/general/feedbackSettings.ts:232
+#, fuzzy
+msgid "Show the current clipboard content in the indicator"
+msgstr "Mostrar o conteúdo da caixa da área de transferência no ponteiro"
+
+#: src/lib/preferences/general/feedbackSettings.ts:239
+msgid "Wiggle Indicator"
+msgstr "Agitar Indicador"
+
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr "Agitar o indicador quando um item da área de transferência é copiado"
 
-#: src/lib/preferences/general/feedbackSettings.ts:237
+#: src/lib/preferences/general/feedbackSettings.ts:245
 msgid "Send Notification"
 msgstr "Enviar notificação"
 
-#: src/lib/preferences/general/feedbackSettings.ts:238
+#: src/lib/preferences/general/feedbackSettings.ts:246
 msgid "Send a notification when a clipboard item is copied"
-msgstr "Enviar uma notificação quando um item da área de transferência é copiado"
+msgstr ""
+"Enviar uma notificação quando um item da área de transferência é copiado"
 
-#: src/lib/preferences/general/feedbackSettings.ts:244
+#: src/lib/preferences/general/feedbackSettings.ts:252
 msgid "Sound to play when a clipboard item is copied"
-msgstr "Som a ser reproduzido quando um item da área de transferência é copiado"
+msgstr ""
+"Som a ser reproduzido quando um item da área de transferência é copiado"
 
 #: src/lib/preferences/general/locationsGroup.ts:13
 msgid "Locations"
@@ -1228,7 +1342,9 @@ msgstr "Lembrar da consulta de pesquisa"
 #: src/lib/preferences/general/behaviorSettings.ts:17
 msgid ""
 "Remember the search query when closing and reopening the clipboard dialog"
-msgstr "Relembrar a consulta de pesquisa quando fechar e reabrir o diálogo da área de transferência"
+msgstr ""
+"Relembrar a consulta de pesquisa quando fechar e reabrir o diálogo da área "
+"de transferência"
 
 #: src/lib/preferences/general/behaviorSettings.ts:22
 msgid "Exclude Pinned Items from Main View"
@@ -1236,7 +1352,9 @@ msgstr "Excluir itens marcados como favoritos da visualização principal"
 
 #: src/lib/preferences/general/behaviorSettings.ts:23
 msgid "Pinned items appear only when searching for pinned items"
-msgstr "Itens marcados como favoritos aparecem apenas quando pesquisando por itens marcados como favoritos"
+msgstr ""
+"Itens marcados como favoritos aparecem apenas quando pesquisando por itens "
+"marcados como favoritos"
 
 #: src/lib/preferences/general/behaviorSettings.ts:28
 msgid "Exclude Tagged Items from Main View"
@@ -1244,7 +1362,9 @@ msgstr "Excluir itens marcados como favoritos da visualização principal"
 
 #: src/lib/preferences/general/behaviorSettings.ts:29
 msgid "Tagged items appear only when searching for tagged items"
-msgstr "Itens marcados como favoritos aparecem apenas quando pesquisando por itens marcados como favoritos"
+msgstr ""
+"Itens marcados como favoritos aparecem apenas quando pesquisando por itens "
+"marcados como favoritos"
 
 #: src/lib/preferences/general/behaviorSettings.ts:34
 msgid "Protect Pinned Items"
@@ -1269,7 +1389,9 @@ msgstr "Colar ao Copiar"
 #: src/lib/preferences/general/behaviorSettings.ts:47
 msgid ""
 "Automatically paste clipboard items when selected from clipboard history"
-msgstr "Cola automaticamente itens copiados quando selecionados do histórico de itens copiados"
+msgstr ""
+"Cola automaticamente itens copiados quando selecionados do histórico de "
+"itens copiados"
 
 #: src/lib/preferences/general/behaviorSettings.ts:52
 msgid "Sync Primary Clipboard"
@@ -1287,48 +1409,52 @@ msgstr "Atualizar Data ao Copiar"
 msgid ""
 "Update the copied date of clipboard items when selected from clipboard "
 "history"
-msgstr "Atualizar a data de itens copiados quando selecionados do histórico de itens copiados"
+msgstr ""
+"Atualizar a data de itens copiados quando selecionados do histórico de itens "
+"copiados"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:43
+#: src/lib/preferences/general/appExclusionSettings.ts:38
 msgid "Search apps"
 msgstr "Procurar aplicativos"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:78
+#: src/lib/preferences/general/appExclusionSettings.ts:73
 msgid "No Apps Found"
 msgstr "Nenhum Aplicativo Encontrado"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:170
+#: src/lib/preferences/general/appExclusionSettings.ts:165
 msgid "Add App Exclusion"
 msgstr "Adicionar Exclusão de Aplicativo"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:171
+#: src/lib/preferences/general/appExclusionSettings.ts:166
 msgid "Enter the WM Class of the application you want to exclude:"
 msgstr "Digite a classe WM do aplicativo que deseja excluir:"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:185
+#: src/lib/preferences/general/appExclusionSettings.ts:180
 msgid "WM Class"
 msgstr "Classe WM"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:261
+#: src/lib/preferences/general/appExclusionSettings.ts:256
 msgid "No Exclusions"
 msgstr "Sem Exclusões"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:296
-#: src/lib/preferences/general/appExclusionSettings.ts:307
+#: src/lib/preferences/general/appExclusionSettings.ts:291
+#: src/lib/preferences/general/appExclusionSettings.ts:302
 msgid "App Exclusions"
 msgstr "Exclusões de Aplicativos"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:320
+#: src/lib/preferences/general/appExclusionSettings.ts:315
 msgid "Exclusions"
 msgstr "Exclusões"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:326
+#: src/lib/preferences/general/appExclusionSettings.ts:321
 msgid "Manage App Exclusions"
 msgstr "Gerenciar Exclusões de Aplicativos"
 
-#: src/lib/preferences/general/appExclusionSettings.ts:327
+#: src/lib/preferences/general/appExclusionSettings.ts:322
 msgid "Manage apps that will be excluded from clipboard history"
-msgstr "Gerenciar aplicativos que serão excluídos da história da Área de Transferência"
+msgstr ""
+"Gerenciar aplicativos que serão excluídos da história da Área de "
+"Transferência"
 
 #: src/lib/preferences/shortcuts/shortcutRow.ts:78
 msgid "Set Shortcut"
@@ -1616,11 +1742,11 @@ msgstr "Co__r"
 msgid "Type to search"
 msgstr "Digite para pesquisar"
 
-#: src/lib/ui/items/linkItem.ts:93
+#: src/lib/ui/items/linkItem.ts:94
 msgid "No Title"
 msgstr "Sem título"
 
-#: src/lib/ui/items/linkItem.ts:95
+#: src/lib/ui/items/linkItem.ts:96
 msgid "No Description"
 msgstr "Sem descrição"
 
@@ -1636,43 +1762,50 @@ msgstr "Área de Transferência Vazia"
 msgid "No Items Found"
 msgstr "Nenhum item encontrado"
 
-#: src/lib/ui/items/filesItem.ts:114
+#: src/lib/ui/items/filesItem.ts:120
 #, javascript-format
 msgid "%d more file"
 msgid_plural "%d more files"
 msgstr[0] "%d mais arquivo"
 msgstr[1] "%d mais arquivos"
 
-#: src/lib/ui/items/filesItem.ts:115
+#: src/lib/ui/items/filesItem.ts:121
 #, javascript-format
 msgid "%d file"
 msgid_plural "%d files"
 msgstr[0] "%d arquivo"
 msgstr[1] "%d arquivos"
 
-#: src/lib/ui/indicator.ts:31
+#: src/lib/ui/indicator.ts:36
 msgid "Clear Clipboard History?"
 msgstr "Limpar Histórico da Área de Transferência?"
 
-#: src/lib/ui/indicator.ts:32
+#: src/lib/ui/indicator.ts:37
 msgid "Are you sure you want to clear your clipboard history?"
 msgstr "Tem certeza de que deseja limpar o histórico da área de transferência?"
 
-#: src/lib/ui/indicator.ts:36
+#: src/lib/ui/indicator.ts:41
 msgid "Clear Pinned/Tagged Items"
 msgstr "Limpar Itens Marcados"
 
-#: src/lib/ui/indicator.ts:86
+#: src/lib/ui/indicator.ts:99
 msgid "Incognito Mode"
 msgstr "Modo Anônimo"
 
-#: src/lib/ui/indicator.ts:89
+#: src/lib/ui/indicator.ts:102
 msgid "Clear History"
 msgstr "Limpar Histórico"
 
-#: src/lib/ui/indicator.ts:90
+#: src/lib/ui/indicator.ts:103
 msgid "Settings"
 msgstr "Configurações"
+
+#: src/lib/ui/indicator.ts:178
+#, fuzzy, javascript-format
+msgid "%d File"
+msgid_plural "%d Files"
+msgstr[0] "%d Arquivo"
+msgstr[1] "%d Arquivos"
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
@@ -1698,14 +1831,14 @@ msgstr "Colar como Caminho"
 msgid "Convert"
 msgstr "Converter"
 
-#: src/prefs.ts:69
+#: src/prefs.ts:70
 msgid "General"
 msgstr "Geral"
 
-#: src/prefs.ts:91
+#: src/prefs.ts:92
 msgid "Customization"
 msgstr "Customização"
 
-#: src/prefs.ts:107
+#: src/prefs.ts:109
 msgid "Shortcuts"
 msgstr "Atalhos"
