@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the Copyous package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
@@ -40,7 +39,6 @@ msgid "Change the height of the clipboard items"
 msgstr "Alterar a altura dos itens da área de transferência"
 
 #: src/lib/preferences/customization/itemCustomization.ts:44
-#, fuzzy
 msgid "Dynamic Item Height"
 msgstr "Altura Dinâmica do Item"
 
@@ -238,7 +236,6 @@ msgstr "Escuro"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 #: src/lib/preferences/customization/themeCustomization.ts:90
-#, fuzzy
 msgid "Light"
 msgstr "Claro"
 
@@ -248,7 +245,6 @@ msgid "Custom"
 msgstr "Customizado"
 
 #: src/lib/preferences/customization/themeCustomization.ts:88
-#, fuzzy
 msgid "Color Scheme"
 msgstr "Esquema de Cor"
 
@@ -257,37 +253,30 @@ msgid "Set the color scheme of the custom theme"
 msgstr "Seleciona o esquema de cor do tema customizado"
 
 #: src/lib/preferences/customization/themeCustomization.ts:96
-#, fuzzy
 msgid "Background Color"
 msgstr "Cor do plano de fundo"
 
 #: src/lib/preferences/customization/themeCustomization.ts:97
-#, fuzzy
 msgid "Set the background color of the clipboard dialog"
 msgstr "Selecione a cor de fundo da caixa de área de transferência"
 
 #: src/lib/preferences/customization/themeCustomization.ts:103
-#, fuzzy
 msgid "Text Color"
 msgstr "Cor do Texto"
 
 #: src/lib/preferences/customization/themeCustomization.ts:104
-#, fuzzy
 msgid "Set the text color of the clipboard dialog"
 msgstr "Selecione a cor do texto da caixa de área de transferência"
 
 #: src/lib/preferences/customization/themeCustomization.ts:110
-#, fuzzy
 msgid "Item Color"
 msgstr "Cor do Item"
 
 #: src/lib/preferences/customization/themeCustomization.ts:111
-#, fuzzy
 msgid "Set the background color of clipboard items"
 msgstr "Selecione a cor de fundo dos itens da área de transferência"
 
 #: src/lib/preferences/customization/themeCustomization.ts:117
-#, fuzzy
 msgid "Search Color"
 msgstr "Pesquisar Cor"
 
@@ -1289,7 +1278,6 @@ msgid "Show Clipboard Content in Indicator"
 msgstr "Mostrar o Conteúdo da Área de trasnferência no Ponteiro"
 
 #: src/lib/preferences/general/feedbackSettings.ts:232
-#, fuzzy
 msgid "Show the current clipboard content in the indicator"
 msgstr "Mostrar o conteúdo da caixa da área de transferência no ponteiro"
 
@@ -1801,7 +1789,7 @@ msgid "Settings"
 msgstr "Configurações"
 
 #: src/lib/ui/indicator.ts:178
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
 msgstr[0] "%d Arquivo"
