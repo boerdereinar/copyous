@@ -187,8 +187,8 @@ export class DialogCustomization extends Adw.PreferencesGroup {
 			if (!horizontalFill) this._horizontal.append(_('Fill'));
 			if (verticalFill) this._vertical.remove(3);
 		} else {
-			if (!verticalFill) this._horizontal.remove(3);
-			if (horizontalFill) this._vertical.append(_('Fill'));
+			if (horizontalFill) this._horizontal.remove(3);
+			if (!verticalFill) this._vertical.append(_('Fill'));
 		}
 
 		// Switch vertical and horizontal position if fill is selected
