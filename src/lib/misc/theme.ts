@@ -104,7 +104,7 @@ export class ThemeManager extends GObject.Object {
 		if (theme === Theme.Custom) {
 			try {
 				// Load template
-				const uri = `resource:///org/gnome/shell/extensions/copyous/template-${colorScheme}.css`;
+				const uri = `resource:///org/gnome/shell/extensions/copyous/css/template-${colorScheme}.css`;
 				const template = Gio.File.new_for_uri(uri);
 				const [contents] = await template.load_contents_async(null);
 				const text = new TextDecoder().decode(contents);
@@ -147,7 +147,7 @@ export class ThemeManager extends GObject.Object {
 		}
 
 		// GNOME Theme
-		const uri = `resource:///org/gnome/shell/extensions/copyous/stylesheet-${colorScheme}.css`;
+		const uri = `resource:///org/gnome/shell/extensions/copyous/css/stylesheet-${colorScheme}.css`;
 		const stylesheet = Gio.File.new_for_uri(uri);
 
 		if (this._stylesheet?.equal(stylesheet)) return;
