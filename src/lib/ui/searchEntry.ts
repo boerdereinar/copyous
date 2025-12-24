@@ -249,11 +249,10 @@ class ItemPopupMenu extends PopupMenu.PopupMenu<ItemPopupMenuSignals> {
 		type: GObject.ParamSpec.string('type', null, null, GObject.ParamFlags.READWRITE, ''),
 	},
 	Signals: {
-		'search': {
+		search: {
 			param_types: [SearchQuery.$gtype],
 		},
-		'activate': {},
-		'navigate-focus-out': {},
+		activate: {},
 	},
 })
 export class SearchEntry extends St.Entry {
@@ -290,6 +289,7 @@ export class SearchEntry extends St.Entry {
 		// Item button
 		const left = new St.BoxLayout();
 		this.primary_icon = left;
+		left.connect('key-press-event', (_btn, event: Clutter.Event) => this._leftKeyPressEvent(event));
 
 		this._itemButton = new St.Button({
 			style_class: 'search-entry-button item-button',
@@ -345,6 +345,7 @@ export class SearchEntry extends St.Entry {
 		// Right
 		const right = new St.BoxLayout();
 		this.secondary_icon = right;
+		right.connect('key-press-event', (_btn, event: Clutter.Event) => this._rightKeyPressEvent(event));
 
 		// Pin button
 		const pinButton = new St.Button({
@@ -543,23 +544,31 @@ export class SearchEntry extends St.Entry {
 		return Clutter.EVENT_PROPAGATE;
 	}
 
+	private _leftKeyPressEvent(event: Clutter.Event) {
+		const key = event.get_key_symbol();
+		if (key === Clutter.KEY_Right || key === Clutter.KEY_KP_Right) {
+			this.clutter_text.grab_key_focus();
+			return Clutter.EVENT_STOP;
+		}
+
+		return Clutter.EVENT_PROPAGATE;
+	}
+
+	private _rightKeyPressEvent(event: Clutter.Event) {
+		const key = event.get_key_symbol();
+		if (key === Clutter.KEY_Left || key === Clutter.KEY_KP_Left) {
+			this.clutter_text.grab_key_focus();
+			return Clutter.EVENT_STOP;
+		}
+
+		return Clutter.EVENT_PROPAGATE;
+	}
+
 	override vfunc_style_changed(): void {
 		super.vfunc_style_changed();
 
 		const themeNode = this.get_theme_node();
 		this.natural_width = themeNode.get_max_width();
-	}
-
-	override vfunc_navigate_focus(from: Clutter.Actor | null, direction: St.DirectionType): boolean {
-		if (direction === St.DirectionType.TAB_BACKWARD) {
-			return Clutter.EVENT_STOP;
-		}
-
-		if (direction === St.DirectionType.TAB_FORWARD || direction === St.DirectionType.DOWN) {
-			this.emit('navigate-focus-out');
-		}
-
-		return super.vfunc_navigate_focus(from, direction);
 	}
 
 	override vfunc_scroll_event(event: Clutter.Event): boolean {

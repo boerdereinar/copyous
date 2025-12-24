@@ -251,7 +251,19 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 	override vfunc_navigate_focus(from: Clutter.Actor | null, direction: St.DirectionType): boolean {
 		// Navigation from the search entry
 		if (from?.get_parent() !== this) {
-			// If the last focus is null or not visible then focus the first visible child
+			// If tab navigation is used, then focus on first or last child
+			if (direction === St.DirectionType.TAB_FORWARD || direction === St.DirectionType.TAB_BACKWARD) {
+				this._lastFocus = null;
+				const child =
+					direction === St.DirectionType.TAB_BACKWARD
+						? get_last_visible_child(this)
+						: get_first_visible_child(this);
+				if (child !== this._statusItem) {
+					this._lastFocus = child;
+				}
+			}
+
+			// If the last focus is null or not visible, then focus the first visible child
 			if (this._lastFocus === null || !this._lastFocus.visible || this._lastFocus.get_parent() !== this) {
 				this._lastFocus = null;
 				const child = get_first_visible_child(this);
@@ -260,25 +272,22 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 				}
 			}
 
-			if (this._lastFocus) {
-				this._lastFocus.grab_key_focus();
-				this.scrollToChild(this._lastFocus);
-			} else {
-				// Navigate to the search entry
-				global.focus_manager.get_group(this).grab_key_focus();
-			}
+			// Navigate to the search entry
+			if (!this._lastFocus) return Clutter.EVENT_PROPAGATE;
 
+			this._lastFocus.grab_key_focus();
+			this.scrollToChild(this._lastFocus);
 			return Clutter.EVENT_STOP;
 		}
 
 		const first = get_first_visible_child(this);
+		const last = get_last_visible_child(this);
 		if (this.orientation === Clutter.Orientation.HORIZONTAL) {
 			// If up or shift tab navigation then focus the search entry
 			if (direction === St.DirectionType.UP) {
 				this._lastFocus = from;
 				// Navigate to the search entry
-				global.focus_manager.get_group(this).grab_key_focus();
-				return Clutter.EVENT_STOP;
+				return Clutter.EVENT_PROPAGATE;
 			}
 
 			// Ignore down navigation
@@ -290,8 +299,13 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 			if (from === first && direction === St.DirectionType.UP) {
 				this._lastFocus = from;
 				// Navigate to the search entry
-				global.focus_manager.get_group(this).grab_key_focus();
-				return Clutter.EVENT_STOP;
+				return Clutter.EVENT_PROPAGATE;
+			}
+
+			// If on the last child then focus on footer
+			if (from === last && direction === St.DirectionType.DOWN) {
+				this._lastFocus = from;
+				return Clutter.EVENT_PROPAGATE;
 			}
 
 			// Ignore left and right navigation
@@ -304,17 +318,17 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 		if (from === first && direction === St.DirectionType.TAB_BACKWARD) {
 			this._lastFocus = from;
 			// Navigate to the search entry
-			global.focus_manager.get_group(this).grab_key_focus();
-			return Clutter.EVENT_STOP;
+			return Clutter.EVENT_PROPAGATE;
 		}
 
-		// Ignore tab navigation on the last child
-		const last = get_last_visible_child(this);
+		// If on last child and tab navigation then focus the footer
 		if (from === last && direction === St.DirectionType.TAB_FORWARD) {
-			return Clutter.EVENT_STOP;
+			this._lastFocus = from;
+			// Navigate to footer
+			return Clutter.EVENT_PROPAGATE;
 		}
 
-		// Otherwise map navigation to tab navigation dure to weird behavior for a larger number of items
+		// Otherwise map navigation to tab navigation due to weird behavior for a larger number of items
 		const tabDirection =
 			direction === St.DirectionType.TAB_FORWARD ||
 			direction === St.DirectionType.RIGHT ||

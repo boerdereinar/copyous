@@ -1,5 +1,6 @@
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
+import Gio from 'gi://Gio';
 import Graphene from 'gi://Graphene';
 import Shell from 'gi://Shell';
 import St from 'gi://St';
@@ -15,10 +16,12 @@ import { EasingParamsWithProperties } from '@girs/gnome-shell/extensions/global'
 import type CopyousExtension from '../../extension.js';
 import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
+import { Icon, loadIcon } from '../common/icons.js';
 import { VERSION } from '../misc/compatibility.js';
 import { ClipboardEntry } from '../misc/db.js';
 import { ClipboardScrollView } from './clipboardScrollView.js';
 import { ClipboardItemMenu } from './components/clipboardItemMenu.js';
+import { ConfirmClearHistoryDialog } from './indicator.js';
 import { CharacterItem } from './items/characterItem.js';
 import { CodeItem } from './items/codeItem.js';
 import { ColorItem } from './items/colorItem.js';
@@ -27,18 +30,229 @@ import { FilesItem } from './items/filesItem.js';
 import { ImageItem } from './items/imageItem.js';
 import { LinkItem } from './items/linkItem.js';
 import { TextItem } from './items/textItem.js';
-import { CollapsibleHeaderLayout, FitConstraint } from './layout.js';
+import { CenterBox, CollapsibleHeaderLayout, FitConstraint } from './layout.js';
 import { SearchEntry, SearchQuery } from './searchEntry.js';
 
 const ANIMATION_TIME = 150;
+
+@registerClass()
+class IncognitoButton extends St.Button {
+	private readonly _incognitoIcon: Gio.Icon;
+	private readonly _incognitoDisabledIcon: Gio.Icon;
+	private readonly _icon: St.Icon;
+
+	constructor(
+		private ext: CopyousExtension,
+		props: Partial<St.Button.ConstructorProps>,
+	) {
+		super({ ...props, toggle_mode: true, can_focus: true });
+
+		this._incognitoIcon = loadIcon(ext, Icon.Incognito);
+		this._incognitoDisabledIcon = loadIcon(ext, Icon.IncognitoDisabled);
+
+		this._icon = new St.Icon({ gicon: this._incognitoDisabledIcon });
+		this.child = this._icon;
+
+		this.ext.settings.connectObject('changed::incognito', this.update.bind(this), this);
+		this.connect('notify::checked', () => {
+			this.ext.settings.set_boolean('incognito', this.checked);
+			this.update();
+		});
+		this.update();
+	}
+
+	override destroy() {
+		this.ext.settings.disconnectObject(this);
+		super.destroy();
+	}
+
+	private update() {
+		const incognito = this.ext.settings.get_boolean('incognito');
+		this.checked = incognito;
+		this._icon.gicon = incognito ? this._incognitoIcon : this._incognitoDisabledIcon;
+	}
+}
+
+@registerClass({
+	Properties: {
+		'header-visible': GObject.ParamSpec.boolean('header-visible', null, null, GObject.ParamFlags.READABLE, true),
+	},
+	Signals: {
+		'open-settings': {},
+		'clear-history': {},
+	},
+})
+class ClipboardDialogHeader extends St.Widget {
+	private readonly _headerLayout: CollapsibleHeaderLayout;
+	private readonly _headerBox: CenterBox;
+	private readonly _settingsButton: St.Button;
+	private readonly _incognitoButton: St.Button;
+	private readonly _clearButton: St.Button;
+
+	public readonly searchEntry: SearchEntry;
+
+	private _headerVisible: boolean = true;
+
+	constructor(private ext: CopyousExtension) {
+		super({
+			style_class: 'dialog-header',
+			clip_to_allocation: true,
+			x_expand: true,
+		});
+
+		this._headerLayout = new CollapsibleHeaderLayout();
+		this.layout_manager = this._headerLayout;
+
+		this._headerBox = new CenterBox({ style_class: 'dialog-header-box', x_expand: true });
+		this.add_child(this._headerBox);
+
+		// Start
+		this._settingsButton = new St.Button({
+			style_class: 'dialog-header-icon-button',
+			child: new St.Icon({ gicon: loadIcon(ext, Icon.Settings) }),
+			can_focus: true,
+		});
+		this._settingsButton.connect('clicked', () => this.emit('open-settings'));
+		this._headerBox.addPrefix(this._settingsButton);
+
+		this._incognitoButton = new IncognitoButton(ext, { style_class: 'dialog-header-icon-button' });
+		this._headerBox.addPrefix(this._incognitoButton);
+
+		// Center
+		this.searchEntry = new SearchEntry(ext);
+		this.searchEntry.clutter_text.connect('key-focus-in', () => this.updateHeader(true));
+		this._headerBox.centerWidget = this.searchEntry;
+
+		// End
+		this._clearButton = new St.Button({
+			style_class: 'dialog-header-button',
+			label: _('Clear'),
+			can_focus: true,
+		});
+		this._clearButton.connect('clicked', () => this.emit('clear-history'));
+		this._headerBox.addSuffix(this._clearButton);
+
+		// Bind properties
+		this.ext.settings.connectObject(
+			'changed::auto-hide-search',
+			() => this.updateHeader(!this.ext.settings.get_boolean('auto-hide-search'), false),
+			this,
+		);
+
+		this.updateHeader(!this.ext.settings.get_boolean('auto-hide-search'), false);
+	}
+
+	override destroy() {
+		this.ext.settings.disconnectObject(this);
+		super.destroy();
+	}
+
+	get headerVisible() {
+		return this._headerVisible;
+	}
+
+	set showButtons(show: boolean) {
+		this._settingsButton.visible = show;
+		this._incognitoButton.visible = show;
+		this._clearButton.visible = show;
+	}
+
+	updateHeader(show: boolean, animate: boolean = true) {
+		if (this.searchEntry.text.length > 0) show = true;
+
+		this._headerLayout.enableCollapse = this.ext.settings.get_boolean('auto-hide-search');
+
+		this._headerVisible = !this._headerVisible || show;
+		this.notify('header-visible');
+
+		const value = Number(show);
+		if (animate) {
+			this.ease_property('@layout.expansion', value, {
+				mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+				duration: 200,
+			});
+		} else {
+			this._headerLayout.expansion = value;
+		}
+	}
+
+	override vfunc_navigate_focus(from: Clutter.Actor | null, direction: St.DirectionType): boolean {
+		let focusChild = from;
+		while (focusChild && focusChild.get_parent() !== this) {
+			focusChild = focusChild.get_parent();
+		}
+
+		if (direction === St.DirectionType.UP) {
+			this.updateHeader(true);
+		} else if (
+			direction === St.DirectionType.DOWN ||
+			direction === St.DirectionType.TAB_FORWARD ||
+			direction === St.DirectionType.TAB_BACKWARD
+		) {
+			this.updateHeader(focusChild === null);
+		}
+
+		return super.vfunc_navigate_focus(from, direction);
+	}
+
+	override vfunc_map() {
+		super.vfunc_map();
+
+		this.updateHeader(!this.ext.settings.get_boolean('auto-hide-search'), false);
+	}
+}
+
+@registerClass({
+	Signals: {
+		'open-settings': {},
+		'clear-history': {},
+	},
+})
+class ClipboardDialogFooter extends St.BoxLayout {
+	constructor(ext: CopyousExtension) {
+		super({
+			style_class: 'dialog-footer',
+			x_expand: true,
+		});
+
+		const settingsButton = new St.Button({
+			style_class: 'dialog-footer-icon-button',
+			child: new St.Icon({ gicon: loadIcon(ext, Icon.Settings) }),
+			can_focus: true,
+			x_align: Clutter.ActorAlign.START,
+		});
+		settingsButton.connect('clicked', () => this.emit('open-settings'));
+		this.add_child(settingsButton);
+
+		this.add_child(
+			new IncognitoButton(ext, {
+				style_class: 'dialog-footer-icon-button',
+				x_align: Clutter.ActorAlign.START,
+			}),
+		);
+
+		const clearButton = new St.Button({
+			style_class: 'dialog-footer-button',
+			label: _('Clear'),
+			can_focus: true,
+			x_align: Clutter.ActorAlign.END,
+			x_expand: true,
+		});
+		clearButton.connect('clicked', () => this.emit('clear-history'));
+		this.add_child(clearButton);
+	}
+}
 
 @registerClass({
 	Properties: {
 		opened: GObject.ParamSpec.boolean('opened', null, null, GObject.ParamFlags.READABLE, false),
 	},
 	Signals: {
-		paste: {
+		'paste': {
 			param_types: [GObject.TYPE_JSOBJECT],
+		},
+		'clear-history': {
+			param_types: [GObject.TYPE_INT],
 		},
 	},
 })
@@ -55,13 +269,12 @@ export class ClipboardDialog extends St.Widget {
 
 	private readonly _monitorConstraint: Layout.MonitorConstraint;
 	private readonly _fitConstraint: FitConstraint;
-	private readonly _headerLayout: CollapsibleHeaderLayout;
 	private readonly _widthConstraint: Clutter.BindConstraint;
 
 	private readonly _dialog: St.BoxLayout;
-	private readonly _header: St.Widget;
-	private readonly _searchEntry: SearchEntry;
+	private readonly _header: ClipboardDialogHeader;
 	private readonly _scrollView: ClipboardScrollView;
+	private readonly _footer: ClipboardDialogFooter;
 	private readonly _clipboardItemMenu: ClipboardItemMenu;
 
 	constructor(private ext: CopyousExtension) {
@@ -95,27 +308,23 @@ export class ClipboardDialog extends St.Widget {
 		this._dialog.add_constraint(this._fitConstraint);
 
 		global.focus_manager.add_group(this._dialog);
-		this._dialog.connect('key-focus-in', () => this._searchEntry.grab_key_focus());
 
 		// Header
-		this._headerLayout = new CollapsibleHeaderLayout();
-		this._header = new St.Widget({
-			style_class: 'dialog-header',
-			layout_manager: this._headerLayout,
-			clip_to_allocation: true,
-		});
+		this._header = new ClipboardDialogHeader(ext);
 		this._dialog.add_child(this._header);
 
-		const headerBox = new St.BoxLayout({ style_class: 'dialog-header-box' });
-		this._header.add_child(headerBox);
+		this._header.connect('open-settings', this.openSettings.bind(this));
+		this._header.connect('clear-history', this.confirmClearHistory.bind(this));
+		this._header.searchEntry.connect('search', (_, query: SearchQuery) => this._scrollView.search(query));
+		this._header.searchEntry.connect('activate', () => this._scrollView.activateFirst());
 
-		this._searchEntry = new SearchEntry(ext);
-		headerBox.add_child(this._searchEntry);
-
-		this._searchEntry.connect('search', (_, query: SearchQuery) => this._scrollView.search(query));
-		this._searchEntry.connect('activate', () => this._scrollView.activateFirst());
-		this._searchEntry.clutter_text.connect('key-focus-in', () => this.updateHeader(true));
-		this._searchEntry.connect('navigate-focus-out', () => this.updateHeader(false));
+		this._header.connect('notify::header-visible', () => {
+			if (this._header.headerVisible) {
+				this._dialog.add_style_class_name('show-header');
+			} else {
+				this._dialog.remove_style_class_name('show-header');
+			}
+		});
 
 		// Scrollbox
 		this._scrollView = new ClipboardScrollView(ext);
@@ -127,6 +336,12 @@ export class ClipboardDialog extends St.Widget {
 			enabled: false,
 		});
 		this._header.add_constraint(this._widthConstraint);
+
+		// Footer
+		this._footer = new ClipboardDialogFooter(ext);
+		this._dialog.add_child(this._footer);
+		this._footer.connect('open-settings', this.openSettings.bind(this));
+		this._footer.connect('clear-history', this.confirmClearHistory.bind(this));
 
 		// Clipboard item menu
 		this._clipboardItemMenu = new ClipboardItemMenu(ext);
@@ -176,14 +391,13 @@ export class ClipboardDialog extends St.Widget {
 			'changed::clipboard-margin-bottom', this.updateMargins.bind(this),
 			'changed::clipboard-margin-left', this.updateMargins.bind(this),
 			'changed::clipboard-margin-right', this.updateMargins.bind(this),
-			'changed::auto-hide-search', () => this.updateHeader(true),
 			this);
 
 		this.updatePosition();
 		this.updateMargins();
 
 		// Update initial search for when exclude-pinned or exclude-tagged is enabled
-		this._scrollView.search(this._searchEntry.searchQuery);
+		this._scrollView.search(this._header.searchEntry.searchQuery);
 	}
 
 	override destroy() {
@@ -396,26 +610,15 @@ export class ClipboardDialog extends St.Widget {
 		this._scrollView.clearItems();
 	}
 
-	private updateHeader(show: boolean, animate: boolean = true) {
-		if (this._searchEntry.text.length > 0) show = true;
+	private openSettings() {
+		this.ext.openPreferences();
+		this.close();
+	}
 
-		if (show) {
-			this._dialog.add_style_class_name('show-header');
-		} else {
-			this._dialog.remove_style_class_name('show-header');
-		}
-
-		this._headerLayout.enableCollapse = this.ext.settings.get_boolean('auto-hide-search');
-
-		const value = Number(show);
-		if (animate) {
-			this._header.ease_property('@layout.expansion', value, {
-				mode: Clutter.AnimationMode.EASE_OUT_QUAD,
-				duration: 200,
-			});
-		} else {
-			this._headerLayout.expansion = value;
-		}
+	private confirmClearHistory() {
+		const dialog = new ConfirmClearHistoryDialog();
+		dialog.connect('clear-history', (_dialog, history) => this.emit('clear-history', history));
+		dialog.open();
 	}
 
 	private updatePosition() {
@@ -450,6 +653,10 @@ export class ClipboardDialog extends St.Widget {
 			this._dialog.width = -1;
 			this._dialog.height = size;
 		}
+
+		// Header / Footer
+		this._header.showButtons = this._orientation === Clutter.Orientation.HORIZONTAL;
+		this._footer.visible = this._orientation === Clutter.Orientation.VERTICAL;
 	}
 
 	private updateMargins() {
@@ -510,7 +717,7 @@ export class ClipboardDialog extends St.Widget {
 		if (event.has_control_modifier() && (isNum || (key >= Clutter.KEY_KP_0 && key <= Clutter.KEY_KP_9))) {
 			const i = isNum ? key - Clutter.KEY_1 : key - Clutter.KEY_KP_1;
 			if (this._scrollView.selectItem((i + 10) % 10)) {
-				this.updateHeader(false);
+				this._header.updateHeader(false);
 			}
 
 			return Clutter.EVENT_STOP;
@@ -518,50 +725,50 @@ export class ClipboardDialog extends St.Widget {
 
 		// Search on ctrl+f
 		if (event.has_control_modifier() && key === Clutter.KEY_f) {
-			this._searchEntry.grab_key_focus();
+			this._header.searchEntry.grab_key_focus();
 			return Clutter.EVENT_STOP;
 		}
 
 		// Trigger search
 		if (!event.has_control_modifier() && this.shouldTriggerSearch(key)) {
-			this._searchEntry.clutter_text.grab_key_focus();
-			return this._searchEntry.clutter_text.event(event, false);
+			this._header.searchEntry.clutter_text.grab_key_focus();
+			return this._header.searchEntry.clutter_text.event(event, false);
 		}
 
 		// Toggle pinned search: alt
 		if (key === Clutter.KEY_Alt_L || key === Clutter.KEY_Alt_R || key === Clutter.KEY_ISO_Level3_Shift) {
-			this._searchEntry.pinned = !this._searchEntry.pinned;
+			this._header.searchEntry.pinned = !this._header.searchEntry.pinned;
 			return Clutter.EVENT_STOP;
 		}
 
 		// Select tag: ctrl + shift + 0..9
 		const code = event.get_key_code();
 		if (event.has_control_modifier() && event.has_shift_modifier() && code >= 10 && code <= 19) {
-			this._searchEntry.selectTag(code - 10);
+			this._header.searchEntry.selectTag(code - 10);
 			return Clutter.EVENT_STOP;
 		}
 
 		// Next tag: ctrl + `
 		if (event.has_control_modifier() && key === Clutter.KEY_grave) {
-			this._searchEntry.nextTag();
+			this._header.searchEntry.nextTag();
 			return Clutter.EVENT_STOP;
 		}
 
 		// Previous tag: ctrl + shift + `
 		if (event.has_control_modifier() && key === Clutter.KEY_asciitilde) {
-			this._searchEntry.prevTag();
+			this._header.searchEntry.prevTag();
 			return Clutter.EVENT_STOP;
 		}
 
 		// Next type: ctrl + tab
 		if (event.has_control_modifier() && key === Clutter.KEY_Tab) {
-			this._searchEntry.nextType();
+			this._header.searchEntry.nextType();
 			return Clutter.EVENT_STOP;
 		}
 
 		// Previous type: ctrl + shift + tab
 		if (event.has_control_modifier() && key === Clutter.KEY_ISO_Left_Tab) {
-			this._searchEntry.prevType();
+			this._header.searchEntry.prevType();
 			return Clutter.EVENT_STOP;
 		}
 
@@ -599,11 +806,10 @@ export class ClipboardDialog extends St.Widget {
 		// Update fit constraint
 		this.updateFitConstraint();
 
-		// Update header with search
-		const autoHide = this.ext.settings.get_boolean('auto-hide-search');
-		this.updateHeader(!autoHide, false);
-
 		// Navigate to first item
-		this._scrollView.navigate_focus(null, St.DirectionType.DOWN, false);
+		if (!this._scrollView.navigate_focus(null, St.DirectionType.DOWN, false)) {
+			this._header.updateHeader(true, false);
+			this._header.searchEntry.grab_key_focus();
+		}
 	}
 }
