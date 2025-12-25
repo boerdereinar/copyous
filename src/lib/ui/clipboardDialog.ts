@@ -212,7 +212,9 @@ class ClipboardDialogFooter extends St.BoxLayout {
 	constructor(ext: CopyousExtension) {
 		super({
 			style_class: 'dialog-footer',
+			y_align: Clutter.ActorAlign.END,
 			x_expand: true,
+			y_expand: true,
 		});
 
 		const settingsButton = new St.Button({
