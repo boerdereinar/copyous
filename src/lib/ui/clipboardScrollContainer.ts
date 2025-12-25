@@ -157,12 +157,19 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 	}
 
 	public clearItems(): void {
+		let focus = false;
 		for (const child of this.get_children()) {
 			if (child instanceof ClipboardItem) {
+				focus ||= child.has_key_focus();
 				this.remove_child(child);
 			}
 		}
 		this.updateVisible();
+
+		if (focus) {
+			// Navigate to the search entry
+			global.focus_manager.get_group(this).navigate_focus(this, St.DirectionType.UP, true);
+		}
 	}
 
 	public removeItem(child: ClipboardItem): void {
@@ -184,7 +191,7 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 				this._lastFocus = null;
 
 				// Navigate to the search entry
-				global.focus_manager.get_group(this).grab_key_focus();
+				global.focus_manager.get_group(this).navigate_focus(this, St.DirectionType.UP, true);
 			}
 		}
 	}
