@@ -145,8 +145,6 @@ export class CenterBox extends St.Widget {
 	constructor(props: Partial<St.Widget.ConstructorProps>) {
 		super(props);
 
-		// global.focus_manager.add_group(this);
-
 		this._startWidget = new St.BoxLayout();
 		this.add_child(this._startWidget);
 		this._endWidget = new St.BoxLayout();
@@ -159,7 +157,7 @@ export class CenterBox extends St.Widget {
 
 	set centerWidget(centerWidget: Clutter.Actor | null) {
 		if (this._centerWidget) this.remove_child(this._centerWidget);
-		if (centerWidget) this.add_child(centerWidget);
+		if (centerWidget) this.insert_child_above(centerWidget, this._startWidget);
 		this._centerWidget = centerWidget;
 		this.notify('center-widget');
 		this.queue_relayout();
@@ -175,14 +173,11 @@ export class CenterBox extends St.Widget {
 		this.queue_relayout();
 	}
 
-	override vfunc_get_focus_chain(): Clutter.Actor[] {
-		const chain = this._startWidget.get_focus_chain();
-		if (this._centerWidget?.visible) chain.push(this._centerWidget);
-		chain.push(...this._endWidget.get_focus_chain());
-		return chain;
-	}
-
 	override vfunc_navigate_focus(from: Clutter.Actor | null, direction: St.DirectionType): boolean {
+		if (direction === St.DirectionType.TAB_FORWARD || direction === St.DirectionType.TAB_BACKWARD) {
+			return super.vfunc_navigate_focus(from, direction);
+		}
+
 		let focusChild = from;
 		while (focusChild && focusChild.get_parent() !== this) focusChild = focusChild.get_parent();
 
@@ -207,10 +202,6 @@ export class CenterBox extends St.Widget {
 				this._centerWidget?.grab_key_focus();
 				return Clutter.EVENT_STOP;
 			}
-		}
-
-		if (direction === St.DirectionType.TAB_FORWARD || direction === St.DirectionType.TAB_BACKWARD) {
-			return Clutter.EVENT_PROPAGATE;
 		}
 
 		return super.vfunc_navigate_focus(from, direction);

@@ -177,22 +177,18 @@ class ClipboardDialogHeader extends St.Widget {
 	}
 
 	override vfunc_navigate_focus(from: Clutter.Actor | null, direction: St.DirectionType): boolean {
-		let focusChild = from;
-		while (focusChild && focusChild.get_parent() !== this) {
-			focusChild = focusChild.get_parent();
-		}
-
-		if (direction === St.DirectionType.UP) {
-			this.updateHeader(true);
-		} else if (
-			direction === St.DirectionType.DOWN ||
-			direction === St.DirectionType.TAB_FORWARD ||
-			direction === St.DirectionType.TAB_BACKWARD
+		const res = super.vfunc_navigate_focus(from, direction);
+		if (
+			direction === St.DirectionType.UP ||
+			direction === St.DirectionType.LEFT ||
+			direction === St.DirectionType.RIGHT
 		) {
-			this.updateHeader(focusChild === null);
+			this.updateHeader(true);
+		} else {
+			this.updateHeader(res);
 		}
 
-		return super.vfunc_navigate_focus(from, direction);
+		return res;
 	}
 
 	override vfunc_map() {
