@@ -28,7 +28,7 @@ import { ClipboardEntry } from '../misc/db.js';
 		},
 	},
 })
-class ConfirmClearHistoryDialog extends ModalDialog.ModalDialog {
+export class ConfirmClearHistoryDialog extends ModalDialog.ModalDialog {
 	constructor() {
 		super();
 

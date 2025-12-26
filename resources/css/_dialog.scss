@@ -5,13 +5,79 @@
 	box-shadow: 0 2px 4px 0 $shadow_color;
 	padding: 0;
 
+	// Header
 	.dialog-header {
 		.dialog-header-box {
 			padding: $base_padding * 2.5;
 			padding-bottom: 0;
+
+			> StBoxLayout {
+				spacing: $base_padding * 2;
+			}
+
+			.dialog-header-icon-button {
+				@extend %button;
+
+				border-radius: $forced_circular_radius;
+				padding: $scaled_padding * 2 * 0.9;
+				min-height: $scalable_icon_size * 0.9;
+
+				StIcon {
+					icon-size: $scalable_icon_size;
+					-st-icon-style: symbolic;
+				}
+
+				// prettier-ignore
+				&:checked:checked {
+					@include button(normal, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default);
+					&:focus { @include button(focus, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default); }
+					&:hover { @include button(hover, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default); }
+					&:active { @include button(active, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default); }
+				}
+			}
+
+			.dialog-header-button {
+				@extend %button;
+				border-radius: $forced_circular_radius;
+				min-height: to_em(22px);
+			}
 		}
 	}
 
+	// Footer
+	.dialog-footer {
+		padding: $base_padding * 1.5;
+		spacing: $base_padding * 1.5;
+
+		.dialog-footer-icon-button {
+			@extend %button;
+
+			border-radius: $forced_circular_radius;
+			padding: $scaled_padding * 1.5;
+			min-height: $scalable_icon_size;
+
+			StIcon {
+				icon-size: $scalable_icon_size;
+				-st-icon-style: symbolic;
+			}
+
+			// prettier-ignore
+			&:checked:checked {
+				@include button(normal, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default);
+				&:focus { @include button(focus, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default); }
+				&:hover { @include button(hover, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default); }
+				&:active { @include button(active, $c: -st-accent-color, $tc: -st-accent-fg-color, $style: default); }
+			}
+		}
+
+		.dialog-footer-button {
+			@extend %button;
+			border-radius: $forced_circular_radius;
+			min-height: to_em(12px);
+		}
+	}
+
+	// Items
 	.clipboard-item-list {
 		spacing: $base_padding * 2;
 	}
@@ -59,10 +125,6 @@
 				margin-top: $base_padding * 2.5;
 			}
 
-			.clipboard-item:last-child {
-				margin-bottom: $base_padding * 2.5;
-			}
-
 			// Fill full height
 			.status-item {
 				height: auto !important;
@@ -70,7 +132,7 @@
 		}
 
 		StScrollBar {
-			padding: $base_padding * 3 $base_padding * 0.5;
+			padding: $base_padding * 3 $base_padding * 0.5 $base_padding * 0.5 $base_padding * 0.5;
 		}
 	}
 
