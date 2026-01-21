@@ -95,6 +95,12 @@ export class ClipboardItem extends St.Button {
 		);
 		entry.bind_property('datetime', this._header, 'datetime', GObject.BindingFlags.SYNC_CREATE);
 		entry.bind_property('tag', this._header, 'tag', GObject.BindingFlags.SYNC_CREATE);
+		entry.bind_property(
+			'title',
+			this._header,
+			'custom-title',
+			GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
+		);
 
 		// prettier-ignore
 		this.ext.settings.connectObject(
@@ -139,7 +145,9 @@ export class ClipboardItem extends St.Button {
 	}
 
 	public search(query: SearchQuery) {
-		this.visible = query.matchesEntry(this.visible, this.entry, this.entry.content);
+		const searchTexts = [this.entry.content];
+		if (this.entry.title) searchTexts.push(this.entry.title);
+		this.visible = query.matchesEntry(this.visible, this.entry, ...searchTexts);
 	}
 
 	private updateSize() {
@@ -203,6 +211,9 @@ export class ClipboardItem extends St.Button {
 	}
 
 	override vfunc_clicked(clicked_button: number): void {
+		// Don't activate while editing the title
+		if (this._header.isEditing) return;
+
 		if (clicked_button === 1) {
 			const event = Clutter.get_current_event();
 			if (event.has_control_modifier()) {

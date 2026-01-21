@@ -79,6 +79,8 @@ export type HeaderControlsVisibility = (typeof HeaderControlsVisibility)[keyof t
 		),
 		'tag': GObject.ParamSpec.string('tag', null, null, GObject.ParamFlags.READWRITE, ''),
 		'active': flagsParamSpec('active', GObject.ParamFlags.READWRITE, ActiveState, ActiveState.None),
+		'custom-title': GObject.ParamSpec.string('custom-title', null, null, GObject.ParamFlags.READWRITE, ''),
+		'default-title': GObject.ParamSpec.string('default-title', null, null, GObject.ParamFlags.READWRITE, ''),
 	},
 	Signals: {
 		'delete': {},
@@ -95,16 +97,22 @@ export class ClipboardItemHeader extends St.BoxLayout {
 	private _controlsVisibility: HeaderControlsVisibility = HeaderControlsVisibility.Visible;
 	private _tag: Tag | null = null;
 	private _active: ActiveState = ActiveState.None;
+	private _customTitle: string = '';
+	private _defaultTitle: string = '';
+	private _isEditing: boolean = false;
 
 	private readonly _headerIcon: St.Icon;
 	private readonly _headerContent: St.BoxLayout;
 	private readonly _headerTitle: St.Label;
+	private _titleEntry: St.Entry | null = null;
 	private readonly _timeLabel: TimeLabel;
 	public buttons: St.BoxLayout;
 	private readonly _deleteButton: St.Button;
 	private readonly _menuButton: St.Button;
 	private readonly _pinButton: St.Button;
 	private readonly _tagIcon: St.Bin;
+	private _clickCount: number = 0;
+	private _lastClickTime: number = 0;
 
 	constructor(ext: Extension, icon: Icon, title: string) {
 		super({
@@ -113,6 +121,8 @@ export class ClipboardItemHeader extends St.BoxLayout {
 			x_expand: true,
 			y_expand: false,
 		});
+
+		this._defaultTitle = title;
 
 		this._headerIcon = new St.Icon({
 			style_class: 'clipboard-item-header-icon',
@@ -132,9 +142,41 @@ export class ClipboardItemHeader extends St.BoxLayout {
 			style_class: 'clipboard-item-title',
 			text: title,
 			y_align: Clutter.ActorAlign.END,
+			x_expand: true,
+			reactive: true,
 		});
-		this._headerTitle.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
+		this._headerTitle.clutter_text.ellipsize = Pango.EllipsizeMode.END;
 		this._headerContent.add_child(this._headerTitle);
+
+		// Handle double-click on title for inline editing
+		// We must stop all button events on the title to prevent them from
+		// propagating to the parent ClipboardItem button which would trigger paste
+		this._headerTitle.connect('button-press-event', (_actor, event: Clutter.Event) => {
+			if (event.get_button() !== Clutter.BUTTON_PRIMARY) return Clutter.EVENT_PROPAGATE;
+
+			const currentTime = event.get_time();
+			const doubleClickTime = Clutter.Settings.get_default()?.double_click_time ?? 400;
+
+			if (currentTime - this._lastClickTime < doubleClickTime) {
+				this._clickCount++;
+				if (this._clickCount >= 2) {
+					this._clickCount = 0;
+					this._startEditing();
+				}
+			} else {
+				this._clickCount = 1;
+			}
+			this._lastClickTime = currentTime;
+
+			// Always stop to prevent paste action on parent
+			return Clutter.EVENT_STOP;
+		});
+
+		this._headerTitle.connect('button-release-event', (_actor, event: Clutter.Event) => {
+			if (event.get_button() !== Clutter.BUTTON_PRIMARY) return Clutter.EVENT_PROPAGATE;
+			// Stop release event too
+			return Clutter.EVENT_STOP;
+		});
 
 		this._timeLabel = new TimeLabel();
 		this._headerContent.add_child(this._timeLabel);
@@ -184,6 +226,82 @@ export class ClipboardItemHeader extends St.BoxLayout {
 
 		// Bind properties
 		this.bind_property('pinned', this._pinButton, 'checked', GObject.BindingFlags.BIDIRECTIONAL);
+	}
+
+	private _startEditing() {
+		if (this._isEditing) return;
+		this._isEditing = true;
+
+		// Hide the title label
+		this._headerTitle.hide();
+
+		// Create an entry for editing
+		this._titleEntry = new St.Entry({
+			style_class: 'clipboard-item-title-entry',
+			text: this._customTitle || this._defaultTitle,
+			y_align: Clutter.ActorAlign.CENTER,
+		});
+
+		// Select all text
+		this._titleEntry.clutter_text.set_selection(0, -1);
+
+		this._titleEntry.clutter_text.connect('key-press-event', (_text, event: Clutter.Event) => {
+			const key = event.get_key_symbol();
+			if (key === Clutter.KEY_Return || key === Clutter.KEY_KP_Enter) {
+				this._finishEditing(true);
+				return Clutter.EVENT_STOP;
+			} else if (key === Clutter.KEY_Escape) {
+				this._finishEditing(false);
+				return Clutter.EVENT_STOP;
+			}
+			return Clutter.EVENT_PROPAGATE;
+		});
+
+		this._titleEntry.clutter_text.connect('key-focus-out', () => {
+			if (this._isEditing) {
+				this._finishEditing(true);
+			}
+		});
+
+		// Insert entry before time label
+		this._headerContent.insert_child_below(this._titleEntry, this._timeLabel);
+		this._titleEntry.grab_key_focus();
+	}
+
+	private _finishEditing(save: boolean) {
+		if (!this._isEditing || !this._titleEntry) return;
+		this._isEditing = false;
+
+		// Capture entry reference before clearing
+		const entry = this._titleEntry;
+		this._titleEntry = null;
+
+		if (save) {
+			const newTitle = entry.text.trim();
+			// If empty or same as default, clear custom title
+			if (newTitle === '' || newTitle === this._defaultTitle) {
+				this.customTitle = '';
+			} else {
+				this.customTitle = newTitle;
+			}
+		}
+
+		// Show label first
+		this._headerTitle.show();
+
+		// Defer entry destruction to avoid crash during event handling
+		GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+			entry.destroy();
+			return GLib.SOURCE_REMOVE;
+		});
+	}
+
+	private _updateTitleDisplay() {
+		this._headerTitle.text = this._customTitle || this._defaultTitle;
+	}
+
+	get isEditing() {
+		return this._isEditing;
 	}
 
 	get pinned() {
@@ -291,6 +409,30 @@ export class ClipboardItemHeader extends St.BoxLayout {
 		this._active = active;
 		this.updateHeaderControls();
 		this.notify('active');
+	}
+
+	get customTitle() {
+		return this._customTitle;
+	}
+
+	set customTitle(customTitle) {
+		if (this._customTitle === customTitle) return;
+
+		this._customTitle = customTitle;
+		this._updateTitleDisplay();
+		this.notify('custom-title');
+	}
+
+	get defaultTitle() {
+		return this._defaultTitle;
+	}
+
+	set defaultTitle(defaultTitle) {
+		if (this._defaultTitle === defaultTitle) return;
+
+		this._defaultTitle = defaultTitle;
+		this._updateTitleDisplay();
+		this.notify('default-title');
 	}
 
 	private updateHeaderControls() {

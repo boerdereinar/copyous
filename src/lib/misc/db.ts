@@ -55,6 +55,7 @@ export interface LinkMetadata {
 		tag: GObject.ParamSpec.string('tag', null, null, GObject.ParamFlags.READWRITE, ''),
 		datetime: GObject.ParamSpec.boxed('datetime', null, null, GObject.ParamFlags.READWRITE, GLib.DateTime),
 		metadata: GObject.ParamSpec.jsobject('metadata', null, null, GObject.ParamFlags.READWRITE),
+		title: GObject.ParamSpec.string('title', null, null, GObject.ParamFlags.READWRITE, ''),
 	},
 	Signals: {
 		delete: {},
@@ -68,6 +69,7 @@ export class ClipboardEntry extends GObject.Object {
 	declare tag: Tag | null;
 	declare datetime: GLib.DateTime;
 	declare metadata: Metadata | null;
+	declare title: string;
 
 	constructor(
 		id: number,
@@ -77,6 +79,7 @@ export class ClipboardEntry extends GObject.Object {
 		tag: Tag | null,
 		datetime: GLib.DateTime,
 		metadata: Metadata | null = null,
+		title: string = '',
 	) {
 		super();
 
@@ -87,6 +90,7 @@ export class ClipboardEntry extends GObject.Object {
 		this.tag = tag;
 		this.datetime = datetime;
 		this.metadata = metadata;
+		this.title = title;
 	}
 
 	get id() {
@@ -249,6 +253,7 @@ export class ClipboardEntryTracker {
 		entry.connect('notify::tag', () => this._database?.updateProperty(entry, 'tag'));
 		entry.connect('notify::datetime', () => this._database?.updateProperty(entry, 'datetime'));
 		entry.connect('notify::metadata', () => this._database?.updateProperty(entry, 'metadata'));
+		entry.connect('notify::title', () => this._database?.updateProperty(entry, 'title'));
 		entry.connect('delete', () => this.delete(entry));
 		this._entries?.set(entry.id, entry);
 	}
@@ -547,10 +552,21 @@ export class GdaDatabase implements Database {
 				'tag'      text,
 				'datetime' timestamp NOT NULL,
 				'metadata' text,
+				'title'    text,
 				UNIQUE ('type', 'content')
 			);
 		`);
 		await async_statement_execute_non_select(this._Gda, this._connection, stmt, this._cancellable);
+
+		// Add title column for existing databases (migration)
+		try {
+			const [addColumnStmt] = this._connection.parse_sql_string(
+				`ALTER TABLE 'clipboard' ADD COLUMN 'title' text;`,
+			);
+			await async_statement_execute_non_select(this._Gda, this._connection, addColumnStmt, this._cancellable);
+		} catch {
+			// Column already exists, ignore error
+		}
 	}
 
 	public async clear(history: ClipboardHistory): Promise<number[]> {
@@ -618,6 +634,7 @@ export class GdaDatabase implements Database {
 			builder.select_add_field('tag', null, null);
 			const datetimeId = builder.select_add_field('datetime', null, null);
 			builder.select_add_field('metadata', null, null);
+			builder.select_add_field('title', null, null);
 			builder.select_order_by(datetimeId, false, null);
 
 			const stmt = builder.get_statement();
@@ -638,6 +655,7 @@ export class GdaDatabase implements Database {
 				const tag = iter.get_value_for_field('tag');
 				let datetime = iter.get_value_for_field('datetime');
 				const metadata = iter.get_value_for_field('metadata') as string | null;
+				const title = (iter.get_value_for_field('title') as string | null) ?? '';
 
 				if ('Timestamp' in this._Gda && datetime instanceof this._Gda.Timestamp) {
 					const timezone = GLib.TimeZone.new_offset(datetime.timezone);
@@ -664,7 +682,7 @@ export class GdaDatabase implements Database {
 					}
 				}
 
-				entries.push(new ClipboardEntry(id, type, content, pinned, tag, datetime, metadataObj));
+				entries.push(new ClipboardEntry(id, type, content, pinned, tag, datetime, metadataObj, title));
 			}
 
 			return entries;
