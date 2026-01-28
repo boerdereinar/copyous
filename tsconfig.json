@@ -11,7 +11,8 @@
 		"target": "ES2024",
 		"lib": ["ES2024"],
 		"experimentalDecorators": true,
-		"exactOptionalPropertyTypes": true
+		"exactOptionalPropertyTypes": true,
+		"noFallthroughCasesInSwitch": false
 	},
 	"include": [
 		"src",

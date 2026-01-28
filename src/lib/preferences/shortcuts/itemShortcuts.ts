@@ -27,6 +27,9 @@ export class ItemShortcuts extends Adw.PreferencesGroup {
 		editItem.subtitle = _('Only supported for text and code items');
 		this.add(editItem);
 
+		const editTitle = new ShortcutRow(_('Edit Title'), '', true);
+		this.add(editTitle);
+
 		const openMenu = new ShortcutRow(_('Open Menu'), '', true);
 		this.add(openMenu);
 
@@ -41,12 +44,14 @@ export class ItemShortcuts extends Adw.PreferencesGroup {
 		settings.bind('pin-item-shortcut', pinItem, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('delete-item-shortcut', deleteItem, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('edit-item-shortcut', editItem, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
+		settings.bind('edit-title-shortcut', editTitle, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('open-menu-shortcut', openMenu, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
 		bind_enum(settings, 'middle-click-action', middleClickAction, 'selected');
 
 		makeResettable(pinItem, settings, 'pin-item-shortcut');
 		makeResettable(deleteItem, settings, 'delete-item-shortcut');
 		makeResettable(editItem, settings, 'edit-item-shortcut');
+		makeResettable(editTitle, settings, 'edit-title-shortcut');
 		makeResettable(openMenu, settings, 'open-menu-shortcut');
 		makeResettable(middleClickAction, settings, 'middle-click-action');
 	}

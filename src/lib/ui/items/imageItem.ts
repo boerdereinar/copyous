@@ -73,7 +73,7 @@ export class ImageItem extends ClipboardItem {
 	}
 
 	override search(query: SearchQuery): void {
-		this.visible = query.matchesEntry(this.visible, this.entry, '');
+		this.visible = query.matchesEntry(this.visible, this.entry);
 	}
 
 	private updateSettings() {

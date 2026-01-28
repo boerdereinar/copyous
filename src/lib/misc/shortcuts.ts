@@ -19,6 +19,7 @@ export const Shortcut = {
 	Pin: 'pin-item-shortcut',
 	Delete: 'delete-item-shortcut',
 	Edit: 'edit-item-shortcut',
+	EditTitle: 'edit-title-shortcut',
 	Menu: 'open-menu-shortcut',
 } as const;
 
@@ -82,6 +83,7 @@ export class ShortcutManager extends GObject.Object {
 		this.registerShortcut(Shortcut.Pin);
 		this.registerShortcut(Shortcut.Delete);
 		this.registerShortcut(Shortcut.Edit);
+		this.registerShortcut(Shortcut.EditTitle);
 		this.registerShortcut(Shortcut.Menu);
 
 		this._actor = actor;
