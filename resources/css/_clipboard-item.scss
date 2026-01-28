@@ -78,20 +78,10 @@
 
 			// Title entry (inline editing)
 			.clipboard-item-title-entry {
+				@extend %reset;
 				font-weight: bold;
-				padding: 0;
-				margin: 0;
-				min-height: 0;
-				border: none;
-				border-radius: 0;
-				background-color: transparent;
+				padding-top: $base_padding - 1px;
 				color: $fg_color;
-				selection-background-color: -st-accent-color;
-
-				StLabel {
-					padding: 0;
-					margin: 0;
-				}
 			}
 
 			// Time label

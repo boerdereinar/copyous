@@ -576,25 +576,23 @@ export class GdaDatabase implements Database {
 			/* falls through */
 			case 1: {
 				// Add title column
-				try {
-					const [addColumnStmt] = this._connection.parse_sql_string(
-						`ALTER TABLE 'clipboard' ADD COLUMN 'title' text;`,
-					);
-					await async_statement_execute_non_select(
-						this._Gda,
-						this._connection,
-						addColumnStmt,
-						this._cancellable,
-					);
-				} catch {
-					// Column may already exist if table was created with title column
-				}
+				const [addColumnStmt] = this._connection.parse_sql_string(
+					`ALTER TABLE 'clipboard' ADD COLUMN 'title' text;`,
+				);
+				await async_statement_execute_non_select(
+					this._Gda,
+					this._connection,
+					addColumnStmt,
+					this._cancellable,
+				);
 			}
 		}
 
 		// Update to current version (use execute_select since libgda treats PRAGMA as SELECT)
-		const [setVersionStmt] = this._connection.parse_sql_string(`PRAGMA user_version = 2;`);
-		await async_statement_execute_select(this._Gda, this._connection, setVersionStmt, this._cancellable);
+		if (version !== 2) {
+			const [setVersionStmt] = this._connection.parse_sql_string(`PRAGMA user_version = 2;`);
+			await async_statement_execute_select(this._Gda, this._connection, setVersionStmt, this._cancellable);
+		}
 	}
 
 	public async clear(history: ClipboardHistory): Promise<number[]> {

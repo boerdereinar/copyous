@@ -141,7 +141,6 @@ export class ClipboardItemHeader extends St.BoxLayout {
 			style_class: 'clipboard-item-title',
 			text: title,
 			y_align: Clutter.ActorAlign.END,
-			x_expand: true,
 			min_width: 0,
 			reactive: true,
 		});
@@ -231,6 +230,7 @@ export class ClipboardItemHeader extends St.BoxLayout {
 	public startEditing() {
 		if (this._isEditing) return;
 		this._isEditing = true;
+		this.updateHeaderControls();
 
 		// Hide the title label
 		this._headerTitle.hide();
@@ -271,6 +271,7 @@ export class ClipboardItemHeader extends St.BoxLayout {
 	private _finishEditing(save: boolean) {
 		if (!this._isEditing || !this._titleEntry) return;
 		this._isEditing = false;
+		this.updateHeaderControls();
 
 		// Capture entry reference before clearing
 		const entry = this._titleEntry;
@@ -437,7 +438,9 @@ export class ClipboardItemHeader extends St.BoxLayout {
 
 	private updateHeaderControls() {
 		let visible = true;
-		if (this._controlsVisibility === HeaderControlsVisibility.VisibleOnHover) {
+		if (this._isEditing) {
+			visible = false;
+		} else if (this._controlsVisibility === HeaderControlsVisibility.VisibleOnHover) {
 			visible = this.active !== ActiveState.None;
 		} else if (this._controlsVisibility === HeaderControlsVisibility.Hidden) {
 			visible = false;
