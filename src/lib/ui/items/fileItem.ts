@@ -84,9 +84,7 @@ export class FileItem extends ClipboardItem {
 
 	public override search(query: SearchQuery): void {
 		const file = this.entry.content.substring('file://'.length);
-		const searchTexts = [file, this._file.text];
-		if (this.entry.title) searchTexts.push(this.entry.title);
-		this.visible = query.matchesEntry(this.visible, this.entry, ...searchTexts);
+		this.visible = query.matchesEntry(this.visible, this.entry, file, this._file.text);
 	}
 
 	private async updateFilePreview() {

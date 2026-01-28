@@ -73,9 +73,7 @@ export class ImageItem extends ClipboardItem {
 	}
 
 	override search(query: SearchQuery): void {
-		const searchTexts = [''];
-		if (this.entry.title) searchTexts.push(this.entry.title);
-		this.visible = query.matchesEntry(this.visible, this.entry, ...searchTexts);
+		this.visible = query.matchesEntry(this.visible, this.entry);
 	}
 
 	private updateSettings() {

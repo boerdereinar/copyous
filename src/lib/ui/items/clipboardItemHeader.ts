@@ -19,11 +19,9 @@ class TimeLabel extends St.Label {
 	constructor() {
 		super({
 			style_class: 'event-time',
-			x_expand: true,
 			y_expand: true,
 			x_align: Clutter.ActorAlign.START,
 			y_align: Clutter.ActorAlign.END,
-			min_width: 0,
 		});
 
 		this.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
@@ -87,6 +85,7 @@ export type HeaderControlsVisibility = (typeof HeaderControlsVisibility)[keyof t
 		'open-menu': {
 			param_types: [GObject.TYPE_INT, GObject.TYPE_INT, GObject.TYPE_INT, GObject.TYPE_INT],
 		},
+		'editing-finished': {},
 	},
 })
 export class ClipboardItemHeader extends St.BoxLayout {
@@ -143,6 +142,7 @@ export class ClipboardItemHeader extends St.BoxLayout {
 			text: title,
 			y_align: Clutter.ActorAlign.END,
 			x_expand: true,
+			min_width: 0,
 			reactive: true,
 		});
 		this._headerTitle.clutter_text.ellipsize = Pango.EllipsizeMode.END;
@@ -161,7 +161,7 @@ export class ClipboardItemHeader extends St.BoxLayout {
 				this._clickCount++;
 				if (this._clickCount >= 2) {
 					this._clickCount = 0;
-					this._startEditing();
+					this.startEditing();
 				}
 			} else {
 				this._clickCount = 1;
@@ -228,7 +228,7 @@ export class ClipboardItemHeader extends St.BoxLayout {
 		this.bind_property('pinned', this._pinButton, 'checked', GObject.BindingFlags.BIDIRECTIONAL);
 	}
 
-	private _startEditing() {
+	public startEditing() {
 		if (this._isEditing) return;
 		this._isEditing = true;
 
@@ -289,11 +289,11 @@ export class ClipboardItemHeader extends St.BoxLayout {
 		// Show label first
 		this._headerTitle.show();
 
-		// Defer entry destruction to avoid crash during event handling
-		GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
-			entry.destroy();
-			return GLib.SOURCE_REMOVE;
-		});
+		// Remove entry from container
+		this._headerContent.remove_child(entry);
+
+		// Notify parent to restore focus
+		this.emit('editing-finished');
 	}
 
 	private _updateTitleDisplay() {

@@ -134,6 +134,7 @@ export class ClipboardItem extends St.Button {
 		this.connect('style-changed', () => this.notify('active'));
 		this._header.connect('delete', () => this.forceDelete());
 		this._header.connect('open-menu', (_, x, y, w, h) => this.emit('open-menu', x, y, w, h));
+		this._header.connect('editing-finished', () => this.grab_key_focus());
 	}
 
 	get active(): ActiveState {
@@ -145,9 +146,7 @@ export class ClipboardItem extends St.Button {
 	}
 
 	public search(query: SearchQuery) {
-		const searchTexts = [this.entry.content];
-		if (this.entry.title) searchTexts.push(this.entry.title);
-		this.visible = query.matchesEntry(this.visible, this.entry, ...searchTexts);
+		this.visible = query.matchesEntry(this.visible, this.entry, this.entry.content);
 	}
 
 	private updateSize() {
@@ -277,6 +276,12 @@ export class ClipboardItem extends St.Button {
 		// Edit
 		if (action === Shortcut.Edit) {
 			this.emit('edit');
+			return Clutter.EVENT_STOP;
+		}
+
+		// Edit Title
+		if (action === Shortcut.EditTitle) {
+			this._header.startEditing();
 			return Clutter.EVENT_STOP;
 		}
 

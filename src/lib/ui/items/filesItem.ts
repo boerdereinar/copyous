@@ -164,8 +164,6 @@ export class FilesItem extends ClipboardItem {
 	}
 
 	public override search(query: SearchQuery): void {
-		const searchTexts = [...this._files, ...(this._formattedFiles ?? [])];
-		if (this.entry.title) searchTexts.push(this.entry.title);
-		this.visible = query.matchesEntry(this.visible, this.entry, ...searchTexts);
+		this.visible = query.matchesEntry(this.visible, this.entry, ...this._files, ...(this._formattedFiles ?? []));
 	}
 }

@@ -543,30 +543,58 @@ export class GdaDatabase implements Database {
 	public async init(): Promise<void> {
 		await open_async(this._connection);
 
-		const [stmt] = this._connection.parse_sql_string(`
-			CREATE TABLE IF NOT EXISTS 'clipboard' (
-				'id'       integer   NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT,
-				'type'     text      NOT NULL,
-				'content'  text      NOT NULL,
-				'pinned'   boolean   NOT NULL,
-				'tag'      text,
-				'datetime' timestamp NOT NULL,
-				'metadata' text,
-				'title'    text,
-				UNIQUE ('type', 'content')
-			);
-		`);
-		await async_statement_execute_non_select(this._Gda, this._connection, stmt, this._cancellable);
+		// Get current schema version
+		const [versionStmt] = this._connection.parse_sql_string(`PRAGMA user_version;`);
+		const versionResult = await async_statement_execute_select<{ user_version: number }>(
+			this._Gda,
+			this._connection,
+			versionStmt,
+			this._cancellable,
+		);
+		const versionIter = versionResult.create_iter();
+		versionIter.move_next();
+		const version = (versionIter.get_value_at(0) as number | null) ?? 0;
 
-		// Add title column for existing databases (migration)
-		try {
-			const [addColumnStmt] = this._connection.parse_sql_string(
-				`ALTER TABLE 'clipboard' ADD COLUMN 'title' text;`,
-			);
-			await async_statement_execute_non_select(this._Gda, this._connection, addColumnStmt, this._cancellable);
-		} catch {
-			// Column already exists, ignore error
+		// Run migrations based on version
+		switch (version) {
+			case 0: {
+				// Create table
+				const [stmt] = this._connection.parse_sql_string(`
+					CREATE TABLE IF NOT EXISTS 'clipboard' (
+						'id'       integer   NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT,
+						'type'     text      NOT NULL,
+						'content'  text      NOT NULL,
+						'pinned'   boolean   NOT NULL,
+						'tag'      text,
+						'datetime' timestamp NOT NULL,
+						'metadata' text,
+						UNIQUE ('type', 'content')
+					);
+				`);
+				await async_statement_execute_non_select(this._Gda, this._connection, stmt, this._cancellable);
+			}
+			/* falls through */
+			case 1: {
+				// Add title column
+				try {
+					const [addColumnStmt] = this._connection.parse_sql_string(
+						`ALTER TABLE 'clipboard' ADD COLUMN 'title' text;`,
+					);
+					await async_statement_execute_non_select(
+						this._Gda,
+						this._connection,
+						addColumnStmt,
+						this._cancellable,
+					);
+				} catch {
+					// Column may already exist if table was created with title column
+				}
+			}
 		}
+
+		// Update to current version (use execute_select since libgda treats PRAGMA as SELECT)
+		const [setVersionStmt] = this._connection.parse_sql_string(`PRAGMA user_version = 2;`);
+		await async_statement_execute_select(this._Gda, this._connection, setVersionStmt, this._cancellable);
 	}
 
 	public async clear(history: ClipboardHistory): Promise<number[]> {
