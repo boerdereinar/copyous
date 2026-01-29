@@ -310,12 +310,34 @@ export function getActionsConfigPath(ext: Extension | ExtensionPreferences): Gio
 }
 
 export function getHljsPath(ext: Extension | ExtensionPreferences): Gio.File {
+	// Check system install
+	const sysPath = ext.dir.get_child('highlight.min.js');
+	if (sysPath.query_exists(null)) {
+		return sysPath;
+	}
+
+	// Otherwise use local install
 	return getDataPath(ext).get_child('highlight.min.js');
 }
 
-export function getHljsLanguages(ext: Extension | ExtensionPreferences): [string, string, string, Gio.File][] {
+/**
+ * Get the list of supported highlight.js languages.
+ * @param ext The extension or preferences
+ * @returns A list of:
+ * - language id
+ * - language name
+ * - file hash
+ * - file path
+ * - boolean indicating system install
+ */
+export function getHljsLanguages(ext: Extension | ExtensionPreferences): [string, string, string, Gio.File, boolean][] {
+	const sysPath = ext.dir.get_child('languages');
 	const path = getDataPath(ext).get_child('languages');
-	return HljsLanguages.map(([language, name, hash]) => [language, name, hash, path.get_child(`${language}.min.js`)]);
+	return HljsLanguages.map(([language, name, hash]) => {
+		const sysFile = sysPath.get_child(`${language}.min.js`);
+		if (sysFile.query_exists(null)) return [language, name, hash, sysFile, true];
+		return [language, name, hash, path.get_child(`${language}.min.js`), false];
+	});
 }
 
 export function getHljsLanguageUrls(language: string): string[] {
