@@ -579,12 +579,7 @@ export class GdaDatabase implements Database {
 				const [addColumnStmt] = this._connection.parse_sql_string(
 					`ALTER TABLE 'clipboard' ADD COLUMN 'title' text;`,
 				);
-				await async_statement_execute_non_select(
-					this._Gda,
-					this._connection,
-					addColumnStmt,
-					this._cancellable,
-				);
+				await async_statement_execute_non_select(this._Gda, this._connection, addColumnStmt, this._cancellable);
 			}
 		}
 
