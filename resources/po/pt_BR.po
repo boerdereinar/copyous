@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-26 00:18+0000\n"
+"POT-Creation-Date: 2026-01-29 15:55+0000\n"
 "PO-Revision-Date: 2025-12-01 18:02-0300\n"
 "Last-Translator: Murilo Leal <murilormleal@outlook.com>\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -1127,7 +1127,7 @@ msgstr "Salvar"
 #: src/lib/preferences/general/feedbackSettings.ts:155
 #: src/lib/preferences/general/feedbackSettings.ts:259
 #: src/lib/preferences/general/feedbackSettings.ts:301
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:38
 #: src/lib/ui/components/editDialog.ts:231
 #: src/lib/ui/components/editDialog.ts:258
 msgid "None"
@@ -1522,12 +1522,12 @@ msgid "Select Item Type"
 msgstr "Selecionar Tipo de Item"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:19
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:38
 msgid "Pin Item"
 msgstr "Fixar Item"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:22
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:38
 msgid "Delete Item"
 msgstr "Excluir Item"
 
@@ -1544,18 +1544,22 @@ msgid "Only supported for text and code items"
 msgstr "Apenas suportado para itens de texto e código"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:30
+msgid "Edit Title"
+msgstr ""
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:33
 msgid "Open Menu"
 msgstr "Abrir Menu"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:34
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:37
 msgid "Middle Click Action"
 msgstr "Ação do clique do meio"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:60
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:65
 msgid "Copy Item"
 msgstr "Copiar Item"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:61
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:66
 msgid "Activate Default Action"
 msgstr "Ativar ação padrão"
 
@@ -1619,19 +1623,19 @@ msgstr "Caractere copiado"
 msgid "Copied Color"
 msgstr "Cor copiada"
 
-#: src/lib/misc/db.ts:128
+#: src/lib/misc/db.ts:132
 msgid "Failed to load Gda"
 msgstr "Falha ao carregar Gda"
 
-#: src/lib/misc/db.ts:129 src/lib/misc/db.ts:154
+#: src/lib/misc/db.ts:133 src/lib/misc/db.ts:158
 msgid "Clipboard history will be disabled"
 msgstr "O histórico da área de transferência será desativado"
 
-#: src/lib/misc/db.ts:130
+#: src/lib/misc/db.ts:134
 msgid "Disable Warning"
 msgstr "Desativar aviso"
 
-#: src/lib/misc/db.ts:153
+#: src/lib/misc/db.ts:157
 msgid "Failed to load database"
 msgstr "Falha ao carregar banco de dados"
 
@@ -1687,43 +1691,43 @@ msgstr "Editar Item da Área de Transferência"
 msgid "Close"
 msgstr "Fechar"
 
-#: src/lib/ui/searchEntry.ts:148
+#: src/lib/ui/searchEntry.ts:150
 msgid "__All"
 msgstr "__Tudo"
 
-#: src/lib/ui/searchEntry.ts:152
+#: src/lib/ui/searchEntry.ts:154
 msgid "__Text"
 msgstr "__Texto"
 
-#: src/lib/ui/searchEntry.ts:153
+#: src/lib/ui/searchEntry.ts:155
 msgid "__Code"
 msgstr "__Código"
 
-#: src/lib/ui/searchEntry.ts:154
+#: src/lib/ui/searchEntry.ts:156
 msgid "__Image"
 msgstr "__Imagem"
 
-#: src/lib/ui/searchEntry.ts:155
+#: src/lib/ui/searchEntry.ts:157
 msgid "__File"
 msgstr "__Arquivo"
 
-#: src/lib/ui/searchEntry.ts:156
+#: src/lib/ui/searchEntry.ts:158
 msgid "File__s"
 msgstr "Arquivos__s"
 
-#: src/lib/ui/searchEntry.ts:157
+#: src/lib/ui/searchEntry.ts:159
 msgid "__Link"
 msgstr "__Link"
 
-#: src/lib/ui/searchEntry.ts:158
+#: src/lib/ui/searchEntry.ts:160
 msgid "C__haracter"
 msgstr "C__ractere"
 
-#: src/lib/ui/searchEntry.ts:159
+#: src/lib/ui/searchEntry.ts:161
 msgid "Colo__r"
 msgstr "Co__r"
 
-#: src/lib/ui/searchEntry.ts:271
+#: src/lib/ui/searchEntry.ts:273
 msgid "Type to search"
 msgstr "Digite para pesquisar"
 

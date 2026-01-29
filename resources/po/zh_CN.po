@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-26 00:18+0000\n"
+"POT-Creation-Date: 2026-01-29 15:55+0000\n"
 "PO-Revision-Date: 2025-12-19 18:30+0800\n"
 "Last-Translator: everyx <lunt.luo@gmail.com>\n"
 "Language-Team: Chinese (China)\n"
@@ -1112,7 +1112,7 @@ msgstr "保存"
 #: src/lib/preferences/general/feedbackSettings.ts:155
 #: src/lib/preferences/general/feedbackSettings.ts:259
 #: src/lib/preferences/general/feedbackSettings.ts:301
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:38
 #: src/lib/ui/components/editDialog.ts:231
 #: src/lib/ui/components/editDialog.ts:258
 msgid "None"
@@ -1494,12 +1494,12 @@ msgid "Select Item Type"
 msgstr "选择项目类型"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:19
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:38
 msgid "Pin Item"
 msgstr "固定项目"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:22
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:38
 msgid "Delete Item"
 msgstr "删除项目"
 
@@ -1516,18 +1516,22 @@ msgid "Only supported for text and code items"
 msgstr "仅支持文本和代码项目"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:30
+msgid "Edit Title"
+msgstr ""
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:33
 msgid "Open Menu"
 msgstr "打开菜单"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:34
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:37
 msgid "Middle Click Action"
 msgstr "中键单击操作"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:60
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:65
 msgid "Copy Item"
 msgstr "复制项目"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:61
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:66
 msgid "Activate Default Action"
 msgstr "激活默认操作"
 
@@ -1590,19 +1594,19 @@ msgstr "已复制字符"
 msgid "Copied Color"
 msgstr "已复制颜色"
 
-#: src/lib/misc/db.ts:128
+#: src/lib/misc/db.ts:132
 msgid "Failed to load Gda"
 msgstr "加载 Gda 失败"
 
-#: src/lib/misc/db.ts:129 src/lib/misc/db.ts:154
+#: src/lib/misc/db.ts:133 src/lib/misc/db.ts:158
 msgid "Clipboard history will be disabled"
 msgstr "剪贴板历史将被禁用"
 
-#: src/lib/misc/db.ts:130
+#: src/lib/misc/db.ts:134
 msgid "Disable Warning"
 msgstr "禁用警告"
 
-#: src/lib/misc/db.ts:153
+#: src/lib/misc/db.ts:157
 msgid "Failed to load database"
 msgstr "加载数据库失败"
 
@@ -1655,43 +1659,43 @@ msgstr "编辑剪贴板项目"
 msgid "Close"
 msgstr "关闭"
 
-#: src/lib/ui/searchEntry.ts:148
+#: src/lib/ui/searchEntry.ts:150
 msgid "__All"
 msgstr "全部(_A)"
 
-#: src/lib/ui/searchEntry.ts:152
+#: src/lib/ui/searchEntry.ts:154
 msgid "__Text"
 msgstr "文本(_T)"
 
-#: src/lib/ui/searchEntry.ts:153
+#: src/lib/ui/searchEntry.ts:155
 msgid "__Code"
 msgstr "代码(_C)"
 
-#: src/lib/ui/searchEntry.ts:154
+#: src/lib/ui/searchEntry.ts:156
 msgid "__Image"
 msgstr "图片(_I)"
 
-#: src/lib/ui/searchEntry.ts:155
+#: src/lib/ui/searchEntry.ts:157
 msgid "__File"
 msgstr "文件(_F)"
 
-#: src/lib/ui/searchEntry.ts:156
+#: src/lib/ui/searchEntry.ts:158
 msgid "File__s"
 msgstr "文件(_S)"
 
-#: src/lib/ui/searchEntry.ts:157
+#: src/lib/ui/searchEntry.ts:159
 msgid "__Link"
 msgstr "链接(_L)"
 
-#: src/lib/ui/searchEntry.ts:158
+#: src/lib/ui/searchEntry.ts:160
 msgid "C__haracter"
 msgstr "字符(_H)"
 
-#: src/lib/ui/searchEntry.ts:159
+#: src/lib/ui/searchEntry.ts:161
 msgid "Colo__r"
 msgstr "颜色(_R)"
 
-#: src/lib/ui/searchEntry.ts:271
+#: src/lib/ui/searchEntry.ts:273
 msgid "Type to search"
 msgstr "输入以搜索"
 
