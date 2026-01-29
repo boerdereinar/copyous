@@ -342,8 +342,8 @@ class HighlightJsPage extends Adw.NavigationPage {
 		}
 
 		const listModel = Gio.ListStore.new(Language.$gtype);
-		for (const [name, language, hash, file] of getHljsLanguages(this.prefs)) {
-			const isDefault = defaultLanguages.includes(name);
+		for (const [name, language, hash, file, system] of getHljsLanguages(this.prefs)) {
+			const isDefault = defaultLanguages.includes(name) || system;
 			listModel.append(new Language(name, language, hash, file, isDefault));
 		}
 		listModel.sort((a: Language, b: Language) => a.language.localeCompare(b.language));
