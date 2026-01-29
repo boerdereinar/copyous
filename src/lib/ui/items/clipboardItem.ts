@@ -95,6 +95,12 @@ export class ClipboardItem extends St.Button {
 		);
 		entry.bind_property('datetime', this._header, 'datetime', GObject.BindingFlags.SYNC_CREATE);
 		entry.bind_property('tag', this._header, 'tag', GObject.BindingFlags.SYNC_CREATE);
+		entry.bind_property(
+			'title',
+			this._header,
+			'custom-title',
+			GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
+		);
 
 		// prettier-ignore
 		this.ext.settings.connectObject(
@@ -128,6 +134,7 @@ export class ClipboardItem extends St.Button {
 		this.connect('style-changed', () => this.notify('active'));
 		this._header.connect('delete', () => this.forceDelete());
 		this._header.connect('open-menu', (_, x, y, w, h) => this.emit('open-menu', x, y, w, h));
+		this._header.connect('editing-finished', () => this.grab_key_focus());
 	}
 
 	get active(): ActiveState {
@@ -203,6 +210,9 @@ export class ClipboardItem extends St.Button {
 	}
 
 	override vfunc_clicked(clicked_button: number): void {
+		// Don't activate while editing the title
+		if (this._header.isEditing) return;
+
 		if (clicked_button === 1) {
 			const event = Clutter.get_current_event();
 			if (event.has_control_modifier()) {
@@ -266,6 +276,12 @@ export class ClipboardItem extends St.Button {
 		// Edit
 		if (action === Shortcut.Edit) {
 			this.emit('edit');
+			return Clutter.EVENT_STOP;
+		}
+
+		// Edit Title
+		if (action === Shortcut.EditTitle) {
+			this._header.startEditing();
 			return Clutter.EVENT_STOP;
 		}
 

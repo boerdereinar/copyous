@@ -324,8 +324,10 @@ export class LinkItem extends ClipboardItem {
 
 	public override search(query: SearchQuery): void {
 		const metadata: LinkMetadata = { title: null, description: null, image: null, ...this.entry.metadata };
-		const params = [this.entry.content, metadata.title, metadata.description].filter((s) => s !== null);
-		this.visible = query.matchesEntry(this.visible, this.entry, ...params);
+		const searchTexts = [this.entry.content];
+		if (metadata.title) searchTexts.push(metadata.title);
+		if (metadata.description) searchTexts.push(metadata.description);
+		this.visible = query.matchesEntry(this.visible, this.entry, ...searchTexts);
 	}
 
 	private async updateLinkPreview() {

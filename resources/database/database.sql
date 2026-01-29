@@ -51,8 +51,12 @@ CREATE TABLE 'clipboard' (
 	'tag'      text,
 	'datetime' timestamp NOT NULL,
 	'metadata' text,
+	'title'    text,
 	UNIQUE ('type', 'content')
 );
+
+-- Set schema version
+PRAGMA user_version = 2;
 
 -- Add trigger to randomize timestamps while keeping the ordering
 CREATE TRIGGER decrease_time
@@ -154,6 +158,11 @@ impl From<&''a str> for State {
     ('Text', printf('%.*c', 5000, 'A'), 0, current_timestamp),
 	('Text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec viverra dui, et cursus lectus. Etiam vel placerat tortor, ut congue risus. Pellentesque convallis semper pulvinar. Nunc accumsan magna in nulla viverra sollicitudin. Suspendisse potenti. Sed volutpat dolor imperdiet semper interdum. Vivamus imperdiet risus a tortor laoreet, sit amet venenatis erat faucibus. Nam commodo dui eu posuere mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 0, current_timestamp),
 	('Text', 'Lorem ipsum dolor sit amet.', 0, current_timestamp);
+
+-- Title test cases
+INSERT INTO 'clipboard' ('type', 'content', 'pinned', 'datetime', 'title') VALUES
+	('Text', 'Item with short title', 0, current_timestamp, 'Short'),
+	('Text', 'Item with a long title that should be truncated with ellipsis when it exceeds the available width', 0, current_timestamp, 'This is a very long custom title that should test the ellipsis truncation behavior');
 
 -- Remove trigger
 DROP TRIGGER decrease_time;

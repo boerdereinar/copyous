@@ -85,7 +85,9 @@ export class SearchQuery extends GObject.Object {
 		if (this.change === SearchChange.LessStrict && state) return true;
 		if (this.change === SearchChange.MoreStrict && !state) return false;
 
-		return this.matchesProperties(entry.pinned, entry.tag, entry.type) && this.matchesQuery(...text);
+		// Include entry title in search texts
+		const searchTexts = entry.title ? [...text, entry.title] : text;
+		return this.matchesProperties(entry.pinned, entry.tag, entry.type) && this.matchesQuery(...searchTexts);
 	}
 
 	public withChange(change: SearchChange): SearchQuery {

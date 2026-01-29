@@ -76,6 +76,14 @@
 				font-weight: bold;
 			}
 
+			// Title entry (inline editing)
+			.clipboard-item-title-entry {
+				@extend %reset;
+				font-weight: bold;
+				padding-top: $base_padding - 1px;
+				color: $fg_color;
+			}
+
 			// Time label
 			.event-time {
 				@extend %caption;
