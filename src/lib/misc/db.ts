@@ -568,14 +568,15 @@ export class GdaDatabase implements Database {
 						'tag'      text,
 						'datetime' timestamp NOT NULL,
 						'metadata' text,
+						'title'    text,
 						UNIQUE ('type', 'content')
 					);
 				`);
 				await async_statement_execute_non_select(this._Gda, this._connection, stmt, this._cancellable);
+				break;
 			}
-			/* falls through */
 			case 1: {
-				// Add title column
+				// Add title column for existing databases
 				const [addColumnStmt] = this._connection.parse_sql_string(
 					`ALTER TABLE 'clipboard' ADD COLUMN 'title' text;`,
 				);
