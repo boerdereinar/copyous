@@ -67,6 +67,9 @@ export default class CopyousExtension extends Extension {
 			await this.clipboardManager?.pasteEntry(entry);
 			this.indicator?.showEntry(entry);
 		});
+		this.clipboardDialog.connect('clear-history', (_, history: ClipboardHistory) =>
+			this.entryTracker?.clear(history),
+		);
 
 		this.indicator = new ClipboardIndicator(this);
 		this.indicator.connect('open-dialog', () => this.clipboardDialog?.open());

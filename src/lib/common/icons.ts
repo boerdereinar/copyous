@@ -14,6 +14,8 @@ export const Icon = {
 	File: 'file-symbolic',
 	Folder: 'folder-symbolic',
 	Image: 'image-symbolic',
+	Incognito: 'incognito-symbolic',
+	IncognitoDisabled: 'incognito-disabled-symbolic',
 	Keyboard: 'keyboard-symbolic',
 	Link: 'link-symbolic',
 	Pin: 'pin-symbolic',

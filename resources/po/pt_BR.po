@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-07 17:29+0000\n"
+"POT-Creation-Date: 2026-01-29 15:55+0000\n"
 "PO-Revision-Date: 2025-12-01 18:02-0300\n"
 "Last-Translator: Murilo Leal <murilormleal@outlook.com>\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -47,8 +47,8 @@ msgid ""
 "Dynamically adjust the height of the clipboard items based on their content. "
 "Only works in vertical orientation"
 msgstr ""
-"Ajustar a altura dinamicamente dos itens da área de transferência baseado no conteúdo. "
-"Funciona apenas na orientação vertical"
+"Ajustar a altura dinamicamente dos itens da área de transferência baseado no "
+"conteúdo. Funciona apenas na orientação vertical"
 
 #: src/lib/preferences/customization/itemCustomization.ts:53
 msgid "Tab Width"
@@ -607,7 +607,8 @@ msgstr "Miniatura"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:89
 msgid "Enable file previews for all files with generated thumbnails"
-msgstr "Habilitar prévias de arquivo para todos os arquivos com miniaturas geradas"
+msgstr ""
+"Habilitar prévias de arquivo para todos os arquivos com miniaturas geradas"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:101
 msgid "Enter a glob pattern to exclude files that should not have a preview."
@@ -1126,7 +1127,7 @@ msgstr "Salvar"
 #: src/lib/preferences/general/feedbackSettings.ts:155
 #: src/lib/preferences/general/feedbackSettings.ts:259
 #: src/lib/preferences/general/feedbackSettings.ts:301
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:38
 #: src/lib/ui/components/editDialog.ts:231
 #: src/lib/ui/components/editDialog.ts:258
 msgid "None"
@@ -1183,7 +1184,9 @@ msgstr ""
 "Escolha o que fazer com o histórico da área de transferência ao reiniciar, "
 "fazer logout ou desligar o sistema"
 
-#: src/lib/preferences/general/historySettings.ts:64 src/lib/ui/indicator.ts:52
+#: src/lib/preferences/general/historySettings.ts:64
+#: src/lib/ui/clipboardDialog.ts:129 src/lib/ui/clipboardDialog.ts:234
+#: src/lib/ui/indicator.ts:52
 msgid "Clear"
 msgstr "Limpar"
 
@@ -1212,8 +1215,8 @@ msgid ""
 "Select how many minutes to keep items in the clipboard history. Set to 0 to "
 "disable the time limit"
 msgstr ""
-"Selecione quantos minutos manter itens no histórico da área de transferência. "
-"Defina como 0 para desativar o limite de tempo"
+"Selecione quantos minutos manter itens no histórico da área de "
+"transferência. Defina como 0 para desativar o limite de tempo"
 
 #: src/lib/preferences/general/feedbackSettings.ts:129
 #: src/lib/preferences/general/feedbackSettings.ts:251
@@ -1294,7 +1297,8 @@ msgstr "Enviar notificação"
 
 #: src/lib/preferences/general/feedbackSettings.ts:246
 msgid "Send a notification when a clipboard item is copied"
-msgstr "Enviar uma notificação quando um item da área de transferência for copiado"
+msgstr ""
+"Enviar uma notificação quando um item da área de transferência for copiado"
 
 #: src/lib/preferences/general/feedbackSettings.ts:252
 msgid "Sound to play when a clipboard item is copied"
@@ -1391,8 +1395,8 @@ msgid ""
 "Update the copied date of clipboard items when selected from clipboard "
 "history"
 msgstr ""
-"Atualizar a data de cópia dos itens da área de transferência ao selecioná-los "
-"do histórico"
+"Atualizar a data de cópia dos itens da área de transferência ao selecioná-"
+"los do histórico"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:38
 msgid "Search apps"
@@ -1433,7 +1437,9 @@ msgstr "Gerenciar Exclusões de Aplicativos"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:322
 msgid "Manage apps that will be excluded from clipboard history"
-msgstr "Gerenciar aplicativos que serão excluídos do histórico da área de transferência"
+msgstr ""
+"Gerenciar aplicativos que serão excluídos do histórico da área de "
+"transferência"
 
 #: src/lib/preferences/shortcuts/shortcutRow.ts:78
 msgid "Set Shortcut"
@@ -1516,12 +1522,12 @@ msgid "Select Item Type"
 msgstr "Selecionar Tipo de Item"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:19
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:38
 msgid "Pin Item"
 msgstr "Fixar Item"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:22
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:35
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:38
 msgid "Delete Item"
 msgstr "Excluir Item"
 
@@ -1538,18 +1544,22 @@ msgid "Only supported for text and code items"
 msgstr "Apenas suportado para itens de texto e código"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:30
+msgid "Edit Title"
+msgstr ""
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:33
 msgid "Open Menu"
 msgstr "Abrir Menu"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:34
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:37
 msgid "Middle Click Action"
 msgstr "Ação do clique do meio"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:60
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:65
 msgid "Copy Item"
 msgstr "Copiar Item"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:61
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:66
 msgid "Activate Default Action"
 msgstr "Ativar ação padrão"
 
@@ -1613,19 +1623,19 @@ msgstr "Caractere copiado"
 msgid "Copied Color"
 msgstr "Cor copiada"
 
-#: src/lib/misc/db.ts:128
+#: src/lib/misc/db.ts:132
 msgid "Failed to load Gda"
 msgstr "Falha ao carregar Gda"
 
-#: src/lib/misc/db.ts:129 src/lib/misc/db.ts:154
+#: src/lib/misc/db.ts:133 src/lib/misc/db.ts:158
 msgid "Clipboard history will be disabled"
 msgstr "O histórico da área de transferência será desativado"
 
-#: src/lib/misc/db.ts:130
+#: src/lib/misc/db.ts:134
 msgid "Disable Warning"
 msgstr "Desativar aviso"
 
-#: src/lib/misc/db.ts:153
+#: src/lib/misc/db.ts:157
 msgid "Failed to load database"
 msgstr "Falha ao carregar banco de dados"
 
@@ -1681,43 +1691,43 @@ msgstr "Editar Item da Área de Transferência"
 msgid "Close"
 msgstr "Fechar"
 
-#: src/lib/ui/searchEntry.ts:148
+#: src/lib/ui/searchEntry.ts:150
 msgid "__All"
 msgstr "__Tudo"
 
-#: src/lib/ui/searchEntry.ts:152
+#: src/lib/ui/searchEntry.ts:154
 msgid "__Text"
 msgstr "__Texto"
 
-#: src/lib/ui/searchEntry.ts:153
+#: src/lib/ui/searchEntry.ts:155
 msgid "__Code"
 msgstr "__Código"
 
-#: src/lib/ui/searchEntry.ts:154
+#: src/lib/ui/searchEntry.ts:156
 msgid "__Image"
 msgstr "__Imagem"
 
-#: src/lib/ui/searchEntry.ts:155
+#: src/lib/ui/searchEntry.ts:157
 msgid "__File"
 msgstr "__Arquivo"
 
-#: src/lib/ui/searchEntry.ts:156
+#: src/lib/ui/searchEntry.ts:158
 msgid "File__s"
 msgstr "Arquivos__s"
 
-#: src/lib/ui/searchEntry.ts:157
+#: src/lib/ui/searchEntry.ts:159
 msgid "__Link"
 msgstr "__Link"
 
-#: src/lib/ui/searchEntry.ts:158
+#: src/lib/ui/searchEntry.ts:160
 msgid "C__haracter"
 msgstr "C__ractere"
 
-#: src/lib/ui/searchEntry.ts:159
+#: src/lib/ui/searchEntry.ts:161
 msgid "Colo__r"
 msgstr "Co__r"
 
-#: src/lib/ui/searchEntry.ts:272
+#: src/lib/ui/searchEntry.ts:273
 msgid "Type to search"
 msgstr "Digite para pesquisar"
 

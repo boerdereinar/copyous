@@ -12,7 +12,7 @@ interface ConstructorProps {
  * @param text The text to trim
  */
 export function trim(text: string): string {
-	return text.replace(/^(\s*\n)*/, '').replace(/(\n\s*)*$/, '');
+	return text.replace(/^([ \t]*\n)*/, '').replace(/(\n[ \t]*)*$/, '');
 }
 
 /**
@@ -37,13 +37,13 @@ export function normalizeIndentation(text: string, tabWidth: number): string {
 
 @registerClass({
 	Properties: {
-		'text': GObject.ParamSpec.string('text', null, null, GObject.ParamFlags.READWRITE, ''),
+		'label': GObject.ParamSpec.string('label', null, null, GObject.ParamFlags.READWRITE, ''),
 		'tab-width': GObject.ParamSpec.int('tab-width', null, null, GObject.ParamFlags.READWRITE, 1, 8, 4),
 	},
 })
 export class Label extends St.Label {
 	private _tabWidth: number = 4;
-	private _text: string = '';
+	private _label: string = '';
 
 	constructor(props: Partial<St.Label.ConstructorProps> & Partial<ConstructorProps>) {
 		super(props);
@@ -57,16 +57,16 @@ export class Label extends St.Label {
 		this.updateLabel();
 	}
 
-	override get text() {
-		return this._text;
+	get label() {
+		return this._label;
 	}
 
-	override set text(text: string) {
-		if (this._text === text) return;
+	set label(text: string) {
+		if (this._label === text) return;
 
-		this._text = text;
+		this._label = text;
 		this.updateLabel();
-		this.notify('text');
+		this.notify('label');
 	}
 
 	get tabWidth() {
@@ -81,6 +81,6 @@ export class Label extends St.Label {
 	}
 
 	private updateLabel() {
-		this.clutter_text.text = normalizeIndentation(trim(this.text), this.tabWidth);
+		this.text = normalizeIndentation(trim(this.label), this.tabWidth);
 	}
 }

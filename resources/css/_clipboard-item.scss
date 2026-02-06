@@ -76,6 +76,14 @@
 				font-weight: bold;
 			}
 
+			// Title entry (inline editing)
+			.clipboard-item-title-entry {
+				@extend %reset;
+				font-weight: bold;
+				padding-top: $base_padding - 1px;
+				color: $fg_color;
+			}
+
 			// Time label
 			.event-time {
 				@extend %caption;
@@ -280,11 +288,11 @@
 			.content-preview {
 				margin: 0;
 				border: none;
-				border-radius: $base_border_radius * 1.5 - 1px;
+				border-radius: $base_border_radius * 2 - 1px;
 
 				.image-box,
 				.color-box {
-					border-radius: $base_border_radius * 1.5 - 1px;
+					border-radius: $base_border_radius * 2 - 1px;
 				}
 			}
 		}

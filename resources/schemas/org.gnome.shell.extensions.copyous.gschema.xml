@@ -321,6 +321,10 @@
 			<default>['&lt;Control&gt;e']</default>
 			<summary>Shortcut to edit a clipboard item</summary>
 		</key>
+		<key name="edit-title-shortcut" type="as">
+			<default>['&lt;Control&gt;t']</default>
+			<summary>Shortcut to edit the title of a clipboard item</summary>
+		</key>
 		<key name="open-menu-shortcut" type="as">
 			<default>['&lt;Control&gt;a']</default>
 			<summary>Shortcut to open the menu of a clipboard item</summary>
