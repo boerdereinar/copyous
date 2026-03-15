@@ -575,20 +575,11 @@ export class GdaDatabase implements Database {
 			}
 			/* falls through */
 			case 1: {
-				// Add title column (ignore error if column already exists)
-				try {
-					const [addColumnStmt] = this._connection.parse_sql_string(
-						`ALTER TABLE 'clipboard' ADD COLUMN 'title' text;`,
-					);
-					await async_statement_execute_non_select(
-						this._Gda,
-						this._connection,
-						addColumnStmt,
-						this._cancellable,
-					);
-				} catch {
-					// Column may already exist from a previous migration attempt
-				}
+				// Add title column
+				const [addColumnStmt] = this._connection.parse_sql_string(
+					`ALTER TABLE 'clipboard' ADD COLUMN 'title' text;`,
+				);
+				await async_statement_execute_non_select(this._Gda, this._connection, addColumnStmt, this._cancellable);
 			}
 		}
 
