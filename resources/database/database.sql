@@ -55,8 +55,14 @@ CREATE TABLE 'clipboard' (
 	UNIQUE ('type', 'content')
 );
 
--- Set schema version
-PRAGMA user_version = 2;
+-- Set version
+DROP TABLE IF EXISTS 'clipboard_version';
+CREATE TABLE 'clipboard_version' (
+	'id'      integer PRIMARY KEY CHECK (id = 1),
+	'version' integer
+);
+
+INSERT INTO 'clipboard_version' (id, version) VALUES (1, 2);
 
 -- Add trigger to randomize timestamps while keeping the ordering
 CREATE TRIGGER decrease_time
