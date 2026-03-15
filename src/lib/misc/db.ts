@@ -18,6 +18,8 @@ import {
 } from './gda.js';
 import { getLinkImagePath } from './link.js';
 
+const DATABASE_VERSION = 2;
+
 export type Metadata = CodeMetadata | FileMetadata | LinkMetadata;
 
 export interface Language {
@@ -542,18 +544,43 @@ export class GdaDatabase implements Database {
 
 	public async init(): Promise<void> {
 		await open_async(this._connection);
+		this.ext.logger.info('Opened database connection');
+
+		// Version table
+		const [versionTableStmt] = this._connection.parse_sql_string(`
+			CREATE TABLE IF NOT EXISTS 'clipboard_version' (
+				'id'      integer PRIMARY KEY CHECK (id = 1),
+				'version' integer
+			)`);
+		await async_statement_execute_non_select(this._Gda, this._connection, versionTableStmt, this._cancellable);
 
 		// Get current schema version
-		const [versionStmt] = this._connection.parse_sql_string(`PRAGMA user_version;`);
-		const versionResult = await async_statement_execute_select<{ user_version: number }>(
+		// SELECT (version) FROM 'clipboard_version'
+		const builder1 = new this._Gda.SqlBuilder({ stmt_type: this._Gda.SqlStatementType.SELECT });
+		builder1.select_add_target('clipboard_version', null);
+		builder1.select_add_field('version', null, null);
+		const versionStmt = builder1.get_statement();
+
+		const versionResult = await async_statement_execute_select<{ version: number }>(
 			this._Gda,
 			this._connection,
 			versionStmt,
 			this._cancellable,
 		);
-		const versionIter = versionResult.create_iter();
-		versionIter.move_next();
-		const version = (versionIter.get_value_at(0) as number | null) ?? 0;
+
+		let version = 0;
+		if (versionResult.get_n_rows() > 0) {
+			// Get version
+			const versionIter = versionResult.create_iter();
+			versionIter.move_next();
+			version = versionIter.get_value_for_field('version');
+		} else {
+			// Insert default version
+			const [addVersionStmt] = this._connection.parse_sql_string(
+				`INSERT OR IGNORE INTO clipboard_version (id, version) VALUES (1, 0)`,
+			);
+			await async_statement_execute_non_select(this._Gda, this._connection, addVersionStmt, this._cancellable);
+		}
 
 		// Run migrations based on version
 		switch (version) {
@@ -575,18 +602,33 @@ export class GdaDatabase implements Database {
 			}
 			/* falls through */
 			case 1: {
-				// Add title column
-				const [addColumnStmt] = this._connection.parse_sql_string(
-					`ALTER TABLE 'clipboard' ADD COLUMN 'title' text;`,
-				);
-				await async_statement_execute_non_select(this._Gda, this._connection, addColumnStmt, this._cancellable);
+				try {
+					// Add title column
+					const [addColumnStmt] = this._connection.parse_sql_string(
+						`ALTER TABLE 'clipboard' ADD COLUMN 'title' text;`,
+					);
+					await async_statement_execute_non_select(
+						this._Gda,
+						this._connection,
+						addColumnStmt,
+						this._cancellable,
+					);
+				} catch {
+					// Ignore
+				}
 			}
 		}
 
-		// Update to current version (use execute_select since libgda treats PRAGMA as SELECT)
-		if (version !== 2) {
-			const [setVersionStmt] = this._connection.parse_sql_string(`PRAGMA user_version = 2;`);
-			await async_statement_execute_select(this._Gda, this._connection, setVersionStmt, this._cancellable);
+		// Update to current version
+		if (version !== DATABASE_VERSION) {
+			// UPDATE 'version' SET version=DATABASE_VERSION
+			const builder2 = new this._Gda.SqlBuilder({ stmt_type: this._Gda.SqlStatementType.UPDATE });
+			builder2.set_table('clipboard_version');
+			builder2.add_field_value_id(builder2.add_id('version'), add_expr_value(builder2, DATABASE_VERSION));
+			const setVersionStmt = builder2.get_statement();
+			await async_statement_execute_non_select(this._Gda, this._connection, setVersionStmt, this._cancellable);
+
+			this.ext.logger.log(`Migrated database version from ${version} to ${DATABASE_VERSION}.`);
 		}
 	}
 

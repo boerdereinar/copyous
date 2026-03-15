@@ -45,11 +45,19 @@ export function new_connection(Gda: typeof Gda5, cncString: string): Gda5.Connec
 }
 
 export function open_async(connection: Gda5.Connection | Gda6.Connection): Promise<boolean> {
-	return new Promise((resolve) => {
+	return new Promise((resolve, reject) => {
 		if ('open_async' in connection) {
 			// Gda 6
-			connection.set_main_context(null, GLib.MainContext.ref_thread_default());
-			connection.open_async((_cnc, _jobId, result) => resolve(result));
+			GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+				try {
+					connection.set_main_context(null, GLib.MainContext.ref_thread_default());
+					connection.open_async((_cnc, _jobId, result) => resolve(result));
+				} catch (error) {
+					reject(error as Error);
+				}
+
+				return GLib.SOURCE_REMOVE;
+			});
 		} else {
 			// Gda 5
 			resolve(connection.open());
