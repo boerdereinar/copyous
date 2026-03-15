@@ -229,11 +229,13 @@ export class ClipboardIndicator extends PanelMenu.Button {
 			this.emit('open-dialog');
 			return Clutter.EVENT_STOP;
 		}
+
 		if (event.get_button() === Clutter.BUTTON_MIDDLE) {
 			this.ext.openPreferences();
 			return Clutter.EVENT_STOP;
 		}
-		return super.vfunc_button_press_event(event);
+
+		return Clutter.EVENT_PROPAGATE;
 	}
 
 	override vfunc_touch_event(event: Clutter.Event): boolean {
@@ -241,7 +243,8 @@ export class ClipboardIndicator extends PanelMenu.Button {
 			this.emit('open-dialog');
 			return Clutter.EVENT_STOP;
 		}
-		return super.vfunc_touch_event(event);
+
+		return Clutter.EVENT_PROPAGATE;
 	}
 
 	override destroy() {
