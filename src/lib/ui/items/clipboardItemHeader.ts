@@ -227,80 +227,6 @@ export class ClipboardItemHeader extends St.BoxLayout {
 		this.bind_property('pinned', this._pinButton, 'checked', GObject.BindingFlags.BIDIRECTIONAL);
 	}
 
-	public startEditing() {
-		if (this._isEditing) return;
-		this._isEditing = true;
-		this.updateHeaderControls();
-
-		// Hide the title label
-		this._headerTitle.hide();
-
-		// Create an entry for editing
-		this._titleEntry = new St.Entry({
-			style_class: 'clipboard-item-title-entry',
-			text: this._customTitle || this._defaultTitle,
-			y_align: Clutter.ActorAlign.CENTER,
-		});
-
-		// Select all text
-		this._titleEntry.clutter_text.set_selection(0, -1);
-
-		this._titleEntry.clutter_text.connect('key-press-event', (_text, event: Clutter.Event) => {
-			const key = event.get_key_symbol();
-			if (key === Clutter.KEY_Return || key === Clutter.KEY_KP_Enter) {
-				this._finishEditing(true);
-				return Clutter.EVENT_STOP;
-			} else if (key === Clutter.KEY_Escape) {
-				this._finishEditing(false);
-				return Clutter.EVENT_STOP;
-			}
-			return Clutter.EVENT_PROPAGATE;
-		});
-
-		this._titleEntry.clutter_text.connect('key-focus-out', () => {
-			if (this._isEditing) {
-				this._finishEditing(true);
-			}
-		});
-
-		// Insert entry before time label
-		this._headerContent.insert_child_below(this._titleEntry, this._timeLabel);
-		this._titleEntry.grab_key_focus();
-	}
-
-	private _finishEditing(save: boolean) {
-		if (!this._isEditing || !this._titleEntry) return;
-		this._isEditing = false;
-		this.updateHeaderControls();
-
-		// Capture entry reference before clearing
-		const entry = this._titleEntry;
-		this._titleEntry = null;
-
-		if (save) {
-			const newTitle = entry.text.trim();
-			// If empty or same as default, clear custom title
-			if (newTitle === '' || newTitle === this._defaultTitle) {
-				this.customTitle = '';
-			} else {
-				this.customTitle = newTitle;
-			}
-		}
-
-		// Show label first
-		this._headerTitle.show();
-
-		// Remove entry from container
-		this._headerContent.remove_child(entry);
-
-		// Notify parent to restore focus
-		this.emit('editing-finished');
-	}
-
-	private _updateTitleDisplay() {
-		this._headerTitle.text = this._customTitle || this._defaultTitle;
-	}
-
 	get isEditing() {
 		return this._isEditing;
 	}
@@ -420,7 +346,7 @@ export class ClipboardItemHeader extends St.BoxLayout {
 		if (this._customTitle === customTitle) return;
 
 		this._customTitle = customTitle;
-		this._updateTitleDisplay();
+		this.updateTitleDisplay();
 		this.notify('custom-title');
 	}
 
@@ -432,8 +358,85 @@ export class ClipboardItemHeader extends St.BoxLayout {
 		if (this._defaultTitle === defaultTitle) return;
 
 		this._defaultTitle = defaultTitle;
-		this._updateTitleDisplay();
+		this.updateTitleDisplay();
 		this.notify('default-title');
+	}
+
+	public startEditing() {
+		if (this._isEditing) return;
+		this._isEditing = true;
+		this.updateHeaderControls();
+		this.updateTitleDisplay();
+
+		// Create an entry for editing
+		this._titleEntry = new St.Entry({
+			style_class: 'clipboard-item-title-entry',
+			text: this._customTitle || this._defaultTitle,
+			y_align: Clutter.ActorAlign.CENTER,
+		});
+
+		// Select all text
+		this._titleEntry.clutter_text.set_selection(0, -1);
+
+		this._titleEntry.clutter_text.connect('key-press-event', (_text, event: Clutter.Event) => {
+			const key = event.get_key_symbol();
+			if (key === Clutter.KEY_Return || key === Clutter.KEY_KP_Enter) {
+				this.finishEditing(true);
+				return Clutter.EVENT_STOP;
+			} else if (key === Clutter.KEY_Escape) {
+				this.finishEditing(false);
+				return Clutter.EVENT_STOP;
+			}
+			return Clutter.EVENT_PROPAGATE;
+		});
+
+		this._titleEntry.clutter_text.connect('key-focus-out', () => {
+			if (this._isEditing) {
+				this.finishEditing(true);
+			}
+		});
+
+		// Insert entry before time label
+		this._headerContent.insert_child_below(this._titleEntry, this._timeLabel);
+		this._titleEntry.grab_key_focus();
+	}
+
+	private finishEditing(save: boolean) {
+		if (!this._isEditing || !this._titleEntry) return;
+		this._isEditing = false;
+		this.updateHeaderControls();
+		this.updateTitleDisplay();
+
+		// Capture entry reference before clearing
+		const entry = this._titleEntry;
+		this._titleEntry = null;
+
+		if (save) {
+			const newTitle = entry.text.trim();
+			// If empty or same as default, clear custom title
+			if (newTitle === '' || newTitle === this._defaultTitle) {
+				this.customTitle = '';
+			} else {
+				this.customTitle = newTitle;
+			}
+		}
+
+		// Remove entry from container
+		this._headerContent.remove_child(entry);
+
+		// Notify parent to restore focus
+		this.emit('editing-finished');
+	}
+
+	private updateTitleDisplay() {
+		if (this._isEditing) {
+			this._headerTitle.hide();
+			this._timeLabel.hide();
+		} else {
+			this._headerTitle.show();
+			this._headerTitle.text = this.customTitle || this._defaultTitle;
+			this._timeLabel.visible = this.customTitle === '';
+		}
 	}
 
 	private updateHeaderControls() {
