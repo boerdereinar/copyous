@@ -39,6 +39,11 @@
 		<value nick="light" value="1"/>
 	</enum>
 
+	<enum id="org.gnome.shell.extensions.copyous.OpenClipboardDialogBehavior">
+		<value nick="toggle" value="0"/>
+		<value nick="open-or-select-next" value="1"/>
+	</enum>
+
 	<enum id="org.gnome.shell.extensions.copyous.MiddleClickAction">
 		<value nick="none" value="0"/>
 		<value nick="pin" value="1"/>
@@ -307,6 +312,10 @@
 		<key name="toggle-incognito-mode-shortcut" type="as">
 			<default>['&lt;Super&gt;&lt;Control&gt;&lt;Shift&gt;v']</default>
 			<summary>Shortcut to toggle incognito mode</summary>
+		</key>
+		<key name="open-clipboard-dialog-behavior" enum="org.gnome.shell.extensions.copyous.OpenClipboardDialogBehavior">
+			<default>'toggle'</default>
+			<summary>Behavior of the open clipboard dialog shortcut when the dialog is open/closed.</summary>
 		</key>
 
 		<key name="pin-item-shortcut" type="as">

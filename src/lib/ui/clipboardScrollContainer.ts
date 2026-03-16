@@ -212,6 +212,25 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 		return false;
 	}
 
+	public selectNextItem() {
+		let focusChild: ClipboardItem | null = null;
+
+		for (const child of this.get_children()) {
+			if (focusChild === null && child instanceof ClipboardItem && child.visible) {
+				focusChild = child;
+			}
+
+			if (child.has_key_focus()) {
+				this.nextFocus(child);
+				return;
+			}
+		}
+
+		if (focusChild !== null) {
+			this.focusChild(focusChild);
+		}
+	}
+
 	public search(query: SearchQuery): void {
 		// Copy search query, but with SearchChange.Different to always force re-search
 		this._lastQuery = query.withChange(SearchChange.Different);

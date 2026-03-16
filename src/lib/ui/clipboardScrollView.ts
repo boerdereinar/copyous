@@ -90,6 +90,10 @@ export class ClipboardScrollView extends St.ScrollView {
 		return this._scrollContainer.selectItem(index);
 	}
 
+	public selectNextItem() {
+		this._scrollContainer.selectNextItem();
+	}
+
 	public search(query: SearchQuery) {
 		this._scrollContainer.search(query);
 	}

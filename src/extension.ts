@@ -94,7 +94,7 @@ export default class CopyousExtension extends Extension {
 
 		// Shortcuts
 		this.shortcutsManager = new ShortcutManager(this, this.clipboardDialog);
-		this.shortcutsManager.connect('open-clipboard-dialog', () => this.clipboardDialog?.toggle());
+		this.shortcutsManager.connect('open-clipboard-dialog', () => this.clipboardDialog?.dialogShortcut());
 		this.shortcutsManager.connect('toggle-incognito-mode', () => this.indicator?.toggleIncognito());
 
 		// Database

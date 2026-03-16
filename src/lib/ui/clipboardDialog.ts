@@ -35,6 +35,14 @@ import { SearchEntry, SearchQuery } from './searchEntry.js';
 
 const ANIMATION_TIME = 150;
 
+export const OpenClipboardDialogBehavior = {
+	Toggle: 0,
+	OpenOrSelectNext: 1,
+} as const;
+
+export type OpenClipboardDialogBehavior =
+	(typeof OpenClipboardDialogBehavior)[keyof typeof OpenClipboardDialogBehavior];
+
 @registerClass()
 class IncognitoButton extends St.Button {
 	private readonly _incognitoIcon: Gio.Icon;
@@ -607,6 +615,16 @@ export class ClipboardDialog extends St.Widget {
 		});
 
 		this._scrollView.addItem(item);
+	}
+
+	public dialogShortcut() {
+		const behavior = this.ext.settings.get_enum('open-clipboard-dialog-behavior') as OpenClipboardDialogBehavior;
+		if (behavior === OpenClipboardDialogBehavior.Toggle) {
+			this.toggle();
+		} else if (behavior === OpenClipboardDialogBehavior.OpenOrSelectNext) {
+			if (!this.opened) this.open();
+			else this._scrollView.selectNextItem();
+		}
 	}
 
 	public clearEntries() {
