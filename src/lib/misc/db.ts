@@ -32,8 +32,8 @@ export interface CodeMetadata {
 }
 
 export const FileOperation = {
-	Copy: 'COPY',
-	Cut: 'CUT',
+	Copy: 'copy',
+	Cut: 'cut',
 } as const;
 
 export type FileOperation = (typeof FileOperation)[keyof typeof FileOperation];

@@ -20,7 +20,7 @@ Gio._promisify(Meta.SelectionSource.prototype, 'read_async');
 const MimeTypes = {
 	Text: ['text/plain;charset=utf-8', 'UTF8_STRING', 'text/plain', 'STRING'],
 	Image: ['image/png', 'image/jxl', 'image/webp', 'image/avif', 'image/jpeg'],
-	File: ['x-special-gnome-copied-files', 'text/uri-list'],
+	File: ['x-special/gnome-copied-files', 'text/uri-list'],
 	Sensitive: ['x-kde-passwordManagerHint'],
 } as const;
 
@@ -305,8 +305,9 @@ export class ClipboardManager extends GObject.Object {
 					.split('\n')
 					.map((f) => f.trim())
 					.filter((f) => f.length !== 0);
-				if (files[0] === FileOperation.Copy || files[0] === FileOperation.Cut) {
-					return { type: ContentType.File, paths: files.slice(1), operation: files[0] };
+				const operation = files[0]?.toLowerCase();
+				if (operation === FileOperation.Copy || operation === FileOperation.Cut) {
+					return { type: ContentType.File, paths: files.slice(1), operation };
 				} else {
 					return { type: ContentType.File, paths: files, operation: FileOperation.Copy };
 				}
