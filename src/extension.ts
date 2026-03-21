@@ -9,8 +9,9 @@ import type { LanguageFn } from 'highlight.js';
 import { ClipboardHistory, getDataPath, getHljsLanguages, getHljsPath } from './lib/common/constants.js';
 import { DbusService } from './lib/common/dbus.js';
 import { SoundManager, tryCreateSoundManager } from './lib/common/sound.js';
+import { ClipboardEntry } from './lib/database/database.js';
+import { ClipboardEntryTracker } from './lib/database/entryTracker.js';
 import { ClipboardManager } from './lib/misc/clipboard.js';
-import { ClipboardEntry, ClipboardEntryTracker } from './lib/misc/db.js';
 import { NotificationManager } from './lib/misc/notifications.js';
 import { ShortcutManager } from './lib/misc/shortcuts.js';
 import { ThemeManager } from './lib/misc/theme.js';
@@ -105,7 +106,7 @@ export default class CopyousExtension extends Extension {
 		this.settings.connectObject(
 			'changed::database-location',
 			this.initEntryTracker.bind(this),
-			'changed::in-memory-database',
+			'changed::database-backend',
 			this.initEntryTracker.bind(this),
 			'changed::history-time',
 			this.initHistoryTimeout.bind(this),
@@ -218,7 +219,7 @@ export default class CopyousExtension extends Extension {
 	}
 
 	private async initEntryTracker() {
-		if (!this.entryTracker) return;
+		if (!this.entryTracker || !this.entryTracker.shouldInit) return;
 
 		this.clipboardDialog?.clearEntries();
 		const entries = await this.entryTracker.init();
@@ -301,7 +302,10 @@ export default class CopyousExtension extends Extension {
 		try {
 			const environment = GLib.get_environ();
 			const settings = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_SCHEMA');
-			if (settings) schema ??= this.metadata['settings-schema'] + '.debug';
+			if (settings) {
+				this.getLogger().log('Using debug schema');
+				schema ??= this.metadata['settings-schema'] + '.debug';
+			}
 
 			return super.getSettings(schema);
 		} catch {

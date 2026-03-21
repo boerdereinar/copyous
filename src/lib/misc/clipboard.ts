@@ -9,7 +9,8 @@ import type CopyousExtension from '../../extension.js';
 import { Color } from '../common/color.js';
 import { ItemType, getImagesPath } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
-import { ClipboardEntry, ClipboardEntryTracker, FileOperation, Metadata } from './db.js';
+import { ClipboardEntry, FileOperation, Metadata } from '../database/database.js';
+import { ClipboardEntryTracker } from '../database/entryTracker.js';
 import { Keyboard } from './keyboard.js';
 
 Gio._promisify(Gio.File.prototype, 'load_contents_async');

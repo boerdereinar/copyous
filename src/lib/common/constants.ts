@@ -64,6 +64,15 @@ export const ActiveState = {
 
 export type ActiveState = (typeof ActiveState)[keyof typeof ActiveState];
 
+export const DatabaseBackend = {
+	Default: 0,
+	Memory: 1,
+	Sqlite: 2,
+	Json: 3,
+};
+
+export type DatabaseBackend = (typeof DatabaseBackend)[keyof typeof DatabaseBackend];
+
 export const ClipboardHistory = {
 	Clear: 0,
 	KeepPinnedAndTagged: 1,
@@ -307,6 +316,12 @@ export function getConfigPath(ext: Extension | ExtensionPreferences): Gio.File {
 
 export function getActionsConfigPath(ext: Extension | ExtensionPreferences): Gio.File {
 	return getConfigPath(ext).get_child('actions.json');
+}
+
+export function getDefaultDatabaseFile(ext: Extension | ExtensionPreferences, backend: DatabaseBackend): Gio.File {
+	return backend === DatabaseBackend.Json
+		? getDataPath(ext).get_child('database.json')
+		: getDataPath(ext).get_child('database.db');
 }
 
 export function getHljsPath(ext: Extension | ExtensionPreferences): Gio.File {

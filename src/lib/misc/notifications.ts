@@ -13,9 +13,9 @@ import type CopyousExtension from '../../extension.js';
 import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
+import { ClipboardEntry } from '../database/database.js';
 import { normalizeIndentation, trim } from '../ui/components/label.js';
 import { commonDirectory } from '../ui/items/filesItem.js';
-import { ClipboardEntry } from './db.js';
 
 @registerClass()
 export class NotificationManager extends GObject.Object {

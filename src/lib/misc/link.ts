@@ -6,7 +6,7 @@ import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
 import type CopyousExtension from '../../extension.js';
 import { UserAgent, getCachePath } from '../common/constants.js';
-import { LinkMetadata } from './db.js';
+import { LinkMetadata } from '../database/database.js';
 
 import OutputStreamSpliceFlags = Gio.OutputStreamSpliceFlags;
 

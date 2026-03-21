@@ -8,7 +8,7 @@ import { gettext as _, ngettext } from 'resource:///org/gnome/shell/extensions/e
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { ClipboardEntry } from '../../misc/db.js';
+import { ClipboardEntry } from '../../database/database.js';
 import { ContentPreview } from '../components/contentPreview.js';
 import { SearchQuery } from '../searchEntry.js';
 import { ClipboardItem } from './clipboardItem.js';

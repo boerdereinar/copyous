@@ -11,7 +11,7 @@ import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { globToRegex } from '../../common/glob.js';
 import { Icon } from '../../common/icons.js';
-import { ClipboardEntry } from '../../misc/db.js';
+import { ClipboardEntry } from '../../database/database.js';
 import { ContentInfo, createFileInfo } from '../components/contentInfo.js';
 import {
 	BackgroundSize,
