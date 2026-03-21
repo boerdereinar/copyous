@@ -19,7 +19,7 @@ import { Color } from '../common/color.js';
 import { ClipboardHistory, ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
-import { ClipboardEntry } from '../misc/db.js';
+import { ClipboardEntry } from '../database/database.js';
 
 @registerClass({
 	Signals: {

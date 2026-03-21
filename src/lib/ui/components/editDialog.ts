@@ -15,7 +15,7 @@ import type CopyousExtension from '../../../extension.js';
 import { ItemType } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
-import { ClipboardEntry, CodeMetadata, Language } from '../../misc/db.js';
+import { ClipboardEntry, CodeMetadata, Language } from '../../database/database.js';
 
 /** Entry with proper height for multiline text and event forwarding */
 @registerClass()

@@ -12,7 +12,7 @@ import type CopyousExtension from '../../extension.js';
 import { ItemType, ItemTypes, Tag, Tags } from '../common/constants.js';
 import { enumParamSpec, registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
-import { ClipboardEntry } from '../misc/db.js';
+import { ClipboardEntry } from '../database/database.js';
 import { TagsItem } from './components/tagsItem.js';
 
 function localeContains(text: string, query: string): boolean {

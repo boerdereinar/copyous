@@ -8,7 +8,7 @@ import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.j
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { ClipboardEntry } from '../../misc/db.js';
+import { ClipboardEntry } from '../../database/database.js';
 import { ClipboardItem } from './clipboardItem.js';
 
 @registerClass()

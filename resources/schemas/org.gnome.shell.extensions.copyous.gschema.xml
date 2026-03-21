@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/HEAD/gio/gschema.dtd"?>
 <schemalist>
+	<enum id="org.gnome.shell.extensions.copyous.DatabaseBackend">
+		<value nick="default" value="0"/>
+		<value nick="memory" value="1"/>
+		<value nick="sqlite" value="2"/>
+		<value nick="json" value="3"/>
+	</enum>
+
 	<enum id="org.gnome.shell.extensions.copyous.ClipboardHistory">
 		<value nick="clear" value="0"/>
 		<value nick="keep-pinned-and-tagged" value="1"/>
@@ -93,11 +100,15 @@
 		<!-- History -->
 		<key name="in-memory-database" type="b">
 			<default>false</default>
-			<summary>Store clipboard history in memory instead of on disk</summary>
+			<summary>Store clipboard history in memory instead of on disk (Deprecated)</summary>
+		</key>
+		<key name="database-backend" enum="org.gnome.shell.extensions.copyous.DatabaseBackend">
+			<default>'default'</default>
+			<summary>Selects which backend to use for the clipboard database.</summary>
 		</key>
 		<key name="database-location" type="s">
 			<default>''</default>
-			<summary>Path to the database. When empty defaults to {XDG_DATA_HOME}/{EXTENSION UUID}/clipboard.db</summary>
+			<summary>Path to the database. When empty defaults to {XDG_DATA_HOME}/{EXTENSION UUID}/clipboard.{db,json} depending on the backend.</summary>
 		</key>
 		<key name="clipboard-history" enum="org.gnome.shell.extensions.copyous.ClipboardHistory">
 			<default>'keep-pinned-and-tagged'</default>

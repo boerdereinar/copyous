@@ -18,7 +18,7 @@ import {
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 
-async function checkGda(prefs: ExtensionPreferences): Promise<boolean> {
+export async function checkGda(prefs: ExtensionPreferences): Promise<boolean> {
 	try {
 		const Gda = (await import('gi://Gda')).default;
 
@@ -105,11 +105,11 @@ class GuideDialog extends Adw.Dialog {
 		);
 
 		// Install guide
-		const gsoundInstallGuide = new Adw.PreferencesGroup({
+		const installGuide = new Adw.PreferencesGroup({
 			title: guideTitle,
 		});
-		content.append(gsoundInstallGuide);
-		gsoundInstallGuide.add(
+		content.append(installGuide);
+		installGuide.add(
 			new Adw.ActionRow({
 				title: 'Fedora',
 				subtitle: `sudo dnf install ${fedora}`,
@@ -117,7 +117,7 @@ class GuideDialog extends Adw.Dialog {
 				css_classes: ['property'],
 			}),
 		);
-		gsoundInstallGuide.add(
+		installGuide.add(
 			new Adw.ActionRow({
 				title: 'Arch Linux',
 				subtitle: `sudo pacman -S ${arch}`,
@@ -125,7 +125,7 @@ class GuideDialog extends Adw.Dialog {
 				css_classes: ['property'],
 			}),
 		);
-		gsoundInstallGuide.add(
+		installGuide.add(
 			new Adw.ActionRow({
 				title: 'Ubuntu/Debian',
 				subtitle: `sudo apt install ${ubuntu}`,
@@ -133,13 +133,32 @@ class GuideDialog extends Adw.Dialog {
 				css_classes: ['property'],
 			}),
 		);
-		gsoundInstallGuide.add(
+		installGuide.add(
 			new Adw.ActionRow({
 				title: 'OpenSUSE',
 				subtitle: `sudo zypper install ${opensuse}`,
 				subtitle_selectable: true,
 				css_classes: ['property'],
 			}),
+		);
+	}
+}
+
+@registerClass()
+export class GdaDialog extends GuideDialog {
+	constructor() {
+		super(
+			_('Libgda Not Installed'),
+			_(
+				'Libgda is required to store clipboard history between sessions. ' +
+					'Install either libgda 5.0 or 6.0 with SQLite support to use this feature. ' +
+					'After installing libgda you will need to log out or restart your system.',
+			),
+			_('Install Libgda'),
+			'libgda libgda-sqlite',
+			'libgda6',
+			'gir1.2-gda-5.0',
+			'libgda-6_0-sqlite typelib-1_0-Gda-6_0',
 		);
 	}
 }
@@ -325,22 +344,10 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 	constructor(prefs: ExtensionPreferences, window: Adw.PreferencesWindow) {
 		super({
 			icon_name: Icon.Warning,
-			css_classes: ['flat', 'warning'],
+			css_classes: ['flat'],
 		});
 
-		const gdaDialog = new GuideDialog(
-			_('Libgda Not Installed'),
-			_(
-				'Libgda is required to store clipboard history between sessions. ' +
-					'Install either libgda 5.0 or 6.0 with SQLite support to use this feature. ' +
-					'After installing libgda you will need to log out or restart your system.',
-			),
-			_('Install Libgda'),
-			'libgda libgda-sqlite',
-			'libgda6',
-			'gir1.2-gda-5.0',
-			'libgda-6_0-sqlite typelib-1_0-Gda-6_0',
-		);
+		const gdaDialog = new GdaDialog();
 
 		const gsoundDialog = new GuideDialog(
 			_('GSound Not Installed'),

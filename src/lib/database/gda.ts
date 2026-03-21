@@ -1,501 +1,225 @@
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import type Gda from 'gi://Gda';
+import type Gda5 from 'gi://Gda?version=5.0';
+import type Gda6 from 'gi://Gda?version=6.0';
 import Gio from 'gi://Gio';
 
-import type CopyousExtension from '../../extension.js';
-import { ClipboardHistory, ItemType, Tag, getDataPath } from '../common/constants.js';
-import { int32ParamSpec, registerClass } from '../common/gjs.js';
-import {
-	SqlBuilder,
-	add_expr_value,
-	async_statement_execute_non_select,
-	async_statement_execute_select,
-	convert_datetime,
-	new_connection,
-	open_async,
-	unescape_sql,
-} from './gda.js';
-import { getLinkImagePath } from './link.js';
+import CopyousExtension from '../../extension.js';
+import { ClipboardHistory, ItemType, getDataPath } from '../common/constants.js';
+import { ClipboardEntry, Database, Metadata } from './database.js';
 
 const DATABASE_VERSION = 2;
 
-export type Metadata = CodeMetadata | FileMetadata | LinkMetadata;
+interface SqlBuilder<T> extends Omit<Gda5.SqlBuilder, 'add_field_value_as_gvalue'> {
+	add_id<K extends Extract<keyof T, string>>(str: K): Gda5.SqlBuilderId;
 
-export interface Language {
-	id: string;
-	name: string;
+	select_add_field<K extends Extract<keyof T, string>>(
+		field_name: K,
+		table_name: string | null,
+		alias: string | null,
+	): Gda5.SqlBuilderId;
+
+	add_field_value_as_gvalue<K extends Extract<keyof T, string>>(key: K, value: T[K] | string): void;
 }
 
-export interface CodeMetadata {
-	language: Language | null;
+interface DataModel<T> extends Omit<Gda5.DataModel, 'create_iter'> {
+	create_iter(): DataModelIter<T>;
 }
 
-export const FileOperation = {
-	Copy: 'copy',
-	Cut: 'cut',
-} as const;
-
-export type FileOperation = (typeof FileOperation)[keyof typeof FileOperation];
-
-export interface FileMetadata {
-	operation: FileOperation;
+interface DataModelIter<T> extends Omit<Gda5.DataModelIter, 'get_value_for_field'> {
+	get_value_for_field<K extends Extract<keyof T, string>>(field_name: K): T[K];
 }
 
-export interface LinkMetadata {
-	title: string | null;
-	description: string | null;
-	image: string | null;
-}
-
-@registerClass({
-	Properties: {
-		id: int32ParamSpec('id', GObject.ParamFlags.READABLE, 0),
-		type: GObject.ParamSpec.string('type', null, null, GObject.ParamFlags.READWRITE, ItemType.Text),
-		content: GObject.ParamSpec.string('content', null, null, GObject.ParamFlags.READWRITE, ''),
-		pinned: GObject.ParamSpec.boolean('pinned', null, null, GObject.ParamFlags.READWRITE, false),
-		tag: GObject.ParamSpec.string('tag', null, null, GObject.ParamFlags.READWRITE, ''),
-		datetime: GObject.ParamSpec.boxed('datetime', null, null, GObject.ParamFlags.READWRITE, GLib.DateTime),
-		metadata: GObject.ParamSpec.jsobject('metadata', null, null, GObject.ParamFlags.READWRITE),
-		title: GObject.ParamSpec.string('title', null, null, GObject.ParamFlags.READWRITE, ''),
-	},
-	Signals: {
-		delete: {},
-	},
-})
-export class ClipboardEntry extends GObject.Object {
-	private readonly _id: number;
-	declare type: ItemType;
-	declare content: string;
-	declare pinned: boolean;
-	declare tag: Tag | null;
-	declare datetime: GLib.DateTime;
-	declare metadata: Metadata | null;
-	declare title: string;
-
-	constructor(
-		id: number,
-		type: ItemType,
-		content: string,
-		pinned: boolean,
-		tag: Tag | null,
-		datetime: GLib.DateTime,
-		metadata: Metadata | null = null,
-		title: string = '',
-	) {
-		super();
-
-		this._id = id;
-		this.type = type;
-		this.content = content;
-		this.pinned = pinned;
-		this.tag = tag;
-		this.datetime = datetime;
-		this.metadata = metadata;
-		this.title = title;
-	}
-
-	get id() {
-		return this._id;
-	}
-}
-
-export class ClipboardEntryTracker {
-	private _database: Database | undefined;
-	private _entries: Map<number, ClipboardEntry> = new Map();
-
-	constructor(private ext: CopyousExtension) {}
-
-	async init(): Promise<ClipboardEntry[]> {
-		if (this._database) {
-			await this.clear();
-			await this.destroy();
-		}
-
-		try {
-			// Check if DEBUG_COPYOUS_GDA_VERSION is set
-			const environment = GLib.get_environ();
-			const gdaVersion = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_GDA_VERSION');
-			if (gdaVersion) {
-				imports.package.require({ Gda: gdaVersion });
-			}
-		} catch (err) {
-			this.ext.logger.warn(err);
-		}
-
-		let gda: typeof Gda | null = null;
-		try {
-			gda = (await import('gi://Gda')).default;
-		} catch {
-			this.ext.logger.error('Failed to load Gda');
-
-			if (!this.ext.settings.get_boolean('disable-gda-warning')) {
-				this.ext.notificationManager?.warning(
-					_('Failed to load Gda'),
-					_('Clipboard history will be disabled'),
-					[_('Disable Warning'), () => this.ext.settings.set_boolean('disable-gda-warning', true)],
-				);
-			}
-		}
-
-		if (gda) {
-			try {
-				// Create database
-				this.ext.logger.log('Using Gda', gda.__version__, 'database');
-				this._database = new GdaDatabase(this.ext, gda);
-				await this._database.init();
-
-				// First get entries and track them
-				const entries = await this._database.entries();
-				entries.forEach((entry) => this.track(entry));
-
-				// Then delete the oldest entries so that images are deleted
-				await this.deleteOldest();
-
-				return entries;
-			} catch (e) {
-				this.ext.logger.error('Failed to initialize Gda database', e);
-				this.ext.notificationManager?.warning(
-					_('Failed to load database'),
-					_('Clipboard history will be disabled'),
-				);
-			}
-		}
-
-		this.ext.logger.log('Using in-memory database');
-		this._database = new MemoryDatabase();
-		await this._database.init();
-		return [];
-	}
-
-	public async clear(history: ClipboardHistory | null = null) {
-		if (!this._database) return;
-
-		history ??= this.ext.settings.get_enum('clipboard-history') as ClipboardHistory;
-		const deleted = await this._database.clear(history);
-		deleted.forEach((id) => this.deleteFromDatabase(id));
-	}
-
-	public async destroy() {
-		await this._database?.close();
-		this._database = undefined;
-	}
-
-	/**
-	 * Inserts an entry into the database
-	 * @param type The type of the entry
-	 * @param content The content of the entry
-	 * @param metadata The metadata of the entry
-	 * @returns The inserted entry or null if the entry could not be inserted or is already tracked
-	 */
-	public async insert(
-		type: ItemType,
-		content: string,
-		metadata: Metadata | null = null,
-	): Promise<ClipboardEntry | null> {
-		const id = await this._database?.selectConflict({ type, content });
-		if (id) {
-			// Check if the entry is already tracked
-			const trackedEntry = this._entries.get(id);
-			if (trackedEntry) {
-				trackedEntry.datetime = GLib.DateTime.new_now_utc();
-				return null;
-			}
-		}
-
-		const entry = await this._database?.insert(type, content, metadata);
-		if (!entry) return null;
-
-		// Start tracking it
-		this.track(entry);
-
-		// Also delete oldest entries
-		await this.deleteOldest();
-
-		return entry;
-	}
-
-	public checkOldest(): boolean {
-		const M = this.ext.settings.get_int('history-time');
-		if (M === 0) return false;
-
-		const now = GLib.DateTime.new_now_utc();
-		const olderThan = now.add_minutes(-M)!;
-
-		for (const entry of this._entries.values()) {
-			if (entry.pinned || entry.tag) continue;
-			if (entry.datetime.compare(olderThan) < 0) return true;
-		}
-
-		return false;
-	}
-
-	public async deleteOldest() {
-		const N = this.ext.settings.get_int('history-length');
-		const M = this.ext.settings.get_int('history-time');
-		const deleted = await this._database?.deleteOldest(N, M);
-		if (deleted) deleted.forEach((id) => this.deleteFromDatabase(id));
-	}
-
-	private track(entry: ClipboardEntry) {
-		entry.connect('notify::content', async () => {
-			const id = await this._database?.updateProperty(entry, 'content');
-			// If entry conflicts with another entry, delete it
-			if (id !== undefined && id >= 0) {
-				entry.emit('delete');
-
-				// Update the date of the other entry
-				const conflicted = this._entries.get(id);
-				if (conflicted) {
-					conflicted.datetime = entry.datetime;
-				}
-			}
+function new_connection(Gda: typeof Gda5, cncString: string): Gda5.Connection {
+	if (Gda.__version__ === '6.0') {
+		// Gda 6
+		return new Gda.Connection({
+			provider: Gda.Config.get_provider('SQLite'),
+			cncString,
 		});
-		entry.connect('notify::pinned', () => this._database?.updateProperty(entry, 'pinned'));
-		entry.connect('notify::tag', () => this._database?.updateProperty(entry, 'tag'));
-		entry.connect('notify::datetime', () => this._database?.updateProperty(entry, 'datetime'));
-		entry.connect('notify::metadata', () => this._database?.updateProperty(entry, 'metadata'));
-		entry.connect('notify::title', () => this._database?.updateProperty(entry, 'title'));
-		entry.connect('delete', () => this.delete(entry));
-		this._entries?.set(entry.id, entry);
-	}
+	} else {
+		// Gda 5
+		const conn = Gda.Connection.new_from_string('SQLite', cncString, null, Gda.ConnectionOptions.THREAD_ISOLATED);
+		if (conn.cnc_string === cncString) return conn;
 
-	private async delete(entry: ClipboardEntry) {
-		if (entry.type === ItemType.Image) {
-			// Delete image
-			try {
-				const file = Gio.File.new_for_uri(entry.content);
-				if (file.query_exists(null)) {
-					file.delete(null);
-				}
-			} catch {
-				this.ext.logger.error('Failed to delete image', entry.content);
-			}
-		} else if (entry.type === ItemType.Link && entry.metadata) {
-			// Delete thumbnail image
-			const metadata: { image: string | null } = { image: null, ...entry.metadata };
-			if (metadata.image) {
+		// Workaround for database not being stored only in home location
+		// Two <user>:<password>@ pairs are required since the first is stripped at creation and the second is stripped
+		// while opening the connection.
+		cncString = `:@:@${cncString}`;
+		return Gda.Connection.new_from_string('SQLite', cncString, null, Gda.ConnectionOptions.THREAD_ISOLATED);
+	}
+}
+
+function open_async(connection: Gda5.Connection | Gda6.Connection): Promise<boolean> {
+	return new Promise((resolve, reject) => {
+		if ('open_async' in connection) {
+			// Gda 6
+			GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
 				try {
-					const file = getLinkImagePath(this.ext, metadata.image);
-					if (file?.query_exists(null)) {
-						file.delete(null);
-					}
-				} catch {
-					this.ext.logger.error('Failed to delete thumbnail image', metadata.image);
+					connection.set_main_context(null, GLib.MainContext.ref_thread_default());
+					connection.open_async((_cnc, _jobId, result) => resolve(result));
+				} catch (error) {
+					reject(error as Error);
 				}
-			}
-		}
 
-		// Delete from database if not deleted already
-		if (this._entries.has(entry.id)) {
-			await this._database?.delete(entry);
-			this._entries.delete(entry.id);
-		}
-	}
-
-	private deleteFromDatabase(id: number) {
-		const entry = this._entries.get(id);
-		if (entry) {
-			this._entries.delete(id);
-			entry.emit('delete');
-		}
-	}
-}
-
-/**
- * Clipboard database
- */
-interface Database {
-	/**
-	 * Initializes the database
-	 */
-	init(): Promise<void>;
-
-	/**
-	 * Clears the database.
-	 * @param history Which items to keep.
-	 */
-	clear(history: ClipboardHistory): Promise<number[]>;
-
-	/**
-	 * Close the connection to the database.
-	 */
-	close(): Promise<void>;
-
-	/**
-	 * Gets the entries of the database.
-	 */
-	entries(): Promise<ClipboardEntry[]>;
-
-	/**
-	 * Select a conflicting entry by its type and content.
-	 * @param entry The entry to search its conflict for.
-	 * @returns The id of the conflicting entry or null if no conflict was found.
-	 */
-	selectConflict(entry: ClipboardEntry | { type: ItemType; content: string }): Promise<number | null>;
-
-	/**
-	 * Inserts an entry into the database.
-	 * @param type The type of the entry.
-	 * @param content The content of the entry.
-	 * @param metadata Metadata of the entry.
-	 */
-	insert(type: ItemType, content: string, metadata: Metadata | null): Promise<ClipboardEntry | null>;
-
-	/**
-	 * Updates a property of an inserted database entry.
-	 * @param entry The entry to update the property of.
-	 * @param property The property of the entry to update.
-	 * @returns -1 if the property was updates, an id of a conflicting entry otherwise.
-	 */
-	updateProperty(
-		entry: ClipboardEntry,
-		property: Exclude<keyof ClipboardEntry, keyof GObject.Object>,
-	): Promise<number>;
-
-	/**
-	 * Delete an entry from the database.
-	 * @param entry The entry to delete.
-	 */
-	delete(entry: ClipboardEntry): Promise<void>;
-
-	/**
-	 * Delete the oldest entries of the database.
-	 * @param offset The number of entries to keep.
-	 * @param olderThanMinutes Items older than this value will be deleted.
-	 * @returns The ids of entries that were deleted.
-	 */
-	deleteOldest(offset: number, olderThanMinutes: number): Promise<number[]>;
-}
-
-/**
- * In memory database
- */
-class MemoryDatabase implements Database {
-	private _entries: Map<string, ClipboardEntry> = new Map();
-	private _keys: Map<number, string> = new Map();
-	private _id: number = 0;
-
-	constructor() {}
-
-	public async init(): Promise<void> {}
-
-	public clear(history: ClipboardHistory): Promise<number[]> {
-		let deleted: number[] = [];
-		switch (history) {
-			case ClipboardHistory.Clear:
-				deleted = Array.from(this._keys.keys());
-				this._entries.clear();
-				this._keys.clear();
-				break;
-			case ClipboardHistory.KeepPinnedAndTagged:
-				deleted = [];
-				for (const [key, entry] of this._entries) {
-					if (!(entry.pinned || entry.tag)) {
-						this._entries.delete(key);
-						this._keys.delete(entry.id);
-						deleted.push(entry.id);
-					}
-				}
-				break;
-			case ClipboardHistory.KeepAll:
-				break;
-		}
-
-		return Promise.resolve(deleted);
-	}
-
-	public async close(): Promise<void> {
-		await this.clear(ClipboardHistory.Clear);
-	}
-
-	public entries(): Promise<ClipboardEntry[]> {
-		const entries = Array.from(this._entries.values()).sort((a, b) => b.datetime.compare(a.datetime));
-		return Promise.resolve(entries);
-	}
-
-	public selectConflict(entry: ClipboardEntry | { type: ItemType; content: string }): Promise<number | null> {
-		const key = `${entry.type}:${entry.content}`;
-		return Promise.resolve(this._entries.get(key)?.id ?? null);
-	}
-
-	public insert(type: ItemType, content: string, metadata: Metadata | null = null): Promise<ClipboardEntry | null> {
-		const key = `${type}:${content}`;
-		const entry = this._entries.get(key);
-		if (entry) {
-			return Promise.resolve(null);
+				return GLib.SOURCE_REMOVE;
+			});
 		} else {
-			const newEntry = new ClipboardEntry(
-				this._id++,
-				type,
-				content,
-				false,
+			// Gda 5
+			resolve(connection.open());
+		}
+	});
+}
+
+function add_expr_value(builder: Gda5.SqlBuilder | Gda6.SqlBuilder | SqlBuilder<unknown>, value: unknown) {
+	if (builder.add_expr_value.length === 1) {
+		return (builder as Gda6.SqlBuilder).add_expr_value(value as GObject.Value);
+	} else {
+		return (builder as Gda5.SqlBuilder).add_expr_value(null, value as GObject.Value);
+	}
+}
+
+function convert_datetime(datetime: GLib.DateTime): string {
+	return datetime.to_utc()!.format('%Y-%m-%d %H:%M:%S')!;
+}
+
+// Unescape null values in sql since Gda.Null is not supported in gda 5
+function unescape_sql(connection: Gda5.Connection, builder: Gda5.SqlBuilder | SqlBuilder<unknown>): Gda5.Statement {
+	const bstmt = builder.get_statement();
+	const sql = connection.statement_to_sql(bstmt, bstmt.get_parameters()[1], null)[0];
+
+	const unescapedSql = sql.replace(/(?<!')'NULL'(?!')/g, 'NULL');
+	return connection.parse_sql_string(unescapedSql)[0];
+}
+
+function async_statement_execute_select<T>(
+	Gda: typeof Gda5 | typeof Gda6,
+	connection: Gda5.Connection | Gda6.Connection,
+	statement: Gda5.Statement | Gda6.Statement,
+	cancellable: Gio.Cancellable,
+): Promise<DataModel<T>> {
+	return new Promise((resolve, reject) => {
+		if ('async_statement_execute' in connection) {
+			// Gda 5
+			const id = connection.async_statement_execute(
+				statement as Gda5.Statement,
 				null,
-				GLib.DateTime.new_now_utc(),
-				metadata,
+				Gda.StatementModelUsage.RANDOM_ACCESS,
+				null,
+				false,
 			);
-			this._entries.set(key, newEntry);
-			this._keys.set(newEntry.id, key);
-			return Promise.resolve(newEntry);
-		}
-	}
 
-	public updateProperty(
-		entry: ClipboardEntry,
-		property: Exclude<keyof ClipboardEntry, keyof GObject.Object>,
-	): Promise<number> {
-		if (property !== 'content') return Promise.resolve(-1);
+			let i = 0;
+			const timeoutId = GLib.timeout_add(GLib.PRIORITY_HIGH, 100, () => {
+				try {
+					const [result] = connection.async_fetch_result(id);
+					if (result) {
+						if (result instanceof Gda.DataModel) {
+							resolve(result as DataModel<T>);
+						} else {
+							reject(new Error('Statement is not a selection statement'));
+						}
+						cancellable.disconnect(cancellableId);
+						return GLib.SOURCE_REMOVE;
+					}
 
-		const key = `${entry.type}:${entry.content}`;
-		const existingEntry = this._entries.get(key);
-		if (existingEntry) {
-			return Promise.resolve(existingEntry.id);
+					if (i >= 10) {
+						reject(new Error('Timeout'));
+						cancellable.disconnect(cancellableId);
+						return GLib.SOURCE_REMOVE;
+					}
+
+					i++;
+					cancellable.disconnect(cancellableId);
+					return GLib.SOURCE_CONTINUE;
+				} catch (error) {
+					reject(error as Error);
+					cancellable.disconnect(cancellableId);
+					return GLib.SOURCE_REMOVE;
+				}
+			});
+
+			const cancellableId = cancellable.connect(() => GLib.source_remove(timeoutId));
 		} else {
-			const prevKey = this._keys.get(entry.id);
-			if (prevKey) this._entries.delete(prevKey);
+			// Gda 6
+			GLib.idle_add(GLib.PRIORITY_HIGH, () => {
+				try {
+					const datamodel = connection.statement_execute_select(statement as Gda6.Statement, null);
+					resolve(datamodel as unknown as DataModel<T>);
+				} catch (error) {
+					reject(error as Error);
+				}
 
-			this._entries.set(key, entry);
-			this._keys.set(entry.id, key);
-			return Promise.resolve(-1);
+				return GLib.SOURCE_REMOVE;
+			});
 		}
-	}
+	});
+}
 
-	public delete(entry: ClipboardEntry): Promise<void> {
-		const key = this._keys.get(entry.id);
-		this._keys.delete(entry.id);
-		if (key) this._entries.delete(key);
+function async_statement_execute_non_select(
+	Gda: typeof Gda5 | typeof Gda6,
+	connection: Gda5.Connection | Gda6.Connection,
+	statement: Gda5.Statement | Gda6.Statement,
+	cancellable: Gio.Cancellable,
+): Promise<[number, Gda5.Set | Gda6.Set | null]> {
+	return new Promise((resolve, reject) => {
+		if ('async_statement_execute' in connection) {
+			// Gda 5
+			const id = connection.async_statement_execute(
+				statement as Gda5.Statement,
+				null,
+				Gda.StatementModelUsage.RANDOM_ACCESS,
+				null,
+				true,
+			);
 
-		return Promise.resolve();
-	}
+			let i = 0;
+			const timeoutId = GLib.timeout_add(GLib.PRIORITY_HIGH, 100, () => {
+				try {
+					const [result, lastRow] = connection.async_fetch_result(id);
+					if (result) {
+						if (result instanceof Gda.Set) {
+							const rows = result.get_holder_value('IMPACTED_ROWS') as number | null;
+							resolve([rows ?? -2, lastRow]);
+						} else {
+							reject(new Error('Statement is a selection statement'));
+						}
+						cancellable.disconnect(cancellableId);
+						return GLib.SOURCE_REMOVE;
+					}
 
-	public async deleteOldest(offset: number, olderThanMinutes: number): Promise<number[]> {
-		const entries = await this.entries();
-		let deleted = entries
-			.filter((e) => !(e.pinned || e.tag))
-			.map((e) => e.id)
-			.slice(offset);
+					if (i >= 10) {
+						reject(new Error('Timeout'));
+						cancellable.disconnect(cancellableId);
+						return GLib.SOURCE_REMOVE;
+					}
 
-		if (olderThanMinutes > 0) {
-			const now = GLib.DateTime.new_now_utc();
-			const olderThan = now.add_minutes(-olderThanMinutes)!;
-			deleted = [
-				...new Set([
-					...deleted,
-					...entries
-						.filter((e) => !(e.pinned || e.tag) && e.datetime.compare(olderThan) < 0)
-						.map((e) => e.id),
-				]),
-			];
+					i++;
+					cancellable.disconnect(cancellableId);
+					return GLib.SOURCE_CONTINUE;
+				} catch (error) {
+					reject(error as Error);
+					cancellable.disconnect(cancellableId);
+					return GLib.SOURCE_REMOVE;
+				}
+			});
+
+			const cancellableId = cancellable.connect(() => GLib.source_remove(timeoutId));
+		} else {
+			// Gda 6
+			GLib.idle_add(GLib.PRIORITY_HIGH, () => {
+				try {
+					const result = connection.statement_execute_non_select(statement as Gda6.Statement, null);
+					resolve(result);
+				} catch (error) {
+					reject(error as Error);
+				}
+
+				return GLib.SOURCE_REMOVE;
+			});
 		}
-
-		for (const id of deleted) {
-			const key = this._keys.get(id);
-			this._keys.delete(id);
-			if (key) this._entries.delete(key);
-		}
-
-		return deleted;
-	}
+	});
 }
 
 // Remove double backslashes since libgda's sqlite escaping is broken
@@ -514,31 +238,24 @@ export class GdaDatabase implements Database {
 	constructor(
 		private ext: CopyousExtension,
 		gda: typeof Gda,
+		file: Gio.File | null,
 	) {
 		this._Gda = gda;
 
-		const location = this.ext.settings.get_string('database-location');
-		const inMemory = this.ext.settings.get_boolean('in-memory-database');
+		let cncString: string;
+		if (file) {
+			const dir = file.get_parent() ?? getDataPath(ext);
+			if (!dir.query_exists(null)) {
+				dir.make_directory_with_parents(null);
+			}
 
-		// Check if DEBUG_COPYOUS_DBPATH is set
-		const environment = GLib.get_environ();
-		const debugPath = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_DBPATH');
-		if (debugPath) ext.logger.log('Using debug database');
-
-		// Get database location or use default ${XDG_DATA_HOME}/${EXTENSION UUID}
-		const database = Gio.File.new_for_path(debugPath ?? location);
-		const dir = database.get_parent() ?? getDataPath(ext);
-
-		// Use in memory database :memory:, database name, or default clipboard.db
-		const file = inMemory ? ':memory:' : (database.get_basename() ?? 'clipboard.db');
-
-		// Create database directory
-		if (!dir.query_exists(null)) {
-			dir.make_directory_with_parents(null);
+			const fileName = file.get_basename()?.replace(/\.db$/, '') ?? 'clipboard';
+			cncString = `DB_DIR=${dir.get_path()};DB_NAME=${fileName}`;
+		} else {
+			cncString = 'DB_NAME=:memory:';
 		}
 
 		// Establish connection
-		const cncString = `DB_DIR=${dir.get_path()};DB_NAME=${file.replace(/\.db$/, '')}`;
 		this._connection = new_connection(this._Gda, cncString);
 	}
 
@@ -843,14 +560,14 @@ export class GdaDatabase implements Database {
 		return null;
 	}
 
-	public async updateProperty(
+	public async updateProperty<K extends Exclude<keyof ClipboardEntry, keyof GObject.Object | 'id'>>(
 		entry: ClipboardEntry,
-		property: Exclude<keyof ClipboardEntry, keyof GObject.Object>,
+		property: K,
 	): Promise<number> {
 		try {
 			let value = entry[property] ?? 'NULL';
-			if (property === 'metadata') value = JSON.stringify(entry[property]);
-			else if (property === 'datetime') value = convert_datetime(entry[property]);
+			if (property === 'metadata') value = JSON.stringify(entry['metadata']);
+			else if (property === 'datetime') value = convert_datetime(entry['datetime']);
 
 			// UPDATE table
 			// SET property = entry.property
@@ -892,7 +609,7 @@ export class GdaDatabase implements Database {
 		return -1;
 	}
 
-	public async delete(entry: ClipboardEntry): Promise<void> {
+	public async delete(entry: ClipboardEntry): Promise<boolean> {
 		try {
 			// DELETE FROM table WHERE id == entry.id
 			const builder = new this._Gda.SqlBuilder({
@@ -909,10 +626,19 @@ export class GdaDatabase implements Database {
 			);
 
 			const stmt = builder.get_statement();
-			await async_statement_execute_non_select(this._Gda, this._connection, stmt, this._cancellable);
+			const [result] = await async_statement_execute_non_select(
+				this._Gda,
+				this._connection,
+				stmt,
+				this._cancellable,
+			);
+
+			return result > 0;
 		} catch (e) {
 			this.ext.logger.error(`Failed to delete entry ${entry.id}`, e);
 		}
+
+		return false;
 	}
 
 	public async deleteOldest(offset: number, olderThanMinutes: number): Promise<number[]> {

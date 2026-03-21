@@ -6,7 +6,7 @@ import St from 'gi://St';
 
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
-import { Language } from '../../misc/db.js';
+import { Language } from '../../database/database.js';
 import { ColorScheme } from '../../misc/theme.js';
 import { normalizeIndentation, trim } from './label.js';
 

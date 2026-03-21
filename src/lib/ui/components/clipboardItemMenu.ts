@@ -9,7 +9,7 @@ import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import type CopyousExtension from '../../../extension.js';
 import { ItemType, Tags } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
-import { ClipboardEntry } from '../../misc/db.js';
+import { ClipboardEntry } from '../../database/database.js';
 import { Shortcut } from '../../misc/shortcuts.js';
 import { ActionPopupMenuSection, ActionPopupMenuSectionSignals } from './actionMenu.js';
 import { EditDialog } from './editDialog.js';
