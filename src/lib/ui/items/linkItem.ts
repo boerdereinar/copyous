@@ -10,7 +10,7 @@ import type CopyousExtension from '../../../extension.js';
 import { ActiveState } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { ClipboardEntry, LinkMetadata } from '../../misc/db.js';
+import { ClipboardEntry, LinkMetadata } from '../../database/database.js';
 import { tryGetLinkImage, tryGetMetadata } from '../../misc/link.js';
 import { BackgroundSize, ImagePreview } from '../components/contentPreview.js';
 import { SearchQuery } from '../searchEntry.js';

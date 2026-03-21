@@ -9,7 +9,7 @@ import type CopyousExtension from '../../../extension.js';
 import { ActiveState } from '../../common/constants.js';
 import { flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { ClipboardEntry } from '../../misc/db.js';
+import { ClipboardEntry } from '../../database/database.js';
 import { Shortcut } from '../../misc/shortcuts.js';
 import { SearchQuery } from '../searchEntry.js';
 import { ClipboardItemHeader, HeaderControlsVisibility } from './clipboardItemHeader.js';

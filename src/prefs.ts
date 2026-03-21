@@ -72,9 +72,7 @@ export default class Preferences extends ExtensionPreferences {
 		});
 		window.add(general);
 
-		const history = new HistorySettings(this, window);
-		dependenciesButton.bind_property('libgda', history, 'libgda', GObject.BindingFlags.SYNC_CREATE);
-		general.add(history);
+		general.add(new HistorySettings(this, window));
 		const feedback = new FeedbackSettings(this, window);
 		dependenciesButton.bind_property('gsound', feedback, 'gsound', GObject.BindingFlags.SYNC_CREATE);
 		general.add(feedback);
@@ -149,10 +147,15 @@ export default class Preferences extends ExtensionPreferences {
 
 	/* DEBUG-ONLY */
 	override getSettings(schema?: string): Gio.Settings {
-		const environment = GLib.get_environ();
-		const settings = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_SCHEMA');
-		if (settings) schema ??= this.metadata['settings-schema'] + '.debug';
+		try {
+			const environment = GLib.get_environ();
+			const settings = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_SCHEMA');
+			if (settings) schema ??= this.metadata['settings-schema'] + '.debug';
 
-		return super.getSettings(schema);
+			return super.getSettings(schema);
+		} catch {
+			// Fallback for when debug schema does not exist
+			return super.getSettings();
+		}
 	}
 }

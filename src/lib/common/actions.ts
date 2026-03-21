@@ -4,7 +4,7 @@ import Gio from 'gi://Gio';
 import type { ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type { ConsoleLike, Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
-import { ClipboardEntry } from '../misc/db.js';
+import { ClipboardEntry } from '../database/database.js';
 import { ColorSpace } from './color.js';
 import { ItemType, getActionsConfigPath } from './constants.js';
 
