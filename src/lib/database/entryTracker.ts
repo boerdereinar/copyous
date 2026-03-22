@@ -19,7 +19,7 @@ export class ClipboardEntryTracker {
 
 	get shouldInit(): boolean {
 		if (this._fromDefault) {
-			this._fromDefault = true;
+			this._fromDefault = false;
 			return false;
 		}
 
@@ -49,18 +49,36 @@ export class ClipboardEntryTracker {
 		if (backend === DatabaseBackend.Default) {
 			this._fromDefault = true;
 			if (this.ext.settings.get_boolean('in-memory-database')) {
+				this.ext.logger.log('Set default database backend to in-memory');
 				return this.initMemory();
 			} else if (dbFile.query_exists(null)) {
 				const entries = await this.initSqlite(dbFile, true);
 				this.ext.settings.set_enum('database-backend', DatabaseBackend.Sqlite);
+				this.ext.logger.log('Set default database backend to SQLite');
 				if (entries !== null) return entries;
 			} else if (jsonFile.query_exists(null)) {
 				const entries = await this.initJson(jsonFile);
 				this.ext.settings.set_enum('database-backend', DatabaseBackend.Json);
+				this.ext.logger.log('Set default database backend to JSON');
 				if (entries !== null) return entries;
 			} else {
-				const entries = (await this.initSqlite(dbFile, false)) ?? (await this.initJson(jsonFile));
-				if (entries !== null) return entries;
+				const sqliteEntries = await this.initSqlite(dbFile, false);
+				if (sqliteEntries !== null) {
+					this.ext.settings.set_enum('database-backend', DatabaseBackend.Sqlite);
+					this.ext.logger.log('Set default database backend to SQLite');
+					return sqliteEntries;
+				}
+
+				const jsonEntries = await this.initJson(jsonFile);
+				if (jsonEntries !== null) {
+					this.ext.settings.set_enum('database-backend', DatabaseBackend.Json);
+					this.ext.logger.log('Set default database backend to JSON');
+					return jsonEntries;
+				}
+
+				this.ext.settings.set_enum('database-backend', DatabaseBackend.Memory);
+				this.ext.logger.log('Set default database backend to in-memory');
+				return this.initMemory();
 			}
 		} else if (backend === DatabaseBackend.Sqlite) {
 			const entries = await this.initSqlite(dbFile, true);
