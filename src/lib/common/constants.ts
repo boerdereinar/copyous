@@ -320,8 +320,8 @@ export function getActionsConfigPath(ext: Extension | ExtensionPreferences): Gio
 
 export function getDefaultDatabaseFile(ext: Extension | ExtensionPreferences, backend: DatabaseBackend): Gio.File {
 	return backend === DatabaseBackend.Json
-		? getDataPath(ext).get_child('database.json')
-		: getDataPath(ext).get_child('database.db');
+		? getDataPath(ext).get_child('clipboard.json')
+		: getDataPath(ext).get_child('clipboard.db');
 }
 
 export function getHljsPath(ext: Extension | ExtensionPreferences): Gio.File {
