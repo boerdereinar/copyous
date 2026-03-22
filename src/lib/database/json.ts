@@ -142,7 +142,7 @@ export class JsonDatabase extends MemoryDatabase {
 				dir.make_directory_with_parents(null);
 			}
 
-			const bytes = new TextEncoder().encode(JSON.stringify(database, null, '\t'));
+			const bytes = new TextEncoder().encode(JSON.stringify(database));
 			await this.file.replace_contents_async(bytes, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
 		} catch (error) {
 			this.ext.logger.error('Failed to save JSON database', error);

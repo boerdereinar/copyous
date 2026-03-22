@@ -55,6 +55,7 @@ ifeq ($(DBPATH),$(DATABASE))
 	@rm -f $(DBPATH)
 	@cp -r resources/database $(DIST_DIR)
 	cat resources/database/database.sql | sed "s|{DIST_PATH}|$(DIST_PATH)|g" | sqlite3 $(DBPATH)
+	cat resources/database/json.sql | sqlite3 $(DBPATH) > $(patsubst %.db,%.json,$(DBPATH))
 endif
 
 # Lint
