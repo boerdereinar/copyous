@@ -1,5 +1,5 @@
 SELECT json_object(
-	'version', 1,
+	'version', 2,
 	'entries', json_group_array(
 		json_object(
 			'type', type,

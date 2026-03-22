@@ -10,7 +10,7 @@ import { MemoryDatabase } from './memory.js';
 Gio._promisify(Gio.File.prototype, 'load_contents_async');
 Gio._promisify(Gio.File.prototype, 'replace_contents_async');
 
-const DATABASE_VERSION = 1;
+const DATABASE_VERSION = 2;
 
 interface JsonClipboardEntry {
 	type: string;
