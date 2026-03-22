@@ -2,6 +2,8 @@ import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import St from 'gi://St';
 
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+
 import CopyousExtension from '../../extension.js';
 import { DefaultColors, getDataPath } from '../common/constants.js';
 import { enumParamSpec, registerClass } from '../common/gjs.js';
@@ -33,7 +35,6 @@ export type ColorScheme = (typeof ColorScheme)[keyof typeof ColorScheme];
 export class ThemeManager extends GObject.Object {
 	private readonly _resource: Gio.Resource;
 	private readonly _themeSettings: Gio.Settings;
-	private readonly _theme: St.Theme;
 	private readonly _settings: St.Settings;
 	private readonly _colorSchemeChangedId: number;
 
@@ -49,12 +50,14 @@ export class ThemeManager extends GObject.Object {
 		this._themeSettings = this.ext.settings.get_child('theme');
 		this._themeSettings.connectObject('changed', this.updateTheme.bind(this), this);
 
-		this._theme = St.ThemeContext.get_for_stage(global.stage).get_theme();
-
 		this._settings = St.Settings.get();
 		this._colorSchemeChangedId = this._settings.connect('notify::color-scheme', this.updateTheme.bind(this));
 
 		this.updateTheme().catch(() => {});
+	}
+
+	get theme(): St.Theme {
+		return St.ThemeContext.get_for_stage(global.stage).get_theme();
 	}
 
 	get colorScheme(): ColorScheme {
@@ -69,7 +72,7 @@ export class ThemeManager extends GObject.Object {
 	}
 
 	destroy() {
-		if (this._stylesheet) this._theme.unload_stylesheet(this._stylesheet);
+		if (this._stylesheet) this.theme.unload_stylesheet(this._stylesheet);
 		this._stylesheet = null;
 		Gio.resources_unregister(this._resource);
 		this._themeSettings.disconnectObject(this);
@@ -79,26 +82,20 @@ export class ThemeManager extends GObject.Object {
 	private async updateTheme() {
 		const theme = this._themeSettings.get_enum('theme') as Theme;
 
-		const systemColorScheme: ColorScheme =
-			this._settings.get_color_scheme() === St.SystemColorScheme.PREFER_LIGHT
-				? ColorScheme.Light
-				: ColorScheme.Dark;
-		const customColorScheme: ColorScheme = this._themeSettings.get_enum('custom-color-scheme') as ColorScheme;
-
 		this.colorScheme = (() => {
 			switch (theme) {
 				case Theme.System:
-					return systemColorScheme;
+					return Main.getStyleVariant() === 'light' ? ColorScheme.Light : ColorScheme.Dark;
 				case Theme.Dark:
 					return ColorScheme.Dark;
 				case Theme.Light:
 					return ColorScheme.Light;
 				case Theme.Custom:
-					return customColorScheme;
+					return this._themeSettings.get_enum('custom-color-scheme') as ColorScheme;
 			}
 		})();
 
-		let colorScheme = this.colorScheme === ColorScheme.Dark ? 'dark' : 'light';
+		const colorScheme = this.colorScheme === ColorScheme.Dark ? 'dark' : 'light';
 
 		// Custom Theme
 		if (theme === Theme.Custom) {
@@ -134,15 +131,12 @@ export class ThemeManager extends GObject.Object {
 				);
 
 				// Load theme
-				if (this._stylesheet) this._theme.unload_stylesheet(this._stylesheet);
-				this._theme.load_stylesheet(stylesheet);
+				if (this._stylesheet) this.theme.unload_stylesheet(this._stylesheet);
+				this.theme.load_stylesheet(stylesheet);
 				this._stylesheet = stylesheet;
 				return;
 			} catch (err) {
 				this.ext.logger.error(err);
-
-				// Fallback to default dark theme
-				colorScheme = 'dark';
 			}
 		}
 
@@ -153,8 +147,8 @@ export class ThemeManager extends GObject.Object {
 		if (this._stylesheet?.equal(stylesheet)) return;
 
 		try {
-			if (this._stylesheet) this._theme.unload_stylesheet(this._stylesheet);
-			this._theme.load_stylesheet(stylesheet);
+			if (this._stylesheet) this.theme.unload_stylesheet(this._stylesheet);
+			this.theme.load_stylesheet(stylesheet);
 			this._stylesheet = stylesheet;
 		} catch (err) {
 			this.ext.logger.error(err);
