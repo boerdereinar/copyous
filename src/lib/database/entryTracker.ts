@@ -46,50 +46,53 @@ export class ClipboardEntryTracker {
 		// 4. (sqlite)  sqlite backend can be loaded
 		// 5. (json)    json backend can be loaded
 		// 6. fallback to in-memory
+		let entries: ClipboardEntry[] | null = null;
 		if (backend === DatabaseBackend.Default) {
 			this._fromDefault = true;
 			if (this.ext.settings.get_boolean('in-memory-database')) {
 				this.ext.logger.log('Set default database backend to in-memory');
-				return this.initMemory();
+				entries = await this.initMemory();
 			} else if (dbFile.query_exists(null)) {
-				const entries = await this.initSqlite(dbFile, true);
+				entries = await this.initSqlite(dbFile, true);
 				this.ext.settings.set_enum('database-backend', DatabaseBackend.Sqlite);
 				this.ext.logger.log('Set default database backend to SQLite');
-				if (entries !== null) return entries;
 			} else if (jsonFile.query_exists(null)) {
-				const entries = await this.initJson(jsonFile);
+				entries = await this.initJson(jsonFile);
 				this.ext.settings.set_enum('database-backend', DatabaseBackend.Json);
 				this.ext.logger.log('Set default database backend to JSON');
-				if (entries !== null) return entries;
 			} else {
-				const sqliteEntries = await this.initSqlite(dbFile, false);
-				if (sqliteEntries !== null) {
+				entries = await this.initSqlite(dbFile, false);
+				if (entries !== null) {
 					this.ext.settings.set_enum('database-backend', DatabaseBackend.Sqlite);
 					this.ext.logger.log('Set default database backend to SQLite');
-					return sqliteEntries;
+				} else {
+					entries = await this.initJson(jsonFile);
+					if (entries !== null) {
+						this.ext.settings.set_enum('database-backend', DatabaseBackend.Json);
+						this.ext.logger.log('Set default database backend to JSON');
+					} else {
+						entries = await this.initMemory();
+						this.ext.settings.set_enum('database-backend', DatabaseBackend.Memory);
+						this.ext.logger.log('Set default database backend to in-memory');
+					}
 				}
-
-				const jsonEntries = await this.initJson(jsonFile);
-				if (jsonEntries !== null) {
-					this.ext.settings.set_enum('database-backend', DatabaseBackend.Json);
-					this.ext.logger.log('Set default database backend to JSON');
-					return jsonEntries;
-				}
-
-				this.ext.settings.set_enum('database-backend', DatabaseBackend.Memory);
-				this.ext.logger.log('Set default database backend to in-memory');
-				return this.initMemory();
 			}
 		} else if (backend === DatabaseBackend.Sqlite) {
-			const entries = await this.initSqlite(dbFile, true);
-			if (entries !== null) return entries;
+			entries = await this.initSqlite(dbFile, true);
 		} else if (backend === DatabaseBackend.Json) {
-			const entries = await this.initJson(jsonFile);
-			if (entries !== null) return entries;
+			entries = await this.initJson(jsonFile);
 		}
 
 		// Fallback to in-memory
-		return this.initMemory();
+		entries ??= await this.initMemory();
+
+		// Track all entries
+		this.track(...entries);
+
+		// Delete oldest entries
+		await this.deleteOldest();
+
+		return entries;
 	}
 
 	private getFile(): Gio.File {
@@ -135,19 +138,10 @@ export class ClipboardEntryTracker {
 		}
 
 		try {
-			// Create database
 			this.ext.logger.log(`Using ${file === null ? 'in-memory ' : ''}Gda ${gda.__version__} database`);
 			this._database = new GdaDatabase(this.ext, gda, file);
 			await this._database.init();
-
-			// First get entries and track them
-			const entries = await this._database.entries();
-			entries.forEach((entry) => this.track(entry));
-
-			// Then delete the oldest entries so that images are deleted
-			await this.deleteOldest();
-
-			return entries;
+			return await this._database.entries();
 		} catch (e) {
 			this.ext.logger.error('Failed to load Gda');
 			this.ext.notificationManager?.warning(_('Failed to load Gda'), _('Clipboard history will be disabled'));
@@ -249,27 +243,29 @@ export class ClipboardEntryTracker {
 		if (deleted) deleted.forEach((id) => this.deleteFromDatabase(id));
 	}
 
-	private track(entry: ClipboardEntry) {
-		entry.connect('notify::content', async () => {
-			const id = await this._database?.updateProperty(entry, 'content');
-			// If entry conflicts with another entry, delete it
-			if (id !== undefined && id >= 0) {
-				entry.emit('delete');
+	private track(...entries: ClipboardEntry[]) {
+		for (const entry of entries) {
+			entry.connect('notify::content', async () => {
+				const id = await this._database?.updateProperty(entry, 'content');
+				// If entry conflicts with another entry, delete it
+				if (id !== undefined && id >= 0) {
+					entry.emit('delete');
 
-				// Update the date of the other entry
-				const conflicted = this._entries.get(id);
-				if (conflicted) {
-					conflicted.datetime = entry.datetime;
+					// Update the date of the other entry
+					const conflicted = this._entries.get(id);
+					if (conflicted) {
+						conflicted.datetime = entry.datetime;
+					}
 				}
-			}
-		});
-		entry.connect('notify::pinned', () => this._database?.updateProperty(entry, 'pinned'));
-		entry.connect('notify::tag', () => this._database?.updateProperty(entry, 'tag'));
-		entry.connect('notify::datetime', () => this._database?.updateProperty(entry, 'datetime'));
-		entry.connect('notify::metadata', () => this._database?.updateProperty(entry, 'metadata'));
-		entry.connect('notify::title', () => this._database?.updateProperty(entry, 'title'));
-		entry.connect('delete', () => this.delete(entry));
-		this._entries?.set(entry.id, entry);
+			});
+			entry.connect('notify::pinned', () => this._database?.updateProperty(entry, 'pinned'));
+			entry.connect('notify::tag', () => this._database?.updateProperty(entry, 'tag'));
+			entry.connect('notify::datetime', () => this._database?.updateProperty(entry, 'datetime'));
+			entry.connect('notify::metadata', () => this._database?.updateProperty(entry, 'metadata'));
+			entry.connect('notify::title', () => this._database?.updateProperty(entry, 'title'));
+			entry.connect('delete', () => this.delete(entry));
+			this._entries?.set(entry.id, entry);
+		}
 	}
 
 	private async delete(entry: ClipboardEntry) {
