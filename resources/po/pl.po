@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-23 22:59+0000\n"
+"POT-Creation-Date: 2026-03-23 23:25+0000\n"
 "PO-Revision-Date: 2026-01-30 10:33+0100\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
@@ -109,8 +109,8 @@ msgstr "Kolo_r"
 msgid "Type to search"
 msgstr "Wpisz, aby wyszukać"
 
-#: src/lib/ui/components/editDialog.ts:231
-#: src/lib/ui/components/editDialog.ts:258
+#: src/lib/ui/components/editDialog.ts:217
+#: src/lib/ui/components/editDialog.ts:244
 #: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:38
 #: src/lib/preferences/general/feedbackSettings.ts:155
@@ -119,11 +119,11 @@ msgstr "Wpisz, aby wyszukać"
 msgid "None"
 msgstr "Brak"
 
-#: src/lib/ui/components/editDialog.ts:283
+#: src/lib/ui/components/editDialog.ts:269
 msgid "Edit Clipboard Item"
 msgstr "Edytuj element schowka"
 
-#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:45
+#: src/lib/ui/components/editDialog.ts:306 src/lib/ui/indicator.ts:45
 #: src/lib/preferences/actions/actionsPage.ts:27
 #: src/lib/preferences/actions/actionsPage.ts:40
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:34
@@ -136,7 +136,7 @@ msgstr "Edytuj element schowka"
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: src/lib/ui/components/editDialog.ts:317
+#: src/lib/ui/components/editDialog.ts:313
 #: src/lib/preferences/actions/actionDialog.ts:662
 msgid "Save"
 msgstr "Zapisz"
@@ -1375,6 +1375,10 @@ msgstr "Ciemny"
 #: src/lib/preferences/customization/themeCustomization.ts:90
 msgid "Light"
 msgstr "Jasny"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "High Contrast"
+msgstr ""
 
 #: src/lib/preferences/customization/themeCustomization.ts:88
 msgid "Color Scheme"

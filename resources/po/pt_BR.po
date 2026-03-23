@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-23 22:59+0000\n"
+"POT-Creation-Date: 2026-03-23 23:25+0000\n"
 "PO-Revision-Date: 2025-12-01 18:02-0300\n"
 "Last-Translator: Murilo Leal <murilormleal@outlook.com>\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -106,8 +106,8 @@ msgstr "Co__r"
 msgid "Type to search"
 msgstr "Digite para pesquisar"
 
-#: src/lib/ui/components/editDialog.ts:231
-#: src/lib/ui/components/editDialog.ts:258
+#: src/lib/ui/components/editDialog.ts:217
+#: src/lib/ui/components/editDialog.ts:244
 #: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:38
 #: src/lib/preferences/general/feedbackSettings.ts:155
@@ -116,11 +116,11 @@ msgstr "Digite para pesquisar"
 msgid "None"
 msgstr "Nenhum"
 
-#: src/lib/ui/components/editDialog.ts:283
+#: src/lib/ui/components/editDialog.ts:269
 msgid "Edit Clipboard Item"
 msgstr "Editar Item da Área de Transferência"
 
-#: src/lib/ui/components/editDialog.ts:310 src/lib/ui/indicator.ts:45
+#: src/lib/ui/components/editDialog.ts:306 src/lib/ui/indicator.ts:45
 #: src/lib/preferences/actions/actionsPage.ts:27
 #: src/lib/preferences/actions/actionsPage.ts:40
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:34
@@ -133,7 +133,7 @@ msgstr "Editar Item da Área de Transferência"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/lib/ui/components/editDialog.ts:317
+#: src/lib/ui/components/editDialog.ts:313
 #: src/lib/preferences/actions/actionDialog.ts:662
 msgid "Save"
 msgstr "Salvar"
@@ -1362,6 +1362,10 @@ msgstr "Escuro"
 #: src/lib/preferences/customization/themeCustomization.ts:90
 msgid "Light"
 msgstr "Claro"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "High Contrast"
+msgstr ""
 
 #: src/lib/preferences/customization/themeCustomization.ts:88
 msgid "Color Scheme"
