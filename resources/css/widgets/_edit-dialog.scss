@@ -3,7 +3,6 @@
 	width: 35em;
 
 	.clipboard-item-edit-dialog-entry {
-		@extend %entry;
 		height: 16em;
 
 		&.monospace {
@@ -14,22 +13,18 @@
 		.multiline-scrollview {
 			.multiline-box {
 				padding-right: $base_padding;
-
-				StEntry {
-					@extend %reset;
-				}
 			}
 		}
 	}
 
-	.language-button {
-		@extend %dialog_button;
+	.modal-dialog-top-button-box {
+		padding: 0;
 	}
 }
 
 // Language button popupmenu
 .scrollable-popup-menu-section {
-	max-height: 500px;
+	max-height: 350px;
 
 	.popup-menu-section {
 		margin-right: $base_padding + 7px;

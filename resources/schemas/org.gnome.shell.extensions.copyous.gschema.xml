@@ -38,7 +38,8 @@
 		<value nick="system" value="0"/>
 		<value nick="dark" value="1"/>
 		<value nick="light" value="2"/>
-		<value nick="custom" value="3"/>
+		<value nick="high-contrast" value="3"/>
+		<value nick="custom" value="4"/>
 	</enum>
 
 	<enum id="org.gnome.shell.extensions.copyous.ColorScheme">

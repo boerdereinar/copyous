@@ -79,12 +79,16 @@ export class Entry extends St.Entry {
 	}
 }
 
+/**
+ * Work around for St.Entry not properly supporting multiline mode. Extends St.Entry to follow system theme.
+ */
 @registerClass()
-export class MultilineEntry extends St.Bin {
-	private readonly _entry: St.Entry;
-
+export class MultilineEntry extends St.Entry {
 	constructor(props: Partial<St.Bin.ConstructorProps>) {
 		super({ reactive: true, ...props });
+
+		const text = this.clutter_text;
+		this.remove_child(text);
 
 		const scrollView = new St.ScrollView({
 			style_class: 'multiline-scrollview',
@@ -93,7 +97,7 @@ export class MultilineEntry extends St.Bin {
 			x_expand: true,
 			clip_to_allocation: true,
 		});
-		this.child = scrollView;
+		this.add_child(scrollView);
 
 		const box = new St.BoxLayout({
 			style_class: 'multiline-box',
@@ -104,26 +108,12 @@ export class MultilineEntry extends St.Bin {
 		});
 		scrollView.child = box;
 
-		this._entry = new Entry({
-			x_expand: true,
-			y_expand: true,
-			y_align: Clutter.ActorAlign.FILL,
-		});
-		box.add_child(this._entry);
+		box.add_child(text);
 
-		const text = this._entry.clutter_text;
 		text.single_line_mode = false;
 		text.activatable = false;
 		text.line_wrap = true;
 		text.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-
-		// Align the text to the top since y_align does not work
-		text.add_constraint(
-			new Clutter.BindConstraint({
-				source: this._entry,
-				coordinate: Clutter.BindCoordinate.Y,
-			}),
-		);
 
 		// Always keep the cursor visible
 		text.connect('cursor-changed', () => {
@@ -140,17 +130,13 @@ export class MultilineEntry extends St.Bin {
 				}
 			}
 		});
-
-		// Bind properties
-		this._entry.bind_property('pseudo-class', this, 'pseudo-class', null);
 	}
 
-	get clutterText() {
-		return this._entry.clutter_text;
-	}
+	override vfunc_allocate(box: Clutter.ActorBox) {
+		super.vfunc_allocate(box);
 
-	override vfunc_key_focus_in(): void {
-		this._entry.grab_key_focus();
+		const contentBox = this.get_theme_node().get_content_box(box);
+		this.first_child.allocate(contentBox);
 	}
 }
 
@@ -162,7 +148,6 @@ export class ScrollablePopupMenuSection extends PopupMenu.PopupMenuSection {
 		this.actor = new St.ScrollView({
 			style_class: 'scrollable-popup-menu-section',
 			child: this.box,
-			style: 'max-height: 500px;',
 			overlay_scrollbars: true,
 		});
 	}
@@ -215,9 +200,10 @@ export class LanguageButton extends St.Button {
 
 	constructor(ext: CopyousExtension, language: Language | null) {
 		super({
-			style_class: 'language-button',
+			style_class: 'language-button modal-dialog-button',
 			reactive: true,
 			can_focus: true,
+			x_expand: true,
 		});
 
 		this._language = language;
@@ -285,9 +271,19 @@ export class EditDialog extends ModalDialog.ModalDialog {
 		this.contentLayout.add_child(content);
 
 		if (entry.type === ItemType.Code) {
+			const box = new St.Widget({
+				style_class: 'modal-dialog-button-box modal-dialog-top-button-box',
+				x_expand: true,
+				layout_manager: new Clutter.BoxLayout({
+					spacing: 12,
+					homogeneous: true,
+				}),
+			});
+			content.add_child(box);
+
 			const metadata = { language: null, ...entry.metadata } as CodeMetadata;
 			this._languageButton = new LanguageButton(ext, metadata.language);
-			content.add_child(this._languageButton);
+			box.add_child(this._languageButton);
 		}
 
 		// Entry

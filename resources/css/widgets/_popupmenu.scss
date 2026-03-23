@@ -1,4 +1,9 @@
+$menu_bg_color: $bg_color;
+
+$menuitem_bg_color: if($variant == 'light', darken($menu_bg_color, 5%), lighten($menu_bg_color, 5%));
 $menuitem_border_radius: $base_border_radius * 1.5;
+
+$submenu_bg_color: if($variant == 'light', darken($menu_bg_color, 17%), lighten($menu_bg_color, 13%));
 
 // prettier-ignore
 @mixin tag_button($color) {
@@ -13,6 +18,60 @@ $menuitem_border_radius: $base_border_radius * 1.5;
 
 .clipboard-item-menu,
 .search-popup-menu {
+	// Match color with color scheme
+	color: $fg_color;
+
+	.popup-menu-content {
+		background-color: $bg_color;
+		border: 1px solid $outer_borders_color;
+		box-shadow: 0 2px 4px 0 $shadow_color;
+	}
+
+	.popup-menu-item {
+		@include menuitem($bg: $menuitem_bg_color);
+
+		&:checked {
+			@if $contrast == 'high' {
+				border: 1px solid $hc_inset_color;
+			}
+		}
+	}
+
+	.popup-inactive-menu-item {
+		color: $fg_color;
+		&:insensitive {
+			color: $insensitive_fg_color;
+		}
+	}
+
+	.popup-sub-menu {
+		background-color: $submenu_bg_color;
+
+		@if $contrast == 'high' {
+			border-color: $hc_inset_color;
+		}
+
+		.popup-menu-item {
+			@include menuitem($bg: $submenu_bg_color);
+		}
+	}
+
+	.popup-separator-menu-item {
+		.popup-separator-menu-item-separator {
+			background-color: $borders_color;
+		}
+
+		// separators in submenus
+		.popup-sub-menu & {
+			background-color: transparent;
+
+			.popup-separator-menu-item-separator {
+				background-color: $borders_color;
+			}
+		}
+	}
+
+	// Tags item
 	.tags-item {
 		padding: 0;
 		spacing: 0;

@@ -15,7 +15,8 @@ export const Theme = {
 	System: 0,
 	Dark: 1,
 	Light: 2,
-	Custom: 3,
+	HighContrast: 3,
+	Custom: 4,
 } as const;
 
 export type Theme = (typeof Theme)[keyof typeof Theme];
@@ -23,6 +24,7 @@ export type Theme = (typeof Theme)[keyof typeof Theme];
 export const ColorScheme = {
 	Dark: 0,
 	Light: 1,
+	HighContrast: 2,
 } as const;
 
 export type ColorScheme = (typeof ColorScheme)[keyof typeof ColorScheme];
@@ -36,6 +38,7 @@ export class ThemeManager extends GObject.Object {
 	private readonly _resource: Gio.Resource;
 	private readonly _themeSettings: Gio.Settings;
 	private readonly _settings: St.Settings;
+	private readonly _contrastChangedId: number;
 	private readonly _colorSchemeChangedId: number;
 
 	private _stylesheet: Gio.File | null = null;
@@ -51,12 +54,14 @@ export class ThemeManager extends GObject.Object {
 		this._themeSettings.connectObject('changed', this.updateTheme.bind(this), this);
 
 		this._settings = St.Settings.get();
+
+		this._contrastChangedId = this._settings.connect('notify::high-contrast', this.updateTheme.bind(this));
 		this._colorSchemeChangedId = this._settings.connect('notify::color-scheme', this.updateTheme.bind(this));
 
 		this.updateTheme().catch(() => {});
 	}
 
-	get theme(): St.Theme {
+	private get theme(): St.Theme {
 		return St.ThemeContext.get_for_stage(global.stage).get_theme();
 	}
 
@@ -76,6 +81,7 @@ export class ThemeManager extends GObject.Object {
 		this._stylesheet = null;
 		Gio.resources_unregister(this._resource);
 		this._themeSettings.disconnectObject(this);
+		this._settings.disconnect(this._contrastChangedId);
 		this._settings.disconnect(this._colorSchemeChangedId);
 	}
 
@@ -85,17 +91,23 @@ export class ThemeManager extends GObject.Object {
 		this.colorScheme = (() => {
 			switch (theme) {
 				case Theme.System:
-					return Main.getStyleVariant() === 'light' ? ColorScheme.Light : ColorScheme.Dark;
+					return this._settings.high_contrast
+						? ColorScheme.HighContrast
+						: Main.getStyleVariant() === 'light'
+							? ColorScheme.Light
+							: ColorScheme.Dark;
 				case Theme.Dark:
 					return ColorScheme.Dark;
 				case Theme.Light:
 					return ColorScheme.Light;
+				case Theme.HighContrast:
+					return ColorScheme.HighContrast;
 				case Theme.Custom:
 					return this._themeSettings.get_enum('custom-color-scheme') as ColorScheme;
 			}
 		})();
 
-		const colorScheme = this.colorScheme === ColorScheme.Dark ? 'dark' : 'light';
+		const colorScheme = (['dark', 'light', 'high-contrast'] as const)[this.colorScheme];
 
 		// Custom Theme
 		if (theme === Theme.Custom) {

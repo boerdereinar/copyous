@@ -118,17 +118,19 @@ endif
 TSC := $(DIST_DIR)/extension.js
 
 # CSS
-$(DIST_DIR)/css/stylesheet-%.css: resources/css/%.scss resources/css/_*.scss | $(DIST_DIR)
+$(DIST_DIR)/css/stylesheet-%.css: resources/css/%.scss resources/css/_*.scss resources/css/widgets/_*.scss | $(DIST_DIR)
 	@mkdir -p $(DIST_DIR)/css
 	pnpm exec sass --no-source-map --load-path=resources/css/gnome-shell-sass --quiet-deps $<:$@
 	sed -i -re ':a; s%(.*)/\*.*\*/%\1%; ta; /\/\*/ !b; N; ba' $@ # Remove multiline comments
 	sed -i -e '/stage {/,/}/d' -e '/^$$/d' $@
 
-$(DIST_DIR)/css/template-%.css: resources/css/_main.scss resources/css/_*.scss scripts/template/postcss.config.cjs | $(DIST_DIR)
+$(DIST_DIR)/css/template-%.css: resources/css/template.scss resources/css/_*.scss resources/css/widgets/_*.scss scripts/template/postcss.config.cjs | $(DIST_DIR)
 	@mkdir -p $(DIST_DIR)/css
 	VARIANT=$* pnpm exec postcss $< --config scripts/template | pnpm exec sass --no-source-map --stdin $@
 
-CSS := $(DIST_DIR)/css/stylesheet-dark.css $(DIST_DIR)/css/stylesheet-light.css $(DIST_DIR)/css/template-dark.css $(DIST_DIR)/css/template-light.css
+CSS := \
+	$(DIST_DIR)/css/stylesheet-dark.css $(DIST_DIR)/css/stylesheet-light.css $(DIST_DIR)/css/stylesheet-high-contrast.css \
+	$(DIST_DIR)/css/template-dark.css $(DIST_DIR)/css/template-light.css
 
 # Schemas
 SCHEMAS := $(patsubst resources/schemas/%.gschema.xml,$(DIST_DIR)/schemas/%.gschema.xml,$(wildcard resources/schemas/*.gschema.xml))

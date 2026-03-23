@@ -13,6 +13,11 @@
 			border: none;
 		}
 
+		@if $contrast == 'high' {
+			color: $fg_color;
+			@include draw_hc_inset();
+		}
+
 		&:first-child {
 			margin-top: $base_padding * 0.5;
 		}
@@ -27,6 +32,11 @@
 		&.image-preview {
 			padding: 0;
 			border-radius: $base_border_radius + 2px;
+
+			@if ($contrast == 'high') {
+				border-radius: $base_border_radius + 1px;
+				padding: 1px;
+			}
 
 			.image-box {
 				border-radius: $base_border_radius;
@@ -53,6 +63,10 @@
 					border-top: 1px solid if($variant == 'light', $card_shadow_border_color, rgba(255, 255, 255, 0.11));
 					font-style: italic;
 
+					@if ($contrast == 'high') {
+						border-color: $hc_inset_color;
+					}
+
 					&:first-child {
 						border-top: none;
 						padding-top: $base_padding * 0.5 + 1px;
@@ -68,6 +82,10 @@
 				height: 1px;
 				border-top: 1px solid if($variant == 'light', $card_shadow_border_color, rgba(255, 255, 255, 0.11));
 				border-bottom: 1px solid if($variant == 'light', $card_shadow_border_color, rgba(255, 255, 255, 0.11));
+
+				@if ($contrast == 'high') {
+					border-color: $hc_inset_color;
+				}
 			}
 
 			.more-files.more-files {
@@ -79,6 +97,11 @@
 		&.color-preview {
 			padding: 0;
 			border-radius: $base_border_radius + 2px;
+
+			@if ($contrast == 'high') {
+				border-radius: $base_border_radius + 1px;
+				padding: 1px;
+			}
 
 			.color-box {
 				border-radius: $base_border_radius;

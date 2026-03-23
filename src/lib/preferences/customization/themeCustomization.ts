@@ -72,11 +72,11 @@ export class ThemeCustomization extends Adw.PreferencesGroup {
 		const theme = new Adw.ComboRow({
 			title: _('Theme'),
 			subtitle: _('Set the preferred theme'),
-			model: Gtk.StringList.new([_('System'), _('Dark'), _('Light'), _('Custom')]),
+			model: Gtk.StringList.new([_('System'), _('Dark'), _('Light'), _('High Contrast'), _('Custom')]),
 		});
 		this.add(theme);
 		theme.connect('notify::selected', () => {
-			const sensitive = theme.selected === 3;
+			const sensitive = theme.selected === 4;
 			colorScheme.sensitive = sensitive;
 			bgColor.sensitive = sensitive;
 			fgColor.sensitive = sensitive;
