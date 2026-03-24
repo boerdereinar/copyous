@@ -35,14 +35,19 @@
 	</enum>
 
 	<enum id="org.gnome.shell.extensions.copyous.Theme">
+		<value nick="default" value="0"/>
+		<value nick="yaru" value="1"/>
+		<value nick="custom" value="2"/>
+	</enum>
+
+	<enum id="org.gnome.shell.extensions.copyous.ColorScheme">
 		<value nick="system" value="0"/>
 		<value nick="dark" value="1"/>
 		<value nick="light" value="2"/>
 		<value nick="high-contrast" value="3"/>
-		<value nick="custom" value="4"/>
 	</enum>
 
-	<enum id="org.gnome.shell.extensions.copyous.ColorScheme">
+	<enum id="org.gnome.shell.extensions.copyous.CustomColorScheme">
 		<value nick="dark" value="0"/>
 		<value nick="light" value="1"/>
 	</enum>
@@ -466,10 +471,14 @@
 
 	<schema id="org.gnome.shell.extensions.copyous.theme" path="/org/gnome/shell/extensions/copyous/theme/">
 		<key name="theme" enum="org.gnome.shell.extensions.copyous.Theme">
-			<default>'system'</default>
+			<default>'default'</default>
 			<summary>The preferred theme</summary>
 		</key>
-		<key name="custom-color-scheme" enum="org.gnome.shell.extensions.copyous.ColorScheme">
+		<key name="color-scheme" enum="org.gnome.shell.extensions.copyous.ColorScheme">
+			<default>'system'</default>
+			<summary>The color scheme of the theme</summary>
+		</key>
+		<key name="custom-color-scheme" enum="org.gnome.shell.extensions.copyous.CustomColorScheme">
 			<default>'dark'</default>
 			<summary>The color scheme of the custom theme</summary>
 		</key>

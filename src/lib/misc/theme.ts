@@ -12,11 +12,9 @@ Gio._promisify(Gio.File.prototype, 'load_contents_async');
 Gio._promisify(Gio.File.prototype, 'replace_contents_async');
 
 export const Theme = {
-	System: 0,
-	Dark: 1,
-	Light: 2,
-	HighContrast: 3,
-	Custom: 4,
+	Default: 0,
+	Yaru: 1,
+	Custom: 2,
 } as const;
 
 export type Theme = (typeof Theme)[keyof typeof Theme];
@@ -86,24 +84,23 @@ export class ThemeManager extends GObject.Object {
 	}
 
 	private async updateTheme() {
-		const theme = this._themeSettings.get_enum('theme') as Theme;
+		let theme = this._themeSettings.get_enum('theme') as Theme;
 
 		this.colorScheme = (() => {
-			switch (theme) {
-				case Theme.System:
-					return this._settings.high_contrast
-						? ColorScheme.HighContrast
-						: Main.getStyleVariant() === 'light'
-							? ColorScheme.Light
-							: ColorScheme.Dark;
-				case Theme.Dark:
-					return ColorScheme.Dark;
-				case Theme.Light:
-					return ColorScheme.Light;
-				case Theme.HighContrast:
-					return ColorScheme.HighContrast;
-				case Theme.Custom:
-					return this._themeSettings.get_enum('custom-color-scheme') as ColorScheme;
+			if (theme === Theme.Custom) {
+				return this._themeSettings.get_enum('custom-color-scheme') as ColorScheme;
+			}
+
+			const colorScheme = this._themeSettings.get_enum('color-scheme');
+			if (colorScheme === 0) {
+				// system
+				return this._settings.high_contrast
+					? ColorScheme.HighContrast
+					: Main.getStyleVariant() === 'light'
+						? ColorScheme.Light
+						: ColorScheme.Dark;
+			} else {
+				return (colorScheme - 1) as ColorScheme;
 			}
 		})();
 
@@ -148,12 +145,14 @@ export class ThemeManager extends GObject.Object {
 				this._stylesheet = stylesheet;
 				return;
 			} catch (err) {
+				theme = Theme.Default;
 				this.ext.logger.error(err);
 			}
 		}
 
 		// GNOME Theme
-		const uri = `resource:///org/gnome/shell/extensions/copyous/css/stylesheet-${colorScheme}.css`;
+		const themeName = (['default', 'yaru'] as const)[theme];
+		const uri = `resource:///org/gnome/shell/extensions/copyous/css/stylesheet-${themeName}-${colorScheme}.css`;
 		const stylesheet = Gio.File.new_for_uri(uri);
 
 		if (this._stylesheet?.equal(stylesheet)) return;

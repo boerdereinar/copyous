@@ -2,9 +2,12 @@
 <?xml-model href="https://gitlab.gnome.org/GNOME/glib/-/raw/main/gio/gresource.dtd?ref_type=heads"?>
 <gresources>
 	<gresource prefix="/org/gnome/shell/extensions/copyous">
-		<file>css/stylesheet-dark.css</file>
-		<file>css/stylesheet-light.css</file>
-		<file>css/stylesheet-high-contrast.css</file>
+		<file>css/stylesheet-default-dark.css</file>
+		<file>css/stylesheet-default-light.css</file>
+		<file>css/stylesheet-default-high-contrast.css</file>
+		<file>css/stylesheet-yaru-dark.css</file>
+		<file>css/stylesheet-yaru-light.css</file>
+		<file>css/stylesheet-yaru-high-contrast.css</file>
 		<file>css/template-dark.css</file>
 		<file>css/template-light.css</file>
 	</gresource>

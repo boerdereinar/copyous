@@ -72,25 +72,33 @@ export class ThemeCustomization extends Adw.PreferencesGroup {
 		const theme = new Adw.ComboRow({
 			title: _('Theme'),
 			subtitle: _('Set the preferred theme'),
-			model: Gtk.StringList.new([_('System'), _('Dark'), _('Light'), _('High Contrast'), _('Custom')]),
+			model: Gtk.StringList.new([_('Default'), _('Yaru'), _('Custom')]),
 		});
 		this.add(theme);
 		theme.connect('notify::selected', () => {
-			const sensitive = theme.selected === 4;
-			colorScheme.sensitive = sensitive;
-			bgColor.sensitive = sensitive;
-			fgColor.sensitive = sensitive;
-			cardBgColor.sensitive = sensitive;
-			searchBgColor.sensitive = sensitive;
+			const custom = theme.selected === 2;
+			colorScheme.visible = !custom;
+			customColorScheme.visible = custom;
+			bgColor.sensitive = custom;
+			fgColor.sensitive = custom;
+			cardBgColor.sensitive = custom;
+			searchBgColor.sensitive = custom;
 		});
 
 		const colorScheme = new Adw.ComboRow({
 			title: _('Color Scheme'),
-			subtitle: _('Set the color scheme of the custom theme'),
-			model: Gtk.StringList.new([_('Dark'), _('Light')]),
-			sensitive: false,
+			subtitle: _('Set the color scheme of the theme'),
+			model: Gtk.StringList.new([_('System'), _('Dark'), _('Light'), _('High Contrast')]),
 		});
 		this.add(colorScheme);
+
+		const customColorScheme = new Adw.ComboRow({
+			title: _('Color Scheme'),
+			subtitle: _('Set the color scheme of the theme'),
+			model: Gtk.StringList.new([_('Dark'), _('Light')]),
+			visible: false,
+		});
+		this.add(customColorScheme);
 
 		const bgColor = new ColorRow({
 			title: _('Background Color'),
@@ -124,7 +132,8 @@ export class ThemeCustomization extends Adw.PreferencesGroup {
 		const settings = prefs.getSettings().get_child('theme');
 
 		bind_enum(settings, 'theme', theme, 'selected');
-		bind_enum(settings, 'custom-color-scheme', colorScheme, 'selected');
+		bind_enum(settings, 'color-scheme', colorScheme, 'selected');
+		bind_enum(settings, 'custom-color-scheme', customColorScheme, 'selected');
 		bind_color(settings, 'custom-bg-color', bgColor);
 		bind_color(settings, 'custom-fg-color', fgColor);
 		bind_color(settings, 'custom-card-bg-color', cardBgColor);

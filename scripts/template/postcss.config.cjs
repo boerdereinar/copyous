@@ -55,7 +55,7 @@ module.exports = {
 	parser: 'postcss-scss',
 	plugins: [
 		require('postcss-import')({
-			path: ['resources/css', 'resources/css/gnome-shell-sass'],
+			path: ['resources/css/themes/default', 'resources/css/themes/default/gnome-shell-sass'],
 			resolve: resolveScss,
 		}),
 		generateTemplate({

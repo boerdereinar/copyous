@@ -118,19 +118,29 @@ endif
 TSC := $(DIST_DIR)/extension.js
 
 # CSS
-$(DIST_DIR)/css/stylesheet-%.css: resources/css/%.scss resources/css/_*.scss resources/css/widgets/_*.scss | $(DIST_DIR)
-	@mkdir -p $(DIST_DIR)/css
-	pnpm exec sass --no-source-map --load-path=resources/css/gnome-shell-sass --quiet-deps $<:$@
-	sed -i -re ':a; s%(.*)/\*.*\*/%\1%; ta; /\/\*/ !b; N; ba' $@ # Remove multiline comments
-	sed -i -e '/stage {/,/}/d' -e '/^$$/d' $@
+# Rule for css/stylesheet-{theme}-{type}.css
+define theme_rule
+$$(DIST_DIR)/css/stylesheet-$(1)-$(2).css: \
+		resources/css/themes/$(1)/$(2).scss resources/css/themes/$(1)/gnome-shell-sass/_*.scss \
+		resources/css/themes/default/_*.scss resources/css/themes/default/widgets/_*.scss | $$(DIST_DIR)
+	@mkdir -p $$(DIST_DIR)/css
+	pnpm exec sass --no-source-map --load-path=resources/css/themes/default --load-path=resources/css/themes/$(1)/gnome-shell-sass --quiet-deps $$<:$$@
+	sed -i -re ':a; s%(.*)/\*.*\*/%\1%; ta; /\/\*/ !b; N; ba' $$@ # Remove multiline comments
+	sed -i -e '/stage {/,/}/d' -e '/^$$$$/d' $$@
+endef
 
-$(DIST_DIR)/css/template-%.css: resources/css/template.scss resources/css/_*.scss resources/css/widgets/_*.scss scripts/template/postcss.config.cjs | $(DIST_DIR)
+THEME_SCSS := $(filter-out $(wildcard resources/css/themes/*/_*.scss),$(wildcard resources/css/themes/*/*.scss))
+THEME_VARIANTS := $(patsubst resources/css/themes/%.scss,%,$(THEME_SCSS))
+THEME_CSS := $(foreach pair,$(THEME_VARIANTS),$(DIST_DIR)/css/stylesheet-$(word 1,$(subst /, ,$(pair)))-$(word 2,$(subst /, ,$(pair))).css)
+$(foreach pair,$(THEME_VARIANTS),$(eval $(call theme_rule,$(word 1,$(subst /, ,$(pair))),$(word 2,$(subst /, ,$(pair))))))
+
+$(DIST_DIR)/css/template-%.css: \
+		resources/css/template.scss scripts/template/postcss.config.cjs \
+		resources/css/themes/default/_*.scss resources/css/themes/default/widgets | $(DIST_DIR)
 	@mkdir -p $(DIST_DIR)/css
 	VARIANT=$* pnpm exec postcss $< --config scripts/template | pnpm exec sass --no-source-map --stdin $@
 
-CSS := \
-	$(DIST_DIR)/css/stylesheet-dark.css $(DIST_DIR)/css/stylesheet-light.css $(DIST_DIR)/css/stylesheet-high-contrast.css \
-	$(DIST_DIR)/css/template-dark.css $(DIST_DIR)/css/template-light.css
+CSS := $(THEME_CSS) $(DIST_DIR)/css/template-dark.css $(DIST_DIR)/css/template-light.css
 
 # Schemas
 SCHEMAS := $(patsubst resources/schemas/%.gschema.xml,$(DIST_DIR)/schemas/%.gschema.xml,$(wildcard resources/schemas/*.gschema.xml))

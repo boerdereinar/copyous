@@ -1,0 +1,212 @@
+// Copyright © 2022, Canonical Ltd
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library. If not, see <http://www.gnu.org/licenses/>.
+// Authors:
+//       Marco Trevisan <marco.trevisan@canonical.com>
+
+@function str-contains($str, $substring) {
+    @return str-index($str, $substring) != null;
+}
+
+@function str-starts-with($str, $substring) {
+    @return str-index($str, $substring) == 1;
+}
+
+@function str-ends-with($str, $substring) {
+    $index: str-index($str, $substring);
+    @if ($index == null) {
+        @return false;
+    }
+
+    @return ($index + str-length($substring) - 1) == str-length($str);
+}
+
+@function str-basename($str, $divider: '/') {
+    $index: str-index($str, $divider);
+
+    @while $index != null {
+        $str: str-slice($str, $index + 1);
+        $index: str-index($str, $divider);
+    }
+
+    @return $str;
+}
+
+@function str-extension($str) {
+    $extension: str-basename($str, '.');
+    @return if($extension == $str, null, $extension);
+}
+
+@function str-dirname($str, $divider: '/') {
+    $str_copy: $str;
+    $index: str-index($str, $divider);
+    $last_index: null;
+
+    @while $index != null {
+        $str: str-slice($str, $index + 1);
+        $last_index: if($last_index, $last_index, 0) + $index;
+        $index: str-index($str, $divider);
+    }
+
+    @return if($last_index, str-slice($str_copy, 1, $last_index - 1), '.');
+}
+
+@function list-length($list) {
+    @return length($list);
+}
+
+@function list-nth($list, $nth) {
+    $length: length($list);
+    @if ($length == 0 or abs($nth) > $length) {
+        @return null;
+    }
+
+    @if ($nth >= 0) {
+        $nth: $nth + 1;
+    }
+
+    @return nth($list, $nth);
+}
+
+@function list-index($list, $item) {
+    $i: 0;
+    @each $e in $list {
+        @if ($e == $item) {
+            @return $i;
+        }
+
+        $i: $i + 1;
+    }
+
+    @return null;
+}
+
+@function pow($base, $exponent, $root: 1) {
+    @if ($exponent == 0) {
+        @return 1;
+    }
+
+    @if ($base == 0) {
+        @return 0;
+    }
+
+    @if ($root != 1) {
+        @if ($exponent == $root) {
+            @return $base;
+        }
+        $base: nth-root($base, $root);
+    }
+
+    @if $exponent < 0 {
+        $base: 1 / $base;
+        $exponent: -$exponent;
+    } @else if ($exponent % 2 == 0) {
+        $half-pow: pow($base, $exponent / 2);
+        @return $half-pow * $half-pow;
+    }
+
+    $i: 1;
+    $val: $base;
+    @while ($i < $exponent) {
+        $val: $val * $base;
+        $i: $i + 1;
+    }
+
+    @return $val;
+}
+
+@function nth-root($value, $n, $max_iterations: 100) {
+    @if ($n <= 0) {
+        @error "Not supported"
+    }
+
+    @if ($n == 1 or $value == 0) {
+        @return $value;
+    }
+
+    $i: 1;
+    $pre-val: 1;
+    @while ($i < $max_iterations) {
+        $val: (1.0 / $n) * ((($n - 1) * $pre-val) + $value / pow($pre-val, $n - 1));
+
+        @if ($pre-val == $val) {
+            @return $val;
+        }
+
+        $pre-val: $val;
+        $i: $i + 1;
+    }
+
+    @error ("Failed to compute " + $n + "th root of " + $value + " in " +
+            $max_iterations + " iterations");
+}
+
+@function truncate($value, $decimals: 10) {
+    @if ($decimals < 0) {
+        @error "Not supported"
+    }
+
+    $multiplier: pow(10, $decimals);
+    @return floor($value * $multiplier) / $multiplier;
+}
+
+// Credits to https://css-tricks.com/snippets/sass/luminance-color-function/
+@function luminance($color) {
+    $colors: (
+        'red': red($color),
+        'green': green($color),
+        'blue': blue($color)
+    );
+
+    @each $name, $value in $colors {
+        $adjusted: 0;
+        $value: $value / 255;
+
+        @if $value < 0.03928 {
+            $value: $value / 12.92;
+        } @else {
+            $value: ($value + .055) / 1.055;
+            $value: pow($value, 12, 5);
+        }
+
+        $colors: map-merge($colors, ($name: $value));
+    }
+
+    @return ((map-get($colors, 'red') * .2126) +
+             (map-get($colors, 'green') * .7152) +
+             (map-get($colors, 'blue') * .0722));
+}
+
+@function color-contrast($color1, $color2) {
+    $c1-luminance: luminance($color1);
+    $c2-luminance: luminance($color2);
+
+    $lighter-luminance: max($c1-luminance, $c2-luminance);
+    $darker-luminance: min($c1-luminance, $c2-luminance);
+
+    @return ($lighter-luminance + 0.05) / ($darker-luminance + 0.05);
+}
+
+@function optimize-contrast($bg, $fg, $large-text: false, $target: 4.5) {
+    @if ($large-text and $target == 4.5) {
+        $target: 3;
+    }
+
+    $dark-bg: luminance($fg) > luminance($bg);
+    @while (color-contrast($bg, $fg) < $target) {
+        $fg: if($dark-bg, lighten($fg, 0.1), darken($fg, 0.1));
+    }
+
+    @return $fg;
+}
