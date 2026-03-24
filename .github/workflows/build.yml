@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           submodules: true
 
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           submodules: true
 
@@ -38,14 +38,11 @@ jobs:
       - name: Build
         run: RELEASE=1 make build
 
-      - name: Prepare Artifact
-        run: unzip dist/${{ env.UUID }}.zip -d dist/${{ env.UUID }}
-
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: ${{ env.UUID }}
-          path: dist/${{ env.UUID }}/*
+          path: dist/${{ env.UUID }}.zip
+          archive: false
 
   localization:
     if: github.event_name == 'push'
@@ -55,7 +52,7 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Install Gettext
         run: |

@@ -9,7 +9,7 @@ runs:
   using: composite
   steps:
     - name: Install Pnpm
-      uses: pnpm/action-setup@v4
+      uses: pnpm/action-setup@v5
       with:
         version: latest
 
