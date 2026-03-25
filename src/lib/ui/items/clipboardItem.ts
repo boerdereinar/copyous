@@ -29,14 +29,11 @@ export type MiddleClickAction = (typeof MiddleClickAction)[keyof typeof MiddleCl
 	},
 	Signals: {
 		'activate': {},
-		'activate-default': {},
-		'activate-action': {
-			param_types: [GObject.TYPE_STRING],
-		},
+		'activate-shift': {},
+		'activate-ctrl': {},
+		'activate-action': { param_types: [GObject.TYPE_STRING] },
 		'edit': {},
-		'open-menu': {
-			param_types: [GObject.TYPE_INT, GObject.TYPE_INT, GObject.TYPE_INT, GObject.TYPE_INT],
-		},
+		'open-menu': { param_types: [GObject.TYPE_INT, GObject.TYPE_INT, GObject.TYPE_INT, GObject.TYPE_INT] },
 	},
 })
 export class ClipboardItem extends St.Button {
@@ -216,7 +213,9 @@ export class ClipboardItem extends St.Button {
 		if (clicked_button === 1) {
 			const event = Clutter.get_current_event();
 			if (event.has_control_modifier()) {
-				this.emit('activate-default');
+				this.emit('activate-ctrl');
+			} else if (event.has_shift_modifier()) {
+				this.emit('activate-shift');
 			} else {
 				this.emit('activate');
 			}

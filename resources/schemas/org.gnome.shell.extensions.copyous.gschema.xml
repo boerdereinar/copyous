@@ -154,7 +154,7 @@
 		</key>
 		<key name="paste-on-copy" type="b">
 			<default>true</default>
-			<summary>Automatically paste clipboard items when selected from clipboard history</summary>
+			<summary>Automatically paste clipboard items when selected from clipboard history (Deprecated)</summary>
 		</key>
 		<key name="sync-primary" type="b">
 			<default>false</default>
@@ -359,6 +359,11 @@
 		<key name="middle-click-action" enum="org.gnome.shell.extensions.copyous.MiddleClickAction">
 			<default>'pin'</default>
 			<summary>Action to perform when the middle mouse button is clicked</summary>
+		</key>
+
+		<key name="swap-copy-shortcut" type="b">
+			<default>false</default>
+			<summary>Swaps copy and paste shortcuts</summary>
 		</key>
 
 		<key name="swap-scroll-shortcut" type="b">

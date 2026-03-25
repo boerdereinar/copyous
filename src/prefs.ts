@@ -9,6 +9,7 @@ import Gtk from 'gi://Gtk';
 import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 import { Icon } from './lib/common/icons.js';
+import { migrateSettings } from './lib/common/settings.js';
 import { ActionsPage } from './lib/preferences/actions/actionsPage.js';
 import { DialogCustomization } from './lib/preferences/customization/dialogCustomization.js';
 import { HeaderCustomization } from './lib/preferences/customization/headerCustomization.js';
@@ -58,6 +59,9 @@ export default class Preferences extends ExtensionPreferences {
 
 		// Enable search
 		window.search_enabled = true;
+
+		// Migrate settings
+		migrateSettings(this.getSettings());
 
 		// Add dependencies button to headerbar
 		const headerBar = findHeaderBar(window);
@@ -111,7 +115,7 @@ export default class Preferences extends ExtensionPreferences {
 
 		shortcuts.add(new DialogShortcuts(this));
 		shortcuts.add(new ItemShortcuts(this));
-		shortcuts.add(new ItemActivationShortcuts());
+		shortcuts.add(new ItemActivationShortcuts(this));
 		shortcuts.add(new PopupMenuShortcuts());
 		shortcuts.add(new NavigationShortcuts());
 		shortcuts.add(new SearchShortcuts());

@@ -60,9 +60,6 @@ class ShortcutBinding extends GObject.Object {
 })
 export class ShortcutManager extends GObject.Object {
 	private _actor: Clutter.Actor | null;
-	private _keyPressSignalId: number = -1;
-	private _keyReleaseSignalId: number = -1;
-	private _destroySignalId: number = -1;
 
 	private _shortcuts: { [shortcut in Shortcut]?: ShortcutBinding } = {};
 	private _actions: { [shortcut in string]: string } = {};
@@ -87,9 +84,17 @@ export class ShortcutManager extends GObject.Object {
 		this.registerShortcut(Shortcut.Menu);
 
 		this._actor = actor;
-		this._keyPressSignalId = actor.connect('key-press-event', this.keyPressEvent.bind(this));
-		this._keyReleaseSignalId = actor.connect('key-release-event', this.keyReleaseEvent.bind(this));
-		this._destroySignalId = actor.connect('destroy', () => (this._actor = null));
+		actor.connectObject(
+			'key-press-event',
+			this.keyPressEvent.bind(this),
+			'key-release-event',
+			this.keyReleaseEvent.bind(this),
+			'hide',
+			this.hideEvent.bind(this),
+			'destroy',
+			() => (this._actor = null),
+			this,
+		);
 
 		this._monitor = getActionsConfigPath(ext).monitor(Gio.FileMonitorFlags.NONE, null);
 		this._monitor.connect('changed', (_source, _file, _otherFile, eventType) => {
@@ -136,6 +141,12 @@ export class ShortcutManager extends GObject.Object {
 		}
 	}
 
+	private hideEvent(_actor: Clutter.Actor) {
+		this._shiftL = false;
+		this._shiftR = false;
+		this.notify('shift');
+	}
+
 	private updateActions(save: boolean = false) {
 		this._actions = {};
 
@@ -177,16 +188,7 @@ export class ShortcutManager extends GObject.Object {
 		this.unregisterGlobalShortcut(Shortcut.Incognito);
 
 		this._shortcuts = {};
-
-		if (this._actor) {
-			if (this._keyPressSignalId >= 0) this._actor.disconnect(this._keyPressSignalId);
-			if (this._keyReleaseSignalId >= 0) this._actor.disconnect(this._keyReleaseSignalId);
-			if (this._destroySignalId >= 0) this._actor.disconnect(this._destroySignalId);
-		}
-
-		this._keyPressSignalId = -1;
-		this._keyReleaseSignalId = -1;
-		this._destroySignalId = -1;
+		this._actor?.disconnectObject(this);
 		this._monitor.cancel();
 	}
 }

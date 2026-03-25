@@ -254,12 +254,9 @@ class ClipboardDialogFooter extends St.BoxLayout {
 		opened: GObject.ParamSpec.boolean('opened', null, null, GObject.ParamFlags.READABLE, false),
 	},
 	Signals: {
-		'paste': {
-			param_types: [GObject.TYPE_JSOBJECT],
-		},
-		'clear-history': {
-			param_types: [GObject.TYPE_INT],
-		},
+		'copy': { param_types: [GObject.TYPE_JSOBJECT] },
+		'paste': { param_types: [GObject.TYPE_JSOBJECT] },
+		'clear-history': { param_types: [GObject.TYPE_INT] },
 	},
 })
 export class ClipboardDialog extends St.Widget {
@@ -604,10 +601,16 @@ export class ClipboardDialog extends St.Widget {
 
 		// Connect activation
 		item.connect('activate', () => {
-			this.emit('paste', entry);
+			const swap = this.ext.settings.get_boolean('swap-copy-shortcut');
+			this.emit(swap ? 'copy' : 'paste', entry);
 			this.close();
 		});
-		item.connect('activate-default', () => {
+		item.connect('activate-shift', () => {
+			const swap = this.ext.settings.get_boolean('swap-copy-shortcut');
+			this.emit(swap ? 'paste' : 'copy', entry);
+			this.close();
+		});
+		item.connect('activate-ctrl', () => {
 			if (this._clipboardItemMenu.activateDefaultAction(entry)) this.close();
 		});
 		item.connect('activate-action', (_, id: string) => {

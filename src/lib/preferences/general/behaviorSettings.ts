@@ -42,12 +42,6 @@ export class BehaviorSettings extends Adw.PreferencesGroup {
 		});
 		this.add(protectTagged);
 
-		const pasteOnCopy = new Adw.SwitchRow({
-			title: _('Paste on Copy'),
-			subtitle: _('Automatically paste clipboard items when selected from clipboard history'),
-		});
-		this.add(pasteOnCopy);
-
 		const syncPrimary = new Adw.SwitchRow({
 			title: _('Sync Primary Clipboard'),
 			subtitle: _('Also copy clipboard items to the primary clipboard'),
@@ -67,7 +61,6 @@ export class BehaviorSettings extends Adw.PreferencesGroup {
 		settings.bind('exclude-tagged', excludeTagged, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('protect-pinned', protectPinned, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('protect-tagged', protectTagged, 'active', Gio.SettingsBindFlags.DEFAULT);
-		settings.bind('paste-on-copy', pasteOnCopy, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('sync-primary', syncPrimary, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('update-date-on-copy', updateDateOnCopy, 'active', Gio.SettingsBindFlags.DEFAULT);
 	}

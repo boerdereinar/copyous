@@ -8,6 +8,7 @@ import type { LanguageFn } from 'highlight.js';
 
 import { ClipboardHistory, getDataPath, getHljsLanguages, getHljsPath } from './lib/common/constants.js';
 import { DbusService } from './lib/common/dbus.js';
+import { migrateSettings } from './lib/common/settings.js';
 import { SoundManager, tryCreateSoundManager } from './lib/common/sound.js';
 import { ClipboardEntry } from './lib/database/database.js';
 import { ClipboardEntryTracker } from './lib/database/entryTracker.js';
@@ -47,6 +48,8 @@ export default class CopyousExtension extends Extension {
 
 	override enable() {
 		this.settings = this.getSettings();
+		migrateSettings(this.settings);
+
 		this.logger = this.getLogger();
 		const error = this.logger.error.bind(this.logger);
 
@@ -63,6 +66,10 @@ export default class CopyousExtension extends Extension {
 			if (!this.clipboardDialog?.opened && this.updateHistory) {
 				await this.entryTracker?.deleteOldest();
 			}
+		});
+		this.clipboardDialog.connect('copy', async (_, entry: ClipboardEntry) => {
+			await this.clipboardManager?.copyEntry(entry);
+			this.indicator?.showEntry(entry);
 		});
 		this.clipboardDialog.connect('paste', async (_, entry: ClipboardEntry) => {
 			await this.clipboardManager?.pasteEntry(entry);

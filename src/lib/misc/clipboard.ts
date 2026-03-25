@@ -127,8 +127,6 @@ export class ClipboardManager extends GObject.Object {
 	public pasteContent(content: ClipboardContent) {
 		this.copyContent(content);
 
-		if (!this.ext.settings.get_boolean('paste-on-copy')) return;
-
 		if (this.pasteSignalId >= 0) GLib.source_remove(this.pasteSignalId);
 		this.pasteSignalId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
 			// https://github.com/Tudmotu/gnome-shell-extension-clipboard-indicator/blob/89c57703641a9d5d15f899f6e780174641911d95/extension.js#L1094
@@ -167,7 +165,17 @@ export class ClipboardManager extends GObject.Object {
 		this.emit('image', data, width, height);
 	}
 
+	public async copyEntry(entry: ClipboardEntry) {
+		await this.handleEntry(entry, false);
+	}
+
 	public async pasteEntry(entry: ClipboardEntry) {
+		await this.handleEntry(entry, true);
+	}
+
+	private async handleEntry(entry: ClipboardEntry, paste: boolean) {
+		const fn = paste ? this.pasteContent.bind(this) : this.copyContent.bind(this);
+
 		if (this.ext.settings.get_boolean('update-date-on-copy')) {
 			entry.datetime = GLib.DateTime.new_now_utc();
 		}
@@ -178,7 +186,7 @@ export class ClipboardManager extends GObject.Object {
 			case ItemType.Link:
 			case ItemType.Character:
 			case ItemType.Color:
-				return this.pasteContent({ type: ContentType.Text, text: entry.content });
+				return fn({ type: ContentType.Text, text: entry.content });
 			case ItemType.Image:
 				try {
 					const image = Gio.File.new_for_uri(entry.content);
@@ -190,14 +198,14 @@ export class ClipboardManager extends GObject.Object {
 					const checksum = GLib.compute_checksum_for_bytes(GLib.ChecksumType.MD5, contents);
 					if (!checksum) return;
 
-					return this.pasteContent({ type: ContentType.Image, mimetype, data: contents, checksum });
+					return fn({ type: ContentType.Image, mimetype, data: contents, checksum });
 				} catch {
 					break;
 				}
 			case ItemType.File:
 			case ItemType.Files: {
 				const paths = entry.content.split('\n');
-				return this.pasteContent({ type: ContentType.File, paths, operation: FileOperation.Copy });
+				return fn({ type: ContentType.File, paths, operation: FileOperation.Copy });
 			}
 		}
 	}

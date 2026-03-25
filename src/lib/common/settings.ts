@@ -20,3 +20,10 @@ export function bind_flags(settings: Gio.Settings, key: string, object: GObject.
 		if (value != null) settings.set_flags(key, value);
 	});
 }
+
+export function migrateSettings(settings: Gio.Settings): void {
+	// inverted paste-on-copy -> swap-copy-shortcut
+	const pasteOnCopy = settings.get_user_value<'b'>('paste-on-copy');
+	if (pasteOnCopy !== null) settings.set_boolean('swap-copy-shortcut', !pasteOnCopy.get_boolean());
+	settings.reset('paste-on-copy');
+}

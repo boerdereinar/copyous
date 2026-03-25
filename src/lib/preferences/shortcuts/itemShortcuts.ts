@@ -59,10 +59,32 @@ export class ItemShortcuts extends Adw.PreferencesGroup {
 
 @registerClass()
 export class ItemActivationShortcuts extends Adw.PreferencesGroup {
-	constructor() {
+	constructor(prefs: ExtensionPreferences) {
 		super();
 
-		this.add(new ShortcutRow(_('Copy Item'), 'Return space'));
+		const swapCopyPasteRow = new Adw.SwitchRow({
+			title: _('Swap Copy Shortcut'),
+			subtitle: _('Swap copy and paste shortcuts'),
+		});
+		this.add(swapCopyPasteRow);
+
+		const pasteRow = new ShortcutRow(_('Paste Item'), 'Return space');
+		this.add(pasteRow);
+		const copyRow = new ShortcutRow(_('Copy Item'), '<Shift>Return space');
+		this.add(copyRow);
 		this.add(new ShortcutRow(_('Activate Default Action'), '<Ctrl>Return space'));
+
+		swapCopyPasteRow.connect('notify::active', () => {
+			if (swapCopyPasteRow.active) {
+				pasteRow.shortcuts = ['<Shift>Return space'];
+				copyRow.shortcuts = ['Return space'];
+			} else {
+				pasteRow.shortcuts = ['Return space'];
+				copyRow.shortcuts = ['<Shift>Return space'];
+			}
+		});
+
+		const settings = prefs.getSettings();
+		settings.bind('swap-copy-shortcut', swapCopyPasteRow, 'active', null);
 	}
 }
