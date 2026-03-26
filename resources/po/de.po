@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-25 23:39+0000\n"
-"PO-Revision-Date: 2025-12-06 20:29+0100\n"
+"PO-Revision-Date: 2026-03-26 22:19+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
@@ -46,22 +46,22 @@ msgstr "Konvertieren"
 #: src/lib/common/actions.ts:227
 #: src/lib/preferences/actions/actionDialog.ts:533
 msgid "Rgb"
-msgstr ""
+msgstr "Rgb"
 
 #: src/lib/common/actions.ts:228
 #: src/lib/preferences/actions/actionDialog.ts:534
 msgid "Hex"
-msgstr ""
+msgstr "Hex"
 
 #: src/lib/common/actions.ts:229
 #: src/lib/preferences/actions/actionDialog.ts:535
 msgid "Hsl"
-msgstr ""
+msgstr "Hsl"
 
 #: src/lib/common/actions.ts:236
 #: src/lib/preferences/actions/actionDialog.ts:542
 msgid "Oklch"
-msgstr ""
+msgstr "Oklch"
 
 #: src/lib/common/actions.ts:242
 #: src/lib/preferences/actions/actionDialog.ts:257
@@ -561,7 +561,7 @@ msgstr "Wählen Sie den Farbraum aus, in den konvertiert werden soll"
 
 #: src/lib/preferences/actions/actionDialog.ts:536
 msgid "Hwb"
-msgstr ""
+msgstr "Hwb"
 
 #: src/lib/preferences/actions/actionDialog.ts:537
 msgid "Linear Rgb"
@@ -569,19 +569,19 @@ msgstr "Lineares RGB"
 
 #: src/lib/preferences/actions/actionDialog.ts:538
 msgid "Xyz"
-msgstr ""
+msgstr "Xyz"
 
 #: src/lib/preferences/actions/actionDialog.ts:539
 msgid "Lab"
-msgstr ""
+msgstr "Lab"
 
 #: src/lib/preferences/actions/actionDialog.ts:540
 msgid "Lch"
-msgstr ""
+msgstr "Lch"
 
 #: src/lib/preferences/actions/actionDialog.ts:541
 msgid "Oklab"
-msgstr ""
+msgstr "Oklab"
 
 #: src/lib/preferences/actions/actionDialog.ts:662
 msgid "Edit Action"
@@ -616,7 +616,7 @@ msgstr "Nur für Text- und Code-Elemente unterstützt"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:30
 msgid "Edit Title"
-msgstr ""
+msgstr "Titel bearbeiten"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:33
 msgid "Open Menu"
@@ -628,15 +628,15 @@ msgstr "Mittlere Maustaste"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:66
 msgid "Swap Copy Shortcut"
-msgstr ""
+msgstr "Tastenkombinationen für „Kopieren“ vertauschen"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:67
 msgid "Swap copy and paste shortcuts"
-msgstr ""
+msgstr "Tastenkombinationen für „Kopieren“ und „Einfügen“ vertauschen"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:71
 msgid "Paste Item"
-msgstr ""
+msgstr "Element einfügen"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:73
 msgid "Copy Item"
@@ -661,15 +661,15 @@ msgstr "Inkognito-Modus umschalten"
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:26
 msgid "Open Clipboard Dialog Behavior"
-msgstr ""
+msgstr "Verhalten beim Öffnen des Zwischenablage-Dialogfelds"
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:27
 msgid "Toggle Dialog"
-msgstr ""
+msgstr "Dialogfeld ein-/ausblenden"
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:27
 msgid "Open / Select Next Item"
-msgstr ""
+msgstr "Öffnen / Nächstes Element auswählen"
 
 #: src/lib/preferences/shortcuts/navigationShortcuts.ts:12
 msgid "Navigation"
@@ -822,27 +822,29 @@ msgstr "Verlauf"
 
 #: src/lib/preferences/general/historySettings.ts:69
 msgid "Memory"
-msgstr ""
+msgstr "Speicher"
 
 #: src/lib/preferences/general/historySettings.ts:70
 msgid "SQLite"
-msgstr ""
+msgstr "SQLite"
 
 #: src/lib/preferences/general/historySettings.ts:70
 msgid "(recommended)"
-msgstr ""
+msgstr "(empfohlen)"
 
 #: src/lib/preferences/general/historySettings.ts:71
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 #: src/lib/preferences/general/historySettings.ts:98
 msgid "Database"
-msgstr ""
+msgstr "Datenbank"
 
 #: src/lib/preferences/general/historySettings.ts:99
 msgid "Select which database type to use for storing your clipboard"
 msgstr ""
+"Wählen Sie aus, welcher Datenbanktyp zum Speichern Ihrer Zwischenablage "
+"verwendet werden soll"
 
 #: src/lib/preferences/general/historySettings.ts:124
 msgid "Database Location"
@@ -1370,7 +1372,7 @@ msgstr "Das bevorzugte Design festlegen"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 msgid "Yaru"
-msgstr ""
+msgstr "Yaru"
 
 #: src/lib/preferences/customization/themeCustomization.ts:89
 #: src/lib/preferences/customization/themeCustomization.ts:96
@@ -1380,7 +1382,7 @@ msgstr "Farbschema"
 #: src/lib/preferences/customization/themeCustomization.ts:90
 #: src/lib/preferences/customization/themeCustomization.ts:97
 msgid "Set the color scheme of the theme"
-msgstr ""
+msgstr "Farbschema des Themes festlegen"
 
 #: src/lib/preferences/customization/themeCustomization.ts:91
 msgid "System"
@@ -1398,7 +1400,7 @@ msgstr "Hell"
 
 #: src/lib/preferences/customization/themeCustomization.ts:91
 msgid "High Contrast"
-msgstr ""
+msgstr "Hoher Kontrast"
 
 #: src/lib/preferences/customization/themeCustomization.ts:104
 msgid "Background Color"
@@ -1880,7 +1882,7 @@ msgstr "Warnung deaktivieren"
 
 #: src/lib/database/entryTracker.ts:163
 msgid "Failed to load JSON"
-msgstr ""
+msgstr "JSON konnte nicht geladen werden"
 
 #: src/prefs.ts:74
 msgid "General"
