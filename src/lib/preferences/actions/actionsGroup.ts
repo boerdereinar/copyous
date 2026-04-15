@@ -74,7 +74,7 @@ class ActionSubmenuRowBase extends Adw.ExpanderRow {
 class ActionSubmenuRow extends ActionSubmenuRowBase {
 	private readonly _actionsList: NestedListBox;
 	private readonly _addActionButtonList: NestedListBox;
-	private readonly _addActionButton: Adw.ButtonRow;
+	private readonly _addActionButton: Adw.ActionRow;
 
 	constructor(
 		private window: Adw.PreferencesWindow,
@@ -96,10 +96,11 @@ class ActionSubmenuRow extends ActionSubmenuRowBase {
 		this._addActionButtonList = new NestedListBox();
 		this.add_row(this._addActionButtonList);
 
-		this._addActionButton = new Adw.ButtonRow({
+		this._addActionButton = new Adw.ActionRow({
 			title: _('Add Action'),
-			start_icon_name: Icon.Add,
+			activatable: true,
 		});
+		this._addActionButton.add_prefix(new Gtk.Image({ icon_name: Icon.Add }));
 		this._addActionButton.connect('activated', this.add.bind(this));
 		this._addActionButtonList.listbox.append(this._addActionButton);
 

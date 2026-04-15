@@ -1,5 +1,6 @@
 import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
+import Gtk from 'gi://Gtk';
 
 import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
@@ -182,58 +183,67 @@ export class Profiles extends Adw.PreferencesGroup {
 			description: _('Choose between pre-defined profiles'),
 		});
 
-		const toggles = new Adw.ToggleGroup();
-		this.add(toggles);
-
-		const defaultToggle = new Adw.Toggle({
-			name: 'default',
-			label: _('Default'),
+		const box = new Gtk.Box({
+			orientation: Gtk.Orientation.HORIZONTAL,
+			homogeneous: true,
+			css_classes: ['linked'],
 		});
-		toggles.add(defaultToggle);
+		this.add(box);
 
-		const compactToggle = new Adw.Toggle({
-			name: 'compact',
-			label: _('Compact'),
-		});
-		toggles.add(compactToggle);
+		const defaultToggle = new Gtk.ToggleButton({ label: _('Default') });
+		box.append(defaultToggle);
 
-		const customToggle = new Adw.Toggle({
-			name: 'custom',
-			label: _('Custom'),
-		});
-		toggles.add(customToggle);
+		const compactToggle = new Gtk.ToggleButton({ label: _('Compact'), group: defaultToggle });
+		box.append(compactToggle);
+
+		const customToggle = new Gtk.ToggleButton({ label: _('Custom'), group: defaultToggle });
+		box.append(customToggle);
 
 		const defaultProfile = new DefaultProfile(prefs);
 		const compactProfile = new CompactProfile(prefs);
 
+		let _activeName = 'custom';
+		const setActive = (name: string) => {
+			_activeName = name;
+			if (name === 'default') defaultToggle.active = true;
+			else if (name === 'compact') compactToggle.active = true;
+			else customToggle.active = true;
+		};
+
 		// Set current active profile
-		if (defaultProfile.active) toggles.set_active_name('default');
-		else if (compactProfile.active) toggles.set_active_name('compact');
-		else toggles.set_active_name('custom');
+		if (defaultProfile.active) setActive('default');
+		else if (compactProfile.active) setActive('compact');
+		else setActive('custom');
 
 		// Update active profile
-		toggles.connect('notify::active-name', () => {
-			if (toggles.active_name === 'default' && !defaultProfile.active) {
+		const onToggled = () => {
+			const newName = defaultToggle.active ? 'default' : compactToggle.active ? 'compact' : 'custom';
+			if (newName === _activeName) return;
+			_activeName = newName;
+			if (newName === 'default' && !defaultProfile.active) {
 				defaultProfile.activate();
-			} else if (toggles.active_name === 'compact' && !compactProfile.active) {
+			} else if (newName === 'compact' && !compactProfile.active) {
 				compactProfile.activate();
 			}
-		});
+		};
+		defaultToggle.connect('toggled', onToggled);
+		compactToggle.connect('toggled', onToggled);
+		customToggle.connect('toggled', onToggled);
 
 		// Check if profile is active
 		defaultProfile.connectActive(() => {
 			if (defaultProfile.active) {
-				toggles.set_active_name('default');
-			} else if (toggles.active_name === 'default') {
-				toggles.set_active_name('custom');
+				setActive('default');
+			} else if (_activeName === 'default') {
+				setActive('custom');
 			}
 		});
 
 		compactProfile.connectActive(() => {
 			if (compactProfile.active) {
-				toggles.set_active_name('compact');
-			} else if (toggles.active_name === 'compact') {
-				toggles.set_active_name('custom');
+				setActive('compact');
+			} else if (_activeName === 'compact') {
+				setActive('custom');
 			}
 		});
 	}

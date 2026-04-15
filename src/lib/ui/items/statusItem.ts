@@ -32,7 +32,7 @@ export class StatusItem extends St.BoxLayout {
 	constructor(private ext: CopyousExtension) {
 		super({
 			style_class: 'clipboard-item status-item',
-			orientation: Clutter.Orientation.VERTICAL,
+			vertical: true,
 			can_focus: false,
 			width: 300,
 			height: 200,
@@ -50,7 +50,7 @@ export class StatusItem extends St.BoxLayout {
 			y_align: Clutter.ActorAlign.CENTER,
 			x_expand: true,
 			y_expand: true,
-			orientation: Clutter.Orientation.VERTICAL,
+			vertical: true,
 		});
 		this.add_child(box);
 

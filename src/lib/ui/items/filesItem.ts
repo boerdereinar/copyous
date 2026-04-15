@@ -44,7 +44,7 @@ export class FilesPreview extends ContentPreview {
 
 		this._files = new St.BoxLayout({
 			style_class: 'files-preview-list',
-			orientation: Clutter.Orientation.VERTICAL,
+			vertical: true,
 			min_height: 0,
 			x_expand: true,
 			clip_to_allocation: true,

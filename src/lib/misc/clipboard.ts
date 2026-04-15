@@ -354,10 +354,9 @@ export class ClipboardManager extends GObject.Object {
 			}
 
 			// Character
-			const iterator = new Intl.Segmenter().segment(trimmed)[Symbol.iterator]();
+			const graphemes = Array.from(trimmed);
 			const maxCharacters = this.ext.settings.get_child('character-item').get_int('max-characters');
-			for (let i = 0; i < maxCharacters; i++) iterator.next();
-			if (!iterator.next().value) {
+			if (graphemes.length <= maxCharacters) {
 				return [ItemType.Character, content.text, null];
 			}
 

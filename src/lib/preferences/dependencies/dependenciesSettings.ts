@@ -140,7 +140,7 @@ class LanguageWidget extends Gtk.ListBox {
 
 	private readonly _check: Gtk.Image;
 	private readonly _delete: Gtk.Image;
-	private readonly _spinner: Adw.Spinner;
+	private readonly _spinner: Gtk.Spinner;
 
 	private _cancellable: Map<string, Gio.Cancellable> = new Map();
 
@@ -177,7 +177,7 @@ class LanguageWidget extends Gtk.ListBox {
 		});
 		row.add_suffix(this._delete);
 
-		this._spinner = new Adw.Spinner({ visible: false });
+		this._spinner = new Gtk.Spinner({ visible: false, spinning: true });
 		row.add_suffix(this._spinner);
 
 		this.updateVisibility();

@@ -2,6 +2,7 @@ import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Graphene from 'gi://Graphene';
+import Meta from 'gi://Meta';
 import Shell from 'gi://Shell';
 import St from 'gi://St';
 
@@ -298,7 +299,7 @@ export class ClipboardDialog extends St.Widget {
 
 		// Dialog
 		this._dialog = new St.BoxLayout({
-			orientation: Clutter.Orientation.VERTICAL,
+			vertical: true,
 			style_class: 'clipboard-dialog horizontal',
 			x_align: Clutter.ActorAlign.FILL,
 			y_align: Clutter.ActorAlign.CENTER,
@@ -476,7 +477,11 @@ export class ClipboardDialog extends St.Widget {
 		}
 
 		this.opened = true;
-		global.compositor.disable_unredirect();
+		if (global.compositor?.disable_unredirect) {
+			global.compositor.disable_unredirect();
+		} else {
+			(Meta as any).disable_unredirect_for_display(global.display);
+		}
 
 		this._dialog.ease({
 			opacity: 255,
@@ -534,7 +539,11 @@ export class ClipboardDialog extends St.Widget {
 				Main.popModal(this._grab);
 				this._grab = null;
 				this.hide();
-				global.compositor.enable_unredirect();
+				if (global.compositor?.enable_unredirect) {
+					global.compositor.enable_unredirect();
+				} else {
+					(Meta as any).enable_unredirect_for_display(global.display);
+				}
 			},
 		});
 	}
