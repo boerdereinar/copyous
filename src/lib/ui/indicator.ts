@@ -20,6 +20,7 @@ import { ClipboardHistory, ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
 import { ClipboardEntry } from '../database/database.js';
+import { VERSION } from '../misc/compatibility.js';
 
 @registerClass({
 	Signals: {
@@ -83,6 +84,7 @@ export class ClipboardIndicator extends PanelMenu.Button {
 
 	constructor(private ext: CopyousExtension) {
 		super(0.5, ext.metadata.name, false);
+		this.configurePanelMenuClickGesture();
 
 		this._box = new St.BoxLayout({
 			style_class: 'copyous-indicator-box',
@@ -119,6 +121,16 @@ export class ClipboardIndicator extends PanelMenu.Button {
 		this.bind_property('incognito', this._incognitoSwitch, 'state', GObject.BindingFlags.BIDIRECTIONAL);
 
 		this.updateSettings();
+	}
+
+	private configurePanelMenuClickGesture() {
+		if (VERSION < 50) return;
+
+		(
+			this as ClipboardIndicator & {
+				_clickGesture?: { set_required_button: (button: number) => void };
+			}
+		)._clickGesture?.set_required_button(Clutter.BUTTON_SECONDARY);
 	}
 
 	get incognito() {
