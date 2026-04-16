@@ -49,6 +49,7 @@ For the extension to work optimally you need to install the following dependenci
 	- Make
     - Node.js
     - [pnpm](https://pnpm.io/installation)
+    - [jq](https://jqlang.org/)
 2. Clone the repository:
    ```shell
    git clone --recurse-submodules https://github.com/boerdereinar/copyous

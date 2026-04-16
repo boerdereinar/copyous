@@ -5,6 +5,5 @@
 	"shell-version": ["48", "49", "50"],
 	"settings-schema": "org.gnome.shell.extensions.copyous",
 	"gettext-domain": "copyous@boerdereinar.dev",
-	"url": "https://github.com/boerdereinar/copyous",
-	"version-name": "2.0.0"
+	"url": "https://github.com/boerdereinar/copyous"
 }
