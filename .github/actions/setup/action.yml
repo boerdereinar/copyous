@@ -30,13 +30,31 @@ runs:
         sudo apt update
         sudo apt install -y meson gettext libglib2.0-dev libgnome-autoar-0-dev libjson-glib-dev libsoup-3.0-dev
 
-    - name: Install Gnome Extensions Tool
+    - name: Get Submodule SHA
+      id: submodule-sha
       if: inputs.install-gnome-extensions-tool == 'true'
       shell: bash
-      working-directory: ./submodules/gnome-shell/subprojects/extensions-tool
+      run: echo "sha=$(git rev-parse HEAD:submodules/gnome-shell)" >> $GITHUB_OUTPUT
+
+    - name: Cache Gnome Extensions Tool
+      id: cache
+      if: inputs.install-gnome-extensions-tool == 'true'
+      uses: actions/cache@v5
+      with:
+        path: submodules/gnome-shell/subprojects/extensions-tool/build/src
+        key: gnome-extensions-${{ runner.os }}-${{ steps.submodule-sha.outputs.sha }}
+
+    - name: Install Gnome Extensions Tool
+      if: inputs.install-gnome-extensions-tool == 'true' && steps.cache.outputs.cache-hit != 'true'
+      working-directory: submodules/gnome-shell/subprojects/extensions-tool
+      shell: bash
       run: |
         ./generate-translations.sh
-        meson setup --prefix=$HOME/.local --buildtype=release -Dman=false build
+        meson setup --buildtype=release -Dman=false build
         meson compile -C build
-        meson install -C build
-        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Add Gnome Extensions Tool to Path
+      if: inputs.install-gnome-extensions-tool == 'true'
+      working-directory: submodules/gnome-shell/subprojects/extensions-tool
+      shell: bash
+      run: echo "$PWD/build/src" >> $GITHUB_PATH

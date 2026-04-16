@@ -75,13 +75,14 @@ resources/po/main.pot: $(SRC)
 		--copyright-holder="Copyous" \
 		--package-name="Copyous" \
 		--language="javascript" \
+		--sort-by-file \
 		--output="$@"
 
 POT := resources/po/main.pot
 pot: $(POT)
 
 resources/po/%.po: resources/po/main.pot
-	msgmerge --backup=off -N -U $@ $<
+	msgmerge --backup=off --update --no-fuzzy-matching --sort-by-file $@ $<
 
 PO := $(wildcard resources/po/*.po)
 po: $(PO)
@@ -100,8 +101,10 @@ check-po:
 	find resources/po -name '*.po' -exec msgcmp --use-untranslated {} resources/po/main.pot \;
 
 # Copy metadata
+VERSION ?= $(shell git describe --tags --dirty | sed -E 's/^v//;s/-g([0-9a-f]{7})/+\1/')
+
 $(DIST_DIR)/metadata.json: resources/metadata.json | $(DIST_DIR)
-	cp $< $@
+	jq '."version-name" = "$(VERSION)"' $< > $@
 
 # TypeScript
 $(DIST_DIR)/extension.js: $(SRC) tsconfig.json | $(DIST_DIR)

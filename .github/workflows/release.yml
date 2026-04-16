@@ -7,7 +7,6 @@ on:
   push:
     tags:
       - 'v*'
-      - 'git-*'
 
 jobs:
   release:
@@ -21,29 +20,32 @@ jobs:
       - uses: actions/checkout@v6
         with:
           submodules: true
+          fetch-tags: true
+          fetch-depth: 0
 
       - uses: ./.github/actions/setup
         with:
           install-gnome-extensions-tool: 'true'
 
       - name: Check Version
+        id: version
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
-          echo "PRERELEASE=$([[ $VERSION == *-* ]] && echo true || echo false)" >> $GITHUB_ENV
+          echo "prerelease=$([[ $VERSION == *-* ]] && echo true || echo false)" >> $GITHUB_OUTPUT
 
       - name: Build
         run: RELEASE=1 make build
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: dist/${{ env.UUID }}.zip
-          prerelease: ${{ env.PRERELEASE == 'true' }}
+          prerelease: ${{ steps.version.outputs.prerelease == 'true' }}
           fail_on_unmatched_files: true
           generate_release_notes: true
 
       - name: Publish Release
-        if: ${{ env.PRERELEASE == 'false' && github.repository == 'boerdereinar/copyous' }}
+        if: ${{ steps.version.outputs.prerelease == 'false' && github.repository == 'boerdereinar/copyous' }}
         run: gnome-extensions upload -u "$GNOME_USER" -p "$GNOME_PASSWORD" --accept-tos dist/${{ env.UUID }}.zip
         env:
           GNOME_USER: ${{ secrets.GNOME_USER }}
