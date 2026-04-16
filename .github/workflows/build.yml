@@ -31,6 +31,7 @@ jobs:
         with:
           submodules: true
           fetch-tags: true
+          fetch-depth: 0
 
       - uses: ./.github/actions/setup
         with:

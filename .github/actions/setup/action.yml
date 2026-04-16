@@ -41,7 +41,7 @@ runs:
       if: inputs.install-gnome-extensions-tool == 'true'
       uses: actions/cache@v5
       with:
-        path: $HOME/.local/bin/gnome-extensions
+        path: submodules/gnome-shell/subprojects/extensions-tool/build/src
         key: gnome-extensions-${{ runner.os }}-${{ steps.submodule-sha.outputs.sha }}
 
     - name: Install Gnome Extensions Tool
@@ -50,11 +50,11 @@ runs:
       shell: bash
       run: |
         ./generate-translations.sh
-        meson setup --prefix=$HOME/.local --buildtype=release -Dman=false build
+        meson setup --buildtype=release -Dman=false build
         meson compile -C build
-        meson install -C build
 
     - name: Add Gnome Extensions Tool to Path
       if: inputs.install-gnome-extensions-tool == 'true'
+      working-directory: submodules/gnome-shell/subprojects/extensions-tool
       shell: bash
-      run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+      run: echo "$PWD/build/src" >> $GITHUB_PATH
