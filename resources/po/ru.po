@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-27 17:47+0000\n"
+"POT-Creation-Date: 2026-04-16 22:30+0000\n"
 "PO-Revision-Date: 2025-11-30 20:29+0700\n"
 "Last-Translator: Victor <firephantom303@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -19,18 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Gtranslator 49.0\n"
-
-#: src/prefs.ts:74
-msgid "General"
-msgstr "Общие"
-
-#: src/prefs.ts:94
-msgid "Customization"
-msgstr "Настройка вида"
-
-#: src/prefs.ts:111
-msgid "Shortcuts"
-msgstr "Сочетания клавиш"
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
@@ -135,404 +123,320 @@ msgstr "Скопирован символ"
 msgid "Copied Color"
 msgstr "Скопирован цвет"
 
-#: src/lib/ui/components/clipboardItemMenu.ts:94
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
-#: src/lib/preferences/actions/actionsGroup.ts:125
-#: src/lib/preferences/actions/actionsGroup.ts:423
-msgid "Edit"
-msgstr "Изменить"
-
-#: src/lib/ui/components/contentInfo.ts:39
-#, javascript-format
-msgid "%dh"
-msgstr ""
-
-#: src/lib/ui/components/contentInfo.ts:40
-#, javascript-format
-msgid "%dm"
-msgstr ""
-
-#: src/lib/ui/components/contentInfo.ts:41
-#, javascript-format
-msgid "%ds"
-msgstr ""
-
-#: src/lib/ui/components/contentInfo.ts:113
-#, javascript-format
-msgid "%d char"
-msgid_plural "%d chars"
-msgstr[0] "%d символ"
-msgstr[1] "%d символа"
-msgstr[2] "%d символов"
-
-#: src/lib/ui/components/contentInfo.ts:121
-#, javascript-format
-msgid "%d word"
-msgid_plural "%d words"
-msgstr[0] "%d слово"
-msgstr[1] "%d слова"
-msgstr[2] "%d слов"
-
-#: src/lib/ui/components/contentInfo.ts:124
-#, javascript-format
-msgid "%d line"
-msgid_plural "%d lines"
-msgstr[0] "%d строка"
-msgstr[1] "%d строки"
-msgstr[2] "%d строк"
-
-#: src/lib/ui/components/contentInfo.ts:184
-msgid "Missing File"
-msgstr "Файл отсутствует"
-
-#: src/lib/ui/components/contentInfo.ts:196
-msgid "Error"
-msgstr "Ошибка"
-
-#: src/lib/ui/components/editDialog.ts:217
-#: src/lib/ui/components/editDialog.ts:244
+#: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/general/feedbackSettings.ts:155
 #: src/lib/preferences/general/feedbackSettings.ts:259
 #: src/lib/preferences/general/feedbackSettings.ts:301
-#: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:38
+#: src/lib/ui/components/editDialog.ts:217
+#: src/lib/ui/components/editDialog.ts:244
 msgid "None"
 msgstr "Нет"
 
-#: src/lib/ui/components/editDialog.ts:269
-msgid "Edit Clipboard Item"
-msgstr "Редактировать элемент буфера обмена"
+#: src/lib/preferences/actions/actionDefaults.ts:113
+#: src/lib/preferences/actions/actionDefaults.ts:128
+#: src/lib/preferences/actions/actionsPage.ts:74
+msgid "Default Actions"
+msgstr "Действия по умолчанию"
 
-#: src/lib/ui/components/editDialog.ts:306 src/lib/ui/indicator.ts:45
-#: src/lib/preferences/customization/items/exclusions.ts:90
-#: src/lib/preferences/general/appExclusionSettings.ts:169
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:34
-#: src/lib/preferences/actions/actionsGroup.ts:33
-#: src/lib/preferences/actions/actionDialog.ts:234
-#: src/lib/preferences/actions/actionsPage.ts:27
-#: src/lib/preferences/actions/actionsPage.ts:40
-#: src/lib/preferences/shortcuts/shortcutRow.ts:131
-#: src/lib/preferences/dependencies/dependencies.ts:222
-msgid "Cancel"
-msgstr "Отмена"
-
-#: src/lib/ui/components/editDialog.ts:313
-#: src/lib/preferences/actions/actionDialog.ts:662
-msgid "Save"
-msgstr "Сохранить"
-
-#: src/lib/ui/components/qrCodeDialog.ts:146
-msgid "Close"
-msgstr "Закрыть"
-
-#: src/lib/ui/components/qrCodeDialog.ts:154
-#: src/lib/preferences/actions/actionDialog.ts:461
-#: src/lib/preferences/actions/actionDialog.ts:552
-msgid "Copy"
-msgstr "Копировать"
-
-#: src/lib/ui/clipboardDialog.ts:137 src/lib/ui/clipboardDialog.ts:242
-#: src/lib/ui/indicator.ts:52
-#: src/lib/preferences/general/historySettings.ts:136
-msgid "Clear"
-msgstr "Очистить"
-
-#: src/lib/ui/items/linkItem.ts:94
-msgid "No Title"
-msgstr "Без заголовка"
-
-#: src/lib/ui/items/linkItem.ts:96
-msgid "No Description"
-msgstr "Без описания"
-
-#: src/lib/ui/items/linkItem.ts:302
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:44
-#: src/lib/preferences/actions/actionDialog.ts:180
-#: src/lib/preferences/actions/actionDialog.ts:379
-#: src/lib/preferences/actions/actionDefaults.ts:152
-msgid "Link"
-msgstr "Ссылка"
-
-#: src/lib/ui/items/statusItem.ts:70 src/lib/ui/items/statusItem.ts:104
-msgid "Clipboard is Empty"
-msgstr "Буфер обмена пуст"
-
-#: src/lib/ui/items/statusItem.ts:107
-msgid "No Items Found"
-msgstr "Элементы не найдены"
-
-#: src/lib/ui/items/fileItem.ts:63
-#: src/lib/preferences/actions/actionDialog.ts:178
-#: src/lib/preferences/actions/actionDialog.ts:373
-#: src/lib/preferences/actions/actionDefaults.ts:144
-msgid "File"
-msgstr "Файл"
-
-#: src/lib/ui/items/codeItem.ts:23
-#: src/lib/preferences/actions/actionDialog.ts:176
-#: src/lib/preferences/actions/actionDialog.ts:367
-#: src/lib/preferences/actions/actionDefaults.ts:136
-msgid "Code"
-msgstr "Код"
-
-#: src/lib/ui/items/colorItem.ts:71
-#: src/lib/preferences/actions/actionDialog.ts:182
-#: src/lib/preferences/actions/actionDialog.ts:257
-#: src/lib/preferences/actions/actionDialog.ts:385
-#: src/lib/preferences/actions/actionDefaults.ts:165
-msgid "Color"
-msgstr "Цвет"
-
-#: src/lib/ui/items/characterItem.ts:22
-msgid "Char"
-msgstr "Символ"
-
-#: src/lib/ui/items/imageItem.ts:37
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:78
-#: src/lib/preferences/actions/actionDialog.ts:177
-#: src/lib/preferences/actions/actionDialog.ts:370
-#: src/lib/preferences/actions/actionDefaults.ts:140
-msgid "Image"
-msgstr "Изображение"
-
-#: src/lib/ui/items/textItem.ts:24
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:68
+#: src/lib/preferences/actions/actionDefaults.ts:132
 #: src/lib/preferences/actions/actionDialog.ts:175
 #: src/lib/preferences/actions/actionDialog.ts:364
-#: src/lib/preferences/actions/actionDefaults.ts:132
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:68
+#: src/lib/ui/items/textItem.ts:24
 msgid "Text"
 msgstr "Текст"
 
-#: src/lib/ui/items/filesItem.ts:120
-#, javascript-format
-msgid "%d more file"
-msgid_plural "%d more files"
-msgstr[0] "ещё %d файл"
-msgstr[1] "ещё %d файла"
-msgstr[2] "ещё %d файлов"
+#: src/lib/preferences/actions/actionDefaults.ts:136
+#: src/lib/preferences/actions/actionDialog.ts:176
+#: src/lib/preferences/actions/actionDialog.ts:367
+#: src/lib/ui/items/codeItem.ts:23
+msgid "Code"
+msgstr "Код"
 
-#: src/lib/ui/items/filesItem.ts:121
-#, javascript-format
-msgid "%d file"
-msgid_plural "%d files"
-msgstr[0] "%d файл"
-msgstr[1] "%d файла"
-msgstr[2] "%d файлов"
+#: src/lib/preferences/actions/actionDefaults.ts:140
+#: src/lib/preferences/actions/actionDialog.ts:177
+#: src/lib/preferences/actions/actionDialog.ts:370
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:78
+#: src/lib/ui/items/imageItem.ts:37
+msgid "Image"
+msgstr "Изображение"
 
-#: src/lib/ui/items/filesItem.ts:140
+#: src/lib/preferences/actions/actionDefaults.ts:144
+#: src/lib/preferences/actions/actionDialog.ts:178
+#: src/lib/preferences/actions/actionDialog.ts:373
+#: src/lib/ui/items/fileItem.ts:63
+msgid "File"
+msgstr "Файл"
+
+#: src/lib/preferences/actions/actionDefaults.ts:148
 #: src/lib/preferences/actions/actionDialog.ts:179
 #: src/lib/preferences/actions/actionDialog.ts:376
-#: src/lib/preferences/actions/actionDefaults.ts:148
+#: src/lib/ui/items/filesItem.ts:140
 msgid "Files"
 msgstr "Файлы"
 
-#: src/lib/ui/searchEntry.ts:150
-msgid "__All"
-msgstr "__Все"
+#: src/lib/preferences/actions/actionDefaults.ts:152
+#: src/lib/preferences/actions/actionDialog.ts:180
+#: src/lib/preferences/actions/actionDialog.ts:379
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:44
+#: src/lib/ui/items/linkItem.ts:302
+msgid "Link"
+msgstr "Ссылка"
 
-#: src/lib/ui/searchEntry.ts:154
-msgid "__Text"
-msgstr "__Текст"
+#: src/lib/preferences/actions/actionDefaults.ts:158
+#: src/lib/preferences/actions/actionDialog.ts:181
+#: src/lib/preferences/actions/actionDialog.ts:382
+msgid "Character"
+msgstr "Символ"
 
-#: src/lib/ui/searchEntry.ts:155
-msgid "__Code"
-msgstr "__Код"
+#: src/lib/preferences/actions/actionDefaults.ts:165
+#: src/lib/preferences/actions/actionDialog.ts:182
+#: src/lib/preferences/actions/actionDialog.ts:257
+#: src/lib/preferences/actions/actionDialog.ts:385
+#: src/lib/ui/items/colorItem.ts:71
+msgid "Color"
+msgstr "Цвет"
 
-#: src/lib/ui/searchEntry.ts:156
-msgid "__Image"
-msgstr "__Изобр"
+#: src/lib/preferences/actions/actionDialog.ts:38
+msgid "All"
+msgstr "Все"
 
-#: src/lib/ui/searchEntry.ts:157
-msgid "__File"
-msgstr "__Файл"
+#: src/lib/preferences/actions/actionDialog.ts:131
+msgid "Types"
+msgstr "Типы"
 
-#: src/lib/ui/searchEntry.ts:158
-msgid "File__s"
-msgstr "Фай__лы"
+#: src/lib/preferences/actions/actionDialog.ts:132
+msgid "Select which types are allowed"
+msgstr "Выберите, какие типы разрешены"
 
-#: src/lib/ui/searchEntry.ts:159
-msgid "__Link"
-msgstr "__Ссылка"
+#: src/lib/preferences/actions/actionDialog.ts:234
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:34
+#: src/lib/preferences/actions/actionsGroup.ts:33
+#: src/lib/preferences/actions/actionsPage.ts:27
+#: src/lib/preferences/actions/actionsPage.ts:40
+#: src/lib/preferences/customization/items/exclusions.ts:90
+#: src/lib/preferences/dependencies/dependencies.ts:222
+#: src/lib/preferences/general/appExclusionSettings.ts:169
+#: src/lib/preferences/shortcuts/shortcutRow.ts:131
+#: src/lib/ui/components/editDialog.ts:306 src/lib/ui/indicator.ts:45
+msgid "Cancel"
+msgstr "Отмена"
 
-#: src/lib/ui/searchEntry.ts:160
-msgid "C__haracter"
-msgstr "С__имвол"
+#: src/lib/preferences/actions/actionDialog.ts:256
+msgid "Kind"
+msgstr "Вид"
 
-#: src/lib/ui/searchEntry.ts:161
-msgid "Colo__r"
-msgstr "Цв__ет"
+#: src/lib/preferences/actions/actionDialog.ts:257
+#: src/lib/preferences/actions/actionDialog.ts:401
+msgid "Command"
+msgstr "Команда"
 
-#: src/lib/ui/searchEntry.ts:273
-msgid "Type to search"
-msgstr "Введите текст для поиска"
+#: src/lib/preferences/actions/actionDialog.ts:347
+msgid ""
+"The regular expression does not use any flags for matching. Leaving this "
+"empty will match everything."
+msgstr ""
+"Регулярное выражение не использует флаги сопоставления. Если оставить поле "
+"пустым, будет совпадать любой текст."
 
-#: src/lib/ui/indicator.ts:36
-msgid "Clear Clipboard History?"
-msgstr "Очистить историю буфера обмена?"
+#: src/lib/preferences/actions/actionDialog.ts:361
+msgid "Type"
+msgstr "Тип"
 
-#: src/lib/ui/indicator.ts:37
-msgid "Are you sure you want to clear your clipboard history?"
-msgstr "Действительно очистить историю буфера обмена?"
+#: src/lib/preferences/actions/actionDialog.ts:362
+msgid "Example"
+msgstr "Пример"
 
-#: src/lib/ui/indicator.ts:41
-msgid "Clear Pinned/Tagged Items"
-msgstr "Очистить закреплённые/помеченные элементы"
+#: src/lib/preferences/actions/actionDialog.ts:393
+msgid "Regular Expression"
+msgstr "Регулярное выражение"
 
-#: src/lib/ui/indicator.ts:99
-msgid "Incognito Mode"
-msgstr "Режим инкогнито"
+#: src/lib/preferences/actions/actionDialog.ts:406
+msgid ""
+"Clipboard content will be provided via stdin. Capture groups of the regular "
+"expression will be passed as positional parameters $1, $2, $3, ..."
+msgstr ""
+"Содержимое буфера обмена будет передано через stdin. Захваченные группы "
+"регулярного выражения будут переданы как позиционные параметры $1, $2, "
+"$3, ..."
 
-#: src/lib/ui/indicator.ts:102
-msgid "Clear History"
-msgstr "Очистить историю"
+#: src/lib/preferences/actions/actionDialog.ts:441
+#: src/lib/preferences/actions/actionDialog.ts:523
+#: src/lib/preferences/actions/actionDialog.ts:611
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:47
+msgid "Name"
+msgstr "Имя"
 
-#: src/lib/ui/indicator.ts:103
-msgid "Settings"
-msgstr "Настройки"
+#: src/lib/preferences/actions/actionDialog.ts:459
+#: src/lib/preferences/actions/actionDialog.ts:550
+msgid "Output"
+msgstr "Вывод"
 
-#: src/lib/ui/indicator.ts:178
-#, javascript-format
-msgid "%d File"
-msgid_plural "%d Files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+#: src/lib/preferences/actions/actionDialog.ts:460
+#: src/lib/preferences/actions/actionDialog.ts:551
+msgid "Select how to handle the output"
+msgstr "Выберите, как обрабатывать вывод"
 
-#: src/lib/preferences/customization/headerCustomization.ts:15
-msgid "Header"
-msgstr "Заголовок"
+#: src/lib/preferences/actions/actionDialog.ts:461
+#: src/lib/preferences/actions/actionDialog.ts:552
+#: src/lib/ui/components/qrCodeDialog.ts:154
+msgid "Copy"
+msgstr "Копировать"
 
-#: src/lib/preferences/customization/headerCustomization.ts:19
-msgid "Show Header"
-msgstr "Показывать заголовок"
+#: src/lib/preferences/actions/actionDialog.ts:461
+msgid "Ignore"
+msgstr "Игнорировать"
 
-#: src/lib/preferences/customization/headerCustomization.ts:20
-msgid "Show the header"
-msgstr "Показывать заголовок"
+#: src/lib/preferences/actions/actionDialog.ts:461
+#: src/lib/preferences/actions/actionDialog.ts:552
+msgid "Paste"
+msgstr "Вставить"
 
-#: src/lib/preferences/customization/headerCustomization.ts:25
-msgid "Show Item Title"
-msgstr "Показывать заголовок элемента"
+#: src/lib/preferences/actions/actionDialog.ts:466
+#: src/lib/preferences/actions/actionDialog.ts:557
+#: src/lib/preferences/actions/actionDialog.ts:621
+msgid "Shortcut"
+msgstr "Сочетание клавиш"
 
-#: src/lib/preferences/customization/headerCustomization.ts:26
-msgid "Show the title of the item"
-msgstr "Показывать заголовок элемента"
+#: src/lib/preferences/actions/actionDialog.ts:530
+msgid "Color Space"
+msgstr "Цветовое пространство"
 
-#: src/lib/preferences/customization/headerCustomization.ts:31
-msgid "Header Controls Visibility"
-msgstr "Отображение элементов управления заголовком"
+#: src/lib/preferences/actions/actionDialog.ts:531
+msgid "Select which color space to convert to"
+msgstr "Выберите цветовое пространство для преобразования"
 
-#: src/lib/preferences/customization/headerCustomization.ts:32
-msgid "The visibility of the header controls"
-msgstr "Отображение элементов управления в заголовке"
-
-#: src/lib/preferences/customization/headerCustomization.ts:33
-msgid "Visible"
-msgstr "Видимо"
-
-#: src/lib/preferences/customization/headerCustomization.ts:33
-msgid "Visible on Hover"
-msgstr "Видимо при наведении"
-
-#: src/lib/preferences/customization/headerCustomization.ts:33
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:163
-msgid "Hidden"
-msgstr "Скрыто"
-
-#: src/lib/preferences/customization/themeCustomization.ts:69
-#: src/lib/preferences/customization/themeCustomization.ts:73
-msgid "Theme"
+#: src/lib/preferences/actions/actionDialog.ts:536
+msgid "Hwb"
 msgstr ""
 
-#: src/lib/preferences/customization/themeCustomization.ts:74
-msgid "Set the preferred theme"
+#: src/lib/preferences/actions/actionDialog.ts:537
+msgid "Linear Rgb"
+msgstr "Линейный RGB"
+
+#: src/lib/preferences/actions/actionDialog.ts:538
+msgid "Xyz"
 msgstr ""
 
-#: src/lib/preferences/customization/themeCustomization.ts:75
-#: src/lib/preferences/customization/profiles.ts:190
-msgid "Default"
-msgstr "По умолчанию"
-
-#: src/lib/preferences/customization/themeCustomization.ts:75
-msgid "Yaru"
+#: src/lib/preferences/actions/actionDialog.ts:539
+msgid "Lab"
 msgstr ""
 
-#: src/lib/preferences/customization/themeCustomization.ts:75
-#: src/lib/preferences/customization/profiles.ts:202
-msgid "Custom"
-msgstr "Пользовательский"
-
-#: src/lib/preferences/customization/themeCustomization.ts:89
-#: src/lib/preferences/customization/themeCustomization.ts:96
-msgid "Color Scheme"
+#: src/lib/preferences/actions/actionDialog.ts:540
+msgid "Lch"
 msgstr ""
 
-#: src/lib/preferences/customization/themeCustomization.ts:90
-#: src/lib/preferences/customization/themeCustomization.ts:97
-msgid "Set the color scheme of the theme"
+#: src/lib/preferences/actions/actionDialog.ts:541
+msgid "Oklab"
 msgstr ""
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
-msgid "System"
+#: src/lib/preferences/actions/actionDialog.ts:655
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
+#: src/lib/preferences/actions/actionsGroup.ts:550
+#: src/lib/preferences/customization/items/exclusions.ts:92
+#: src/lib/preferences/general/appExclusionSettings.ts:171
+msgid "Add"
+msgstr "Добавить"
+
+#: src/lib/preferences/actions/actionDialog.ts:655
+#: src/lib/preferences/actions/actionsGroup.ts:100
+#: src/lib/preferences/actions/actionsGroup.ts:568
+msgid "Add Action"
+msgstr "Добавить действие"
+
+#: src/lib/preferences/actions/actionDialog.ts:662
+msgid "Edit Action"
+msgstr "Изменить действие"
+
+#: src/lib/preferences/actions/actionDialog.ts:662
+#: src/lib/ui/components/editDialog.ts:313
+msgid "Save"
+msgstr "Сохранить"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
+#: src/lib/preferences/actions/actionsGroup.ts:569
+msgid "Add Submenu"
+msgstr "Добавить подменю"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
+#: src/lib/preferences/actions/actionsGroup.ts:125
+#: src/lib/preferences/actions/actionsGroup.ts:423
+#: src/lib/ui/components/clipboardItemMenu.ts:94
+msgid "Edit"
+msgstr "Изменить"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
+msgid "Edit Submenu"
+msgstr "Изменить подменю"
+
+#: src/lib/preferences/actions/actionsGroup.ts:34
+#: src/lib/preferences/actions/actionsGroup.ts:126
+#: src/lib/preferences/actions/actionsGroup.ts:424
+msgid "Delete"
+msgstr "Удалить"
+
+#: src/lib/preferences/actions/actionsGroup.ts:91
+#: src/lib/preferences/actions/actionsGroup.ts:529
+msgid "No Actions"
+msgstr "Нет действий"
+
+#: src/lib/preferences/actions/actionsGroup.ts:180
+msgid "Delete Submenu?"
+msgstr "Удалить подменю?"
+
+#: src/lib/preferences/actions/actionsGroup.ts:181
+msgid "Deleting the submenu will delete all actions in the submenu"
+msgstr "Удаление подменю удалит все действия внутри него"
+
+#: src/lib/preferences/actions/actionsGroup.ts:446
+msgid "Delete Action?"
+msgstr "Удалить действие?"
+
+#: src/lib/preferences/actions/actionsGroup.ts:518
+#: src/lib/preferences/actions/actionsPage.ts:62
+msgid "Actions"
+msgstr "Действия"
+
+#: src/lib/preferences/actions/actionsPage.ts:28
+msgid "Reset"
+msgstr "Сбросить"
+
+#: src/lib/preferences/actions/actionsPage.ts:41
+msgid "Restore"
+msgstr "Восстановить"
+
+#: src/lib/preferences/actions/actionsPage.ts:75
+msgid "Set default actions that trigger when holding control"
+msgstr "Задать действия по умолчанию, срабатывающие при удержании Control"
+
+#: src/lib/preferences/actions/actionsPage.ts:92
+msgid "Restore Built-In Actions"
+msgstr "Восстановить встроенные действия"
+
+#: src/lib/preferences/actions/actionsPage.ts:101
+msgid "Reset Actions"
+msgstr "Сбросить действия"
+
+#: src/lib/preferences/actions/actionsPage.ts:121
+msgid "Restore Built-In Actions?"
+msgstr "Восстановить встроенные действия?"
+
+#: src/lib/preferences/actions/actionsPage.ts:123
+msgid ""
+"Restoring the built-in actions will restore built-in actions that were "
+"removed. Custom actions will remain unchanged"
 msgstr ""
+"Восстановление встроенных действий вернёт удалённые встроенные действия. "
+"Пользовательские действия останутся без изменений."
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
-#: src/lib/preferences/customization/themeCustomization.ts:98
-msgid "Dark"
-msgstr ""
+#: src/lib/preferences/actions/actionsPage.ts:140
+msgid "Reset Actions?"
+msgstr "Сбросить действия?"
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
-#: src/lib/preferences/customization/themeCustomization.ts:98
-msgid "Light"
-msgstr ""
-
-#: src/lib/preferences/customization/themeCustomization.ts:91
-msgid "High Contrast"
-msgstr ""
-
-#: src/lib/preferences/customization/themeCustomization.ts:104
-msgid "Background Color"
-msgstr ""
-
-#: src/lib/preferences/customization/themeCustomization.ts:105
-msgid "Set the background color of the clipboard dialog"
-msgstr ""
-
-#: src/lib/preferences/customization/themeCustomization.ts:111
-msgid "Text Color"
-msgstr ""
-
-#: src/lib/preferences/customization/themeCustomization.ts:112
-msgid "Set the text color of the clipboard dialog"
-msgstr ""
-
-#: src/lib/preferences/customization/themeCustomization.ts:118
-msgid "Item Color"
-msgstr ""
-
-#: src/lib/preferences/customization/themeCustomization.ts:119
-msgid "Set the background color of clipboard items"
-msgstr ""
-
-#: src/lib/preferences/customization/themeCustomization.ts:125
-msgid "Search Color"
-msgstr ""
-
-#: src/lib/preferences/customization/themeCustomization.ts:126
-msgid "Set the background color of the search bar"
-msgstr ""
-
-#: src/lib/preferences/customization/profiles.ts:181
-msgid "Profiles"
-msgstr "Профили"
-
-#: src/lib/preferences/customization/profiles.ts:182
-msgid "Choose between pre-defined profiles"
-msgstr "Выберите один из предопределённых профилей"
-
-#: src/lib/preferences/customization/profiles.ts:196
-msgid "Compact"
-msgstr "Компактный"
+#: src/lib/preferences/actions/actionsPage.ts:141
+msgid "Resetting the actions will delete all custom actions"
+msgstr "Сброс действий удалит все пользовательские действия"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:24
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:16
@@ -586,9 +490,9 @@ msgid "Vertical"
 msgstr "Вертикальная"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:56
-#: src/lib/preferences/customization/dialogCustomization.ts:86
-msgid "Top"
-msgstr "Сверху"
+#: src/lib/preferences/customization/dialogCustomization.ts:100
+msgid "Bottom"
+msgstr "Снизу"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:56
 #: src/lib/preferences/customization/dialogCustomization.ts:65
@@ -596,16 +500,16 @@ msgid "Center"
 msgstr "По центру"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:56
-#: src/lib/preferences/customization/dialogCustomization.ts:100
-msgid "Bottom"
-msgstr "Снизу"
-
-#: src/lib/preferences/customization/dialogCustomization.ts:56
 #: src/lib/preferences/customization/dialogCustomization.ts:65
 #: src/lib/preferences/customization/dialogCustomization.ts:187
 #: src/lib/preferences/customization/dialogCustomization.ts:191
 msgid "Fill"
 msgstr "Заполнить"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:56
+#: src/lib/preferences/customization/dialogCustomization.ts:86
+msgid "Top"
+msgstr "Сверху"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:58
 msgid "Vertical Position"
@@ -689,6 +593,47 @@ msgstr "Высота"
 msgid "Change the height of the clipboard dialog"
 msgstr "Изменить высоту диалогового окна буфера обмена"
 
+#: src/lib/preferences/customization/headerCustomization.ts:15
+msgid "Header"
+msgstr "Заголовок"
+
+#: src/lib/preferences/customization/headerCustomization.ts:19
+msgid "Show Header"
+msgstr "Показывать заголовок"
+
+#: src/lib/preferences/customization/headerCustomization.ts:20
+msgid "Show the header"
+msgstr "Показывать заголовок"
+
+#: src/lib/preferences/customization/headerCustomization.ts:25
+msgid "Show Item Title"
+msgstr "Показывать заголовок элемента"
+
+#: src/lib/preferences/customization/headerCustomization.ts:26
+msgid "Show the title of the item"
+msgstr "Показывать заголовок элемента"
+
+#: src/lib/preferences/customization/headerCustomization.ts:31
+msgid "Header Controls Visibility"
+msgstr "Отображение элементов управления заголовком"
+
+#: src/lib/preferences/customization/headerCustomization.ts:32
+msgid "The visibility of the header controls"
+msgstr "Отображение элементов управления в заголовке"
+
+#: src/lib/preferences/customization/headerCustomization.ts:33
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:163
+msgid "Hidden"
+msgstr "Скрыто"
+
+#: src/lib/preferences/customization/headerCustomization.ts:33
+msgid "Visible"
+msgstr "Видимо"
+
+#: src/lib/preferences/customization/headerCustomization.ts:33
+msgid "Visible on Hover"
+msgstr "Видимо при наведении"
+
 #: src/lib/preferences/customization/itemCustomization.ts:14
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:16
 msgid "Item"
@@ -728,84 +673,136 @@ msgstr "Ширина табуляции"
 msgid "Change the width of a tab character in the clipboard items"
 msgstr "Изменить ширину символа табуляции в элементах буфера обмена"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:29
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:98
-msgid "Link Exclusions"
-msgstr "Исключения ссылок"
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:13
+msgid "Character Item"
+msgstr "Символьный элемент"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:42
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:100
-msgid "Add Pattern"
-msgstr "Добавить шаблон"
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:14
+msgid "Configure character clipboard items"
+msgstr "Настроить символьные элементы буфера обмена"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:43
-msgid ""
-"Enter a regular expression to exclude links that should not have a preview."
-msgstr "Введите регулярное выражение для исключения ссылок без предпросмотра."
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:18
+msgid "Maximum Characters"
+msgstr "Максимум символов"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:47
-msgid "Link Exclusion Patterns"
-msgstr "Шаблоны исключения ссылок"
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:19
+msgid "Maximum number of characters that are recognized as a character item"
+msgstr "Максимальное количество символов, считающееся символьным элементом"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:48
-msgid "Links matching these patterns will not have a preview"
-msgstr "Ссылки, подходящие под эти шаблоны, не будут иметь предпросмотра"
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:25
+msgid "Show Unicode"
+msgstr "Показывать Unicode"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:65
-msgid "Link Item"
-msgstr "Элемент со ссылкой"
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:26
+msgid "Show the Unicode of the character"
+msgstr "Показывать значение Unicode символа"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:66
-msgid "Configure link clipboard items"
-msgstr "Настроить элементы буфера обмена со ссылками"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:15
+msgid "Code Item"
+msgstr "Элемент с кодом"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:70
-msgid "Show Link Preview"
-msgstr "Показывать предпросмотр ссылки"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:16
+msgid "Configure code clipboard items"
+msgstr "Настроить элементы буфера обмена с кодом"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:71
-msgid "Show link preview in the link item"
-msgstr "Показывать предпросмотр ссылки в элементе со ссылкой"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:20
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:178
+msgid "Syntax Highlighting"
+msgstr "Подсветка синтаксиса"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:76
-msgid "Show Link Preview Image"
-msgstr "Показывать изображение предпросмотра ссылки"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:21
+msgid "Enable or disable syntax highlighting in the code item"
+msgstr "Включить или отключить подсветку синтаксиса в элементе с кодом"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:77
-msgid "Show link preview image in the link item"
-msgstr "Показывать изображение предпросмотра ссылки в элементе со ссылкой"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:26
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:184
+msgid "Show Line Numbers"
+msgstr "Показывать номера строк"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:82
-msgid "Link Preview Image Background Size"
-msgstr "Размер фона изображения предпросмотра ссылки"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:27
+msgid "Show line numbers in the code item"
+msgstr "Показывать номера строк в элементе с кодом"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:83
-msgid "Background size of the link preview image"
-msgstr "Размер фонового изображения предпросмотра ссылки"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:32
+msgid "Show Code Info"
+msgstr "Показывать сведения о коде"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:84
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
-msgid "Cover"
-msgstr "Заполнить"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:33
+msgid "Show extra information in the code item"
+msgstr "Показывать дополнительную информацию в элементе с кодом"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:84
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
-msgid "Contain"
-msgstr "Вместить целиком"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:38
+#: src/lib/preferences/customization/items/textItemCustomization.ts:26
+msgid "Text Count Mode"
+msgstr "Режим подсчёта текста"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:89
-msgid "Link Preview Orientation"
-msgstr "Ориентация предпросмотра ссылки"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:39
+#: src/lib/preferences/customization/items/textItemCustomization.ts:27
+msgid "Show the number of characters, words or lines"
+msgstr "Показывать количество символов, слов или строк"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:90
-msgid "Orientation of the link preview"
-msgstr "Ориентация области предпросмотра ссылки"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
+msgid "Characters"
+msgstr "Символы"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:99
-msgid "Configure link exclusions for link previews"
-msgstr "Настроить исключения ссылок для предпросмотра"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
+msgid "Lines"
+msgstr "Строки"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
+msgid "Words"
+msgstr "Слова"
+
+#: src/lib/preferences/customization/items/exclusions.ts:33
+msgid "Zero or More Characters"
+msgstr "Ноль или более символов"
+
+#: src/lib/preferences/customization/items/exclusions.ts:39
+msgid "One Character"
+msgstr "Один символ"
+
+#: src/lib/preferences/customization/items/exclusions.ts:45
+msgid "Recursive Wildcard"
+msgstr "Рекурсивный шаблон"
+
+#: src/lib/preferences/customization/items/exclusions.ts:51
+msgid "List"
+msgstr "Список"
+
+#: src/lib/preferences/customization/items/exclusions.ts:57
+msgid "Range"
+msgstr "Диапазон"
+
+#: src/lib/preferences/customization/items/exclusions.ts:63
+msgid "Not in Range"
+msgstr "Вне диапазона"
+
+#: src/lib/preferences/customization/items/exclusions.ts:107
+msgid "Pattern"
+msgstr "Шаблон"
+
+#: src/lib/preferences/customization/items/exclusions.ts:124
+msgid "You can test your pattern below"
+msgstr "Ниже можно протестировать шаблон"
+
+#: src/lib/preferences/customization/items/exclusions.ts:158
+msgid "Invalid Pattern"
+msgstr "Недопустимый шаблон"
+
+#: src/lib/preferences/customization/items/exclusions.ts:163
+msgid "Preview Shown"
+msgstr "Предпросмотр показан"
+
+#: src/lib/preferences/customization/items/exclusions.ts:168
+msgid "Preview Hidden"
+msgstr "Предпросмотр скрыт"
+
+#: src/lib/preferences/customization/items/exclusions.ts:291
+msgid "No Exclusion Patterns"
+msgstr "Нет шаблонов исключений"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:51
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:190
@@ -831,6 +828,11 @@ msgstr "Обложка"
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:89
 msgid "Enable file previews for all files with generated thumbnails"
 msgstr "Включить предпросмотр для всех файлов с созданными эскизами"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:100
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:42
+msgid "Add Pattern"
+msgstr "Добавить шаблон"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:101
 msgid "Enter a glob pattern to exclude files that should not have a preview."
@@ -893,19 +895,21 @@ msgstr "Размер фона"
 msgid "Background size of the image preview"
 msgstr "Размер фонового изображения предпросмотра"
 
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:178
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:20
-msgid "Syntax Highlighting"
-msgstr "Подсветка синтаксиса"
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:84
+msgid "Contain"
+msgstr "Вместить целиком"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:84
+msgid "Cover"
+msgstr "Заполнить"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:179
 msgid "Enable or disable syntax highlighting in the text preview"
 msgstr "Включить или отключить подсветку синтаксиса в текстовом предпросмотре"
-
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:184
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:26
-msgid "Show Line Numbers"
-msgstr "Показывать номера строк"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:185
 msgid "Show line numbers in the text preview"
@@ -914,151 +918,6 @@ msgstr "Показывать номера строк в текстовом пр�
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:191
 msgid "Configure file exclusions for file previews"
 msgstr "Настроить исключения файлов для предпросмотра"
-
-#: src/lib/preferences/customization/items/exclusions.ts:33
-msgid "Zero or More Characters"
-msgstr "Ноль или более символов"
-
-#: src/lib/preferences/customization/items/exclusions.ts:39
-msgid "One Character"
-msgstr "Один символ"
-
-#: src/lib/preferences/customization/items/exclusions.ts:45
-msgid "Recursive Wildcard"
-msgstr "Рекурсивный шаблон"
-
-#: src/lib/preferences/customization/items/exclusions.ts:51
-msgid "List"
-msgstr "Список"
-
-#: src/lib/preferences/customization/items/exclusions.ts:57
-msgid "Range"
-msgstr "Диапазон"
-
-#: src/lib/preferences/customization/items/exclusions.ts:63
-msgid "Not in Range"
-msgstr "Вне диапазона"
-
-#: src/lib/preferences/customization/items/exclusions.ts:92
-#: src/lib/preferences/general/appExclusionSettings.ts:171
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
-#: src/lib/preferences/actions/actionsGroup.ts:550
-#: src/lib/preferences/actions/actionDialog.ts:655
-msgid "Add"
-msgstr "Добавить"
-
-#: src/lib/preferences/customization/items/exclusions.ts:107
-msgid "Pattern"
-msgstr "Шаблон"
-
-#: src/lib/preferences/customization/items/exclusions.ts:124
-msgid "You can test your pattern below"
-msgstr "Ниже можно протестировать шаблон"
-
-#: src/lib/preferences/customization/items/exclusions.ts:158
-msgid "Invalid Pattern"
-msgstr "Недопустимый шаблон"
-
-#: src/lib/preferences/customization/items/exclusions.ts:163
-msgid "Preview Shown"
-msgstr "Предпросмотр показан"
-
-#: src/lib/preferences/customization/items/exclusions.ts:168
-msgid "Preview Hidden"
-msgstr "Предпросмотр скрыт"
-
-#: src/lib/preferences/customization/items/exclusions.ts:291
-msgid "No Exclusion Patterns"
-msgstr "Нет шаблонов исключений"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:13
-msgid "Character Item"
-msgstr "Символьный элемент"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:14
-msgid "Configure character clipboard items"
-msgstr "Настроить символьные элементы буфера обмена"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:18
-msgid "Maximum Characters"
-msgstr "Максимум символов"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:19
-msgid "Maximum number of characters that are recognized as a character item"
-msgstr "Максимальное количество символов, считающееся символьным элементом"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:25
-msgid "Show Unicode"
-msgstr "Показывать Unicode"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:26
-msgid "Show the Unicode of the character"
-msgstr "Показывать значение Unicode символа"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:15
-msgid "Code Item"
-msgstr "Элемент с кодом"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:16
-msgid "Configure code clipboard items"
-msgstr "Настроить элементы буфера обмена с кодом"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:21
-msgid "Enable or disable syntax highlighting in the code item"
-msgstr "Включить или отключить подсветку синтаксиса в элементе с кодом"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:27
-msgid "Show line numbers in the code item"
-msgstr "Показывать номера строк в элементе с кодом"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:32
-msgid "Show Code Info"
-msgstr "Показывать сведения о коде"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:33
-msgid "Show extra information in the code item"
-msgstr "Показывать дополнительную информацию в элементе с кодом"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:38
-#: src/lib/preferences/customization/items/textItemCustomization.ts:26
-msgid "Text Count Mode"
-msgstr "Режим подсчёта текста"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:39
-#: src/lib/preferences/customization/items/textItemCustomization.ts:27
-msgid "Show the number of characters, words or lines"
-msgstr "Показывать количество символов, слов или строк"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
-#: src/lib/preferences/customization/items/textItemCustomization.ts:28
-msgid "Characters"
-msgstr "Символы"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
-#: src/lib/preferences/customization/items/textItemCustomization.ts:28
-msgid "Words"
-msgstr "Слова"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
-#: src/lib/preferences/customization/items/textItemCustomization.ts:28
-msgid "Lines"
-msgstr "Строки"
-
-#: src/lib/preferences/customization/items/textItemCustomization.ts:15
-msgid "Text Item"
-msgstr "Текстовый элемент"
-
-#: src/lib/preferences/customization/items/textItemCustomization.ts:16
-msgid "Configure text clipboard items"
-msgstr "Настроить текстовые элементы буфера обмена"
-
-#: src/lib/preferences/customization/items/textItemCustomization.ts:20
-msgid "Show Text Info"
-msgstr "Показывать сведения о тексте"
-
-#: src/lib/preferences/customization/items/textItemCustomization.ts:21
-msgid "Show extra information in the text item"
-msgstr "Показывать дополнительную информацию в текстовом элементе"
 
 #: src/lib/preferences/customization/items/imageItemCustomization.ts:14
 msgid "Image Item"
@@ -1080,25 +939,307 @@ msgstr "Показывать дополнительную информацию �
 msgid "Background size of the image"
 msgstr "Размер фонового изображения"
 
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:29
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:98
+msgid "Link Exclusions"
+msgstr "Исключения ссылок"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:43
+msgid ""
+"Enter a regular expression to exclude links that should not have a preview."
+msgstr "Введите регулярное выражение для исключения ссылок без предпросмотра."
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:47
+msgid "Link Exclusion Patterns"
+msgstr "Шаблоны исключения ссылок"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:48
+msgid "Links matching these patterns will not have a preview"
+msgstr "Ссылки, подходящие под эти шаблоны, не будут иметь предпросмотра"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:65
+msgid "Link Item"
+msgstr "Элемент со ссылкой"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:66
+msgid "Configure link clipboard items"
+msgstr "Настроить элементы буфера обмена со ссылками"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:70
+msgid "Show Link Preview"
+msgstr "Показывать предпросмотр ссылки"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:71
+msgid "Show link preview in the link item"
+msgstr "Показывать предпросмотр ссылки в элементе со ссылкой"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:76
+msgid "Show Link Preview Image"
+msgstr "Показывать изображение предпросмотра ссылки"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:77
+msgid "Show link preview image in the link item"
+msgstr "Показывать изображение предпросмотра ссылки в элементе со ссылкой"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:82
+msgid "Link Preview Image Background Size"
+msgstr "Размер фона изображения предпросмотра ссылки"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:83
+msgid "Background size of the link preview image"
+msgstr "Размер фонового изображения предпросмотра ссылки"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:89
+msgid "Link Preview Orientation"
+msgstr "Ориентация предпросмотра ссылки"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:90
+msgid "Orientation of the link preview"
+msgstr "Ориентация области предпросмотра ссылки"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:99
+msgid "Configure link exclusions for link previews"
+msgstr "Настроить исключения ссылок для предпросмотра"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:15
+msgid "Text Item"
+msgstr "Текстовый элемент"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:16
+msgid "Configure text clipboard items"
+msgstr "Настроить текстовые элементы буфера обмена"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:20
+msgid "Show Text Info"
+msgstr "Показывать сведения о тексте"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:21
+msgid "Show extra information in the text item"
+msgstr "Показывать дополнительную информацию в текстовом элементе"
+
 #: src/lib/preferences/customization/itemsCustomization.ts:22
 msgid "Items"
 msgstr "Элементы"
 
-#: src/lib/preferences/general/locationsGroup.ts:13
-msgid "Locations"
-msgstr "Расположения"
+#: src/lib/preferences/customization/profiles.ts:181
+msgid "Profiles"
+msgstr "Профили"
 
-#: src/lib/preferences/general/locationsGroup.ts:19
-msgid "Data"
-msgstr "Данные"
+#: src/lib/preferences/customization/profiles.ts:182
+msgid "Choose between pre-defined profiles"
+msgstr "Выберите один из предопределённых профилей"
 
-#: src/lib/preferences/general/locationsGroup.ts:29
-msgid "Config"
-msgstr "Конфиг"
+#: src/lib/preferences/customization/profiles.ts:190
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "Default"
+msgstr "По умолчанию"
 
-#: src/lib/preferences/general/locationsGroup.ts:39
-msgid "Cache"
-msgstr "Кэш"
+#: src/lib/preferences/customization/profiles.ts:196
+msgid "Compact"
+msgstr "Компактный"
+
+#: src/lib/preferences/customization/profiles.ts:202
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "Custom"
+msgstr "Пользовательский"
+
+#: src/lib/preferences/customization/themeCustomization.ts:69
+#: src/lib/preferences/customization/themeCustomization.ts:73
+msgid "Theme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:74
+msgid "Set the preferred theme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "Yaru"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:89
+#: src/lib/preferences/customization/themeCustomization.ts:96
+msgid "Color Scheme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:90
+#: src/lib/preferences/customization/themeCustomization.ts:97
+msgid "Set the color scheme of the theme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:98
+msgid "Dark"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+msgid "High Contrast"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:98
+msgid "Light"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+msgid "System"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:104
+msgid "Background Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:105
+msgid "Set the background color of the clipboard dialog"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:111
+msgid "Text Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:112
+msgid "Set the text color of the clipboard dialog"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:118
+msgid "Item Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:119
+msgid "Set the background color of clipboard items"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:125
+msgid "Search Color"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:126
+msgid "Set the background color of the search bar"
+msgstr ""
+
+#: src/lib/preferences/dependencies/dependencies.ts:151
+#: src/lib/preferences/dependencies/dependencies.ts:438
+msgid "Libgda Not Installed"
+msgstr "Libgda не установлена"
+
+#: src/lib/preferences/dependencies/dependencies.ts:153
+msgid ""
+"Libgda is required to store clipboard history between sessions. Install "
+"either libgda 5.0 or 6.0 with SQLite support to use this feature. After "
+"installing libgda you will need to log out or restart your system."
+msgstr ""
+"Для сохранения истории буфера обмена между сессиями требуется Libgda. "
+"Установите libgda 5.0 или 6.0 с поддержкой SQLite, чтобы использовать эту "
+"функцию. После установки Libgda нужно выйти из системы или перезагрузить её."
+
+#: src/lib/preferences/dependencies/dependencies.ts:157
+msgid "Install Libgda"
+msgstr "Установить Libgda"
+
+#: src/lib/preferences/dependencies/dependencies.ts:170
+#: src/lib/preferences/dependencies/dependencies.ts:440
+msgid "Highlight.js Not Installed"
+msgstr "Highlight.js не установлен"
+
+#: src/lib/preferences/dependencies/dependencies.ts:171
+msgid "Highlight.js is required to display syntax highlighted code."
+msgstr "Для отображения кода с подсветкой синтаксиса требуется Highlight.js."
+
+#: src/lib/preferences/dependencies/dependencies.ts:175
+msgid "Manual Installation"
+msgstr "Ручная установка"
+
+#: src/lib/preferences/dependencies/dependencies.ts:189
+msgid ""
+"You can manually install highlight.js by downloading highlight.min.js from "
+"\"Url\" to \"Install Location\"."
+msgstr ""
+"Можно установить Highlight.js вручную, скачав highlight.min.js из «Url» в "
+"«Место установки»."
+
+#: src/lib/preferences/dependencies/dependencies.ts:206
+msgid "Url"
+msgstr ""
+
+#: src/lib/preferences/dependencies/dependencies.ts:215
+msgid "Install Location"
+msgstr "Место установки"
+
+#: src/lib/preferences/dependencies/dependencies.ts:224
+msgid "Install"
+msgstr "Установить"
+
+#: src/lib/preferences/dependencies/dependencies.ts:353
+#: src/lib/preferences/dependencies/dependencies.ts:439
+msgid "GSound Not Installed"
+msgstr "GSound не установлен"
+
+#: src/lib/preferences/dependencies/dependencies.ts:355
+msgid ""
+"GSound is required to play sound effects. Install GSound to use this "
+"feature. After installing GSound you will need to log out or restart your "
+"system."
+msgstr ""
+"Для воспроизведения звуковых эффектов требуется GSound. Установите GSound, "
+"чтобы использовать эту функцию. После установки GSound нужно выйти из "
+"системы или перезагрузить её."
+
+#: src/lib/preferences/dependencies/dependencies.ts:358
+msgid "Install GSound"
+msgstr "Установить GSound"
+
+#: src/lib/preferences/dependencies/dependencies.ts:371
+msgid "Starting Highlight.js Download"
+msgstr "Запуск загрузки Highlight.js"
+
+#: src/lib/preferences/dependencies/dependencies.ts:391
+msgid "Error Installing Highlight.js"
+msgstr "Ошибка установки Highlight.js"
+
+#: src/lib/preferences/dependencies/dependencies.ts:391
+msgid "Successfully Installed Highlight.js"
+msgstr "Highlight.js успешно установлен"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:240
+#, javascript-format
+msgid "Successfully Installed %s"
+msgstr "Успешно установлен %s"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:241
+#, javascript-format
+msgid "Error Installing %s"
+msgstr "Ошибка установки %s"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:261
+#, javascript-format
+msgid "Successfully Uninstalled %s"
+msgstr "Успешно удалён %s"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:262
+#, javascript-format
+msgid "Error Uninstalling %s"
+msgstr "Ошибка удаления %s"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:288
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:382
+msgid "Manage Highlight.js"
+msgstr "Управление Highlight.js"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:300
+msgid "Languages"
+msgstr "Языки"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:321
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:47
+msgid "Search"
+msgstr "Поиск"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:375
+msgid "Dependencies"
+msgstr "Зависимости"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:383
+msgid "Manage the Highlight.js installation"
+msgstr "Управлять установкой Highlight.js"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:38
 msgid "Search apps"
@@ -1140,6 +1281,72 @@ msgstr "Управление исключениями приложений"
 #: src/lib/preferences/general/appExclusionSettings.ts:322
 msgid "Manage apps that will be excluded from clipboard history"
 msgstr "Управлять приложениями, исключёнными из истории буфера обмена"
+
+#: src/lib/preferences/general/behaviorSettings.ts:12
+msgid "Behavior"
+msgstr "Поведение"
+
+#: src/lib/preferences/general/behaviorSettings.ts:16
+msgid "Remember Search Query"
+msgstr "Запоминать поисковый запрос"
+
+#: src/lib/preferences/general/behaviorSettings.ts:17
+msgid ""
+"Remember the search query when closing and reopening the clipboard dialog"
+msgstr ""
+"Запоминать поисковый запрос при закрытии и повторном открытии диалогового "
+"окна буфера обмена"
+
+#: src/lib/preferences/general/behaviorSettings.ts:22
+msgid "Exclude Pinned Items from Main View"
+msgstr "Исключать закреплённые элементы из основного вида"
+
+#: src/lib/preferences/general/behaviorSettings.ts:23
+msgid "Pinned items appear only when searching for pinned items"
+msgstr "Закреплённые элементы отображаются только при поиске по закреплённым"
+
+#: src/lib/preferences/general/behaviorSettings.ts:28
+msgid "Exclude Tagged Items from Main View"
+msgstr "Исключать помеченные элементы из основного вида"
+
+#: src/lib/preferences/general/behaviorSettings.ts:29
+msgid "Tagged items appear only when searching for tagged items"
+msgstr "Помеченные элементы отображаются только при поиске по меткам"
+
+#: src/lib/preferences/general/behaviorSettings.ts:34
+msgid "Protect Pinned Items"
+msgstr "Защищать закреплённые элементы"
+
+#: src/lib/preferences/general/behaviorSettings.ts:35
+msgid "Prevents pinned clipboard items from being deleted"
+msgstr "Не позволяет удалять закреплённые элементы буфера обмена"
+
+#: src/lib/preferences/general/behaviorSettings.ts:40
+msgid "Protect Tagged Items"
+msgstr "Защищать помеченные элементы"
+
+#: src/lib/preferences/general/behaviorSettings.ts:41
+msgid "Prevents tagged clipboard items from being deleted"
+msgstr "Не позволяет удалять помеченные элементы буфера обмена"
+
+#: src/lib/preferences/general/behaviorSettings.ts:46
+msgid "Sync Primary Clipboard"
+msgstr "Синхронизировать основной буфер обмена"
+
+#: src/lib/preferences/general/behaviorSettings.ts:47
+msgid "Also copy clipboard items to the primary clipboard"
+msgstr "Также копировать элементы в основной буфер обмена"
+
+#: src/lib/preferences/general/behaviorSettings.ts:52
+msgid "Update Date on Copy"
+msgstr "Обновлять дату при копировании"
+
+#: src/lib/preferences/general/behaviorSettings.ts:53
+msgid ""
+"Update the copied date of clipboard items when selected from clipboard "
+"history"
+msgstr ""
+"Обновлять дату копирования элементов при выборе их из истории буфера обмена"
 
 #: src/lib/preferences/general/feedbackSettings.ts:129
 #: src/lib/preferences/general/feedbackSettings.ts:251
@@ -1226,72 +1433,6 @@ msgstr "Отправлять уведомление при копировани�
 msgid "Sound to play when a clipboard item is copied"
 msgstr "Звук при копировании элемента буфера обмена"
 
-#: src/lib/preferences/general/behaviorSettings.ts:12
-msgid "Behavior"
-msgstr "Поведение"
-
-#: src/lib/preferences/general/behaviorSettings.ts:16
-msgid "Remember Search Query"
-msgstr "Запоминать поисковый запрос"
-
-#: src/lib/preferences/general/behaviorSettings.ts:17
-msgid ""
-"Remember the search query when closing and reopening the clipboard dialog"
-msgstr ""
-"Запоминать поисковый запрос при закрытии и повторном открытии диалогового "
-"окна буфера обмена"
-
-#: src/lib/preferences/general/behaviorSettings.ts:22
-msgid "Exclude Pinned Items from Main View"
-msgstr "Исключать закреплённые элементы из основного вида"
-
-#: src/lib/preferences/general/behaviorSettings.ts:23
-msgid "Pinned items appear only when searching for pinned items"
-msgstr "Закреплённые элементы отображаются только при поиске по закреплённым"
-
-#: src/lib/preferences/general/behaviorSettings.ts:28
-msgid "Exclude Tagged Items from Main View"
-msgstr "Исключать помеченные элементы из основного вида"
-
-#: src/lib/preferences/general/behaviorSettings.ts:29
-msgid "Tagged items appear only when searching for tagged items"
-msgstr "Помеченные элементы отображаются только при поиске по меткам"
-
-#: src/lib/preferences/general/behaviorSettings.ts:34
-msgid "Protect Pinned Items"
-msgstr "Защищать закреплённые элементы"
-
-#: src/lib/preferences/general/behaviorSettings.ts:35
-msgid "Prevents pinned clipboard items from being deleted"
-msgstr "Не позволяет удалять закреплённые элементы буфера обмена"
-
-#: src/lib/preferences/general/behaviorSettings.ts:40
-msgid "Protect Tagged Items"
-msgstr "Защищать помеченные элементы"
-
-#: src/lib/preferences/general/behaviorSettings.ts:41
-msgid "Prevents tagged clipboard items from being deleted"
-msgstr "Не позволяет удалять помеченные элементы буфера обмена"
-
-#: src/lib/preferences/general/behaviorSettings.ts:46
-msgid "Sync Primary Clipboard"
-msgstr "Синхронизировать основной буфер обмена"
-
-#: src/lib/preferences/general/behaviorSettings.ts:47
-msgid "Also copy clipboard items to the primary clipboard"
-msgstr "Также копировать элементы в основной буфер обмена"
-
-#: src/lib/preferences/general/behaviorSettings.ts:52
-msgid "Update Date on Copy"
-msgstr "Обновлять дату при копировании"
-
-#: src/lib/preferences/general/behaviorSettings.ts:53
-msgid ""
-"Update the copied date of clipboard items when selected from clipboard "
-"history"
-msgstr ""
-"Обновлять дату копирования элементов при выборе их из истории буфера обмена"
-
 #: src/lib/preferences/general/historySettings.ts:63
 msgid "History"
 msgstr "История"
@@ -1301,11 +1442,11 @@ msgid "Memory"
 msgstr ""
 
 #: src/lib/preferences/general/historySettings.ts:70
-msgid "SQLite"
+msgid "(recommended)"
 msgstr ""
 
 #: src/lib/preferences/general/historySettings.ts:70
-msgid "(recommended)"
+msgid "SQLite"
 msgstr ""
 
 #: src/lib/preferences/general/historySettings.ts:71
@@ -1337,12 +1478,18 @@ msgstr ""
 "системы или её завершении"
 
 #: src/lib/preferences/general/historySettings.ts:136
-msgid "Keep Pinned/Tagged"
-msgstr "Сохранять закреплённые/помеченные"
+#: src/lib/ui/clipboardDialog.ts:137 src/lib/ui/clipboardDialog.ts:242
+#: src/lib/ui/indicator.ts:52
+msgid "Clear"
+msgstr "Очистить"
 
 #: src/lib/preferences/general/historySettings.ts:136
 msgid "Keep All"
 msgstr "Сохранять всё"
+
+#: src/lib/preferences/general/historySettings.ts:136
+msgid "Keep Pinned/Tagged"
+msgstr "Сохранять закреплённые/помеченные"
 
 #: src/lib/preferences/general/historySettings.ts:142
 msgid "History Length"
@@ -1364,218 +1511,21 @@ msgstr ""
 "Выберите, сколько минут хранить элементы в истории буфера обмена. Значение 0 "
 "отключает ограничение по времени"
 
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:47
-#: src/lib/preferences/actions/actionDialog.ts:441
-#: src/lib/preferences/actions/actionDialog.ts:523
-#: src/lib/preferences/actions/actionDialog.ts:611
-msgid "Name"
-msgstr "Имя"
+#: src/lib/preferences/general/locationsGroup.ts:13
+msgid "Locations"
+msgstr "Расположения"
 
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
-#: src/lib/preferences/actions/actionsGroup.ts:569
-msgid "Add Submenu"
-msgstr "Добавить подменю"
+#: src/lib/preferences/general/locationsGroup.ts:19
+msgid "Data"
+msgstr "Данные"
 
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
-msgid "Edit Submenu"
-msgstr "Изменить подменю"
+#: src/lib/preferences/general/locationsGroup.ts:29
+msgid "Config"
+msgstr "Конфиг"
 
-#: src/lib/preferences/actions/actionsGroup.ts:34
-#: src/lib/preferences/actions/actionsGroup.ts:126
-#: src/lib/preferences/actions/actionsGroup.ts:424
-msgid "Delete"
-msgstr "Удалить"
-
-#: src/lib/preferences/actions/actionsGroup.ts:91
-#: src/lib/preferences/actions/actionsGroup.ts:529
-msgid "No Actions"
-msgstr "Нет действий"
-
-#: src/lib/preferences/actions/actionsGroup.ts:100
-#: src/lib/preferences/actions/actionsGroup.ts:568
-#: src/lib/preferences/actions/actionDialog.ts:655
-msgid "Add Action"
-msgstr "Добавить действие"
-
-#: src/lib/preferences/actions/actionsGroup.ts:180
-msgid "Delete Submenu?"
-msgstr "Удалить подменю?"
-
-#: src/lib/preferences/actions/actionsGroup.ts:181
-msgid "Deleting the submenu will delete all actions in the submenu"
-msgstr "Удаление подменю удалит все действия внутри него"
-
-#: src/lib/preferences/actions/actionsGroup.ts:446
-msgid "Delete Action?"
-msgstr "Удалить действие?"
-
-#: src/lib/preferences/actions/actionsGroup.ts:518
-#: src/lib/preferences/actions/actionsPage.ts:62
-msgid "Actions"
-msgstr "Действия"
-
-#: src/lib/preferences/actions/actionDialog.ts:38
-msgid "All"
-msgstr "Все"
-
-#: src/lib/preferences/actions/actionDialog.ts:131
-msgid "Types"
-msgstr "Типы"
-
-#: src/lib/preferences/actions/actionDialog.ts:132
-msgid "Select which types are allowed"
-msgstr "Выберите, какие типы разрешены"
-
-#: src/lib/preferences/actions/actionDialog.ts:181
-#: src/lib/preferences/actions/actionDialog.ts:382
-#: src/lib/preferences/actions/actionDefaults.ts:158
-msgid "Character"
-msgstr "Символ"
-
-#: src/lib/preferences/actions/actionDialog.ts:256
-msgid "Kind"
-msgstr "Вид"
-
-#: src/lib/preferences/actions/actionDialog.ts:257
-#: src/lib/preferences/actions/actionDialog.ts:401
-msgid "Command"
-msgstr "Команда"
-
-#: src/lib/preferences/actions/actionDialog.ts:347
-msgid ""
-"The regular expression does not use any flags for matching. Leaving this "
-"empty will match everything."
-msgstr ""
-"Регулярное выражение не использует флаги сопоставления. Если оставить поле "
-"пустым, будет совпадать любой текст."
-
-#: src/lib/preferences/actions/actionDialog.ts:361
-msgid "Type"
-msgstr "Тип"
-
-#: src/lib/preferences/actions/actionDialog.ts:362
-msgid "Example"
-msgstr "Пример"
-
-#: src/lib/preferences/actions/actionDialog.ts:393
-msgid "Regular Expression"
-msgstr "Регулярное выражение"
-
-#: src/lib/preferences/actions/actionDialog.ts:406
-msgid ""
-"Clipboard content will be provided via stdin. Capture groups of the regular "
-"expression will be passed as positional parameters $1, $2, $3, ..."
-msgstr ""
-"Содержимое буфера обмена будет передано через stdin. Захваченные группы "
-"регулярного выражения будут переданы как позиционные параметры $1, $2, "
-"$3, ..."
-
-#: src/lib/preferences/actions/actionDialog.ts:459
-#: src/lib/preferences/actions/actionDialog.ts:550
-msgid "Output"
-msgstr "Вывод"
-
-#: src/lib/preferences/actions/actionDialog.ts:460
-#: src/lib/preferences/actions/actionDialog.ts:551
-msgid "Select how to handle the output"
-msgstr "Выберите, как обрабатывать вывод"
-
-#: src/lib/preferences/actions/actionDialog.ts:461
-msgid "Ignore"
-msgstr "Игнорировать"
-
-#: src/lib/preferences/actions/actionDialog.ts:461
-#: src/lib/preferences/actions/actionDialog.ts:552
-msgid "Paste"
-msgstr "Вставить"
-
-#: src/lib/preferences/actions/actionDialog.ts:466
-#: src/lib/preferences/actions/actionDialog.ts:557
-#: src/lib/preferences/actions/actionDialog.ts:621
-msgid "Shortcut"
-msgstr "Сочетание клавиш"
-
-#: src/lib/preferences/actions/actionDialog.ts:530
-msgid "Color Space"
-msgstr "Цветовое пространство"
-
-#: src/lib/preferences/actions/actionDialog.ts:531
-msgid "Select which color space to convert to"
-msgstr "Выберите цветовое пространство для преобразования"
-
-#: src/lib/preferences/actions/actionDialog.ts:536
-msgid "Hwb"
-msgstr ""
-
-#: src/lib/preferences/actions/actionDialog.ts:537
-msgid "Linear Rgb"
-msgstr "Линейный RGB"
-
-#: src/lib/preferences/actions/actionDialog.ts:538
-msgid "Xyz"
-msgstr ""
-
-#: src/lib/preferences/actions/actionDialog.ts:539
-msgid "Lab"
-msgstr ""
-
-#: src/lib/preferences/actions/actionDialog.ts:540
-msgid "Lch"
-msgstr ""
-
-#: src/lib/preferences/actions/actionDialog.ts:541
-msgid "Oklab"
-msgstr ""
-
-#: src/lib/preferences/actions/actionDialog.ts:662
-msgid "Edit Action"
-msgstr "Изменить действие"
-
-#: src/lib/preferences/actions/actionsPage.ts:28
-msgid "Reset"
-msgstr "Сбросить"
-
-#: src/lib/preferences/actions/actionsPage.ts:41
-msgid "Restore"
-msgstr "Восстановить"
-
-#: src/lib/preferences/actions/actionsPage.ts:74
-#: src/lib/preferences/actions/actionDefaults.ts:113
-#: src/lib/preferences/actions/actionDefaults.ts:128
-msgid "Default Actions"
-msgstr "Действия по умолчанию"
-
-#: src/lib/preferences/actions/actionsPage.ts:75
-msgid "Set default actions that trigger when holding control"
-msgstr "Задать действия по умолчанию, срабатывающие при удержании Control"
-
-#: src/lib/preferences/actions/actionsPage.ts:92
-msgid "Restore Built-In Actions"
-msgstr "Восстановить встроенные действия"
-
-#: src/lib/preferences/actions/actionsPage.ts:101
-msgid "Reset Actions"
-msgstr "Сбросить действия"
-
-#: src/lib/preferences/actions/actionsPage.ts:121
-msgid "Restore Built-In Actions?"
-msgstr "Восстановить встроенные действия?"
-
-#: src/lib/preferences/actions/actionsPage.ts:123
-msgid ""
-"Restoring the built-in actions will restore built-in actions that were "
-"removed. Custom actions will remain unchanged"
-msgstr ""
-"Восстановление встроенных действий вернёт удалённые встроенные действия. "
-"Пользовательские действия останутся без изменений."
-
-#: src/lib/preferences/actions/actionsPage.ts:140
-msgid "Reset Actions?"
-msgstr "Сбросить действия?"
-
-#: src/lib/preferences/actions/actionsPage.ts:141
-msgid "Resetting the actions will delete all custom actions"
-msgstr "Сброс действий удалит все пользовательские действия"
+#: src/lib/preferences/general/locationsGroup.ts:39
+msgid "Cache"
+msgstr "Кэш"
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:19
 msgid "Open Clipboard Dialog"
@@ -1590,11 +1540,11 @@ msgid "Open Clipboard Dialog Behavior"
 msgstr ""
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:27
-msgid "Toggle Dialog"
+msgid "Open / Select Next Item"
 msgstr ""
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:27
-msgid "Open / Select Next Item"
+msgid "Toggle Dialog"
 msgstr ""
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:19
@@ -1651,17 +1601,29 @@ msgstr "Копировать элемент"
 msgid "Activate Default Action"
 msgstr "Активировать действие по умолчанию"
 
-#: src/lib/preferences/shortcuts/shortcutRow.ts:78
-msgid "Set Shortcut"
-msgstr "Задать сочетание клавиш"
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:12
+msgid "Navigation"
+msgstr "Навигация"
 
-#: src/lib/preferences/shortcuts/shortcutRow.ts:126
-msgid "Disable Shortcut"
-msgstr "Отключить сочетание клавиш"
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:15
+msgid "Navigate"
+msgstr "Навигация по элементам"
 
-#: src/lib/preferences/shortcuts/shortcutRow.ts:219
-msgid "Disabled"
-msgstr "Отключено"
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:16
+msgid "Jump to Item"
+msgstr "Перейти к элементу"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:17
+msgid "Jump to Start"
+msgstr "Перейти к началу"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:18
+msgid "Jump to End"
+msgstr "Перейти к концу"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:19
+msgid "Jump to Search"
+msgstr "Перейти к поиску"
 
 #: src/lib/preferences/shortcuts/popupMenuShortcuts.ts:11
 msgid "Popup Menu"
@@ -1674,11 +1636,6 @@ msgstr "Выбрать тип элемента"
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:31
 msgid "Scroll"
 msgstr "Прокрутка"
-
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:47
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:321
-msgid "Search"
-msgstr "Поиск"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:49
 msgid "Toggle Pinned Search"
@@ -1728,152 +1685,192 @@ msgstr "Переключать тип элемента"
 msgid "Cycle Item Tag"
 msgstr "Переключать метку элемента"
 
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:12
-msgid "Navigation"
-msgstr "Навигация"
+#: src/lib/preferences/shortcuts/shortcutRow.ts:78
+msgid "Set Shortcut"
+msgstr "Задать сочетание клавиш"
 
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:15
-msgid "Navigate"
-msgstr "Навигация по элементам"
+#: src/lib/preferences/shortcuts/shortcutRow.ts:126
+msgid "Disable Shortcut"
+msgstr "Отключить сочетание клавиш"
 
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:16
-msgid "Jump to Item"
-msgstr "Перейти к элементу"
+#: src/lib/preferences/shortcuts/shortcutRow.ts:219
+msgid "Disabled"
+msgstr "Отключено"
 
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:17
-msgid "Jump to Start"
-msgstr "Перейти к началу"
-
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:18
-msgid "Jump to End"
-msgstr "Перейти к концу"
-
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:19
-msgid "Jump to Search"
-msgstr "Перейти к поиску"
-
-#: src/lib/preferences/dependencies/dependencies.ts:151
-#: src/lib/preferences/dependencies/dependencies.ts:438
-msgid "Libgda Not Installed"
-msgstr "Libgda не установлена"
-
-#: src/lib/preferences/dependencies/dependencies.ts:153
-msgid ""
-"Libgda is required to store clipboard history between sessions. Install "
-"either libgda 5.0 or 6.0 with SQLite support to use this feature. After "
-"installing libgda you will need to log out or restart your system."
-msgstr ""
-"Для сохранения истории буфера обмена между сессиями требуется Libgda. "
-"Установите libgda 5.0 или 6.0 с поддержкой SQLite, чтобы использовать эту "
-"функцию. После установки Libgda нужно выйти из системы или перезагрузить её."
-
-#: src/lib/preferences/dependencies/dependencies.ts:157
-msgid "Install Libgda"
-msgstr "Установить Libgda"
-
-#: src/lib/preferences/dependencies/dependencies.ts:170
-#: src/lib/preferences/dependencies/dependencies.ts:440
-msgid "Highlight.js Not Installed"
-msgstr "Highlight.js не установлен"
-
-#: src/lib/preferences/dependencies/dependencies.ts:171
-msgid "Highlight.js is required to display syntax highlighted code."
-msgstr "Для отображения кода с подсветкой синтаксиса требуется Highlight.js."
-
-#: src/lib/preferences/dependencies/dependencies.ts:175
-msgid "Manual Installation"
-msgstr "Ручная установка"
-
-#: src/lib/preferences/dependencies/dependencies.ts:189
-msgid ""
-"You can manually install highlight.js by downloading highlight.min.js from "
-"\"Url\" to \"Install Location\"."
-msgstr ""
-"Можно установить Highlight.js вручную, скачав highlight.min.js из «Url» в "
-"«Место установки»."
-
-#: src/lib/preferences/dependencies/dependencies.ts:206
-msgid "Url"
+#: src/lib/ui/components/contentInfo.ts:39
+#, javascript-format
+msgid "%dh"
 msgstr ""
 
-#: src/lib/preferences/dependencies/dependencies.ts:215
-msgid "Install Location"
-msgstr "Место установки"
-
-#: src/lib/preferences/dependencies/dependencies.ts:224
-msgid "Install"
-msgstr "Установить"
-
-#: src/lib/preferences/dependencies/dependencies.ts:353
-#: src/lib/preferences/dependencies/dependencies.ts:439
-msgid "GSound Not Installed"
-msgstr "GSound не установлен"
-
-#: src/lib/preferences/dependencies/dependencies.ts:355
-msgid ""
-"GSound is required to play sound effects. Install GSound to use this "
-"feature. After installing GSound you will need to log out or restart your "
-"system."
+#: src/lib/ui/components/contentInfo.ts:40
+#, javascript-format
+msgid "%dm"
 msgstr ""
-"Для воспроизведения звуковых эффектов требуется GSound. Установите GSound, "
-"чтобы использовать эту функцию. После установки GSound нужно выйти из "
-"системы или перезагрузить её."
 
-#: src/lib/preferences/dependencies/dependencies.ts:358
-msgid "Install GSound"
-msgstr "Установить GSound"
-
-#: src/lib/preferences/dependencies/dependencies.ts:371
-msgid "Starting Highlight.js Download"
-msgstr "Запуск загрузки Highlight.js"
-
-#: src/lib/preferences/dependencies/dependencies.ts:391
-msgid "Successfully Installed Highlight.js"
-msgstr "Highlight.js успешно установлен"
-
-#: src/lib/preferences/dependencies/dependencies.ts:391
-msgid "Error Installing Highlight.js"
-msgstr "Ошибка установки Highlight.js"
-
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:240
+#: src/lib/ui/components/contentInfo.ts:41
 #, javascript-format
-msgid "Successfully Installed %s"
-msgstr "Успешно установлен %s"
+msgid "%ds"
+msgstr ""
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:241
+#: src/lib/ui/components/contentInfo.ts:113
 #, javascript-format
-msgid "Error Installing %s"
-msgstr "Ошибка установки %s"
+msgid "%d char"
+msgid_plural "%d chars"
+msgstr[0] "%d символ"
+msgstr[1] "%d символа"
+msgstr[2] "%d символов"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:261
+#: src/lib/ui/components/contentInfo.ts:121
 #, javascript-format
-msgid "Successfully Uninstalled %s"
-msgstr "Успешно удалён %s"
+msgid "%d word"
+msgid_plural "%d words"
+msgstr[0] "%d слово"
+msgstr[1] "%d слова"
+msgstr[2] "%d слов"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:262
+#: src/lib/ui/components/contentInfo.ts:124
 #, javascript-format
-msgid "Error Uninstalling %s"
-msgstr "Ошибка удаления %s"
+msgid "%d line"
+msgid_plural "%d lines"
+msgstr[0] "%d строка"
+msgstr[1] "%d строки"
+msgstr[2] "%d строк"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:288
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:382
-msgid "Manage Highlight.js"
-msgstr "Управление Highlight.js"
+#: src/lib/ui/components/contentInfo.ts:184
+msgid "Missing File"
+msgstr "Файл отсутствует"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:300
-msgid "Languages"
-msgstr "Языки"
+#: src/lib/ui/components/contentInfo.ts:196
+msgid "Error"
+msgstr "Ошибка"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:375
-msgid "Dependencies"
-msgstr "Зависимости"
+#: src/lib/ui/components/editDialog.ts:269
+msgid "Edit Clipboard Item"
+msgstr "Редактировать элемент буфера обмена"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:383
-msgid "Manage the Highlight.js installation"
-msgstr "Управлять установкой Highlight.js"
+#: src/lib/ui/components/qrCodeDialog.ts:146
+msgid "Close"
+msgstr "Закрыть"
 
-#~ msgid "Paste on Copy"
-#~ msgstr "Вставлять при копировании"
+#: src/lib/ui/indicator.ts:36
+msgid "Clear Clipboard History?"
+msgstr "Очистить историю буфера обмена?"
+
+#: src/lib/ui/indicator.ts:37
+msgid "Are you sure you want to clear your clipboard history?"
+msgstr "Действительно очистить историю буфера обмена?"
+
+#: src/lib/ui/indicator.ts:41
+msgid "Clear Pinned/Tagged Items"
+msgstr "Очистить закреплённые/помеченные элементы"
+
+#: src/lib/ui/indicator.ts:99
+msgid "Incognito Mode"
+msgstr "Режим инкогнито"
+
+#: src/lib/ui/indicator.ts:102
+msgid "Clear History"
+msgstr "Очистить историю"
+
+#: src/lib/ui/indicator.ts:103
+msgid "Settings"
+msgstr "Настройки"
+
+#: src/lib/ui/indicator.ts:178
+#, javascript-format
+msgid "%d File"
+msgid_plural "%d Files"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: src/lib/ui/items/characterItem.ts:22
+msgid "Char"
+msgstr "Символ"
+
+#: src/lib/ui/items/filesItem.ts:120
+#, javascript-format
+msgid "%d more file"
+msgid_plural "%d more files"
+msgstr[0] "ещё %d файл"
+msgstr[1] "ещё %d файла"
+msgstr[2] "ещё %d файлов"
+
+#: src/lib/ui/items/filesItem.ts:121
+#, javascript-format
+msgid "%d file"
+msgid_plural "%d files"
+msgstr[0] "%d файл"
+msgstr[1] "%d файла"
+msgstr[2] "%d файлов"
+
+#: src/lib/ui/items/linkItem.ts:94
+msgid "No Title"
+msgstr "Без заголовка"
+
+#: src/lib/ui/items/linkItem.ts:96
+msgid "No Description"
+msgstr "Без описания"
+
+#: src/lib/ui/items/statusItem.ts:70 src/lib/ui/items/statusItem.ts:104
+msgid "Clipboard is Empty"
+msgstr "Буфер обмена пуст"
+
+#: src/lib/ui/items/statusItem.ts:107
+msgid "No Items Found"
+msgstr "Элементы не найдены"
+
+#: src/lib/ui/searchEntry.ts:150
+msgid "__All"
+msgstr "__Все"
+
+#: src/lib/ui/searchEntry.ts:154
+msgid "__Text"
+msgstr "__Текст"
+
+#: src/lib/ui/searchEntry.ts:155
+msgid "__Code"
+msgstr "__Код"
+
+#: src/lib/ui/searchEntry.ts:156
+msgid "__Image"
+msgstr "__Изобр"
+
+#: src/lib/ui/searchEntry.ts:157
+msgid "__File"
+msgstr "__Файл"
+
+#: src/lib/ui/searchEntry.ts:158
+msgid "File__s"
+msgstr "Фай__лы"
+
+#: src/lib/ui/searchEntry.ts:159
+msgid "__Link"
+msgstr "__Ссылка"
+
+#: src/lib/ui/searchEntry.ts:160
+msgid "C__haracter"
+msgstr "С__имвол"
+
+#: src/lib/ui/searchEntry.ts:161
+msgid "Colo__r"
+msgstr "Цв__ет"
+
+#: src/lib/ui/searchEntry.ts:273
+msgid "Type to search"
+msgstr "Введите текст для поиска"
+
+#: src/prefs.ts:74
+msgid "General"
+msgstr "Общие"
+
+#: src/prefs.ts:94
+msgid "Customization"
+msgstr "Настройка вида"
+
+#: src/prefs.ts:111
+msgid "Shortcuts"
+msgstr "Сочетания клавиш"
 
 #~ msgid ""
 #~ "Automatically paste clipboard items when selected from clipboard history"
@@ -1883,8 +1880,11 @@ msgstr "Управлять установкой Highlight.js"
 #~ msgid "Failed to load database"
 #~ msgstr "Не удалось загрузить базу данных"
 
-#~ msgid "Use In-Memory Database"
-#~ msgstr "Использовать базу данных в памяти"
+#~ msgid "Paste on Copy"
+#~ msgstr "Вставлять при копировании"
 
 #~ msgid "Store clipboard history in memory instead of on disk"
 #~ msgstr "Хранить историю буфера обмена в памяти, а не на диске"
+
+#~ msgid "Use In-Memory Database"
+#~ msgstr "Использовать базу данных в памяти"

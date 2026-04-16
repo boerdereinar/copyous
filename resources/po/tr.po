@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-27 17:47+0000\n"
+"POT-Creation-Date: 2026-04-16 22:30+0000\n"
 "PO-Revision-Date: 2026-03-18 07:29+0300\n"
 "Last-Translator: Muha Aliss <muhaaliss@pm.me>\n"
 "Language-Team: Turkish\n"
@@ -18,18 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Gtranslator 49.0\n"
-
-#: src/prefs.ts:74
-msgid "General"
-msgstr "Genel"
-
-#: src/prefs.ts:94
-msgid "Customization"
-msgstr "Özelleştirme"
-
-#: src/prefs.ts:111
-msgid "Shortcuts"
-msgstr "Kısayollar"
 
 #: src/lib/common/actions.ts:180
 msgid "Open"
@@ -133,398 +121,320 @@ msgstr "Karakter Kopyalandı"
 msgid "Copied Color"
 msgstr "Renk Kopyalandı"
 
-#: src/lib/ui/components/clipboardItemMenu.ts:94
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
-#: src/lib/preferences/actions/actionsGroup.ts:125
-#: src/lib/preferences/actions/actionsGroup.ts:423
-msgid "Edit"
-msgstr "Düzenle"
-
-#: src/lib/ui/components/contentInfo.ts:39
-#, javascript-format
-msgid "%dh"
-msgstr "%d sa"
-
-#: src/lib/ui/components/contentInfo.ts:40
-#, javascript-format
-msgid "%dm"
-msgstr "%d dk"
-
-#: src/lib/ui/components/contentInfo.ts:41
-#, javascript-format
-msgid "%ds"
-msgstr "%d sn"
-
-#: src/lib/ui/components/contentInfo.ts:113
-#, javascript-format
-msgid "%d char"
-msgid_plural "%d chars"
-msgstr[0] "%d karakter"
-msgstr[1] "%d karakter"
-
-#: src/lib/ui/components/contentInfo.ts:121
-#, javascript-format
-msgid "%d word"
-msgid_plural "%d words"
-msgstr[0] "%d kelime"
-msgstr[1] "%d kelime"
-
-#: src/lib/ui/components/contentInfo.ts:124
-#, javascript-format
-msgid "%d line"
-msgid_plural "%d lines"
-msgstr[0] "%d satır"
-msgstr[1] "%d satır"
-
-#: src/lib/ui/components/contentInfo.ts:184
-msgid "Missing File"
-msgstr "Eksik Dosya"
-
-#: src/lib/ui/components/contentInfo.ts:196
-msgid "Error"
-msgstr "Hata"
-
-#: src/lib/ui/components/editDialog.ts:217
-#: src/lib/ui/components/editDialog.ts:244
+#: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/general/feedbackSettings.ts:155
 #: src/lib/preferences/general/feedbackSettings.ts:259
 #: src/lib/preferences/general/feedbackSettings.ts:301
-#: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:38
+#: src/lib/ui/components/editDialog.ts:217
+#: src/lib/ui/components/editDialog.ts:244
 msgid "None"
 msgstr "Hiçbiri"
 
-#: src/lib/ui/components/editDialog.ts:269
-msgid "Edit Clipboard Item"
-msgstr "Pano Öğesini Düzenle"
+#: src/lib/preferences/actions/actionDefaults.ts:113
+#: src/lib/preferences/actions/actionDefaults.ts:128
+#: src/lib/preferences/actions/actionsPage.ts:74
+msgid "Default Actions"
+msgstr "Varsayılan Eylemler"
 
-#: src/lib/ui/components/editDialog.ts:306 src/lib/ui/indicator.ts:45
-#: src/lib/preferences/customization/items/exclusions.ts:90
-#: src/lib/preferences/general/appExclusionSettings.ts:169
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:34
-#: src/lib/preferences/actions/actionsGroup.ts:33
-#: src/lib/preferences/actions/actionDialog.ts:234
-#: src/lib/preferences/actions/actionsPage.ts:27
-#: src/lib/preferences/actions/actionsPage.ts:40
-#: src/lib/preferences/shortcuts/shortcutRow.ts:131
-#: src/lib/preferences/dependencies/dependencies.ts:222
-msgid "Cancel"
-msgstr "İptal"
-
-#: src/lib/ui/components/editDialog.ts:313
-#: src/lib/preferences/actions/actionDialog.ts:662
-msgid "Save"
-msgstr "Kaydet"
-
-#: src/lib/ui/components/qrCodeDialog.ts:146
-msgid "Close"
-msgstr "Kapat"
-
-#: src/lib/ui/components/qrCodeDialog.ts:154
-#: src/lib/preferences/actions/actionDialog.ts:461
-#: src/lib/preferences/actions/actionDialog.ts:552
-msgid "Copy"
-msgstr "Kopyala"
-
-#: src/lib/ui/clipboardDialog.ts:137 src/lib/ui/clipboardDialog.ts:242
-#: src/lib/ui/indicator.ts:52
-#: src/lib/preferences/general/historySettings.ts:136
-msgid "Clear"
-msgstr "Temizle"
-
-#: src/lib/ui/items/linkItem.ts:94
-msgid "No Title"
-msgstr "Başlık Yok"
-
-#: src/lib/ui/items/linkItem.ts:96
-msgid "No Description"
-msgstr "Açıklama Yok"
-
-#: src/lib/ui/items/linkItem.ts:302
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:44
-#: src/lib/preferences/actions/actionDialog.ts:180
-#: src/lib/preferences/actions/actionDialog.ts:379
-#: src/lib/preferences/actions/actionDefaults.ts:152
-msgid "Link"
-msgstr "Bağlantı"
-
-#: src/lib/ui/items/statusItem.ts:70 src/lib/ui/items/statusItem.ts:104
-msgid "Clipboard is Empty"
-msgstr "Pano Boş"
-
-#: src/lib/ui/items/statusItem.ts:107
-msgid "No Items Found"
-msgstr "Öğe Bulunamadı"
-
-#: src/lib/ui/items/fileItem.ts:63
-#: src/lib/preferences/actions/actionDialog.ts:178
-#: src/lib/preferences/actions/actionDialog.ts:373
-#: src/lib/preferences/actions/actionDefaults.ts:144
-msgid "File"
-msgstr "Dosya"
-
-#: src/lib/ui/items/codeItem.ts:23
-#: src/lib/preferences/actions/actionDialog.ts:176
-#: src/lib/preferences/actions/actionDialog.ts:367
-#: src/lib/preferences/actions/actionDefaults.ts:136
-msgid "Code"
-msgstr "Kod"
-
-#: src/lib/ui/items/colorItem.ts:71
-#: src/lib/preferences/actions/actionDialog.ts:182
-#: src/lib/preferences/actions/actionDialog.ts:257
-#: src/lib/preferences/actions/actionDialog.ts:385
-#: src/lib/preferences/actions/actionDefaults.ts:165
-msgid "Color"
-msgstr "Renk"
-
-#: src/lib/ui/items/characterItem.ts:22
-msgid "Char"
-msgstr "Karakter"
-
-#: src/lib/ui/items/imageItem.ts:37
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:78
-#: src/lib/preferences/actions/actionDialog.ts:177
-#: src/lib/preferences/actions/actionDialog.ts:370
-#: src/lib/preferences/actions/actionDefaults.ts:140
-msgid "Image"
-msgstr "Resim"
-
-#: src/lib/ui/items/textItem.ts:24
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:68
+#: src/lib/preferences/actions/actionDefaults.ts:132
 #: src/lib/preferences/actions/actionDialog.ts:175
 #: src/lib/preferences/actions/actionDialog.ts:364
-#: src/lib/preferences/actions/actionDefaults.ts:132
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:68
+#: src/lib/ui/items/textItem.ts:24
 msgid "Text"
 msgstr "Metin"
 
-#: src/lib/ui/items/filesItem.ts:120
-#, javascript-format
-msgid "%d more file"
-msgid_plural "%d more files"
-msgstr[0] "%d dosya daha"
-msgstr[1] "%d dosya daha"
+#: src/lib/preferences/actions/actionDefaults.ts:136
+#: src/lib/preferences/actions/actionDialog.ts:176
+#: src/lib/preferences/actions/actionDialog.ts:367
+#: src/lib/ui/items/codeItem.ts:23
+msgid "Code"
+msgstr "Kod"
 
-#: src/lib/ui/items/filesItem.ts:121
-#, javascript-format
-msgid "%d file"
-msgid_plural "%d files"
-msgstr[0] "%d dosya"
-msgstr[1] "%d dosya"
+#: src/lib/preferences/actions/actionDefaults.ts:140
+#: src/lib/preferences/actions/actionDialog.ts:177
+#: src/lib/preferences/actions/actionDialog.ts:370
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:78
+#: src/lib/ui/items/imageItem.ts:37
+msgid "Image"
+msgstr "Resim"
 
-#: src/lib/ui/items/filesItem.ts:140
+#: src/lib/preferences/actions/actionDefaults.ts:144
+#: src/lib/preferences/actions/actionDialog.ts:178
+#: src/lib/preferences/actions/actionDialog.ts:373
+#: src/lib/ui/items/fileItem.ts:63
+msgid "File"
+msgstr "Dosya"
+
+#: src/lib/preferences/actions/actionDefaults.ts:148
 #: src/lib/preferences/actions/actionDialog.ts:179
 #: src/lib/preferences/actions/actionDialog.ts:376
-#: src/lib/preferences/actions/actionDefaults.ts:148
+#: src/lib/ui/items/filesItem.ts:140
 msgid "Files"
 msgstr "Dosyalar"
 
-#: src/lib/ui/searchEntry.ts:150
-msgid "__All"
-msgstr "__Hepsi"
+#: src/lib/preferences/actions/actionDefaults.ts:152
+#: src/lib/preferences/actions/actionDialog.ts:180
+#: src/lib/preferences/actions/actionDialog.ts:379
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:44
+#: src/lib/ui/items/linkItem.ts:302
+msgid "Link"
+msgstr "Bağlantı"
 
-#: src/lib/ui/searchEntry.ts:154
-msgid "__Text"
-msgstr "__Metin"
+#: src/lib/preferences/actions/actionDefaults.ts:158
+#: src/lib/preferences/actions/actionDialog.ts:181
+#: src/lib/preferences/actions/actionDialog.ts:382
+msgid "Character"
+msgstr "Karakter"
 
-#: src/lib/ui/searchEntry.ts:155
-msgid "__Code"
-msgstr "__Kod"
+#: src/lib/preferences/actions/actionDefaults.ts:165
+#: src/lib/preferences/actions/actionDialog.ts:182
+#: src/lib/preferences/actions/actionDialog.ts:257
+#: src/lib/preferences/actions/actionDialog.ts:385
+#: src/lib/ui/items/colorItem.ts:71
+msgid "Color"
+msgstr "Renk"
 
-#: src/lib/ui/searchEntry.ts:156
-msgid "__Image"
-msgstr "__Resim"
+#: src/lib/preferences/actions/actionDialog.ts:38
+msgid "All"
+msgstr "Hepsi"
 
-#: src/lib/ui/searchEntry.ts:157
-msgid "__File"
-msgstr "__Dosya"
+#: src/lib/preferences/actions/actionDialog.ts:131
+msgid "Types"
+msgstr "Türler"
 
-#: src/lib/ui/searchEntry.ts:158
-msgid "File__s"
-msgstr "Dosy__alar"
+#: src/lib/preferences/actions/actionDialog.ts:132
+msgid "Select which types are allowed"
+msgstr "Hangi türlere izin verileceğini seç"
 
-#: src/lib/ui/searchEntry.ts:159
-msgid "__Link"
-msgstr "__Bağlantı"
+#: src/lib/preferences/actions/actionDialog.ts:234
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:34
+#: src/lib/preferences/actions/actionsGroup.ts:33
+#: src/lib/preferences/actions/actionsPage.ts:27
+#: src/lib/preferences/actions/actionsPage.ts:40
+#: src/lib/preferences/customization/items/exclusions.ts:90
+#: src/lib/preferences/dependencies/dependencies.ts:222
+#: src/lib/preferences/general/appExclusionSettings.ts:169
+#: src/lib/preferences/shortcuts/shortcutRow.ts:131
+#: src/lib/ui/components/editDialog.ts:306 src/lib/ui/indicator.ts:45
+msgid "Cancel"
+msgstr "İptal"
 
-#: src/lib/ui/searchEntry.ts:160
-msgid "C__haracter"
-msgstr "K__arakter"
+#: src/lib/preferences/actions/actionDialog.ts:256
+msgid "Kind"
+msgstr "Tür"
 
-#: src/lib/ui/searchEntry.ts:161
-msgid "Colo__r"
-msgstr "Re__nk"
+#: src/lib/preferences/actions/actionDialog.ts:257
+#: src/lib/preferences/actions/actionDialog.ts:401
+msgid "Command"
+msgstr "Komut"
 
-#: src/lib/ui/searchEntry.ts:273
-msgid "Type to search"
-msgstr "Aramak için yaz"
-
-#: src/lib/ui/indicator.ts:36
-msgid "Clear Clipboard History?"
-msgstr "Pano Geçmişi Temizlensin mi?"
-
-#: src/lib/ui/indicator.ts:37
-msgid "Are you sure you want to clear your clipboard history?"
-msgstr "Pano geçmişinizi temizlemek istediğinden emin misin?"
-
-#: src/lib/ui/indicator.ts:41
-msgid "Clear Pinned/Tagged Items"
-msgstr "İğnelenen/Etiketlenen Öğeleri Temizle"
-
-#: src/lib/ui/indicator.ts:99
-msgid "Incognito Mode"
-msgstr "Gizli Mod"
-
-#: src/lib/ui/indicator.ts:102
-msgid "Clear History"
-msgstr "Geçmişi Temizle"
-
-#: src/lib/ui/indicator.ts:103
-msgid "Settings"
-msgstr "Ayarlar"
-
-#: src/lib/ui/indicator.ts:178
-#, javascript-format
-msgid "%d File"
-msgid_plural "%d Files"
-msgstr[0] "%d Dosya"
-msgstr[1] "%d Dosya"
-
-#: src/lib/preferences/customization/headerCustomization.ts:15
-msgid "Header"
-msgstr "Başlık"
-
-#: src/lib/preferences/customization/headerCustomization.ts:19
-msgid "Show Header"
-msgstr "Başlığı Göster"
-
-#: src/lib/preferences/customization/headerCustomization.ts:20
-msgid "Show the header"
-msgstr "Başlığı göster"
-
-#: src/lib/preferences/customization/headerCustomization.ts:25
-msgid "Show Item Title"
-msgstr "Öğe Başlığını Göster"
-
-#: src/lib/preferences/customization/headerCustomization.ts:26
-msgid "Show the title of the item"
-msgstr "Öğenin başlığını göster"
-
-#: src/lib/preferences/customization/headerCustomization.ts:31
-msgid "Header Controls Visibility"
-msgstr "Başlık Kontrollerinin Görünürlüğü"
-
-#: src/lib/preferences/customization/headerCustomization.ts:32
-msgid "The visibility of the header controls"
-msgstr "Başlık kontrollerinin görünürlüğü"
-
-#: src/lib/preferences/customization/headerCustomization.ts:33
-msgid "Visible"
-msgstr "Görünür"
-
-#: src/lib/preferences/customization/headerCustomization.ts:33
-msgid "Visible on Hover"
-msgstr "Üzerine Gelindiğinde Görünür"
-
-#: src/lib/preferences/customization/headerCustomization.ts:33
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:163
-msgid "Hidden"
-msgstr "Gizli"
-
-#: src/lib/preferences/customization/themeCustomization.ts:69
-#: src/lib/preferences/customization/themeCustomization.ts:73
-msgid "Theme"
-msgstr "Tema"
-
-#: src/lib/preferences/customization/themeCustomization.ts:74
-msgid "Set the preferred theme"
-msgstr "Tercih edilen temayı ayarla"
-
-#: src/lib/preferences/customization/themeCustomization.ts:75
-#: src/lib/preferences/customization/profiles.ts:190
-msgid "Default"
-msgstr "Varsayılan"
-
-#: src/lib/preferences/customization/themeCustomization.ts:75
-msgid "Yaru"
+#: src/lib/preferences/actions/actionDialog.ts:347
+msgid ""
+"The regular expression does not use any flags for matching. Leaving this "
+"empty will match everything."
 msgstr ""
+"Düzenli ifade eşleşme için herhangi bir bayrak kullanmaz. Burayı boş "
+"bırakmak her şeyi eşleştirecektir."
 
-#: src/lib/preferences/customization/themeCustomization.ts:75
-#: src/lib/preferences/customization/profiles.ts:202
-msgid "Custom"
-msgstr "Özel"
+#: src/lib/preferences/actions/actionDialog.ts:361
+msgid "Type"
+msgstr "Tür"
 
-#: src/lib/preferences/customization/themeCustomization.ts:89
-#: src/lib/preferences/customization/themeCustomization.ts:96
-msgid "Color Scheme"
-msgstr "Renk Şeması"
+#: src/lib/preferences/actions/actionDialog.ts:362
+msgid "Example"
+msgstr "Örnek"
 
-#: src/lib/preferences/customization/themeCustomization.ts:90
-#: src/lib/preferences/customization/themeCustomization.ts:97
-msgid "Set the color scheme of the theme"
+#: src/lib/preferences/actions/actionDialog.ts:393
+msgid "Regular Expression"
+msgstr "Düzenli İfade"
+
+#: src/lib/preferences/actions/actionDialog.ts:406
+msgid ""
+"Clipboard content will be provided via stdin. Capture groups of the regular "
+"expression will be passed as positional parameters $1, $2, $3, ..."
 msgstr ""
+"Pano içeriği stdin üzerinden sağlanacaktır. Düzenli ifadenin yakalama "
+"grupları $1, $2, $3, ... gibi konumsal parametreler olarak aktarılacaktır."
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
-msgid "System"
-msgstr "Sistem"
+#: src/lib/preferences/actions/actionDialog.ts:441
+#: src/lib/preferences/actions/actionDialog.ts:523
+#: src/lib/preferences/actions/actionDialog.ts:611
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:47
+msgid "Name"
+msgstr "Ad"
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
-#: src/lib/preferences/customization/themeCustomization.ts:98
-msgid "Dark"
-msgstr "Koyu"
+#: src/lib/preferences/actions/actionDialog.ts:459
+#: src/lib/preferences/actions/actionDialog.ts:550
+msgid "Output"
+msgstr "Çıktı"
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
-#: src/lib/preferences/customization/themeCustomization.ts:98
-msgid "Light"
-msgstr "Açık"
+#: src/lib/preferences/actions/actionDialog.ts:460
+#: src/lib/preferences/actions/actionDialog.ts:551
+msgid "Select how to handle the output"
+msgstr "Çıktının nasıl işleneceğini seç"
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
-msgid "High Contrast"
+#: src/lib/preferences/actions/actionDialog.ts:461
+#: src/lib/preferences/actions/actionDialog.ts:552
+#: src/lib/ui/components/qrCodeDialog.ts:154
+msgid "Copy"
+msgstr "Kopyala"
+
+#: src/lib/preferences/actions/actionDialog.ts:461
+msgid "Ignore"
+msgstr "Yoksay"
+
+#: src/lib/preferences/actions/actionDialog.ts:461
+#: src/lib/preferences/actions/actionDialog.ts:552
+msgid "Paste"
+msgstr "Yapıştır"
+
+#: src/lib/preferences/actions/actionDialog.ts:466
+#: src/lib/preferences/actions/actionDialog.ts:557
+#: src/lib/preferences/actions/actionDialog.ts:621
+msgid "Shortcut"
+msgstr "Kısayol"
+
+#: src/lib/preferences/actions/actionDialog.ts:530
+msgid "Color Space"
+msgstr "Renk Uzayı"
+
+#: src/lib/preferences/actions/actionDialog.ts:531
+msgid "Select which color space to convert to"
+msgstr "Hangi renk uzayına dönüştürüleceğini seç"
+
+#: src/lib/preferences/actions/actionDialog.ts:536
+msgid "Hwb"
+msgstr "Hwb"
+
+#: src/lib/preferences/actions/actionDialog.ts:537
+msgid "Linear Rgb"
+msgstr "Doğrusal Rgb"
+
+#: src/lib/preferences/actions/actionDialog.ts:538
+msgid "Xyz"
+msgstr "Xyz"
+
+#: src/lib/preferences/actions/actionDialog.ts:539
+msgid "Lab"
+msgstr "Lab"
+
+#: src/lib/preferences/actions/actionDialog.ts:540
+msgid "Lch"
+msgstr "Lch"
+
+#: src/lib/preferences/actions/actionDialog.ts:541
+msgid "Oklab"
+msgstr "Oklab"
+
+#: src/lib/preferences/actions/actionDialog.ts:655
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
+#: src/lib/preferences/actions/actionsGroup.ts:550
+#: src/lib/preferences/customization/items/exclusions.ts:92
+#: src/lib/preferences/general/appExclusionSettings.ts:171
+msgid "Add"
+msgstr "Ekle"
+
+#: src/lib/preferences/actions/actionDialog.ts:655
+#: src/lib/preferences/actions/actionsGroup.ts:100
+#: src/lib/preferences/actions/actionsGroup.ts:568
+msgid "Add Action"
+msgstr "Eylem Ekle"
+
+#: src/lib/preferences/actions/actionDialog.ts:662
+msgid "Edit Action"
+msgstr "Eylemi Düzenle"
+
+#: src/lib/preferences/actions/actionDialog.ts:662
+#: src/lib/ui/components/editDialog.ts:313
+msgid "Save"
+msgstr "Kaydet"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
+#: src/lib/preferences/actions/actionsGroup.ts:569
+msgid "Add Submenu"
+msgstr "Alt Menü Ekle"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
+#: src/lib/preferences/actions/actionsGroup.ts:125
+#: src/lib/preferences/actions/actionsGroup.ts:423
+#: src/lib/ui/components/clipboardItemMenu.ts:94
+msgid "Edit"
+msgstr "Düzenle"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
+msgid "Edit Submenu"
+msgstr "Alt Menüyü Düzenle"
+
+#: src/lib/preferences/actions/actionsGroup.ts:34
+#: src/lib/preferences/actions/actionsGroup.ts:126
+#: src/lib/preferences/actions/actionsGroup.ts:424
+msgid "Delete"
+msgstr "Sil"
+
+#: src/lib/preferences/actions/actionsGroup.ts:91
+#: src/lib/preferences/actions/actionsGroup.ts:529
+msgid "No Actions"
+msgstr "Eylem Yok"
+
+#: src/lib/preferences/actions/actionsGroup.ts:180
+msgid "Delete Submenu?"
+msgstr "Alt Menü Silinsin mi?"
+
+#: src/lib/preferences/actions/actionsGroup.ts:181
+msgid "Deleting the submenu will delete all actions in the submenu"
+msgstr "Alt menüyü silmek, alt menüdeki tüm eylemleri silecektir."
+
+#: src/lib/preferences/actions/actionsGroup.ts:446
+msgid "Delete Action?"
+msgstr "Eylem Silinsin mi?"
+
+#: src/lib/preferences/actions/actionsGroup.ts:518
+#: src/lib/preferences/actions/actionsPage.ts:62
+msgid "Actions"
+msgstr "Eylemler"
+
+#: src/lib/preferences/actions/actionsPage.ts:28
+msgid "Reset"
+msgstr "Sıfırla"
+
+#: src/lib/preferences/actions/actionsPage.ts:41
+msgid "Restore"
+msgstr "Geri Yükle"
+
+#: src/lib/preferences/actions/actionsPage.ts:75
+msgid "Set default actions that trigger when holding control"
 msgstr ""
+"Kontrol tuşuna basılı tutulduğunda tetiklenen varsayılan eylemleri ayarla"
 
-#: src/lib/preferences/customization/themeCustomization.ts:104
-msgid "Background Color"
-msgstr "Arka Plan Rengi"
+#: src/lib/preferences/actions/actionsPage.ts:92
+msgid "Restore Built-In Actions"
+msgstr "Yerleşik Eylemleri Geri Yükle"
 
-#: src/lib/preferences/customization/themeCustomization.ts:105
-msgid "Set the background color of the clipboard dialog"
-msgstr "Pano iletişim kutusunun arka plan rengini ayarla"
+#: src/lib/preferences/actions/actionsPage.ts:101
+msgid "Reset Actions"
+msgstr "Eylemleri Sıfırla"
 
-#: src/lib/preferences/customization/themeCustomization.ts:111
-msgid "Text Color"
-msgstr "Metin Rengi"
+#: src/lib/preferences/actions/actionsPage.ts:121
+msgid "Restore Built-In Actions?"
+msgstr "Yerleşik Eylemler Geri Yüklensin mi?"
 
-#: src/lib/preferences/customization/themeCustomization.ts:112
-msgid "Set the text color of the clipboard dialog"
-msgstr "Pano iletişim kutusunun metin rengini ayarla"
+#: src/lib/preferences/actions/actionsPage.ts:123
+msgid ""
+"Restoring the built-in actions will restore built-in actions that were "
+"removed. Custom actions will remain unchanged"
+msgstr ""
+"Yerleşik eylemleri geri yüklemek, kaldırılan yerleşik eylemleri geri "
+"getirecektir. Özel eylemler değişmeden kalacaktır"
 
-#: src/lib/preferences/customization/themeCustomization.ts:118
-msgid "Item Color"
-msgstr "Öğe Rengi"
+#: src/lib/preferences/actions/actionsPage.ts:140
+msgid "Reset Actions?"
+msgstr "Eylemler Sıfırlansın mı?"
 
-#: src/lib/preferences/customization/themeCustomization.ts:119
-msgid "Set the background color of clipboard items"
-msgstr "Pano öğelerinin arka plan rengini ayarla"
-
-#: src/lib/preferences/customization/themeCustomization.ts:125
-msgid "Search Color"
-msgstr "Arama Rengi"
-
-#: src/lib/preferences/customization/themeCustomization.ts:126
-msgid "Set the background color of the search bar"
-msgstr "Arama çubuğunun arka plan rengini ayarla"
-
-#: src/lib/preferences/customization/profiles.ts:181
-msgid "Profiles"
-msgstr "Profiller"
-
-#: src/lib/preferences/customization/profiles.ts:182
-msgid "Choose between pre-defined profiles"
-msgstr "Önceden tanımlanmış profiller arasından seçim yap"
-
-#: src/lib/preferences/customization/profiles.ts:196
-msgid "Compact"
-msgstr "Sıkışık"
+#: src/lib/preferences/actions/actionsPage.ts:141
+msgid "Resetting the actions will delete all custom actions"
+msgstr "Eylemleri sıfırlamak tüm özel eylemleri silecektir."
 
 #: src/lib/preferences/customization/dialogCustomization.ts:24
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:16
@@ -578,9 +488,9 @@ msgid "Vertical"
 msgstr "Dikey"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:56
-#: src/lib/preferences/customization/dialogCustomization.ts:86
-msgid "Top"
-msgstr "Üst"
+#: src/lib/preferences/customization/dialogCustomization.ts:100
+msgid "Bottom"
+msgstr "Alt"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:56
 #: src/lib/preferences/customization/dialogCustomization.ts:65
@@ -588,16 +498,16 @@ msgid "Center"
 msgstr "Orta"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:56
-#: src/lib/preferences/customization/dialogCustomization.ts:100
-msgid "Bottom"
-msgstr "Alt"
-
-#: src/lib/preferences/customization/dialogCustomization.ts:56
 #: src/lib/preferences/customization/dialogCustomization.ts:65
 #: src/lib/preferences/customization/dialogCustomization.ts:187
 #: src/lib/preferences/customization/dialogCustomization.ts:191
 msgid "Fill"
 msgstr "Doldur"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:56
+#: src/lib/preferences/customization/dialogCustomization.ts:86
+msgid "Top"
+msgstr "Üst"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:58
 msgid "Vertical Position"
@@ -681,6 +591,47 @@ msgstr "Yükseklik"
 msgid "Change the height of the clipboard dialog"
 msgstr "Pano iletişim kutusunun yüksekliğini değiştir"
 
+#: src/lib/preferences/customization/headerCustomization.ts:15
+msgid "Header"
+msgstr "Başlık"
+
+#: src/lib/preferences/customization/headerCustomization.ts:19
+msgid "Show Header"
+msgstr "Başlığı Göster"
+
+#: src/lib/preferences/customization/headerCustomization.ts:20
+msgid "Show the header"
+msgstr "Başlığı göster"
+
+#: src/lib/preferences/customization/headerCustomization.ts:25
+msgid "Show Item Title"
+msgstr "Öğe Başlığını Göster"
+
+#: src/lib/preferences/customization/headerCustomization.ts:26
+msgid "Show the title of the item"
+msgstr "Öğenin başlığını göster"
+
+#: src/lib/preferences/customization/headerCustomization.ts:31
+msgid "Header Controls Visibility"
+msgstr "Başlık Kontrollerinin Görünürlüğü"
+
+#: src/lib/preferences/customization/headerCustomization.ts:32
+msgid "The visibility of the header controls"
+msgstr "Başlık kontrollerinin görünürlüğü"
+
+#: src/lib/preferences/customization/headerCustomization.ts:33
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:163
+msgid "Hidden"
+msgstr "Gizli"
+
+#: src/lib/preferences/customization/headerCustomization.ts:33
+msgid "Visible"
+msgstr "Görünür"
+
+#: src/lib/preferences/customization/headerCustomization.ts:33
+msgid "Visible on Hover"
+msgstr "Üzerine Gelindiğinde Görünür"
+
 #: src/lib/preferences/customization/itemCustomization.ts:14
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:16
 msgid "Item"
@@ -722,86 +673,136 @@ msgstr "Sekme Genişliği"
 msgid "Change the width of a tab character in the clipboard items"
 msgstr "Pano öğelerindeki sekme (tab) karakterinin genişliğini değiştir"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:29
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:98
-msgid "Link Exclusions"
-msgstr "Bağlantı Hariç Tutmaları"
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:13
+msgid "Character Item"
+msgstr "Karakter Öğesi"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:42
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:100
-msgid "Add Pattern"
-msgstr "Desen Ekle"
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:14
+msgid "Configure character clipboard items"
+msgstr "Karakter pano öğelerini yapılandır"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:43
-msgid ""
-"Enter a regular expression to exclude links that should not have a preview."
-msgstr ""
-"Önizlemesi olmaması gereken bağlantıları hariç tutmak için bir düzenli ifade "
-"gir."
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:18
+msgid "Maximum Characters"
+msgstr "Maksimum Karakter"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:47
-msgid "Link Exclusion Patterns"
-msgstr "Bağlantı Hariç Tutma Desenleri"
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:19
+msgid "Maximum number of characters that are recognized as a character item"
+msgstr "Karakter öğesi olarak tanınan maksimum karakter sayısı"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:48
-msgid "Links matching these patterns will not have a preview"
-msgstr "Bu desenlerle eşleşen bağlantıların önizlemesi olmayacaktır"
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:25
+msgid "Show Unicode"
+msgstr "Unicode'u Göster"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:65
-msgid "Link Item"
-msgstr "Bağlantı Öğesi"
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:26
+msgid "Show the Unicode of the character"
+msgstr "Karakterin Unicode'unu göster"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:66
-msgid "Configure link clipboard items"
-msgstr "Bağlantı pano öğelerini yapılandır"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:15
+msgid "Code Item"
+msgstr "Kod Öğesi"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:70
-msgid "Show Link Preview"
-msgstr "Bağlantı Önizlemesini Göster"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:16
+msgid "Configure code clipboard items"
+msgstr "Kod pano öğelerini yapılandır"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:71
-msgid "Show link preview in the link item"
-msgstr "Bağlantı öğesinde bağlantı önizlemesini göster"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:20
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:178
+msgid "Syntax Highlighting"
+msgstr "Sözdizimi Vurgulama"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:76
-msgid "Show Link Preview Image"
-msgstr "Bağlantı Önizleme Resmini Göster"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:21
+msgid "Enable or disable syntax highlighting in the code item"
+msgstr "Kod öğesinde sözdizimi vurgulamayı etkinleştir veya devre dışı bırak"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:77
-msgid "Show link preview image in the link item"
-msgstr "Bağlantı öğesinde bağlantı önizleme resmini göster"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:26
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:184
+msgid "Show Line Numbers"
+msgstr "Satır Numaralarını Göster"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:82
-msgid "Link Preview Image Background Size"
-msgstr "Bağlantı Önizleme Resmi Arka Plan Boyutu"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:27
+msgid "Show line numbers in the code item"
+msgstr "Kod öğesinde satır numaralarını göster"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:83
-msgid "Background size of the link preview image"
-msgstr "Bağlantı önizleme resminin arka plan boyutu"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:32
+msgid "Show Code Info"
+msgstr "Kod Bilgisini Göster"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:84
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
-msgid "Cover"
-msgstr "Kapak"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:33
+msgid "Show extra information in the code item"
+msgstr "Kod öğesinde ekstra bilgi göster"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:84
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
-msgid "Contain"
-msgstr "İçer"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:38
+#: src/lib/preferences/customization/items/textItemCustomization.ts:26
+msgid "Text Count Mode"
+msgstr "Metin Sayma Modu"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:89
-msgid "Link Preview Orientation"
-msgstr "Bağlantı Önizleme Yönelimi"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:39
+#: src/lib/preferences/customization/items/textItemCustomization.ts:27
+msgid "Show the number of characters, words or lines"
+msgstr "Karakter, kelime veya satır sayısını göster"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:90
-msgid "Orientation of the link preview"
-msgstr "Bağlantı önizlemesinin yönelimi"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
+msgid "Characters"
+msgstr "Karakterler"
 
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:99
-msgid "Configure link exclusions for link previews"
-msgstr "Bağlantı önizlemeleri için bağlantı hariç tutmalarını yapılandır"
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
+msgid "Lines"
+msgstr "Satırlar"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
+msgid "Words"
+msgstr "Kelimeler"
+
+#: src/lib/preferences/customization/items/exclusions.ts:33
+msgid "Zero or More Characters"
+msgstr "Sıfır veya Daha Fazla Karakter"
+
+#: src/lib/preferences/customization/items/exclusions.ts:39
+msgid "One Character"
+msgstr "Bir Karakter"
+
+#: src/lib/preferences/customization/items/exclusions.ts:45
+msgid "Recursive Wildcard"
+msgstr "Özyinelemeli Joker Karakter"
+
+#: src/lib/preferences/customization/items/exclusions.ts:51
+msgid "List"
+msgstr "Liste"
+
+#: src/lib/preferences/customization/items/exclusions.ts:57
+msgid "Range"
+msgstr "Aralık"
+
+#: src/lib/preferences/customization/items/exclusions.ts:63
+msgid "Not in Range"
+msgstr "Aralık Dışı"
+
+#: src/lib/preferences/customization/items/exclusions.ts:107
+msgid "Pattern"
+msgstr "Desen"
+
+#: src/lib/preferences/customization/items/exclusions.ts:124
+msgid "You can test your pattern below"
+msgstr "Desenini aşağıda test edebilirsin"
+
+#: src/lib/preferences/customization/items/exclusions.ts:158
+msgid "Invalid Pattern"
+msgstr "Geçersiz Desen"
+
+#: src/lib/preferences/customization/items/exclusions.ts:163
+msgid "Preview Shown"
+msgstr "Önizleme Gösteriliyor"
+
+#: src/lib/preferences/customization/items/exclusions.ts:168
+msgid "Preview Hidden"
+msgstr "Önizleme Gizlendi"
+
+#: src/lib/preferences/customization/items/exclusions.ts:291
+msgid "No Exclusion Patterns"
+msgstr "Hariç Tutma Deseni Yok"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:51
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:190
@@ -829,6 +830,11 @@ msgid "Enable file previews for all files with generated thumbnails"
 msgstr ""
 "Oluşturulmuş küçük resimleri olan tüm dosyalar için dosya önizlemelerini "
 "etkinleştir"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:100
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:42
+msgid "Add Pattern"
+msgstr "Desen Ekle"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:101
 msgid "Enter a glob pattern to exclude files that should not have a preview."
@@ -892,20 +898,22 @@ msgstr "Arka Plan Boyutu"
 msgid "Background size of the image preview"
 msgstr "Resim önizlemesinin arka plan boyutu"
 
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:178
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:20
-msgid "Syntax Highlighting"
-msgstr "Sözdizimi Vurgulama"
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:84
+msgid "Contain"
+msgstr "İçer"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:84
+msgid "Cover"
+msgstr "Kapak"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:179
 msgid "Enable or disable syntax highlighting in the text preview"
 msgstr ""
 "Metin önizlemesinde sözdizimi vurgulamayı etkinleştir veya devre dışı bırak"
-
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:184
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:26
-msgid "Show Line Numbers"
-msgstr "Satır Numaralarını Göster"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:185
 msgid "Show line numbers in the text preview"
@@ -914,151 +922,6 @@ msgstr "Metin önizlemesinde satır numaralarını göster"
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:191
 msgid "Configure file exclusions for file previews"
 msgstr "Dosya önizlemeleri için dosya hariç tutmalarını yapılandır"
-
-#: src/lib/preferences/customization/items/exclusions.ts:33
-msgid "Zero or More Characters"
-msgstr "Sıfır veya Daha Fazla Karakter"
-
-#: src/lib/preferences/customization/items/exclusions.ts:39
-msgid "One Character"
-msgstr "Bir Karakter"
-
-#: src/lib/preferences/customization/items/exclusions.ts:45
-msgid "Recursive Wildcard"
-msgstr "Özyinelemeli Joker Karakter"
-
-#: src/lib/preferences/customization/items/exclusions.ts:51
-msgid "List"
-msgstr "Liste"
-
-#: src/lib/preferences/customization/items/exclusions.ts:57
-msgid "Range"
-msgstr "Aralık"
-
-#: src/lib/preferences/customization/items/exclusions.ts:63
-msgid "Not in Range"
-msgstr "Aralık Dışı"
-
-#: src/lib/preferences/customization/items/exclusions.ts:92
-#: src/lib/preferences/general/appExclusionSettings.ts:171
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
-#: src/lib/preferences/actions/actionsGroup.ts:550
-#: src/lib/preferences/actions/actionDialog.ts:655
-msgid "Add"
-msgstr "Ekle"
-
-#: src/lib/preferences/customization/items/exclusions.ts:107
-msgid "Pattern"
-msgstr "Desen"
-
-#: src/lib/preferences/customization/items/exclusions.ts:124
-msgid "You can test your pattern below"
-msgstr "Desenini aşağıda test edebilirsin"
-
-#: src/lib/preferences/customization/items/exclusions.ts:158
-msgid "Invalid Pattern"
-msgstr "Geçersiz Desen"
-
-#: src/lib/preferences/customization/items/exclusions.ts:163
-msgid "Preview Shown"
-msgstr "Önizleme Gösteriliyor"
-
-#: src/lib/preferences/customization/items/exclusions.ts:168
-msgid "Preview Hidden"
-msgstr "Önizleme Gizlendi"
-
-#: src/lib/preferences/customization/items/exclusions.ts:291
-msgid "No Exclusion Patterns"
-msgstr "Hariç Tutma Deseni Yok"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:13
-msgid "Character Item"
-msgstr "Karakter Öğesi"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:14
-msgid "Configure character clipboard items"
-msgstr "Karakter pano öğelerini yapılandır"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:18
-msgid "Maximum Characters"
-msgstr "Maksimum Karakter"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:19
-msgid "Maximum number of characters that are recognized as a character item"
-msgstr "Karakter öğesi olarak tanınan maksimum karakter sayısı"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:25
-msgid "Show Unicode"
-msgstr "Unicode'u Göster"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:26
-msgid "Show the Unicode of the character"
-msgstr "Karakterin Unicode'unu göster"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:15
-msgid "Code Item"
-msgstr "Kod Öğesi"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:16
-msgid "Configure code clipboard items"
-msgstr "Kod pano öğelerini yapılandır"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:21
-msgid "Enable or disable syntax highlighting in the code item"
-msgstr "Kod öğesinde sözdizimi vurgulamayı etkinleştir veya devre dışı bırak"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:27
-msgid "Show line numbers in the code item"
-msgstr "Kod öğesinde satır numaralarını göster"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:32
-msgid "Show Code Info"
-msgstr "Kod Bilgisini Göster"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:33
-msgid "Show extra information in the code item"
-msgstr "Kod öğesinde ekstra bilgi göster"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:38
-#: src/lib/preferences/customization/items/textItemCustomization.ts:26
-msgid "Text Count Mode"
-msgstr "Metin Sayma Modu"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:39
-#: src/lib/preferences/customization/items/textItemCustomization.ts:27
-msgid "Show the number of characters, words or lines"
-msgstr "Karakter, kelime veya satır sayısını göster"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
-#: src/lib/preferences/customization/items/textItemCustomization.ts:28
-msgid "Characters"
-msgstr "Karakterler"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
-#: src/lib/preferences/customization/items/textItemCustomization.ts:28
-msgid "Words"
-msgstr "Kelimeler"
-
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
-#: src/lib/preferences/customization/items/textItemCustomization.ts:28
-msgid "Lines"
-msgstr "Satırlar"
-
-#: src/lib/preferences/customization/items/textItemCustomization.ts:15
-msgid "Text Item"
-msgstr "Metin Öğesi"
-
-#: src/lib/preferences/customization/items/textItemCustomization.ts:16
-msgid "Configure text clipboard items"
-msgstr "Metin pano öğelerini yapılandır"
-
-#: src/lib/preferences/customization/items/textItemCustomization.ts:20
-msgid "Show Text Info"
-msgstr "Metin Bilgisini Göster"
-
-#: src/lib/preferences/customization/items/textItemCustomization.ts:21
-msgid "Show extra information in the text item"
-msgstr "Metin öğesinde ekstra bilgi göster"
 
 #: src/lib/preferences/customization/items/imageItemCustomization.ts:14
 msgid "Image Item"
@@ -1080,25 +943,310 @@ msgstr "Resim öğesinde ekstra bilgi göster"
 msgid "Background size of the image"
 msgstr "Resmin arka plan boyutu"
 
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:29
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:98
+msgid "Link Exclusions"
+msgstr "Bağlantı Hariç Tutmaları"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:43
+msgid ""
+"Enter a regular expression to exclude links that should not have a preview."
+msgstr ""
+"Önizlemesi olmaması gereken bağlantıları hariç tutmak için bir düzenli ifade "
+"gir."
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:47
+msgid "Link Exclusion Patterns"
+msgstr "Bağlantı Hariç Tutma Desenleri"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:48
+msgid "Links matching these patterns will not have a preview"
+msgstr "Bu desenlerle eşleşen bağlantıların önizlemesi olmayacaktır"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:65
+msgid "Link Item"
+msgstr "Bağlantı Öğesi"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:66
+msgid "Configure link clipboard items"
+msgstr "Bağlantı pano öğelerini yapılandır"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:70
+msgid "Show Link Preview"
+msgstr "Bağlantı Önizlemesini Göster"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:71
+msgid "Show link preview in the link item"
+msgstr "Bağlantı öğesinde bağlantı önizlemesini göster"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:76
+msgid "Show Link Preview Image"
+msgstr "Bağlantı Önizleme Resmini Göster"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:77
+msgid "Show link preview image in the link item"
+msgstr "Bağlantı öğesinde bağlantı önizleme resmini göster"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:82
+msgid "Link Preview Image Background Size"
+msgstr "Bağlantı Önizleme Resmi Arka Plan Boyutu"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:83
+msgid "Background size of the link preview image"
+msgstr "Bağlantı önizleme resminin arka plan boyutu"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:89
+msgid "Link Preview Orientation"
+msgstr "Bağlantı Önizleme Yönelimi"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:90
+msgid "Orientation of the link preview"
+msgstr "Bağlantı önizlemesinin yönelimi"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:99
+msgid "Configure link exclusions for link previews"
+msgstr "Bağlantı önizlemeleri için bağlantı hariç tutmalarını yapılandır"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:15
+msgid "Text Item"
+msgstr "Metin Öğesi"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:16
+msgid "Configure text clipboard items"
+msgstr "Metin pano öğelerini yapılandır"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:20
+msgid "Show Text Info"
+msgstr "Metin Bilgisini Göster"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:21
+msgid "Show extra information in the text item"
+msgstr "Metin öğesinde ekstra bilgi göster"
+
 #: src/lib/preferences/customization/itemsCustomization.ts:22
 msgid "Items"
 msgstr "Öğeler"
 
-#: src/lib/preferences/general/locationsGroup.ts:13
-msgid "Locations"
-msgstr "Konumlar"
+#: src/lib/preferences/customization/profiles.ts:181
+msgid "Profiles"
+msgstr "Profiller"
 
-#: src/lib/preferences/general/locationsGroup.ts:19
-msgid "Data"
-msgstr "Veri"
+#: src/lib/preferences/customization/profiles.ts:182
+msgid "Choose between pre-defined profiles"
+msgstr "Önceden tanımlanmış profiller arasından seçim yap"
 
-#: src/lib/preferences/general/locationsGroup.ts:29
-msgid "Config"
-msgstr "Yapılandırma"
+#: src/lib/preferences/customization/profiles.ts:190
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "Default"
+msgstr "Varsayılan"
 
-#: src/lib/preferences/general/locationsGroup.ts:39
-msgid "Cache"
-msgstr "Önbellek"
+#: src/lib/preferences/customization/profiles.ts:196
+msgid "Compact"
+msgstr "Sıkışık"
+
+#: src/lib/preferences/customization/profiles.ts:202
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "Custom"
+msgstr "Özel"
+
+#: src/lib/preferences/customization/themeCustomization.ts:69
+#: src/lib/preferences/customization/themeCustomization.ts:73
+msgid "Theme"
+msgstr "Tema"
+
+#: src/lib/preferences/customization/themeCustomization.ts:74
+msgid "Set the preferred theme"
+msgstr "Tercih edilen temayı ayarla"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "Yaru"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:89
+#: src/lib/preferences/customization/themeCustomization.ts:96
+msgid "Color Scheme"
+msgstr "Renk Şeması"
+
+#: src/lib/preferences/customization/themeCustomization.ts:90
+#: src/lib/preferences/customization/themeCustomization.ts:97
+msgid "Set the color scheme of the theme"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:98
+msgid "Dark"
+msgstr "Koyu"
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+msgid "High Contrast"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:98
+msgid "Light"
+msgstr "Açık"
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+msgid "System"
+msgstr "Sistem"
+
+#: src/lib/preferences/customization/themeCustomization.ts:104
+msgid "Background Color"
+msgstr "Arka Plan Rengi"
+
+#: src/lib/preferences/customization/themeCustomization.ts:105
+msgid "Set the background color of the clipboard dialog"
+msgstr "Pano iletişim kutusunun arka plan rengini ayarla"
+
+#: src/lib/preferences/customization/themeCustomization.ts:111
+msgid "Text Color"
+msgstr "Metin Rengi"
+
+#: src/lib/preferences/customization/themeCustomization.ts:112
+msgid "Set the text color of the clipboard dialog"
+msgstr "Pano iletişim kutusunun metin rengini ayarla"
+
+#: src/lib/preferences/customization/themeCustomization.ts:118
+msgid "Item Color"
+msgstr "Öğe Rengi"
+
+#: src/lib/preferences/customization/themeCustomization.ts:119
+msgid "Set the background color of clipboard items"
+msgstr "Pano öğelerinin arka plan rengini ayarla"
+
+#: src/lib/preferences/customization/themeCustomization.ts:125
+msgid "Search Color"
+msgstr "Arama Rengi"
+
+#: src/lib/preferences/customization/themeCustomization.ts:126
+msgid "Set the background color of the search bar"
+msgstr "Arama çubuğunun arka plan rengini ayarla"
+
+#: src/lib/preferences/dependencies/dependencies.ts:151
+#: src/lib/preferences/dependencies/dependencies.ts:438
+msgid "Libgda Not Installed"
+msgstr "Libgda Kurulu Değil"
+
+#: src/lib/preferences/dependencies/dependencies.ts:153
+msgid ""
+"Libgda is required to store clipboard history between sessions. Install "
+"either libgda 5.0 or 6.0 with SQLite support to use this feature. After "
+"installing libgda you will need to log out or restart your system."
+msgstr ""
+"Pano geçmişini oturumlar arasında saklamak için Libgda gereklidir. Bu "
+"özelliği kullanmak için SQLite destekli libgda 5.0 veya 6.0 sürümünü kur. "
+"Libgda kurduktan sonra oturumu kapatman veya sistemi yeniden başlatman "
+"gerekecek."
+
+#: src/lib/preferences/dependencies/dependencies.ts:157
+msgid "Install Libgda"
+msgstr "Libgda Kur"
+
+#: src/lib/preferences/dependencies/dependencies.ts:170
+#: src/lib/preferences/dependencies/dependencies.ts:440
+msgid "Highlight.js Not Installed"
+msgstr "Highlight.js Kurulu Değil"
+
+#: src/lib/preferences/dependencies/dependencies.ts:171
+msgid "Highlight.js is required to display syntax highlighted code."
+msgstr "Sözdizimi vurgulu kodları görüntülemek için Highlight.js gereklidir."
+
+#: src/lib/preferences/dependencies/dependencies.ts:175
+msgid "Manual Installation"
+msgstr "Elle Kurulum"
+
+#: src/lib/preferences/dependencies/dependencies.ts:189
+msgid ""
+"You can manually install highlight.js by downloading highlight.min.js from "
+"\"Url\" to \"Install Location\"."
+msgstr ""
+"Highlight.js'yi \"Adres\" üzerinden \"Kurulum Konumu\"na indirerek elle "
+"kurabilirsin."
+
+#: src/lib/preferences/dependencies/dependencies.ts:206
+msgid "Url"
+msgstr "Adres"
+
+#: src/lib/preferences/dependencies/dependencies.ts:215
+msgid "Install Location"
+msgstr "Kurulum Konumu"
+
+#: src/lib/preferences/dependencies/dependencies.ts:224
+msgid "Install"
+msgstr "Kur"
+
+#: src/lib/preferences/dependencies/dependencies.ts:353
+#: src/lib/preferences/dependencies/dependencies.ts:439
+msgid "GSound Not Installed"
+msgstr "GSound Kurulu Değil"
+
+#: src/lib/preferences/dependencies/dependencies.ts:355
+msgid ""
+"GSound is required to play sound effects. Install GSound to use this "
+"feature. After installing GSound you will need to log out or restart your "
+"system."
+msgstr ""
+"Ses efektlerini çalmak için GSound gereklidir. Bu özelliği kullanmak için "
+"GSound kur. GSound kurduktan sonra oturumu kapatman veya sistemi yeniden "
+"başlatman gerekecek."
+
+#: src/lib/preferences/dependencies/dependencies.ts:358
+msgid "Install GSound"
+msgstr "GSound Kur"
+
+#: src/lib/preferences/dependencies/dependencies.ts:371
+msgid "Starting Highlight.js Download"
+msgstr "Highlight.js İndirmesi Başlatılıyor"
+
+#: src/lib/preferences/dependencies/dependencies.ts:391
+msgid "Error Installing Highlight.js"
+msgstr "Highlight.js Kurulurken Hata Oluştu"
+
+#: src/lib/preferences/dependencies/dependencies.ts:391
+msgid "Successfully Installed Highlight.js"
+msgstr "Highlight.js Başarıyla Kuruldu"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:240
+#, javascript-format
+msgid "Successfully Installed %s"
+msgstr "%s Başarıyla Kuruldu"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:241
+#, javascript-format
+msgid "Error Installing %s"
+msgstr "%s Kurulurken Hata Oluştu"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:261
+#, javascript-format
+msgid "Successfully Uninstalled %s"
+msgstr "%s Başarıyla Kaldırıldı"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:262
+#, javascript-format
+msgid "Error Uninstalling %s"
+msgstr "%s Kaldırılırken Hata Oluştu"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:288
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:382
+msgid "Manage Highlight.js"
+msgstr "Highlight.js'yi Yönet"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:300
+msgid "Languages"
+msgstr "Diller"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:321
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:47
+msgid "Search"
+msgstr "Ara"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:375
+msgid "Dependencies"
+msgstr "Bağımlılıklar"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:383
+msgid "Manage the Highlight.js installation"
+msgstr "Highlight.js kurulumunu yönet"
 
 #: src/lib/preferences/general/appExclusionSettings.ts:38
 msgid "Search apps"
@@ -1140,6 +1288,70 @@ msgstr "Uygulama Hariç Tutmalarını Yönet"
 #: src/lib/preferences/general/appExclusionSettings.ts:322
 msgid "Manage apps that will be excluded from clipboard history"
 msgstr "Pano geçmişinden hariç tutulacak uygulamaları yönetin"
+
+#: src/lib/preferences/general/behaviorSettings.ts:12
+msgid "Behavior"
+msgstr "Davranış"
+
+#: src/lib/preferences/general/behaviorSettings.ts:16
+msgid "Remember Search Query"
+msgstr "Arama Sorgusunu Hatırla"
+
+#: src/lib/preferences/general/behaviorSettings.ts:17
+msgid ""
+"Remember the search query when closing and reopening the clipboard dialog"
+msgstr ""
+"Pano iletişim kutusunu kapatıp yeniden açtığında arama sorgusunu hatırla"
+
+#: src/lib/preferences/general/behaviorSettings.ts:22
+msgid "Exclude Pinned Items from Main View"
+msgstr "İğnelenmiş Öğeleri Ana Görünümden Hariç Tut"
+
+#: src/lib/preferences/general/behaviorSettings.ts:23
+msgid "Pinned items appear only when searching for pinned items"
+msgstr "İğnelenmiş öğeler yalnızca iğnelenmiş öğeler arandığında görünür"
+
+#: src/lib/preferences/general/behaviorSettings.ts:28
+msgid "Exclude Tagged Items from Main View"
+msgstr "Etiketlenmiş Öğeleri Ana Görünümden Hariç Tut"
+
+#: src/lib/preferences/general/behaviorSettings.ts:29
+msgid "Tagged items appear only when searching for tagged items"
+msgstr "Etiketlenmiş öğeler yalnızca etiketlenmiş öğeler arandığında görünür"
+
+#: src/lib/preferences/general/behaviorSettings.ts:34
+msgid "Protect Pinned Items"
+msgstr "İğnelenmiş Öğeleri Koru"
+
+#: src/lib/preferences/general/behaviorSettings.ts:35
+msgid "Prevents pinned clipboard items from being deleted"
+msgstr "İğnelenmiş pano öğelerinin silinmesini önler"
+
+#: src/lib/preferences/general/behaviorSettings.ts:40
+msgid "Protect Tagged Items"
+msgstr "Etiketlenmiş Öğeleri Koru"
+
+#: src/lib/preferences/general/behaviorSettings.ts:41
+msgid "Prevents tagged clipboard items from being deleted"
+msgstr "Etiketlenmiş pano öğelerinin silinmesini önler"
+
+#: src/lib/preferences/general/behaviorSettings.ts:46
+msgid "Sync Primary Clipboard"
+msgstr "Birincil Panoyu Senkronize Et"
+
+#: src/lib/preferences/general/behaviorSettings.ts:47
+msgid "Also copy clipboard items to the primary clipboard"
+msgstr "Pano öğelerini aynı zamanda birincil panoya da kopyala"
+
+#: src/lib/preferences/general/behaviorSettings.ts:52
+msgid "Update Date on Copy"
+msgstr "Kopyalamada Tarihi Güncelle"
+
+#: src/lib/preferences/general/behaviorSettings.ts:53
+msgid ""
+"Update the copied date of clipboard items when selected from clipboard "
+"history"
+msgstr "Pano geçmişinden bir öğe seçildiğinde kopyalanma tarihini güncelle"
 
 #: src/lib/preferences/general/feedbackSettings.ts:129
 #: src/lib/preferences/general/feedbackSettings.ts:251
@@ -1226,70 +1438,6 @@ msgstr "Bir pano öğesi kopyalandığında bildirim gönder"
 msgid "Sound to play when a clipboard item is copied"
 msgstr "Bir pano öğesi kopyalandığında çalınacak ses"
 
-#: src/lib/preferences/general/behaviorSettings.ts:12
-msgid "Behavior"
-msgstr "Davranış"
-
-#: src/lib/preferences/general/behaviorSettings.ts:16
-msgid "Remember Search Query"
-msgstr "Arama Sorgusunu Hatırla"
-
-#: src/lib/preferences/general/behaviorSettings.ts:17
-msgid ""
-"Remember the search query when closing and reopening the clipboard dialog"
-msgstr ""
-"Pano iletişim kutusunu kapatıp yeniden açtığında arama sorgusunu hatırla"
-
-#: src/lib/preferences/general/behaviorSettings.ts:22
-msgid "Exclude Pinned Items from Main View"
-msgstr "İğnelenmiş Öğeleri Ana Görünümden Hariç Tut"
-
-#: src/lib/preferences/general/behaviorSettings.ts:23
-msgid "Pinned items appear only when searching for pinned items"
-msgstr "İğnelenmiş öğeler yalnızca iğnelenmiş öğeler arandığında görünür"
-
-#: src/lib/preferences/general/behaviorSettings.ts:28
-msgid "Exclude Tagged Items from Main View"
-msgstr "Etiketlenmiş Öğeleri Ana Görünümden Hariç Tut"
-
-#: src/lib/preferences/general/behaviorSettings.ts:29
-msgid "Tagged items appear only when searching for tagged items"
-msgstr "Etiketlenmiş öğeler yalnızca etiketlenmiş öğeler arandığında görünür"
-
-#: src/lib/preferences/general/behaviorSettings.ts:34
-msgid "Protect Pinned Items"
-msgstr "İğnelenmiş Öğeleri Koru"
-
-#: src/lib/preferences/general/behaviorSettings.ts:35
-msgid "Prevents pinned clipboard items from being deleted"
-msgstr "İğnelenmiş pano öğelerinin silinmesini önler"
-
-#: src/lib/preferences/general/behaviorSettings.ts:40
-msgid "Protect Tagged Items"
-msgstr "Etiketlenmiş Öğeleri Koru"
-
-#: src/lib/preferences/general/behaviorSettings.ts:41
-msgid "Prevents tagged clipboard items from being deleted"
-msgstr "Etiketlenmiş pano öğelerinin silinmesini önler"
-
-#: src/lib/preferences/general/behaviorSettings.ts:46
-msgid "Sync Primary Clipboard"
-msgstr "Birincil Panoyu Senkronize Et"
-
-#: src/lib/preferences/general/behaviorSettings.ts:47
-msgid "Also copy clipboard items to the primary clipboard"
-msgstr "Pano öğelerini aynı zamanda birincil panoya da kopyala"
-
-#: src/lib/preferences/general/behaviorSettings.ts:52
-msgid "Update Date on Copy"
-msgstr "Kopyalamada Tarihi Güncelle"
-
-#: src/lib/preferences/general/behaviorSettings.ts:53
-msgid ""
-"Update the copied date of clipboard items when selected from clipboard "
-"history"
-msgstr "Pano geçmişinden bir öğe seçildiğinde kopyalanma tarihini güncelle"
-
 #: src/lib/preferences/general/historySettings.ts:63
 msgid "History"
 msgstr "Geçmiş"
@@ -1299,11 +1447,11 @@ msgid "Memory"
 msgstr ""
 
 #: src/lib/preferences/general/historySettings.ts:70
-msgid "SQLite"
+msgid "(recommended)"
 msgstr ""
 
 #: src/lib/preferences/general/historySettings.ts:70
-msgid "(recommended)"
+msgid "SQLite"
 msgstr ""
 
 #: src/lib/preferences/general/historySettings.ts:71
@@ -1335,12 +1483,18 @@ msgstr ""
 "pano geçmişine ne yapılacağını seç"
 
 #: src/lib/preferences/general/historySettings.ts:136
-msgid "Keep Pinned/Tagged"
-msgstr "İğnelenenleri/Etiketlenenleri Koru"
+#: src/lib/ui/clipboardDialog.ts:137 src/lib/ui/clipboardDialog.ts:242
+#: src/lib/ui/indicator.ts:52
+msgid "Clear"
+msgstr "Temizle"
 
 #: src/lib/preferences/general/historySettings.ts:136
 msgid "Keep All"
 msgstr "Hepsini Koru"
+
+#: src/lib/preferences/general/historySettings.ts:136
+msgid "Keep Pinned/Tagged"
+msgstr "İğnelenenleri/Etiketlenenleri Koru"
 
 #: src/lib/preferences/general/historySettings.ts:142
 msgid "History Length"
@@ -1362,218 +1516,21 @@ msgstr ""
 "Pano geçmişinde öğelerin kaç dakika tutulacağını seç. Zaman sınırını devre "
 "dışı bırakmak için 0 olarak ayarla"
 
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:47
-#: src/lib/preferences/actions/actionDialog.ts:441
-#: src/lib/preferences/actions/actionDialog.ts:523
-#: src/lib/preferences/actions/actionDialog.ts:611
-msgid "Name"
-msgstr "Ad"
+#: src/lib/preferences/general/locationsGroup.ts:13
+msgid "Locations"
+msgstr "Konumlar"
 
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
-#: src/lib/preferences/actions/actionsGroup.ts:569
-msgid "Add Submenu"
-msgstr "Alt Menü Ekle"
+#: src/lib/preferences/general/locationsGroup.ts:19
+msgid "Data"
+msgstr "Veri"
 
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
-msgid "Edit Submenu"
-msgstr "Alt Menüyü Düzenle"
+#: src/lib/preferences/general/locationsGroup.ts:29
+msgid "Config"
+msgstr "Yapılandırma"
 
-#: src/lib/preferences/actions/actionsGroup.ts:34
-#: src/lib/preferences/actions/actionsGroup.ts:126
-#: src/lib/preferences/actions/actionsGroup.ts:424
-msgid "Delete"
-msgstr "Sil"
-
-#: src/lib/preferences/actions/actionsGroup.ts:91
-#: src/lib/preferences/actions/actionsGroup.ts:529
-msgid "No Actions"
-msgstr "Eylem Yok"
-
-#: src/lib/preferences/actions/actionsGroup.ts:100
-#: src/lib/preferences/actions/actionsGroup.ts:568
-#: src/lib/preferences/actions/actionDialog.ts:655
-msgid "Add Action"
-msgstr "Eylem Ekle"
-
-#: src/lib/preferences/actions/actionsGroup.ts:180
-msgid "Delete Submenu?"
-msgstr "Alt Menü Silinsin mi?"
-
-#: src/lib/preferences/actions/actionsGroup.ts:181
-msgid "Deleting the submenu will delete all actions in the submenu"
-msgstr "Alt menüyü silmek, alt menüdeki tüm eylemleri silecektir."
-
-#: src/lib/preferences/actions/actionsGroup.ts:446
-msgid "Delete Action?"
-msgstr "Eylem Silinsin mi?"
-
-#: src/lib/preferences/actions/actionsGroup.ts:518
-#: src/lib/preferences/actions/actionsPage.ts:62
-msgid "Actions"
-msgstr "Eylemler"
-
-#: src/lib/preferences/actions/actionDialog.ts:38
-msgid "All"
-msgstr "Hepsi"
-
-#: src/lib/preferences/actions/actionDialog.ts:131
-msgid "Types"
-msgstr "Türler"
-
-#: src/lib/preferences/actions/actionDialog.ts:132
-msgid "Select which types are allowed"
-msgstr "Hangi türlere izin verileceğini seç"
-
-#: src/lib/preferences/actions/actionDialog.ts:181
-#: src/lib/preferences/actions/actionDialog.ts:382
-#: src/lib/preferences/actions/actionDefaults.ts:158
-msgid "Character"
-msgstr "Karakter"
-
-#: src/lib/preferences/actions/actionDialog.ts:256
-msgid "Kind"
-msgstr "Tür"
-
-#: src/lib/preferences/actions/actionDialog.ts:257
-#: src/lib/preferences/actions/actionDialog.ts:401
-msgid "Command"
-msgstr "Komut"
-
-#: src/lib/preferences/actions/actionDialog.ts:347
-msgid ""
-"The regular expression does not use any flags for matching. Leaving this "
-"empty will match everything."
-msgstr ""
-"Düzenli ifade eşleşme için herhangi bir bayrak kullanmaz. Burayı boş "
-"bırakmak her şeyi eşleştirecektir."
-
-#: src/lib/preferences/actions/actionDialog.ts:361
-msgid "Type"
-msgstr "Tür"
-
-#: src/lib/preferences/actions/actionDialog.ts:362
-msgid "Example"
-msgstr "Örnek"
-
-#: src/lib/preferences/actions/actionDialog.ts:393
-msgid "Regular Expression"
-msgstr "Düzenli İfade"
-
-#: src/lib/preferences/actions/actionDialog.ts:406
-msgid ""
-"Clipboard content will be provided via stdin. Capture groups of the regular "
-"expression will be passed as positional parameters $1, $2, $3, ..."
-msgstr ""
-"Pano içeriği stdin üzerinden sağlanacaktır. Düzenli ifadenin yakalama "
-"grupları $1, $2, $3, ... gibi konumsal parametreler olarak aktarılacaktır."
-
-#: src/lib/preferences/actions/actionDialog.ts:459
-#: src/lib/preferences/actions/actionDialog.ts:550
-msgid "Output"
-msgstr "Çıktı"
-
-#: src/lib/preferences/actions/actionDialog.ts:460
-#: src/lib/preferences/actions/actionDialog.ts:551
-msgid "Select how to handle the output"
-msgstr "Çıktının nasıl işleneceğini seç"
-
-#: src/lib/preferences/actions/actionDialog.ts:461
-msgid "Ignore"
-msgstr "Yoksay"
-
-#: src/lib/preferences/actions/actionDialog.ts:461
-#: src/lib/preferences/actions/actionDialog.ts:552
-msgid "Paste"
-msgstr "Yapıştır"
-
-#: src/lib/preferences/actions/actionDialog.ts:466
-#: src/lib/preferences/actions/actionDialog.ts:557
-#: src/lib/preferences/actions/actionDialog.ts:621
-msgid "Shortcut"
-msgstr "Kısayol"
-
-#: src/lib/preferences/actions/actionDialog.ts:530
-msgid "Color Space"
-msgstr "Renk Uzayı"
-
-#: src/lib/preferences/actions/actionDialog.ts:531
-msgid "Select which color space to convert to"
-msgstr "Hangi renk uzayına dönüştürüleceğini seç"
-
-#: src/lib/preferences/actions/actionDialog.ts:536
-msgid "Hwb"
-msgstr "Hwb"
-
-#: src/lib/preferences/actions/actionDialog.ts:537
-msgid "Linear Rgb"
-msgstr "Doğrusal Rgb"
-
-#: src/lib/preferences/actions/actionDialog.ts:538
-msgid "Xyz"
-msgstr "Xyz"
-
-#: src/lib/preferences/actions/actionDialog.ts:539
-msgid "Lab"
-msgstr "Lab"
-
-#: src/lib/preferences/actions/actionDialog.ts:540
-msgid "Lch"
-msgstr "Lch"
-
-#: src/lib/preferences/actions/actionDialog.ts:541
-msgid "Oklab"
-msgstr "Oklab"
-
-#: src/lib/preferences/actions/actionDialog.ts:662
-msgid "Edit Action"
-msgstr "Eylemi Düzenle"
-
-#: src/lib/preferences/actions/actionsPage.ts:28
-msgid "Reset"
-msgstr "Sıfırla"
-
-#: src/lib/preferences/actions/actionsPage.ts:41
-msgid "Restore"
-msgstr "Geri Yükle"
-
-#: src/lib/preferences/actions/actionsPage.ts:74
-#: src/lib/preferences/actions/actionDefaults.ts:113
-#: src/lib/preferences/actions/actionDefaults.ts:128
-msgid "Default Actions"
-msgstr "Varsayılan Eylemler"
-
-#: src/lib/preferences/actions/actionsPage.ts:75
-msgid "Set default actions that trigger when holding control"
-msgstr ""
-"Kontrol tuşuna basılı tutulduğunda tetiklenen varsayılan eylemleri ayarla"
-
-#: src/lib/preferences/actions/actionsPage.ts:92
-msgid "Restore Built-In Actions"
-msgstr "Yerleşik Eylemleri Geri Yükle"
-
-#: src/lib/preferences/actions/actionsPage.ts:101
-msgid "Reset Actions"
-msgstr "Eylemleri Sıfırla"
-
-#: src/lib/preferences/actions/actionsPage.ts:121
-msgid "Restore Built-In Actions?"
-msgstr "Yerleşik Eylemler Geri Yüklensin mi?"
-
-#: src/lib/preferences/actions/actionsPage.ts:123
-msgid ""
-"Restoring the built-in actions will restore built-in actions that were "
-"removed. Custom actions will remain unchanged"
-msgstr ""
-"Yerleşik eylemleri geri yüklemek, kaldırılan yerleşik eylemleri geri "
-"getirecektir. Özel eylemler değişmeden kalacaktır"
-
-#: src/lib/preferences/actions/actionsPage.ts:140
-msgid "Reset Actions?"
-msgstr "Eylemler Sıfırlansın mı?"
-
-#: src/lib/preferences/actions/actionsPage.ts:141
-msgid "Resetting the actions will delete all custom actions"
-msgstr "Eylemleri sıfırlamak tüm özel eylemleri silecektir."
+#: src/lib/preferences/general/locationsGroup.ts:39
+msgid "Cache"
+msgstr "Önbellek"
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:19
 msgid "Open Clipboard Dialog"
@@ -1588,12 +1545,12 @@ msgid "Open Clipboard Dialog Behavior"
 msgstr "Pano İletişim Kutusu Açma Davranışı"
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:27
-msgid "Toggle Dialog"
-msgstr "İletişim Kutusunu Aç/Kapat"
-
-#: src/lib/preferences/shortcuts/dialogShortcuts.ts:27
 msgid "Open / Select Next Item"
 msgstr "Aç / Sonraki Öğeyi Seç"
+
+#: src/lib/preferences/shortcuts/dialogShortcuts.ts:27
+msgid "Toggle Dialog"
+msgstr "İletişim Kutusunu Aç/Kapat"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:19
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:38
@@ -1649,17 +1606,29 @@ msgstr "Öğeyi Kopyala"
 msgid "Activate Default Action"
 msgstr "Varsayılan Eylemi Etkinleştir"
 
-#: src/lib/preferences/shortcuts/shortcutRow.ts:78
-msgid "Set Shortcut"
-msgstr "Kısayolu Ayarla"
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:12
+msgid "Navigation"
+msgstr "Gezinme"
 
-#: src/lib/preferences/shortcuts/shortcutRow.ts:126
-msgid "Disable Shortcut"
-msgstr "Kısayolu Devre Dışı Bırak"
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:15
+msgid "Navigate"
+msgstr "Gezin"
 
-#: src/lib/preferences/shortcuts/shortcutRow.ts:219
-msgid "Disabled"
-msgstr "Devre Dışı"
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:16
+msgid "Jump to Item"
+msgstr "Öğeye Atla"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:17
+msgid "Jump to Start"
+msgstr "Başa Atla"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:18
+msgid "Jump to End"
+msgstr "Sona Atla"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:19
+msgid "Jump to Search"
+msgstr "Aramaya Atla"
 
 #: src/lib/preferences/shortcuts/popupMenuShortcuts.ts:11
 msgid "Popup Menu"
@@ -1672,11 +1641,6 @@ msgstr "Öğe Türünü Seç"
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:31
 msgid "Scroll"
 msgstr "Kaydır"
-
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:47
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:321
-msgid "Search"
-msgstr "Ara"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:49
 msgid "Toggle Pinned Search"
@@ -1728,166 +1692,202 @@ msgstr "Öğe Türü Döngüsü"
 msgid "Cycle Item Tag"
 msgstr "Öğe Etiketi Döngüsü"
 
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:12
-msgid "Navigation"
-msgstr "Gezinme"
+#: src/lib/preferences/shortcuts/shortcutRow.ts:78
+msgid "Set Shortcut"
+msgstr "Kısayolu Ayarla"
 
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:15
-msgid "Navigate"
-msgstr "Gezin"
+#: src/lib/preferences/shortcuts/shortcutRow.ts:126
+msgid "Disable Shortcut"
+msgstr "Kısayolu Devre Dışı Bırak"
 
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:16
-msgid "Jump to Item"
-msgstr "Öğeye Atla"
+#: src/lib/preferences/shortcuts/shortcutRow.ts:219
+msgid "Disabled"
+msgstr "Devre Dışı"
 
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:17
-msgid "Jump to Start"
-msgstr "Başa Atla"
-
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:18
-msgid "Jump to End"
-msgstr "Sona Atla"
-
-#: src/lib/preferences/shortcuts/navigationShortcuts.ts:19
-msgid "Jump to Search"
-msgstr "Aramaya Atla"
-
-#: src/lib/preferences/dependencies/dependencies.ts:151
-#: src/lib/preferences/dependencies/dependencies.ts:438
-msgid "Libgda Not Installed"
-msgstr "Libgda Kurulu Değil"
-
-#: src/lib/preferences/dependencies/dependencies.ts:153
-msgid ""
-"Libgda is required to store clipboard history between sessions. Install "
-"either libgda 5.0 or 6.0 with SQLite support to use this feature. After "
-"installing libgda you will need to log out or restart your system."
-msgstr ""
-"Pano geçmişini oturumlar arasında saklamak için Libgda gereklidir. Bu "
-"özelliği kullanmak için SQLite destekli libgda 5.0 veya 6.0 sürümünü kur. "
-"Libgda kurduktan sonra oturumu kapatman veya sistemi yeniden başlatman "
-"gerekecek."
-
-#: src/lib/preferences/dependencies/dependencies.ts:157
-msgid "Install Libgda"
-msgstr "Libgda Kur"
-
-#: src/lib/preferences/dependencies/dependencies.ts:170
-#: src/lib/preferences/dependencies/dependencies.ts:440
-msgid "Highlight.js Not Installed"
-msgstr "Highlight.js Kurulu Değil"
-
-#: src/lib/preferences/dependencies/dependencies.ts:171
-msgid "Highlight.js is required to display syntax highlighted code."
-msgstr "Sözdizimi vurgulu kodları görüntülemek için Highlight.js gereklidir."
-
-#: src/lib/preferences/dependencies/dependencies.ts:175
-msgid "Manual Installation"
-msgstr "Elle Kurulum"
-
-#: src/lib/preferences/dependencies/dependencies.ts:189
-msgid ""
-"You can manually install highlight.js by downloading highlight.min.js from "
-"\"Url\" to \"Install Location\"."
-msgstr ""
-"Highlight.js'yi \"Adres\" üzerinden \"Kurulum Konumu\"na indirerek elle "
-"kurabilirsin."
-
-#: src/lib/preferences/dependencies/dependencies.ts:206
-msgid "Url"
-msgstr "Adres"
-
-#: src/lib/preferences/dependencies/dependencies.ts:215
-msgid "Install Location"
-msgstr "Kurulum Konumu"
-
-#: src/lib/preferences/dependencies/dependencies.ts:224
-msgid "Install"
-msgstr "Kur"
-
-#: src/lib/preferences/dependencies/dependencies.ts:353
-#: src/lib/preferences/dependencies/dependencies.ts:439
-msgid "GSound Not Installed"
-msgstr "GSound Kurulu Değil"
-
-#: src/lib/preferences/dependencies/dependencies.ts:355
-msgid ""
-"GSound is required to play sound effects. Install GSound to use this "
-"feature. After installing GSound you will need to log out or restart your "
-"system."
-msgstr ""
-"Ses efektlerini çalmak için GSound gereklidir. Bu özelliği kullanmak için "
-"GSound kur. GSound kurduktan sonra oturumu kapatman veya sistemi yeniden "
-"başlatman gerekecek."
-
-#: src/lib/preferences/dependencies/dependencies.ts:358
-msgid "Install GSound"
-msgstr "GSound Kur"
-
-#: src/lib/preferences/dependencies/dependencies.ts:371
-msgid "Starting Highlight.js Download"
-msgstr "Highlight.js İndirmesi Başlatılıyor"
-
-#: src/lib/preferences/dependencies/dependencies.ts:391
-msgid "Successfully Installed Highlight.js"
-msgstr "Highlight.js Başarıyla Kuruldu"
-
-#: src/lib/preferences/dependencies/dependencies.ts:391
-msgid "Error Installing Highlight.js"
-msgstr "Highlight.js Kurulurken Hata Oluştu"
-
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:240
+#: src/lib/ui/components/contentInfo.ts:39
 #, javascript-format
-msgid "Successfully Installed %s"
-msgstr "%s Başarıyla Kuruldu"
+msgid "%dh"
+msgstr "%d sa"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:241
+#: src/lib/ui/components/contentInfo.ts:40
 #, javascript-format
-msgid "Error Installing %s"
-msgstr "%s Kurulurken Hata Oluştu"
+msgid "%dm"
+msgstr "%d dk"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:261
+#: src/lib/ui/components/contentInfo.ts:41
 #, javascript-format
-msgid "Successfully Uninstalled %s"
-msgstr "%s Başarıyla Kaldırıldı"
+msgid "%ds"
+msgstr "%d sn"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:262
+#: src/lib/ui/components/contentInfo.ts:113
 #, javascript-format
-msgid "Error Uninstalling %s"
-msgstr "%s Kaldırılırken Hata Oluştu"
+msgid "%d char"
+msgid_plural "%d chars"
+msgstr[0] "%d karakter"
+msgstr[1] "%d karakter"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:288
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:382
-msgid "Manage Highlight.js"
-msgstr "Highlight.js'yi Yönet"
+#: src/lib/ui/components/contentInfo.ts:121
+#, javascript-format
+msgid "%d word"
+msgid_plural "%d words"
+msgstr[0] "%d kelime"
+msgstr[1] "%d kelime"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:300
-msgid "Languages"
-msgstr "Diller"
+#: src/lib/ui/components/contentInfo.ts:124
+#, javascript-format
+msgid "%d line"
+msgid_plural "%d lines"
+msgstr[0] "%d satır"
+msgstr[1] "%d satır"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:375
-msgid "Dependencies"
-msgstr "Bağımlılıklar"
+#: src/lib/ui/components/contentInfo.ts:184
+msgid "Missing File"
+msgstr "Eksik Dosya"
 
-#: src/lib/preferences/dependencies/dependenciesSettings.ts:383
-msgid "Manage the Highlight.js installation"
-msgstr "Highlight.js kurulumunu yönet"
+#: src/lib/ui/components/contentInfo.ts:196
+msgid "Error"
+msgstr "Hata"
 
-#~ msgid "Paste on Copy"
-#~ msgstr "Kopyalamada Yapıştır"
+#: src/lib/ui/components/editDialog.ts:269
+msgid "Edit Clipboard Item"
+msgstr "Pano Öğesini Düzenle"
+
+#: src/lib/ui/components/qrCodeDialog.ts:146
+msgid "Close"
+msgstr "Kapat"
+
+#: src/lib/ui/indicator.ts:36
+msgid "Clear Clipboard History?"
+msgstr "Pano Geçmişi Temizlensin mi?"
+
+#: src/lib/ui/indicator.ts:37
+msgid "Are you sure you want to clear your clipboard history?"
+msgstr "Pano geçmişinizi temizlemek istediğinden emin misin?"
+
+#: src/lib/ui/indicator.ts:41
+msgid "Clear Pinned/Tagged Items"
+msgstr "İğnelenen/Etiketlenen Öğeleri Temizle"
+
+#: src/lib/ui/indicator.ts:99
+msgid "Incognito Mode"
+msgstr "Gizli Mod"
+
+#: src/lib/ui/indicator.ts:102
+msgid "Clear History"
+msgstr "Geçmişi Temizle"
+
+#: src/lib/ui/indicator.ts:103
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: src/lib/ui/indicator.ts:178
+#, javascript-format
+msgid "%d File"
+msgid_plural "%d Files"
+msgstr[0] "%d Dosya"
+msgstr[1] "%d Dosya"
+
+#: src/lib/ui/items/characterItem.ts:22
+msgid "Char"
+msgstr "Karakter"
+
+#: src/lib/ui/items/filesItem.ts:120
+#, javascript-format
+msgid "%d more file"
+msgid_plural "%d more files"
+msgstr[0] "%d dosya daha"
+msgstr[1] "%d dosya daha"
+
+#: src/lib/ui/items/filesItem.ts:121
+#, javascript-format
+msgid "%d file"
+msgid_plural "%d files"
+msgstr[0] "%d dosya"
+msgstr[1] "%d dosya"
+
+#: src/lib/ui/items/linkItem.ts:94
+msgid "No Title"
+msgstr "Başlık Yok"
+
+#: src/lib/ui/items/linkItem.ts:96
+msgid "No Description"
+msgstr "Açıklama Yok"
+
+#: src/lib/ui/items/statusItem.ts:70 src/lib/ui/items/statusItem.ts:104
+msgid "Clipboard is Empty"
+msgstr "Pano Boş"
+
+#: src/lib/ui/items/statusItem.ts:107
+msgid "No Items Found"
+msgstr "Öğe Bulunamadı"
+
+#: src/lib/ui/searchEntry.ts:150
+msgid "__All"
+msgstr "__Hepsi"
+
+#: src/lib/ui/searchEntry.ts:154
+msgid "__Text"
+msgstr "__Metin"
+
+#: src/lib/ui/searchEntry.ts:155
+msgid "__Code"
+msgstr "__Kod"
+
+#: src/lib/ui/searchEntry.ts:156
+msgid "__Image"
+msgstr "__Resim"
+
+#: src/lib/ui/searchEntry.ts:157
+msgid "__File"
+msgstr "__Dosya"
+
+#: src/lib/ui/searchEntry.ts:158
+msgid "File__s"
+msgstr "Dosy__alar"
+
+#: src/lib/ui/searchEntry.ts:159
+msgid "__Link"
+msgstr "__Bağlantı"
+
+#: src/lib/ui/searchEntry.ts:160
+msgid "C__haracter"
+msgstr "K__arakter"
+
+#: src/lib/ui/searchEntry.ts:161
+msgid "Colo__r"
+msgstr "Re__nk"
+
+#: src/lib/ui/searchEntry.ts:273
+msgid "Type to search"
+msgstr "Aramak için yaz"
+
+#: src/prefs.ts:74
+msgid "General"
+msgstr "Genel"
+
+#: src/prefs.ts:94
+msgid "Customization"
+msgstr "Özelleştirme"
+
+#: src/prefs.ts:111
+msgid "Shortcuts"
+msgstr "Kısayollar"
 
 #~ msgid ""
 #~ "Automatically paste clipboard items when selected from clipboard history"
 #~ msgstr "Pano geçmişinden bir öğe seçildiğinde otomatik olarak yapıştır"
 
-#~ msgid "Set the color scheme of the custom theme"
-#~ msgstr "Özel temanın renk şemasını ayarla"
-
 #~ msgid "Failed to load database"
 #~ msgstr "Veritabanı yüklenemedi"
 
-#~ msgid "Use In-Memory Database"
-#~ msgstr "Bellek İçi Veritabanı Kullan"
+#~ msgid "Paste on Copy"
+#~ msgstr "Kopyalamada Yapıştır"
+
+#~ msgid "Set the color scheme of the custom theme"
+#~ msgstr "Özel temanın renk şemasını ayarla"
 
 #~ msgid "Store clipboard history in memory instead of on disk"
 #~ msgstr "Pano geçmişini disk yerine bellekte sakla"
+
+#~ msgid "Use In-Memory Database"
+#~ msgstr "Bellek İçi Veritabanı Kullan"
