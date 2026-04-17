@@ -94,6 +94,7 @@ check-pot:
 		--copyright-holder="Copyous" \
 		--package-name="Copyous" \
 		--language="javascript" \
+		--sort-by-file \
 		--output=- \
 	| diff -q -I '^"POT-Creation-Date: .*' - resources/po/main.pot
 
