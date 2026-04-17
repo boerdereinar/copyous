@@ -46,7 +46,7 @@ export class ContentPreview extends St.BoxLayout {
 	constructor() {
 		super({
 			style_class: 'content-preview',
-			orientation: Clutter.Orientation.VERTICAL,
+			vertical: true,
 			x_expand: true,
 			y_expand: true,
 		});

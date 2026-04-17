@@ -98,7 +98,7 @@ export class ActionsPage extends Adw.PreferencesPage {
 		restoreBox.end_widget = this._restoreBadge;
 		this.updateRestoreButton();
 
-		const resetButton = new Adw.ButtonRow({ title: _('Reset Actions') });
+		const resetButton = new Adw.ActionRow({ title: _('Reset Actions'), activatable: true });
 		resetButton.add_css_class('destructive-action');
 		resetButton.connect('activated', this.reset.bind(this));
 		resetGroup.add(resetButton);

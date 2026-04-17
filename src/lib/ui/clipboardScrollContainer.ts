@@ -98,7 +98,7 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 		const box = child.get_allocation_box();
 		let adjustment: St.Adjustment;
 		let value: number;
-		if (this.orientation === Clutter.Orientation.HORIZONTAL) {
+		if (!this.vertical) {
 			adjustment = this.hadjustment;
 			value = box.x1 + box.get_width() * 0.5 - adjustment.page_size * 0.5;
 		} else {
@@ -308,7 +308,7 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 
 		const first = get_first_visible_child(this);
 		const last = get_last_visible_child(this);
-		if (this.orientation === Clutter.Orientation.HORIZONTAL) {
+		if (!this.vertical) {
 			// If up or shift tab navigation then focus the search entry
 			if (direction === St.DirectionType.UP) {
 				this._lastFocus = from;

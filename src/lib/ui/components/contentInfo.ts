@@ -106,17 +106,11 @@ export class TextInfo extends ContentInfo {
 
 	private updateCount() {
 		if (this._textCountMode === TextCountMode.Characters) {
-			let count = 0;
-			const segments = new Intl.Segmenter(undefined, { granularity: 'grapheme' }).segment(this._text);
-			for (const _segment of segments) count++;
+			const count = Array.from(this._text).length;
 
 			this._countLabel.text = ngettext('%d char', '%d chars', count).format(count);
 		} else if (this._textCountMode === TextCountMode.Words) {
-			let count = 0;
-			const segments = new Intl.Segmenter(undefined, { granularity: 'word' }).segment(this._text);
-			for (const segment of segments) {
-				if (segment.isWordLike) count++;
-			}
+			const count = this._text.trim().split(/\s+/).filter(Boolean).length;
 
 			this._countLabel.text = ngettext('%d word', '%d words', count).format(count);
 		} else if (this._textCountMode === TextCountMode.Lines) {

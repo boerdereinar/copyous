@@ -63,7 +63,10 @@ export class ClipboardScrollView extends St.ScrollView {
 		this.updateSize();
 		this.updateScrollbar();
 
-		this.bind_property('orientation', this._scrollContainer, 'orientation', GObject.BindingFlags.SYNC_CREATE);
+		this.connect('notify::orientation', () => {
+			this._scrollContainer.vertical = this._orientation === Clutter.Orientation.VERTICAL;
+		});
+		this._scrollContainer.vertical = this._orientation === Clutter.Orientation.VERTICAL;
 	}
 
 	get orientation(): Clutter.Orientation {

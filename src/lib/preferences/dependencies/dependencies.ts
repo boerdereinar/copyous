@@ -27,7 +27,7 @@ export async function checkGda(prefs: ExtensionPreferences): Promise<boolean> {
 
 		return true;
 	} catch (err) {
-		prefs.getLogger().error((err as Error).message);
+		(prefs.getLogger?.() ?? console).error((err as Error).message);
 		return false;
 	}
 }
@@ -238,7 +238,7 @@ async function downloadHljsModule(
 ): Promise<boolean> {
 	try {
 		if (path.query_exists(null)) {
-			prefs.getLogger().error(`Highlight.js module ${path.get_path()} already installed`);
+			(prefs.getLogger?.() ?? console).error(`Highlight.js module ${path.get_path()} already installed`);
 			return false;
 		}
 
@@ -259,8 +259,7 @@ async function downloadHljsModule(
 		// Check integrity
 		const sha512 = GLib.compute_checksum_for_bytes(GLib.ChecksumType.SHA512, data);
 		if (sha512 !== hash) {
-			prefs
-				.getLogger()
+			(prefs.getLogger?.() ?? console)
 				.error(
 					`Highlight.js module ${path.get_path()} integrity check failed\nExpected: ${hash}\nActual: ${sha512}`,
 				);
@@ -274,7 +273,7 @@ async function downloadHljsModule(
 		await path.replace_contents_async(data, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, cancellable);
 		return true;
 	} catch (error) {
-		prefs.getLogger().error(error);
+		(prefs.getLogger?.() ?? console).error(error);
 		return false;
 	}
 }
@@ -283,7 +282,7 @@ async function downloadHljs(prefs: ExtensionPreferences, cancellable: Gio.Cancel
 	const path = getHljsPath(prefs);
 	let prefUrl = null;
 	for (const url of HljsUrls) {
-		if (prefUrl) prefs.getLogger().warn(`Failed to download highlight.js from '${prefUrl}'. Trying next cdn`);
+		if (prefUrl) (prefs.getLogger?.() ?? console).warn(`Failed to download highlight.js from '${prefUrl}'. Trying next cdn`);
 		prefUrl = url;
 
 		// eslint-disable-next-line no-await-in-loop
@@ -292,7 +291,7 @@ async function downloadHljs(prefs: ExtensionPreferences, cancellable: Gio.Cancel
 		}
 	}
 
-	prefs.getLogger().error(`Failed to download highlight.js from '${prefUrl}'`);
+	(prefs.getLogger?.() ?? console).error(`Failed to download highlight.js from '${prefUrl}'`);
 	return false;
 }
 
@@ -306,8 +305,7 @@ export async function downloadHljsLanguage(
 	let prefUrl = null;
 	for (const url of getHljsLanguageUrls(language)) {
 		if (prefUrl)
-			prefs
-				.getLogger()
+			(prefs.getLogger?.() ?? console)
 				.warn(`Failed to download highlight.js language '${language}' from '${prefUrl}'. Trying next cdn`);
 		prefUrl = url;
 
@@ -317,7 +315,7 @@ export async function downloadHljsLanguage(
 		}
 	}
 
-	prefs.getLogger().error(`Failed to download highlight.js language '${language}' from '${prefUrl}'`);
+	(prefs.getLogger?.() ?? console).error(`Failed to download highlight.js language '${language}' from '${prefUrl}'`);
 	return false;
 }
 
@@ -372,8 +370,7 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 				window.add_toast(toast);
 
 				// Show spinner
-				const spinner = new Gtk.Image();
-				spinner.paintable = new Adw.SpinnerPaintable({ widget: spinner });
+				const spinner = new Gtk.Spinner({ spinning: true });
 				this.child = spinner;
 				this.remove_css_class('warning');
 
@@ -447,7 +444,7 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 				if (libgda) this.deleteItem('libgda');
 				this.notify('libgda');
 			})
-			.catch(() => prefs.getLogger().warn('Libgda check failed'));
+			.catch(() => (prefs.getLogger?.() ?? console).warn('Libgda check failed'));
 
 		checkGSound()
 			.then((gsound) => {
@@ -455,7 +452,7 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 				if (gsound) this.deleteItem('gsound');
 				this.notify('gsound');
 			})
-			.catch(() => prefs.getLogger().warn('GSound check failed'));
+			.catch(() => (prefs.getLogger?.() ?? console).warn('GSound check failed'));
 
 		checkHighlightJS(prefs)
 			.then((hljs) => {
@@ -472,7 +469,7 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 
 				this.notify('hljs');
 			})
-			.catch(() => prefs.getLogger().warn('Highlight.js check failed'));
+			.catch(() => (prefs.getLogger?.() ?? console).warn('Highlight.js check failed'));
 	}
 
 	get libgda(): boolean {

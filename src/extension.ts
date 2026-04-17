@@ -1,7 +1,7 @@
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
 
-import { ConsoleLike, Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
+import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
 import type { HLJSApi } from 'highlight.js';
 import type { LanguageFn } from 'highlight.js';
@@ -21,7 +21,7 @@ import { ClipboardIndicator } from './lib/ui/indicator.js';
 
 export default class CopyousExtension extends Extension {
 	public settings!: Gio.Settings;
-	public logger!: ConsoleLike;
+	public logger!: { log(...a: unknown[]): void; info(...a: unknown[]): void; warn(...a: unknown[]): void; error(...a: unknown[]): void };
 
 	public hljs: HLJSApi | null | undefined;
 	private hljsMonitor: Gio.FileMonitor | undefined;
@@ -50,7 +50,7 @@ export default class CopyousExtension extends Extension {
 		this.settings = this.getSettings();
 		migrateSettings(this.settings);
 
-		this.logger = this.getLogger();
+		this.logger = this.getLogger?.() ?? console;
 		const error = this.logger.error.bind(this.logger);
 
 		// Highlight.js
@@ -310,7 +310,7 @@ export default class CopyousExtension extends Extension {
 			const environment = GLib.get_environ();
 			const settings = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_SCHEMA');
 			if (settings) {
-				this.getLogger().log('Using debug schema');
+				(this.getLogger?.() ?? console).log('Using debug schema');
 				schema ??= this.metadata['settings-schema'] + '.debug';
 			}
 

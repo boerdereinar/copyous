@@ -75,7 +75,7 @@ export class ClipboardItem extends St.Button {
 
 		this._content = new St.BoxLayout({
 			style_class: 'clipboard-item-content',
-			orientation: Clutter.Orientation.VERTICAL,
+			vertical: true,
 			x_expand: true,
 			y_expand: true,
 			clip_to_allocation: true,
