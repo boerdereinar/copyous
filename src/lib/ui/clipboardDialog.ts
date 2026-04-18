@@ -17,6 +17,7 @@ import type CopyousExtension from '../../extension.js';
 import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
+import { OpenClipboardDialogBehavior } from '../common/settings.js';
 import { ClipboardEntry } from '../database/database.js';
 import { VERSION } from '../misc/compatibility.js';
 import { ClipboardScrollView } from './clipboardScrollView.js';
@@ -34,14 +35,6 @@ import { CenterBox, CollapsibleHeaderLayout, FitConstraint } from './layout.js';
 import { SearchEntry, SearchQuery } from './searchEntry.js';
 
 const ANIMATION_TIME = 150;
-
-export const OpenClipboardDialogBehavior = {
-	Toggle: 0,
-	OpenOrSelectNext: 1,
-} as const;
-
-export type OpenClipboardDialogBehavior =
-	(typeof OpenClipboardDialogBehavior)[keyof typeof OpenClipboardDialogBehavior];
 
 @registerClass()
 class IncognitoButton extends St.Button {
@@ -621,7 +614,7 @@ export class ClipboardDialog extends St.Widget {
 	}
 
 	public dialogShortcut() {
-		const behavior = this.ext.settings.get_enum('open-clipboard-dialog-behavior') as OpenClipboardDialogBehavior;
+		const behavior = this.ext.settings.get_enum('open-clipboard-dialog-behavior');
 		if (behavior === OpenClipboardDialogBehavior.Toggle) {
 			this.toggle();
 		} else if (behavior === OpenClipboardDialogBehavior.OpenOrSelectNext) {

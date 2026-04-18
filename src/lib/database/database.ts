@@ -1,8 +1,9 @@
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 
-import { ClipboardHistory, ItemType, Tag } from '../common/constants.js';
+import { ItemType, Tag } from '../common/constants.js';
 import { int32ParamSpec, registerClass } from '../common/gjs.js';
+import { ClipboardHistory } from '../common/settings.js';
 
 /**
  * Metadata.

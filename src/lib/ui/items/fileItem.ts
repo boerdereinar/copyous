@@ -11,12 +11,11 @@ import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { globToRegex } from '../../common/glob.js';
 import { Icon } from '../../common/icons.js';
+import { FileItemSettings, FilePreviewType, FilePreviewVisibility } from '../../common/settings.js';
 import { ClipboardEntry } from '../../database/database.js';
 import { ContentInfo, createFileInfo } from '../components/contentInfo.js';
 import {
-	BackgroundSize,
 	ContentPreview,
-	FilePreviewType,
 	FileType,
 	ImagePreview,
 	TextPreview,
@@ -32,19 +31,9 @@ export function formatFile(file: Gio.File): string {
 	return relative !== null ? `~/${relative}` : file.get_path()!;
 }
 
-export const FilePreviewVisibility = {
-	FilePreviewOnly: 0,
-	FileInfoOnly: 1,
-	FilePreviewOrFileInfo: 2,
-	FilePreviewAndFileInfo: 3,
-	Hidden: 4,
-} as const;
-
-export type FilePreviewVisibility = (typeof FilePreviewVisibility)[keyof typeof FilePreviewVisibility];
-
 @registerClass()
 export class FileItem extends ClipboardItem {
-	private readonly fileItemSettings: Gio.Settings;
+	private readonly fileItemSettings: FileItemSettings;
 
 	private _filePreviewVisibility: FilePreviewVisibility = FilePreviewVisibility.Hidden;
 	private _filePreviewTypes: FilePreviewType = FilePreviewType.All;
@@ -88,10 +77,8 @@ export class FileItem extends ClipboardItem {
 	}
 
 	private async updateFilePreview() {
-		this._filePreviewVisibility = this.fileItemSettings.get_enum(
-			'file-preview-visibility',
-		) as FilePreviewVisibility;
-		this._filePreviewTypes = this.fileItemSettings.get_flags('file-preview-types') as FilePreviewType;
+		this._filePreviewVisibility = this.fileItemSettings.get_enum('file-preview-visibility');
+		this._filePreviewTypes = this.fileItemSettings.get_flags('file-preview-types');
 		this._filePreviewExclusionPatterns = this.fileItemSettings.get_strv('file-preview-exclusion-patterns');
 
 		if (this._filePreviewExclusionPatterns.length > 0) {
@@ -163,7 +150,7 @@ export class FileItem extends ClipboardItem {
 				this._filePreview.showLineNumbers = this.fileItemSettings.get_boolean('show-line-numbers');
 				this._filePreview.tabWidth = this.ext.settings.get_int('tab-width');
 			} else if (this._filePreview instanceof ImagePreview) {
-				this._filePreview.backgroundSize = this.fileItemSettings.get_enum('background-size') as BackgroundSize;
+				this._filePreview.backgroundSize = this.fileItemSettings.get_enum('background-size');
 			}
 		}
 	}

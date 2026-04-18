@@ -1,8 +1,8 @@
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 
-import { ClipboardHistory } from './constants.js';
 import { registerClass } from './gjs.js';
+import { ClipboardHistory } from './settings.js';
 
 const DBusInterfaceXml = `
 <node>

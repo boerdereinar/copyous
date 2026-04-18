@@ -11,15 +11,8 @@ import { Extension, gettext as _, ngettext } from 'resource:///org/gnome/shell/e
 import type CopyousExtension from '../../../extension.js';
 import { enumParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
+import { TextCountMode } from '../../common/settings.js';
 import { FileType } from './contentPreview.js';
-
-export const TextCountMode = {
-	Characters: 0,
-	Words: 1,
-	Lines: 2,
-} as const;
-
-export type TextCountMode = (typeof TextCountMode)[keyof typeof TextCountMode];
 
 function formatBytes(bytes: number): [string, string] {
 	const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];

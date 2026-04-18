@@ -1,10 +1,10 @@
 import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
 import { registerClass } from '../common/gjs.js';
 import { Icon } from '../common/icons.js';
+import { KeysWithValue, SettingsKeys, TypedSettings } from '../common/settings.js';
 
 @registerClass({
 	Properties: {
@@ -46,7 +46,11 @@ interface Row {
 	add_suffix(child: Gtk.Widget): void;
 }
 
-export function makeResettable<T extends Row>(row: T, settings: Gio.Settings, ...keys: string[]): T {
+export function makeResettable<
+	TRow extends Row,
+	T,
+	TEnum extends { [K in KeysWithValue<T, 'enum'> | KeysWithValue<T, 'flags'>]: unknown },
+>(row: TRow, settings: TypedSettings<T, TEnum>, ...keys: SettingsKeys<T>[]): TRow {
 	const defaultValues = keys.map((key) => settings.get_default_value(key));
 	if (defaultValues.some((value) => value === null)) return row;
 

@@ -9,18 +9,11 @@ import type CopyousExtension from '../../../extension.js';
 import { ActiveState } from '../../common/constants.js';
 import { flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
+import { MiddleClickAction } from '../../common/settings.js';
 import { ClipboardEntry } from '../../database/database.js';
 import { Shortcut } from '../../misc/shortcuts.js';
 import { SearchQuery } from '../searchEntry.js';
-import { ClipboardItemHeader, HeaderControlsVisibility } from './clipboardItemHeader.js';
-
-export const MiddleClickAction = {
-	None: 0,
-	Pin: 1,
-	Delete: 2,
-} as const;
-
-export type MiddleClickAction = (typeof MiddleClickAction)[keyof typeof MiddleClickAction];
+import { ClipboardItemHeader } from './clipboardItemHeader.js';
 
 @registerClass({
 	Properties: {
@@ -169,7 +162,7 @@ export class ClipboardItem extends St.Button {
 	}
 
 	private updateMiddleClickAction() {
-		this._middleClickAction = this.ext.settings.get_enum('middle-click-action') as MiddleClickAction;
+		this._middleClickAction = this.ext.settings.get_enum('middle-click-action');
 		if (this._middleClickAction === MiddleClickAction.None) {
 			this.button_mask &= ~St.ButtonMask.TWO;
 		} else {
@@ -181,9 +174,7 @@ export class ClipboardItem extends St.Button {
 		const show = this.ext.settings.get_boolean('show-header');
 		this._header.headerVisible = show;
 		this._header.showTitle = this.ext.settings.get_boolean('show-item-title');
-		this._header.controlsVisibility = this.ext.settings.get_enum(
-			'header-controls-visibility',
-		) as HeaderControlsVisibility;
+		this._header.controlsVisibility = this.ext.settings.get_enum('header-controls-visibility');
 
 		if (show) {
 			this.remove_style_class_name('no-header');

@@ -1,8 +1,9 @@
 import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
 import { CharacterItemCustomization } from './items/characterItemCustomization.js';
 import { CodeItemCustomization } from './items/codeItemCustomization.js';
@@ -17,7 +18,7 @@ import { TextItemCustomization } from './items/textItemCustomization.js';
 	},
 })
 export class ItemsCustomization extends Adw.PreferencesGroup {
-	constructor(prefs: ExtensionPreferences, window: Adw.PreferencesWindow) {
+	constructor(prefs: Preferences, window: Adw.PreferencesWindow) {
 		super({
 			title: _('Items'),
 		});

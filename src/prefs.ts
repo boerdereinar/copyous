@@ -9,7 +9,7 @@ import Gtk from 'gi://Gtk';
 import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 import { Icon } from './lib/common/icons.js';
-import { migrateSettings } from './lib/common/settings.js';
+import { CopyousSettings, migrateSettings } from './lib/common/settings.js';
 import { ActionsPage } from './lib/preferences/actions/actionsPage.js';
 import { DialogCustomization } from './lib/preferences/customization/dialogCustomization.js';
 import { HeaderCustomization } from './lib/preferences/customization/headerCustomization.js';
@@ -150,16 +150,16 @@ export default class Preferences extends ExtensionPreferences {
 	}
 
 	/* DEBUG-ONLY */
-	override getSettings(schema?: string): Gio.Settings {
+	override getSettings(schema?: string): Gio.Settings & CopyousSettings {
 		try {
 			const environment = GLib.get_environ();
 			const settings = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_SCHEMA');
 			if (settings) schema ??= this.metadata['settings-schema'] + '.debug';
 
-			return super.getSettings(schema);
+			return super.getSettings(schema) as Gio.Settings & CopyousSettings;
 		} catch {
 			// Fallback for when debug schema does not exist
-			return super.getSettings();
+			return super.getSettings() as Gio.Settings & CopyousSettings;
 		}
 	}
 }

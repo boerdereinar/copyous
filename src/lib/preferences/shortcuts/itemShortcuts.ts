@@ -2,16 +2,17 @@ import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import { bind_enum } from '../../common/settings.js';
+import { CopyousSettings, bind_enum } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 import { ShortcutRow } from './shortcutRow.js';
 
 @registerClass()
 export class ItemShortcuts extends Adw.PreferencesGroup {
-	constructor(prefs: ExtensionPreferences) {
+	constructor(prefs: Preferences) {
 		super({
 			title: _('Item'),
 		});
@@ -40,7 +41,7 @@ export class ItemShortcuts extends Adw.PreferencesGroup {
 		this.add(middleClickAction);
 
 		// Bind properties
-		const settings = prefs.getSettings();
+		const settings: CopyousSettings = prefs.getSettings();
 		settings.bind('pin-item-shortcut', pinItem, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('delete-item-shortcut', deleteItem, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('edit-item-shortcut', editItem, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
@@ -59,7 +60,7 @@ export class ItemShortcuts extends Adw.PreferencesGroup {
 
 @registerClass()
 export class ItemActivationShortcuts extends Adw.PreferencesGroup {
-	constructor(prefs: ExtensionPreferences) {
+	constructor(prefs: Preferences) {
 		super();
 
 		const swapCopyPasteRow = new Adw.SwitchRow({
@@ -84,7 +85,7 @@ export class ItemActivationShortcuts extends Adw.PreferencesGroup {
 			}
 		});
 
-		const settings = prefs.getSettings();
+		const settings: CopyousSettings = prefs.getSettings();
 		settings.bind('swap-copy-shortcut', swapCopyPasteRow, 'active', null);
 	}
 }

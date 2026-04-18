@@ -1,20 +1,47 @@
 import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
+import {
+	ChildKeys,
+	FilePreviewVisibility,
+	HeaderControlsVisibility,
+	Orientation,
+	Position,
+	Settings,
+	SettingsTypes,
+	ValueTypes,
+} from '../../common/settings.js';
 
-type ValueTypes = 'boolean' | 'double' | 'enum' | 'flags' | 'int' | 'string';
+type ValueOf<T> = T[keyof T];
+
+type SettingsKey = Extract<ValueOf<typeof Settings>, string>;
+type ChildKey = ValueOf<typeof ChildKeys>;
+type ChildKeyMap = {
+	[ChildKeys.TextItem]: Extract<ValueOf<typeof Settings.TextItem>, string>;
+	[ChildKeys.CodeItem]: Extract<ValueOf<typeof Settings.CodeItem>, string>;
+	[ChildKeys.ImageItem]: Extract<ValueOf<typeof Settings.ImageItem>, string>;
+	[ChildKeys.FileItem]: Extract<ValueOf<typeof Settings.FileItem>, string>;
+	[ChildKeys.LinkItem]: Extract<ValueOf<typeof Settings.LinkItem>, string>;
+	[ChildKeys.CharacterItem]: Extract<ValueOf<typeof Settings.CharacterItem>, string>;
+	[ChildKeys.Theme]: Extract<ValueOf<typeof Settings.Theme>, string>;
+};
+
+type SettingsMap = Partial<Record<SettingsKey, unknown>> & {
+	[K in ChildKey]?: Partial<Record<ChildKeyMap[K], unknown>>;
+};
 
 abstract class Profile {
 	private readonly _settings: Gio.Settings;
-	private _values: Map<string, [unknown, ValueTypes] | Map<string, [unknown, ValueTypes]>> = new Map();
+	private _values: SettingsMap = {};
 	private _invalidValues: Set<string> = new Set();
 
 	private _signals: (() => void)[] = [];
 
-	constructor(prefs: ExtensionPreferences) {
+	constructor(prefs: Preferences) {
 		this._settings = prefs.getSettings();
 
 		this.initProfile();
@@ -27,16 +54,15 @@ abstract class Profile {
 
 	protected abstract initProfile(): void;
 
-	protected addSetting(child: string | null, key: string, value: unknown, type: ValueTypes) {
+	protected addSetting<K extends SettingsKey>(child: null, key: K, value: unknown): void;
+	protected addSetting<C extends ChildKey, K extends ChildKeyMap[C]>(child: C, key: K, value: unknown): void;
+	protected addSetting(child: ChildKey | null, key: string, value: unknown) {
 		if (child) {
-			let map = this._values.get(child);
-			if (!(map instanceof Map)) {
-				this._values.set(child, (map = new Map()));
-			}
-
-			map.set(key, [value, type]);
+			this._values[child] ??= {};
+			const values = this._values[child] as Partial<Record<string, unknown>>;
+			values[key] = value;
 		} else {
-			this._values.set(key, [value, type]);
+			this._values[key as SettingsKey] = value;
 		}
 	}
 
@@ -47,14 +73,13 @@ abstract class Profile {
 	public activate() {
 		this._invalidValues.clear();
 
-		for (const [key, valueOrMap] of this._values) {
-			if (valueOrMap instanceof Map) {
-				for (const [subkey, [value, type]] of valueOrMap) {
-					this.setValue(key, subkey, value, type);
+		for (const [key, valueOrChild] of Object.entries(this._values)) {
+			if (typeof valueOrChild === 'object' && !Array.isArray(valueOrChild)) {
+				for (const [subkey, value] of Object.entries(valueOrChild as object)) {
+					this.setValue(key as ChildKey, subkey, value);
 				}
 			} else {
-				const [value, type] = valueOrMap;
-				this.setValue(null, key, value, type);
+				this.setValue(null, key, valueOrChild);
 			}
 		}
 	}
@@ -64,24 +89,22 @@ abstract class Profile {
 	}
 
 	private checkSettings() {
-		for (const [key, valueOrMap] of this._values) {
-			if (valueOrMap instanceof Map) {
-				for (const [subkey, [value, type]] of valueOrMap) {
-					this.checkSetting(key, subkey, value, type);
-					this._settings
-						.get_child(key)
-						.connect(`changed::${subkey}`, () => this.checkSetting(key, subkey, value, type));
+		for (const [key, valueOrChild] of Object.entries(this._values)) {
+			if (typeof valueOrChild === 'object' && !Array.isArray(valueOrChild)) {
+				const child = this._settings.get_child(key);
+				for (const [subkey, value] of Object.entries(valueOrChild as object)) {
+					this.checkSetting(key as ChildKey, subkey, value);
+					child.connect(`changed::${subkey}`, () => this.checkSetting(key as ChildKey, subkey, value));
 				}
 			} else {
-				const [value, type] = valueOrMap;
-				this.checkSetting(null, key, value, type);
-				this._settings.connect(`changed::${key}`, () => this.checkSetting(null, key, value, type));
+				this.checkSetting(null, key, valueOrChild);
+				this._settings.connect(`changed::${key}`, () => this.checkSetting(null, key, valueOrChild));
 			}
 		}
 	}
 
-	private checkSetting(child: string | null, key: string, value: unknown, type: ValueTypes): boolean {
-		if (this.getValue(child, key, type) === value) {
+	private checkSetting(child: ChildKey | null, key: string, value: unknown): boolean {
+		if (this.getValue(child, key) === value) {
 			if (this._invalidValues.delete(`${child}:${key}`) && this.active) this.notifyActive();
 			return true;
 		} else {
@@ -91,8 +114,9 @@ abstract class Profile {
 		}
 	}
 
-	private getValue(child: string | null, key: string, type: ValueTypes): unknown {
+	private getValue(child: ChildKey | null, key: string): unknown {
 		const settings = child ? this._settings.get_child(child) : this._settings;
+		const type = (child ? SettingsTypes[child][key as never] : SettingsTypes[key as SettingsKey]) as ValueTypes;
 		switch (type) {
 			case 'boolean':
 				return settings.get_boolean(key);
@@ -106,11 +130,14 @@ abstract class Profile {
 				return settings.get_int(key);
 			case 'string':
 				return settings.get_string(key);
+			case 'strv':
+				return settings.get_strv(key);
 		}
 	}
 
-	private setValue(child: string | null, key: string, value: unknown, type: ValueTypes) {
+	private setValue(child: ChildKey | null, key: string, value: unknown): void {
 		const settings = child ? this._settings.get_child(child) : this._settings;
+		const type = (child ? SettingsTypes[child][key as never] : SettingsTypes[key as SettingsKey]) as ValueTypes;
 		switch (type) {
 			case 'boolean':
 				settings.set_boolean(key, value as boolean);
@@ -136,47 +163,47 @@ abstract class Profile {
 
 class DefaultProfile extends Profile {
 	protected override initProfile(): void {
-		this.addSetting(null, 'show-at-pointer', false, 'boolean');
-		this.addSetting(null, 'clipboard-orientation', 0, 'enum'); // horizontal
-		this.addSetting(null, 'clipboard-position-vertical', 0, 'enum'); // top
-		this.addSetting(null, 'clipboard-position-horizontal', 3, 'enum'); // fill
-		this.addSetting(null, 'clipboard-size', 500, 'int');
-		this.addSetting(null, 'auto-hide-search', false, 'boolean');
-		this.addSetting(null, 'item-width', 250, 'int');
-		this.addSetting(null, 'item-height', 170, 'int');
-		this.addSetting(null, 'dynamic-item-height', false, 'boolean');
-		this.addSetting(null, 'show-header', true, 'boolean');
-		this.addSetting(null, 'header-controls-visibility', 0, 'enum'); // visible
+		this.addSetting(null, 'show-at-pointer', false);
+		this.addSetting(null, 'clipboard-orientation', Orientation.Horizontal);
+		this.addSetting(null, 'clipboard-position-vertical', Position.Top);
+		this.addSetting(null, 'clipboard-position-horizontal', Position.Fill);
+		this.addSetting(null, 'clipboard-size', 500);
+		this.addSetting(null, 'auto-hide-search', false);
+		this.addSetting(null, 'item-width', 250);
+		this.addSetting(null, 'item-height', 170);
+		this.addSetting(null, 'dynamic-item-height', false);
+		this.addSetting(null, 'show-header', true);
+		this.addSetting(null, 'header-controls-visibility', HeaderControlsVisibility.Visible);
 
-		this.addSetting('file-item', 'file-preview-visibility', 2, 'enum'); // file-preview-or-file-info
+		this.addSetting('file-item', 'file-preview-visibility', FilePreviewVisibility.FilePreviewOrFileInfo);
 
-		this.addSetting('link-item', 'link-preview-orientation', 1, 'enum'); // vertical
+		this.addSetting('link-item', 'link-preview-orientation', Orientation.Vertical);
 	}
 }
 
 class CompactProfile extends Profile {
 	protected override initProfile(): void {
-		this.addSetting(null, 'show-at-pointer', true, 'boolean');
-		this.addSetting(null, 'clipboard-orientation', 1, 'enum'); // vertical
-		this.addSetting(null, 'clipboard-position-vertical', 3, 'enum'); // fill
-		this.addSetting(null, 'clipboard-position-horizontal', 0, 'enum'); // left
-		this.addSetting(null, 'clipboard-size', 500, 'int');
-		this.addSetting(null, 'auto-hide-search', true, 'boolean');
-		this.addSetting(null, 'item-width', 300, 'int');
-		this.addSetting(null, 'item-height', 100, 'int');
-		this.addSetting(null, 'dynamic-item-height', true, 'boolean');
-		this.addSetting(null, 'show-header', false, 'boolean');
-		this.addSetting(null, 'header-controls-visibility', 1, 'enum'); // visible on hover
+		this.addSetting(null, 'show-at-pointer', true);
+		this.addSetting(null, 'clipboard-orientation', Orientation.Vertical);
+		this.addSetting(null, 'clipboard-position-vertical', Position.Fill);
+		this.addSetting(null, 'clipboard-position-horizontal', Position.Left);
+		this.addSetting(null, 'clipboard-size', 500);
+		this.addSetting(null, 'auto-hide-search', true);
+		this.addSetting(null, 'item-width', 300);
+		this.addSetting(null, 'item-height', 100);
+		this.addSetting(null, 'dynamic-item-height', true);
+		this.addSetting(null, 'show-header', false);
+		this.addSetting(null, 'header-controls-visibility', HeaderControlsVisibility.VisibleOnHover);
 
-		this.addSetting('file-item', 'file-preview-visibility', 1, 'enum'); // file-info
+		this.addSetting('file-item', 'file-preview-visibility', FilePreviewVisibility.FileInfoOnly);
 
-		this.addSetting('link-item', 'link-preview-orientation', 0, 'enum'); // horizontal
+		this.addSetting('link-item', 'link-preview-orientation', Orientation.Horizontal);
 	}
 }
 
 @registerClass()
 export class Profiles extends Adw.PreferencesGroup {
-	constructor(prefs: ExtensionPreferences) {
+	constructor(prefs: Preferences) {
 		super({
 			title: _('Profiles'),
 			description: _('Choose between pre-defined profiles'),

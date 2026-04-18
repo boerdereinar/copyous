@@ -4,8 +4,9 @@ import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../../prefs.js';
 import { flagsParamSpec, registerClass } from '../../../common/gjs.js';
 import { Icon } from '../../../common/icons.js';
 import { bind_enum, bind_flags } from '../../../common/settings.js';
@@ -144,7 +145,7 @@ class FileExclusionsPage extends Adw.NavigationPage {
 	},
 })
 export class FileItemCustomization extends Adw.ExpanderRow {
-	constructor(prefs: ExtensionPreferences, window: Adw.PreferencesWindow) {
+	constructor(prefs: Preferences, window: Adw.PreferencesWindow) {
 		super({
 			title: _('File Item'),
 			subtitle: _('Configure file clipboard items'),

@@ -6,9 +6,9 @@ import { ConsoleLike, Extension } from 'resource:///org/gnome/shell/extensions/e
 import type { HLJSApi } from 'highlight.js';
 import type { LanguageFn } from 'highlight.js';
 
-import { ClipboardHistory, getDataPath, getHljsLanguages, getHljsPath } from './lib/common/constants.js';
+import { getDataPath, getHljsLanguages, getHljsPath } from './lib/common/constants.js';
 import { DbusService } from './lib/common/dbus.js';
-import { migrateSettings } from './lib/common/settings.js';
+import { ClipboardHistory, CopyousSettings, migrateSettings } from './lib/common/settings.js';
 import { SoundManager, tryCreateSoundManager } from './lib/common/sound.js';
 import { ClipboardEntry } from './lib/database/database.js';
 import { ClipboardEntryTracker } from './lib/database/entryTracker.js';
@@ -20,7 +20,7 @@ import { ClipboardDialog } from './lib/ui/clipboardDialog.js';
 import { ClipboardIndicator } from './lib/ui/indicator.js';
 
 export default class CopyousExtension extends Extension {
-	public settings!: Gio.Settings;
+	public settings!: CopyousSettings;
 	public logger!: ConsoleLike;
 
 	public hljs: HLJSApi | null | undefined;
@@ -305,7 +305,7 @@ export default class CopyousExtension extends Extension {
 	}
 
 	/* DEBUG-ONLY */
-	override getSettings(schema?: string): Gio.Settings {
+	override getSettings(schema?: string): Gio.Settings & CopyousSettings {
 		try {
 			const environment = GLib.get_environ();
 			const settings = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_SCHEMA');
@@ -314,10 +314,10 @@ export default class CopyousExtension extends Extension {
 				schema ??= this.metadata['settings-schema'] + '.debug';
 			}
 
-			return super.getSettings(schema);
+			return super.getSettings(schema) as Gio.Settings & CopyousSettings;
 		} catch {
 			// Fallback for when debug schema does not exist
-			return super.getSettings();
+			return super.getSettings() as Gio.Settings & CopyousSettings;
 		}
 	}
 }

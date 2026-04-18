@@ -2,9 +2,11 @@ import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
+import { CopyousSettings } from '../../common/settings.js';
 import { ShortcutRow } from './shortcutRow.js';
 
 const ShortcutLabel = ('ShortcutLabel' in Gtk && !('ShortcutLabel' in Adw) ? (Gtk as typeof Adw) : Adw).ShortcutLabel;
@@ -67,7 +69,7 @@ export class SearchNavigationShortcuts extends Adw.PreferencesGroup {
 
 @registerClass()
 export class SearchScrollShortcuts extends Adw.PreferencesGroup {
-	constructor(prefs: ExtensionPreferences) {
+	constructor(prefs: Preferences) {
 		super();
 
 		const swapScrollRow = new Adw.SwitchRow({
@@ -85,7 +87,7 @@ export class SearchScrollShortcuts extends Adw.PreferencesGroup {
 		swapScrollRow.bind_property('active', cycleItemTypeRow, 'show-ctrl', GObject.BindingFlags.DEFAULT);
 		swapScrollRow.bind_property('active', cycleItemTagRow, 'show-ctrl', GObject.BindingFlags.INVERT_BOOLEAN);
 
-		const settings = prefs.getSettings();
+		const settings: CopyousSettings = prefs.getSettings();
 		settings.bind('swap-scroll-shortcut', swapScrollRow, 'active', null);
 	}
 }

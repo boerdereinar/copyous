@@ -4,12 +4,13 @@ import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
-import { DatabaseBackend, getDataPath, getDefaultDatabaseFile } from '../../common/constants.js';
+import Preferences from '../../../prefs.js';
+import { getDataPath, getDefaultDatabaseFile } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { bind_enum } from '../../common/settings.js';
+import { CopyousSettings, DatabaseBackend, bind_enum } from '../../common/settings.js';
 import { GdaDialog, checkGda } from '../dependencies/dependencies.js';
 import { makeResettable } from '../utils.js';
 
@@ -45,7 +46,7 @@ class DatabaseBackendItem extends GObject.Object {
 	},
 })
 export class HistorySettings extends Adw.PreferencesGroup {
-	private readonly _settings: Gio.Settings;
+	private readonly _settings: CopyousSettings;
 
 	private _defaultDatabaseLocation: string;
 	private readonly _databaseBackend: Adw.ComboRow;
@@ -56,7 +57,7 @@ export class HistorySettings extends Adw.PreferencesGroup {
 	private _libgda: boolean = false;
 
 	constructor(
-		private prefs: ExtensionPreferences,
+		private prefs: Preferences,
 		private window: Adw.PreferencesWindow,
 	) {
 		super({

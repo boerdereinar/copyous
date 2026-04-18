@@ -1,14 +1,14 @@
 import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
 import Gdk from 'gi://Gdk';
-import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../prefs.js';
 import { DefaultColors } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
-import { bind_enum } from '../../common/settings.js';
+import { CopyousSettings, ThemeSettings, bind_enum } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 
 @registerClass({
@@ -43,7 +43,7 @@ class ColorRow extends Adw.ActionRow {
 	}
 }
 
-function bind_color(settings: Gio.Settings, key: keyof typeof DefaultColors, target: ColorRow) {
+function bind_color(settings: ThemeSettings, key: keyof typeof DefaultColors, target: ColorRow) {
 	function setColor() {
 		const colorScheme = Math.min(settings.get_enum('custom-color-scheme'), DefaultColors[key].length - 1);
 		const color = settings.get_string(key);
@@ -64,7 +64,7 @@ function bind_color(settings: Gio.Settings, key: keyof typeof DefaultColors, tar
 
 @registerClass()
 export class ThemeCustomization extends Adw.PreferencesGroup {
-	constructor(prefs: ExtensionPreferences) {
+	constructor(prefs: Preferences) {
 		super({
 			title: _('Theme'),
 		});
@@ -129,7 +129,7 @@ export class ThemeCustomization extends Adw.PreferencesGroup {
 		this.add(searchBgColor);
 
 		// Bind properties
-		const settings = prefs.getSettings().get_child('theme');
+		const settings = (prefs.getSettings() as CopyousSettings).get_child('theme');
 
 		bind_enum(settings, 'theme', theme, 'selected');
 		bind_enum(settings, 'color-scheme', colorScheme, 'selected');

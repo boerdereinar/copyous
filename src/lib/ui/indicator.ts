@@ -16,9 +16,10 @@ import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 
 import type CopyousExtension from '../../extension.js';
 import { Color } from '../common/color.js';
-import { ClipboardHistory, ItemType } from '../common/constants.js';
+import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
+import { ClipboardHistory } from '../common/settings.js';
 import { ClipboardEntry } from '../database/database.js';
 import { VERSION } from '../misc/compatibility.js';
 

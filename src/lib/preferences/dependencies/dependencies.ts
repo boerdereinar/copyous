@@ -7,6 +7,7 @@ import Soup from 'gi://Soup?version=3.0';
 
 import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../prefs.js';
 import {
 	HljsSha512,
 	HljsUrls,
@@ -17,6 +18,7 @@ import {
 } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
+import { CopyousSettings } from '../../common/settings.js';
 
 export async function checkGda(prefs: ExtensionPreferences): Promise<boolean> {
 	try {
@@ -341,7 +343,7 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 
 	private readonly _cancellable: Gio.Cancellable = new Gio.Cancellable();
 
-	constructor(prefs: ExtensionPreferences, window: Adw.PreferencesWindow) {
+	constructor(prefs: Preferences, window: Adw.PreferencesWindow) {
 		super({
 			icon_name: Icon.Warning,
 			css_classes: ['flat'],
@@ -398,7 +400,7 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 						this.deleteItem('hljs');
 
 						// Re-enable hljs dialog for if hljs was uninstalled for some reason
-						const settings = prefs.getSettings();
+						const settings: CopyousSettings = prefs.getSettings();
 						settings.set_boolean('disable-hljs-dialog', false);
 					}
 					this.notify('hljs');
@@ -409,7 +411,7 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 				}
 			} else if (response === 'cancel') {
 				// Disable hljs dialog from showing up since hljs is not installed
-				const settings = prefs.getSettings();
+				const settings: CopyousSettings = prefs.getSettings();
 				settings.set_boolean('disable-hljs-dialog', true);
 			}
 		});
@@ -464,7 +466,7 @@ export class DependenciesWarningButton extends Gtk.MenuButton {
 					this.deleteItem('hljs');
 				} else {
 					// Open dialog for the first time if hljs is not installed
-					const settings = prefs.getSettings();
+					const settings: CopyousSettings = prefs.getSettings();
 					if (!settings.get_boolean('disable-hljs-dialog')) {
 						hljsDialog.present(window);
 					}
