@@ -2,13 +2,14 @@ import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../../prefs.js';
 import { registerClass } from '../../../common/gjs.js';
 
 @registerClass()
 export class CharacterItemCustomization extends Adw.ExpanderRow {
-	constructor(prefs: ExtensionPreferences) {
+	constructor(prefs: Preferences) {
 		super({
 			title: _('Character Item'),
 			subtitle: _('Configure character clipboard items'),

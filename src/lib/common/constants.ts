@@ -4,6 +4,8 @@ import Gio from 'gi://Gio';
 import type { ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
+import { DatabaseBackend } from './settings.js';
+
 export const ItemType = {
 	Text: 'Text',
 	Code: 'Code',
@@ -63,23 +65,6 @@ export const ActiveState = {
 } as const;
 
 export type ActiveState = (typeof ActiveState)[keyof typeof ActiveState];
-
-export const DatabaseBackend = {
-	Default: 0,
-	Memory: 1,
-	Sqlite: 2,
-	Json: 3,
-};
-
-export type DatabaseBackend = (typeof DatabaseBackend)[keyof typeof DatabaseBackend];
-
-export const ClipboardHistory = {
-	Clear: 0,
-	KeepPinnedAndTagged: 1,
-	KeepAll: 2,
-} as const;
-
-export type ClipboardHistory = (typeof ClipboardHistory)[keyof typeof ClipboardHistory];
 
 export const DefaultColors = {
 	'custom-bg-color': ['rgb(54,54,58)', 'rgb(250,250,251)'],

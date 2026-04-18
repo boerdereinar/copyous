@@ -6,9 +6,10 @@ import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.j
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
+import { ImageItemSettings } from '../../common/settings.js';
 import { ClipboardEntry } from '../../database/database.js';
 import { ContentInfo, createFileInfo } from '../components/contentInfo.js';
-import { BackgroundSize, FileType, ImagePreview } from '../components/contentPreview.js';
+import { FileType, ImagePreview } from '../components/contentPreview.js';
 import { SearchQuery } from '../searchEntry.js';
 import { ClipboardItem } from './clipboardItem.js';
 
@@ -24,7 +25,7 @@ import { ClipboardItem } from './clipboardItem.js';
 	},
 })
 export class ImageItem extends ClipboardItem {
-	private readonly imageItemSettings: Gio.Settings;
+	private readonly imageItemSettings: ImageItemSettings;
 
 	private _showImageInfo: boolean = false;
 
@@ -78,7 +79,7 @@ export class ImageItem extends ClipboardItem {
 
 	private updateSettings() {
 		this.showImageInfo = this.imageItemSettings.get_boolean('show-image-info');
-		this._imagePreview.backgroundSize = this.imageItemSettings.get_enum('background-size') as BackgroundSize;
+		this._imagePreview.backgroundSize = this.imageItemSettings.get_enum('background-size');
 	}
 
 	private configureImageInfo() {

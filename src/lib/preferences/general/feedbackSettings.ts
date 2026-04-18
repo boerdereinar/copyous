@@ -3,10 +3,12 @@ import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
+import { CopyousSettings } from '../../common/settings.js';
 import { Sound, SoundManager } from '../../common/sound.js';
 import { makeResettable } from '../utils.js';
 
@@ -216,7 +218,7 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 
 	private readonly _soundLabel: Gtk.Label;
 
-	constructor(prefs: ExtensionPreferences, window: Adw.PreferencesWindow) {
+	constructor(prefs: Preferences, window: Adw.PreferencesWindow) {
 		super({
 			title: _('Feedback'),
 		});
@@ -266,7 +268,7 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 		playSound.connect('activated', () => this._soundChooserPage && window.push_subpage(this._soundChooserPage));
 
 		// Bind properties
-		const settings = prefs.getSettings();
+		const settings: CopyousSettings = prefs.getSettings();
 		settings.bind('show-indicator', showIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('show-content-indicator', showContentIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('wiggle-indicator', wiggleIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);

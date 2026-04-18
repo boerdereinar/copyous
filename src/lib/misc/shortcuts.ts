@@ -106,8 +106,12 @@ export class ShortcutManager extends GObject.Object {
 	}
 
 	private registerGlobalShortcut(key: Shortcut, signal: string) {
-		Main.wm.addKeybinding(key, this.ext.settings, Meta.KeyBindingFlags.NONE, Shell.ActionMode.ALL, () =>
-			this.emit(signal),
+		Main.wm.addKeybinding(
+			key,
+			this.ext.settings as Gio.Settings,
+			Meta.KeyBindingFlags.NONE,
+			Shell.ActionMode.ALL,
+			() => this.emit(signal),
 		);
 	}
 
@@ -116,7 +120,7 @@ export class ShortcutManager extends GObject.Object {
 	}
 
 	private registerShortcut(key: Shortcut) {
-		this._shortcuts[key] = new ShortcutBinding(this.ext.settings, key);
+		this._shortcuts[key] = new ShortcutBinding(this.ext.settings as Gio.Settings, key);
 	}
 
 	private keyPressEvent(_actor: Clutter.Actor, event: Clutter.Event) {

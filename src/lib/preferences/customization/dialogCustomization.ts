@@ -2,10 +2,11 @@ import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import { bind_enum } from '../../common/settings.js';
+import { CopyousSettings, bind_enum } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 
 @registerClass()
@@ -19,7 +20,7 @@ export class DialogCustomization extends Adw.PreferencesGroup {
 	private readonly _verticalPosition: Adw.ComboRow;
 	private readonly _size: Adw.SpinRow;
 
-	constructor(prefs: ExtensionPreferences) {
+	constructor(prefs: Preferences) {
 		super({
 			title: _('Dialog'),
 		});
@@ -123,7 +124,7 @@ export class DialogCustomization extends Adw.PreferencesGroup {
 		this.add(showScrollbar);
 
 		// Bind properties
-		const settings = prefs.getSettings();
+		const settings: CopyousSettings = prefs.getSettings();
 		settings.bind('show-at-pointer', this._showAtPointer, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('show-at-cursor', this._showAtCursor, 'active', Gio.SettingsBindFlags.DEFAULT);
 		bind_enum(settings, 'clipboard-orientation', this._orientation, 'selected');

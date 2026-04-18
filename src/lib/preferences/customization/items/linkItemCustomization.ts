@@ -4,8 +4,9 @@ import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../../prefs.js';
 import { registerClass } from '../../../common/gjs.js';
 import { Icon } from '../../../common/icons.js';
 import { bind_enum } from '../../../common/settings.js';
@@ -60,7 +61,7 @@ class LinkExclusionsPage extends Adw.NavigationPage {
 
 @registerClass()
 export class LinkItemCustomization extends Adw.ExpanderRow {
-	constructor(prefs: ExtensionPreferences, window: Adw.PreferencesWindow) {
+	constructor(prefs: Preferences, window: Adw.PreferencesWindow) {
 		super({
 			title: _('Link Item'),
 			subtitle: _('Configure link clipboard items'),

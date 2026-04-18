@@ -3,7 +3,8 @@ import type Gda from 'gi://Gda';
 import Gio from 'gi://Gio';
 
 import type CopyousExtension from '../../extension.js';
-import { ClipboardHistory, DatabaseBackend, ItemType, getDefaultDatabaseFile } from '../common/constants.js';
+import { ItemType, getDefaultDatabaseFile } from '../common/constants.js';
+import { ClipboardHistory, DatabaseBackend } from '../common/settings.js';
 import { getLinkImagePath } from '../misc/link.js';
 import { ClipboardEntry, Database, Metadata } from './database.js';
 import { GdaDatabase } from './gda.js';
@@ -177,7 +178,7 @@ export class ClipboardEntryTracker {
 	public async clear(history: ClipboardHistory | null = null) {
 		if (!this._database) return;
 
-		history ??= this.ext.settings.get_enum('clipboard-history') as ClipboardHistory;
+		history ??= this.ext.settings.get_enum('clipboard-history');
 		const deleted = await this._database.clear(history);
 		deleted.forEach((id) => this.deleteFromDatabase(id));
 	}

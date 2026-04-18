@@ -6,8 +6,8 @@ import St from 'gi://St';
 
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
+import { CustomColorScheme } from '../../common/settings.js';
 import { Language } from '../../database/database.js';
-import { ColorScheme } from '../../misc/theme.js';
 import { normalizeIndentation, trim } from './label.js';
 
 // https://gitlab.gnome.org/GNOME/gtksourceview/-/blob/master/data/styles/Adwaita-dark.xml
@@ -212,8 +212,8 @@ export interface CodeLabelConstructorProps {
  * @param colorScheme the color scheme
  * @param highlighted the highlighted highlight.js output
  */
-export function applyTheme(colorScheme: ColorScheme | undefined, highlighted: string): string {
-	const theme = colorScheme === ColorScheme.Light ? Light : Dark;
+export function applyTheme(colorScheme: CustomColorScheme | undefined, highlighted: string): string {
+	const theme = colorScheme === CustomColorScheme.Light ? Light : Dark;
 	return highlighted.replace(/class="([^"]*)"/gm, (_, classes: string) => {
 		if (!classes.startsWith('hljs-')) return '';
 
@@ -394,7 +394,8 @@ export class CodeLabel extends St.Label {
 
 		if (this.showLineNumbers && lines.length > 1) {
 			// Add line numbers
-			const color = this.ext.themeManager?.colorScheme === ColorScheme.Light ? Colors.dark_7 : Colors.light_1;
+			const color =
+				this.ext.themeManager?.colorScheme === CustomColorScheme.Light ? Colors.dark_7 : Colors.light_1;
 			const span = `<span color="${color}" alpha="50%">`;
 			text = lines.map((l, i) => `${span}${i.toString().padEnd(2, ' ')}</span> ${l}`).join('\n');
 		}
