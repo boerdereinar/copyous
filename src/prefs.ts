@@ -8,6 +8,7 @@ import Gtk from 'gi://Gtk';
 
 import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import { loadConfig } from './lib/common/actions.js';
 import { Icon } from './lib/common/icons.js';
 import { CopyousSettings, migrateSettings } from './lib/common/settings.js';
 import { ActionsPage } from './lib/preferences/actions/actionsPage.js';
@@ -123,7 +124,8 @@ export default class Preferences extends ExtensionPreferences {
 		shortcuts.add(new SearchScrollShortcuts(this));
 
 		// Actions page
-		const actions = new ActionsPage(this, window);
+		const config = await loadConfig(this);
+		const actions = new ActionsPage(this, window, config);
 		window.add(actions);
 
 		// Register icons

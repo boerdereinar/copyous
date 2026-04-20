@@ -67,6 +67,9 @@ lint-fix:
 	pnpm exec eslint src --ext .ts --fix
 	pnpm exec prettier src resources/css --write
 
+shexli: $(DIST_ZIP)
+	uv run python -m shexli $< --format json | pnpm tsx ./scripts/shexli/transform-output.ts
+
 # Localization
 resources/po/main.pot: $(SRC)
 	find src -name '*.ts' \
@@ -109,14 +112,19 @@ $(DIST_DIR)/metadata.json: resources/metadata.json | $(DIST_DIR)
 
 # TypeScript
 $(DIST_DIR)/extension.js: $(SRC) tsconfig.json | $(DIST_DIR)
-	pnpm exec tsc
-	@touch $@
 ifeq ($(RELEASE),1)
+	pnpm exec tsc --sourceMap false
+	@touch $@
 # Remove code blocks commented with /* DEBUG-ONLY */ or lines ending with // DEBUG-ONLY
 	find $(@D) -name '*.js' -exec perl -0777 -i -pe 's/^(\s*)\/\* DEBUG-ONLY \*\/(?:.|\n)*?^\1\}|\/\/ DEBUG-ONLY.*\n.*$$//gm' {} \;
 # Format code to make it easier for EGO reviewers
 	-pnpm exec eslint $(DIST_DIR) --config ./format.eslint.config.js --fix --cache --cache-location=$(DIST_DIR)/.eslintcache
 	pnpm exec prettier $(DIST_DIR) --ignore-path= --log-level=warn --write --cache --cache-location=$(DIST_DIR)/.prettiercache
+else
+	pnpm exec tsc
+	@touch $@
+# Move source maps to subdirectory
+	rsync -rv --include '*/' --exclude 'sourcemaps/**' --include '*.js.map' --exclude '*' --prune-empty-dirs --remove-source-files dist/ dist/sourcemaps/
 endif
 
 TSC := $(DIST_DIR)/extension.js

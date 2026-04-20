@@ -52,12 +52,17 @@ export class CodeItem extends ClipboardItem {
 
 		// Update label
 		this.entry.bind_property('content', this._code, 'code', GObject.BindingFlags.SYNC_CREATE);
-		this.entry.connect('notify::content', this.updateCodeInfo.bind(this));
-		this.entry.connect('notify::metadata', () => {
-			const m = { language: null, ...this.entry.metadata } as CodeMetadata;
-			this._code.language = m.language;
-			if (this._codeInfo) this._codeInfo.language = m.language?.name ?? null;
-		});
+		this.entry.connectObject(
+			'notify::content',
+			this.updateCodeInfo.bind(this),
+			'notify::metadata',
+			() => {
+				const m = { language: null, ...this.entry.metadata } as CodeMetadata;
+				this._code.language = m.language;
+				if (this._codeInfo) this._codeInfo.language = m.language?.name ?? null;
+			},
+			this,
+		);
 
 		this.updateCode();
 		this.updateCodeInfo();
@@ -92,6 +97,7 @@ export class CodeItem extends ClipboardItem {
 	override destroy() {
 		this.codeItemSettings.disconnectObject(this);
 		this.ext.settings.disconnectObject(this._code);
+		this.entry.disconnectObject(this);
 
 		super.destroy();
 	}

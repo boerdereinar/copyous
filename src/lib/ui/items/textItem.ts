@@ -41,7 +41,7 @@ export class TextItem extends ClipboardItem {
 		this.ext.settings.connectObject('changed::tab-width', this.updateText.bind(this), this._text);
 
 		entry.bind_property('content', this._text, 'label', GObject.BindingFlags.SYNC_CREATE);
-		entry.connect('notify::content', this.updateTextInfo.bind(this));
+		entry.connectObject('notify::content', this.updateTextInfo.bind(this));
 
 		this.updateText();
 		this.updateTextInfo();
@@ -68,6 +68,7 @@ export class TextItem extends ClipboardItem {
 	override destroy() {
 		this.textItemSettings.disconnectObject(this);
 		this.ext.settings.disconnectObject(this._text);
+		this.entry.disconnectObject(this);
 
 		super.destroy();
 	}

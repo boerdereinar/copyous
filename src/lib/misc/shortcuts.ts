@@ -97,12 +97,16 @@ export class ShortcutManager extends GObject.Object {
 		);
 
 		this._monitor = getActionsConfigPath(ext).monitor(Gio.FileMonitorFlags.NONE, null);
-		this._monitor.connect('changed', (_source, _file, _otherFile, eventType) => {
-			if (eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT) {
-				this.updateActions();
-			}
-		});
-		this.updateActions(true);
+		this._monitor.connectObject(
+			'changed',
+			async (_source: unknown, _file: unknown, _otherFile: unknown, eventType: Gio.FileMonitorEvent) => {
+				if (eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT) {
+					await this.updateActions();
+				}
+			},
+			this,
+		);
+		this.updateActions(true).catch(() => {});
 	}
 
 	private registerGlobalShortcut(key: Shortcut, signal: string) {
@@ -151,10 +155,10 @@ export class ShortcutManager extends GObject.Object {
 		this.notify('shift');
 	}
 
-	private updateActions(save: boolean = false) {
+	private async updateActions(save: boolean = false) {
 		this._actions = {};
 
-		const actions = loadConfig(this.ext, save);
+		const actions = await loadConfig(this.ext, save);
 		for (const action of actions.actions) {
 			if (instanceofActionSubmenu(action)) {
 				for (const subAction of action.actions) {
@@ -193,6 +197,7 @@ export class ShortcutManager extends GObject.Object {
 
 		this._shortcuts = {};
 		this._actor?.disconnectObject(this);
+		this._monitor?.disconnectObject(this);
 		this._monitor.cancel();
 	}
 }

@@ -568,47 +568,58 @@ export class ClipboardDialog extends St.Widget {
 		}
 
 		// Connect edit
-		item.connect('edit', () => this._clipboardItemMenu.edit(entry));
+		item.connectObject('edit', () => this._clipboardItemMenu.edit(entry), this);
 
 		// Connect item menu
-		item.connect('open-menu', (_, x: number, y: number, w: number, h: number) => {
-			// Connect the menu signal to update the hover state of the item and remove the signal when the menu is closed
-			const signalId = this._clipboardItemMenu.connect('open-state-changed', (_menu, state: boolean) => {
-				item.sync_hover();
-				if (!state) this._clipboardItemMenu.disconnect(signalId);
-				return true;
-			});
+		item.connectObject(
+			'open-menu',
+			(_: unknown, x: number, y: number, w: number, h: number) => {
+				// Connect the menu signal to update the hover state of the item and remove the signal when the menu is closed
+				const signalId = this._clipboardItemMenu.connect('open-state-changed', (_menu, state: boolean) => {
+					item.sync_hover();
+					if (!state) this._clipboardItemMenu.disconnect(signalId);
+					return true;
+				});
 
-			this._clipboardItemMenu.arrowAlignment = w === 0 && h === 0 ? 0 : 0.5;
+				this._clipboardItemMenu.arrowAlignment = w === 0 && h === 0 ? 0 : 0.5;
 
-			// Slightly offset the menu to allow immediately clicking and closing the menu
-			if (w === 0 && h === 0) {
-				x++;
-				y++;
-			}
+				// Slightly offset the menu to allow immediately clicking and closing the menu
+				if (w === 0 && h === 0) {
+					x++;
+					y++;
+				}
 
-			Main.layoutManager.setDummyCursorGeometry(x, y, w, h);
-			this._clipboardItemMenu.entry = entry;
-			this._clipboardItemMenu.open(BoxPointer.PopupAnimation.SLIDE);
-		});
+				Main.layoutManager.setDummyCursorGeometry(x, y, w, h);
+				this._clipboardItemMenu.entry = entry;
+				this._clipboardItemMenu.open(BoxPointer.PopupAnimation.SLIDE);
+			},
+			this,
+		);
 
 		// Connect activation
-		item.connect('activate', () => {
-			const swap = this.ext.settings.get_boolean('swap-copy-shortcut');
-			this.emit(swap ? 'copy' : 'paste', entry);
-			this.close();
-		});
-		item.connect('activate-shift', () => {
-			const swap = this.ext.settings.get_boolean('swap-copy-shortcut');
-			this.emit(swap ? 'paste' : 'copy', entry);
-			this.close();
-		});
-		item.connect('activate-ctrl', () => {
-			if (this._clipboardItemMenu.activateDefaultAction(entry)) this.close();
-		});
-		item.connect('activate-action', (_, id: string) => {
-			if (this._clipboardItemMenu.activateAction(entry, id)) this.close();
-		});
+		item.connectObject(
+			'activate',
+			() => {
+				const swap = this.ext.settings.get_boolean('swap-copy-shortcut');
+				this.emit(swap ? 'copy' : 'paste', entry);
+				this.close();
+			},
+			'activate-shift',
+			() => {
+				const swap = this.ext.settings.get_boolean('swap-copy-shortcut');
+				this.emit(swap ? 'paste' : 'copy', entry);
+				this.close();
+			},
+			'activate-ctrl',
+			() => {
+				if (this._clipboardItemMenu.activateDefaultAction(entry)) this.close();
+			},
+			'activate-action',
+			(_: unknown, id: string) => {
+				if (this._clipboardItemMenu.activateAction(entry, id)) this.close();
+			},
+			this,
+		);
 
 		this._scrollView.addItem(item);
 	}

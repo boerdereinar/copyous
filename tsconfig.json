@@ -5,14 +5,16 @@
 		"moduleResolution": "NodeNext",
 		"rootDir": "./src",
 		"outDir": "./dist",
+		"sourceRoot": "src",
 		"tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
 		"incremental": true,
-		"sourceMap": false,
+		"sourceMap": true,
 		"target": "ES2024",
 		"lib": ["ES2024"],
 		"experimentalDecorators": true,
 		"exactOptionalPropertyTypes": true,
-		"noFallthroughCasesInSwitch": false
+		"noFallthroughCasesInSwitch": false,
+		"types": [],
 	},
 	"include": [
 		"src",

@@ -43,8 +43,10 @@ export default [
 			parserOptions: {
 				ecmaVersion: 2024,
 				sourceType: 'module',
-				projectService: true,
 				tsconfigRootDir: import.meta.dirname,
+				projectService: {
+					allowDefaultProject: ['scripts/shexli/*.ts'],
+				},
 			},
 		},
 		rules: {
