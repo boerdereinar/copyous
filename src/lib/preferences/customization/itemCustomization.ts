@@ -2,14 +2,16 @@ import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
+import { CopyousSettings } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 
 @registerClass()
 export class ItemCustomization extends Adw.PreferencesGroup {
-	constructor(prefs: ExtensionPreferences) {
+	constructor(prefs: Preferences) {
 		super({
 			title: _('Item'),
 		});
@@ -56,7 +58,7 @@ export class ItemCustomization extends Adw.PreferencesGroup {
 		});
 		this.add(tabWidth);
 
-		const settings = prefs.getSettings();
+		const settings: CopyousSettings = prefs.getSettings();
 		settings.bind('item-width', itemWidth, 'value', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('item-height', itemHeight, 'value', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('dynamic-item-height', dynamicHeight, 'active', Gio.SettingsBindFlags.DEFAULT);

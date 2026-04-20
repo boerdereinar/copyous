@@ -2,16 +2,10 @@ import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
-import {
-	ActionConfig,
-	countDifference,
-	defaultConfig,
-	loadConfig,
-	mergeConfig,
-	saveConfig,
-} from '../../common/actions.js';
+import Preferences from '../../../prefs.js';
+import { ActionConfig, countDifference, defaultConfig, mergeConfig, saveConfig } from '../../common/actions.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 import { ActionDefaultsPage } from './actionDefaults.js';
@@ -54,8 +48,9 @@ export class ActionsPage extends Adw.PreferencesPage {
 	private readonly _restoreBadge: Gtk.Label;
 
 	constructor(
-		private prefs: ExtensionPreferences,
+		private prefs: Preferences,
 		private window: Adw.PreferencesWindow,
+		config: ActionConfig,
 	) {
 		super({
 			name: 'actions',
@@ -63,7 +58,7 @@ export class ActionsPage extends Adw.PreferencesPage {
 			icon_name: Icon.Action,
 		});
 
-		this._config = loadConfig(prefs, true);
+		this._config = config;
 
 		this._actionsGroup = new ActionsGroup(window, this._config.actions);
 		this.add(this._actionsGroup);

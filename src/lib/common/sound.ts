@@ -5,6 +5,8 @@ import Gio from 'gi://Gio';
 import type { ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 import type { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
+import { CopyousSettings } from './settings.js';
+
 export const Sound = {
 	None: 'none',
 
@@ -36,14 +38,14 @@ export class SoundManager {
 	private readonly _GSound: typeof GSound;
 	private readonly _context: GSound.Context;
 	private readonly _sounds: { [sound in Sound]?: string | null } = {};
-	private readonly _settings: Gio.Settings;
+	private readonly _settings: CopyousSettings;
 
 	constructor(gsound: typeof GSound, ext: Extension | ExtensionPreferences) {
 		this._GSound = gsound;
 		this._context = new gsound.Context();
 		this._context.init(null);
 		this._sounds = SoundManager.initSounds();
-		this._settings = 'settings' in ext ? (ext.settings as Gio.Settings) : ext.getSettings();
+		this._settings = ('settings' in ext ? ext.settings : ext.getSettings()) as CopyousSettings;
 	}
 
 	private static initSounds(): { [sound in Sound]?: string | null } {

@@ -8,6 +8,8 @@ import { ClipboardEntry } from '../database/database.js';
 import { ColorSpace } from './color.js';
 import { ItemType, getActionsConfigPath } from './constants.js';
 
+Gio._promisify(Gio.File.prototype, 'load_contents_async');
+
 export interface ActionConfig {
 	actions: (Action | ActionSubmenu)[];
 	defaults?: Partial<Record<ItemType, string>>;
@@ -259,7 +261,7 @@ export function defaultConfig(ext: Extension | ExtensionPreferences): ActionConf
  * @param ext the extension or extension preferences.
  * @param save whether to save a default configuration if no configuration was found.
  */
-export function loadConfig(ext: Extension | ExtensionPreferences, save: boolean = false): ActionConfig {
+export async function loadConfig(ext: Extension | ExtensionPreferences, save: boolean = false): Promise<ActionConfig> {
 	const environment = GLib.get_environ();
 	const actions = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_ACTIONS');
 	if (actions === 'default') return defaultConfig(ext);
@@ -267,11 +269,9 @@ export function loadConfig(ext: Extension | ExtensionPreferences, save: boolean 
 	const path = actions ? Gio.File.new_for_path(actions) : getActionsConfigPath(ext);
 	try {
 		if (path.query_exists(null)) {
-			const [success, contents, _etag] = path.load_contents(null);
-			if (success) {
-				const text = new TextDecoder().decode(contents);
-				return JSON.parse(text) as ActionConfig;
-			}
+			const [contents, _etag] = await path.load_contents_async(null);
+			const text = new TextDecoder().decode(contents);
+			return JSON.parse(text) as ActionConfig;
 		} else {
 			const config = defaultConfig(ext);
 			if (save) saveConfig(ext, config);

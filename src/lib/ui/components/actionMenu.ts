@@ -129,12 +129,12 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 		this._menuActions = [];
 
 		this._monitor = getActionsConfigPath(ext).monitor(Gio.FileMonitorFlags.NONE, null);
-		this._monitor.connect('changed', (_source, _file, _otherFile, eventType) => {
+		this._monitor.connect('changed', async (_source, _file, _otherFile, eventType) => {
 			if (eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT) {
-				this.updateActions();
+				await this.updateActions();
 			}
 		});
-		this.updateActions(true);
+		this.updateActions(true).catch(() => {});
 	}
 
 	set entry(entry: ClipboardEntry) {
@@ -142,8 +142,8 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 		this._entry = entry;
 	}
 
-	private updateActions(save: boolean = false) {
-		this._config = loadConfig(this.ext, save);
+	private async updateActions(save: boolean = false) {
+		this._config = await loadConfig(this.ext, save);
 
 		this._menuActions.forEach((a) => a.destroy());
 		this._menuActions = this._config.actions

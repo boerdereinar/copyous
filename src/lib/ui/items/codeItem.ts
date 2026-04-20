@@ -1,20 +1,20 @@
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
+import { CodeItemSettings } from '../../common/settings.js';
 import { ClipboardEntry, CodeMetadata } from '../../database/database.js';
 import { CodeLabel } from '../components/codeLabel.js';
-import { CodeInfo, TextCountMode } from '../components/contentInfo.js';
+import { CodeInfo } from '../components/contentInfo.js';
 import { ClipboardItem } from './clipboardItem.js';
 
 @registerClass()
 export class CodeItem extends ClipboardItem {
-	private readonly codeItemSettings: Gio.Settings;
+	private readonly codeItemSettings: CodeItemSettings;
 
 	private readonly _code: CodeLabel;
 	private _codeInfo?: CodeInfo;
@@ -52,12 +52,17 @@ export class CodeItem extends ClipboardItem {
 
 		// Update label
 		this.entry.bind_property('content', this._code, 'code', GObject.BindingFlags.SYNC_CREATE);
-		this.entry.connect('notify::content', this.updateCodeInfo.bind(this));
-		this.entry.connect('notify::metadata', () => {
-			const m = { language: null, ...this.entry.metadata } as CodeMetadata;
-			this._code.language = m.language;
-			if (this._codeInfo) this._codeInfo.language = m.language?.name ?? null;
-		});
+		this.entry.connectObject(
+			'notify::content',
+			this.updateCodeInfo.bind(this),
+			'notify::metadata',
+			() => {
+				const m = { language: null, ...this.entry.metadata } as CodeMetadata;
+				this._code.language = m.language;
+				if (this._codeInfo) this._codeInfo.language = m.language?.name ?? null;
+			},
+			this,
+		);
 
 		this.updateCode();
 		this.updateCodeInfo();
@@ -76,7 +81,7 @@ export class CodeItem extends ClipboardItem {
 
 	private updateCodeInfo() {
 		const show = this.codeItemSettings.get_boolean('show-code-info');
-		const textCountMode = this.codeItemSettings.get_enum('text-count-mode') as TextCountMode;
+		const textCountMode = this.codeItemSettings.get_enum('text-count-mode');
 
 		if (this._codeInfo) {
 			this._codeInfo.visible = show;
@@ -92,6 +97,7 @@ export class CodeItem extends ClipboardItem {
 	override destroy() {
 		this.codeItemSettings.disconnectObject(this);
 		this.ext.settings.disconnectObject(this._code);
+		this.entry.disconnectObject(this);
 
 		super.destroy();
 	}

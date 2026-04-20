@@ -12,7 +12,8 @@
 		"lib": ["ES2024"],
 		"experimentalDecorators": true,
 		"exactOptionalPropertyTypes": true,
-		"noFallthroughCasesInSwitch": false
+		"noFallthroughCasesInSwitch": false,
+		"types": [],
 	},
 	"include": [
 		"src",

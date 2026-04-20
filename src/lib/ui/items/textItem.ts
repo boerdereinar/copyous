@@ -1,6 +1,5 @@
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 import Pango from 'gi://Pango';
 
 import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
@@ -8,14 +7,15 @@ import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.j
 import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
+import { TextItemSettings } from '../../common/settings.js';
 import { ClipboardEntry } from '../../database/database.js';
-import { TextCountMode, TextInfo } from '../components/contentInfo.js';
+import { TextInfo } from '../components/contentInfo.js';
 import { Label } from '../components/label.js';
 import { ClipboardItem } from './clipboardItem.js';
 
 @registerClass()
 export class TextItem extends ClipboardItem {
-	private readonly textItemSettings: Gio.Settings;
+	private readonly textItemSettings: TextItemSettings;
 
 	private readonly _text: Label;
 	private _textInfo?: TextInfo;
@@ -37,18 +37,11 @@ export class TextItem extends ClipboardItem {
 		this._text.clutter_text.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
 		this._content.add_child(this._text);
 
-		this.textItemSettings.connectObject(
-			'changed::show-text-info',
-			this.updateTextInfo.bind(this),
-			'changed::text-count-mode',
-			this.updateTextInfo.bind(this),
-			this,
-		);
-
+		this.textItemSettings.connectObject('changed', this.updateTextInfo.bind(this), this);
 		this.ext.settings.connectObject('changed::tab-width', this.updateText.bind(this), this._text);
 
 		entry.bind_property('content', this._text, 'label', GObject.BindingFlags.SYNC_CREATE);
-		entry.connect('notify::content', this.updateTextInfo.bind(this));
+		entry.connectObject('notify::content', this.updateTextInfo.bind(this));
 
 		this.updateText();
 		this.updateTextInfo();
@@ -60,7 +53,7 @@ export class TextItem extends ClipboardItem {
 
 	private updateTextInfo() {
 		const show = this.textItemSettings.get_boolean('show-text-info');
-		const textCountMode = this.textItemSettings.get_enum('text-count-mode') as TextCountMode;
+		const textCountMode = this.textItemSettings.get_enum('text-count-mode');
 
 		if (this._textInfo) {
 			this._textInfo.visible = show;
@@ -75,6 +68,7 @@ export class TextItem extends ClipboardItem {
 	override destroy() {
 		this.textItemSettings.disconnectObject(this);
 		this.ext.settings.disconnectObject(this._text);
+		this.entry.disconnectObject(this);
 
 		super.destroy();
 	}

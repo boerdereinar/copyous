@@ -6,10 +6,12 @@ import GioUnix from 'gi://GioUnix';
 import Gtk from 'gi://Gtk';
 import Pango from 'gi://Pango';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
+import { CopyousSettings } from '../../common/settings.js';
 
 Gio._promisify(Adw.AlertDialog.prototype, 'choose');
 
@@ -286,7 +288,7 @@ class AppExclusionsGroup extends Adw.PreferencesGroup {
 
 @registerClass()
 export class AppExclusionsPage extends Adw.NavigationPage {
-	constructor(prefs: ExtensionPreferences, window: Adw.PreferencesWindow) {
+	constructor(prefs: Preferences, window: Adw.PreferencesWindow) {
 		super({
 			title: _('App Exclusions'),
 		});
@@ -303,14 +305,14 @@ export class AppExclusionsPage extends Adw.NavigationPage {
 		page.add(wmClassExclusionsGroup);
 
 		// Bind properties
-		const settings = prefs.getSettings();
+		const settings: CopyousSettings = prefs.getSettings();
 		settings.bind('wmclass-exclusions', wmClassExclusionsGroup, 'exclusions', Gio.SettingsBindFlags.DEFAULT);
 	}
 }
 
 @registerClass()
 export class AppExclusionSettings extends Adw.PreferencesGroup {
-	constructor(prefs: ExtensionPreferences, window: Adw.PreferencesWindow) {
+	constructor(prefs: Preferences, window: Adw.PreferencesWindow) {
 		super({
 			title: _('Exclusions'),
 		});

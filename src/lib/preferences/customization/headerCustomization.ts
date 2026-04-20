@@ -2,15 +2,16 @@ import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import { bind_enum } from '../../common/settings.js';
+import { CopyousSettings, bind_enum } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 
 @registerClass()
 export class HeaderCustomization extends Adw.PreferencesGroup {
-	constructor(prefs: ExtensionPreferences) {
+	constructor(prefs: Preferences) {
 		super({
 			title: _('Header'),
 		});
@@ -35,7 +36,7 @@ export class HeaderCustomization extends Adw.PreferencesGroup {
 		this.add(headerControlsVisibility);
 
 		// Bind properties
-		const settings = prefs.getSettings();
+		const settings: CopyousSettings = prefs.getSettings();
 		settings.bind('show-header', showHeader, 'active', null);
 		bind_enum(settings, 'header-controls-visibility', headerControlsVisibility, 'selected');
 		settings.bind('show-item-title', showItemTitle, 'active', null);

@@ -2,15 +2,16 @@ import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
-import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
+import Preferences from '../../../../prefs.js';
 import { registerClass } from '../../../common/gjs.js';
 import { bind_enum } from '../../../common/settings.js';
 import { makeResettable } from '../../utils.js';
 
 @registerClass()
 export class CodeItemCustomization extends Adw.ExpanderRow {
-	constructor(prefs: ExtensionPreferences) {
+	constructor(prefs: Preferences) {
 		super({
 			title: _('Code Item'),
 			subtitle: _('Configure code clipboard items'),

@@ -11,6 +11,7 @@ import type CopyousExtension from '../../../extension.js';
 import { ActiveState } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
+import { BackgroundSize, FilePreviewType } from '../../common/settings.js';
 import { CodeLabel, CodeLabelConstructorProps } from './codeLabel.js';
 
 export const FileType = {
@@ -23,23 +24,6 @@ export const FileType = {
 } as const;
 
 export type FileType = (typeof FileType)[keyof typeof FileType];
-
-export const FilePreviewType = {
-	None: 0,
-	Text: 1,
-	Image: 2,
-	Thumbnail: 4,
-	All: 7,
-} as const;
-
-export type FilePreviewType = (typeof FilePreviewType)[keyof typeof FilePreviewType];
-
-export const BackgroundSize = {
-	Cover: 0,
-	Contain: 1,
-} as const;
-
-export type BackgroundSize = (typeof BackgroundSize)[keyof typeof BackgroundSize];
 
 @registerClass()
 export class ContentPreview extends St.BoxLayout {

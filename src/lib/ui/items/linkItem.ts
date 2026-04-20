@@ -10,9 +10,10 @@ import type CopyousExtension from '../../../extension.js';
 import { ActiveState } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
+import { BackgroundSize, LinkItemSettings } from '../../common/settings.js';
 import { ClipboardEntry, LinkMetadata } from '../../database/database.js';
 import { tryGetLinkImage, tryGetMetadata } from '../../misc/link.js';
-import { BackgroundSize, ImagePreview } from '../components/contentPreview.js';
+import { ImagePreview } from '../components/contentPreview.js';
 import { SearchQuery } from '../searchEntry.js';
 import { ClipboardItem } from './clipboardItem.js';
 
@@ -291,7 +292,7 @@ export class LinkPreview extends St.Widget {
 
 @registerClass()
 export class LinkItem extends ClipboardItem {
-	private readonly linkItemSettings: Gio.Settings;
+	private readonly linkItemSettings: LinkItemSettings;
 
 	private readonly _linkPreview: LinkPreview;
 	private readonly _url: St.Label;
@@ -345,7 +346,7 @@ export class LinkItem extends ClipboardItem {
 		const url = this.entry.content.trim();
 		const showLinkPreview = this.linkItemSettings.get_boolean('show-link-preview');
 		const showLinkPreviewImage = this.linkItemSettings.get_boolean('show-link-preview-image');
-		const backgroundSize = this.linkItemSettings.get_enum('link-preview-image-background-size') as BackgroundSize;
+		const backgroundSize = this.linkItemSettings.get_enum('link-preview-image-background-size');
 		const orientation = this.linkItemSettings.get_enum('link-preview-orientation');
 		const showHeader = this.ext.settings.get_boolean('show-header');
 		const show = showLinkPreview && !regex?.test(url);

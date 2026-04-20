@@ -6,9 +6,9 @@ import { ConsoleLike, Extension } from 'resource:///org/gnome/shell/extensions/e
 import type { HLJSApi } from 'highlight.js';
 import type { LanguageFn } from 'highlight.js';
 
-import { ClipboardHistory, getDataPath, getHljsLanguages, getHljsPath } from './lib/common/constants.js';
+import { getDataPath, getHljsLanguages, getHljsPath } from './lib/common/constants.js';
 import { DbusService } from './lib/common/dbus.js';
-import { migrateSettings } from './lib/common/settings.js';
+import { ClipboardHistory, CopyousSettings, migrateSettings } from './lib/common/settings.js';
 import { SoundManager, tryCreateSoundManager } from './lib/common/sound.js';
 import { ClipboardEntry } from './lib/database/database.js';
 import { ClipboardEntryTracker } from './lib/database/entryTracker.js';
@@ -20,7 +20,7 @@ import { ClipboardDialog } from './lib/ui/clipboardDialog.js';
 import { ClipboardIndicator } from './lib/ui/indicator.js';
 
 export default class CopyousExtension extends Extension {
-	public settings!: Gio.Settings;
+	public settings!: CopyousSettings;
 	public logger!: ConsoleLike;
 
 	public hljs: HLJSApi | null | undefined;
@@ -61,35 +61,50 @@ export default class CopyousExtension extends Extension {
 
 		// UI
 		this.clipboardDialog = new ClipboardDialog(this);
-		this.clipboardDialog.connect('notify::opened', async () => {
-			// Update the history when the dialog is closed and an update was scheduled while the dialog was open
-			if (!this.clipboardDialog?.opened && this.updateHistory) {
-				await this.entryTracker?.deleteOldest();
-			}
-		});
-		this.clipboardDialog.connect('copy', async (_, entry: ClipboardEntry) => {
-			await this.clipboardManager?.copyEntry(entry);
-			this.indicator?.showEntry(entry);
-		});
-		this.clipboardDialog.connect('paste', async (_, entry: ClipboardEntry) => {
-			await this.clipboardManager?.pasteEntry(entry);
-			this.indicator?.showEntry(entry);
-		});
-		this.clipboardDialog.connect('clear-history', (_, history: ClipboardHistory) =>
-			this.entryTracker?.clear(history),
+		this.clipboardDialog.connectObject(
+			'notify::opened',
+			async () => {
+				// Update the history when the dialog is closed and an update was scheduled while the dialog was open
+				if (!this.clipboardDialog?.opened && this.updateHistory) {
+					await this.entryTracker?.deleteOldest();
+				}
+			},
+			'copy',
+			async (_: unknown, entry: ClipboardEntry) => {
+				await this.clipboardManager?.copyEntry(entry);
+				this.indicator?.showEntry(entry);
+			},
+			'paste',
+			async (_: unknown, entry: ClipboardEntry) => {
+				await this.clipboardManager?.pasteEntry(entry);
+				this.indicator?.showEntry(entry);
+			},
+			'clear-history',
+			(_: unknown, history: ClipboardHistory) => this.entryTracker?.clear(history),
+			this,
 		);
 
 		this.indicator = new ClipboardIndicator(this);
-		this.indicator.connect('open-dialog', () => this.clipboardDialog?.open());
-		this.indicator.connect('clear-history', (_, history: ClipboardHistory) => this.entryTracker?.clear(history));
+		this.indicator.connectObject(
+			'open-dialog',
+			() => this.clipboardDialog?.open(),
+			'clear-history',
+			(_: unknown, history: ClipboardHistory) => this.entryTracker?.clear(history),
+			this,
+		);
 
 		// DBus
 		this.dbus = new DbusService();
-		this.dbus.connect('toggle', () => this.clipboardDialog?.toggle());
-		this.dbus.connect('show', () => this.clipboardDialog?.open());
-		this.dbus.connect('hide', () => this.clipboardDialog?.close());
-		this.dbus.connect('clear-history', (_, history: ClipboardHistory | -1) =>
-			this.entryTracker?.clear(history === -1 ? null : history),
+		this.dbus.connectObject(
+			'toggle',
+			() => this.clipboardDialog?.toggle(),
+			'show',
+			() => this.clipboardDialog?.open(),
+			'hide',
+			() => this.clipboardDialog?.close(),
+			'clear-history',
+			(_: unknown, history: ClipboardHistory | -1) => this.entryTracker?.clear(history === -1 ? null : history),
+			this,
 		);
 
 		// Feedback
@@ -102,8 +117,13 @@ export default class CopyousExtension extends Extension {
 
 		// Shortcuts
 		this.shortcutsManager = new ShortcutManager(this, this.clipboardDialog);
-		this.shortcutsManager.connect('open-clipboard-dialog', () => this.clipboardDialog?.dialogShortcut());
-		this.shortcutsManager.connect('toggle-incognito-mode', () => this.indicator?.toggleIncognito());
+		this.shortcutsManager.connectObject(
+			'open-clipboard-dialog',
+			() => this.clipboardDialog?.dialogShortcut(),
+			'toggle-incognito-mode',
+			() => this.indicator?.toggleIncognito(),
+			this,
+		);
 
 		// Database
 		this.entryTracker = new ClipboardEntryTracker(this);
@@ -122,25 +142,31 @@ export default class CopyousExtension extends Extension {
 
 		// Clipboard Manager
 		this.clipboardManager = new ClipboardManager(this, this.entryTracker);
-		this.clipboardManager.connect('clipboard', (_, entry: ClipboardEntry) => {
-			this.clipboardDialog?.addEntry(entry);
-			this.indicator?.showEntry(entry);
-			this.indicator?.animate();
-			this.notificationManager?.notification(entry);
-			this.soundManager?.playSound();
-		});
-		this.clipboardManager.connect('text', (_, text: string) => {
-			this.indicator?.showText(text);
-			this.indicator?.animate();
-			this.notificationManager?.textNotification(text);
-			this.soundManager?.playSound();
-		});
-		this.clipboardManager.connect('image', (_, image: Uint8Array, width: number, height: number) => {
-			this.indicator?.showImageBytes(image);
-			this.indicator?.animate();
-			this.notificationManager?.imageNotification(image, width, height);
-			this.soundManager?.playSound();
-		});
+		this.clipboardManager.connectObject(
+			'clipboard',
+			(_: unknown, entry: ClipboardEntry) => {
+				this.clipboardDialog?.addEntry(entry);
+				this.indicator?.showEntry(entry);
+				this.indicator?.animate();
+				this.notificationManager?.notification(entry);
+				this.soundManager?.playSound();
+			},
+			'text',
+			(_: unknown, text: string) => {
+				this.indicator?.showText(text);
+				this.indicator?.animate();
+				this.notificationManager?.textNotification(text);
+				this.soundManager?.playSound();
+			},
+			'image',
+			(_: unknown, image: Uint8Array, width: number, height: number) => {
+				this.indicator?.showImageBytes(image);
+				this.indicator?.animate();
+				this.notificationManager?.imageNotification(image, width, height);
+				this.soundManager?.playSound();
+			},
+			this,
+		);
 	}
 
 	private async initHljs() {
@@ -167,11 +193,15 @@ export default class CopyousExtension extends Extension {
 			// Automatically load highlight.js
 			if (!this.hljsMonitor) {
 				this.hljsMonitor = hljsPath.monitor(Gio.FileMonitorFlags.NONE, null);
-				this.hljsMonitor.connect('changed', async (_monitor, _file, _otherFile, eventType) => {
-					if (eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT) {
-						await this.initHljs();
-					}
-				});
+				this.hljsMonitor.connectObject(
+					'changed',
+					async (_monitor: unknown, _file: unknown, _otherFile: unknown, eventType: Gio.FileMonitorEvent) => {
+						if (eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT) {
+							await this.initHljs();
+						}
+					},
+					this,
+				);
 			}
 		}
 	}
@@ -182,14 +212,18 @@ export default class CopyousExtension extends Extension {
 		if (!this.hljsMonitor) {
 			const path = getDataPath(this).get_child('languages');
 			this.hljsMonitor = path.monitor_directory(Gio.FileMonitorFlags.NONE, null);
-			this.hljsMonitor.connect('changed', async (_monitor, _file, _otherFile, eventType) => {
-				if (
-					eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT ||
-					eventType === Gio.FileMonitorEvent.DELETED
-				) {
-					await this.loadHljsLanguages();
-				}
-			});
+			this.hljsMonitor.connectObject(
+				'changed',
+				async (_monitor: unknown, _file: unknown, _otherFile: unknown, eventType: Gio.FileMonitorEvent) => {
+					if (
+						eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT ||
+						eventType === Gio.FileMonitorEvent.DELETED
+					) {
+						await this.loadHljsLanguages();
+					}
+				},
+				this,
+			);
 		}
 
 		const languages = getHljsLanguages(this);
@@ -257,13 +291,16 @@ export default class CopyousExtension extends Extension {
 
 	override disable() {
 		// UI
+		this.clipboardDialog?.disconnectObject(this);
 		this.clipboardDialog?.destroy();
+		this.indicator?.disconnectObject(this);
 		this.indicator?.destroy();
 		this.clipboardDialog = undefined;
 		this.indicator = undefined;
 
 		// Highlight.js
 		this.hljs = undefined;
+		this.hljsMonitor?.disconnectObject(this);
 		this.hljsMonitor?.cancel();
 		this.hljsMonitor = undefined;
 		this.hljsLanguages = undefined;
@@ -274,6 +311,7 @@ export default class CopyousExtension extends Extension {
 		this.themeManager = undefined;
 
 		// DBus
+		this.dbus?.disconnectObject(this);
 		this.dbus?.destroy();
 		this.dbus = undefined;
 
@@ -283,6 +321,7 @@ export default class CopyousExtension extends Extension {
 		this.soundManager = undefined;
 
 		// Shortcuts
+		this.shortcutsManager?.disconnectObject(this);
 		this.shortcutsManager?.destroy();
 		this.shortcutsManager = undefined;
 
@@ -295,6 +334,7 @@ export default class CopyousExtension extends Extension {
 		this.historyTimeoutId = -1;
 
 		// Clipboard Manager
+		this.clipboardManager?.disconnectObject(this);
 		this.clipboardManager?.destroy();
 		this.clipboardManager = undefined;
 
@@ -305,7 +345,7 @@ export default class CopyousExtension extends Extension {
 	}
 
 	/* DEBUG-ONLY */
-	override getSettings(schema?: string): Gio.Settings {
+	override getSettings(schema?: string): Gio.Settings & CopyousSettings {
 		try {
 			const environment = GLib.get_environ();
 			const settings = GLib.environ_getenv(environment, 'DEBUG_COPYOUS_SCHEMA');
@@ -314,10 +354,10 @@ export default class CopyousExtension extends Extension {
 				schema ??= this.metadata['settings-schema'] + '.debug';
 			}
 
-			return super.getSettings(schema);
+			return super.getSettings(schema) as Gio.Settings & CopyousSettings;
 		} catch {
 			// Fallback for when debug schema does not exist
-			return super.getSettings();
+			return super.getSettings() as Gio.Settings & CopyousSettings;
 		}
 	}
 }

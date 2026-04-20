@@ -5,6 +5,7 @@
 
 .env
 .idea
+.venv
 
 dist
 node_modules

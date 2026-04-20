@@ -3,7 +3,8 @@ import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 
 import CopyousExtension from '../../extension.js';
-import { ClipboardHistory, ItemType, Tag } from '../common/constants.js';
+import { ItemType, Tag } from '../common/constants.js';
+import { ClipboardHistory } from '../common/settings.js';
 import { ClipboardEntry, Metadata } from './database.js';
 import { MemoryDatabase } from './memory.js';
 

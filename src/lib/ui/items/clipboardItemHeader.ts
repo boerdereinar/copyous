@@ -10,6 +10,7 @@ import { formatTimeSpan } from 'resource:///org/gnome/shell/misc/dateUtils.js';
 import { ActiveState, Tag } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
+import { HeaderControlsVisibility } from '../../common/settings.js';
 
 // https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/main/js/ui/messageList.js#L277
 @registerClass()
@@ -51,14 +52,6 @@ class TimeLabel extends St.Label {
 		super.vfunc_map();
 	}
 }
-
-export const HeaderControlsVisibility = {
-	Visible: 0,
-	VisibleOnHover: 1,
-	Hidden: 2,
-} as const;
-
-export type HeaderControlsVisibility = (typeof HeaderControlsVisibility)[keyof typeof HeaderControlsVisibility];
 
 @registerClass({
 	Properties: {

@@ -6,7 +6,8 @@ import type Gda6 from 'gi://Gda?version=6.0';
 import Gio from 'gi://Gio';
 
 import CopyousExtension from '../../extension.js';
-import { ClipboardHistory, ItemType, getDataPath } from '../common/constants.js';
+import { ItemType, getDataPath } from '../common/constants.js';
+import { ClipboardHistory } from '../common/settings.js';
 import { ClipboardEntry, Database, Metadata } from './database.js';
 
 const DATABASE_VERSION = 2;
