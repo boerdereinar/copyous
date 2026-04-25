@@ -223,25 +223,25 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 			title: _('Feedback'),
 		});
 
-		const showIndicator = new Adw.SwitchRow({
-			title: _('Show Indicator'),
-			subtitle: _('Show an indicator on the top panel'),
+		const showIconIndicator = new Adw.SwitchRow({
+			title: _('Show Clipboard Icon in Indicator'),
+			subtitle: _('Show the clipboard icon in the indicator'),
 		});
-		this.add(showIndicator);
+		this.add(showIconIndicator);
 
 		const showContentIndicator = new Adw.SwitchRow({
 			title: _('Show Clipboard Content in Indicator'),
 			subtitle: _('Show the current clipboard content in the indicator'),
 		});
 		this.add(showContentIndicator);
-		showIndicator.bind_property('active', showContentIndicator, 'sensitive', null);
-		this.connect('map', () => (showContentIndicator.sensitive = showIndicator.active));
 
 		const wiggleIndicator = new Adw.SwitchRow({
 			title: _('Wiggle Indicator'),
 			subtitle: _('Wiggle the indicator when a clipboard item is copied'),
 		});
 		this.add(wiggleIndicator);
+		showIconIndicator.bind_property('active', wiggleIndicator, 'sensitive', null);
+		this.connect('map', () => (wiggleIndicator.sensitive = showIconIndicator.active));
 
 		const sendNotification = new Adw.SwitchRow({
 			title: _('Send Notification'),
@@ -269,7 +269,7 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 
 		// Bind properties
 		const settings: CopyousSettings = prefs.getSettings();
-		settings.bind('show-indicator', showIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
+		settings.bind('show-indicator', showIconIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('show-content-indicator', showContentIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('wiggle-indicator', wiggleIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('send-notification', sendNotification, 'active', Gio.SettingsBindFlags.DEFAULT);

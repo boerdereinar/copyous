@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 15:54+0000\n"
+"POT-Creation-Date: 2026-04-25 16:20-0500\n"
 "PO-Revision-Date: 2026-04-17 08:33+0200\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
@@ -1413,12 +1413,12 @@ msgid "Feedback"
 msgstr "Opinie"
 
 #: src/lib/preferences/general/feedbackSettings.ts:227
-msgid "Show Indicator"
-msgstr "Pokaż wskaźnik"
+msgid "Show Clipboard Icon in Indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:228
-msgid "Show an indicator on the top panel"
-msgstr "Pokaż wskaźnik na górnym panelu"
+msgid "Show the clipboard icon in the indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:233
 msgid "Show Clipboard Content in Indicator"
@@ -1428,11 +1428,11 @@ msgstr "Pokaż zawartość schowka we wskaźniku"
 msgid "Show the current clipboard content in the indicator"
 msgstr "Pokaż bieżącą zawartość schowka we wskaźniku"
 
-#: src/lib/preferences/general/feedbackSettings.ts:241
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr "Wskaźnik drgający"
 
-#: src/lib/preferences/general/feedbackSettings.ts:242
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr "Włącz drganie wskaźnika, gdy element zostanie skopiowany do schowka"
 
@@ -1792,7 +1792,7 @@ msgstr "Wyczyść historię"
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: src/lib/ui/indicator.ts:191
+#: src/lib/ui/indicator.ts:195
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
@@ -2019,11 +2019,17 @@ msgstr "Skróty klawiszowe"
 #~ msgid "Shortcut to toggle incognito mode"
 #~ msgstr "Skrót do przełączenia trybu prywatnego"
 
+#~ msgid "Show Indicator"
+#~ msgstr "Pokaż wskaźnik"
+
 #~ msgid "Show a preview image of the link"
 #~ msgstr "Pokaż obraz podglądu odnośnika"
 
 #~ msgid "Show a preview of the link"
 #~ msgstr "Pokaż podgląd odnośnika"
+
+#~ msgid "Show an indicator on the top panel"
+#~ msgstr "Pokaż wskaźnik na górnym panelu"
 
 #~ msgid "Show extra information"
 #~ msgstr "Pokaż dodatkowe informacje"

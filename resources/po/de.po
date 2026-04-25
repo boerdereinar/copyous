@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 15:54+0000\n"
+"POT-Creation-Date: 2026-04-25 16:20-0500\n"
 "PO-Revision-Date: 2026-03-26 22:19+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
@@ -1421,12 +1421,12 @@ msgid "Feedback"
 msgstr "Rückmeldung"
 
 #: src/lib/preferences/general/feedbackSettings.ts:227
-msgid "Show Indicator"
-msgstr "Indikator anzeigen"
+msgid "Show Clipboard Icon in Indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:228
-msgid "Show an indicator on the top panel"
-msgstr "Zeige einen Indikator auf dem oberen Bedienfeld an"
+msgid "Show the clipboard icon in the indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:233
 msgid "Show Clipboard Content in Indicator"
@@ -1436,11 +1436,11 @@ msgstr "Inhalt der Zwischenablage in Indikator anzeigen"
 msgid "Show the current clipboard content in the indicator"
 msgstr "Zeige den aktuellen Inhalt der Zwischenablage im Indikator an"
 
-#: src/lib/preferences/general/feedbackSettings.ts:241
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr "Indikator bewegen"
 
-#: src/lib/preferences/general/feedbackSettings.ts:242
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr ""
 "Bewege den Indikator, wenn ein Element aus der Zwischenablage kopiert wird"
@@ -1803,7 +1803,7 @@ msgstr "Verlauf löschen"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: src/lib/ui/indicator.ts:191
+#: src/lib/ui/indicator.ts:195
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
@@ -1910,6 +1910,12 @@ msgstr "Tastenkürzel"
 
 #~ msgid "Set the color scheme of the custom theme"
 #~ msgstr "Legen Sie das Farbschema des benutzerdefinierten Designs fest"
+
+#~ msgid "Show Indicator"
+#~ msgstr "Indikator anzeigen"
+
+#~ msgid "Show an indicator on the top panel"
+#~ msgstr "Zeige einen Indikator auf dem oberen Bedienfeld an"
 
 #~ msgid "Store clipboard history in memory instead of on disk"
 #~ msgstr ""

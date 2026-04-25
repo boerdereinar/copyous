@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 15:54+0000\n"
+"POT-Creation-Date: 2026-04-25 16:20-0500\n"
 "PO-Revision-Date: 2025-11-30 20:29+0700\n"
 "Last-Translator: Victor <firephantom303@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1398,12 +1398,12 @@ msgid "Feedback"
 msgstr "Обратная связь"
 
 #: src/lib/preferences/general/feedbackSettings.ts:227
-msgid "Show Indicator"
-msgstr "Показывать индикатор"
+msgid "Show Clipboard Icon in Indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:228
-msgid "Show an indicator on the top panel"
-msgstr "Показывать индикатор на верхней панели"
+msgid "Show the clipboard icon in the indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:233
 msgid "Show Clipboard Content in Indicator"
@@ -1413,11 +1413,11 @@ msgstr ""
 msgid "Show the current clipboard content in the indicator"
 msgstr ""
 
-#: src/lib/preferences/general/feedbackSettings.ts:241
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr "Анимировать индикатор"
 
-#: src/lib/preferences/general/feedbackSettings.ts:242
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr "Анимировать индикатор при копировании элемента буфера обмена"
 
@@ -1776,7 +1776,7 @@ msgstr "Очистить историю"
 msgid "Settings"
 msgstr "Настройки"
 
-#: src/lib/ui/indicator.ts:191
+#: src/lib/ui/indicator.ts:195
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
@@ -1882,6 +1882,12 @@ msgstr "Сочетания клавиш"
 
 #~ msgid "Paste on Copy"
 #~ msgstr "Вставлять при копировании"
+
+#~ msgid "Show Indicator"
+#~ msgstr "Показывать индикатор"
+
+#~ msgid "Show an indicator on the top panel"
+#~ msgstr "Показывать индикатор на верхней панели"
 
 #~ msgid "Store clipboard history in memory instead of on disk"
 #~ msgstr "Хранить историю буфера обмена в памяти, а не на диске"

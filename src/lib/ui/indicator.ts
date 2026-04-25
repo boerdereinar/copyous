@@ -155,8 +155,12 @@ export class ClipboardIndicator extends PanelMenu.Button {
 	}
 
 	private updateSettings() {
-		this.visible = this.ext.settings.get_boolean('show-indicator');
-		if (this._previewWidget) this._previewWidget.visible = this.ext.settings.get_boolean('show-content-indicator');
+		const showIconIndicator = this.ext.settings.get_boolean('show-indicator');
+		const showContentIndicator = this.ext.settings.get_boolean('show-content-indicator');
+
+		this.visible = showIconIndicator || showContentIndicator;
+		this._icon.visible = showIconIndicator;
+		if (this._previewWidget) this._previewWidget.visible = showContentIndicator;
 		this.incognito = this.ext.settings.get_boolean('incognito');
 	}
 
@@ -165,7 +169,7 @@ export class ClipboardIndicator extends PanelMenu.Button {
 	}
 
 	animate() {
-		if (this.ext.settings.get_boolean('wiggle-indicator')) {
+		if (this._icon.visible && this.ext.settings.get_boolean('wiggle-indicator')) {
 			animationUtils.wiggle(this._icon, { offset: 2, duration: 65, wiggleCount: 3 });
 		}
 	}

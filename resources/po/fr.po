@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 15:54+0000\n"
+"POT-Creation-Date: 2026-04-25 16:20-0500\n"
 "PO-Revision-Date: 2025-12-06 04:59+0100\n"
 "Last-Translator: Axel Haustant <noirbizarre@gmail.com>\n"
 "Language-Team: \n"
@@ -1174,8 +1174,8 @@ msgid ""
 "You can manually install highlight.js by downloading highlight.min.js from "
 "\"Url\" to \"Install Location\"."
 msgstr ""
-"Vous pouvez installer manuellement highlight.js en téléchargeant highlight."
-"min.js de \"Url\" vers \"Emplacement d'installation\"."
+"Vous pouvez installer manuellement highlight.js en téléchargeant "
+"highlight.min.js de \"Url\" vers \"Emplacement d'installation\"."
 
 #: src/lib/preferences/dependencies/dependencies.ts:208
 msgid "Url"
@@ -1427,12 +1427,12 @@ msgid "Feedback"
 msgstr "Commentaires"
 
 #: src/lib/preferences/general/feedbackSettings.ts:227
-msgid "Show Indicator"
-msgstr "Afficher l'indicateur"
+msgid "Show Clipboard Icon in Indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:228
-msgid "Show an indicator on the top panel"
-msgstr "Affiche un indicateur sur le panneau supérieur"
+msgid "Show the clipboard icon in the indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:233
 msgid "Show Clipboard Content in Indicator"
@@ -1442,11 +1442,11 @@ msgstr "Affiche le contenu du presse-papiers dans l'indicateur"
 msgid "Show the current clipboard content in the indicator"
 msgstr "Affiche le contenu actuel du presse-papier dans l'indicateur"
 
-#: src/lib/preferences/general/feedbackSettings.ts:241
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr "Agiter l'indicateur"
 
-#: src/lib/preferences/general/feedbackSettings.ts:242
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr "Agite l'indicateur lorsqu'un élément du presse-papiers est copié"
 
@@ -1808,7 +1808,7 @@ msgstr "Effacer l'historique"
 msgid "Settings"
 msgstr "Paramètres"
 
-#: src/lib/ui/indicator.ts:191
+#: src/lib/ui/indicator.ts:195
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
@@ -1915,6 +1915,12 @@ msgstr "Raccourcis"
 
 #~ msgid "Set the color scheme of the custom theme"
 #~ msgstr "Définit le schéma de couleurs du thème personnalisé"
+
+#~ msgid "Show Indicator"
+#~ msgstr "Afficher l'indicateur"
+
+#~ msgid "Show an indicator on the top panel"
+#~ msgstr "Affiche un indicateur sur le panneau supérieur"
 
 #~ msgid "Store clipboard history in memory instead of on disk"
 #~ msgstr "Stocke l'historique du presse-papiers en mémoire au lieu du disque"

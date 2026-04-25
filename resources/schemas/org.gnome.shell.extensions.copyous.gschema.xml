@@ -168,7 +168,7 @@
 		<!-- Feedback -->
 		<key name="show-indicator" type="b">
 			<default>true</default>
-			<summary>Show an indicator on the top panel</summary>
+			<summary>Show the clipboard icon in the indicator</summary>
 		</key>
 		<key name="show-content-indicator" type="b">
 			<default>false</default>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 15:54+0000\n"
+"POT-Creation-Date: 2026-04-25 16:20-0500\n"
 "PO-Revision-Date: 2025-12-19 18:30+0800\n"
 "Last-Translator: everyx <lunt.luo@gmail.com>\n"
 "Language-Team: Chinese (China)\n"
@@ -1382,12 +1382,12 @@ msgid "Feedback"
 msgstr "反馈"
 
 #: src/lib/preferences/general/feedbackSettings.ts:227
-msgid "Show Indicator"
-msgstr "显示指示器"
+msgid "Show Clipboard Icon in Indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:228
-msgid "Show an indicator on the top panel"
-msgstr "在顶部面板显示指示器"
+msgid "Show the clipboard icon in the indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:233
 msgid "Show Clipboard Content in Indicator"
@@ -1397,11 +1397,11 @@ msgstr "在指示器中显示剪贴板内容"
 msgid "Show the current clipboard content in the indicator"
 msgstr "在指示器中显示当前剪贴板内容"
 
-#: src/lib/preferences/general/feedbackSettings.ts:241
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr "抖动指示器"
 
-#: src/lib/preferences/general/feedbackSettings.ts:242
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr "复制剪贴板项时抖动指示器"
 
@@ -1750,7 +1750,7 @@ msgstr "清理历史"
 msgid "Settings"
 msgstr "设置"
 
-#: src/lib/ui/indicator.ts:191
+#: src/lib/ui/indicator.ts:195
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
@@ -1852,6 +1852,12 @@ msgstr "快捷键"
 
 #~ msgid "Set the color scheme of the custom theme"
 #~ msgstr "设置自定义主题的配色方案"
+
+#~ msgid "Show Indicator"
+#~ msgstr "显示指示器"
+
+#~ msgid "Show an indicator on the top panel"
+#~ msgstr "在顶部面板显示指示器"
 
 #~ msgid "Store clipboard history in memory instead of on disk"
 #~ msgstr "将剪贴板历史记录存储在内存而非磁盘中"

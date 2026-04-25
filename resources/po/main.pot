@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 15:54+0000\n"
+"POT-Creation-Date: 2026-04-25 16:20-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1373,11 +1373,11 @@ msgid "Feedback"
 msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:227
-msgid "Show Indicator"
+msgid "Show Clipboard Icon in Indicator"
 msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:228
-msgid "Show an indicator on the top panel"
+msgid "Show the clipboard icon in the indicator"
 msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:233
@@ -1388,11 +1388,11 @@ msgstr ""
 msgid "Show the current clipboard content in the indicator"
 msgstr ""
 
-#: src/lib/preferences/general/feedbackSettings.ts:241
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr ""
 
-#: src/lib/preferences/general/feedbackSettings.ts:242
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr ""
 
@@ -1744,7 +1744,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/lib/ui/indicator.ts:191
+#: src/lib/ui/indicator.ts:195
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"

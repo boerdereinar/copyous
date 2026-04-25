@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 15:54+0000\n"
+"POT-Creation-Date: 2026-04-25 16:20-0500\n"
 "PO-Revision-Date: 2025-12-14 10:45+0100\n"
 "Last-Translator: Fabian Esposito <fabian.esposito@outlook.com>\n"
 "Language-Team: Italiano\n"
@@ -1418,12 +1418,12 @@ msgid "Feedback"
 msgstr "Feedback"
 
 #: src/lib/preferences/general/feedbackSettings.ts:227
-msgid "Show Indicator"
-msgstr "Mostra indicatore"
+msgid "Show Clipboard Icon in Indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:228
-msgid "Show an indicator on the top panel"
-msgstr "Mostra un indicatore sul pannello superiore"
+msgid "Show the clipboard icon in the indicator"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:233
 msgid "Show Clipboard Content in Indicator"
@@ -1433,11 +1433,11 @@ msgstr "Mostra il contenuto degli appunti nell'indicatore"
 msgid "Show the current clipboard content in the indicator"
 msgstr "Mostra il contenuto attuale degli appunti nell'indicatore"
 
-#: src/lib/preferences/general/feedbackSettings.ts:241
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr "Agita indicatore"
 
-#: src/lib/preferences/general/feedbackSettings.ts:242
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr "Agita l'indicatore quando un elemento degli appunti 00e8 copiato"
 
@@ -1798,7 +1798,7 @@ msgstr "Cancella la cronologia"
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: src/lib/ui/indicator.ts:191
+#: src/lib/ui/indicator.ts:195
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
@@ -1905,6 +1905,12 @@ msgstr "Scorciatoie"
 
 #~ msgid "Set the color scheme of the custom theme"
 #~ msgstr "Imposta lo schema di colori del tema personalizzato"
+
+#~ msgid "Show Indicator"
+#~ msgstr "Mostra indicatore"
+
+#~ msgid "Show an indicator on the top panel"
+#~ msgstr "Mostra un indicatore sul pannello superiore"
 
 #~ msgid "Store clipboard history in memory instead of on disk"
 #~ msgstr "Archivia la cronologia degli appunti in memoria anziché su disco"
