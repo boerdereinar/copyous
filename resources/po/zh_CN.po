@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 15:54+0000\n"
+"POT-Creation-Date: 2026-04-26 12:23-0500\n"
 "PO-Revision-Date: 2025-12-19 18:30+0800\n"
 "Last-Translator: everyx <lunt.luo@gmail.com>\n"
 "Language-Team: Chinese (China)\n"
@@ -122,8 +122,8 @@ msgstr "已复制颜色"
 
 #: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/general/feedbackSettings.ts:157
-#: src/lib/preferences/general/feedbackSettings.ts:261
-#: src/lib/preferences/general/feedbackSettings.ts:303
+#: src/lib/preferences/general/feedbackSettings.ts:259
+#: src/lib/preferences/general/feedbackSettings.ts:308
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:39
 #: src/lib/ui/components/editDialog.ts:217
 #: src/lib/ui/components/editDialog.ts:244
@@ -613,6 +613,7 @@ msgstr "标题栏控件的可见性"
 
 #: src/lib/preferences/customization/headerCustomization.ts:34
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:164
+#: src/lib/preferences/general/feedbackSettings.ts:230
 msgid "Hidden"
 msgstr "隐藏"
 
@@ -1333,47 +1334,47 @@ msgid ""
 msgstr "从剪贴板历史记录中选择项目时更新其复制日期"
 
 #: src/lib/preferences/general/feedbackSettings.ts:131
-#: src/lib/preferences/general/feedbackSettings.ts:253
+#: src/lib/preferences/general/feedbackSettings.ts:251
 msgid "Sound"
 msgstr "提示音"
 
 #: src/lib/preferences/general/feedbackSettings.ts:162
-#: src/lib/preferences/general/feedbackSettings.ts:305
+#: src/lib/preferences/general/feedbackSettings.ts:310
 msgid "Click"
 msgstr "点击"
 
 #: src/lib/preferences/general/feedbackSettings.ts:163
-#: src/lib/preferences/general/feedbackSettings.ts:307
+#: src/lib/preferences/general/feedbackSettings.ts:312
 msgid "Hum"
 msgstr "蜂鸣"
 
 #: src/lib/preferences/general/feedbackSettings.ts:164
-#: src/lib/preferences/general/feedbackSettings.ts:309
+#: src/lib/preferences/general/feedbackSettings.ts:314
 msgid "String"
 msgstr "弦音"
 
 #: src/lib/preferences/general/feedbackSettings.ts:165
-#: src/lib/preferences/general/feedbackSettings.ts:311
+#: src/lib/preferences/general/feedbackSettings.ts:316
 msgid "Swing"
 msgstr "挥动"
 
 #: src/lib/preferences/general/feedbackSettings.ts:166
-#: src/lib/preferences/general/feedbackSettings.ts:313
+#: src/lib/preferences/general/feedbackSettings.ts:318
 msgid "Message"
 msgstr "消息"
 
 #: src/lib/preferences/general/feedbackSettings.ts:167
-#: src/lib/preferences/general/feedbackSettings.ts:315
+#: src/lib/preferences/general/feedbackSettings.ts:320
 msgid "Message New Instant"
 msgstr "即时消息"
 
 #: src/lib/preferences/general/feedbackSettings.ts:168
-#: src/lib/preferences/general/feedbackSettings.ts:317
+#: src/lib/preferences/general/feedbackSettings.ts:322
 msgid "Bell"
 msgstr "铃声"
 
 #: src/lib/preferences/general/feedbackSettings.ts:169
-#: src/lib/preferences/general/feedbackSettings.ts:319
+#: src/lib/preferences/general/feedbackSettings.ts:324
 msgid "Dialog Warning"
 msgstr "对话框警示"
 
@@ -1382,38 +1383,42 @@ msgid "Feedback"
 msgstr "反馈"
 
 #: src/lib/preferences/general/feedbackSettings.ts:227
-msgid "Show Indicator"
-msgstr "显示指示器"
+msgid "Indicator Display"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:228
-msgid "Show an indicator on the top panel"
-msgstr "在顶部面板显示指示器"
+msgid "Choose how the clipboard indicator appears in the top panel"
+msgstr ""
+
+#: src/lib/preferences/general/feedbackSettings.ts:231
+msgid "Icon Only"
+msgstr ""
+
+#: src/lib/preferences/general/feedbackSettings.ts:232
+msgid "Clipboard Content Only"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:233
-msgid "Show Clipboard Content in Indicator"
-msgstr "在指示器中显示剪贴板内容"
+msgid "Icon and Clipboard Content"
+msgstr ""
 
-#: src/lib/preferences/general/feedbackSettings.ts:234
-msgid "Show the current clipboard content in the indicator"
-msgstr "在指示器中显示当前剪贴板内容"
-
-#: src/lib/preferences/general/feedbackSettings.ts:241
+#: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
 msgstr "抖动指示器"
 
-#: src/lib/preferences/general/feedbackSettings.ts:242
+#: src/lib/preferences/general/feedbackSettings.ts:240
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr "复制剪贴板项时抖动指示器"
 
-#: src/lib/preferences/general/feedbackSettings.ts:247
+#: src/lib/preferences/general/feedbackSettings.ts:245
 msgid "Send Notification"
 msgstr "发送通知"
 
-#: src/lib/preferences/general/feedbackSettings.ts:248
+#: src/lib/preferences/general/feedbackSettings.ts:246
 msgid "Send a notification when a clipboard item is copied"
 msgstr "复制剪贴板项时发送通知"
 
-#: src/lib/preferences/general/feedbackSettings.ts:254
+#: src/lib/preferences/general/feedbackSettings.ts:252
 msgid "Sound to play when a clipboard item is copied"
 msgstr "复制剪贴板项时播放的声音"
 
@@ -1750,7 +1755,7 @@ msgstr "清理历史"
 msgid "Settings"
 msgstr "设置"
 
-#: src/lib/ui/indicator.ts:191
+#: src/lib/ui/indicator.ts:199
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
@@ -1852,6 +1857,18 @@ msgstr "快捷键"
 
 #~ msgid "Set the color scheme of the custom theme"
 #~ msgstr "设置自定义主题的配色方案"
+
+#~ msgid "Show Clipboard Content in Indicator"
+#~ msgstr "在指示器中显示剪贴板内容"
+
+#~ msgid "Show Indicator"
+#~ msgstr "显示指示器"
+
+#~ msgid "Show an indicator on the top panel"
+#~ msgstr "在顶部面板显示指示器"
+
+#~ msgid "Show the current clipboard content in the indicator"
+#~ msgstr "在指示器中显示当前剪贴板内容"
 
 #~ msgid "Store clipboard history in memory instead of on disk"
 #~ msgstr "将剪贴板历史记录存储在内存而非磁盘中"

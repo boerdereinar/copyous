@@ -19,7 +19,7 @@ import { Color } from '../common/color.js';
 import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
-import { ClipboardHistory } from '../common/settings.js';
+import { ClipboardHistory, IndicatorDisplay } from '../common/settings.js';
 import { ClipboardEntry } from '../database/database.js';
 import { VERSION } from '../misc/compatibility.js';
 
@@ -110,9 +110,7 @@ export class ClipboardIndicator extends PanelMenu.Button {
 
 		// Bind properties
 		this.ext.settings.connectObject(
-			'changed::show-indicator',
-			this.updateSettings.bind(this),
-			'changed::show-content-indicator',
+			'changed::indicator-display',
 			this.updateSettings.bind(this),
 			'changed::incognito',
 			this.updateSettings.bind(this),
@@ -149,14 +147,24 @@ export class ClipboardIndicator extends PanelMenu.Button {
 
 	private set previewWidget(widget: St.Widget) {
 		this._previewWidget?.destroy();
-		widget.visible = this.ext.settings.get_boolean('show-content-indicator');
 		this._previewWidget = widget;
 		this._box.add_child(widget);
+		this.updateSettings();
 	}
 
 	private updateSettings() {
-		this.visible = this.ext.settings.get_boolean('show-indicator');
-		if (this._previewWidget) this._previewWidget.visible = this.ext.settings.get_boolean('show-content-indicator');
+		const indicatorDisplay = this.ext.settings.get_enum('indicator-display');
+		const showContentIndicator =
+			indicatorDisplay === IndicatorDisplay.ClipboardContentOnly ||
+			indicatorDisplay === IndicatorDisplay.IconAndClipboardContent;
+		const showIconIndicator =
+			indicatorDisplay === IndicatorDisplay.IconOnly ||
+			indicatorDisplay === IndicatorDisplay.IconAndClipboardContent ||
+			(showContentIndicator && !this._previewWidget);
+
+		this.visible = indicatorDisplay !== IndicatorDisplay.Hidden;
+		this._icon.visible = showIconIndicator;
+		if (this._previewWidget) this._previewWidget.visible = showContentIndicator;
 		this.incognito = this.ext.settings.get_boolean('incognito');
 	}
 
@@ -165,7 +173,7 @@ export class ClipboardIndicator extends PanelMenu.Button {
 	}
 
 	animate() {
-		if (this.ext.settings.get_boolean('wiggle-indicator')) {
+		if (this._icon.visible && this.ext.settings.get_boolean('wiggle-indicator')) {
 			animationUtils.wiggle(this._icon, { offset: 2, duration: 65, wiggleCount: 3 });
 		}
 	}
