@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-25 16:20-0500\n"
+"POT-Creation-Date: 2026-04-26 12:23-0500\n"
 "PO-Revision-Date: 2026-04-17 08:33+0200\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
@@ -125,8 +125,8 @@ msgstr "Skopiowany kolor"
 
 #: src/lib/preferences/actions/actionDefaults.ts:72
 #: src/lib/preferences/general/feedbackSettings.ts:157
-#: src/lib/preferences/general/feedbackSettings.ts:261
-#: src/lib/preferences/general/feedbackSettings.ts:303
+#: src/lib/preferences/general/feedbackSettings.ts:259
+#: src/lib/preferences/general/feedbackSettings.ts:308
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:39
 #: src/lib/ui/components/editDialog.ts:217
 #: src/lib/ui/components/editDialog.ts:244
@@ -623,6 +623,7 @@ msgstr "Widoczność kontrolek nagłówka"
 
 #: src/lib/preferences/customization/headerCustomization.ts:34
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:164
+#: src/lib/preferences/general/feedbackSettings.ts:230
 msgid "Hidden"
 msgstr "Ukryte"
 
@@ -1364,47 +1365,47 @@ msgstr ""
 "schowka"
 
 #: src/lib/preferences/general/feedbackSettings.ts:131
-#: src/lib/preferences/general/feedbackSettings.ts:253
+#: src/lib/preferences/general/feedbackSettings.ts:251
 msgid "Sound"
 msgstr "Dźwięk"
 
 #: src/lib/preferences/general/feedbackSettings.ts:162
-#: src/lib/preferences/general/feedbackSettings.ts:305
+#: src/lib/preferences/general/feedbackSettings.ts:310
 msgid "Click"
 msgstr "Klik"
 
 #: src/lib/preferences/general/feedbackSettings.ts:163
-#: src/lib/preferences/general/feedbackSettings.ts:307
+#: src/lib/preferences/general/feedbackSettings.ts:312
 msgid "Hum"
 msgstr "Brum"
 
 #: src/lib/preferences/general/feedbackSettings.ts:164
-#: src/lib/preferences/general/feedbackSettings.ts:309
+#: src/lib/preferences/general/feedbackSettings.ts:314
 msgid "String"
 msgstr "Plum"
 
 #: src/lib/preferences/general/feedbackSettings.ts:165
-#: src/lib/preferences/general/feedbackSettings.ts:311
+#: src/lib/preferences/general/feedbackSettings.ts:316
 msgid "Swing"
 msgstr "Buczenie"
 
 #: src/lib/preferences/general/feedbackSettings.ts:166
-#: src/lib/preferences/general/feedbackSettings.ts:313
+#: src/lib/preferences/general/feedbackSettings.ts:318
 msgid "Message"
 msgstr "Wiadomość"
 
 #: src/lib/preferences/general/feedbackSettings.ts:167
-#: src/lib/preferences/general/feedbackSettings.ts:315
+#: src/lib/preferences/general/feedbackSettings.ts:320
 msgid "Message New Instant"
 msgstr "Nowa natychmiastowa wiadomość"
 
 #: src/lib/preferences/general/feedbackSettings.ts:168
-#: src/lib/preferences/general/feedbackSettings.ts:317
+#: src/lib/preferences/general/feedbackSettings.ts:322
 msgid "Bell"
 msgstr "Dzwonek"
 
 #: src/lib/preferences/general/feedbackSettings.ts:169
-#: src/lib/preferences/general/feedbackSettings.ts:319
+#: src/lib/preferences/general/feedbackSettings.ts:324
 msgid "Dialog Warning"
 msgstr "Komunikat ostrzegawczy"
 
@@ -1413,20 +1414,24 @@ msgid "Feedback"
 msgstr "Opinie"
 
 #: src/lib/preferences/general/feedbackSettings.ts:227
-msgid "Show Clipboard Icon in Indicator"
+msgid "Indicator Display"
 msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:228
-msgid "Show the clipboard icon in the indicator"
+msgid "Choose how the clipboard indicator appears in the top panel"
+msgstr ""
+
+#: src/lib/preferences/general/feedbackSettings.ts:231
+msgid "Icon Only"
+msgstr ""
+
+#: src/lib/preferences/general/feedbackSettings.ts:232
+msgid "Clipboard Content Only"
 msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:233
-msgid "Show Clipboard Content in Indicator"
-msgstr "Pokaż zawartość schowka we wskaźniku"
-
-#: src/lib/preferences/general/feedbackSettings.ts:234
-msgid "Show the current clipboard content in the indicator"
-msgstr "Pokaż bieżącą zawartość schowka we wskaźniku"
+msgid "Icon and Clipboard Content"
+msgstr ""
 
 #: src/lib/preferences/general/feedbackSettings.ts:239
 msgid "Wiggle Indicator"
@@ -1436,15 +1441,15 @@ msgstr "Wskaźnik drgający"
 msgid "Wiggle the indicator when a clipboard item is copied"
 msgstr "Włącz drganie wskaźnika, gdy element zostanie skopiowany do schowka"
 
-#: src/lib/preferences/general/feedbackSettings.ts:247
+#: src/lib/preferences/general/feedbackSettings.ts:245
 msgid "Send Notification"
 msgstr "Wyślij powiadomienie"
 
-#: src/lib/preferences/general/feedbackSettings.ts:248
+#: src/lib/preferences/general/feedbackSettings.ts:246
 msgid "Send a notification when a clipboard item is copied"
 msgstr "Wyślij powiadomienie, gdy element zostanie skopiowany do schowka"
 
-#: src/lib/preferences/general/feedbackSettings.ts:254
+#: src/lib/preferences/general/feedbackSettings.ts:252
 msgid "Sound to play when a clipboard item is copied"
 msgstr "Dźwięk odtwarzany po skopiowaniu elementu do schowka"
 
@@ -1792,7 +1797,7 @@ msgstr "Wyczyść historię"
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: src/lib/ui/indicator.ts:195
+#: src/lib/ui/indicator.ts:199
 #, javascript-format
 msgid "%d File"
 msgid_plural "%d Files"
@@ -2019,6 +2024,9 @@ msgstr "Skróty klawiszowe"
 #~ msgid "Shortcut to toggle incognito mode"
 #~ msgstr "Skrót do przełączenia trybu prywatnego"
 
+#~ msgid "Show Clipboard Content in Indicator"
+#~ msgstr "Pokaż zawartość schowka we wskaźniku"
+
 #~ msgid "Show Indicator"
 #~ msgstr "Pokaż wskaźnik"
 
@@ -2039,6 +2047,9 @@ msgstr "Skróty klawiszowe"
 
 #~ msgid "Show the clipboard dialog at the text cursor position"
 #~ msgstr "Pokaż okno dialogowe schowka w pozycji kursora tekstowego"
+
+#~ msgid "Show the current clipboard content in the indicator"
+#~ msgstr "Pokaż bieżącą zawartość schowka we wskaźniku"
 
 #~ msgid "Show the header of a clipboard item"
 #~ msgstr "Pokaż nagłówek elementu schowka'"

@@ -8,7 +8,7 @@ import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensio
 import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
-import { CopyousSettings } from '../../common/settings.js';
+import { CopyousSettings, IndicatorDisplay, bind_enum } from '../../common/settings.js';
 import { Sound, SoundManager } from '../../common/sound.js';
 import { makeResettable } from '../utils.js';
 
@@ -223,25 +223,23 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 			title: _('Feedback'),
 		});
 
-		const showIconIndicator = new Adw.SwitchRow({
-			title: _('Show Clipboard Icon in Indicator'),
-			subtitle: _('Show the clipboard icon in the indicator'),
+		const indicatorDisplay = new Adw.ComboRow({
+			title: _('Indicator Display'),
+			subtitle: _('Choose how the clipboard indicator appears in the top panel'),
+			model: Gtk.StringList.new([
+				_('Hidden'),
+				_('Icon Only'),
+				_('Clipboard Content Only'),
+				_('Icon and Clipboard Content'),
+			]),
 		});
-		this.add(showIconIndicator);
-
-		const showContentIndicator = new Adw.SwitchRow({
-			title: _('Show Clipboard Content in Indicator'),
-			subtitle: _('Show the current clipboard content in the indicator'),
-		});
-		this.add(showContentIndicator);
+		this.add(indicatorDisplay);
 
 		const wiggleIndicator = new Adw.SwitchRow({
 			title: _('Wiggle Indicator'),
 			subtitle: _('Wiggle the indicator when a clipboard item is copied'),
 		});
 		this.add(wiggleIndicator);
-		showIconIndicator.bind_property('active', wiggleIndicator, 'sensitive', null);
-		this.connect('map', () => (wiggleIndicator.sensitive = showIconIndicator.active));
 
 		const sendNotification = new Adw.SwitchRow({
 			title: _('Send Notification'),
@@ -269,10 +267,17 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 
 		// Bind properties
 		const settings: CopyousSettings = prefs.getSettings();
-		settings.bind('show-indicator', showIconIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
-		settings.bind('show-content-indicator', showContentIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
+		bind_enum(settings, 'indicator-display', indicatorDisplay, 'selected');
 		settings.bind('wiggle-indicator', wiggleIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('send-notification', sendNotification, 'active', Gio.SettingsBindFlags.DEFAULT);
+
+		const updateWiggleSensitivity = () => {
+			wiggleIndicator.sensitive =
+				indicatorDisplay.selected === IndicatorDisplay.IconOnly ||
+				indicatorDisplay.selected === IndicatorDisplay.IconAndClipboardContent;
+		};
+		indicatorDisplay.connect('notify::selected', updateWiggleSensitivity);
+		updateWiggleSensitivity();
 
 		makeResettable(playSound, settings, 'sound', 'volume');
 
