@@ -15,10 +15,11 @@ import { Icon, loadIcon } from '../common/icons.js';
 import { ClipboardEntry } from '../database/database.js';
 import { TagsItem } from './components/tagsItem.js';
 
+const SearchCollator = new Intl.Collator(undefined, { sensitivity: 'base' });
+
 function localeContains(text: string, query: string): boolean {
-	const collator = new Intl.Collator(undefined, { sensitivity: 'base' });
 	for (let offset = 0; offset <= text.length - query.length; offset++) {
-		const comparison = collator.compare(text.substring(offset, offset + query.length), query);
+		const comparison = SearchCollator.compare(text.substring(offset, offset + query.length), query);
 		if (comparison === 0) return true;
 	}
 	return false;
@@ -85,9 +86,9 @@ export class SearchQuery extends GObject.Object {
 		if (this.change === SearchChange.LessStrict && state) return true;
 		if (this.change === SearchChange.MoreStrict && !state) return false;
 
-		// Include entry title in search texts
-		const searchTexts = entry.title ? [...text, entry.title] : text;
-		return this.matchesProperties(entry.pinned, entry.tag, entry.type) && this.matchesQuery(...searchTexts);
+		if (!this.matchesProperties(entry.pinned, entry.tag, entry.type)) return false;
+		if (this.matchesQuery(...text)) return true;
+		return entry.title ? this.matchesQuery(entry.title) : false;
 	}
 
 	public withChange(change: SearchChange): SearchQuery {
@@ -417,6 +418,7 @@ export class SearchEntry extends St.Entry {
 	get searchQuery(): SearchQuery {
 		const excludePinned = this.ext.settings.get_boolean('exclude-pinned');
 		const excludeTagged = this.ext.settings.get_boolean('exclude-tagged');
+		const query = this.text;
 
 		let change: SearchChange;
 		if (!this._prevSearch) {
@@ -424,9 +426,9 @@ export class SearchEntry extends St.Entry {
 		} else {
 			// Query
 			let queryChange: SearchChange;
-			if (this.text === this._prevSearch.query) queryChange = SearchChange.Same;
-			else if (this.text.includes(this._prevSearch.query)) queryChange = SearchChange.MoreStrict;
-			else if (this._prevSearch.query.includes(this.text)) queryChange = SearchChange.LessStrict;
+			if (query === this._prevSearch.query) queryChange = SearchChange.Same;
+			else if (query.includes(this._prevSearch.query)) queryChange = SearchChange.MoreStrict;
+			else if (this._prevSearch.query.includes(query)) queryChange = SearchChange.LessStrict;
 			else queryChange = SearchChange.Different;
 
 			change = queryChange;
@@ -475,7 +477,7 @@ export class SearchEntry extends St.Entry {
 				change = change === SearchChange.Same || change === typeChange ? typeChange : SearchChange.Different;
 		}
 
-		return new SearchQuery(change, this.text, this.pinned, excludePinned, this.tag, excludeTagged, this.type);
+		return new SearchQuery(change, query, this.pinned, excludePinned, this.tag, excludeTagged, this.type);
 	}
 
 	private search() {
