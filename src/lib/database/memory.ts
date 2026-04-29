@@ -110,22 +110,19 @@ export class MemoryDatabase implements Database {
 
 	public async deleteOldest(offset: number, olderThanMinutes: number): Promise<number[]> {
 		const entries = await this.entries();
-		let deleted = entries
-			.filter((e) => !(e.pinned || e.tag))
-			.map((e) => e.id)
-			.slice(offset);
+		const unprotected = entries.filter((e) => !(e.pinned || e.tag));
+		const deleted = unprotected.slice(offset).map((e) => e.id);
 
 		if (olderThanMinutes > 0) {
 			const now = GLib.DateTime.new_now_utc();
 			const olderThan = now.add_minutes(-olderThanMinutes)!;
-			deleted = [
-				...new Set([
-					...deleted,
-					...entries
-						.filter((e) => !(e.pinned || e.tag) && e.datetime.compare(olderThan) < 0)
-						.map((e) => e.id),
-				]),
-			];
+			const deletedIds = new Set(deleted);
+			for (const entry of unprotected) {
+				if (!deletedIds.has(entry.id) && entry.datetime.compare(olderThan) < 0) {
+					deletedIds.add(entry.id);
+					deleted.push(entry.id);
+				}
+			}
 		}
 
 		for (const id of deleted) {
