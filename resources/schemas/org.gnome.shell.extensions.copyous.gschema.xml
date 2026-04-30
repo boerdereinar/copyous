@@ -63,6 +63,13 @@
 		<value nick="delete" value="2"/>
 	</enum>
 
+	<enum id="org.gnome.shell.extensions.copyous.IndicatorDisplay">
+		<value nick="hidden" value="0"/>
+		<value nick="icon-only" value="1"/>
+		<value nick="clipboard-content-only" value="2"/>
+		<value nick="icon-and-clipboard-content" value="3"/>
+	</enum>
+
 	<enum id="org.gnome.shell.extensions.copyous.TextCountMode">
 		<value nick="characters" value="0"/>
 		<value nick="words" value="1"/>
@@ -166,13 +173,17 @@
 		</key>
 
 		<!-- Feedback -->
+		<key name="indicator-display" enum="org.gnome.shell.extensions.copyous.IndicatorDisplay">
+			<default>'icon-only'</default>
+			<summary>Choose how the clipboard indicator appears in the top panel</summary>
+		</key>
 		<key name="show-indicator" type="b">
 			<default>true</default>
-			<summary>Show an indicator on the top panel</summary>
+			<summary>Show the clipboard icon in the indicator (Deprecated)</summary>
 		</key>
 		<key name="show-content-indicator" type="b">
 			<default>false</default>
-			<summary>Show the current clipboard content in the indicator</summary>
+			<summary>Show the current clipboard content in the indicator (Deprecated)</summary>
 		</key>
 		<key name="wiggle-indicator" type="b">
 			<default>true</default>

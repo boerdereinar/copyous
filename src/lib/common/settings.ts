@@ -22,6 +22,7 @@ export const Settings = {
 	SyncPrimary: 'sync-primary',
 	UpdateDateOnCopy: 'update-date-on-copy',
 
+	IndicatorDisplay: 'indicator-display',
 	ShowIndicator: 'show-indicator',
 	ShowContentIndicator: 'show-content-indicator',
 	WiggleIndicator: 'wiggle-indicator',
@@ -152,8 +153,9 @@ export const SettingsTypes = {
 	[Settings.SyncPrimary]: 'boolean',
 	[Settings.UpdateDateOnCopy]: 'boolean',
 
-	[Settings.ShowIndicator]: 'boolean',
-	[Settings.ShowContentIndicator]: 'boolean',
+	[Settings.IndicatorDisplay]: 'enum',
+	[Settings.ShowIndicator]: 'boolean', // deprecated
+	[Settings.ShowContentIndicator]: 'boolean', // deprecated
 	[Settings.WiggleIndicator]: 'boolean',
 	[Settings.SendNotification]: 'boolean',
 	[Settings.Sound]: 'string',
@@ -368,9 +370,19 @@ export const MiddleClickAction = {
 
 export type MiddleClickAction = (typeof MiddleClickAction)[keyof typeof MiddleClickAction];
 
+export const IndicatorDisplay = {
+	Hidden: 0,
+	IconOnly: 1,
+	ClipboardContentOnly: 2,
+	IconAndClipboardContent: 3,
+} as const;
+
+export type IndicatorDisplay = (typeof IndicatorDisplay)[keyof typeof IndicatorDisplay];
+
 type SettingsEnumTypes = {
 	[Settings.DatabaseBackend]: DatabaseBackend;
 	[Settings.ClipboardHistory]: ClipboardHistory;
+	[Settings.IndicatorDisplay]: IndicatorDisplay;
 	[Settings.ClipboardOrientation]: Orientation;
 	[Settings.ClipboardPositionVertical]: Position;
 	[Settings.ClipboardPositionHorizontal]: Position;
@@ -522,9 +534,28 @@ export function bind_flags<T, TEnum extends { [K in KeysWithValue<T, 'enum'> | K
 	});
 }
 
+function getIndicatorDisplay(showIcon: boolean, showContent: boolean): IndicatorDisplay {
+	if (showIcon && showContent) return IndicatorDisplay.IconAndClipboardContent;
+	if (showIcon) return IndicatorDisplay.IconOnly;
+	if (showContent) return IndicatorDisplay.ClipboardContentOnly;
+	return IndicatorDisplay.Hidden;
+}
+
 export function migrateSettings(settings: CopyousSettings): void {
 	// inverted paste-on-copy -> swap-copy-shortcut
 	const pasteOnCopy = settings.get_user_value<'b'>('paste-on-copy');
 	if (pasteOnCopy !== null) settings.set_boolean('swap-copy-shortcut', !pasteOnCopy.get_boolean());
 	settings.reset('paste-on-copy');
+
+	// show-indicator + show-content-indicator -> indicator-display
+	const indicatorDisplay = settings.get_user_value('indicator-display');
+	const showIndicator = settings.get_user_value<'b'>('show-indicator');
+	const showContentIndicator = settings.get_user_value<'b'>('show-content-indicator');
+	if (indicatorDisplay === null && (showIndicator !== null || showContentIndicator !== null)) {
+		const showIcon = showIndicator?.get_boolean() ?? settings.get_boolean('show-indicator');
+		const showContent = showContentIndicator?.get_boolean() ?? settings.get_boolean('show-content-indicator');
+		settings.set_enum('indicator-display', getIndicatorDisplay(showIcon, showContent));
+	}
+	settings.reset('show-indicator');
+	settings.reset('show-content-indicator');
 }
