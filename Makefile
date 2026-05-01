@@ -177,10 +177,19 @@ $(DIST_DIR)/resources.gresource: resources/resources.gresource.xml resources/css
 $(DIST_DIR)/theme.gresource: resources/theme.gresource.xml $(CSS) | $(DIST_DIR)
 	glib-compile-resources --target=$@ --sourcedir=$(@D) $<
 
+HLJS := $(DIST_DIR)/thirdparty/highlight.min.js
 RESOURCES := $(DIST_DIR)/resources.gresource $(DIST_DIR)/theme.gresource
 
+# highlight.js
+HLJS_URL := https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/es/highlight.min.js
+HLJS_SHA512 := f35f24636b981f53d194735964bd7b8606c79e0f4b04e800e24f13415b1761368ac20839a4cc416a1c5e1c351d00c4cf509f360972d098964e97739050a675f1
+$(HLJS): | $(DIST_DIR)
+	@mkdir -p $(@D)
+	curl -fsSL $(HLJS_URL) -o $@
+	echo "$(HLJS_SHA512)  $@" | sha512sum -c
+
 # Build all
-$(DIST_ZIP): $(DIST_DIR)/metadata.json $(TSC) $(CSS) $(SCHEMAS) $(DEBUG_SCHEMAS) $(RESOURCES) | $(DIST_DIR)
+$(DIST_ZIP): $(DIST_DIR)/metadata.json $(TSC) $(CSS) $(SCHEMAS) $(DEBUG_SCHEMAS) $(RESOURCES) $(HLJS) | $(DIST_DIR)
 	gnome-extensions pack $(DIST_DIR) -o $(@D) \
 		--force \
 		--podir=$(PO_PATH) \
