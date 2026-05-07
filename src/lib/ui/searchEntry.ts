@@ -15,11 +15,15 @@ import { Icon, loadIcon } from '../common/icons.js';
 import { ClipboardEntry } from '../database/database.js';
 import { TagsItem } from './components/tagsItem.js';
 
+// Reused across calls: constructing Intl.Collator is non-trivial, and a single
+// search batch invokes localeContains once per item per text field.
+const _collator = new Intl.Collator(undefined, { sensitivity: 'base' });
+
 function localeContains(text: string, query: string): boolean {
-	const collator = new Intl.Collator(undefined, { sensitivity: 'base' });
-	for (let offset = 0; offset <= text.length - query.length; offset++) {
-		const comparison = collator.compare(text.substring(offset, offset + query.length), query);
-		if (comparison === 0) return true;
+	const queryLen = query.length;
+	const limit = text.length - queryLen;
+	for (let offset = 0; offset <= limit; offset++) {
+		if (_collator.compare(text.substring(offset, offset + queryLen), query) === 0) return true;
 	}
 	return false;
 }

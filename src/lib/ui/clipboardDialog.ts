@@ -34,7 +34,7 @@ import { TextItem } from './items/textItem.js';
 import { CenterBox, CollapsibleHeaderLayout, FitConstraint } from './layout.js';
 import { SearchEntry, SearchQuery } from './searchEntry.js';
 
-const ANIMATION_TIME = 150;
+const ANIMATION_TIME = 100;
 
 @registerClass()
 class IncognitoButton extends St.Button {
@@ -260,6 +260,7 @@ export class ClipboardDialog extends St.Widget {
 	private _cursor: [number, number] | null = null;
 
 	private _orientation: Clutter.Orientation = Clutter.Orientation.HORIZONTAL;
+	private _layoutDirty: boolean = true;
 
 	private readonly _ibusManager: IBusManager.IBusManager;
 
@@ -378,22 +379,29 @@ export class ClipboardDialog extends St.Widget {
 		// Bind properties
 		// prettier-ignore
 		this.ext.settings.connectObject(
-			'changed::show-at-pointer', this.updatePosition.bind(this),
-			'changed::clipboard-orientation', this.updatePosition.bind(this),
-			'changed::clipboard-position-horizontal', this.updatePosition.bind(this),
-			'changed::clipboard-position-vertical', this.updatePosition.bind(this),
-			'changed::clipboard-size', this.updatePosition.bind(this),
-			'changed::clipboard-margin-top', this.updateMargins.bind(this),
-			'changed::clipboard-margin-bottom', this.updateMargins.bind(this),
-			'changed::clipboard-margin-left', this.updateMargins.bind(this),
-			'changed::clipboard-margin-right', this.updateMargins.bind(this),
+			'changed::show-at-pointer', this.markLayoutDirty.bind(this),
+			'changed::clipboard-orientation', this.markLayoutDirty.bind(this),
+			'changed::clipboard-position-horizontal', this.markLayoutDirty.bind(this),
+			'changed::clipboard-position-vertical', this.markLayoutDirty.bind(this),
+			'changed::clipboard-size', this.markLayoutDirty.bind(this),
+			'changed::clipboard-margin-top', this.markLayoutDirty.bind(this),
+			'changed::clipboard-margin-bottom', this.markLayoutDirty.bind(this),
+			'changed::clipboard-margin-left', this.markLayoutDirty.bind(this),
+			'changed::clipboard-margin-right', this.markLayoutDirty.bind(this),
 			this);
+	}
 
+	private markLayoutDirty() {
+		this._layoutDirty = true;
+		// If currently visible, apply immediately so user-driven setting changes are reflected.
+		if (this.opened) this.applyLayoutIfDirty();
+	}
+
+	private applyLayoutIfDirty() {
+		if (!this._layoutDirty) return;
+		this._layoutDirty = false;
 		this.updatePosition();
 		this.updateMargins();
-
-		// Update initial search for when exclude-pinned or exclude-tagged is enabled
-		this._scrollView.search(this._header.searchEntry.searchQuery);
 	}
 
 	override destroy() {
@@ -418,8 +426,20 @@ export class ClipboardDialog extends St.Widget {
 		else this.close();
 	}
 
+	public preWarm() {
+		// Force one layout pass while still hidden so first open() is snappier.
+		// Reading get_preferred_size triggers Clutter's allocation cycle, which
+		// caches style nodes and child measurements.
+		this.applyLayoutIfDirty();
+		this._dialog.get_preferred_size();
+	}
+
 	public open() {
 		if (this.opened) return;
+
+		// Lazy: layout settings are read on first open (and after any change)
+		// instead of in the constructor, keeping the deferred enable cheap.
+		this.applyLayoutIfDirty();
 
 		this._updateCursor = false;
 		this._nextCursor = this._cursor;
@@ -533,6 +553,24 @@ export class ClipboardDialog extends St.Widget {
 	}
 
 	public addEntry(entry: ClipboardEntry): void {
+		const item = this.createItem(entry);
+		if (!item) return;
+		this._scrollView.addItem(item);
+	}
+
+	public loadEntries(entries: ClipboardEntry[]): void {
+		const items = [];
+		for (const entry of entries) {
+			const item = this.createItem(entry);
+			if (item) items.push(item);
+		}
+		this._scrollView.loadItems(items);
+
+		// Apply initial search filter for exclude-pinned / exclude-tagged once after bulk load.
+		this._scrollView.search(this._header.searchEntry.searchQuery);
+	}
+
+	private createItem(entry: ClipboardEntry) {
 		let item;
 		try {
 			item = (() => {
@@ -560,11 +598,11 @@ export class ClipboardDialog extends St.Widget {
 
 			if (!item) {
 				this.ext.logger.error('Unknown item type', entry);
-				return;
+				return null;
 			}
 		} catch (e) {
 			this.ext.logger.error(e);
-			return;
+			return null;
 		}
 
 		// Connect edit
@@ -621,7 +659,7 @@ export class ClipboardDialog extends St.Widget {
 			this,
 		);
 
-		this._scrollView.addItem(item);
+		return item;
 	}
 
 	public dialogShortcut() {

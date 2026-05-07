@@ -33,6 +33,7 @@ export class ClipboardItem extends St.Button {
 	private _protectPinned: boolean = true;
 	private _protectTagged: boolean = true;
 	private _middleClickAction: MiddleClickAction = MiddleClickAction.None;
+	private _headerShown: boolean | null = null;
 
 	private readonly _box: St.Widget;
 	private readonly _header: ClipboardItemHeader;
@@ -176,14 +177,24 @@ export class ClipboardItem extends St.Button {
 		this._header.showTitle = this.ext.settings.get_boolean('show-item-title');
 		this._header.controlsVisibility = this.ext.settings.get_enum('header-controls-visibility');
 
+		// Skip the layout-manager / sibling swap when state is unchanged: this
+		// is called once per item during bulk load, and replacing layout_manager
+		// triggers a full relayout pass per item.
+		if (this._headerShown === show) return;
+		this._headerShown = show;
+
 		if (show) {
 			this.remove_style_class_name('no-header');
 			this._box.set_child_above_sibling(this._content, this._header);
-			this._box.layout_manager = new Clutter.BoxLayout({ orientation: Clutter.Orientation.VERTICAL });
+			if (!(this._box.layout_manager instanceof Clutter.BoxLayout)) {
+				this._box.layout_manager = new Clutter.BoxLayout({ orientation: Clutter.Orientation.VERTICAL });
+			}
 		} else {
 			this.add_style_class_name('no-header');
 			this._box.set_child_above_sibling(this._header, this._content);
-			this._box.layout_manager = new Clutter.BinLayout();
+			if (!(this._box.layout_manager instanceof Clutter.BinLayout)) {
+				this._box.layout_manager = new Clutter.BinLayout();
+			}
 		}
 	}
 
