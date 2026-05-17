@@ -47,11 +47,17 @@ export class CharacterItem extends ClipboardItem {
 			y_align: Clutter.ActorAlign.END,
 		});
 		this._content.add_child(this._chars);
+	}
 
-		// Bind properties
-		this.characterItemSettings.connectObject('changed::show-unicode', this.updateSettings.bind(this), this);
-
-		this.updateSettings();
+	private _charInitialized: boolean = false;
+	override vfunc_map(): void {
+		if (!this._charInitialized) {
+			this._charInitialized = true;
+			// Bind properties
+			this.characterItemSettings.connectObject('changed::show-unicode', this.updateSettings.bind(this), this);
+			this.updateSettings();
+		}
+		super.vfunc_map();
 	}
 
 	private updateSettings() {

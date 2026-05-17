@@ -46,19 +46,25 @@ export class ImageItem extends ClipboardItem {
 		this._imagePreview = new ImagePreview(ext, file);
 		this._content.add_child(this._imagePreview);
 
-		// Bind properties
-		this.imageItemSettings.connectObject(
-			'changed::show-image-info',
-			this.updateSettings.bind(this),
-			'changed::background-size',
-			this.updateSettings.bind(this),
-			this,
-		);
-
-		this.updateSettings();
-
 		// Hover effect
 		this.bind_property('active', this._imagePreview, 'active', GObject.BindingFlags.DEFAULT);
+	}
+
+	private _imageInitialized: boolean = false;
+	override vfunc_map(): void {
+		if (!this._imageInitialized) {
+			this._imageInitialized = true;
+			// Bind properties
+			this.imageItemSettings.connectObject(
+				'changed::show-image-info',
+				this.updateSettings.bind(this),
+				'changed::background-size',
+				this.updateSettings.bind(this),
+				this,
+			);
+			this.updateSettings();
+		}
+		super.vfunc_map();
 	}
 
 	get showImageInfo() {

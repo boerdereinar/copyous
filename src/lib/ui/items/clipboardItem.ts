@@ -72,7 +72,7 @@ export class ClipboardItem extends St.Button {
 			x_expand: true,
 			y_expand: true,
 			clip_to_allocation: true,
-			effect: new HoleEffect(this._header.buttons),
+			// HoleEffect (GLSL shader) is deferred to vfunc_map for performance
 		});
 		this._box.add_child(this._content);
 
@@ -91,20 +91,6 @@ export class ClipboardItem extends St.Button {
 			'custom-title',
 			GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
 		);
-
-		// prettier-ignore
-		this.ext.settings.connectObject(
-			'changed::item-width', this.updateSize.bind(this),
-			'changed::item-height', this.updateSize.bind(this),
-			'changed::dynamic-item-height', this.updateSize.bind(this),
-			'changed::clipboard-orientation', this.updateSize.bind(this),
-			'changed::protect-pinned', this.updateProtection.bind(this),
-			'changed::protect-tagged', this.updateProtection.bind(this),
-			'changed::middle-click-action', this.updateMiddleClickAction.bind(this),
-			'changed::show-header', this.updateHeader.bind(this),
-			'changed::show-item-title', this.updateHeader.bind(this),
-			'changed::header-controls-visibility', this.updateHeader.bind(this),
-			this);
 
 		this.bind_property('active', this._header, 'active', GObject.BindingFlags.SYNC_CREATE);
 		this.ext.shortcutsManager?.bind_property(
@@ -236,6 +222,37 @@ export class ClipboardItem extends St.Button {
 	override vfunc_key_focus_out(): void {
 		super.vfunc_key_focus_out();
 		this.notify('active');
+	}
+
+	private _settingsInitialized: boolean = false;
+	override vfunc_map(): void {
+		// Deferred initialization: GLSL shader and settings connections
+		// are only created when the item is first mapped (scrolled into view).
+		// This avoids compiling N shaders and creating N*10 signal connections
+		// during bulk loading when items aren't even visible.
+		if (!this._settingsInitialized) {
+			this._settingsInitialized = true;
+
+			// Create the GLSL shader now that we're visible
+			this._content.effect = new HoleEffect(this._header.buttons);
+
+			// Connect settings change handlers
+			// prettier-ignore
+			this.ext.settings.connectObject(
+				'changed::item-width', this.updateSize.bind(this),
+				'changed::item-height', this.updateSize.bind(this),
+				'changed::dynamic-item-height', this.updateSize.bind(this),
+				'changed::clipboard-orientation', this.updateSize.bind(this),
+				'changed::protect-pinned', this.updateProtection.bind(this),
+				'changed::protect-tagged', this.updateProtection.bind(this),
+				'changed::middle-click-action', this.updateMiddleClickAction.bind(this),
+				'changed::show-header', this.updateHeader.bind(this),
+				'changed::show-item-title', this.updateHeader.bind(this),
+				'changed::header-controls-visibility', this.updateHeader.bind(this),
+				this);
+		}
+
+		super.vfunc_map();
 	}
 
 	override vfunc_key_press_event(event: Clutter.Event): boolean {

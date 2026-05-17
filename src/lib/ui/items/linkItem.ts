@@ -314,13 +314,19 @@ export class LinkItem extends ClipboardItem {
 		this._url.clutter_text.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
 		this._content.add_child(this._url);
 
-		// Bind properties
-		this.linkItemSettings.connectObject('changed', this.updateLinkPreview.bind(this), this);
-		this.ext.settings.connectObject('changed::show-header', this.updateLinkPreview.bind(this), this);
-
+		// Bind properties (deferred settings connections to vfunc_map)
 		this.bind_property('active', this._linkPreview, 'active', GObject.BindingFlags.DEFAULT);
+	}
 
-		this.updateLinkPreview().catch(() => {});
+	private _linkInitialized: boolean = false;
+	override vfunc_map(): void {
+		if (!this._linkInitialized) {
+			this._linkInitialized = true;
+			this.linkItemSettings.connectObject('changed', this.updateLinkPreview.bind(this), this);
+			this.ext.settings.connectObject('changed::show-header', this.updateLinkPreview.bind(this), this);
+			this.updateLinkPreview().catch(() => {});
+		}
+		super.vfunc_map();
 	}
 
 	public override search(query: SearchQuery): void {

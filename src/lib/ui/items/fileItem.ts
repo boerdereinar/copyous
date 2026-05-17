@@ -64,11 +64,18 @@ export class FileItem extends ClipboardItem {
 		this._file.clutter_text.line_wrap = true;
 		this._file.clutter_text.ellipsize = Pango.EllipsizeMode.MIDDLE;
 		this._content.add_child(this._file);
+	}
 
-		// Bind properties
-		this.fileItemSettings.connectObject('changed', this.updateFilePreview.bind(this), this);
-		const logger = this.ext.logger;
-		this.updateFilePreview().catch(logger.error.bind(logger));
+	private _fileInitialized: boolean = false;
+	override vfunc_map(): void {
+		if (!this._fileInitialized) {
+			this._fileInitialized = true;
+			// Bind properties
+			this.fileItemSettings.connectObject('changed', this.updateFilePreview.bind(this), this);
+			const logger = this.ext.logger;
+			this.updateFilePreview().catch(logger.error.bind(logger));
+		}
+		super.vfunc_map();
 	}
 
 	public override search(query: SearchQuery): void {

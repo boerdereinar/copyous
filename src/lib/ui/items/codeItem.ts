@@ -36,20 +36,6 @@ export class CodeItem extends ClipboardItem {
 		});
 		this._content.add_child(this._code);
 
-		this.codeItemSettings.connectObject(
-			'changed::syntax-highlighting',
-			this.updateCode.bind(this),
-			'changed::show-line-numbers',
-			this.updateCode.bind(this),
-			'changed::show-code-info',
-			this.updateCodeInfo.bind(this),
-			'changed::text-count-mode',
-			this.updateCodeInfo.bind(this),
-			this,
-		);
-
-		this.ext.settings.connectObject('changed::tab-width', this.updateCode.bind(this), this._code);
-
 		// Update label
 		this.entry.bind_property('content', this._code, 'code', GObject.BindingFlags.SYNC_CREATE);
 		this.entry.connectObject(
@@ -64,13 +50,35 @@ export class CodeItem extends ClipboardItem {
 			this,
 		);
 
-		this.updateCode();
-		this.updateCodeInfo();
-
 		// Update metadata
 		this._code.connect('notify::language', () => {
 			this.entry.metadata = { language: this._code.language } as CodeMetadata;
 		});
+	}
+
+	private _codeInitialized: boolean = false;
+	override vfunc_map(): void {
+		if (!this._codeInitialized) {
+			this._codeInitialized = true;
+
+			this.codeItemSettings.connectObject(
+				'changed::syntax-highlighting',
+				this.updateCode.bind(this),
+				'changed::show-line-numbers',
+				this.updateCode.bind(this),
+				'changed::show-code-info',
+				this.updateCodeInfo.bind(this),
+				'changed::text-count-mode',
+				this.updateCodeInfo.bind(this),
+				this,
+			);
+
+			this.ext.settings.connectObject('changed::tab-width', this.updateCode.bind(this), this._code);
+
+			this.updateCode();
+			this.updateCodeInfo();
+		}
+		super.vfunc_map();
 	}
 
 	private updateCode() {
