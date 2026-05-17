@@ -19,6 +19,7 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 	private readonly _statusItem: StatusItem;
 	private _lastFocus: Clutter.Actor | null = null;
 	private _lastQuery: SearchQuery | null = null;
+	private _bulkLoading: boolean = false;
 
 	constructor(ext: CopyousExtension) {
 		super({
@@ -117,8 +118,14 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 		}
 	}
 
-	public addItem(item: ClipboardItem): void {
-		this.insertOrMoveItem(item);
+	public addItem(item: ClipboardItem, bulk: boolean = false): void {
+		if (bulk || this._bulkLoading) {
+			// During bulk loading, skip sorted insertion and search.
+			// Items from DB are already sorted by datetime.
+			this.add_child(item);
+		} else {
+			this.insertOrMoveItem(item);
+		}
 
 		// Move item when datetime changes
 		item.entry.connect('notify::datetime', () => this.insertOrMoveItem(item, false));
@@ -133,6 +140,15 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 		item.entry.connect('notify::type', () => this.updateSearch(item));
 		item.entry.connect('notify::metadata', () => this.updateSearch(item));
 		item.entry.connect('notify::title', () => this.updateSearch(item));
+	}
+
+	public beginBulkAdd(): void {
+		this._bulkLoading = true;
+	}
+
+	public endBulkAdd(): void {
+		this._bulkLoading = false;
+		this.updateVisible();
 	}
 
 	private insertOrMoveItem(item: ClipboardItem, search: boolean = true): void {

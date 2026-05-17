@@ -37,14 +37,20 @@ export class TextItem extends ClipboardItem {
 		this._text.clutter_text.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
 		this._content.add_child(this._text);
 
-		this.textItemSettings.connectObject('changed', this.updateTextInfo.bind(this), this);
-		this.ext.settings.connectObject('changed::tab-width', this.updateText.bind(this), this._text);
-
 		entry.bind_property('content', this._text, 'label', GObject.BindingFlags.SYNC_CREATE);
-		entry.connectObject('notify::content', this.updateTextInfo.bind(this));
+	}
 
-		this.updateText();
-		this.updateTextInfo();
+	private _textInitialized: boolean = false;
+	override vfunc_map(): void {
+		if (!this._textInitialized) {
+			this._textInitialized = true;
+			this.textItemSettings.connectObject('changed', this.updateTextInfo.bind(this), this);
+			this.ext.settings.connectObject('changed::tab-width', this.updateText.bind(this), this._text);
+			this.entry.connectObject('notify::content', this.updateTextInfo.bind(this));
+			this.updateText();
+			this.updateTextInfo();
+		}
+		super.vfunc_map();
 	}
 
 	private updateText() {

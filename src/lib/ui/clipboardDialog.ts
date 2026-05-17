@@ -393,8 +393,8 @@ export class ClipboardDialog extends St.Widget {
 		this.updatePosition();
 		this.updateMargins();
 
-		// Update initial search for when exclude-pinned or exclude-tagged is enabled
-		this._scrollView.search(this._header.searchEntry.searchQuery);
+		// Initial search is deferred to vfunc_map for performance
+		// (avoids running search during construction when no items are visible yet)
 	}
 
 	override destroy() {
@@ -535,7 +535,7 @@ export class ClipboardDialog extends St.Widget {
 		});
 	}
 
-	public addEntry(entry: ClipboardEntry): void {
+	public addEntry(entry: ClipboardEntry, bulk: boolean = false): void {
 		let item;
 		try {
 			item = (() => {
@@ -624,7 +624,15 @@ export class ClipboardDialog extends St.Widget {
 			this,
 		);
 
-		this._scrollView.addItem(item);
+		this._scrollView.addItem(item, bulk);
+	}
+
+	public beginBulkAdd(): void {
+		this._scrollView.beginBulkAdd();
+	}
+
+	public endBulkAdd(): void {
+		this._scrollView.endBulkAdd();
 	}
 
 	public dialogShortcut() {
@@ -836,6 +844,9 @@ export class ClipboardDialog extends St.Widget {
 
 		// Update fit constraint
 		this.updateFitConstraint();
+
+		// Run initial search (deferred from constructor for performance)
+		this._scrollView.search(this._header.searchEntry.searchQuery);
 
 		// Navigate to first item
 		if (!this._scrollView.navigate_focus(null, St.DirectionType.DOWN, false)) {
