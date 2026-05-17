@@ -42,15 +42,34 @@ type ClipboardContent =
 	| { type: (typeof ContentType)['Image']; mimetype: string; data: Uint8Array; checksum: string }
 	| { type: (typeof ContentType)['File']; paths: string[]; operation: FileOperation };
 
+// Max bytes to hash for text content — caps checksum to O(1).
+// Collisions are harmless: selectConflict in the DB compares full content.
+const CHECKSUM_TEXT_LIMIT = 8192;
+
 function contentChecksum(content: ClipboardContent): string | null {
 	switch (content.type) {
-		case ContentType.Text:
-			return GLib.compute_checksum_for_string(GLib.ChecksumType.MD5, content.text, content.text.length);
+		case ContentType.Text: {
+			// Use Utf8Encoder + compute_checksum_for_bytes to:
+			//   - avoid implicit GJS UTF-16→UTF-8 marshaling overhead
+			//   - cap input size for O(1) hashing
+			const text = content.text.length > CHECKSUM_TEXT_LIMIT
+				? content.text.slice(0, CHECKSUM_TEXT_LIMIT)
+				: content.text;
+			const bytes = new GLib.Bytes(Utf8Encoder.encode(text));
+			return GLib.compute_checksum_for_bytes(GLib.ChecksumType.MD5, bytes);
+		}
 		case ContentType.Image:
 			return content.checksum;
 		case ContentType.File: {
-			const s = content.paths.map((f) => decodeURI(f).substring('file://'.length)).join('\n');
-			return GLib.compute_checksum_for_string(GLib.ChecksumType.MD5, s, s.length);
+			// Incremental hashing: avoids .map()/.join() allocations
+			// and the giant intermediate string they produce.
+			const checksum = new GLib.Checksum(GLib.ChecksumType.MD5);
+			for (const path of content.paths) {
+				const decoded = decodeURI(path).substring(7); // strip "file://"
+				checksum.update(Utf8Encoder.encode(decoded));
+				checksum.update(Utf8Encoder.encode('\n'));
+			}
+			return checksum.get_string();
 		}
 	}
 }
