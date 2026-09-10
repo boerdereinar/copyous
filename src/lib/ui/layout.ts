@@ -29,6 +29,7 @@ export class FitConstraint extends Clutter.Constraint {
 	}
 
 	set source(source: Clutter.Actor) {
+		if (this._source === source) return;
 		this._source = source;
 		if (this.actor) this.actor.queue_relayout();
 		this.notify('source');
@@ -39,6 +40,7 @@ export class FitConstraint extends Clutter.Constraint {
 	}
 
 	set x(x: number) {
+		if (this._x === x) return;
 		this._x = x;
 		if (this.actor) this.actor.queue_relayout();
 		this.notify('x');
@@ -49,6 +51,7 @@ export class FitConstraint extends Clutter.Constraint {
 	}
 
 	set y(y: number) {
+		if (this._y === y) return;
 		this._y = y;
 		if (this.actor) this.actor.queue_relayout();
 		this.notify('y');

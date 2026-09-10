@@ -12,7 +12,7 @@ import type CopyousExtension from '../../../extension.js';
 import { enumParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
 import { TextCountMode } from '../../common/settings.js';
-import { FileType } from './contentPreview.js';
+import { FileType, fileExists } from './contentPreview.js';
 
 const GraphemeSegmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
 const WordSegmenter = new Intl.Segmenter(undefined, { granularity: 'word' });
@@ -340,7 +340,7 @@ export async function createFileInfo(
 	cancellable: Gio.Cancellable,
 ): Promise<FileInfo> {
 	try {
-		if (!file.query_exists(null)) {
+		if (!(await fileExists(file))) {
 			return new MissingFileInfo(ext);
 		}
 

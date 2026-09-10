@@ -152,6 +152,7 @@ export class LinkPreview extends St.Widget {
 
 			tryGetLinkImage(this.ext, this._metadata.image, this._cancellable)
 				.then((image) => {
+					if (this._cancellable.is_cancelled()) return;
 					if (image) {
 						this._image = new ImagePreview(this.ext, image);
 						this._image.backgroundSize = this._backgroundSize;
@@ -166,7 +167,8 @@ export class LinkPreview extends St.Widget {
 		this._title.visible = this._metadata?.title != null || this._metadata?.description != null;
 		this._description.visible = this._metadata?.title != null && this._metadata?.description != null;
 
-		this.queue_relayout();
+		// No explicit queue_relayout(): the visibility assignments above
+		// already queue a relayout when something actually changed.
 	}
 
 	override vfunc_get_preferred_height(for_width: number): [number, number] {
@@ -363,6 +365,7 @@ export class LinkItem extends ClipboardItem {
 			this._linkPreview.metadata ??= metadata;
 		} else if (show) {
 			const metadata = await tryGetMetadata(this.ext, url, this._cancellable);
+			if (this._cancellable.is_cancelled()) return;
 			this.entry.metadata = metadata;
 			this._linkPreview.metadata = metadata;
 		}

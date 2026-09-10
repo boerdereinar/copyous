@@ -167,12 +167,16 @@ class ClipboardDialogHeader extends St.Widget {
 		this.notify('header-visible');
 
 		const value = Number(show);
-		if (animate) {
+		// Skip the animation when already at the target expansion (e.g. the
+		// search entry grabbing focus on open while the header is shown);
+		// the expansion setter itself is a no-op in that case.
+		if (animate && this._headerLayout.expansion !== value) {
 			this.ease_property('@layout.expansion', value, {
 				mode: Clutter.AnimationMode.EASE_OUT_QUAD,
 				duration: 200,
 			});
 		} else {
+			this.remove_transition('@layout.expansion');
 			this._headerLayout.expansion = value;
 		}
 	}

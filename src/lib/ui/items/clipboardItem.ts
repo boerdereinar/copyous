@@ -33,6 +33,9 @@ export class ClipboardItem extends St.Button {
 	private _protectPinned: boolean = true;
 	private _protectTagged: boolean = true;
 	private _middleClickAction: MiddleClickAction = MiddleClickAction.None;
+	// Tracks the last applied header layout so settings changes that don't
+	// affect it skip the re-parenting and layout-manager swap below.
+	private _headerShown: boolean | null = null;
 
 	private readonly _box: St.Widget;
 	private readonly _header: ClipboardItemHeader;
@@ -175,6 +178,9 @@ export class ClipboardItem extends St.Button {
 		this._header.headerVisible = show;
 		this._header.showTitle = this.ext.settings.get_boolean('show-item-title');
 		this._header.controlsVisibility = this.ext.settings.get_enum('header-controls-visibility');
+
+		if (this._headerShown === show) return;
+		this._headerShown = show;
 
 		if (show) {
 			this.remove_style_class_name('no-header');

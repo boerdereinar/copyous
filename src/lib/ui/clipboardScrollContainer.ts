@@ -31,6 +31,11 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 		this.updateVisible();
 	}
 
+	override destroy() {
+		this._statusItem.destroy();
+		super.destroy();
+	}
+
 	private updateVisible() {
 		const n = get_n_visible_children(this);
 		if (n === 0) {
@@ -110,6 +115,15 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 			value = adjustment.get_upper() - adjustment.page_size - value;
 		}
 
+		// Compare the effective target, including the first/last item limits.
+		value = Math.clamp(
+			value,
+			adjustment.lower,
+			Math.max(adjustment.lower, adjustment.upper - adjustment.page_size),
+		);
+		adjustment.remove_transition('value');
+		if (value === adjustment.value) return;
+
 		if (animate) {
 			adjustment.ease(value, { duration: 150, mode: Clutter.AnimationMode.EASE_OUT_QUAD });
 		} else {
@@ -120,19 +134,26 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 	public addItem(item: ClipboardItem): void {
 		this.insertOrMoveItem(item);
 
-		// Move item when datetime changes
-		item.entry.connect('notify::datetime', () => this.insertOrMoveItem(item, false));
-
-		// Delete item when deleted
-		item.entry.connect('delete', () => this.removeItem(item));
-
-		// Update search only when properties used by search can change.
-		item.entry.connect('notify::content', () => this.updateSearch(item));
-		item.entry.connect('notify::pinned', () => this.updateSearch(item));
-		item.entry.connect('notify::tag', () => this.updateSearch(item));
-		item.entry.connect('notify::type', () => this.updateSearch(item));
-		item.entry.connect('notify::metadata', () => this.updateSearch(item));
-		item.entry.connect('notify::title', () => this.updateSearch(item));
+		// Tie entry callbacks to the actor so removed history cannot retain it.
+		item.entry.connectObject(
+			'notify::datetime',
+			() => this.insertOrMoveItem(item, false),
+			'delete',
+			() => this.removeItem(item),
+			'notify::content',
+			() => this.updateSearch(item),
+			'notify::pinned',
+			() => this.updateSearch(item),
+			'notify::tag',
+			() => this.updateSearch(item),
+			'notify::type',
+			() => this.updateSearch(item),
+			'notify::metadata',
+			() => this.updateSearch(item),
+			'notify::title',
+			() => this.updateSearch(item),
+			item,
+		);
 	}
 
 	private insertOrMoveItem(item: ClipboardItem, search: boolean = true): void {
@@ -165,9 +186,10 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 		for (const child of this.get_children()) {
 			if (child instanceof ClipboardItem) {
 				focus ||= child.has_key_focus();
-				this.remove_child(child);
+				child.destroy();
 			}
 		}
+		this._lastFocus = null;
 		this.updateVisible();
 
 		if (focus) {
@@ -185,7 +207,8 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 			newFocus = get_next_visible_sibling(child) ?? get_previous_visible_sibling(child);
 		}
 
-		this.remove_child(child);
+		if (this._lastFocus === child) this._lastFocus = null;
+		child.destroy();
 		this.updateVisible();
 
 		if (hasKeyFocus) {

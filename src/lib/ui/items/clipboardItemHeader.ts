@@ -43,7 +43,11 @@ class TimeLabel extends St.Label {
 	}
 
 	private _updateText() {
-		this.text = formatTimeSpan(this._datetime);
+		// vfunc_map calls this for every item on every open; skip the
+		// relayout when the formatted time has not changed.
+		const text = formatTimeSpan(this._datetime);
+		if (this.text === text) return;
+		this.text = text;
 	}
 
 	override vfunc_map() {
