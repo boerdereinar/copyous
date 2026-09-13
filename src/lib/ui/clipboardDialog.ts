@@ -293,7 +293,7 @@ export class ClipboardDialog extends St.Widget {
 		// Dialog
 		this._dialog = new St.BoxLayout({
 			orientation: Clutter.Orientation.VERTICAL,
-			style_class: 'clipboard-dialog horizontal',
+			style_class: 'modal-dialog clipboard-dialog horizontal',
 			x_align: Clutter.ActorAlign.FILL,
 			y_align: Clutter.ActorAlign.CENTER,
 			x_expand: true,

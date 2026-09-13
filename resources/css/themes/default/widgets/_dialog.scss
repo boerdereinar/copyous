@@ -3,7 +3,9 @@
 	border-radius: $alert_radius;
 	border: 1px solid $outer_borders_color;
 	box-shadow: 0 2px 4px 0 $shadow_color;
+	// Child margins and padding handle layout instead of the modal-dialog defaults.
 	padding: 0;
+	spacing: 0;
 
 	// Header
 	.dialog-header {
@@ -16,7 +18,7 @@
 			}
 
 			.dialog-header-icon-button {
-				@extend %button;
+				@extend %surface_button;
 
 				border-radius: $forced_circular_radius;
 				padding: $scaled_padding * 2 * 0.9;
@@ -37,7 +39,7 @@
 			}
 
 			.dialog-header-button {
-				@extend %button;
+				@extend %surface_button;
 				border-radius: $forced_circular_radius;
 				min-height: to_em(22px);
 			}
@@ -50,7 +52,7 @@
 		spacing: $base_padding * 1.5;
 
 		.dialog-footer-icon-button {
-			@extend %button;
+			@extend %surface_button;
 
 			border-radius: $forced_circular_radius;
 			padding: $scaled_padding * 1.5;
@@ -71,7 +73,7 @@
 		}
 
 		.dialog-footer-button {
-			@extend %button;
+			@extend %surface_button;
 			border-radius: $forced_circular_radius;
 			min-height: to_em(12px);
 		}

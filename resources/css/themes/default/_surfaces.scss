@@ -1,0 +1,42 @@
+// Let neutral controls share the surface beneath them without fading their content.
+@mixin surface_button($type, $c: $bg_color, $style: null) {
+	@if $contrast == 'high' {
+		@include button($type, $c: $c, $style: $style);
+	} @else {
+		$background: st-mix($fg_color, $c, $background_mix_factor);
+		@if $style == 'card' {
+			$background: $card_bg_color;
+		} @else if $style == 'default' {
+			$background: $c;
+		}
+
+		@include button($type, $c: st-mix($background, transparent, 75%), $style: default);
+
+		// Keep the original focus ring for controls that are not default buttons.
+		@if $type == 'focus' and $style != 'default' {
+			@include focus_ring();
+		}
+	}
+}
+
+// prettier-ignore
+%surface_button {
+	@extend %button_common;
+	@include surface_button(normal);
+	&:focus { @include surface_button(focus); }
+	&:hover { @include surface_button(hover); }
+	&:insensitive { @include surface_button(insensitive); }
+	&:selected,
+	&:active { @include surface_button(active); }
+	&:checked { @include surface_button(checked); }
+}
+
+// prettier-ignore
+%surface_card {
+	@extend %card_common;
+	@include surface_button(normal, $style: card);
+	&:hover { @include surface_button(hover, $style: card); }
+	&:active { @include surface_button(active, $style: card); }
+	&:focus { @include surface_button(focus, $style: card); }
+	&:insensitive { @include surface_button(insensitive, $style: card); }
+}
