@@ -8,7 +8,7 @@ export class Keyboard {
 	private _purpose: Clutter.InputContentPurpose = Clutter.InputContentPurpose.NORMAL;
 
 	constructor() {
-		const seat = Clutter.get_default_backend().get_default_seat();
+		const seat = global.stage.get_context().get_backend().get_default_seat();
 		this._device = seat.create_virtual_device(Clutter.InputDeviceType.KEYBOARD_DEVICE);
 
 		(Main.inputMethod as Clutter.InputMethod).connectObject(
