@@ -15,6 +15,8 @@ import { Shortcut } from '../../misc/shortcuts.js';
 import { SearchQuery } from '../searchEntry.js';
 import { ClipboardItemHeader } from './clipboardItemHeader.js';
 
+const GLSLEffect = Shell.GLSLEffect ?? Clutter.OffscreenEffect;
+
 @registerClass({
 	Properties: {
 		entry: GObject.ParamSpec.object('entry', null, null, GObject.ParamFlags.READABLE, ClipboardEntry),
@@ -307,32 +309,62 @@ export class ClipboardItem extends St.Button {
 }
 
 // Based on https://gitlab.gnome.org/GNOME/mutter/-/blob/8b5c757bea75b7712bbe09c2018a8eb15b4d22cc/src/compositor/meta-background-content.c
-@registerClass()
-class HoleEffect extends Shell.GLSLEffect {
-	private readonly _sizeLocation: number;
-	private readonly _holeBoxLocation: number;
+class HoleEffect extends GLSLEffect {
+	private _pipeline: Cogl.Pipeline | null = null;
+	private _sizeLocation = -1;
+	private _holeBoxLocation = -1;
 
 	constructor(private target: Clutter.Actor) {
 		super();
 
-		this._sizeLocation = this.get_uniform_location('size');
-		this._holeBoxLocation = this.get_uniform_location('hole_box');
+		if (Shell.GLSLEffect) {
+			this._sizeLocation = this.get_uniform_location('size');
+			this._holeBoxLocation = this.get_uniform_location('hole_box');
+		}
 
 		target.connect('notify::allocation', () => this.queue_repaint());
 	}
 
 	override vfunc_paint_target(node: Clutter.PaintNode, paintContext: Clutter.PaintContext): void {
+		if (!Shell.GLSLEffect) {
+			const pipeline = this.get_pipeline();
+			if (!pipeline) {
+				super.vfunc_paint_target(node, paintContext);
+				return;
+			}
+
+			if (this._pipeline !== pipeline) {
+				this._pipeline = pipeline;
+				this._buildPipeline();
+				this._sizeLocation = pipeline.get_uniform_location('size');
+				this._holeBoxLocation = pipeline.get_uniform_location('hole_box');
+			}
+		}
+
 		const size = this.actor.get_transformed_size();
-		this.set_uniform_float(this._sizeLocation, 2, size);
+		if (Shell.GLSLEffect) {
+			this.set_uniform_float(this._sizeLocation, 2, size);
+		} else {
+			this._pipeline!.set_uniform_float(this._sizeLocation, 2, 1, size as unknown as number);
+		}
 
 		const position = this.target.apply_relative_transform_to_point(this.actor, new Graphene.Point3D());
 		const [width, height] = this.target.get_transformed_size();
-		this.set_uniform_float(this._holeBoxLocation, 4, [position.x - 1.5, position.y + 1, width + 2, height + 1]);
+		const holeBox = [position.x - 1.5, position.y + 1, width + 2, height + 1];
+		if (Shell.GLSLEffect) {
+			this.set_uniform_float(this._holeBoxLocation, 4, holeBox);
+		} else {
+			this._pipeline!.set_uniform_float(this._holeBoxLocation, 4, 1, holeBox as unknown as number);
+		}
 
 		super.vfunc_paint_target(node, paintContext);
 	}
 
 	override vfunc_build_pipeline(): void {
+		this._buildPipeline();
+	}
+
+	private _buildPipeline(): void {
 		const dec = `
 			uniform sampler2D tex;
 			uniform vec2 size;
@@ -390,6 +422,15 @@ class HoleEffect extends Shell.GLSLEffect {
 			float alpha = rounded_rect_coverage(p, bounds, radius);
 			cogl_color_out = vec4(c.rgb * alpha, min(alpha, c.a));`;
 
-		this.add_glsl_snippet(Cogl.SnippetHook.FRAGMENT, dec, src, true);
+		if (Shell.GLSLEffect) {
+			this.add_glsl_snippet(Cogl.SnippetHook.FRAGMENT, dec, src, true);
+		} else {
+			const snippet = Cogl.Snippet.new(Cogl.SnippetHook.FRAGMENT, dec, null);
+			snippet.set_replace(src);
+			this._pipeline!.add_snippet(snippet);
+		}
 	}
 }
+
+if (!Shell.GLSLEffect) Reflect.deleteProperty(HoleEffect.prototype, 'vfunc_build_pipeline');
+registerClass()(HoleEffect);
