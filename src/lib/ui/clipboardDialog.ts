@@ -804,7 +804,45 @@ export class ClipboardDialog extends St.Widget {
 		}
 
 		// Navigate
-		if (global.focus_manager.navigate_from_event(event)) return Clutter.EVENT_STOP;
+		if (global.focus_manager.navigate_from_event) {
+			if (global.focus_manager.navigate_from_event(event)) return Clutter.EVENT_STOP;
+		} else {
+			let direction: St.DirectionType | undefined;
+			switch (key) {
+				case Clutter.KEY_Up:
+				case Clutter.KEY_KP_Up:
+					direction = St.DirectionType.UP;
+					break;
+				case Clutter.KEY_Down:
+				case Clutter.KEY_KP_Down:
+					direction = St.DirectionType.DOWN;
+					break;
+				case Clutter.KEY_Left:
+				case Clutter.KEY_KP_Left:
+					direction = St.DirectionType.LEFT;
+					break;
+				case Clutter.KEY_Right:
+				case Clutter.KEY_KP_Right:
+					direction = St.DirectionType.RIGHT;
+					break;
+				case Clutter.KEY_Tab:
+				case Clutter.KEY_KP_Tab:
+					direction = event.has_shift_modifier()
+						? St.DirectionType.TAB_BACKWARD
+						: St.DirectionType.TAB_FORWARD;
+					break;
+				case Clutter.KEY_ISO_Left_Tab:
+					direction = St.DirectionType.TAB_BACKWARD;
+					break;
+			}
+
+			if (
+				direction !== undefined &&
+				this._dialog.navigate_focus(global.stage.get_key_focus(), direction, false)
+			) {
+				return Clutter.EVENT_STOP;
+			}
+		}
 
 		return super.vfunc_key_press_event(event);
 	}
