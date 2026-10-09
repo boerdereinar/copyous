@@ -1,0 +1,1888 @@
+# Ukrainian translation for Copyous.
+# Copyright (C) 2026 Copyous
+# This file is distributed under the same license as the Copyous package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Copyous\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-09 16:27+0000\n"
+"PO-Revision-Date: 2026-09-25 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Ukrainian\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: src/lib/common/actions.ts:182
+msgid "Open"
+msgstr "Відкрити"
+
+#: src/lib/common/actions.ts:187
+msgid "Open with Default"
+msgstr "Відкрити типовою програмою"
+
+#: src/lib/common/actions.ts:197
+msgid "Open with Files"
+msgstr "Відкрити у «Файлах»"
+
+#: src/lib/common/actions.ts:207
+msgid "Open with Browser"
+msgstr "Відкрити у браузері"
+
+#: src/lib/common/actions.ts:219
+msgid "Paste as Path"
+msgstr "Вставити як шлях"
+
+#: src/lib/common/actions.ts:227
+msgid "Convert"
+msgstr "Перетворити"
+
+#: src/lib/common/actions.ts:229
+#: src/lib/preferences/actions/actionDialog.ts:533
+msgid "Rgb"
+msgstr "Rgb"
+
+#: src/lib/common/actions.ts:230
+#: src/lib/preferences/actions/actionDialog.ts:534
+msgid "Hex"
+msgstr "Hex"
+
+#: src/lib/common/actions.ts:231
+#: src/lib/preferences/actions/actionDialog.ts:535
+msgid "Hsl"
+msgstr "Hsl"
+
+#: src/lib/common/actions.ts:238
+#: src/lib/preferences/actions/actionDialog.ts:542
+msgid "Oklch"
+msgstr "Oklch"
+
+#: src/lib/common/actions.ts:244
+#: src/lib/preferences/actions/actionDialog.ts:257
+msgid "QR Code"
+msgstr "QR-код"
+
+#: src/lib/database/entryTracker.ts:133 src/lib/database/entryTracker.ts:148
+msgid "Failed to load Gda"
+msgstr "Не вдалося завантажити Gda"
+
+#: src/lib/database/entryTracker.ts:134 src/lib/database/entryTracker.ts:148
+#: src/lib/database/entryTracker.ts:164
+msgid "Clipboard history will be disabled"
+msgstr "Історію буфера обміну буде вимкнено"
+
+#: src/lib/database/entryTracker.ts:135
+msgid "Disable Warning"
+msgstr "Вимкнути попередження"
+
+#: src/lib/database/entryTracker.ts:164
+msgid "Failed to load JSON"
+msgstr "Не вдалося завантажити JSON"
+
+#: src/lib/misc/notifications.ts:63 src/lib/misc/notifications.ts:114
+msgid "Copied Text"
+msgstr "Скопійовано текст"
+
+#: src/lib/misc/notifications.ts:98 src/lib/misc/notifications.ts:123
+msgid "Copied Image"
+msgstr "Скопійовано зображення"
+
+#: src/lib/misc/notifications.ts:99 src/lib/misc/notifications.ts:129
+#, javascript-format
+msgid "Size: %d×%d px"
+msgstr "Розмір: %d×%d пікс"
+
+#: src/lib/misc/notifications.ts:118
+msgid "Copied Code"
+msgstr "Скопійовано код"
+
+#: src/lib/misc/notifications.ts:142
+#, javascript-format
+msgid "Copied %d File"
+msgid_plural "Copied %d Files"
+msgstr[0] "Скопійовано %d файл"
+msgstr[1] "Скопійовано %d файли"
+msgstr[2] "Скопійовано %d файлів"
+
+#: src/lib/misc/notifications.ts:148
+msgid "Copied Link"
+msgstr "Скопійовано посилання"
+
+#: src/lib/misc/notifications.ts:152
+msgid "Copied Character"
+msgstr "Скопійовано символ"
+
+#: src/lib/misc/notifications.ts:156
+msgid "Copied Color"
+msgstr "Скопійовано колір"
+
+#: src/lib/preferences/actions/actionDefaults.ts:72
+#: src/lib/preferences/general/feedbackSettings.ts:157
+#: src/lib/preferences/general/feedbackSettings.ts:259
+#: src/lib/preferences/general/feedbackSettings.ts:308
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:39
+#: src/lib/ui/components/editDialog.ts:217
+#: src/lib/ui/components/editDialog.ts:244
+msgid "None"
+msgstr "Немає"
+
+#: src/lib/preferences/actions/actionDefaults.ts:113
+#: src/lib/preferences/actions/actionDefaults.ts:128
+#: src/lib/preferences/actions/actionsPage.ts:69
+msgid "Default Actions"
+msgstr "Типові дії"
+
+#: src/lib/preferences/actions/actionDefaults.ts:132
+#: src/lib/preferences/actions/actionDialog.ts:175
+#: src/lib/preferences/actions/actionDialog.ts:364
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:69
+#: src/lib/ui/items/textItem.ts:24
+msgid "Text"
+msgstr "Текст"
+
+#: src/lib/preferences/actions/actionDefaults.ts:136
+#: src/lib/preferences/actions/actionDialog.ts:176
+#: src/lib/preferences/actions/actionDialog.ts:367
+#: src/lib/ui/items/codeItem.ts:23
+msgid "Code"
+msgstr "Код"
+
+#: src/lib/preferences/actions/actionDefaults.ts:140
+#: src/lib/preferences/actions/actionDialog.ts:177
+#: src/lib/preferences/actions/actionDialog.ts:370
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:79
+#: src/lib/ui/items/imageItem.ts:38
+msgid "Image"
+msgstr "Зображення"
+
+#: src/lib/preferences/actions/actionDefaults.ts:144
+#: src/lib/preferences/actions/actionDialog.ts:178
+#: src/lib/preferences/actions/actionDialog.ts:373
+#: src/lib/ui/items/fileItem.ts:52
+msgid "File"
+msgstr "Файл"
+
+#: src/lib/preferences/actions/actionDefaults.ts:148
+#: src/lib/preferences/actions/actionDialog.ts:179
+#: src/lib/preferences/actions/actionDialog.ts:376
+#: src/lib/ui/items/filesItem.ts:140
+msgid "Files"
+msgstr "Файли"
+
+#: src/lib/preferences/actions/actionDefaults.ts:152
+#: src/lib/preferences/actions/actionDialog.ts:180
+#: src/lib/preferences/actions/actionDialog.ts:379
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:45
+#: src/lib/ui/items/linkItem.ts:303
+msgid "Link"
+msgstr "Посилання"
+
+#: src/lib/preferences/actions/actionDefaults.ts:158
+#: src/lib/preferences/actions/actionDialog.ts:181
+#: src/lib/preferences/actions/actionDialog.ts:382
+msgid "Character"
+msgstr "Символ"
+
+#: src/lib/preferences/actions/actionDefaults.ts:165
+#: src/lib/preferences/actions/actionDialog.ts:182
+#: src/lib/preferences/actions/actionDialog.ts:257
+#: src/lib/preferences/actions/actionDialog.ts:385
+#: src/lib/ui/items/colorItem.ts:71
+msgid "Color"
+msgstr "Колір"
+
+#: src/lib/preferences/actions/actionDialog.ts:38
+msgid "All"
+msgstr "Усі"
+
+#: src/lib/preferences/actions/actionDialog.ts:131
+msgid "Types"
+msgstr "Типи"
+
+#: src/lib/preferences/actions/actionDialog.ts:132
+msgid "Select which types are allowed"
+msgstr "Виберіть, які типи дозволено"
+
+#: src/lib/preferences/actions/actionDialog.ts:234
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:34
+#: src/lib/preferences/actions/actionsGroup.ts:33
+#: src/lib/preferences/actions/actionsPage.ts:21
+#: src/lib/preferences/actions/actionsPage.ts:34
+#: src/lib/preferences/customization/items/exclusions.ts:90
+#: src/lib/preferences/dependencies/dependencies.ts:224
+#: src/lib/preferences/general/appExclusionSettings.ts:171
+#: src/lib/preferences/shortcuts/shortcutRow.ts:131
+#: src/lib/ui/components/editDialog.ts:306 src/lib/ui/indicator.ts:47
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: src/lib/preferences/actions/actionDialog.ts:256
+msgid "Kind"
+msgstr "Вид"
+
+#: src/lib/preferences/actions/actionDialog.ts:257
+#: src/lib/preferences/actions/actionDialog.ts:401
+msgid "Command"
+msgstr "Команда"
+
+#: src/lib/preferences/actions/actionDialog.ts:347
+msgid ""
+"The regular expression does not use any flags for matching. Leaving this "
+"empty will match everything."
+msgstr ""
+"Регулярний вираз не використовує прапорців для зіставлення. Якщо залишити це "
+"поле порожнім, зіставлятиметься будь-що."
+
+#: src/lib/preferences/actions/actionDialog.ts:361
+msgid "Type"
+msgstr "Тип"
+
+#: src/lib/preferences/actions/actionDialog.ts:362
+msgid "Example"
+msgstr "Приклад"
+
+#: src/lib/preferences/actions/actionDialog.ts:393
+msgid "Regular Expression"
+msgstr "Регулярний вираз"
+
+#: src/lib/preferences/actions/actionDialog.ts:406
+msgid ""
+"Clipboard content will be provided via stdin. Capture groups of the regular "
+"expression will be passed as positional parameters $1, $2, $3, ..."
+msgstr ""
+"Вміст буфера обміну буде передано через stdin. Захоплені групи регулярного "
+"виразу буде передано як позиційні параметри $1, $2, $3, ..."
+
+#: src/lib/preferences/actions/actionDialog.ts:441
+#: src/lib/preferences/actions/actionDialog.ts:523
+#: src/lib/preferences/actions/actionDialog.ts:611
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:47
+msgid "Name"
+msgstr "Назва"
+
+#: src/lib/preferences/actions/actionDialog.ts:459
+#: src/lib/preferences/actions/actionDialog.ts:550
+msgid "Output"
+msgstr "Вивід"
+
+#: src/lib/preferences/actions/actionDialog.ts:460
+#: src/lib/preferences/actions/actionDialog.ts:551
+msgid "Select how to handle the output"
+msgstr "Виберіть, як обробляти вивід"
+
+#: src/lib/preferences/actions/actionDialog.ts:461
+#: src/lib/preferences/actions/actionDialog.ts:552
+#: src/lib/ui/components/qrCodeDialog.ts:154
+msgid "Copy"
+msgstr "Копіювати"
+
+#: src/lib/preferences/actions/actionDialog.ts:461
+msgid "Ignore"
+msgstr "Ігнорувати"
+
+#: src/lib/preferences/actions/actionDialog.ts:461
+#: src/lib/preferences/actions/actionDialog.ts:552
+msgid "Paste"
+msgstr "Вставити"
+
+#: src/lib/preferences/actions/actionDialog.ts:466
+#: src/lib/preferences/actions/actionDialog.ts:557
+#: src/lib/preferences/actions/actionDialog.ts:621
+msgid "Shortcut"
+msgstr "Комбінація клавіш"
+
+#: src/lib/preferences/actions/actionDialog.ts:530
+msgid "Color Space"
+msgstr "Колірний простір"
+
+#: src/lib/preferences/actions/actionDialog.ts:531
+msgid "Select which color space to convert to"
+msgstr "Виберіть колірний простір для перетворення"
+
+#: src/lib/preferences/actions/actionDialog.ts:536
+msgid "Hwb"
+msgstr "Hwb"
+
+#: src/lib/preferences/actions/actionDialog.ts:537
+msgid "Linear Rgb"
+msgstr "Лінійний Rgb"
+
+#: src/lib/preferences/actions/actionDialog.ts:538
+msgid "Xyz"
+msgstr "Xyz"
+
+#: src/lib/preferences/actions/actionDialog.ts:539
+msgid "Lab"
+msgstr "Lab"
+
+#: src/lib/preferences/actions/actionDialog.ts:540
+msgid "Lch"
+msgstr "Lch"
+
+#: src/lib/preferences/actions/actionDialog.ts:541
+msgid "Oklab"
+msgstr "Oklab"
+
+#: src/lib/preferences/actions/actionDialog.ts:655
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
+#: src/lib/preferences/actions/actionsGroup.ts:550
+#: src/lib/preferences/customization/items/exclusions.ts:92
+#: src/lib/preferences/general/appExclusionSettings.ts:173
+msgid "Add"
+msgstr "Додати"
+
+#: src/lib/preferences/actions/actionDialog.ts:655
+#: src/lib/preferences/actions/actionsGroup.ts:100
+#: src/lib/preferences/actions/actionsGroup.ts:568
+msgid "Add Action"
+msgstr "Додати дію"
+
+#: src/lib/preferences/actions/actionDialog.ts:662
+msgid "Edit Action"
+msgstr "Змінити дію"
+
+#: src/lib/preferences/actions/actionDialog.ts:662
+#: src/lib/ui/components/editDialog.ts:313
+msgid "Save"
+msgstr "Зберегти"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:73
+#: src/lib/preferences/actions/actionsGroup.ts:569
+msgid "Add Submenu"
+msgstr "Додати підменю"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
+#: src/lib/preferences/actions/actionsGroup.ts:125
+#: src/lib/preferences/actions/actionsGroup.ts:423
+#: src/lib/ui/components/clipboardItemMenu.ts:94
+msgid "Edit"
+msgstr "Змінити"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
+msgid "Edit Submenu"
+msgstr "Змінити підменю"
+
+#: src/lib/preferences/actions/actionsGroup.ts:34
+#: src/lib/preferences/actions/actionsGroup.ts:126
+#: src/lib/preferences/actions/actionsGroup.ts:424
+msgid "Delete"
+msgstr "Видалити"
+
+#: src/lib/preferences/actions/actionsGroup.ts:91
+#: src/lib/preferences/actions/actionsGroup.ts:529
+msgid "No Actions"
+msgstr "Немає дій"
+
+#: src/lib/preferences/actions/actionsGroup.ts:180
+msgid "Delete Submenu?"
+msgstr "Видалити підменю?"
+
+#: src/lib/preferences/actions/actionsGroup.ts:181
+msgid "Deleting the submenu will delete all actions in the submenu"
+msgstr "Видалення підменю призведе до видалення всіх дій у ньому"
+
+#: src/lib/preferences/actions/actionsGroup.ts:446
+msgid "Delete Action?"
+msgstr "Видалити дію?"
+
+#: src/lib/preferences/actions/actionsGroup.ts:518
+#: src/lib/preferences/actions/actionsPage.ts:57
+msgid "Actions"
+msgstr "Дії"
+
+#: src/lib/preferences/actions/actionsPage.ts:22
+msgid "Reset"
+msgstr "Скинути"
+
+#: src/lib/preferences/actions/actionsPage.ts:35
+msgid "Restore"
+msgstr "Відновити"
+
+#: src/lib/preferences/actions/actionsPage.ts:70
+msgid "Set default actions that trigger when holding control"
+msgstr "Задати типові дії, що спрацьовують під час утримання Control"
+
+#: src/lib/preferences/actions/actionsPage.ts:87
+msgid "Restore Built-In Actions"
+msgstr "Відновити вбудовані дії"
+
+#: src/lib/preferences/actions/actionsPage.ts:96
+msgid "Reset Actions"
+msgstr "Скинути дії"
+
+#: src/lib/preferences/actions/actionsPage.ts:116
+msgid "Restore Built-In Actions?"
+msgstr "Відновити вбудовані дії?"
+
+#: src/lib/preferences/actions/actionsPage.ts:118
+msgid ""
+"Restoring the built-in actions will restore built-in actions that were "
+"removed. Custom actions will remain unchanged"
+msgstr ""
+"Відновлення вбудованих дій поверне видалені вбудовані дії. Власні дії "
+"залишаться без змін"
+
+#: src/lib/preferences/actions/actionsPage.ts:135
+msgid "Reset Actions?"
+msgstr "Скинути дії?"
+
+#: src/lib/preferences/actions/actionsPage.ts:136
+msgid "Resetting the actions will delete all custom actions"
+msgstr "Скидання дій призведе до видалення всіх власних дій"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:25
+#: src/lib/preferences/shortcuts/dialogShortcuts.ts:17
+msgid "Dialog"
+msgstr "Діалогове вікно"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:29
+msgid "Position"
+msgstr "Положення"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:30
+msgid "Change the position of the clipboard dialog"
+msgstr "Змінити розташування діалогового вікна буфера обміну"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:35
+msgid "Show at Pointer"
+msgstr "Показувати біля вказівника"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:36
+msgid "Show the clipboard dialog at the pointer position"
+msgstr "Показувати діалогове вікно буфера обміну біля вказівника миші"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:42
+msgid "Show at Text Cursor"
+msgstr "Показувати біля текстового курсора"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:44
+msgid ""
+"Show the clipboard dialog at the text cursor position whenever possible, "
+"otherwise at the pointer position"
+msgstr ""
+"Показувати діалогове вікно буфера обміну біля текстового курсора, коли це "
+"можливо, інакше — біля вказівника миші"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:50
+msgid "Orientation"
+msgstr "Орієнтація"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:51
+msgid "Select the orientation of the clipboard dialog"
+msgstr "Виберіть орієнтацію діалогового вікна буфера обміну"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:52
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:92
+msgid "Horizontal"
+msgstr "Горизонтальна"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:52
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:92
+msgid "Vertical"
+msgstr "Вертикальна"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:57
+#: src/lib/preferences/customization/dialogCustomization.ts:101
+msgid "Bottom"
+msgstr "Знизу"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:57
+#: src/lib/preferences/customization/dialogCustomization.ts:66
+msgid "Center"
+msgstr "По центру"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:57
+#: src/lib/preferences/customization/dialogCustomization.ts:66
+#: src/lib/preferences/customization/dialogCustomization.ts:188
+#: src/lib/preferences/customization/dialogCustomization.ts:192
+msgid "Fill"
+msgstr "Заповнити"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:57
+#: src/lib/preferences/customization/dialogCustomization.ts:87
+msgid "Top"
+msgstr "Зверху"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:59
+msgid "Vertical Position"
+msgstr "Вертикальне розташування"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:60
+msgid "Select the vertical position of the clipboard dialog"
+msgstr "Виберіть вертикальне розташування діалогового вікна буфера обміну"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:66
+#: src/lib/preferences/customization/dialogCustomization.ts:108
+msgid "Left"
+msgstr "Ліворуч"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:66
+#: src/lib/preferences/customization/dialogCustomization.ts:94
+msgid "Right"
+msgstr "Праворуч"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:68
+msgid "Horizontal Position"
+msgstr "Горизонтальне розташування"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:69
+msgid "Select the horizontal position of the clipboard dialog"
+msgstr "Виберіть горизонтальне розташування діалогового вікна буфера обміну"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:81
+msgid "Margins"
+msgstr "Відступи"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:82
+msgid "Change the distance of the dialog from the screen edges"
+msgstr "Змінити відстань діалогового вікна від країв екрана"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:88
+msgid "Distance from the top of the screen"
+msgstr "Відстань від верхнього краю екрана"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:95
+msgid "Distance from the right of the screen"
+msgstr "Відстань від правого краю екрана"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:102
+msgid "Distance from the bottom of the screen"
+msgstr "Відстань від нижнього краю екрана"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:109
+msgid "Distance from the left of the screen"
+msgstr "Відстань від лівого краю екрана"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:115
+msgid "Auto Hide Search"
+msgstr "Автоматично приховувати пошук"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:116
+msgid "Automatically hide the search bar when not focused"
+msgstr "Автоматично приховувати рядок пошуку, коли він не у фокусі"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:121
+msgid "Show Scrollbar"
+msgstr "Показувати смугу прокручування"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:122
+msgid "Show a scrollbar when items overflow"
+msgstr "Показувати смугу прокручування, коли елементи не вміщаються"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:206
+msgid "Width"
+msgstr "Ширина"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:207
+msgid "Change the width of the clipboard dialog"
+msgstr "Змінити ширину діалогового вікна буфера обміну"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:209
+msgid "Height"
+msgstr "Висота"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:210
+msgid "Change the height of the clipboard dialog"
+msgstr "Змінити висоту діалогового вікна буфера обміну"
+
+#: src/lib/preferences/customization/headerCustomization.ts:16
+msgid "Header"
+msgstr "Заголовок"
+
+#: src/lib/preferences/customization/headerCustomization.ts:20
+msgid "Show Header"
+msgstr "Показувати заголовок"
+
+#: src/lib/preferences/customization/headerCustomization.ts:21
+msgid "Show the header"
+msgstr "Показувати заголовок"
+
+#: src/lib/preferences/customization/headerCustomization.ts:26
+msgid "Show Item Title"
+msgstr "Показувати назву елемента"
+
+#: src/lib/preferences/customization/headerCustomization.ts:27
+msgid "Show the title of the item"
+msgstr "Показувати назву елемента"
+
+#: src/lib/preferences/customization/headerCustomization.ts:32
+msgid "Header Controls Visibility"
+msgstr "Видимість елементів керування заголовка"
+
+#: src/lib/preferences/customization/headerCustomization.ts:33
+msgid "The visibility of the header controls"
+msgstr "Видимість елементів керування в заголовку"
+
+#: src/lib/preferences/customization/headerCustomization.ts:34
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:164
+#: src/lib/preferences/general/feedbackSettings.ts:230
+msgid "Hidden"
+msgstr "Приховано"
+
+#: src/lib/preferences/customization/headerCustomization.ts:34
+msgid "Visible"
+msgstr "Видимо"
+
+#: src/lib/preferences/customization/headerCustomization.ts:34
+msgid "Visible on Hover"
+msgstr "Видимо під час наведення"
+
+#: src/lib/preferences/customization/itemCustomization.ts:16
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:17
+msgid "Item"
+msgstr "Елемент"
+
+#: src/lib/preferences/customization/itemCustomization.ts:20
+msgid "Item Width"
+msgstr "Ширина елемента"
+
+#: src/lib/preferences/customization/itemCustomization.ts:21
+msgid "Change the width of the clipboard items"
+msgstr "Змінити ширину елементів буфера обміну"
+
+#: src/lib/preferences/customization/itemCustomization.ts:33
+msgid "Item Height"
+msgstr "Висота елемента"
+
+#: src/lib/preferences/customization/itemCustomization.ts:34
+msgid "Change the height of the clipboard items"
+msgstr "Змінити висоту елементів буфера обміну"
+
+#: src/lib/preferences/customization/itemCustomization.ts:46
+msgid "Dynamic Item Height"
+msgstr "Динамічна висота елемента"
+
+#: src/lib/preferences/customization/itemCustomization.ts:48
+msgid ""
+"Dynamically adjust the height of the clipboard items based on their content. "
+"Only works in vertical orientation"
+msgstr ""
+"Динамічно змінювати висоту елементів буфера обміну залежно від їхнього "
+"вмісту. Працює лише у вертикальній орієнтації"
+
+#: src/lib/preferences/customization/itemCustomization.ts:55
+msgid "Tab Width"
+msgstr "Ширина табуляції"
+
+#: src/lib/preferences/customization/itemCustomization.ts:56
+msgid "Change the width of a tab character in the clipboard items"
+msgstr "Змінити ширину символу табуляції в елементах буфера обміну"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:14
+msgid "Character Item"
+msgstr "Символьний елемент"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:15
+msgid "Configure character clipboard items"
+msgstr "Налаштувати символьні елементи буфера обміну"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:19
+msgid "Maximum Characters"
+msgstr "Максимум символів"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:20
+msgid "Maximum number of characters that are recognized as a character item"
+msgstr ""
+"Максимальна кількість символів, що розпізнається як символьний елемент"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:26
+msgid "Show Unicode"
+msgstr "Показувати Unicode"
+
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:27
+msgid "Show the Unicode of the character"
+msgstr "Показувати код Unicode символу"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:16
+msgid "Code Item"
+msgstr "Елемент з кодом"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:17
+msgid "Configure code clipboard items"
+msgstr "Налаштувати елементи буфера обміну з кодом"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:21
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:179
+msgid "Syntax Highlighting"
+msgstr "Підсвічування синтаксису"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:22
+msgid "Enable or disable syntax highlighting in the code item"
+msgstr "Увімкнути або вимкнути підсвічування синтаксису в елементі з кодом"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:27
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:185
+msgid "Show Line Numbers"
+msgstr "Показувати номери рядків"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:28
+msgid "Show line numbers in the code item"
+msgstr "Показувати номери рядків в елементі з кодом"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:33
+msgid "Show Code Info"
+msgstr "Показувати відомості про код"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:34
+msgid "Show extra information in the code item"
+msgstr "Показувати додаткову інформацію в елементі з кодом"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:39
+#: src/lib/preferences/customization/items/textItemCustomization.ts:27
+msgid "Text Count Mode"
+msgstr "Режим підрахунку тексту"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
+msgid "Show the number of characters, words or lines"
+msgstr "Показувати кількість символів, слів або рядків"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:41
+#: src/lib/preferences/customization/items/textItemCustomization.ts:29
+msgid "Characters"
+msgstr "Символи"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:41
+#: src/lib/preferences/customization/items/textItemCustomization.ts:29
+msgid "Lines"
+msgstr "Рядки"
+
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:41
+#: src/lib/preferences/customization/items/textItemCustomization.ts:29
+msgid "Words"
+msgstr "Слова"
+
+#: src/lib/preferences/customization/items/exclusions.ts:33
+msgid "Zero or More Characters"
+msgstr "Нуль або більше символів"
+
+#: src/lib/preferences/customization/items/exclusions.ts:39
+msgid "One Character"
+msgstr "Один символ"
+
+#: src/lib/preferences/customization/items/exclusions.ts:45
+msgid "Recursive Wildcard"
+msgstr "Рекурсивний шаблон"
+
+#: src/lib/preferences/customization/items/exclusions.ts:51
+msgid "List"
+msgstr "Список"
+
+#: src/lib/preferences/customization/items/exclusions.ts:57
+msgid "Range"
+msgstr "Діапазон"
+
+#: src/lib/preferences/customization/items/exclusions.ts:63
+msgid "Not in Range"
+msgstr "Поза діапазоном"
+
+#: src/lib/preferences/customization/items/exclusions.ts:107
+msgid "Pattern"
+msgstr "Шаблон"
+
+#: src/lib/preferences/customization/items/exclusions.ts:124
+msgid "You can test your pattern below"
+msgstr "Нижче можна перевірити свій шаблон"
+
+#: src/lib/preferences/customization/items/exclusions.ts:158
+msgid "Invalid Pattern"
+msgstr "Неприпустимий шаблон"
+
+#: src/lib/preferences/customization/items/exclusions.ts:163
+msgid "Preview Shown"
+msgstr "Попередній перегляд показано"
+
+#: src/lib/preferences/customization/items/exclusions.ts:168
+msgid "Preview Hidden"
+msgstr "Попередній перегляд приховано"
+
+#: src/lib/preferences/customization/items/exclusions.ts:291
+msgid "No Exclusion Patterns"
+msgstr "Немає шаблонів виключення"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:52
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:191
+msgid "File Exclusions"
+msgstr "Виключення файлів"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:64
+msgid "File Preview Type"
+msgstr "Тип попереднього перегляду файлу"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:70
+msgid "Enable file previews for all text files"
+msgstr "Увімкнути попередній перегляд для всіх текстових файлів"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:80
+msgid "Enable file previews for all image files"
+msgstr "Увімкнути попередній перегляд для всіх файлів зображень"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:89
+msgid "Thumbnail"
+msgstr "Мініатюра"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:90
+msgid "Enable file previews for all files with generated thumbnails"
+msgstr "Увімкнути попередній перегляд для всіх файлів зі створеними мініатюрами"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:101
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:43
+msgid "Add Pattern"
+msgstr "Додати шаблон"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:102
+msgid "Enter a glob pattern to exclude files that should not have a preview."
+msgstr ""
+"Введіть glob-шаблон, щоб виключити файли, які не повинні мати попереднього "
+"перегляду."
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:103
+msgid "Path"
+msgstr "Шлях"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:106
+msgid "File Exclusion Patterns"
+msgstr "Шаблони виключення файлів"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:107
+msgid "Files matching these patterns will not have a preview"
+msgstr "Файли, що відповідають цим шаблонам, не матимуть попереднього перегляду"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:150
+msgid "File Item"
+msgstr "Елемент з файлом"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:151
+msgid "Configure file clipboard items"
+msgstr "Налаштувати елементи буфера обміну з файлами"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:155
+msgid "File Preview Visibility"
+msgstr "Видимість попереднього перегляду файлу"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:157
+msgid ""
+"File preview shows a preview of the contents of a file.\n"
+"File info shows some information about the file."
+msgstr ""
+"Попередній перегляд файлу показує вміст файлу.\n"
+"Відомості про файл показують інформацію про файл."
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:160
+msgid "File Preview"
+msgstr "Попередній перегляд файлу"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:161
+msgid "File Info"
+msgstr "Відомості про файл"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:162
+msgid "File Preview or File Info"
+msgstr "Попередній перегляд файлу або відомості про файл"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:163
+msgid "File Preview and File Info"
+msgstr "Попередній перегляд файлу та відомості про файл"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:172
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:26
+msgid "Background Size"
+msgstr "Розмір фону"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
+msgid "Background size of the image preview"
+msgstr "Розмір фонового зображення попереднього перегляду"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:174
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:28
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:85
+msgid "Contain"
+msgstr "Умістити повністю"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:174
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:28
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:85
+msgid "Cover"
+msgstr "Заповнити"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:180
+msgid "Enable or disable syntax highlighting in the text preview"
+msgstr ""
+"Увімкнути або вимкнути підсвічування синтаксису в попередньому перегляді "
+"тексту"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:186
+msgid "Show line numbers in the text preview"
+msgstr "Показувати номери рядків у попередньому перегляді тексту"
+
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:192
+msgid "Configure file exclusions for file previews"
+msgstr "Налаштувати виключення файлів для попереднього перегляду"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:15
+msgid "Image Item"
+msgstr "Елемент із зображенням"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:16
+msgid "Configure image clipboard items"
+msgstr "Налаштувати елементи буфера обміну із зображеннями"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:20
+msgid "Show Image Info"
+msgstr "Показувати відомості про зображення"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:21
+msgid "Show extra information in the image item"
+msgstr "Показувати додаткову інформацію в елементі із зображенням"
+
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
+msgid "Background size of the image"
+msgstr "Розмір фону зображення"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:30
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:99
+msgid "Link Exclusions"
+msgstr "Виключення посилань"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:44
+msgid ""
+"Enter a regular expression to exclude links that should not have a preview."
+msgstr ""
+"Введіть регулярний вираз, щоб виключити посилання, які не повинні мати "
+"попереднього перегляду."
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:48
+msgid "Link Exclusion Patterns"
+msgstr "Шаблони виключення посилань"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:49
+msgid "Links matching these patterns will not have a preview"
+msgstr ""
+"Посилання, що відповідають цим шаблонам, не матимуть попереднього перегляду"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:66
+msgid "Link Item"
+msgstr "Елемент із посиланням"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:67
+msgid "Configure link clipboard items"
+msgstr "Налаштувати елементи буфера обміну з посиланнями"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:71
+msgid "Show Link Preview"
+msgstr "Показувати попередній перегляд посилання"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:72
+msgid "Show link preview in the link item"
+msgstr "Показувати попередній перегляд у елементі з посиланням"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:77
+msgid "Show Link Preview Image"
+msgstr "Показувати зображення попереднього перегляду посилання"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:78
+msgid "Show link preview image in the link item"
+msgstr "Показувати зображення попереднього перегляду в елементі з посиланням"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:83
+msgid "Link Preview Image Background Size"
+msgstr "Розмір фону зображення попереднього перегляду посилання"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:84
+msgid "Background size of the link preview image"
+msgstr "Розмір фону зображення попереднього перегляду посилання"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:90
+msgid "Link Preview Orientation"
+msgstr "Орієнтація попереднього перегляду посилання"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:91
+msgid "Orientation of the link preview"
+msgstr "Орієнтація попереднього перегляду посилання"
+
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:100
+msgid "Configure link exclusions for link previews"
+msgstr "Налаштувати виключення посилань для попереднього перегляду"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:16
+msgid "Text Item"
+msgstr "Текстовий елемент"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:17
+msgid "Configure text clipboard items"
+msgstr "Налаштувати текстові елементи буфера обміну"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:21
+msgid "Show Text Info"
+msgstr "Показувати відомості про текст"
+
+#: src/lib/preferences/customization/items/textItemCustomization.ts:22
+msgid "Show extra information in the text item"
+msgstr "Показувати додаткову інформацію в текстовому елементі"
+
+#: src/lib/preferences/customization/itemsCustomization.ts:23
+msgid "Items"
+msgstr "Елементи"
+
+#: src/lib/preferences/customization/profiles.ts:208
+msgid "Profiles"
+msgstr "Профілі"
+
+#: src/lib/preferences/customization/profiles.ts:209
+msgid "Choose between pre-defined profiles"
+msgstr "Виберіть один із наперед визначених профілів"
+
+#: src/lib/preferences/customization/profiles.ts:217
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "Default"
+msgstr "Типовий"
+
+#: src/lib/preferences/customization/profiles.ts:223
+msgid "Compact"
+msgstr "Компактний"
+
+#: src/lib/preferences/customization/profiles.ts:229
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "Custom"
+msgstr "Власний"
+
+#: src/lib/preferences/customization/themeCustomization.ts:69
+#: src/lib/preferences/customization/themeCustomization.ts:73
+msgid "Theme"
+msgstr "Тема"
+
+#: src/lib/preferences/customization/themeCustomization.ts:74
+msgid "Set the preferred theme"
+msgstr "Задати бажану тему"
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "Yaru"
+msgstr "Yaru"
+
+#: src/lib/preferences/customization/themeCustomization.ts:89
+#: src/lib/preferences/customization/themeCustomization.ts:96
+msgid "Color Scheme"
+msgstr "Колірна схема"
+
+#: src/lib/preferences/customization/themeCustomization.ts:90
+#: src/lib/preferences/customization/themeCustomization.ts:97
+msgid "Set the color scheme of the theme"
+msgstr "Задати колірну схему теми"
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:98
+msgid "Dark"
+msgstr "Темна"
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+msgid "High Contrast"
+msgstr "Висока контрастність"
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:98
+msgid "Light"
+msgstr "Світла"
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
+msgid "System"
+msgstr "Системна"
+
+#: src/lib/preferences/customization/themeCustomization.ts:104
+msgid "Background Color"
+msgstr "Колір фону"
+
+#: src/lib/preferences/customization/themeCustomization.ts:105
+msgid "Set the background color of the clipboard dialog"
+msgstr "Задати колір фону діалогового вікна буфера обміну"
+
+#: src/lib/preferences/customization/themeCustomization.ts:111
+msgid "Text Color"
+msgstr "Колір тексту"
+
+#: src/lib/preferences/customization/themeCustomization.ts:112
+msgid "Set the text color of the clipboard dialog"
+msgstr "Задати колір тексту діалогового вікна буфера обміну"
+
+#: src/lib/preferences/customization/themeCustomization.ts:118
+msgid "Item Color"
+msgstr "Колір елемента"
+
+#: src/lib/preferences/customization/themeCustomization.ts:119
+msgid "Set the background color of clipboard items"
+msgstr "Задати колір фону елементів буфера обміну"
+
+#: src/lib/preferences/customization/themeCustomization.ts:125
+msgid "Search Color"
+msgstr "Колір пошуку"
+
+#: src/lib/preferences/customization/themeCustomization.ts:126
+msgid "Set the background color of the search bar"
+msgstr "Задати колір фону рядка пошуку"
+
+#: src/lib/preferences/dependencies/dependencies.ts:153
+#: src/lib/preferences/dependencies/dependencies.ts:440
+msgid "Libgda Not Installed"
+msgstr "Libgda не встановлено"
+
+#: src/lib/preferences/dependencies/dependencies.ts:155
+msgid ""
+"Libgda is required to store clipboard history between sessions. Install "
+"either libgda 5.0 or 6.0 with SQLite support to use this feature. After "
+"installing libgda you will need to log out or restart your system."
+msgstr ""
+"Libgda потрібна для зберігання історії буфера обміну між сеансами. Щоб "
+"скористатися цією функцією, установіть libgda 5.0 або 6.0 з підтримкою "
+"SQLite. Після встановлення libgda потрібно вийти із сеансу або перезавантажити "
+"систему."
+
+#: src/lib/preferences/dependencies/dependencies.ts:159
+msgid "Install Libgda"
+msgstr "Установити Libgda"
+
+#: src/lib/preferences/dependencies/dependencies.ts:172
+#: src/lib/preferences/dependencies/dependencies.ts:442
+msgid "Highlight.js Not Installed"
+msgstr "Highlight.js не встановлено"
+
+#: src/lib/preferences/dependencies/dependencies.ts:173
+msgid "Highlight.js is required to display syntax highlighted code."
+msgstr "Highlight.js потрібен для показу коду з підсвічуванням синтаксису."
+
+#: src/lib/preferences/dependencies/dependencies.ts:177
+msgid "Manual Installation"
+msgstr "Ручне встановлення"
+
+#: src/lib/preferences/dependencies/dependencies.ts:191
+msgid ""
+"You can manually install highlight.js by downloading highlight.min.js from "
+"\"Url\" to \"Install Location\"."
+msgstr ""
+"Ви можете встановити highlight.js вручну, завантаживши highlight.min.js з "
+"«Url» до «Місця встановлення»."
+
+#: src/lib/preferences/dependencies/dependencies.ts:208
+msgid "Url"
+msgstr "Url"
+
+#: src/lib/preferences/dependencies/dependencies.ts:217
+msgid "Install Location"
+msgstr "Місце встановлення"
+
+#: src/lib/preferences/dependencies/dependencies.ts:226
+msgid "Install"
+msgstr "Установити"
+
+#: src/lib/preferences/dependencies/dependencies.ts:355
+#: src/lib/preferences/dependencies/dependencies.ts:441
+msgid "GSound Not Installed"
+msgstr "GSound не встановлено"
+
+#: src/lib/preferences/dependencies/dependencies.ts:357
+msgid ""
+"GSound is required to play sound effects. Install GSound to use this "
+"feature. After installing GSound you will need to log out or restart your "
+"system."
+msgstr ""
+"GSound потрібен для відтворення звукових ефектів. Щоб скористатися цією "
+"функцією, установіть GSound. Після встановлення GSound потрібно вийти із "
+"сеансу або перезавантажити систему."
+
+#: src/lib/preferences/dependencies/dependencies.ts:360
+msgid "Install GSound"
+msgstr "Установити GSound"
+
+#: src/lib/preferences/dependencies/dependencies.ts:373
+msgid "Starting Highlight.js Download"
+msgstr "Починається завантаження Highlight.js"
+
+#: src/lib/preferences/dependencies/dependencies.ts:393
+msgid "Error Installing Highlight.js"
+msgstr "Помилка встановлення Highlight.js"
+
+#: src/lib/preferences/dependencies/dependencies.ts:393
+msgid "Successfully Installed Highlight.js"
+msgstr "Highlight.js успішно встановлено"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:240
+#, javascript-format
+msgid "Successfully Installed %s"
+msgstr "%s успішно встановлено"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:241
+#, javascript-format
+msgid "Error Installing %s"
+msgstr "Помилка встановлення %s"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:261
+#, javascript-format
+msgid "Successfully Uninstalled %s"
+msgstr "%s успішно видалено"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:262
+#, javascript-format
+msgid "Error Uninstalling %s"
+msgstr "Помилка видалення %s"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:288
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:382
+msgid "Manage Highlight.js"
+msgstr "Керувати Highlight.js"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:300
+msgid "Languages"
+msgstr "Мови"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:321
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:49
+msgid "Search"
+msgstr "Пошук"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:375
+msgid "Dependencies"
+msgstr "Залежності"
+
+#: src/lib/preferences/dependencies/dependenciesSettings.ts:383
+msgid "Manage the Highlight.js installation"
+msgstr "Керувати встановленням Highlight.js"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:40
+msgid "Search apps"
+msgstr "Пошук програм"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:75
+msgid "No Apps Found"
+msgstr "Програм не знайдено"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:167
+msgid "Add App Exclusion"
+msgstr "Додати виключення програми"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:168
+msgid "Enter the WM Class of the application you want to exclude:"
+msgstr "Введіть WM Class програми, яку потрібно виключити:"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:182
+msgid "WM Class"
+msgstr "WM Class"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:258
+msgid "No Exclusions"
+msgstr "Немає виключень"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:293
+#: src/lib/preferences/general/appExclusionSettings.ts:304
+msgid "App Exclusions"
+msgstr "Виключення програм"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:317
+msgid "Exclusions"
+msgstr "Виключення"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:323
+msgid "Manage App Exclusions"
+msgstr "Керувати виключеннями програм"
+
+#: src/lib/preferences/general/appExclusionSettings.ts:324
+msgid "Manage apps that will be excluded from clipboard history"
+msgstr "Керувати програмами, які буде виключено з історії буфера обміну"
+
+#: src/lib/preferences/general/behaviorSettings.ts:14
+msgid "Behavior"
+msgstr "Поведінка"
+
+#: src/lib/preferences/general/behaviorSettings.ts:18
+msgid "Remember Search Query"
+msgstr "Запам’ятовувати пошуковий запит"
+
+#: src/lib/preferences/general/behaviorSettings.ts:19
+msgid ""
+"Remember the search query when closing and reopening the clipboard dialog"
+msgstr ""
+"Запам’ятовувати пошуковий запит під час закриття та повторного відкриття "
+"діалогового вікна буфера обміну"
+
+#: src/lib/preferences/general/behaviorSettings.ts:24
+msgid "Exclude Pinned Items from Main View"
+msgstr "Виключити закріплені елементи з основного вигляду"
+
+#: src/lib/preferences/general/behaviorSettings.ts:25
+msgid "Pinned items appear only when searching for pinned items"
+msgstr "Закріплені елементи з’являються лише під час пошуку закріплених елементів"
+
+#: src/lib/preferences/general/behaviorSettings.ts:30
+msgid "Exclude Tagged Items from Main View"
+msgstr "Виключити позначені елементи з основного вигляду"
+
+#: src/lib/preferences/general/behaviorSettings.ts:31
+msgid "Tagged items appear only when searching for tagged items"
+msgstr "Позначені елементи з’являються лише під час пошуку позначених елементів"
+
+#: src/lib/preferences/general/behaviorSettings.ts:36
+msgid "Protect Pinned Items"
+msgstr "Захищати закріплені елементи"
+
+#: src/lib/preferences/general/behaviorSettings.ts:37
+msgid "Prevents pinned clipboard items from being deleted"
+msgstr "Запобігає видаленню закріплених елементів буфера обміну"
+
+#: src/lib/preferences/general/behaviorSettings.ts:42
+msgid "Protect Tagged Items"
+msgstr "Захищати позначені елементи"
+
+#: src/lib/preferences/general/behaviorSettings.ts:43
+msgid "Prevents tagged clipboard items from being deleted"
+msgstr "Запобігає видаленню позначених елементів буфера обміну"
+
+#: src/lib/preferences/general/behaviorSettings.ts:48
+msgid "Sync Primary Clipboard"
+msgstr "Синхронізувати основний буфер обміну"
+
+#: src/lib/preferences/general/behaviorSettings.ts:49
+msgid "Also copy clipboard items to the primary clipboard"
+msgstr "Також копіювати елементи буфера обміну до основного буфера обміну"
+
+#: src/lib/preferences/general/behaviorSettings.ts:54
+msgid "Update Date on Copy"
+msgstr "Оновлювати дату під час копіювання"
+
+#: src/lib/preferences/general/behaviorSettings.ts:55
+msgid ""
+"Update the copied date of clipboard items when selected from clipboard "
+"history"
+msgstr ""
+"Оновлювати дату копіювання елементів буфера обміну під час їх вибору з "
+"історії буфера обміну"
+
+#: src/lib/preferences/general/feedbackSettings.ts:131
+#: src/lib/preferences/general/feedbackSettings.ts:251
+msgid "Sound"
+msgstr "Звук"
+
+#: src/lib/preferences/general/feedbackSettings.ts:162
+#: src/lib/preferences/general/feedbackSettings.ts:310
+msgid "Click"
+msgstr "Клацання"
+
+#: src/lib/preferences/general/feedbackSettings.ts:163
+#: src/lib/preferences/general/feedbackSettings.ts:312
+msgid "Hum"
+msgstr "Гудіння"
+
+#: src/lib/preferences/general/feedbackSettings.ts:164
+#: src/lib/preferences/general/feedbackSettings.ts:314
+msgid "String"
+msgstr "Струна"
+
+#: src/lib/preferences/general/feedbackSettings.ts:165
+#: src/lib/preferences/general/feedbackSettings.ts:316
+msgid "Swing"
+msgstr "Гойдання"
+
+#: src/lib/preferences/general/feedbackSettings.ts:166
+#: src/lib/preferences/general/feedbackSettings.ts:318
+msgid "Message"
+msgstr "Повідомлення"
+
+#: src/lib/preferences/general/feedbackSettings.ts:167
+#: src/lib/preferences/general/feedbackSettings.ts:320
+msgid "Message New Instant"
+msgstr "Нове миттєве повідомлення"
+
+#: src/lib/preferences/general/feedbackSettings.ts:168
+#: src/lib/preferences/general/feedbackSettings.ts:322
+msgid "Bell"
+msgstr "Дзвінок"
+
+#: src/lib/preferences/general/feedbackSettings.ts:169
+#: src/lib/preferences/general/feedbackSettings.ts:324
+msgid "Dialog Warning"
+msgstr "Попередження діалогу"
+
+#: src/lib/preferences/general/feedbackSettings.ts:223
+msgid "Feedback"
+msgstr "Зворотний зв’язок"
+
+#: src/lib/preferences/general/feedbackSettings.ts:227
+msgid "Indicator Display"
+msgstr "Показ індикатора"
+
+#: src/lib/preferences/general/feedbackSettings.ts:228
+msgid "Choose how the clipboard indicator appears in the top panel"
+msgstr "Виберіть, як індикатор буфера обміну відображається на верхній панелі"
+
+#: src/lib/preferences/general/feedbackSettings.ts:231
+msgid "Icon Only"
+msgstr "Лише піктограма"
+
+#: src/lib/preferences/general/feedbackSettings.ts:232
+msgid "Clipboard Content Only"
+msgstr "Лише вміст буфера обміну"
+
+#: src/lib/preferences/general/feedbackSettings.ts:233
+msgid "Icon and Clipboard Content"
+msgstr "Піктограма та вміст буфера обміну"
+
+#: src/lib/preferences/general/feedbackSettings.ts:239
+msgid "Wiggle Indicator"
+msgstr "Похитувати індикатор"
+
+#: src/lib/preferences/general/feedbackSettings.ts:240
+msgid "Wiggle the indicator when a clipboard item is copied"
+msgstr "Похитувати індикатор під час копіювання елемента буфера обміну"
+
+#: src/lib/preferences/general/feedbackSettings.ts:245
+msgid "Send Notification"
+msgstr "Надсилати сповіщення"
+
+#: src/lib/preferences/general/feedbackSettings.ts:246
+msgid "Send a notification when a clipboard item is copied"
+msgstr "Надсилати сповіщення під час копіювання елемента буфера обміну"
+
+#: src/lib/preferences/general/feedbackSettings.ts:252
+msgid "Sound to play when a clipboard item is copied"
+msgstr "Звук, що відтворюється під час копіювання елемента буфера обміну"
+
+#: src/lib/preferences/general/historySettings.ts:64
+msgid "History"
+msgstr "Історія"
+
+#: src/lib/preferences/general/historySettings.ts:70
+msgid "Memory"
+msgstr "Пам’ять"
+
+#: src/lib/preferences/general/historySettings.ts:71
+msgid "(recommended)"
+msgstr "(рекомендовано)"
+
+#: src/lib/preferences/general/historySettings.ts:71
+msgid "SQLite"
+msgstr "SQLite"
+
+#: src/lib/preferences/general/historySettings.ts:72
+msgid "JSON"
+msgstr "JSON"
+
+#: src/lib/preferences/general/historySettings.ts:99
+msgid "Database"
+msgstr "База даних"
+
+#: src/lib/preferences/general/historySettings.ts:100
+msgid "Select which database type to use for storing your clipboard"
+msgstr "Виберіть тип бази даних для зберігання вашого буфера обміну"
+
+#: src/lib/preferences/general/historySettings.ts:125
+msgid "Database Location"
+msgstr "Розташування бази даних"
+
+#: src/lib/preferences/general/historySettings.ts:133
+msgid "Clipboard History"
+msgstr "Історія буфера обміну"
+
+#: src/lib/preferences/general/historySettings.ts:135
+msgid ""
+"Choose what to do with your clipboard history when you restart, log out, or "
+"shut down your system"
+msgstr ""
+"Виберіть, що робити з історією буфера обміну під час перезавантаження, виходу "
+"із сеансу або вимкнення системи"
+
+#: src/lib/preferences/general/historySettings.ts:137
+#: src/lib/ui/clipboardDialog.ts:130 src/lib/ui/clipboardDialog.ts:235
+#: src/lib/ui/indicator.ts:54
+msgid "Clear"
+msgstr "Очистити"
+
+#: src/lib/preferences/general/historySettings.ts:137
+msgid "Keep All"
+msgstr "Зберегти все"
+
+#: src/lib/preferences/general/historySettings.ts:137
+msgid "Keep Pinned/Tagged"
+msgstr "Зберегти закріплені/позначені"
+
+#: src/lib/preferences/general/historySettings.ts:143
+msgid "History Length"
+msgstr "Довжина історії"
+
+#: src/lib/preferences/general/historySettings.ts:144
+msgid "Select how many items to keep in the clipboard history"
+msgstr "Виберіть, скільки елементів зберігати в історії буфера обміну"
+
+#: src/lib/preferences/general/historySettings.ts:150
+msgid "History Time Limit"
+msgstr "Обмеження часу історії"
+
+#: src/lib/preferences/general/historySettings.ts:152
+msgid ""
+"Select how many minutes to keep items in the clipboard history. Set to 0 to "
+"disable the time limit"
+msgstr ""
+"Виберіть, скільки хвилин зберігати елементи в історії буфера обміну. "
+"Установіть 0, щоб вимкнути обмеження часу"
+
+#: src/lib/preferences/general/locationsGroup.ts:13
+msgid "Locations"
+msgstr "Розташування"
+
+#: src/lib/preferences/general/locationsGroup.ts:19
+msgid "Data"
+msgstr "Дані"
+
+#: src/lib/preferences/general/locationsGroup.ts:29
+msgid "Config"
+msgstr "Конфігурація"
+
+#: src/lib/preferences/general/locationsGroup.ts:39
+msgid "Cache"
+msgstr "Кеш"
+
+#: src/lib/preferences/shortcuts/dialogShortcuts.ts:20
+msgid "Open Clipboard Dialog"
+msgstr "Відкрити діалогове вікно буфера обміну"
+
+#: src/lib/preferences/shortcuts/dialogShortcuts.ts:23
+msgid "Toggle Incognito Mode"
+msgstr "Перемкнути режим анонімного перегляду"
+
+#: src/lib/preferences/shortcuts/dialogShortcuts.ts:27
+msgid "Open Clipboard Dialog Behavior"
+msgstr "Поведінка відкриття діалогового вікна буфера обміну"
+
+#: src/lib/preferences/shortcuts/dialogShortcuts.ts:28
+msgid "Open / Select Next Item"
+msgstr "Відкрити / вибрати наступний елемент"
+
+#: src/lib/preferences/shortcuts/dialogShortcuts.ts:28
+msgid "Toggle Dialog"
+msgstr "Перемкнути діалогове вікно"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:20
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:39
+msgid "Pin Item"
+msgstr "Закріпити елемент"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:23
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:39
+msgid "Delete Item"
+msgstr "Видалити елемент"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:24
+msgid "Holding shift force deletes"
+msgstr "Утримання Shift примусово видаляє"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:27
+msgid "Edit Item"
+msgstr "Змінити елемент"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:28
+msgid "Only supported for text and code items"
+msgstr "Підтримується лише для текстових елементів та елементів з кодом"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:31
+msgid "Edit Title"
+msgstr "Змінити назву"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:34
+msgid "Open Menu"
+msgstr "Відкрити меню"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:38
+msgid "Middle Click Action"
+msgstr "Дія клацання середньою кнопкою"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:67
+msgid "Swap Copy Shortcut"
+msgstr "Поміняти комбінацію копіювання"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:68
+msgid "Swap copy and paste shortcuts"
+msgstr "Поміняти місцями комбінації копіювання та вставлення"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:72
+msgid "Paste Item"
+msgstr "Вставити елемент"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:74
+msgid "Copy Item"
+msgstr "Копіювати елемент"
+
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:76
+msgid "Activate Default Action"
+msgstr "Виконати типову дію"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:12
+msgid "Navigation"
+msgstr "Навігація"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:15
+msgid "Navigate"
+msgstr "Навігувати"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:16
+msgid "Jump to Item"
+msgstr "Перейти до елемента"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:17
+msgid "Jump to Start"
+msgstr "Перейти до початку"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:18
+msgid "Jump to End"
+msgstr "Перейти до кінця"
+
+#: src/lib/preferences/shortcuts/navigationShortcuts.ts:19
+msgid "Jump to Search"
+msgstr "Перейти до пошуку"
+
+#: src/lib/preferences/shortcuts/popupMenuShortcuts.ts:11
+msgid "Popup Menu"
+msgstr "Спливне меню"
+
+#: src/lib/preferences/shortcuts/popupMenuShortcuts.ts:13
+msgid "Select Item Type"
+msgstr "Вибрати тип елемента"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:33
+msgid "Scroll"
+msgstr "Прокручування"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:51
+msgid "Toggle Pinned Search"
+msgstr "Перемкнути пошук закріплених"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:52
+msgid "Clear Item Tag/Type"
+msgstr "Очистити мітку/тип елемента"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:53
+msgid "Activate First Item"
+msgstr "Виконати перший елемент"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:62
+msgid "Next Item Type"
+msgstr "Наступний тип елемента"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:63
+msgid "Previous Item Type"
+msgstr "Попередній тип елемента"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:64
+msgid "Next Item Tag"
+msgstr "Наступна мітка елемента"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:65
+msgid "Previous Item Tag"
+msgstr "Попередня мітка елемента"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:66
+msgid "Select Item Tag"
+msgstr "Вибрати мітку елемента"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:76
+msgid "Swap Scroll Shortcut"
+msgstr "Поміняти комбінацію прокручування"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:77
+msgid "Swaps scroll shortcuts of cycling item types and item tags"
+msgstr ""
+"Міняє місцями комбінації прокручування для циклічного перемикання типів та "
+"міток елементів"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:81
+msgid "Cycle Item Type"
+msgstr "Циклічно перемикати тип елемента"
+
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:83
+msgid "Cycle Item Tag"
+msgstr "Циклічно перемикати мітку елемента"
+
+#: src/lib/preferences/shortcuts/shortcutRow.ts:78
+msgid "Set Shortcut"
+msgstr "Задати комбінацію"
+
+#: src/lib/preferences/shortcuts/shortcutRow.ts:126
+msgid "Disable Shortcut"
+msgstr "Вимкнути комбінацію"
+
+#: src/lib/preferences/shortcuts/shortcutRow.ts:219
+msgid "Disabled"
+msgstr "Вимкнено"
+
+#: src/lib/ui/components/contentInfo.ts:35
+#, javascript-format
+msgid "%dh"
+msgstr "%dг"
+
+#: src/lib/ui/components/contentInfo.ts:36
+#, javascript-format
+msgid "%dm"
+msgstr "%dхв"
+
+#: src/lib/ui/components/contentInfo.ts:37
+#, javascript-format
+msgid "%ds"
+msgstr "%dс"
+
+#: src/lib/ui/components/contentInfo.ts:116
+#, javascript-format
+msgid "%d char"
+msgid_plural "%d chars"
+msgstr[0] "%d символ"
+msgstr[1] "%d символи"
+msgstr[2] "%d символів"
+
+#: src/lib/ui/components/contentInfo.ts:123
+#, javascript-format
+msgid "%d word"
+msgid_plural "%d words"
+msgstr[0] "%d слово"
+msgstr[1] "%d слова"
+msgstr[2] "%d слів"
+
+#: src/lib/ui/components/contentInfo.ts:126
+#, javascript-format
+msgid "%d line"
+msgid_plural "%d lines"
+msgstr[0] "%d рядок"
+msgstr[1] "%d рядки"
+msgstr[2] "%d рядків"
+
+#: src/lib/ui/components/contentInfo.ts:186
+msgid "Missing File"
+msgstr "Файл відсутній"
+
+#: src/lib/ui/components/contentInfo.ts:198
+msgid "Error"
+msgstr "Помилка"
+
+#: src/lib/ui/components/editDialog.ts:269
+msgid "Edit Clipboard Item"
+msgstr "Змінити елемент буфера обміну"
+
+#: src/lib/ui/components/qrCodeDialog.ts:146
+msgid "Close"
+msgstr "Закрити"
+
+#: src/lib/ui/indicator.ts:38
+msgid "Clear Clipboard History?"
+msgstr "Очистити історію буфера обміну?"
+
+#: src/lib/ui/indicator.ts:39
+msgid "Are you sure you want to clear your clipboard history?"
+msgstr "Ви впевнені, що хочете очистити історію буфера обміну?"
+
+#: src/lib/ui/indicator.ts:43
+msgid "Clear Pinned/Tagged Items"
+msgstr "Очистити закріплені/позначені елементи"
+
+#: src/lib/ui/indicator.ts:102
+msgid "Incognito Mode"
+msgstr "Режим анонімного перегляду"
+
+#: src/lib/ui/indicator.ts:105
+msgid "Clear History"
+msgstr "Очистити історію"
+
+#: src/lib/ui/indicator.ts:106
+msgid "Settings"
+msgstr "Налаштування"
+
+#: src/lib/ui/indicator.ts:199
+#, javascript-format
+msgid "%d File"
+msgid_plural "%d Files"
+msgstr[0] "%d файл"
+msgstr[1] "%d файли"
+msgstr[2] "%d файлів"
+
+#: src/lib/ui/items/characterItem.ts:22
+msgid "Char"
+msgstr "Символ"
+
+#: src/lib/ui/items/filesItem.ts:120
+#, javascript-format
+msgid "%d more file"
+msgid_plural "%d more files"
+msgstr[0] "ще %d файл"
+msgstr[1] "ще %d файли"
+msgstr[2] "ще %d файлів"
+
+#: src/lib/ui/items/filesItem.ts:121
+#, javascript-format
+msgid "%d file"
+msgid_plural "%d files"
+msgstr[0] "%d файл"
+msgstr[1] "%d файли"
+msgstr[2] "%d файлів"
+
+#: src/lib/ui/items/linkItem.ts:95
+msgid "No Title"
+msgstr "Без назви"
+
+#: src/lib/ui/items/linkItem.ts:97
+msgid "No Description"
+msgstr "Без опису"
+
+#: src/lib/ui/items/statusItem.ts:70 src/lib/ui/items/statusItem.ts:104
+msgid "Clipboard is Empty"
+msgstr "Буфер обміну порожній"
+
+#: src/lib/ui/items/statusItem.ts:107
+msgid "No Items Found"
+msgstr "Елементів не знайдено"
+
+#: src/lib/ui/searchEntry.ts:151
+msgid "__All"
+msgstr "__Усі"
+
+#: src/lib/ui/searchEntry.ts:155
+msgid "__Text"
+msgstr "__Текст"
+
+#: src/lib/ui/searchEntry.ts:156
+msgid "__Code"
+msgstr "__Код"
+
+#: src/lib/ui/searchEntry.ts:157
+msgid "__Image"
+msgstr "__Зображення"
+
+#: src/lib/ui/searchEntry.ts:158
+msgid "__File"
+msgstr "__Файл"
+
+#: src/lib/ui/searchEntry.ts:159
+msgid "File__s"
+msgstr "Файл__и"
+
+#: src/lib/ui/searchEntry.ts:160
+msgid "__Link"
+msgstr "__Посилання"
+
+#: src/lib/ui/searchEntry.ts:161
+msgid "C__haracter"
+msgstr "С__имвол"
+
+#: src/lib/ui/searchEntry.ts:162
+msgid "Colo__r"
+msgstr "Колі__р"
+
+#: src/lib/ui/searchEntry.ts:274
+msgid "Type to search"
+msgstr "Введіть текст для пошуку"
+
+#: src/prefs.ts:75
+msgid "General"
+msgstr "Загальні"
+
+#: src/prefs.ts:95
+msgid "Customization"
+msgstr "Налаштування вигляду"
+
+#: src/prefs.ts:112
+msgid "Shortcuts"
+msgstr "Комбінації клавіш"
