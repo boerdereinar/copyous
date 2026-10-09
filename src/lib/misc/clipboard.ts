@@ -3,6 +3,7 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Meta from 'gi://Meta';
+import Shell from 'gi://Shell';
 import St from 'gi://St';
 
 import type CopyousExtension from '../../extension.js';
@@ -61,6 +62,19 @@ function hasMoreGraphemes(text: string, max: number): boolean {
 	return iterator.next().value !== undefined;
 }
 
+function isTerminalWindow(window: Meta.Window | null): boolean {
+	if (!window) return false;
+
+	try {
+		const app = Shell.WindowTracker.get_default().get_window_app(window);
+		const info = app?.get_app_info();
+		const categories = (info as Gio.DesktopAppInfo | null)?.get_string('Categories') ?? '';
+		return categories.split(';').includes('TerminalEmulator');
+	} catch {
+		return false;
+	}
+}
+
 @registerClass({
 	Signals: {
 		clipboard: {
@@ -82,6 +96,9 @@ export class ClipboardManager extends GObject.Object {
 	private pasteSignalId: number = -1;
 
 	private prevClipboard: [ContentType, string] | null = null;
+
+	/** Whether the paste target captured when the dialog opened is a terminal. */
+	private savedTerminal: boolean | null = null;
 
 	constructor(
 		private ext: CopyousExtension,
@@ -134,24 +151,36 @@ export class ClipboardManager extends GObject.Object {
 		}
 	}
 
+	/** Capture the paste target before the dialog takes focus. */
+	public savePasteTarget() {
+		this.savedTerminal =
+			isTerminalWindow(global.display.focus_window) ||
+			this.keyboard.purpose === Clutter.InputContentPurpose.TERMINAL;
+	}
+
 	public pasteContent(content: ClipboardContent) {
+		const terminal = this.savedTerminal ?? this.keyboard.purpose === Clutter.InputContentPurpose.TERMINAL;
+		this.savedTerminal = null;
+
 		this.copyContent(content);
 
 		if (this.pasteSignalId >= 0) GLib.source_remove(this.pasteSignalId);
 		this.pasteSignalId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
-			// https://github.com/Tudmotu/gnome-shell-extension-clipboard-indicator/blob/89c57703641a9d5d15f899f6e780174641911d95/extension.js#L1094
-			if (this.keyboard.purpose === Clutter.InputContentPurpose.TERMINAL) {
+			// Terminals paste the clipboard themselves (Ctrl+Shift+V). Images cannot
+			// travel through a terminal paste, so they always get the raw Ctrl+V for
+			// clipboard-reading TUIs. Everything else uses the platform paste.
+			if (terminal && content.type !== ContentType.Image) {
 				this.keyboard.press(Clutter.KEY_Control_L);
 				this.keyboard.press(Clutter.KEY_Shift_L);
-				this.keyboard.press(Clutter.KEY_Insert);
-				this.keyboard.release(Clutter.KEY_Insert);
+				this.keyboard.press(Clutter.KEY_v);
+				this.keyboard.release(Clutter.KEY_v);
 				this.keyboard.release(Clutter.KEY_Shift_L);
 				this.keyboard.release(Clutter.KEY_Control_L);
 			} else {
-				this.keyboard.press(Clutter.KEY_Shift_L);
-				this.keyboard.press(Clutter.KEY_Insert);
-				this.keyboard.release(Clutter.KEY_Insert);
-				this.keyboard.release(Clutter.KEY_Shift_L);
+				this.keyboard.press(Clutter.KEY_Control_L);
+				this.keyboard.press(Clutter.KEY_v);
+				this.keyboard.release(Clutter.KEY_v);
+				this.keyboard.release(Clutter.KEY_Control_L);
 			}
 
 			this.pasteSignalId = -1;
