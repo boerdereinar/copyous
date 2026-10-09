@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-09 16:27+0000\n"
+"POT-Creation-Date: 2026-10-09 23:37+0000\n"
 "PO-Revision-Date: 2026-09-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
@@ -686,8 +686,7 @@ msgstr "Максимум символів"
 
 #: src/lib/preferences/customization/items/characterItemCustomization.ts:20
 msgid "Maximum number of characters that are recognized as a character item"
-msgstr ""
-"Максимальна кількість символів, що розпізнається як символьний елемент"
+msgstr "Максимальна кількість символів, що розпізнається як символьний елемент"
 
 #: src/lib/preferences/customization/items/characterItemCustomization.ts:26
 msgid "Show Unicode"
@@ -827,7 +826,8 @@ msgstr "Мініатюра"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:90
 msgid "Enable file previews for all files with generated thumbnails"
-msgstr "Увімкнути попередній перегляд для всіх файлів зі створеними мініатюрами"
+msgstr ""
+"Увімкнути попередній перегляд для всіх файлів зі створеними мініатюрами"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:101
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:43
@@ -850,7 +850,8 @@ msgstr "Шаблони виключення файлів"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:107
 msgid "Files matching these patterns will not have a preview"
-msgstr "Файли, що відповідають цим шаблонам, не матимуть попереднього перегляду"
+msgstr ""
+"Файли, що відповідають цим шаблонам, не матимуть попереднього перегляду"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:150
 msgid "File Item"
@@ -1136,8 +1137,8 @@ msgid ""
 msgstr ""
 "Libgda потрібна для зберігання історії буфера обміну між сеансами. Щоб "
 "скористатися цією функцією, установіть libgda 5.0 або 6.0 з підтримкою "
-"SQLite. Після встановлення libgda потрібно вийти із сеансу або перезавантажити "
-"систему."
+"SQLite. Після встановлення libgda потрібно вийти із сеансу або "
+"перезавантажити систему."
 
 #: src/lib/preferences/dependencies/dependencies.ts:159
 msgid "Install Libgda"
@@ -1311,7 +1312,8 @@ msgstr "Виключити закріплені елементи з основн
 
 #: src/lib/preferences/general/behaviorSettings.ts:25
 msgid "Pinned items appear only when searching for pinned items"
-msgstr "Закріплені елементи з’являються лише під час пошуку закріплених елементів"
+msgstr ""
+"Закріплені елементи з’являються лише під час пошуку закріплених елементів"
 
 #: src/lib/preferences/general/behaviorSettings.ts:30
 msgid "Exclude Tagged Items from Main View"
@@ -1319,7 +1321,8 @@ msgstr "Виключити позначені елементи з основно
 
 #: src/lib/preferences/general/behaviorSettings.ts:31
 msgid "Tagged items appear only when searching for tagged items"
-msgstr "Позначені елементи з’являються лише під час пошуку позначених елементів"
+msgstr ""
+"Позначені елементи з’являються лише під час пошуку позначених елементів"
 
 #: src/lib/preferences/general/behaviorSettings.ts:36
 msgid "Protect Pinned Items"
@@ -1487,8 +1490,8 @@ msgid ""
 "Choose what to do with your clipboard history when you restart, log out, or "
 "shut down your system"
 msgstr ""
-"Виберіть, що робити з історією буфера обміну під час перезавантаження, виходу "
-"із сеансу або вимкнення системи"
+"Виберіть, що робити з історією буфера обміну під час перезавантаження, "
+"виходу із сеансу або вимкнення системи"
 
 #: src/lib/preferences/general/historySettings.ts:137
 #: src/lib/ui/clipboardDialog.ts:130 src/lib/ui/clipboardDialog.ts:235
@@ -1539,6 +1542,26 @@ msgstr "Конфігурація"
 #: src/lib/preferences/general/locationsGroup.ts:39
 msgid "Cache"
 msgstr "Кеш"
+
+#: src/lib/preferences/general/versionSettings.ts:15
+msgid "Unknown"
+msgstr ""
+
+#: src/lib/preferences/general/versionSettings.ts:18
+msgid "Version"
+msgstr ""
+
+#: src/lib/preferences/general/versionSettings.ts:22
+msgid "Installed build"
+msgstr ""
+
+#: src/lib/preferences/general/versionSettings.ts:31
+msgid "Copy version"
+msgstr ""
+
+#: src/lib/preferences/general/versionSettings.ts:37
+msgid "Copied to clipboard"
+msgstr ""
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:20
 msgid "Open Clipboard Dialog"
@@ -1875,14 +1898,14 @@ msgstr "Колі__р"
 msgid "Type to search"
 msgstr "Введіть текст для пошуку"
 
-#: src/prefs.ts:75
+#: src/prefs.ts:76
 msgid "General"
 msgstr "Загальні"
 
-#: src/prefs.ts:95
+#: src/prefs.ts:97
 msgid "Customization"
 msgstr "Налаштування вигляду"
 
-#: src/prefs.ts:112
+#: src/prefs.ts:114
 msgid "Shortcuts"
 msgstr "Комбінації клавіш"

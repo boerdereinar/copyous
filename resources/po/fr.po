@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-09 16:27+0000\n"
+"POT-Creation-Date: 2026-10-09 23:37+0000\n"
 "PO-Revision-Date: 2025-12-06 04:59+0100\n"
 "Last-Translator: Axel Haustant <noirbizarre@gmail.com>\n"
 "Language-Team: \n"
@@ -1565,6 +1565,26 @@ msgstr "Configuration"
 msgid "Cache"
 msgstr "Cache"
 
+#: src/lib/preferences/general/versionSettings.ts:15
+msgid "Unknown"
+msgstr ""
+
+#: src/lib/preferences/general/versionSettings.ts:18
+msgid "Version"
+msgstr ""
+
+#: src/lib/preferences/general/versionSettings.ts:22
+msgid "Installed build"
+msgstr ""
+
+#: src/lib/preferences/general/versionSettings.ts:31
+msgid "Copy version"
+msgstr ""
+
+#: src/lib/preferences/general/versionSettings.ts:37
+msgid "Copied to clipboard"
+msgstr ""
+
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:20
 msgid "Open Clipboard Dialog"
 msgstr "Ouvrir la boîte de dialogue du presse-papiers"
@@ -1894,15 +1914,15 @@ msgstr "Couleu__r"
 msgid "Type to search"
 msgstr "Tapez pour rechercher"
 
-#: src/prefs.ts:75
+#: src/prefs.ts:76
 msgid "General"
 msgstr "Général"
 
-#: src/prefs.ts:95
+#: src/prefs.ts:97
 msgid "Customization"
 msgstr "Personnalisation"
 
-#: src/prefs.ts:112
+#: src/prefs.ts:114
 msgid "Shortcuts"
 msgstr "Raccourcis"
 
