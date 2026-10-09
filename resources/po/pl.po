@@ -8,17 +8,388 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-09 16:27+0000\n"
-"PO-Revision-Date: 2026-04-30 18:05+0200\n"
+"POT-Creation-Date: 2026-05-10 20:52+0200\n"
+"PO-Revision-Date: 2026-05-10 21:03+0200\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
-"|| n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || "
+"n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.9\n"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:102
+msgid "Do not record clipboard history"
+msgstr "Nie zapisuj historii schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:106
+msgid "Disable Gda warning"
+msgstr "Wyłącz ostrzeżenie GDA"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:110
+msgid ""
+"Disable the hljs dialog from showing up when launching preferences if hljs is not "
+"installed"
+msgstr ""
+"Wyłącz wyświetlanie okna hljs podczas otwierania ustawień, jeśli hljs nie jest "
+"zainstalowany"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:116
+msgid "Store clipboard history in memory instead of on disk (Deprecated)"
+msgstr "Przechowuj historię schowka w pamięci zamiast na dysku (Przestarzałe)"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:120
+msgid "Selects which backend to use for the clipboard database."
+msgstr "Wybiera silnik bazy danych używany dla historii schowka."
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:124
+msgid ""
+"Path to the database. When empty defaults to {XDG_DATA_HOME}/{EXTENSION UUID}/"
+"clipboard.{db,json} depending on the backend."
+msgstr ""
+"Ścieżka do bazy danych. Jeśli pozostanie pusta, domyślnie zostanie użyte "
+"{XDG_DATA_HOME}/{EXTENSION UUID}/clipboard.{db,json} w zależności od silnika."
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:128
+#: src/lib/preferences/general/historySettings.ts:135
+msgid ""
+"Choose what to do with your clipboard history when you restart, log out, or shut "
+"down your system"
+msgstr ""
+"Wybierz, co zrobić z historią schowka podczas ponownego uruchamiania, "
+"wylogowywania lub zamykania systemu"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:133
+msgid "Number of unpinned and untagged items to keep in the clipboard history"
+msgstr ""
+"Liczba nieprzypiętych i nieoznaczonych elementów zachowywanych w historii schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:138
+msgid ""
+"Number of minutes to keep unpinned and untagged items in the clipboard history. "
+"Set to 0 to disable the time limit"
+msgstr ""
+"Liczba minut przechowywania nieprzypiętych i nieoznaczonych elementów w historii. "
+"Ustaw na 0, aby wyłączyć limit czasu"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:144
+msgid "Remember the last search"
+msgstr "Zapamiętaj ostatnie wyszukiwanie"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:148
+#: src/lib/preferences/general/behaviorSettings.ts:25
+msgid "Pinned items appear only when searching for pinned items"
+msgstr ""
+"Przypięte elementy pojawią się tylko podczas wyszukiwania przypiętych elementów"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:152
+#: src/lib/preferences/general/behaviorSettings.ts:31
+msgid "Tagged items appear only when searching for tagged items"
+msgstr ""
+"Oznaczone elementy pojawią się tylko podczas wyszukiwania otagowanych elementów"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:156
+#: src/lib/preferences/general/behaviorSettings.ts:37
+msgid "Prevents pinned clipboard items from being deleted"
+msgstr "Zapobiega usunięciu przypiętych elementów schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:160
+#: src/lib/preferences/general/behaviorSettings.ts:43
+msgid "Prevents tagged clipboard items from being deleted"
+msgstr "Zapobiega usunięciu oznaczonych elementów schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:164
+msgid ""
+"Automatically paste clipboard items when selected from clipboard history "
+"(Deprecated)"
+msgstr "Automatycznie wklejaj elementy po wybraniu ich z historii (Przestarzałe)"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:168
+#: src/lib/preferences/general/behaviorSettings.ts:49
+msgid "Also copy clipboard items to the primary clipboard"
+msgstr "Kopiuj również elementy schowka do schowka podstawowego"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:172
+#: src/lib/preferences/general/behaviorSettings.ts:55
+msgid ""
+"Update the copied date of clipboard items when selected from clipboard history"
+msgstr ""
+"Aktualizuj datę skopiowania elementów schowka po wybraniu ich z historii schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:178
+#: src/lib/preferences/general/feedbackSettings.ts:228
+msgid "Choose how the clipboard indicator appears in the top panel"
+msgstr "Wybierz, jak powinna wyglądać kontrolka schowka na panelu"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:182
+msgid "Show the clipboard icon in the indicator (Deprecated)"
+msgstr "Pokazuj ikonę schowka na wskaźniku (Przestarzałe)"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:186
+msgid "Show the current clipboard content in the indicator (Deprecated)"
+msgstr "Pokazuj aktualną zawartość schowka na wskaźniku (Przestarzałe)"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:190
+#: src/lib/preferences/general/feedbackSettings.ts:240
+msgid "Wiggle the indicator when a clipboard item is copied"
+msgstr "Włącz drganie wskaźnika, gdy element zostanie skopiowany do schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:194
+#: src/lib/preferences/general/feedbackSettings.ts:246
+msgid "Send a notification when a clipboard item is copied"
+msgstr "Wyślij powiadomienie, gdy element zostanie skopiowany do schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:209
+#: src/lib/preferences/general/feedbackSettings.ts:252
+msgid "Sound to play when a clipboard item is copied"
+msgstr "Dźwięk odtwarzany po skopiowaniu elementu do schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:214
+msgid "Volume of the sound as a decibel offset"
+msgstr "Głośność dźwięku jako przesunięcie w decybelach"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:220
+msgid "Apps that will be excluded from clipboard history"
+msgstr "Programy, które będą wykluczone z historii schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:226
+#: src/lib/preferences/customization/dialogCustomization.ts:36
+msgid "Show the clipboard dialog at the pointer position"
+msgstr "Pokaż okno dialogowe schowka w pozycji wskaźnika"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:230
+msgid "Show the clipboard dialog at the text cursor position"
+msgstr "Pokaż okno dialogowe schowka w pozycji kursora tekstowego"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:234
+msgid "Orientation of the clipboard dialog"
+msgstr "Orientacja okna dialogowego schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:238
+msgid "Vertical position of the clipboard dialog"
+msgstr "Pionowe położenie okna dialogowego schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:247
+msgid "Horizontal position of the clipboard dialog"
+msgstr "Poziome położenie okna dialogowego schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:257
+msgid "Width or height of the clipboard dialog depending on the orientation"
+msgstr "Szerokość lub wysokość okna schowka w zależności od orientacji"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:263
+msgid "Top margin of the clipboard dialog"
+msgstr "Górny margines okna dialogowego schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:268
+msgid "Right margin of the clipboard dialog"
+msgstr "Prawy margines okna dialogowego schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:273
+msgid "Bottom margin of the clipboard dialog"
+msgstr "Dolny margines okna dialogowego schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:278
+msgid "Left margin of the clipboard dialog"
+msgstr "Lewy margines okna dialogowego schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:282
+#: src/lib/preferences/customization/dialogCustomization.ts:116
+msgid "Automatically hide the search bar when not focused"
+msgstr "Automatycznie ukrywaj pasek wyszukiwania, gdy nie jest aktywny"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:286
+#: src/lib/preferences/customization/dialogCustomization.ts:122
+msgid "Show a scrollbar when items overflow"
+msgstr "Pokaż pasek przewijania, gdy elementy przepełniają widok"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:293
+msgid "Width of a clipboard item"
+msgstr "Szerokość elementu schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:298
+msgid "Height of a clipboard item"
+msgstr "Wysokość elementu schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:302
+msgid "Dynamically adjust the height of the clipboard items based on their content"
+msgstr ""
+"Dynamicznie dostosowuj wysokość elementów schowka na podstawie ich zawartości"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:307
+msgid "Tab width"
+msgstr "Szerokość tabulacji"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:313
+msgid "Show the header of a clipboard item"
+msgstr "Pokazuj nagłówek elementu schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:317
+msgid "Visibility of the header controls of a clipboard item"
+msgstr "Widoczność kontrolek nagłówka elementu schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:321
+msgid "Show the title of a clipboard item"
+msgstr "Pokazuj tytuł elementu schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:338
+msgid "Shortcut to open the clipboard dialog"
+msgstr "Skrót do otwierania okna dialogowego schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:342
+msgid "Shortcut to toggle incognito mode"
+msgstr "Skrót do przełączania trybu prywatnego"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:346
+msgid ""
+"Behavior of the open clipboard dialog shortcut when the dialog is open/closed."
+msgstr "Zachowanie skrótu otwierania okna schowka, gdy okno jest otwarte/zamknięte."
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:351
+msgid "Shortcut to pin a clipboard item"
+msgstr "Skrót do przypinania elementu schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:355
+msgid "Shortcut to delete a clipboard item"
+msgstr "Skrót do usuwania elementu schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:359
+msgid "Shortcut to edit a clipboard item"
+msgstr "Skrót do edycji elementu schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:363
+msgid "Shortcut to edit the title of a clipboard item"
+msgstr "Skrót do edycji tytułu elementu schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:367
+msgid "Shortcut to open the menu of a clipboard item"
+msgstr "Skrót do otwierania menu elementu schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:372
+msgid "Action to perform when the middle mouse button is clicked"
+msgstr "Czynność wykonywana po kliknięciu środkowym przyciskiem myszy"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:377
+msgid "Swaps copy and paste shortcuts"
+msgstr "Zamienia skróty kopiowania i wklejania"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:382
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:77
+msgid "Swaps scroll shortcuts of cycling item types and item tags"
+msgstr ""
+"Zamienia skróty przewijania przełączania typów elementów i oznaczeń elementów"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:389
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:408
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:419
+msgid "Show extra information"
+msgstr "Pokazuj dodatkowe informacje"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:393
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:412
+#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
+#: src/lib/preferences/customization/items/textItemCustomization.ts:28
+msgid "Show the number of characters, words or lines"
+msgstr "Pokaż liczbę znaków, słów lub linii"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:400
+msgid "Enable syntax highlighting"
+msgstr "Włącz podświetlanie składni"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:404
+msgid "Show line numbers"
+msgstr "Pokazuj numery linii"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:423
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
+msgid "Background size of the image"
+msgstr "Rozmiar tła obrazu"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:430
+msgid ""
+"File preview shows a preview of the contents of a file. File info shows some "
+"information about the file."
+msgstr ""
+"Podgląd pliku wyświetla zawartość pliku. Informacje o pliku wyświetlają "
+"podstawowe dane o pliku."
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:437
+msgid "Files matching these glob patterns will not have a preview"
+msgstr "Pliki pasujące do tych wzorców 'glob' nie będą miały podglądu"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:441
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
+msgid "Background size of the image preview"
+msgstr "Rozmiar tła podglądu obrazu"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:445
+msgid "Enable syntax highlighting in the text preview"
+msgstr "Włącz podświetlanie składni w podglądzie tekstu"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:449
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:186
+msgid "Show line numbers in the text preview"
+msgstr "Pokaż numery wierszy w podglądzie tekstu"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:456
+msgid "Show a preview of the link"
+msgstr "Pokazuj podgląd odnośnika"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:460
+msgid "Show a preview image of the link"
+msgstr "Pokazuj obraz podglądu odnośnika"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:464
+msgid "Background size of the preview image of the link"
+msgstr "Rozmiar tła obrazu podglądu odnośnika"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:468
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:91
+msgid "Orientation of the link preview"
+msgstr "Orientacja podglądu odnośnika"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:472
+msgid "Links matching these regex patterns will not have a preview"
+msgstr "Odnośniki pasujące do tych wyrażeń regularnych nie będą miały podglądu"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:480
+msgid "Maximum number of characters that are recognized as a character"
+msgstr "Maksymalna liczba znaków rozpoznawana jako pojedynczy znak"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:484
+#: src/lib/preferences/customization/items/characterItemCustomization.ts:27
+msgid "Show the Unicode of the character"
+msgstr "Pokaż kod Unicode znaku"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:491
+msgid "The preferred theme"
+msgstr "Preferowany motyw"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:495
+msgid "The color scheme of the theme"
+msgstr "Schemat kolorów motywu"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:499
+msgid "The color scheme of the custom theme"
+msgstr "Schemat kolorów motywu niestandardowego"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:503
+msgid "The background color of the clipboard dialog"
+msgstr "Kolor tła okna dialogowego schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:507
+msgid "The text color of the clipboard dialog"
+msgstr "Kolor tekstu okna dialogowego schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:511
+msgid "The background color of clipboard items"
+msgstr "Kolor tła elementów schowka"
+
+#: resources/schemas/org.gnome.shell.extensions.copyous.gschema.xml:515
+msgid "The background color of the search bar"
+msgstr "Kolor tła paska wyszukiwania"
 
 #: src/lib/common/actions.ts:182
 msgid "Open"
@@ -44,28 +415,23 @@ msgstr "Wklej jako ścieżkę"
 msgid "Convert"
 msgstr "Konwertuj"
 
-#: src/lib/common/actions.ts:229
-#: src/lib/preferences/actions/actionDialog.ts:533
+#: src/lib/common/actions.ts:229 src/lib/preferences/actions/actionDialog.ts:533
 msgid "Rgb"
 msgstr "RGB"
 
-#: src/lib/common/actions.ts:230
-#: src/lib/preferences/actions/actionDialog.ts:534
+#: src/lib/common/actions.ts:230 src/lib/preferences/actions/actionDialog.ts:534
 msgid "Hex"
 msgstr "HEX"
 
-#: src/lib/common/actions.ts:231
-#: src/lib/preferences/actions/actionDialog.ts:535
+#: src/lib/common/actions.ts:231 src/lib/preferences/actions/actionDialog.ts:535
 msgid "Hsl"
 msgstr "HSL"
 
-#: src/lib/common/actions.ts:238
-#: src/lib/preferences/actions/actionDialog.ts:542
+#: src/lib/common/actions.ts:238 src/lib/preferences/actions/actionDialog.ts:542
 msgid "Oklch"
 msgstr "Oklch"
 
-#: src/lib/common/actions.ts:244
-#: src/lib/preferences/actions/actionDialog.ts:257
+#: src/lib/common/actions.ts:244 src/lib/preferences/actions/actionDialog.ts:257
 msgid "QR Code"
 msgstr "Kod QR"
 
@@ -128,8 +494,7 @@ msgstr "Skopiowany kolor"
 #: src/lib/preferences/general/feedbackSettings.ts:259
 #: src/lib/preferences/general/feedbackSettings.ts:308
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:39
-#: src/lib/ui/components/editDialog.ts:217
-#: src/lib/ui/components/editDialog.ts:244
+#: src/lib/ui/components/editDialog.ts:217 src/lib/ui/components/editDialog.ts:244
 msgid "None"
 msgstr "Brak"
 
@@ -149,8 +514,7 @@ msgstr "Tekst"
 
 #: src/lib/preferences/actions/actionDefaults.ts:136
 #: src/lib/preferences/actions/actionDialog.ts:176
-#: src/lib/preferences/actions/actionDialog.ts:367
-#: src/lib/ui/items/codeItem.ts:23
+#: src/lib/preferences/actions/actionDialog.ts:367 src/lib/ui/items/codeItem.ts:23
 msgid "Code"
 msgstr "Kod"
 
@@ -164,15 +528,13 @@ msgstr "Obraz"
 
 #: src/lib/preferences/actions/actionDefaults.ts:144
 #: src/lib/preferences/actions/actionDialog.ts:178
-#: src/lib/preferences/actions/actionDialog.ts:373
-#: src/lib/ui/items/fileItem.ts:52
+#: src/lib/preferences/actions/actionDialog.ts:373 src/lib/ui/items/fileItem.ts:52
 msgid "File"
 msgstr "Plik"
 
 #: src/lib/preferences/actions/actionDefaults.ts:148
 #: src/lib/preferences/actions/actionDialog.ts:179
-#: src/lib/preferences/actions/actionDialog.ts:376
-#: src/lib/ui/items/filesItem.ts:140
+#: src/lib/preferences/actions/actionDialog.ts:376 src/lib/ui/items/filesItem.ts:140
 msgid "Files"
 msgstr "Pliki"
 
@@ -193,8 +555,7 @@ msgstr "Znak"
 #: src/lib/preferences/actions/actionDefaults.ts:165
 #: src/lib/preferences/actions/actionDialog.ts:182
 #: src/lib/preferences/actions/actionDialog.ts:257
-#: src/lib/preferences/actions/actionDialog.ts:385
-#: src/lib/ui/items/colorItem.ts:71
+#: src/lib/preferences/actions/actionDialog.ts:385 src/lib/ui/items/colorItem.ts:71
 msgid "Color"
 msgstr "Kolor"
 
@@ -234,8 +595,8 @@ msgstr "Polecenie"
 
 #: src/lib/preferences/actions/actionDialog.ts:347
 msgid ""
-"The regular expression does not use any flags for matching. Leaving this "
-"empty will match everything."
+"The regular expression does not use any flags for matching. Leaving this empty "
+"will match everything."
 msgstr ""
 "Wyrażenie regularne nie używa żadnych flag do dopasowania. Pozostawienie tej "
 "opcji pustej spowoduje dopasowanie wszystkiego."
@@ -258,8 +619,8 @@ msgid ""
 "expression will be passed as positional parameters $1, $2, $3, ..."
 msgstr ""
 "Zawartość schowka zostanie dostarczona za pośrednictwem stdin. Grupy "
-"przechwytywania wyrażenia regularnego zostaną przekazane jako parametry "
-"pozycyjne $1, $2, $3, ..."
+"przechwytywania wyrażenia regularnego zostaną przekazane jako parametry pozycyjne "
+"$1, $2, $3, ..."
 
 #: src/lib/preferences/actions/actionDialog.ts:441
 #: src/lib/preferences/actions/actionDialog.ts:523
@@ -279,14 +640,14 @@ msgid "Select how to handle the output"
 msgstr "Wybierz sposób obsługi wyjścia"
 
 #: src/lib/preferences/actions/actionDialog.ts:461
+msgid "Ignore"
+msgstr "Ignoruj"
+
+#: src/lib/preferences/actions/actionDialog.ts:461
 #: src/lib/preferences/actions/actionDialog.ts:552
 #: src/lib/ui/components/qrCodeDialog.ts:154
 msgid "Copy"
 msgstr "Skopiuj"
-
-#: src/lib/preferences/actions/actionDialog.ts:461
-msgid "Ignore"
-msgstr "Ignoruj"
 
 #: src/lib/preferences/actions/actionDialog.ts:461
 #: src/lib/preferences/actions/actionDialog.ts:552
@@ -332,18 +693,18 @@ msgid "Oklab"
 msgstr "Oklab"
 
 #: src/lib/preferences/actions/actionDialog.ts:655
+#: src/lib/preferences/actions/actionsGroup.ts:100
+#: src/lib/preferences/actions/actionsGroup.ts:568
+msgid "Add Action"
+msgstr "Dodaj akcję"
+
+#: src/lib/preferences/actions/actionDialog.ts:655
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:73
 #: src/lib/preferences/actions/actionsGroup.ts:550
 #: src/lib/preferences/customization/items/exclusions.ts:92
 #: src/lib/preferences/general/appExclusionSettings.ts:173
 msgid "Add"
 msgstr "Dodaj"
-
-#: src/lib/preferences/actions/actionDialog.ts:655
-#: src/lib/preferences/actions/actionsGroup.ts:100
-#: src/lib/preferences/actions/actionsGroup.ts:568
-msgid "Add Action"
-msgstr "Dodaj akcję"
 
 #: src/lib/preferences/actions/actionDialog.ts:662
 msgid "Edit Action"
@@ -360,15 +721,15 @@ msgid "Add Submenu"
 msgstr "Dodaj podmenu"
 
 #: src/lib/preferences/actions/actionSubMenuDialog.ts:80
+msgid "Edit Submenu"
+msgstr "Edytuj podmenu"
+
+#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
 #: src/lib/preferences/actions/actionsGroup.ts:125
 #: src/lib/preferences/actions/actionsGroup.ts:423
 #: src/lib/ui/components/clipboardItemMenu.ts:94
 msgid "Edit"
 msgstr "Edytuj"
-
-#: src/lib/preferences/actions/actionSubMenuDialog.ts:80
-msgid "Edit Submenu"
-msgstr "Edytuj podmenu"
 
 #: src/lib/preferences/actions/actionsGroup.ts:34
 #: src/lib/preferences/actions/actionsGroup.ts:126
@@ -424,11 +785,11 @@ msgstr "Przywrócić wbudowane akcje?"
 
 #: src/lib/preferences/actions/actionsPage.ts:118
 msgid ""
-"Restoring the built-in actions will restore built-in actions that were "
-"removed. Custom actions will remain unchanged"
+"Restoring the built-in actions will restore built-in actions that were removed. "
+"Custom actions will remain unchanged"
 msgstr ""
-"Przywrócenie wbudowanych akcji przywróci wbudowane akcje, które zostały "
-"usunięte. Akcje niestandardowe pozostaną niezmienione"
+"Przywrócenie wbudowanych akcji przywróci wbudowane akcje, które zostały usunięte. "
+"Akcje niestandardowe pozostaną niezmienione"
 
 #: src/lib/preferences/actions/actionsPage.ts:135
 msgid "Reset Actions?"
@@ -455,10 +816,6 @@ msgstr "Zmień położenie okna dialogowego schowka"
 msgid "Show at Pointer"
 msgstr "Pokaż przy wskaźniku"
 
-#: src/lib/preferences/customization/dialogCustomization.ts:36
-msgid "Show the clipboard dialog at the pointer position"
-msgstr "Pokaż okno dialogowe schowka w pozycji wskaźnika"
-
 #: src/lib/preferences/customization/dialogCustomization.ts:42
 msgid "Show at Text Cursor"
 msgstr "Pokaż przy kursorze tekstowym"
@@ -468,8 +825,8 @@ msgid ""
 "Show the clipboard dialog at the text cursor position whenever possible, "
 "otherwise at the pointer position"
 msgstr ""
-"Pokaż okno dialogowe schowka w pozycji kursora tekstowego, jeśli to możliwe, "
-"w przeciwnym razie w pozycji wskaźnika"
+"Pokaż okno dialogowe schowka w pozycji kursora tekstowego, jeśli to możliwe, w "
+"przeciwnym razie w pozycji wskaźnika"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:50
 msgid "Orientation"
@@ -490,9 +847,9 @@ msgid "Vertical"
 msgstr "Pionowo"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:57
-#: src/lib/preferences/customization/dialogCustomization.ts:101
-msgid "Bottom"
-msgstr "Na dole"
+#: src/lib/preferences/customization/dialogCustomization.ts:87
+msgid "Top"
+msgstr "U góry"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:57
 #: src/lib/preferences/customization/dialogCustomization.ts:66
@@ -500,16 +857,16 @@ msgid "Center"
 msgstr "Na środku"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:57
+#: src/lib/preferences/customization/dialogCustomization.ts:101
+msgid "Bottom"
+msgstr "Na dole"
+
+#: src/lib/preferences/customization/dialogCustomization.ts:57
 #: src/lib/preferences/customization/dialogCustomization.ts:66
 #: src/lib/preferences/customization/dialogCustomization.ts:188
 #: src/lib/preferences/customization/dialogCustomization.ts:192
 msgid "Fill"
 msgstr "Wypełnienie"
-
-#: src/lib/preferences/customization/dialogCustomization.ts:57
-#: src/lib/preferences/customization/dialogCustomization.ts:87
-msgid "Top"
-msgstr "U góry"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:59
 msgid "Vertical Position"
@@ -565,17 +922,9 @@ msgstr "Odstęp od lewej krawędzi ekranu"
 msgid "Auto Hide Search"
 msgstr "Automatycznie ukrywaj wyszukiwanie"
 
-#: src/lib/preferences/customization/dialogCustomization.ts:116
-msgid "Automatically hide the search bar when not focused"
-msgstr "Automatycznie ukrywaj pasek wyszukiwania, gdy nie jest aktywny"
-
 #: src/lib/preferences/customization/dialogCustomization.ts:121
 msgid "Show Scrollbar"
 msgstr "Pokaż pasek przewijania"
-
-#: src/lib/preferences/customization/dialogCustomization.ts:122
-msgid "Show a scrollbar when items overflow"
-msgstr "Pokaż pasek przewijania, gdy elementy przepełniają widok"
 
 #: src/lib/preferences/customization/dialogCustomization.ts:206
 msgid "Width"
@@ -622,18 +971,18 @@ msgid "The visibility of the header controls"
 msgstr "Widoczność kontrolek nagłówka"
 
 #: src/lib/preferences/customization/headerCustomization.ts:34
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:164
-#: src/lib/preferences/general/feedbackSettings.ts:230
-msgid "Hidden"
-msgstr "Ukryte"
-
-#: src/lib/preferences/customization/headerCustomization.ts:34
 msgid "Visible"
 msgstr "Widoczne"
 
 #: src/lib/preferences/customization/headerCustomization.ts:34
 msgid "Visible on Hover"
 msgstr "Widoczne po najechaniu"
+
+#: src/lib/preferences/customization/headerCustomization.ts:34
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:164
+#: src/lib/preferences/general/feedbackSettings.ts:230
+msgid "Hidden"
+msgstr "Ukryte"
 
 #: src/lib/preferences/customization/itemCustomization.ts:16
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:17
@@ -662,8 +1011,8 @@ msgstr "Dynamiczna wysokość elementu"
 
 #: src/lib/preferences/customization/itemCustomization.ts:48
 msgid ""
-"Dynamically adjust the height of the clipboard items based on their content. "
-"Only works in vertical orientation"
+"Dynamically adjust the height of the clipboard items based on their content. Only "
+"works in vertical orientation"
 msgstr ""
 "Dynamicznie dostosuj wysokość elementów schowka na podstawie ich zawartości. "
 "Działa tylko w orientacji pionowej"
@@ -695,10 +1044,6 @@ msgstr "Maksymalna liczba znaków rozpoznawana jako element znaku"
 #: src/lib/preferences/customization/items/characterItemCustomization.ts:26
 msgid "Show Unicode"
 msgstr "Pokaż Unicode"
-
-#: src/lib/preferences/customization/items/characterItemCustomization.ts:27
-msgid "Show the Unicode of the character"
-msgstr "Pokaż kod Unicode znaku"
 
 #: src/lib/preferences/customization/items/codeItemCustomization.ts:16
 msgid "Code Item"
@@ -739,11 +1084,6 @@ msgstr "Pokaż dodatkowe informacje w elemencie kodu"
 msgid "Text Count Mode"
 msgstr "Tryb liczenia tekstu"
 
-#: src/lib/preferences/customization/items/codeItemCustomization.ts:40
-#: src/lib/preferences/customization/items/textItemCustomization.ts:28
-msgid "Show the number of characters, words or lines"
-msgstr "Pokaż liczbę znaków, słów lub linii"
-
 #: src/lib/preferences/customization/items/codeItemCustomization.ts:41
 #: src/lib/preferences/customization/items/textItemCustomization.ts:29
 msgid "Characters"
@@ -751,13 +1091,13 @@ msgstr "Znaki"
 
 #: src/lib/preferences/customization/items/codeItemCustomization.ts:41
 #: src/lib/preferences/customization/items/textItemCustomization.ts:29
-msgid "Lines"
-msgstr "Linie"
+msgid "Words"
+msgstr "Słowa"
 
 #: src/lib/preferences/customization/items/codeItemCustomization.ts:41
 #: src/lib/preferences/customization/items/textItemCustomization.ts:29
-msgid "Words"
-msgstr "Słowa"
+msgid "Lines"
+msgstr "Linie"
 
 #: src/lib/preferences/customization/items/exclusions.ts:33
 msgid "Zero or More Characters"
@@ -830,8 +1170,7 @@ msgstr "Miniatura"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:90
 msgid "Enable file previews for all files with generated thumbnails"
-msgstr ""
-"Włącz podglądy plików dla wszystkich plików z wygenerowanymi miniaturami"
+msgstr "Włącz podglądy plików dla wszystkich plików z wygenerowanymi miniaturami"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:101
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:43
@@ -897,9 +1236,11 @@ msgstr "Podgląd pliku i Informacje o pliku"
 msgid "Background Size"
 msgstr "Rozmiar tła"
 
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:173
-msgid "Background size of the image preview"
-msgstr "Rozmiar tła podglądu obrazu"
+#: src/lib/preferences/customization/items/fileItemCustomization.ts:174
+#: src/lib/preferences/customization/items/imageItemCustomization.ts:28
+#: src/lib/preferences/customization/items/linkItemCustomization.ts:85
+msgid "Cover"
+msgstr "Pokryj"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:174
 #: src/lib/preferences/customization/items/imageItemCustomization.ts:28
@@ -907,19 +1248,9 @@ msgstr "Rozmiar tła podglądu obrazu"
 msgid "Contain"
 msgstr "Dopasuj"
 
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:174
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:28
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:85
-msgid "Cover"
-msgstr "Pokryj"
-
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:180
 msgid "Enable or disable syntax highlighting in the text preview"
 msgstr "Włącz lub wyłącz podświetlanie składni w podglądzie tekstu"
-
-#: src/lib/preferences/customization/items/fileItemCustomization.ts:186
-msgid "Show line numbers in the text preview"
-msgstr "Pokaż numery wierszy w podglądzie tekstu"
 
 #: src/lib/preferences/customization/items/fileItemCustomization.ts:192
 msgid "Configure file exclusions for file previews"
@@ -941,21 +1272,16 @@ msgstr "Pokaż informacje o obrazie"
 msgid "Show extra information in the image item"
 msgstr "Pokaż dodatkowe informacje w elemencie graficznym"
 
-#: src/lib/preferences/customization/items/imageItemCustomization.ts:27
-msgid "Background size of the image"
-msgstr "Rozmiar tła obrazu"
-
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:30
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:99
 msgid "Link Exclusions"
 msgstr "Wykluczenia odnośników"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:44
-msgid ""
-"Enter a regular expression to exclude links that should not have a preview."
+msgid "Enter a regular expression to exclude links that should not have a preview."
 msgstr ""
-"Wprowadź wyrażenie regularne, aby wykluczyć odnośniki, dla których nie ma "
-"być podglądu."
+"Wprowadź wyrażenie regularne, aby wykluczyć odnośniki, dla których nie ma być "
+"podglądu."
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:48
 msgid "Link Exclusion Patterns"
@@ -999,10 +1325,6 @@ msgstr "Rozmiar tła obrazu podglądu odnośnika"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:90
 msgid "Link Preview Orientation"
-msgstr "Orientacja podglądu odnośnika"
-
-#: src/lib/preferences/customization/items/linkItemCustomization.ts:91
-msgid "Orientation of the link preview"
 msgstr "Orientacja podglądu odnośnika"
 
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:100
@@ -1075,13 +1397,13 @@ msgid "Set the color scheme of the theme"
 msgstr "Ustaw schemat kolorów motywu"
 
 #: src/lib/preferences/customization/themeCustomization.ts:91
+msgid "System"
+msgstr "System"
+
+#: src/lib/preferences/customization/themeCustomization.ts:91
 #: src/lib/preferences/customization/themeCustomization.ts:98
 msgid "Dark"
 msgstr "Ciemny"
-
-#: src/lib/preferences/customization/themeCustomization.ts:91
-msgid "High Contrast"
-msgstr "Wysoki kontrast"
 
 #: src/lib/preferences/customization/themeCustomization.ts:91
 #: src/lib/preferences/customization/themeCustomization.ts:98
@@ -1089,8 +1411,8 @@ msgid "Light"
 msgstr "Jasny"
 
 #: src/lib/preferences/customization/themeCustomization.ts:91
-msgid "System"
-msgstr "System"
+msgid "High Contrast"
+msgstr "Wysoki kontrast"
 
 #: src/lib/preferences/customization/themeCustomization.ts:104
 msgid "Background Color"
@@ -1131,14 +1453,14 @@ msgstr "Libgda nie jest zainstalowane"
 
 #: src/lib/preferences/dependencies/dependencies.ts:155
 msgid ""
-"Libgda is required to store clipboard history between sessions. Install "
-"either libgda 5.0 or 6.0 with SQLite support to use this feature. After "
-"installing libgda you will need to log out or restart your system."
+"Libgda is required to store clipboard history between sessions. Install either "
+"libgda 5.0 or 6.0 with SQLite support to use this feature. After installing "
+"libgda you will need to log out or restart your system."
 msgstr ""
 "Wymagana jest biblioteka Libgda, aby przechowywać historię schowka pomiędzy "
 "sesjami. Zainstaluj Libgda w wersji 5.0 lub 6.0 z obsługą SQLite, aby móc "
-"korzystać z tej funkcji. Po zainstalowaniu Libgda konieczne będzie "
-"wylogowanie się lub ponowne uruchomienie systemu."
+"korzystać z tej funkcji. Po zainstalowaniu Libgda konieczne będzie wylogowanie "
+"się lub ponowne uruchomienie systemu."
 
 #: src/lib/preferences/dependencies/dependencies.ts:159
 msgid "Install Libgda"
@@ -1152,8 +1474,7 @@ msgstr "Highlight.js nie jest zainstalowane"
 #: src/lib/preferences/dependencies/dependencies.ts:173
 msgid "Highlight.js is required to display syntax highlighted code."
 msgstr ""
-"Wymagana jest biblioteka Highlight.js, aby wyświetlać kod z podświetloną "
-"składnią."
+"Wymagana jest biblioteka Highlight.js, aby wyświetlać kod z podświetloną składnią."
 
 #: src/lib/preferences/dependencies/dependencies.ts:177
 msgid "Manual Installation"
@@ -1164,8 +1485,8 @@ msgid ""
 "You can manually install highlight.js by downloading highlight.min.js from "
 "\"Url\" to \"Install Location\"."
 msgstr ""
-"Możesz ręcznie zainstalować highlight.js, pobierając 'highlight.min.js' z "
-"\"URL\" do \"Lokalizacja instalacji\"."
+"Możesz ręcznie zainstalować highlight.js, pobierając 'highlight.min.js' z \"URL\" "
+"do \"Lokalizacja instalacji\"."
 
 #: src/lib/preferences/dependencies/dependencies.ts:208
 msgid "Url"
@@ -1186,13 +1507,12 @@ msgstr "GSound nie jest zainstalowane"
 
 #: src/lib/preferences/dependencies/dependencies.ts:357
 msgid ""
-"GSound is required to play sound effects. Install GSound to use this "
-"feature. After installing GSound you will need to log out or restart your "
-"system."
+"GSound is required to play sound effects. Install GSound to use this feature. "
+"After installing GSound you will need to log out or restart your system."
 msgstr ""
 "Wymagana jest biblioteka GSound, aby odtwarzać efekty dźwiękowe. Zainstaluj "
-"GSound, aby korzystać z tej funkcji. Po zainstalowaniu GSound konieczne "
-"będzie wylogowanie się lub ponowne uruchomienie systemu."
+"GSound, aby korzystać z tej funkcji. Po zainstalowaniu GSound konieczne będzie "
+"wylogowanie się lub ponowne uruchomienie systemu."
 
 #: src/lib/preferences/dependencies/dependencies.ts:360
 msgid "Install GSound"
@@ -1203,12 +1523,12 @@ msgid "Starting Highlight.js Download"
 msgstr "Rozpoczynanie pobierania Highlight.js"
 
 #: src/lib/preferences/dependencies/dependencies.ts:393
-msgid "Error Installing Highlight.js"
-msgstr "Błąd instalacji Highlight.js"
-
-#: src/lib/preferences/dependencies/dependencies.ts:393
 msgid "Successfully Installed Highlight.js"
 msgstr "Pomyślnie zainstalowano Highlight.js"
+
+#: src/lib/preferences/dependencies/dependencies.ts:393
+msgid "Error Installing Highlight.js"
+msgstr "Błąd instalacji Highlight.js"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:240
 #, javascript-format
@@ -1302,8 +1622,7 @@ msgid "Remember Search Query"
 msgstr "Zapamiętaj zapytanie wyszukiwania"
 
 #: src/lib/preferences/general/behaviorSettings.ts:19
-msgid ""
-"Remember the search query when closing and reopening the clipboard dialog"
+msgid "Remember the search query when closing and reopening the clipboard dialog"
 msgstr ""
 "Zapamiętaj zapytanie wyszukiwania przy zamykaniu i ponownym otwieraniu okna "
 "dialogowego schowka"
@@ -1312,57 +1631,25 @@ msgstr ""
 msgid "Exclude Pinned Items from Main View"
 msgstr "Wyklucz przypięte elementy z widoku głównego"
 
-#: src/lib/preferences/general/behaviorSettings.ts:25
-msgid "Pinned items appear only when searching for pinned items"
-msgstr ""
-"Przypięte elementy pojawią się tylko podczas wyszukiwania przypiętych "
-"elementów"
-
 #: src/lib/preferences/general/behaviorSettings.ts:30
 msgid "Exclude Tagged Items from Main View"
 msgstr "Wyklucz oznaczone elementy z widoku głównego"
-
-#: src/lib/preferences/general/behaviorSettings.ts:31
-msgid "Tagged items appear only when searching for tagged items"
-msgstr ""
-"Oznaczone elementy pojawią się tylko podczas wyszukiwania otagowanych "
-"elementów"
 
 #: src/lib/preferences/general/behaviorSettings.ts:36
 msgid "Protect Pinned Items"
 msgstr "Chroń przypięte elementy"
 
-#: src/lib/preferences/general/behaviorSettings.ts:37
-msgid "Prevents pinned clipboard items from being deleted"
-msgstr "Zapobiega usunięciu przypiętych elementów schowka"
-
 #: src/lib/preferences/general/behaviorSettings.ts:42
 msgid "Protect Tagged Items"
 msgstr "Chroń oznaczone elementy"
-
-#: src/lib/preferences/general/behaviorSettings.ts:43
-msgid "Prevents tagged clipboard items from being deleted"
-msgstr "Zapobiega usunięciu oznaczonych elementów schowka"
 
 #: src/lib/preferences/general/behaviorSettings.ts:48
 msgid "Sync Primary Clipboard"
 msgstr "Synchronizuj schowek podstawowy"
 
-#: src/lib/preferences/general/behaviorSettings.ts:49
-msgid "Also copy clipboard items to the primary clipboard"
-msgstr "Kopiuj również elementy schowka do schowka podstawowego"
-
 #: src/lib/preferences/general/behaviorSettings.ts:54
 msgid "Update Date on Copy"
 msgstr "Aktualizuj datę przy kopiowaniu"
-
-#: src/lib/preferences/general/behaviorSettings.ts:55
-msgid ""
-"Update the copied date of clipboard items when selected from clipboard "
-"history"
-msgstr ""
-"Aktualizuj datę skopiowania elementów schowka po wybraniu ich z historii "
-"schowka"
 
 #: src/lib/preferences/general/feedbackSettings.ts:131
 #: src/lib/preferences/general/feedbackSettings.ts:251
@@ -1417,10 +1704,6 @@ msgstr "Opinie"
 msgid "Indicator Display"
 msgstr "Wyświetlanie kontrolki"
 
-#: src/lib/preferences/general/feedbackSettings.ts:228
-msgid "Choose how the clipboard indicator appears in the top panel"
-msgstr "Wybierz, jak powinna wyglądać kontrolka schowka na panelu"
-
 #: src/lib/preferences/general/feedbackSettings.ts:231
 msgid "Icon Only"
 msgstr "Tylko ikona"
@@ -1437,21 +1720,9 @@ msgstr "Ikona oraz zawartość schowka"
 msgid "Wiggle Indicator"
 msgstr "Wskaźnik drgający"
 
-#: src/lib/preferences/general/feedbackSettings.ts:240
-msgid "Wiggle the indicator when a clipboard item is copied"
-msgstr "Włącz drganie wskaźnika, gdy element zostanie skopiowany do schowka"
-
 #: src/lib/preferences/general/feedbackSettings.ts:245
 msgid "Send Notification"
 msgstr "Wyślij powiadomienie"
-
-#: src/lib/preferences/general/feedbackSettings.ts:246
-msgid "Send a notification when a clipboard item is copied"
-msgstr "Wyślij powiadomienie, gdy element zostanie skopiowany do schowka"
-
-#: src/lib/preferences/general/feedbackSettings.ts:252
-msgid "Sound to play when a clipboard item is copied"
-msgstr "Dźwięk odtwarzany po skopiowaniu elementu do schowka"
 
 #: src/lib/preferences/general/historySettings.ts:64
 msgid "History"
@@ -1462,12 +1733,12 @@ msgid "Memory"
 msgstr "Pamięć"
 
 #: src/lib/preferences/general/historySettings.ts:71
-msgid "(recommended)"
-msgstr "(zalecane)"
-
-#: src/lib/preferences/general/historySettings.ts:71
 msgid "SQLite"
 msgstr "SQLite"
+
+#: src/lib/preferences/general/historySettings.ts:71
+msgid "(recommended)"
+msgstr "(zalecane)"
 
 #: src/lib/preferences/general/historySettings.ts:72
 msgid "JSON"
@@ -1489,14 +1760,6 @@ msgstr "Lokalizacja bazy danych"
 msgid "Clipboard History"
 msgstr "Historia schowka"
 
-#: src/lib/preferences/general/historySettings.ts:135
-msgid ""
-"Choose what to do with your clipboard history when you restart, log out, or "
-"shut down your system"
-msgstr ""
-"Wybierz, co zrobić z historią schowka podczas ponownego uruchamiania, "
-"wylogowywania lub zamykania systemu"
-
 #: src/lib/preferences/general/historySettings.ts:137
 #: src/lib/ui/clipboardDialog.ts:130 src/lib/ui/clipboardDialog.ts:235
 #: src/lib/ui/indicator.ts:54
@@ -1504,12 +1767,12 @@ msgid "Clear"
 msgstr "Wyczyść"
 
 #: src/lib/preferences/general/historySettings.ts:137
-msgid "Keep All"
-msgstr "Zachowaj wszystko"
-
-#: src/lib/preferences/general/historySettings.ts:137
 msgid "Keep Pinned/Tagged"
 msgstr "Zachowaj przypięte/oznaczone"
+
+#: src/lib/preferences/general/historySettings.ts:137
+msgid "Keep All"
+msgstr "Zachowaj wszystko"
 
 #: src/lib/preferences/general/historySettings.ts:143
 msgid "History Length"
@@ -1528,8 +1791,8 @@ msgid ""
 "Select how many minutes to keep items in the clipboard history. Set to 0 to "
 "disable the time limit"
 msgstr ""
-"Wybierz, ile minut mają być przechowywane elementy w historii schowka. Ustaw "
-"0, aby wyłączyć limit czasu"
+"Wybierz, ile minut mają być przechowywane elementy w historii schowka. Ustaw 0, "
+"aby wyłączyć limit czasu"
 
 #: src/lib/preferences/general/locationsGroup.ts:13
 msgid "Locations"
@@ -1560,12 +1823,12 @@ msgid "Open Clipboard Dialog Behavior"
 msgstr "Zachowanie otwarcia okna schowka"
 
 #: src/lib/preferences/shortcuts/dialogShortcuts.ts:28
-msgid "Open / Select Next Item"
-msgstr "Otwórz / Wybierz kolejny element"
-
-#: src/lib/preferences/shortcuts/dialogShortcuts.ts:28
 msgid "Toggle Dialog"
 msgstr "Przełącz okno"
+
+#: src/lib/preferences/shortcuts/dialogShortcuts.ts:28
+msgid "Open / Select Next Item"
+msgstr "Otwórz / Wybierz kolejny element"
 
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:20
 #: src/lib/preferences/shortcuts/itemShortcuts.ts:39
@@ -1692,11 +1955,6 @@ msgstr "Wybierz oznaczenie elementu"
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:76
 msgid "Swap Scroll Shortcut"
 msgstr "Zamień skrót klawiszowy przewijania"
-
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:77
-msgid "Swaps scroll shortcuts of cycling item types and item tags"
-msgstr ""
-"Zamienia skróty przewijania przełączania typów elementów i oznaczeń elementów"
 
 #: src/lib/preferences/shortcuts/searchShortcuts.ts:81
 msgid "Cycle Item Type"
@@ -1843,39 +2101,39 @@ msgstr "Nie znaleziono elementów"
 
 #: src/lib/ui/searchEntry.ts:151
 msgid "__All"
-msgstr "__Wszystko"
+msgstr "Wszystko"
 
 #: src/lib/ui/searchEntry.ts:155
 msgid "__Text"
-msgstr "__Tekst"
+msgstr "Tekst"
 
 #: src/lib/ui/searchEntry.ts:156
 msgid "__Code"
-msgstr "__Kod"
+msgstr "Kod"
 
 #: src/lib/ui/searchEntry.ts:157
 msgid "__Image"
-msgstr "__Obraz"
+msgstr "Obraz"
 
 #: src/lib/ui/searchEntry.ts:158
 msgid "__File"
-msgstr "__Plik"
+msgstr "Plik"
 
 #: src/lib/ui/searchEntry.ts:159
 msgid "File__s"
-msgstr "Plik_i"
+msgstr "Pliki"
 
 #: src/lib/ui/searchEntry.ts:160
 msgid "__Link"
-msgstr "__Odnośnik"
+msgstr "Odnośnik"
 
 #: src/lib/ui/searchEntry.ts:161
 msgid "C__haracter"
-msgstr "Z_nak"
+msgstr "Znak"
 
 #: src/lib/ui/searchEntry.ts:162
 msgid "Colo__r"
-msgstr "Kolo_r"
+msgstr "Kolor"
 
 #: src/lib/ui/searchEntry.ts:274
 msgid "Type to search"
