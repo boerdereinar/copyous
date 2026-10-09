@@ -106,6 +106,10 @@ check-po:
 
 # Copy metadata
 VERSION ?= $(shell git describe --tags --dirty | sed -E 's/^v//;s/-g([0-9a-f]{7})/+\1/')
+BRANCH := $(shell git rev-parse --abbrev-ref HEAD 2>/dev/null)
+ifneq ($(filter main master,$(BRANCH)),$(BRANCH))
+VERSION := $(VERSION).$(subst /,-,$(BRANCH))
+endif
 
 $(DIST_DIR)/metadata.json: resources/metadata.json | $(DIST_DIR)
 	jq '."version-name" = "$(VERSION)"' $< > $@

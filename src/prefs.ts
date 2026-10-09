@@ -25,6 +25,7 @@ import { BehaviorSettings } from './lib/preferences/general/behaviorSettings.js'
 import { FeedbackSettings } from './lib/preferences/general/feedbackSettings.js';
 import { HistorySettings } from './lib/preferences/general/historySettings.js';
 import { LocationsGroup } from './lib/preferences/general/locationsGroup.js';
+import { VersionSettings } from './lib/preferences/general/versionSettings.js';
 import { DialogShortcuts } from './lib/preferences/shortcuts/dialogShortcuts.js';
 import { ItemActivationShortcuts, ItemShortcuts } from './lib/preferences/shortcuts/itemShortcuts.js';
 import { NavigationShortcuts } from './lib/preferences/shortcuts/navigationShortcuts.js';
@@ -88,6 +89,7 @@ export default class Preferences extends ExtensionPreferences {
 		dependenciesButton.connect('hljs-installed', () => dependenciesSettings.openHighlightJsPage());
 		general.add(dependenciesSettings);
 		general.add(new LocationsGroup(this, window));
+		general.add(new VersionSettings(this, window));
 
 		// Customization page
 		const customization = new Adw.PreferencesPage({
