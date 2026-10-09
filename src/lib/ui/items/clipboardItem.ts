@@ -2,7 +2,6 @@ import Clutter from 'gi://Clutter';
 import Cogl from 'gi://Cogl';
 import GObject from 'gi://GObject';
 import Graphene from 'gi://Graphene';
-import Shell from 'gi://Shell';
 import St from 'gi://St';
 
 import type CopyousExtension from '../../../extension.js';
@@ -11,6 +10,7 @@ import { flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 import { MiddleClickAction } from '../../common/settings.js';
 import { ClipboardEntry } from '../../database/database.js';
+import { VERSION } from '../../misc/compatibility.js';
 import { Shortcut } from '../../misc/shortcuts.js';
 import { SearchQuery } from '../searchEntry.js';
 import { ClipboardItemHeader } from './clipboardItemHeader.js';
@@ -306,90 +306,115 @@ export class ClipboardItem extends St.Button {
 	}
 }
 
-// Based on https://gitlab.gnome.org/GNOME/mutter/-/blob/8b5c757bea75b7712bbe09c2018a8eb15b4d22cc/src/compositor/meta-background-content.c
-@registerClass()
-class HoleEffect extends Shell.GLSLEffect {
-	private readonly _sizeLocation: number;
-	private readonly _holeBoxLocation: number;
+const HOLE_SHADER_DEC = `
+	uniform sampler2D tex;
+	uniform vec2 size;
+	uniform vec4 hole_box;
 
+	float circle_bounds(vec2 p, vec2 center, float radius) {
+		vec2 delta = p - center;
+		float dist_squared = dot(delta, delta);
+		float dist = sqrt(dist_squared);
+
+		float outer_radius = radius + 0.5;
+		if (dist >= outer_radius)
+			return 1.0;
+
+		float inner_radius = radius - 0.5;
+		if (dist <= inner_radius)
+			return 0.0;
+
+		return dist - inner_radius;
+	}
+
+	float rounded_rect_coverage(vec2 p, vec4 bounds, float radius) {
+		if (p.x < bounds.x || p.x > bounds.z || p.y < bounds.y || p.y > bounds.w)
+			return 1.0;
+
+		vec2 center;
+
+		float center_left = bounds.x + radius;
+		float center_right = bounds.z - radius;
+
+		if (p.x < center_left)
+			center.x = center_left;
+		else if (p.x > center_right)
+			center.x = center_right;
+		else
+			return 0.0;
+
+		center.y = bounds.y + radius;
+
+		return circle_bounds(p, center, radius);
+	}`;
+
+const HOLE_SHADER_SRC = `
+	vec2 uv = cogl_tex_coord_in[0].xy;
+	vec2 p = size * cogl_tex_coord_in[0].xy;
+	vec4 c = cogl_color_in * texture2D(tex, uv);
+
+	if (hole_box.z <= 2.0 || hole_box.w <= 2.0) {
+		cogl_color_out = c;
+		return;
+	}
+
+	float radius = hole_box.w / 2.0;
+	vec4 bounds = vec4(hole_box.x, hole_box.y, hole_box.x + hole_box.z, hole_box.y + hole_box.w);
+	float alpha = rounded_rect_coverage(p, bounds, radius);
+	cogl_color_out = vec4(c.rgb * alpha, min(alpha, c.a));`;
+
+// Based on https://gitlab.gnome.org/GNOME/mutter/-/blob/8b5c757bea75b7712bbe09c2018a8eb15b4d22cc/src/compositor/meta-background-content.c
+class HoleEffect extends Clutter.ShaderEffect {
 	constructor(private target: Clutter.Actor) {
 		super();
-
-		this._sizeLocation = this.get_uniform_location('size');
-		this._holeBoxLocation = this.get_uniform_location('hole_box');
 
 		target.connect('notify::allocation', () => this.queue_repaint());
 	}
 
 	override vfunc_paint_target(node: Clutter.PaintNode, paintContext: Clutter.PaintContext): void {
 		const size = this.actor.get_transformed_size();
-		this.set_uniform_float(this._sizeLocation, 2, size);
+		const sizeVal = new GObject.Value();
+		Clutter.value_set_shader_float(sizeVal, size); // Can replace with set_uniform_float after GNOME 51
+		this.set_uniform_value('size', sizeVal);
 
 		const position = this.target.apply_relative_transform_to_point(this.actor, new Graphene.Point3D());
 		const [width, height] = this.target.get_transformed_size();
-		this.set_uniform_float(this._holeBoxLocation, 4, [position.x - 1.5, position.y + 1, width + 2, height + 1]);
+		const holeVal = new GObject.Value();
+		Clutter.value_set_shader_float(holeVal, [position.x - 1.5, position.y + 1, width + 2, height + 1]); // Can replace with set_uniform_float after GNOME 51
+		this.set_uniform_value('hole', holeVal);
 
 		super.vfunc_paint_target(node, paintContext);
 	}
 
-	override vfunc_build_pipeline(): void {
-		const dec = `
-			uniform sampler2D tex;
-			uniform vec2 size;
-			uniform vec4 hole_box;
+	// GNOME >=51
+	// @ts-ignore: vfunc_get_static_snippet added in GNOME 51
+	override vfunc_get_static_snippet(): Cogl.Snippet {
+		const snippet = Cogl.Snippet.new(Cogl.SnippetHook.FRAGMENT, HOLE_SHADER_DEC, null);
+		snippet.set_replace(HOLE_SHADER_SRC);
+		return snippet;
+	}
 
-			float circle_bounds(vec2 p, vec2 center, float radius) {
-				vec2 delta = p - center;
-				float dist_squared = dot(delta, delta);
-				float dist = sqrt(dist_squared);
+	// GNOME <51
+	override vfunc_get_static_shader_source(): string {
+		return `
+			${HOLE_SHADER_DEC}
 
-				float outer_radius = radius + 0.5;
-				if (dist >= outer_radius)
-					return 1.0;
-
-				float inner_radius = radius - 0.5;
-				if (dist <= inner_radius)
-					return 0.0;
-
-				return dist - inner_radius;
+			void main() {
+				${HOLE_SHADER_SRC}
 			}
-
-			float rounded_rect_coverage(vec2 p, vec4 bounds, float radius) {
-				if (p.x < bounds.x || p.x > bounds.z || p.y < bounds.y || p.y > bounds.w)
-					return 1.0;
-
-				vec2 center;
-
-				float center_left = bounds.x + radius;
-				float center_right = bounds.z - radius;
-
-				if (p.x < center_left)
-					center.x = center_left;
-				else if (p.x > center_right)
-					center.x = center_right;
-				else
-					return 0.0;
-
-				center.y = bounds.y + radius;
-
-				return circle_bounds(p, center, radius);
-			}`;
-
-		const src = `
-			vec2 uv = cogl_tex_coord_in[0].xy;
-			vec2 p = size * cogl_tex_coord_in[0].xy;
-			vec4 c = cogl_color_in * texture2D(tex, uv);
-
-			if (hole_box.z <= 2.0 || hole_box.w <= 2.0) {
-				cogl_color_out = c;
-				return;
-			}
-
-			float radius = hole_box.w / 2.0;
-			vec4 bounds = vec4(hole_box.x, hole_box.y, hole_box.x + hole_box.z, hole_box.y + hole_box.w);
-			float alpha = rounded_rect_coverage(p, bounds, radius);
-			cogl_color_out = vec4(c.rgb * alpha, min(alpha, c.a));`;
-
-		this.add_glsl_snippet(Cogl.SnippetHook.FRAGMENT, dec, src, true);
+			`;
 	}
 }
+
+// Remove whichever virtual function should not exist
+if (VERSION >= 51) {
+	Object.defineProperty(HoleEffect.prototype, 'vfunc_get_static_shader_source', {
+		value: undefined,
+	});
+} else {
+	Object.defineProperty(HoleEffect.prototype, 'vfunc_get_static_snippet', {
+		value: undefined,
+	});
+}
+
+GObject.registerClass(HoleEffect);
