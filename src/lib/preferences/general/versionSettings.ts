@@ -1,4 +1,5 @@
 import Adw from 'gi://Adw';
+import type Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
@@ -9,16 +10,18 @@ import { registerClass } from '../../common/gjs.js';
 @registerClass()
 export class VersionSettings extends Adw.PreferencesGroup {
 	constructor(prefs: Preferences, window: Adw.PreferencesWindow) {
-		const version =
-			prefs.metadata['version-name']?.toString() ?? prefs.metadata['version']?.toString() ?? _('Unknown');
+		const metadata = prefs.metadata as ExtensionMetadata;
+
+		const version = metadata['version-name'] ?? metadata['version'] ?? _('Unknown');
 
 		super({
 			title: _('Version'),
 		});
 
 		const row = new Adw.ActionRow({
-			title: version,
-			subtitle: _('Installed build'),
+			title: _('Installed build'),
+			subtitle: version,
+			css_classes: ['property'],
 		});
 
 		const copyButton = new Gtk.Button({
@@ -39,4 +42,20 @@ export class VersionSettings extends Adw.PreferencesGroup {
 
 		this.add(row);
 	}
+}
+
+interface ExtensionMetadata {
+	readonly 'uuid': string;
+	readonly 'dir': Gio.File;
+	readonly 'path': string;
+	readonly 'name': string;
+	readonly 'description': string;
+	readonly 'version'?: string;
+	readonly 'url'?: string;
+	readonly 'shell-version': string[];
+	readonly 'settings-schema'?: string;
+	readonly 'gettext-domain'?: string;
+	readonly 'original-author'?: string[];
+	readonly 'extension-id'?: string;
+	readonly 'version-name'?: string;
 }
