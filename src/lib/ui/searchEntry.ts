@@ -529,8 +529,7 @@ export class SearchEntry extends St.Entry {
 
 		// Toggle pinned search
 		if (
-			this.ext.shortcutsManager?.getShortcutForKeyBinding(key, event.get_state()) ===
-			Shortcut.TogglePinnedSearch
+			this.ext.shortcutsManager?.getShortcutForKeyBinding(key, event.get_state()) === Shortcut.TogglePinnedSearch
 		) {
 			this.pinned = !this.pinned;
 			return Clutter.EVENT_STOP;

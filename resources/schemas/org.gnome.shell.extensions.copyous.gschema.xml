@@ -367,7 +367,7 @@
 			<summary>Shortcut to open the menu of a clipboard item</summary>
 		</key>
 		<key name="toggle-pinned-search-shortcut" type="as">
-			<default>['&lt;Alt&gt;']</default>
+			<default>['Alt']</default>
 			<summary>Shortcut to toggle the pinned items search filter</summary>
 		</key>
 

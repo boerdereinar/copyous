@@ -56,12 +56,7 @@ export class SearchShortcuts extends Adw.PreferencesGroup {
 		this.add(new ShortcutRow(_('Activate First Item'), 'Return'));
 
 		const settings: CopyousSettings = prefs.getSettings();
-		settings.bind(
-			'toggle-pinned-search-shortcut',
-			togglePinnedSearch,
-			'shortcuts',
-			Gio.SettingsBindFlags.DEFAULT,
-		);
+		settings.bind('toggle-pinned-search-shortcut', togglePinnedSearch, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
 		makeResettable(togglePinnedSearch, settings, 'toggle-pinned-search-shortcut');
 	}
 }

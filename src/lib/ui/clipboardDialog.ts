@@ -769,8 +769,7 @@ export class ClipboardDialog extends St.Widget {
 
 		// Toggle pinned search
 		if (
-			this.ext.shortcutsManager?.getShortcutForKeyBinding(key, event.get_state()) ===
-			Shortcut.TogglePinnedSearch
+			this.ext.shortcutsManager?.getShortcutForKeyBinding(key, event.get_state()) === Shortcut.TogglePinnedSearch
 		) {
 			this._header.searchEntry.pinned = !this._header.searchEntry.pinned;
 			return Clutter.EVENT_STOP;

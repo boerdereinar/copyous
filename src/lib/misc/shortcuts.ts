@@ -181,7 +181,7 @@ export class ShortcutManager extends GObject.Object {
 	}
 
 	public getShortcutForKeyBinding(keyval: number, mask: Clutter.ModifierType): Shortcut | null {
-		const accelerator = Meta.accelerator_name(mask, keyval);
+		const accelerator = ShortcutManager.acceleratorName(mask, keyval);
 		for (const [key, binding] of Object.entries(this._shortcuts)) {
 			if (binding.shortcuts.includes(accelerator)) return key as Shortcut;
 		}
@@ -189,7 +189,7 @@ export class ShortcutManager extends GObject.Object {
 	}
 
 	public getActionForKeyBinding(keyval: number, mask: Clutter.ModifierType): string | null {
-		const accelerator = Meta.accelerator_name(mask, keyval);
+		const accelerator = ShortcutManager.acceleratorName(mask, keyval);
 		return this._actions[accelerator] ?? null;
 	}
 
@@ -201,5 +201,10 @@ export class ShortcutManager extends GObject.Object {
 		this._actor?.disconnectObject(this);
 		this._monitor?.disconnectObject(this);
 		this._monitor.cancel();
+	}
+
+	private static acceleratorName(mask: Clutter.ModifierType, keyval: number): string {
+		const accelerator = Meta.accelerator_name(mask, keyval);
+		return accelerator.replace(/Alt_[LR]|ISO_Level3_Shift$/g, 'Alt');
 	}
 }
