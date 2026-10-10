@@ -185,7 +185,7 @@ class WMClassExclusionDialog extends Adw.AlertDialog {
 		list.append(this._entry);
 
 		const popover = new AppSelectionPopover();
-		popover.connect('activate', (_popover, info: Gio.DesktopAppInfo) => {
+		popover.connect('activate', (_popover, info: GioUnix.DesktopAppInfo) => {
 			const wmClass = info.get_startup_wm_class() ?? info.get_id()?.replace(/.desktop$/, '');
 			if (wmClass) this._entry.text = wmClass;
 		});

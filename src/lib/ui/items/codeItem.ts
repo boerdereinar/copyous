@@ -26,7 +26,7 @@ export class CodeItem extends ClipboardItem {
 
 		this.add_style_class_name('code-item');
 
-		const metadata: CodeMetadata = { language: null, ...entry.metadata } as CodeMetadata;
+		const metadata: CodeMetadata = { language: null, ...entry.metadata };
 
 		this._code = new CodeLabel(ext, {
 			style_class: 'code-item-content',
@@ -57,7 +57,7 @@ export class CodeItem extends ClipboardItem {
 			this.updateCodeInfo.bind(this),
 			'notify::metadata',
 			() => {
-				const m = { language: null, ...this.entry.metadata } as CodeMetadata;
+				const m = { language: null, ...this.entry.metadata };
 				this._code.language = m.language;
 				if (this._codeInfo) this._codeInfo.language = m.language?.name ?? null;
 			},
@@ -69,7 +69,7 @@ export class CodeItem extends ClipboardItem {
 
 		// Update metadata
 		this._code.connect('notify::language', () => {
-			this.entry.metadata = { language: this._code.language } as CodeMetadata;
+			this.entry.metadata = { language: this._code.language };
 		});
 	}
 
@@ -88,7 +88,7 @@ export class CodeItem extends ClipboardItem {
 			this._codeInfo.text = this.entry.content;
 			this._codeInfo.textCountMode = textCountMode;
 		} else if (show) {
-			const m = { language: null, ...this.entry.metadata } as CodeMetadata;
+			const m = { language: null, ...this.entry.metadata };
 			this._codeInfo = new CodeInfo(this.entry.content, textCountMode, m.language?.name ?? null);
 			this._content.add_child(this._codeInfo);
 		}

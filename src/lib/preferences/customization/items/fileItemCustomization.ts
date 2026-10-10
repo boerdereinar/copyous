@@ -208,8 +208,8 @@ export class FileItemCustomization extends Adw.ExpanderRow {
 			Gio.SettingsBindFlags.DEFAULT,
 		);
 		bind_enum(settings, 'background-size', backgroundSize, 'selected');
-		settings.bind('syntax-highlighting', syntaxHighlighting, 'active', null);
-		settings.bind('show-line-numbers', showLineNumbers, 'active', null);
+		settings.bind('syntax-highlighting', syntaxHighlighting, 'active', Gio.SettingsBindFlags.DEFAULT);
+		settings.bind('show-line-numbers', showLineNumbers, 'active', Gio.SettingsBindFlags.DEFAULT);
 
 		makeResettable(filePreviewVisibility, settings, 'file-preview-visibility');
 		makeResettable(backgroundSize, settings, 'background-size');

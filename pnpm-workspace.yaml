@@ -1,0 +1,11 @@
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: true
+overrides:
+ "@girs/cairo-1.0": "5.5.0"
+ "@girs/gio-2.0": "5.5.0"
+ "@girs/gjs": "5.5.0"
+ "@girs/glib-2.0": "5.5.0"
+ "@girs/gmodule-2.0": "5.5.0"
+ "@girs/gobject-2.0": "5.5.0"
+ "@girs/libxml2-2.0": "5.5.0"

@@ -191,7 +191,7 @@ export class ClipboardScrollView extends St.ScrollView {
 
 		// Extend previous animation or current value
 		const transition = adjustment.get_transition('value');
-		let start = (transition?.interval.final as unknown as number | undefined) ?? adjustment.value;
+		let start = (transition?.interval.final as number | undefined) ?? adjustment.value;
 		if ((start < adjustment.value && delta > 0) || (start > adjustment.value && delta < 0)) {
 			start = adjustment.value;
 		}

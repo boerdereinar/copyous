@@ -145,7 +145,7 @@ export class ClipboardItem extends St.Button {
 		this.set_size(width, height);
 
 		const dynamicHeight = this.ext.settings.get_boolean('dynamic-item-height');
-		const orientation = this.ext.settings.get_enum('clipboard-orientation');
+		const orientation: Clutter.Orientation = this.ext.settings.get_enum('clipboard-orientation');
 		if (dynamicHeight && orientation === Clutter.Orientation.VERTICAL) {
 			this.set_height(-1);
 			this.style = `max-height: ${height}px`;

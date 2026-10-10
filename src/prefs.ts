@@ -39,8 +39,8 @@ import {
 function findHeaderBar(window: Adw.PreferencesWindow): Adw.HeaderBar | null {
 	// Depth first search for the header bar
 	const stack: Gtk.Widget[] = [window];
-	let widget = undefined;
-	while ((widget = stack.pop())) {
+	while (stack.length > 0) {
+		const widget = stack.pop()!;
 		if (widget instanceof Adw.HeaderBar) {
 			return widget;
 		} else {

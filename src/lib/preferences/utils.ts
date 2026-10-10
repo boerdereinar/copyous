@@ -38,7 +38,7 @@ export class NestedListBox extends Adw.PreferencesRow {
 		if (direction !== Gtk.DirectionType.UP && direction !== Gtk.DirectionType.DOWN) return false;
 
 		const dir = direction === Gtk.DirectionType.UP ? Gtk.DirectionType.TAB_BACKWARD : Gtk.DirectionType.TAB_FORWARD;
-		return this.root.child_focus(dir);
+		return this.root!.child_focus(dir);
 	}
 }
 

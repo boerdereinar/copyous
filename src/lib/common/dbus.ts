@@ -2,6 +2,7 @@ import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 
 import { registerClass } from './gjs.js';
+import type { SignalMethods } from './gjs.js';
 import { ClipboardHistory } from './settings.js';
 
 const DBusInterfaceXml = `
@@ -24,17 +25,21 @@ export interface DBusInterface {
 	ClearHistory(all: boolean): void;
 }
 
-@registerClass({
-	Signals: {
-		'toggle': {},
-		'show': {},
-		'hide': {},
-		'clear-history': {
-			param_types: [GObject.TYPE_INT],
-		},
+const DbusServiceSignals = {
+	'toggle': {},
+	'show': {},
+	'hide': {},
+	'clear-history': {
+		param_types: [GObject.TYPE_INT],
 	},
+} as const;
+
+@registerClass({
+	Signals: DbusServiceSignals,
 })
 export class DbusService extends GObject.Object implements DBusInterface {
+	declare emit: SignalMethods<this, typeof DbusServiceSignals>['emit'];
+
 	private dbus: Gio.DBusExportedObject | undefined;
 	private ownerId: number;
 	private confirmedLogoutId: number = -1;

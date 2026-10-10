@@ -11,6 +11,7 @@ import type CopyousExtension from '../../extension.js';
 import { instanceofAction, instanceofActionSubmenu, loadConfig } from '../common/actions.js';
 import { getActionsConfigPath } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
+import type { SignalMethods } from '../common/gjs.js';
 
 export const Shortcut = {
 	Open: 'open-clipboard-dialog-shortcut',
@@ -50,16 +51,20 @@ class ShortcutBinding extends GObject.Object {
 	}
 }
 
+const ShortcutManagerSignals = {
+	'open-clipboard-dialog': {},
+	'toggle-incognito-mode': {},
+} as const;
+
 @registerClass({
 	Properties: {
 		shift: GObject.ParamSpec.boolean('shift', null, null, GObject.ParamFlags.READABLE, false),
 	},
-	Signals: {
-		'open-clipboard-dialog': {},
-		'toggle-incognito-mode': {},
-	},
+	Signals: ShortcutManagerSignals,
 })
 export class ShortcutManager extends GObject.Object {
+	declare emit: SignalMethods<this, typeof ShortcutManagerSignals>['emit'];
+
 	private _actor: Clutter.Actor | null;
 
 	private _shortcuts: { [shortcut in Shortcut]?: ShortcutBinding } = {};
@@ -111,7 +116,7 @@ export class ShortcutManager extends GObject.Object {
 		this.updateActions(true).catch(() => {});
 	}
 
-	private registerGlobalShortcut(key: Shortcut, signal: string) {
+	private registerGlobalShortcut(key: Shortcut, signal: keyof typeof ShortcutManagerSignals) {
 		Main.wm.addKeybinding(
 			key,
 			this.ext.settings as Gio.Settings,

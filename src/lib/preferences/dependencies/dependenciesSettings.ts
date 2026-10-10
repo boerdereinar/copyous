@@ -346,7 +346,10 @@ class HighlightJsPage extends Adw.NavigationPage {
 			const isDefault = defaultLanguages.includes(name) || system;
 			listModel.append(new Language(name, language, hash, file, isDefault));
 		}
-		listModel.sort((a: Language, b: Language) => a.language.localeCompare(b.language));
+		listModel.sort((a: Language | null, b: Language | null) => {
+			if (a === null || b === null) return 0;
+			return a.language.localeCompare(b.language);
+		});
 
 		const filterListModel = new Gtk.FilterListModel<Language>({ model: listModel, filter: this._filter });
 

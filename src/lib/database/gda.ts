@@ -53,7 +53,7 @@ function new_connection(Gda: typeof Gda5, cncString: string): Gda5.Connection {
 }
 
 function open_async(connection: Gda5.Connection | Gda6.Connection): Promise<boolean> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve, reject: (reason: Error) => void) => {
 		if ('open_async' in connection) {
 			// Gda 6
 			GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
@@ -77,7 +77,7 @@ function add_expr_value(builder: Gda5.SqlBuilder | Gda6.SqlBuilder | SqlBuilder<
 	if (builder.add_expr_value.length === 1) {
 		return (builder as Gda6.SqlBuilder).add_expr_value(value as GObject.Value);
 	} else {
-		return (builder as Gda5.SqlBuilder).add_expr_value(null, value as GObject.Value);
+		return (builder as Gda5.SqlBuilder).add_expr_value(null, value);
 	}
 }
 
@@ -88,7 +88,7 @@ function convert_datetime(datetime: GLib.DateTime): string {
 // Unescape null values in sql since Gda.Null is not supported in gda 5
 function unescape_sql(connection: Gda5.Connection, builder: Gda5.SqlBuilder | SqlBuilder<unknown>): Gda5.Statement {
 	const bstmt = builder.get_statement();
-	const sql = connection.statement_to_sql(bstmt, bstmt.get_parameters()[1], null)[0];
+	const sql = connection.statement_to_sql(bstmt, bstmt.get_parameters()[1], 0)[0];
 
 	const unescapedSql = sql.replace(/(?<!')'NULL'(?!')/g, 'NULL');
 	return connection.parse_sql_string(unescapedSql)[0];
@@ -100,13 +100,13 @@ function async_statement_execute_select<T>(
 	statement: Gda5.Statement | Gda6.Statement,
 	cancellable: Gio.Cancellable,
 ): Promise<DataModel<T>> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve, reject: (reason: Error) => void) => {
 		if ('async_statement_execute' in connection) {
 			// Gda 5
 			const id = connection.async_statement_execute(
 				statement as Gda5.Statement,
 				null,
-				Gda.StatementModelUsage.RANDOM_ACCESS,
+				Gda.StatementModelUsage.RANDOM_ACCESS as Gda5.StatementModelUsage,
 				null,
 				false,
 			);
@@ -164,13 +164,13 @@ function async_statement_execute_non_select(
 	statement: Gda5.Statement | Gda6.Statement,
 	cancellable: Gio.Cancellable,
 ): Promise<[number, Gda5.Set | Gda6.Set | null]> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve, reject: (reason: Error) => void) => {
 		if ('async_statement_execute' in connection) {
 			// Gda 5
 			const id = connection.async_statement_execute(
 				statement as Gda5.Statement,
 				null,
-				Gda.StatementModelUsage.RANDOM_ACCESS,
+				Gda.StatementModelUsage.RANDOM_ACCESS as Gda5.StatementModelUsage,
 				null,
 				true,
 			);
@@ -380,9 +380,7 @@ export class GdaDatabase implements Database {
 				deleteBuilder.set_table('clipboard');
 
 				if (where) {
-					deleteBuilder.set_where(
-						deleteBuilder.import_expression_from_builder(selectBuilder as Gda.SqlBuilder, where),
-					);
+					deleteBuilder.set_where(deleteBuilder.import_expression_from_builder(selectBuilder, where));
 				}
 
 				const deleteStmt = deleteBuilder.get_statement();
@@ -550,7 +548,7 @@ export class GdaDatabase implements Database {
 				stmt,
 				this._cancellable,
 			);
-			const id = row?.get_nth_holder(0).get_value() as unknown as number;
+			const id = row?.get_nth_holder(0).get_value() as number;
 			if (id == null) return null;
 
 			return new ClipboardEntry(id, type, content, false, null, datetime, metadata);
@@ -665,11 +663,11 @@ export class GdaDatabase implements Database {
 				selectBuilder.compound_add_sub_select_from_builder(workAroundBuilder);
 
 				const [select2Builder] = this.selectToDeleteBuilder(true, olderThanMinutes);
-				selectBuilder.compound_add_sub_select_from_builder(select2Builder as Gda.SqlBuilder);
+				selectBuilder.compound_add_sub_select_from_builder(select2Builder);
 
 				// SELECT id FROM (SELECT id FROM table WHERE ...)
-				const select1Sql = this._connection.statement_to_sql(select1Builder.get_statement(), null, null)[0];
-				const selectSql = this._connection.statement_to_sql(selectBuilder.get_statement(), null, null)[0];
+				const select1Sql = this._connection.statement_to_sql(select1Builder.get_statement(), null, 0)[0];
+				const selectSql = this._connection.statement_to_sql(selectBuilder.get_statement(), null, 0)[0];
 				selectStmt = this._connection.parse_sql_string(selectSql.replace('select1', `(${select1Sql})`))[0];
 			} else {
 				// Ignore compound selector
@@ -686,7 +684,7 @@ export class GdaDatabase implements Database {
 
 			// DELETE FROM table WHERE id IN (select)
 			// add_subselect is not exposed as a javascript binding in Gda 5.0
-			const selectSql = this._connection.statement_to_sql(selectStmt, selectStmt.get_parameters()[1], null)[0];
+			const selectSql = this._connection.statement_to_sql(selectStmt, selectStmt.get_parameters()[1], 0)[0];
 			const [deleteStmt] = this._connection.parse_sql_string(`DELETE FROM clipboard WHERE id IN (${selectSql})`);
 			const [rows] = await async_statement_execute_non_select(
 				this._Gda,

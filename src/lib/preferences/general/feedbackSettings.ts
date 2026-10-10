@@ -170,7 +170,7 @@ class SoundChooserPage extends Adw.NavigationPage {
 		};
 
 		for (const [sound, row] of Object.entries(this._rows) as [Sound, CheckRow<Sound>][]) {
-			row.visible = sound === Sound.None || soundManager.hasSound(sound as Sound);
+			row.visible = sound === Sound.None || soundManager.hasSound(sound);
 			row.connect('activated', this.toggled.bind(this));
 			soundChooser.add(row);
 		}

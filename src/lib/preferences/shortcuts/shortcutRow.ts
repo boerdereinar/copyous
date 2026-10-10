@@ -12,7 +12,7 @@ import { registerClass } from '../../common/gjs.js';
 const ShortcutLabel = ('ShortcutLabel' in Gtk && !('ShortcutLabel' in Adw) ? (Gtk as typeof Adw) : Adw).ShortcutLabel;
 
 function isEmptyBinding(keyval: number, keycode: number, mask: Gdk.ModifierType): boolean {
-	return keyval === 0 && keycode === 0 && mask === 0;
+	return keyval === 0 && keycode === 0 && mask === Gdk.ModifierType.NO_MODIFIER_MASK;
 }
 
 function keyvalIsForbidden(keyval: number): boolean {
@@ -40,7 +40,7 @@ function isValidBinding(keyval: number, keycode: number, mask: Gdk.ModifierType)
 		return false;
 	}
 
-	if ((mask === 0 || mask === Gdk.ModifierType.SHIFT_MASK) && keycode !== 0) {
+	if ((mask === Gdk.ModifierType.NO_MODIFIER_MASK || mask === Gdk.ModifierType.SHIFT_MASK) && keycode !== 0) {
 		if (
 			(keyval >= Gdk.KEY_a && keyval <= Gdk.KEY_z) ||
 			(keyval >= Gdk.KEY_A && keyval <= Gdk.KEY_Z) ||
@@ -52,7 +52,7 @@ function isValidBinding(keyval: number, keycode: number, mask: Gdk.ModifierType)
 			(keyval >= Gdk.KEY_hebrew_doublelowline && keyval <= Gdk.KEY_hebrew_taf) ||
 			(keyval >= Gdk.KEY_Thai_kokai && keyval <= Gdk.KEY_Thai_lekkao) ||
 			(keyval >= Gdk.KEY_Hangul_Kiyeog && keyval <= Gdk.KEY_Hangul_J_YeorinHieuh) ||
-			(keyval === Gdk.KEY_space && mask === 0) ||
+			(keyval === Gdk.KEY_space && mask === Gdk.ModifierType.NO_MODIFIER_MASK) ||
 			keyvalIsForbidden(keyval)
 		) {
 			return false;

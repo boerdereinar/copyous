@@ -3,6 +3,7 @@ import GObject from 'gi://GObject';
 
 import { ItemType, Tag } from '../common/constants.js';
 import { int32ParamSpec, registerClass } from '../common/gjs.js';
+import type { SignalMethods } from '../common/gjs.js';
 import { ClipboardHistory } from '../common/settings.js';
 
 /**
@@ -54,6 +55,10 @@ export interface LinkMetadata {
 /**
  * Clipboard entry.
  */
+const ClipboardEntrySignals = {
+	delete: {},
+} as const;
+
 @registerClass({
 	Properties: {
 		id: int32ParamSpec('id', GObject.ParamFlags.READABLE, 0),
@@ -65,11 +70,12 @@ export interface LinkMetadata {
 		metadata: GObject.ParamSpec.jsobject('metadata', null, null, GObject.ParamFlags.READWRITE),
 		title: GObject.ParamSpec.string('title', null, null, GObject.ParamFlags.READWRITE, ''),
 	},
-	Signals: {
-		delete: {},
-	},
+	Signals: ClipboardEntrySignals,
 })
 export class ClipboardEntry extends GObject.Object {
+	declare connect: SignalMethods<this, typeof ClipboardEntrySignals>['connect'];
+	declare emit: SignalMethods<this, typeof ClipboardEntrySignals>['emit'];
+
 	private readonly _id: number;
 	declare type: ItemType;
 	declare content: string;

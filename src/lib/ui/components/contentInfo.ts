@@ -289,7 +289,7 @@ export async function tryCreateMediaFileInfo(
 ): Promise<MediaInfo | null> {
 	try {
 		if (!Gst.is_initialized()) {
-			Gst.init(null);
+			Gst.init(undefined);
 		}
 
 		// https://gitlab.freedesktop.org/gstreamer/gst-plugins-base/-/blob/ce69d1068af058425b083aaa1b8c268b1b2e5ddd/gst-libs/gst/pbutils/gstdiscoverer.c#L340
@@ -323,7 +323,7 @@ export async function tryCreateMediaFileInfo(
 		pipeline.set_state(Gst.State.NULL);
 
 		if (success && duration >= 0) {
-			return new MediaInfo(ext, size, duration / Gst.SECOND);
+			return new MediaInfo(ext, size, duration / (Gst.SECOND as unknown as number));
 		} else {
 			return null;
 		}

@@ -9,6 +9,7 @@ import type CopyousExtension from '../../extension.js';
 import { Color } from '../common/color.js';
 import { ItemType, getImagesPath } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
+import type { SignalMethods } from '../common/gjs.js';
 import { ClipboardEntry, FileOperation, Metadata } from '../database/database.js';
 import { ClipboardEntryTracker } from '../database/entryTracker.js';
 import { Keyboard } from './keyboard.js';
@@ -61,20 +62,28 @@ function hasMoreGraphemes(text: string, max: number): boolean {
 	return iterator.next().value !== undefined;
 }
 
-@registerClass({
-	Signals: {
-		clipboard: {
-			param_types: [ClipboardEntry.$gtype],
-		},
-		text: {
-			param_types: [GObject.TYPE_STRING],
-		},
-		image: {
-			param_types: [GObject.TYPE_JSOBJECT, GObject.TYPE_INT, GObject.TYPE_INT],
-		},
+const ClipboardManagerSignals = {
+	clipboard: {
+		param_types: [ClipboardEntry.$gtype as GObject.GType<ClipboardEntry>],
 	},
+	text: {
+		param_types: [GObject.TYPE_STRING],
+	},
+	image: {
+		param_types: [
+			GObject.TYPE_JSOBJECT as unknown as GObject.GType<Uint8Array>,
+			GObject.TYPE_INT,
+			GObject.TYPE_INT,
+		],
+	},
+} as const;
+
+@registerClass({
+	Signals: ClipboardManagerSignals,
 })
 export class ClipboardManager extends GObject.Object {
+	declare emit: SignalMethods<this, typeof ClipboardManagerSignals>['emit'];
+
 	private selection: Meta.Selection;
 	private clipboard: St.Clipboard;
 	private keyboard: Keyboard | undefined;
@@ -232,7 +241,7 @@ export class ClipboardManager extends GObject.Object {
 		const window = global.display.focus_window;
 		if (window) {
 			const exclusions = this.ext.settings.get_strv('wmclass-exclusions');
-			if (exclusions.includes(window.wm_class)) return false;
+			if (window.wm_class && exclusions.includes(window.wm_class)) return false;
 		}
 
 		return !this.ext.settings.get_boolean('incognito');

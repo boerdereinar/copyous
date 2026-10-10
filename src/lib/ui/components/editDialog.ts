@@ -15,7 +15,7 @@ import type CopyousExtension from '../../../extension.js';
 import { ItemType } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
-import { ClipboardEntry, CodeMetadata, Language } from '../../database/database.js';
+import { ClipboardEntry, Language } from '../../database/database.js';
 
 /** Entry with proper height for multiline text and event forwarding */
 @registerClass()
@@ -71,10 +71,13 @@ export class Entry extends St.Entry {
 
 	private updateHover() {
 		this.sync_hover();
+
+		const display = global.display as unknown as { set_cursor(cursor: number): void };
+		const cursor = Meta as unknown as { Cursor: { TEXT: number; DEFAULT: number } };
 		if (this.hover) {
-			global.display.set_cursor(Meta.Cursor.TEXT);
+			display.set_cursor(cursor.Cursor.TEXT);
 		} else {
-			global.display.set_cursor(Meta.Cursor.DEFAULT);
+			display.set_cursor(cursor.Cursor.DEFAULT);
 		}
 	}
 }
@@ -136,7 +139,7 @@ export class MultilineEntry extends St.Entry {
 		super.vfunc_allocate(box);
 
 		const contentBox = this.get_theme_node().get_content_box(box);
-		this.first_child.allocate(contentBox);
+		this.first_child!.allocate(contentBox);
 	}
 }
 
@@ -281,7 +284,7 @@ export class EditDialog extends ModalDialog.ModalDialog {
 			});
 			content.add_child(box);
 
-			const metadata = { language: null, ...entry.metadata } as CodeMetadata;
+			const metadata = { language: null, ...entry.metadata };
 			this._languageButton = new LanguageButton(ext, metadata.language);
 			box.add_child(this._languageButton);
 		}

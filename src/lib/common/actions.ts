@@ -246,7 +246,7 @@ export function defaultConfig(ext: Extension | ExtensionPreferences): ActionConf
 				types: [ItemType.Text, ItemType.Code, ItemType.Link, ItemType.Character, ItemType.Color],
 				output: ActionOutput.Ignore,
 				shortcut: ['<Control>q'],
-			} as QrCodeAction,
+			},
 		],
 		defaults: {
 			[ItemType.File]: 'paste-as-path',

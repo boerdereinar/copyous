@@ -78,7 +78,7 @@ export class ActionsPage extends Adw.PreferencesPage {
 
 		this._restoreButton = new Adw.PreferencesRow({ css_classes: ['button'], activatable: true, sensitive: false });
 		resetGroup.add(this._restoreButton);
-		this._restoreButton.parent.connect('row-activated', async (_listBox, row: Gtk.ListBoxRow) => {
+		this._restoreButton.parent!.connect('row-activated', async (_listBox, row: Gtk.ListBoxRow) => {
 			if (row === this._restoreButton) await this.restore();
 		});
 

@@ -177,7 +177,7 @@ export class HistorySettings extends Adw.PreferencesGroup {
 		if (this._databaseLocation.subtitle === this._defaultDatabaseLocation) {
 			return '';
 		} else {
-			return this._databaseLocation.subtitle;
+			return this._databaseLocation.subtitle ?? '';
 		}
 	}
 

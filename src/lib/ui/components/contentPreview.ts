@@ -213,9 +213,9 @@ export class TextPreview extends ContentPreview {
 		const label = new CodeLabel(ext, props);
 		this.add_child(label);
 
-		this.bind_property('syntax-highlighting', label, 'syntax-highlighting', null);
-		this.bind_property('show-line-numbers', label, 'show-line-numbers', null);
-		this.bind_property('tab-width', label, 'tab-width', null);
+		this.bind_property('syntax-highlighting', label, 'syntax-highlighting', GObject.BindingFlags.DEFAULT);
+		this.bind_property('show-line-numbers', label, 'show-line-numbers', GObject.BindingFlags.DEFAULT);
+		this.bind_property('tab-width', label, 'tab-width', GObject.BindingFlags.DEFAULT);
 	}
 }
 
@@ -286,7 +286,7 @@ async function getContentType(file: Gio.File): Promise<string | null> {
 		return contentType;
 	}
 
-	let data: GLib.Bytes | null = null;
+	let data: GLib.Bytes;
 	try {
 		const stream = await file.read_async(GLib.PRIORITY_DEFAULT, null);
 		data = await stream.read_bytes_async(64, GLib.PRIORITY_DEFAULT, null);
@@ -294,7 +294,7 @@ async function getContentType(file: Gio.File): Promise<string | null> {
 		return null;
 	}
 
-	return Gio.content_type_guess(file.get_path(), data?.toArray())[0];
+	return Gio.content_type_guess(file.get_path(), data.toArray())[0];
 }
 
 /**

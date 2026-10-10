@@ -124,18 +124,15 @@ export class JsonDatabase extends MemoryDatabase {
 		try {
 			const database: JsonDatabaseModel = {
 				version: DATABASE_VERSION,
-				entries: Array.from(
-					this._entries.values(),
-					(entry): JsonClipboardEntry => ({
-						type: entry.type,
-						content: entry.content,
-						pinned: entry.pinned,
-						tag: entry.tag,
-						datetime: entry.datetime.to_utc()!.format_iso8601()!,
-						metadata: entry.metadata,
-						title: entry.title || undefined,
-					}),
-				),
+				entries: Array.from(this._entries.values(), (entry): JsonClipboardEntry => ({
+					type: entry.type,
+					content: entry.content,
+					pinned: entry.pinned,
+					tag: entry.tag,
+					datetime: entry.datetime.to_utc()!.format_iso8601()!,
+					metadata: entry.metadata,
+					title: entry.title || undefined,
+				})),
 			};
 
 			const dir = this.file.get_parent();

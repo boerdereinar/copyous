@@ -265,7 +265,7 @@ export class ExclusionsGroup extends Adw.PreferencesGroup {
 			}
 		});
 
-		this.header_suffix.connect('clicked', () => {
+		this.header_suffix!.connect('clicked', () => {
 			addFileExclusionPatternDialog.present(window);
 		});
 

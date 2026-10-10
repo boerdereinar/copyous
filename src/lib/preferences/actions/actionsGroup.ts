@@ -193,7 +193,7 @@ class ActionSubmenuRow extends ActionSubmenuRowBase {
 		const addActionDropController = new Gtk.DropControllerMotion();
 		const dragSource = new Gtk.DragSource({ actions: Gdk.DragAction.MOVE });
 
-		const expanderRow = this.child.get_first_child()?.get_first_child() as Adw.ActionRow;
+		const expanderRow = this.child!.get_first_child()!.get_first_child() as Adw.ActionRow;
 		expanderRow.add_controller(dropController);
 		expanderRow.add_controller(dragSource);
 		this._addActionButton.add_controller(addActionDropController);

@@ -516,14 +516,14 @@ export class SearchEntry extends St.Entry {
 		const cursor = this.clutter_text.get_cursor_position();
 		const start = cursor === 0 || (this.text.length === 0 && cursor === -1);
 		if ((key === Clutter.KEY_Left || key === Clutter.KEY_KP_Left) && start) {
-			this.primary_icon.first_child.grab_key_focus();
+			this.primary_icon!.first_child!.grab_key_focus();
 			return Clutter.EVENT_STOP;
 		}
 
 		// Navigate focus to pin button: right + right & cursor at end
 		const end = cursor === this.text.length || cursor === -1;
 		if ((key === Clutter.KEY_Right || key === Clutter.KEY_KP_Right) && end) {
-			this.secondary_icon.first_child.grab_key_focus();
+			this.secondary_icon!.first_child!.grab_key_focus();
 			return Clutter.EVENT_STOP;
 		}
 
