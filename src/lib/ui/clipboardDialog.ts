@@ -807,9 +807,48 @@ export class ClipboardDialog extends St.Widget {
 		}
 
 		// Navigate
-		if (global.focus_manager.navigate_from_event(event)) return Clutter.EVENT_STOP;
+		if (this.navigateFromEvent(event)) return Clutter.EVENT_STOP;
 
 		return super.vfunc_key_press_event(event);
+	}
+
+	private navigateFromEvent(event: Clutter.Event): boolean {
+		let direction: St.DirectionType;
+		let wrapAround = false;
+		switch (event.get_key_symbol()) {
+			case Clutter.KEY_Up:
+			case Clutter.KEY_KP_Up:
+				direction = St.DirectionType.UP;
+				break;
+			case Clutter.KEY_Down:
+			case Clutter.KEY_KP_Down:
+				direction = St.DirectionType.DOWN;
+				break;
+			case Clutter.KEY_Left:
+			case Clutter.KEY_KP_Left:
+				direction = St.DirectionType.LEFT;
+				break;
+			case Clutter.KEY_Right:
+			case Clutter.KEY_KP_Right:
+				direction = St.DirectionType.RIGHT;
+				break;
+			case Clutter.KEY_Tab:
+				direction = event.has_shift_modifier() ? St.DirectionType.TAB_BACKWARD : St.DirectionType.TAB_FORWARD;
+				wrapAround = true;
+				break;
+			case Clutter.KEY_ISO_Left_Tab:
+				direction = St.DirectionType.TAB_BACKWARD;
+				wrapAround = true;
+				break;
+			default:
+				return false;
+		}
+
+		const focused = global.stage.get_key_focus();
+		if (!focused) return false;
+		// get_group accepts any Clutter.Actor; the GNOME 49 typings narrow it to St.Widget.
+		const group = global.focus_manager.get_group(focused as St.Widget);
+		return group?.navigate_focus(focused, direction, wrapAround) ?? false;
 	}
 
 	override vfunc_button_press_event(event: Clutter.Event): boolean {

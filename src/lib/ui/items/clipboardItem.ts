@@ -1,8 +1,6 @@
 import Clutter from 'gi://Clutter';
-import Cogl from 'gi://Cogl';
 import GObject from 'gi://GObject';
 import Graphene from 'gi://Graphene';
-import Shell from 'gi://Shell';
 import St from 'gi://St';
 
 import type CopyousExtension from '../../../extension.js';
@@ -14,6 +12,7 @@ import { ClipboardEntry } from '../../database/database.js';
 import { Shortcut } from '../../misc/shortcuts.js';
 import { SearchQuery } from '../searchEntry.js';
 import { ClipboardItemHeader } from './clipboardItemHeader.js';
+import { createFragmentEffect } from './fragmentEffect.js';
 
 @registerClass({
 	Properties: {
@@ -308,32 +307,27 @@ export class ClipboardItem extends St.Button {
 
 // Based on https://gitlab.gnome.org/GNOME/mutter/-/blob/8b5c757bea75b7712bbe09c2018a8eb15b4d22cc/src/compositor/meta-background-content.c
 @registerClass()
-class HoleEffect extends Shell.GLSLEffect {
-	private readonly _sizeLocation: number;
-	private readonly _holeBoxLocation: number;
-
+class HoleEffect extends createFragmentEffect(getHoleShader) {
 	constructor(private target: Clutter.Actor) {
 		super();
-
-		this._sizeLocation = this.get_uniform_location('size');
-		this._holeBoxLocation = this.get_uniform_location('hole_box');
 
 		target.connect('notify::allocation', () => this.queue_repaint());
 	}
 
 	override vfunc_paint_target(node: Clutter.PaintNode, paintContext: Clutter.PaintContext): void {
 		const size = this.actor.get_transformed_size();
-		this.set_uniform_float(this._sizeLocation, 2, size);
+		this.setUniform('size', size);
 
 		const position = this.target.apply_relative_transform_to_point(this.actor, new Graphene.Point3D());
 		const [width, height] = this.target.get_transformed_size();
-		this.set_uniform_float(this._holeBoxLocation, 4, [position.x - 1.5, position.y + 1, width + 2, height + 1]);
+		this.setUniform('hole_box', [position.x - 1.5, position.y + 1, width + 2, height + 1]);
 
 		super.vfunc_paint_target(node, paintContext);
 	}
+}
 
-	override vfunc_build_pipeline(): void {
-		const dec = `
+function getHoleShader() {
+	const dec = `
 			uniform sampler2D tex;
 			uniform vec2 size;
 			uniform vec4 hole_box;
@@ -375,7 +369,7 @@ class HoleEffect extends Shell.GLSLEffect {
 				return circle_bounds(p, center, radius);
 			}`;
 
-		const src = `
+	const src = `
 			vec2 uv = cogl_tex_coord_in[0].xy;
 			vec2 p = size * cogl_tex_coord_in[0].xy;
 			vec4 c = cogl_color_in * texture2D(tex, uv);
@@ -390,6 +384,5 @@ class HoleEffect extends Shell.GLSLEffect {
 			float alpha = rounded_rect_coverage(p, bounds, radius);
 			cogl_color_out = vec4(c.rgb * alpha, min(alpha, c.a));`;
 
-		this.add_glsl_snippet(Cogl.SnippetHook.FRAGMENT, dec, src, true);
-	}
+	return { declarations: dec, code: src };
 }
