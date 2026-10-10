@@ -9,6 +9,7 @@
 	- Long single line code snippet
 - Image
     - Image
+	- Image above size limit
     - Image that doesn't exist
 - File
     - Text file
@@ -137,6 +138,7 @@ file://{DIST_PATH}/metadata.json', 0, current_timestamp),
 
 -- Image
 	('Image', 'file://{DIST_PATH}/database/non-existent.png', 0, current_timestamp),
+	('Image', 'file://{DIST_PATH}/database/large-image.svg', 0, current_timestamp),
 	('Image', 'file://{DIST_PATH}/database/image.svg', 0, current_timestamp),
 
 -- Code

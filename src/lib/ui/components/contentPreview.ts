@@ -8,7 +8,7 @@ import St from 'gi://St';
 import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
 import type CopyousExtension from '../../../extension.js';
-import { ActiveState } from '../../common/constants.js';
+import { ActiveState, getCachePath } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
 import { BackgroundSize, FilePreviewType } from '../../common/settings.js';
@@ -37,6 +37,46 @@ export class ContentPreview extends St.BoxLayout {
 	}
 }
 
+/**
+ * Largest image edge that is passed to St as a background-image directly.
+ * Anything larger gets a cached downscaled copy, since St crashes gnome-shell
+ * when the texture cache fails to load an image (e.g. one that exceeds
+ * GL_MAX_TEXTURE_SIZE, usually 16384px).
+ */
+const MAX_PREVIEW_EDGE = 4096;
+const PREVIEW_TARGET_EDGE = 1024;
+
+/**
+ * Gets a file that is safe to use as a preview background-image
+ * @param ext The extension
+ * @param image The original image
+ * @param width The width of the original image
+ * @param height The height of the original image
+ * @returns The original image if it is small enough, otherwise a cached downscaled copy
+ */
+function getSafePreviewFile(ext: Extension, image: Gio.File, width: number, height: number): Gio.File {
+	if (width <= MAX_PREVIEW_EDGE && height <= MAX_PREVIEW_EDGE) return image;
+
+	const uri = image.get_uri();
+	const key = GLib.compute_checksum_for_string(GLib.ChecksumType.MD5, uri, uri.length);
+	const previewDir = getCachePath(ext).get_child('previews');
+	if (!previewDir.query_exists(null)) previewDir.make_directory_with_parents(null);
+
+	const preview = previewDir.get_child(`${key}.png`);
+	if (!preview.query_exists(null)) {
+		const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+			image.get_path()!,
+			PREVIEW_TARGET_EDGE,
+			PREVIEW_TARGET_EDGE,
+			true,
+		);
+		if (!pixbuf.savev(preview.get_path()!, 'png', [], [])) {
+			throw new Error('Failed to save downscaled preview');
+		}
+	}
+	return preview;
+}
+
 @registerClass({
 	Properties: {
 		'background-size': enumParamSpec(
@@ -63,13 +103,14 @@ export class ImagePreview extends ContentPreview {
 				const [, width, height] = GdkPixbuf.Pixbuf.get_file_info(image.get_path()!);
 				this._ratio = height / width;
 
+				const previewFile = getSafePreviewFile(ext, image, width, height);
 				const imageBox = new St.Widget({
 					style_class: 'image-box',
 					x_align: Clutter.ActorAlign.FILL,
 					y_align: Clutter.ActorAlign.FILL,
 					x_expand: true,
 					y_expand: true,
-					style: `background-image: url("${image.get_uri()}");`,
+					style: `background-image: url("${previewFile.get_uri()}");`,
 				});
 				this.add_child(imageBox);
 
