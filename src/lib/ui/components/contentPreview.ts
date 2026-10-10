@@ -221,7 +221,19 @@ export class TextPreview extends ContentPreview {
 
 Gio._promisify(Gio.File.prototype, 'enumerate_children_async');
 Gio._promisify(Gio.File.prototype, 'read_async');
+Gio._promisify(Gio.File.prototype, 'query_info_async');
+Gio._promisify(Gio.InputStream.prototype, 'close_async');
+Gio._promisify(Gio.FileEnumerator.prototype, 'close_async');
 Gio._promisify(Gio.InputStream.prototype, 'read_bytes_async');
+
+export async function fileExists(file: Gio.File): Promise<boolean> {
+	try {
+		await file.query_info_async('standard::type', Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null);
+		return true;
+	} catch {
+		return false;
+	}
+}
 
 /**
  * Creates a text preview by reading the first 4096 bytes
@@ -230,9 +242,13 @@ Gio._promisify(Gio.InputStream.prototype, 'read_bytes_async');
 async function createTextPreview(ext: CopyousExtension, file: Gio.File): Promise<TextPreview> {
 	const extension = file.get_uri().match(/\.(\w+)$/)?.[1];
 	const stream = await file.read_async(GLib.PRIORITY_DEFAULT, null);
-	const bytes = await stream.read_bytes_async(4096, GLib.PRIORITY_DEFAULT, null);
-	const text = new TextDecoder().decode(bytes.toArray());
-	return new TextPreview(ext, text, extension);
+	try {
+		const bytes = await stream.read_bytes_async(4096, GLib.PRIORITY_DEFAULT, null);
+		const text = new TextDecoder().decode(bytes.toArray());
+		return new TextPreview(ext, text, extension);
+	} finally {
+		await stream.close_async(GLib.PRIORITY_DEFAULT, null);
+	}
 }
 
 /**
@@ -248,19 +264,23 @@ async function tryGetThumbnail(file: Gio.File): Promise<Gio.File | null> {
 	const thumbnailDir = Gio.File.new_build_filenamev([homeDir, '.cache', 'thumbnails']);
 
 	try {
+		// Re-enumerate so directories created later in the session are visible.
+		// All filesystem work stays off the Shell's main thread.
 		const enumerator = await thumbnailDir.enumerate_children_async(
-			'standard::*',
+			'standard::name,standard::type',
 			Gio.FileQueryInfoFlags.NONE,
 			GLib.PRIORITY_DEFAULT,
 			null,
 		);
-		for await (const f of enumerator) {
-			if (f.get_file_type() !== Gio.FileType.DIRECTORY) continue;
-
-			const thumbnailFile = thumbnailDir.get_child(f.get_name()).get_child(`${md5}.png`);
-			if (thumbnailFile.query_exists(null)) {
-				return thumbnailFile;
+		try {
+			for await (const info of enumerator) {
+				if (info.get_file_type() !== Gio.FileType.DIRECTORY) continue;
+				const thumbnailFile = thumbnailDir.get_child(info.get_name()).get_child(`${md5}.png`);
+				if (await fileExists(thumbnailFile)) return thumbnailFile;
 			}
+		} finally {
+			// GJS's async iterator normally closes the enumerator itself.
+			if (!enumerator.is_closed()) await enumerator.close_async(GLib.PRIORITY_DEFAULT, null);
 		}
 	} catch {
 		return null;
@@ -274,22 +294,18 @@ async function tryGetThumbnail(file: Gio.File): Promise<Gio.File | null> {
  * @param file The file to guess the content type of
  * @returns The content type or null if no content type was found
  */
-async function getContentType(file: Gio.File): Promise<string | null> {
-	const info = await file.query_info_async(
-		'standard::content-type',
-		Gio.FileQueryInfoFlags.NONE,
-		GLib.PRIORITY_DEFAULT,
-		null,
-	);
+async function getContentType(file: Gio.File, info: Gio.FileInfo): Promise<string | null> {
 	const contentType = info.get_content_type();
-	if (contentType !== null) {
-		return contentType;
-	}
+	if (contentType !== null) return contentType;
 
 	let data: GLib.Bytes | null = null;
 	try {
 		const stream = await file.read_async(GLib.PRIORITY_DEFAULT, null);
-		data = await stream.read_bytes_async(64, GLib.PRIORITY_DEFAULT, null);
+		try {
+			data = await stream.read_bytes_async(64, GLib.PRIORITY_DEFAULT, null);
+		} finally {
+			await stream.close_async(GLib.PRIORITY_DEFAULT, null);
+		}
 	} catch {
 		return null;
 	}
@@ -300,21 +316,35 @@ async function getContentType(file: Gio.File): Promise<string | null> {
 /**
  * Gets the file type for a file
  * @param file The file to find the file type for
+ * @param fetchThumbnail Whether to look up a cached thumbnail (skip when
+ * thumbnails can never be displayed to avoid enumerating ~/.cache/thumbnails)
  * @returns The file type and a Gio.File if a thumbnail was found for the file
  */
-export async function getFileType(file: Gio.File): Promise<[FileType, Gio.File | null]> {
-	if (!file.query_exists(null)) return [FileType.Unknown, null];
-
-	const fileType = file.query_file_type(Gio.FileQueryInfoFlags.NONE, null);
+export async function getFileType(
+	file: Gio.File,
+	fetchThumbnail: boolean = true,
+): Promise<[FileType, Gio.File | null]> {
+	let info: Gio.FileInfo;
+	try {
+		info = await file.query_info_async(
+			'standard::type,standard::content-type',
+			Gio.FileQueryInfoFlags.NONE,
+			GLib.PRIORITY_DEFAULT,
+			null,
+		);
+	} catch {
+		return [FileType.Unknown, null];
+	}
+	const fileType = info.get_file_type();
 	if (fileType === Gio.FileType.DIRECTORY) return [FileType.Directory, null];
 
 	if (fileType !== Gio.FileType.REGULAR) return [FileType.Unknown, null];
 
 	// First check if the file has thumbnail
-	const thumbnail = await tryGetThumbnail(file);
+	const thumbnail = fetchThumbnail ? await tryGetThumbnail(file) : null;
 
 	// Then check if the file has any of the allowed types
-	const contentType = await getContentType(file);
+	const contentType = await getContentType(file, info);
 	if (!contentType) return [FileType.Unknown, thumbnail];
 
 	// Check image before text since svg is also classified as text/plain
@@ -343,7 +373,7 @@ export async function tryCreateFilePreview(
 	const allowedTypes = ext.settings.get_child('file-item').get_flags('file-preview-types');
 
 	try {
-		if (!file.query_exists(null)) return null;
+		if (!(await fileExists(file))) return null;
 
 		switch (fileType) {
 			case FileType.Text:

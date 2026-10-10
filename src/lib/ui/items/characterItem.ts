@@ -60,11 +60,12 @@ export class CharacterItem extends ClipboardItem {
 
 	override vfunc_allocate(box: Clutter.ActorBox) {
 		super.vfunc_allocate(box);
-		this.updateHeight();
-		super.vfunc_allocate(box);
+		// Content/header allocations and font metrics can change independently
+		// of the outer size. Recompute, but only relayout if the style changes.
+		if (this.updateHeight()) super.vfunc_allocate(box);
 	}
 
-	private updateHeight() {
+	private updateHeight(): boolean {
 		const themeNode = this._content.get_theme_node();
 		const padding = themeNode.get_horizontal_padding();
 		const scale = this.get_resource_scale();
@@ -80,7 +81,13 @@ export class CharacterItem extends ClipboardItem {
 		const charsHeight = this._chars.has_allocation() ? this._chars.allocation.get_height() : 0;
 		const height = (this._content.allocation.get_height() - charsHeight) / fontFactor;
 		const characterSize = Math.clamp(Math.floor((200 * height) / (height + 200)), 20, maxSize);
-		this._character.set_style(`font-size: ${characterSize}px;`);
+
+		// Only re-apply the style (which queues another relayout) when it
+		// actually changed; returns whether a second allocate is needed.
+		const style = `font-size: ${characterSize}px;`;
+		if (this._character.get_style() === style) return false;
+		this._character.set_style(style);
+		return true;
 	}
 
 	override destroy() {

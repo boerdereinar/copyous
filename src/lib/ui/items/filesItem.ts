@@ -82,32 +82,36 @@ export class FilesPreview extends ContentPreview {
 	}
 
 	override vfunc_allocate(box: Clutter.ActorBox): void {
-		const nat = this._files.get_children().reduce((a, f) => a + f.get_preferred_height(-1)[1], 0);
+		const children = this._files.get_children();
+		const heights = children.map((child) => child.get_preferred_height(-1)[1]);
+		const nat = heights.reduce((sum, height) => sum + height, 0);
 		const [, borderNat] = this._border.get_preferred_height(box.get_width());
 		const [, moreNat] = this._moreFiles.get_preferred_height(box.get_width());
 
 		const lastChildNat = this._files.last_child?.get_preferred_height(box.get_width())?.[1] ?? 0;
 		const maxHeight = box.get_height();
 
-		this._border.visible = true;
+		let borderVisible = true;
 		if (nat - lastChildNat * 0.5 < maxHeight) {
-			for (const file of this._files.get_children()) file.visible = true;
-			this._moreFiles.visible = false;
+			for (const file of children) {
+				if (!file.visible) file.visible = true;
+			}
+			if (this._moreFiles.visible) this._moreFiles.visible = false;
 
 			// Hide bottom border in the border radius area
 			const radius = this.get_theme_node().get_border_radius(null);
 			if (maxHeight - nat <= radius) {
-				this._border.visible = false;
+				borderVisible = false;
 			}
 		} else {
 			let height = 0;
 			let count = 0;
-			for (const child of this._files.get_children()) {
-				const [, childNat] = child.get_preferred_height(-1);
+			for (const [index, child] of children.entries()) {
+				const childNat = heights[index]!;
 				if (height + childNat * 0.5 + borderNat + moreNat >= maxHeight) {
-					child.visible = false;
+					if (child.visible) child.visible = false;
 				} else {
-					child.visible = true;
+					if (!child.visible) child.visible = true;
 					count++;
 				}
 
@@ -116,17 +120,19 @@ export class FilesPreview extends ContentPreview {
 
 			// More files label
 			const n = this._files.get_n_children() - count;
-			this._moreFiles.text = count
+			const moreText = count
 				? ngettext('%d more file', '%d more files', n).format(n)
 				: ngettext('%d file', '%d files', n).format(n);
-			this._moreFiles.visible = true;
+			if (this._moreFiles.text !== moreText) this._moreFiles.text = moreText;
+			if (!this._moreFiles.visible) this._moreFiles.visible = true;
 
 			// Hide bottom border if only the file count is shown
 			if (!count) {
-				this._border.visible = false;
+				borderVisible = false;
 			}
 		}
 
+		this._border.visible = borderVisible;
 		super.vfunc_allocate(box);
 	}
 }

@@ -252,11 +252,14 @@ export default class CopyousExtension extends Extension {
 		);
 	}
 
-	public connectHljsInit(fn: () => void) {
-		if (this.hljs != null) return;
+	public connectHljsInit(fn: () => void): () => void {
+		if (this.hljs != null) return () => {};
 
 		this.hljsCallbacks ??= [];
 		this.hljsCallbacks.push(fn);
+		return () => {
+			this.hljsCallbacks = this.hljsCallbacks?.filter((callback) => callback !== fn);
+		};
 	}
 
 	private async initEntryTracker() {
