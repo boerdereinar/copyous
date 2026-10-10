@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-09 23:37+0000\n"
+"POT-Creation-Date: 2026-10-10 00:23+0000\n"
 "PO-Revision-Date: 2026-05-10 21:03+0200\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
@@ -1240,7 +1240,7 @@ msgid "Languages"
 msgstr "Języki"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:321
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:49
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:51
 msgid "Search"
 msgstr "Szukaj"
 
@@ -1498,7 +1498,7 @@ msgstr ""
 "wylogowywania lub zamykania systemu"
 
 #: src/lib/preferences/general/historySettings.ts:137
-#: src/lib/ui/clipboardDialog.ts:130 src/lib/ui/clipboardDialog.ts:235
+#: src/lib/ui/clipboardDialog.ts:131 src/lib/ui/clipboardDialog.ts:236
 #: src/lib/ui/indicator.ts:54
 msgid "Clear"
 msgstr "Wyczyść"
@@ -1673,56 +1673,56 @@ msgstr "Wyskakujące menu"
 msgid "Select Item Type"
 msgstr "Wybierz typ elementu"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:33
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:35
 msgid "Scroll"
 msgstr "Przewiń"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:51
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:53
 msgid "Toggle Pinned Search"
 msgstr "Włącz wyszukiwanie przypiętych elementów"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:52
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:55
 msgid "Clear Item Tag/Type"
 msgstr "Wyczyść typ/oznaczenie elementu"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:53
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:56
 msgid "Activate First Item"
 msgstr "Aktywny pierwszy element"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:62
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:69
 msgid "Next Item Type"
 msgstr "Następny typ elementu"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:63
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:70
 msgid "Previous Item Type"
 msgstr "Poprzedni typ elementu"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:64
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:71
 msgid "Next Item Tag"
 msgstr "Następny oznaczony element"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:65
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:72
 msgid "Previous Item Tag"
 msgstr "Poprzedni oznaczony element"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:66
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:73
 msgid "Select Item Tag"
 msgstr "Wybierz oznaczenie elementu"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:76
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:83
 msgid "Swap Scroll Shortcut"
 msgstr "Zamień skrót klawiszowy przewijania"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:77
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:84
 msgid "Swaps scroll shortcuts of cycling item types and item tags"
 msgstr ""
 "Zamienia skróty przewijania przełączania typów elementów i oznaczeń elementów"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:81
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:88
 msgid "Cycle Item Type"
 msgstr "Przełącz typ elementu"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:83
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:90
 msgid "Cycle Item Tag"
 msgstr "Przełącz oznaczenie elementu"
 
@@ -1861,43 +1861,43 @@ msgstr "Schowek jest pusty"
 msgid "No Items Found"
 msgstr "Nie znaleziono elementów"
 
-#: src/lib/ui/searchEntry.ts:151
+#: src/lib/ui/searchEntry.ts:152
 msgid "__All"
 msgstr "Wszystko"
 
-#: src/lib/ui/searchEntry.ts:155
+#: src/lib/ui/searchEntry.ts:156
 msgid "__Text"
 msgstr "Tekst"
 
-#: src/lib/ui/searchEntry.ts:156
+#: src/lib/ui/searchEntry.ts:157
 msgid "__Code"
 msgstr "Kod"
 
-#: src/lib/ui/searchEntry.ts:157
+#: src/lib/ui/searchEntry.ts:158
 msgid "__Image"
 msgstr "Obraz"
 
-#: src/lib/ui/searchEntry.ts:158
+#: src/lib/ui/searchEntry.ts:159
 msgid "__File"
 msgstr "Plik"
 
-#: src/lib/ui/searchEntry.ts:159
+#: src/lib/ui/searchEntry.ts:160
 msgid "File__s"
 msgstr "Pliki"
 
-#: src/lib/ui/searchEntry.ts:160
+#: src/lib/ui/searchEntry.ts:161
 msgid "__Link"
 msgstr "Odnośnik"
 
-#: src/lib/ui/searchEntry.ts:161
+#: src/lib/ui/searchEntry.ts:162
 msgid "C__haracter"
 msgstr "Znak"
 
-#: src/lib/ui/searchEntry.ts:162
+#: src/lib/ui/searchEntry.ts:163
 msgid "Colo__r"
 msgstr "Kolor"
 
-#: src/lib/ui/searchEntry.ts:274
+#: src/lib/ui/searchEntry.ts:275
 msgid "Type to search"
 msgstr "Wpisz, aby wyszukać"
 

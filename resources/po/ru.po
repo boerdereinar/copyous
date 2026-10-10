@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-09 23:37+0000\n"
+"POT-Creation-Date: 2026-10-10 00:23+0000\n"
 "PO-Revision-Date: 2025-11-30 20:29+0700\n"
 "Last-Translator: Victor <firephantom303@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1230,7 +1230,7 @@ msgid "Languages"
 msgstr "Языки"
 
 #: src/lib/preferences/dependencies/dependenciesSettings.ts:321
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:49
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:51
 msgid "Search"
 msgstr "Поиск"
 
@@ -1483,7 +1483,7 @@ msgstr ""
 "системы или её завершении"
 
 #: src/lib/preferences/general/historySettings.ts:137
-#: src/lib/ui/clipboardDialog.ts:130 src/lib/ui/clipboardDialog.ts:235
+#: src/lib/ui/clipboardDialog.ts:131 src/lib/ui/clipboardDialog.ts:236
 #: src/lib/ui/indicator.ts:54
 msgid "Clear"
 msgstr "Очистить"
@@ -1658,55 +1658,55 @@ msgstr "Всплывающее меню"
 msgid "Select Item Type"
 msgstr "Выбрать тип элемента"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:33
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:35
 msgid "Scroll"
 msgstr "Прокрутка"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:51
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:53
 msgid "Toggle Pinned Search"
 msgstr "Переключить поиск по закреплённым"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:52
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:55
 msgid "Clear Item Tag/Type"
 msgstr "Сбросить метку/тип элемента"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:53
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:56
 msgid "Activate First Item"
 msgstr "Активировать первый элемент"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:62
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:69
 msgid "Next Item Type"
 msgstr "Следующий тип элемента"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:63
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:70
 msgid "Previous Item Type"
 msgstr "Предыдущий тип элемента"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:64
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:71
 msgid "Next Item Tag"
 msgstr "Следующая метка элемента"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:65
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:72
 msgid "Previous Item Tag"
 msgstr "Предыдущая метка элемента"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:66
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:73
 msgid "Select Item Tag"
 msgstr "Выбрать метку элемента"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:76
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:83
 msgid "Swap Scroll Shortcut"
 msgstr "Поменять местами сочетания прокрутки"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:77
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:84
 msgid "Swaps scroll shortcuts of cycling item types and item tags"
 msgstr "Меняет местами сочетания прокрутки типов элементов и меток элементов"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:81
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:88
 msgid "Cycle Item Type"
 msgstr "Переключать тип элемента"
 
-#: src/lib/preferences/shortcuts/searchShortcuts.ts:83
+#: src/lib/preferences/shortcuts/searchShortcuts.ts:90
 msgid "Cycle Item Tag"
 msgstr "Переключать метку элемента"
 
@@ -1845,43 +1845,43 @@ msgstr "Буфер обмена пуст"
 msgid "No Items Found"
 msgstr "Элементы не найдены"
 
-#: src/lib/ui/searchEntry.ts:151
+#: src/lib/ui/searchEntry.ts:152
 msgid "__All"
 msgstr "__Все"
 
-#: src/lib/ui/searchEntry.ts:155
+#: src/lib/ui/searchEntry.ts:156
 msgid "__Text"
 msgstr "__Текст"
 
-#: src/lib/ui/searchEntry.ts:156
+#: src/lib/ui/searchEntry.ts:157
 msgid "__Code"
 msgstr "__Код"
 
-#: src/lib/ui/searchEntry.ts:157
+#: src/lib/ui/searchEntry.ts:158
 msgid "__Image"
 msgstr "__Изобр"
 
-#: src/lib/ui/searchEntry.ts:158
+#: src/lib/ui/searchEntry.ts:159
 msgid "__File"
 msgstr "__Файл"
 
-#: src/lib/ui/searchEntry.ts:159
+#: src/lib/ui/searchEntry.ts:160
 msgid "File__s"
 msgstr "Фай__лы"
 
-#: src/lib/ui/searchEntry.ts:160
+#: src/lib/ui/searchEntry.ts:161
 msgid "__Link"
 msgstr "__Ссылка"
 
-#: src/lib/ui/searchEntry.ts:161
+#: src/lib/ui/searchEntry.ts:162
 msgid "C__haracter"
 msgstr "С__имвол"
 
-#: src/lib/ui/searchEntry.ts:162
+#: src/lib/ui/searchEntry.ts:163
 msgid "Colo__r"
 msgstr "Цв__ет"
 
-#: src/lib/ui/searchEntry.ts:274
+#: src/lib/ui/searchEntry.ts:275
 msgid "Type to search"
 msgstr "Введите текст для поиска"
 
