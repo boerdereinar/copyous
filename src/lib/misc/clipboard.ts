@@ -144,10 +144,10 @@ export class ClipboardManager extends GObject.Object {
 			// https://github.com/Tudmotu/gnome-shell-extension-clipboard-indicator/blob/89c57703641a9d5d15f899f6e780174641911d95/extension.js#L1094
 			if (this.keyboard.purpose === Clutter.InputContentPurpose.TERMINAL) {
 				this.keyboard.press(Clutter.KEY_Control_L);
-				this.keyboard.press(Clutter.KEY_Shift_L);
+				this.keyboard.press(Clutter.KEY_Shift_R);
 				this.keyboard.press(Clutter.KEY_Insert);
 				this.keyboard.release(Clutter.KEY_Insert);
-				this.keyboard.release(Clutter.KEY_Shift_L);
+				this.keyboard.release(Clutter.KEY_Shift_R);
 				this.keyboard.release(Clutter.KEY_Control_L);
 			} else {
 				this.keyboard.press(Clutter.KEY_Shift_L);
