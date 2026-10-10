@@ -20,6 +20,7 @@ import { Icon, loadIcon } from '../common/icons.js';
 import { OpenClipboardDialogBehavior } from '../common/settings.js';
 import { ClipboardEntry } from '../database/database.js';
 import { VERSION } from '../misc/compatibility.js';
+import { Shortcut } from '../misc/shortcuts.js';
 import { ClipboardScrollView } from './clipboardScrollView.js';
 import { ClipboardItemMenu } from './components/clipboardItemMenu.js';
 import { ConfirmClearHistoryDialog } from './indicator.js';
@@ -766,8 +767,10 @@ export class ClipboardDialog extends St.Widget {
 			return this._header.searchEntry.clutter_text.event(event, false);
 		}
 
-		// Toggle pinned search: alt
-		if (key === Clutter.KEY_Alt_L || key === Clutter.KEY_Alt_R || key === Clutter.KEY_ISO_Level3_Shift) {
+		// Toggle pinned search
+		if (
+			this.ext.shortcutsManager?.getShortcutForKeyBinding(key, event.get_state()) === Shortcut.TogglePinnedSearch
+		) {
 			this._header.searchEntry.pinned = !this._header.searchEntry.pinned;
 			return Clutter.EVENT_STOP;
 		}

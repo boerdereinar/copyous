@@ -366,6 +366,10 @@
 			<default>['&lt;Control&gt;a']</default>
 			<summary>Shortcut to open the menu of a clipboard item</summary>
 		</key>
+		<key name="toggle-pinned-search-shortcut" type="as">
+			<default>['Alt']</default>
+			<summary>Shortcut to toggle the pinned items search filter</summary>
+		</key>
 
 		<key name="middle-click-action" enum="org.gnome.shell.extensions.copyous.MiddleClickAction">
 			<default>'pin'</default>

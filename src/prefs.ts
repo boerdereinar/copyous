@@ -121,7 +121,7 @@ export default class Preferences extends ExtensionPreferences {
 		shortcuts.add(new ItemActivationShortcuts(this));
 		shortcuts.add(new PopupMenuShortcuts());
 		shortcuts.add(new NavigationShortcuts());
-		shortcuts.add(new SearchShortcuts());
+		shortcuts.add(new SearchShortcuts(this));
 		shortcuts.add(new SearchNavigationShortcuts());
 		shortcuts.add(new SearchScrollShortcuts(this));
 

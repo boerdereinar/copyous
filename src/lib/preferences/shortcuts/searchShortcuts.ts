@@ -1,5 +1,6 @@
 import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
+import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
@@ -7,6 +8,7 @@ import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensio
 import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
 import { CopyousSettings } from '../../common/settings.js';
+import { makeResettable } from '../utils.js';
 import { ShortcutRow } from './shortcutRow.js';
 
 const ShortcutLabel = ('ShortcutLabel' in Gtk && !('ShortcutLabel' in Adw) ? (Gtk as typeof Adw) : Adw).ShortcutLabel;
@@ -45,12 +47,17 @@ class ScrollShortcutRow extends Adw.ActionRow {
 
 @registerClass()
 export class SearchShortcuts extends Adw.PreferencesGroup {
-	constructor() {
+	constructor(prefs: Preferences) {
 		super({ title: _('Search') });
 
-		this.add(new ShortcutRow(_('Toggle Pinned Search'), '<Alt>'));
+		const togglePinnedSearch = new ShortcutRow(_('Toggle Pinned Search'), '', true);
+		this.add(togglePinnedSearch);
 		this.add(new ShortcutRow(_('Clear Item Tag/Type'), 'Back'));
 		this.add(new ShortcutRow(_('Activate First Item'), 'Return'));
+
+		const settings: CopyousSettings = prefs.getSettings();
+		settings.bind('toggle-pinned-search-shortcut', togglePinnedSearch, 'shortcuts', Gio.SettingsBindFlags.DEFAULT);
+		makeResettable(togglePinnedSearch, settings, 'toggle-pinned-search-shortcut');
 	}
 }
 
