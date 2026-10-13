@@ -251,6 +251,11 @@
 				<alias value="right" target="bottom" />
 			</aliases>
 		</key>
+		<key name="dialog-animation-duration" type="i">
+			<default>150</default>
+			<range min="0" max="300" />
+			<summary>Duration of clipboard dialog animations in milliseconds</summary>
+		</key>
 		<key name="clipboard-size" type="i">
 			<default>500</default>
 			<range min="200" max="10000" />

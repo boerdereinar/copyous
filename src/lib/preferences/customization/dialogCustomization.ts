@@ -6,7 +6,7 @@ import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensio
 
 import Preferences from '../../../prefs.js';
 import { registerClass } from '../../common/gjs.js';
-import { CopyousSettings, bind_enum } from '../../common/settings.js';
+import { CopyousSettings, Settings, bind_enum } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 
 @registerClass()
@@ -111,6 +111,19 @@ export class DialogCustomization extends Adw.PreferencesGroup {
 		});
 		margins.add_row(leftMargin);
 
+		const animationDuration = new Adw.SpinRow({
+			title: _('Animation Duration'),
+			subtitle: _('Duration of opening and closing animations in milliseconds (0 to disable)'),
+			adjustment: new Gtk.Adjustment({
+				lower: 0,
+				upper: 300,
+				step_increment: 25,
+				page_increment: 25,
+				value: 150,
+			}),
+		});
+		this.add(animationDuration);
+
 		const autoHideSearch = new Adw.SwitchRow({
 			title: _('Auto Hide Search'),
 			subtitle: _('Automatically hide the search bar when not focused'),
@@ -131,6 +144,7 @@ export class DialogCustomization extends Adw.PreferencesGroup {
 		bind_enum(settings, 'clipboard-position-vertical', this._verticalPosition, 'selected');
 		bind_enum(settings, 'clipboard-position-horizontal', this._horizontalPosition, 'selected');
 		settings.bind('clipboard-size', this._size, 'value', Gio.SettingsBindFlags.DEFAULT);
+		settings.bind(Settings.DialogAnimationDuration, animationDuration, 'value', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('clipboard-margin-top', topMargin, 'value', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('clipboard-margin-right', rightMargin, 'value', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('clipboard-margin-bottom', bottomMargin, 'value', Gio.SettingsBindFlags.DEFAULT);
@@ -156,6 +170,7 @@ export class DialogCustomization extends Adw.PreferencesGroup {
 			'clipboard-margin-bottom',
 			'clipboard-margin-left',
 		);
+		makeResettable(animationDuration, settings, Settings.DialogAnimationDuration);
 		makeResettable(topMargin, settings, 'clipboard-margin-top');
 		makeResettable(rightMargin, settings, 'clipboard-margin-right');
 		makeResettable(bottomMargin, settings, 'clipboard-margin-bottom');

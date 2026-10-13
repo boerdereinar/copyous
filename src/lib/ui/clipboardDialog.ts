@@ -17,7 +17,7 @@ import type CopyousExtension from '../../extension.js';
 import { ItemType } from '../common/constants.js';
 import { registerClass } from '../common/gjs.js';
 import { Icon, loadIcon } from '../common/icons.js';
-import { OpenClipboardDialogBehavior } from '../common/settings.js';
+import { OpenClipboardDialogBehavior, Settings } from '../common/settings.js';
 import { ClipboardEntry } from '../database/database.js';
 import { VERSION } from '../misc/compatibility.js';
 import { Shortcut } from '../misc/shortcuts.js';
@@ -34,8 +34,6 @@ import { LinkItem } from './items/linkItem.js';
 import { TextItem } from './items/textItem.js';
 import { CenterBox, CollapsibleHeaderLayout, FitConstraint } from './layout.js';
 import { SearchEntry, SearchQuery } from './searchEntry.js';
-
-const ANIMATION_TIME = 150;
 
 @registerClass()
 class IncognitoButton extends St.Button {
@@ -479,7 +477,7 @@ export class ClipboardDialog extends St.Widget {
 			translationY: 0,
 			scaleX: 1,
 			scaleY: 1,
-			duration: ANIMATION_TIME,
+			duration: Math.max(1, this.ext.settings.get_int(Settings.DialogAnimationDuration)),
 			mode,
 		});
 	}
@@ -524,7 +522,7 @@ export class ClipboardDialog extends St.Widget {
 		this._dialog.ease({
 			opacity: 0,
 			...easeArgs,
-			duration: ANIMATION_TIME,
+			duration: Math.max(1, this.ext.settings.get_int(Settings.DialogAnimationDuration)),
 			mode,
 			onComplete: () => {
 				Main.popModal(this._grab);

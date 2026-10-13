@@ -38,6 +38,7 @@ export const Settings = {
 	ClipboardPositionVertical: 'clipboard-position-vertical',
 	ClipboardPositionHorizontal: 'clipboard-position-horizontal',
 	ClipboardSize: 'clipboard-size',
+	DialogAnimationDuration: 'dialog-animation-duration',
 
 	ClipboardMarginTop: 'clipboard-margin-top',
 	ClipboardMarginRight: 'clipboard-margin-right',
@@ -170,6 +171,7 @@ export const SettingsTypes = {
 	[Settings.ClipboardPositionVertical]: 'enum',
 	[Settings.ClipboardPositionHorizontal]: 'enum',
 	[Settings.ClipboardSize]: 'int',
+	[Settings.DialogAnimationDuration]: 'int',
 
 	[Settings.ClipboardMarginTop]: 'int',
 	[Settings.ClipboardMarginRight]: 'int',
