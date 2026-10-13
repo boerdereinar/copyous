@@ -79,6 +79,8 @@ export default class CopyousExtension extends Extension {
 				await this.clipboardManager?.pasteEntry(entry);
 				this.indicator?.showEntry(entry);
 			},
+			'modal-released',
+			() => this.clipboardManager?.onModalReleased(),
 			'clear-history',
 			(_: unknown, history: ClipboardHistory) => this.entryTracker?.clear(history),
 			this,
