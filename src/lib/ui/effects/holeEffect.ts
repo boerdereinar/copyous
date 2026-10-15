@@ -4,6 +4,7 @@ import GObject from 'gi://GObject';
 import Graphene from 'gi://Graphene';
 import Shell from 'gi://Shell';
 
+import { isConstructable } from '../../common/constructable.js';
 import { registerClass } from '../../common/gjs.js';
 
 // Based on https://gitlab.gnome.org/GNOME/mutter/-/blob/8b5c757bea75b7712bbe09c2018a8eb15b4d22cc/src/compositor/meta-background-content.c
@@ -69,7 +70,7 @@ type HoleEffectBaseType = new () => Shell.GLSLEffect & {
 };
 
 let HoleEffectBase: HoleEffectBaseType;
-if (Shell.GLSLEffect) {
+if (isConstructable(Shell.GLSLEffect)) {
 	HoleEffectBase = class extends Shell.GLSLEffect {
 		override vfunc_build_pipeline() {
 			this.add_glsl_snippet(Cogl.SnippetHook.FRAGMENT, dec, src, true);
