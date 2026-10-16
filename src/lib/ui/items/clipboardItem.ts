@@ -127,7 +127,6 @@ export class ClipboardItem extends St.Button {
 	}
 
 	get active(): ActiveState {
-		this.sync_hover();
 		const focus = +this.has_key_focus() * ActiveState.Focus;
 		const hover = +this.hover * ActiveState.Hover;
 		const active = +(this.get_style_pseudo_class()?.includes('active') ?? false) * ActiveState.Active;
