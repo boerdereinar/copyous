@@ -143,9 +143,18 @@ export class ClipboardManager extends GObject.Object {
 
 	public pasteContent(content: ClipboardContent) {
 		this.copyContent(content);
+		this.schedulePaste(250);
+	}
 
+	public onModalReleased() {
+		if (this.pasteSignalId < 0) return;
+
+		this.schedulePaste(20);
+	}
+
+	private schedulePaste(delay: number) {
 		if (this.pasteSignalId >= 0) GLib.source_remove(this.pasteSignalId);
-		this.pasteSignalId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
+		this.pasteSignalId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, delay, () => {
 			this.keyboard ??= new Keyboard();
 
 			// https://github.com/Tudmotu/gnome-shell-extension-clipboard-indicator/blob/89c57703641a9d5d15f899f6e780174641911d95/extension.js#L1094
