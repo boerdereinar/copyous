@@ -13,6 +13,7 @@ import { Icon } from '../../common/icons.js';
 import { BackgroundSize, LinkItemSettings } from '../../common/settings.js';
 import { ClipboardEntry, LinkMetadata } from '../../database/database.js';
 import { tryGetLinkImage, tryGetMetadata } from '../../misc/link.js';
+import { QueuedWork } from '../../misc/workQueue.js';
 import { ImagePreview } from '../components/contentPreview.js';
 import { SearchQuery } from '../searchEntry.js';
 import { ClipboardItem } from './clipboardItem.js';
@@ -48,6 +49,8 @@ export class LinkPreview extends St.Widget {
 	private _topPadding: boolean = false;
 
 	private _image?: ImagePreview | null;
+	private _previewForeground = false;
+	private _imageRequest: QueuedWork<Gio.File | null> | null = null;
 	private readonly _title: St.Label;
 	private readonly _description: St.Label;
 	private readonly _url: St.Label;
@@ -63,6 +66,11 @@ export class LinkPreview extends St.Widget {
 			style_class: 'link-preview',
 			y_expand: true,
 			y_align: Clutter.ActorAlign.FILL,
+		});
+
+		this.connect('destroy', () => {
+			this._cancellable.cancel();
+			this._imageRequest?.cancel();
 		});
 
 		this._title = new St.Label({ style_class: 'link-title', visible: false });
@@ -150,23 +158,34 @@ export class LinkPreview extends St.Widget {
 		} else if (this._image === undefined && this._metadata?.image && this._showImage) {
 			this._image = null;
 
-			tryGetLinkImage(this.ext, this._metadata.image, this._cancellable)
+			const imageUrl = this._metadata.image;
+			this._imageRequest = this.ext.networkQueue.add(() =>
+				tryGetLinkImage(this.ext, imageUrl, this._cancellable),
+			);
+			if (this._previewForeground) this._imageRequest.promote();
+			this._imageRequest.promise
 				.then((image) => {
+					if (this._cancellable.is_cancelled()) return;
 					if (image) {
 						this._image = new ImagePreview(this.ext, image);
+						if (this._previewForeground) this._image.prioritizePreviews();
 						this._image.backgroundSize = this._backgroundSize;
 						this.insert_child_at_index(this._image, 0);
 					} else {
 						this._image = null;
 					}
 				})
-				.catch(() => {});
+				.catch(() => {})
+				.finally(() => {
+					this._imageRequest = null;
+				});
 		}
 
 		this._title.visible = this._metadata?.title != null || this._metadata?.description != null;
 		this._description.visible = this._metadata?.title != null && this._metadata?.description != null;
 
-		this.queue_relayout();
+		// No explicit queue_relayout(): the visibility assignments above
+		// already queue a relayout when something actually changed.
 	}
 
 	override vfunc_get_preferred_height(for_width: number): [number, number] {
@@ -284,7 +303,20 @@ export class LinkPreview extends St.Widget {
 		}
 	}
 
+	public deprioritizePreviews(): void {
+		this._previewForeground = false;
+		this._imageRequest?.demote();
+		this._image?.deprioritizePreviews();
+	}
+
+	public prioritizePreviews(): void {
+		this._previewForeground = true;
+		this._imageRequest?.promote();
+		this._image?.prioritizePreviews();
+	}
+
 	override destroy() {
+		this._imageRequest?.cancel();
 		this._cancellable.cancel();
 		super.destroy();
 	}
@@ -298,9 +330,11 @@ export class LinkItem extends ClipboardItem {
 	private readonly _url: St.Label;
 
 	private readonly _cancellable: Gio.Cancellable = new Gio.Cancellable();
+	private _metadataRequest: Promise<LinkMetadata | undefined> | null = null;
 
 	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Link, _('Link'));
+		this.connect('destroy', () => this._cancellable.cancel());
 
 		this.linkItemSettings = this.ext.settings.get_child('link-item');
 
@@ -362,7 +396,14 @@ export class LinkItem extends ClipboardItem {
 			const metadata: LinkMetadata = { title: null, description: null, image: null, ...this.entry.metadata };
 			this._linkPreview.metadata ??= metadata;
 		} else if (show) {
-			const metadata = await tryGetMetadata(this.ext, url, this._cancellable);
+			this._metadataRequest ??= this.queuePreview(this.ext.networkQueue, () =>
+				tryGetMetadata(this.ext, url, this._cancellable),
+			).finally(() => {
+				this._metadataRequest = null;
+			});
+			const metadata = await this._metadataRequest;
+			if (!metadata) return;
+			if (this._cancellable.is_cancelled()) return;
 			this.entry.metadata = metadata;
 			this._linkPreview.metadata = metadata;
 		}

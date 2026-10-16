@@ -31,6 +31,10 @@ export class CodeItem extends ClipboardItem {
 		this._code = new CodeLabel(ext, {
 			style_class: 'code-item-content',
 			language: metadata.language,
+			code: entry.content,
+			syntaxHighlighting: this.codeItemSettings.get_boolean('syntax-highlighting'),
+			showLineNumbers: this.codeItemSettings.get_boolean('show-line-numbers'),
+			tabWidth: this.ext.settings.get_int('tab-width'),
 			y_align: Clutter.ActorAlign.FILL,
 			y_expand: true,
 		});

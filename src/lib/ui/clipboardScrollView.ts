@@ -45,6 +45,13 @@ export class ClipboardScrollView extends St.ScrollView {
 
 		this._scrollContainer = new ClipboardScrollContainer(ext);
 		this.set_child(this._scrollContainer);
+		// The child owns these adjustments and disposes them before this actor's
+		// destroy signal. Their native disposal disconnects the handlers; using
+		// connectObject here would access an already disposed source during teardown.
+		for (const adjustment of [this.hadjustment, this.vadjustment]) {
+			adjustment.connect('notify::value', () => this._scrollContainer.prioritizePreviews());
+			adjustment.connect('notify::page-size', () => this._scrollContainer.prioritizePreviews());
+		}
 
 		this.connect('notify::width', this.scrollbarWorkaround.bind(this));
 		this._scrollContainer.connect('notify::width', this.scrollbarWorkaround.bind(this));

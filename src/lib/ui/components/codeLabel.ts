@@ -8,6 +8,7 @@ import type CopyousExtension from '../../../extension.js';
 import { registerClass } from '../../common/gjs.js';
 import { CustomColorScheme } from '../../common/settings.js';
 import { Language } from '../../database/database.js';
+import { QueuedWork } from '../../misc/workQueue.js';
 import { normalizeIndentation, trim } from './label.js';
 
 // https://gitlab.gnome.org/GNOME/gtksourceview/-/blob/master/data/styles/Adwaita-dark.xml
@@ -255,6 +256,9 @@ export function applyTheme(colorScheme: CustomColorScheme | undefined, highlight
 })
 export class CodeLabel extends St.Label {
 	private readonly _colorSchemeChangedId: number = -1;
+	private _disposed = false;
+	private _previewForeground = false;
+	private _highlightUpdate: QueuedWork<void> | null = null;
 
 	private _code: string = '';
 	private _language: Language | null = null;
@@ -262,20 +266,32 @@ export class CodeLabel extends St.Label {
 	private _syntaxHighlighting = true;
 	private _showLineNumbers = true;
 
+	private readonly _disconnectHljsInit: () => void;
+
 	private _highlighted: string = '';
+	private _highlightedCode: string | null = null;
+
+	// Pango's serial covers wrapping, text, font and context changes.
+	private _lineMetrics: { layout: Pango.Layout; serial: number; offset: number; heights: number[] } | null = null;
 
 	public constructor(
 		private ext: CopyousExtension,
 		props: Partial<St.Label.ConstructorProps & CodeLabelConstructorProps>,
 	) {
-		super({ ...props, min_height: 0, clip_to_allocation: true });
+		// GObject applies constructor properties inside super(), before ext and
+		// this class's fields exist. Initialize custom properties only afterwards.
+		const { code, language, syntaxHighlighting, showLineNumbers, tabWidth, ...labelProps } = props;
+		super({ ...labelProps, min_height: 0, clip_to_allocation: true });
 		this.clutter_text.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
 		this.clutter_text.ellipsize = Pango.EllipsizeMode.END;
 
-		const params = {
-			...{ code: '', language: '', syntaxHighlighting: true, showLineNumbers: true, tabWidth: 4 },
-			...props,
-		} as CodeLabelConstructorProps;
+		const params: CodeLabelConstructorProps = {
+			code: code ?? '',
+			language: language ?? null,
+			syntaxHighlighting: syntaxHighlighting ?? true,
+			showLineNumbers: showLineNumbers ?? true,
+			tabWidth: tabWidth ?? 4,
+		};
 		this._code = params.code;
 		this._language = params.language;
 		this._syntaxHighlighting = params.syntaxHighlighting;
@@ -286,21 +302,53 @@ export class CodeLabel extends St.Label {
 		if (this.ext.themeManager) {
 			this._colorSchemeChangedId = this.ext.themeManager?.connect(
 				'notify::color-scheme',
-				this.updateText.bind(this),
+				this.updateTheme.bind(this),
 			);
 		}
 
 		// Update text after hljs is loaded
-		this.ext.connectHljsInit(this.updateText.bind(this));
+		this._disconnectHljsInit = this.ext.connectHljsInit(() => {
+			if (this._disposed) return;
+			this._highlightUpdate?.cancel();
+			const job = this.ext.previewQueue.add(() => {
+				if (!this._disposed) this.updateText();
+			});
+			this._highlightUpdate = job;
+			if (this._previewForeground) job.promote();
+			const logger = this.ext.logger;
+			void job.promise
+				.finally(() => {
+					if (this._highlightUpdate === job) this._highlightUpdate = null;
+				})
+				.catch((error) => logger.error(error));
+		});
+		this.connect('destroy', () => this.dispose());
 
 		this.updateText();
 	}
 
-	override destroy(): void {
+	private dispose(): void {
+		if (this._disposed) return;
+		this._disposed = true;
+		this._highlightUpdate?.cancel();
+		this._disconnectHljsInit();
 		if (this._colorSchemeChangedId >= 0) {
 			this.ext.themeManager?.disconnect(this._colorSchemeChangedId);
 		}
+	}
 
+	public deprioritizePreviews(): void {
+		this._previewForeground = false;
+		this._highlightUpdate?.demote();
+	}
+
+	public prioritizePreviews(): void {
+		this._previewForeground = true;
+		this._highlightUpdate?.promote();
+	}
+
+	override destroy(): void {
+		this.dispose();
 		super.destroy();
 	}
 
@@ -363,13 +411,13 @@ export class CodeLabel extends St.Label {
 		if (this._code == null) return;
 
 		// Trim indentation before highlighting to prevent empty lines
-		let text = normalizeIndentation(trim(this._code), this.tabWidth);
-		if (this.syntaxHighlighting && this.ext.hljs != null) {
+		const text = normalizeIndentation(trim(this._code), this.tabWidth);
+		if (text.length > 0 && this.syntaxHighlighting && this.ext.hljs != null) {
 			const language =
 				this.language && this.ext.hljs.getLanguage(this.language.id) != null ? this.language.id : null;
 
 			const result = language ? this.ext.hljs.highlight(text, { language }) : this.ext.hljs.highlightAuto(text);
-			text = applyTheme(this.ext.themeManager?.colorScheme, result.value);
+			this._highlightedCode = result.value;
 
 			// Store language
 			if (!language && result.language) {
@@ -380,14 +428,22 @@ export class CodeLabel extends St.Label {
 				this.notify('language');
 			}
 		} else {
-			text = GLib.markup_escape_text(text, text.length);
+			this._highlightedCode = null;
+			this._highlighted = GLib.markup_escape_text(text, text.length);
 		}
 
-		this._highlighted = text;
+		this.updateTheme();
+	}
+
+	private updateTheme() {
+		if (this._highlightedCode !== null) {
+			this._highlighted = applyTheme(this.ext.themeManager?.colorScheme, this._highlightedCode);
+		}
 		this.updateLabel();
 	}
 
 	private updateLabel() {
+		this._lineMetrics = null;
 		let text = this._highlighted;
 		const lines = this._highlighted.split('\n');
 		this.clutter_text.line_wrap = lines.length === 1;
@@ -411,17 +467,29 @@ export class CodeLabel extends St.Label {
 		const contentBox = themeNode.get_content_box(box);
 		const scale = this.get_resource_scale();
 
-		// Shift one line up to account for extra blank line
 		const layout = this.clutter_text.get_layout();
-		const line = layout.get_line_readonly(0);
-		const offset = line ? line.get_height() / Pango.SCALE / scale : 0;
-		contentBox.y1 -= offset;
+		const serial = layout.get_serial();
+		if (this._lineMetrics?.layout !== layout || this._lineMetrics.serial !== serial) {
+			// Shift one line up to account for extra blank line
+			const line = layout.get_line_readonly(0);
+			const offset = line ? line.get_height() / Pango.SCALE : 0;
+
+			this._lineMetrics = { layout, serial, offset, heights: [] };
+		}
+
+		const { offset, heights } = this._lineMetrics;
+		contentBox.y1 -= offset / scale;
 
 		// Fit label to content box without partial clipping
 		let y = contentBox.y1;
-		for (const l of layout.get_lines_readonly()) {
-			const [, extents] = l.get_extents();
-			const height = (extents?.height ?? 0) / Pango.SCALE / scale;
+		// Measure only the lines that reach the visible box, even for large clips.
+		const lineCount = layout.get_line_count();
+		for (let i = 0; i < lineCount; i++) {
+			if (heights[i] === undefined) {
+				const [, extents] = layout.get_line_readonly(i)!.get_extents();
+				heights[i] = (extents?.height ?? 0) / Pango.SCALE;
+			}
+			const height = heights[i]! / scale;
 			if (y + height <= contentBox.y2) {
 				y += height;
 			} else {
@@ -431,5 +499,11 @@ export class CodeLabel extends St.Label {
 		}
 
 		this.clutter_text.allocate(contentBox);
+	}
+
+	override vfunc_style_changed(): void {
+		super.vfunc_style_changed();
+		// Font/theme changes invalidate the cached line metrics.
+		this._lineMetrics = null;
 	}
 }

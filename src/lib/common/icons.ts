@@ -49,11 +49,18 @@ export const Icon = {
 
 export type Icon = (typeof Icon)[keyof typeof Icon];
 
+// Cache loaded icons: every clipboard item loads several icons and each
+// load performs synchronous I/O (query_exists). Icons are immutable and the
+// extension path is constant for the session, so sharing them is safe.
+const iconCache = new Map<string, Gio.Icon>();
+
 export function loadIcon(ext: Extension, icon: Icon): Gio.Icon {
+	const key = `${ext.path}::${icon}`;
+	const cached = iconCache.get(key);
+	if (cached) return cached;
+
 	const file = Gio.file_new_for_path(`${ext.path}/icons/hicolor/scalable/actions/${icon}.svg`);
-	if (file.query_exists(null)) {
-		return Gio.Icon.new_for_string(file.get_path()!);
-	} else {
-		return Gio.Icon.new_for_string(icon);
-	}
+	const loaded = file.query_exists(null) ? Gio.Icon.new_for_string(file.get_path()!) : Gio.Icon.new_for_string(icon);
+	iconCache.set(key, loaded);
+	return loaded;
 }

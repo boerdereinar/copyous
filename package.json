@@ -36,6 +36,7 @@
 		"typescript-eslint": "8.71.1"
 	},
 	"scripts": {
+		"test": "node --test scripts/tests/*.test.mjs",
 		"build": "make build",
 		"install": "make install",
 		"launch": "make launch",

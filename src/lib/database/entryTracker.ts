@@ -96,6 +96,10 @@ export class ClipboardEntryTracker {
 		return entries;
 	}
 
+	public hasEntry(entry: ClipboardEntry): boolean {
+		return this._entries.get(entry.id) === entry;
+	}
+
 	private getFile(): Gio.File {
 		// Check if DEBUG_COPYOUS_DBPATH is set
 		const environment = GLib.get_environ();

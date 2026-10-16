@@ -1,4 +1,5 @@
 import Clutter from 'gi://Clutter';
+import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Graphene from 'gi://Graphene';
@@ -20,11 +21,14 @@ import { Icon, loadIcon } from '../common/icons.js';
 import { OpenClipboardDialogBehavior } from '../common/settings.js';
 import { ClipboardEntry } from '../database/database.js';
 import { VERSION } from '../misc/compatibility.js';
+import { scheduleIdle } from '../misc/idle.js';
 import { Shortcut } from '../misc/shortcuts.js';
+import { IdleBatch } from '../misc/workQueue.js';
 import { ClipboardScrollView } from './clipboardScrollView.js';
 import { ClipboardItemMenu } from './components/clipboardItemMenu.js';
 import { ConfirmClearHistoryDialog } from './indicator.js';
 import { CharacterItem } from './items/characterItem.js';
+import type { ClipboardItem } from './items/clipboardItem.js';
 import { CodeItem } from './items/codeItem.js';
 import { ColorItem } from './items/colorItem.js';
 import { FileItem } from './items/fileItem.js';
@@ -168,12 +172,16 @@ class ClipboardDialogHeader extends St.Widget {
 		this.notify('header-visible');
 
 		const value = Number(show);
-		if (animate) {
+		// Skip the animation when already at the target expansion (e.g. the
+		// search entry grabbing focus on open while the header is shown);
+		// the expansion setter itself is a no-op in that case.
+		if (animate && this._headerLayout.expansion !== value) {
 			this.ease_property('@layout.expansion', value, {
 				mode: Clutter.AnimationMode.EASE_OUT_QUAD,
 				duration: 200,
 			});
 		} else {
+			this.remove_transition('@layout.expansion');
 			this._headerLayout.expansion = value;
 		}
 	}
@@ -254,6 +262,21 @@ class ClipboardDialogFooter extends St.BoxLayout {
 	},
 })
 export class ClipboardDialog extends St.Widget {
+	private _disposed = false;
+	private _historyEntryIsCurrent: ((entry: ClipboardEntry) => boolean) | null = null;
+	private readonly _historyLoader = new IdleBatch<ClipboardEntry>(
+		scheduleIdle,
+		() => GLib.get_monotonic_time(),
+		(entry) => {
+			try {
+				if (this._historyEntryIsCurrent?.(entry)) this.addEntry(entry);
+			} catch (error) {
+				this.ext.logger.error(error);
+			}
+		},
+	);
+	private readonly _displayedEntries = new Set<ClipboardEntry>();
+
 	private _grab: Clutter.Grab | null = null;
 	private _open: boolean = false;
 	private _closing: boolean = false;
@@ -284,6 +307,12 @@ export class ClipboardDialog extends St.Widget {
 			y_expand: true,
 			visible: false,
 			reactive: true,
+		});
+
+		this.connect('destroy', () => {
+			this._disposed = true;
+			this._historyLoader.clear();
+			this._historyEntryIsCurrent = null;
 		});
 
 		this._monitorConstraint = new Layout.MonitorConstraint({ workArea: true });
@@ -399,6 +428,9 @@ export class ClipboardDialog extends St.Widget {
 	}
 
 	override destroy() {
+		if (this._disposed) return;
+		this._disposed = true;
+		this._historyLoader.clear();
 		(Main.inputMethod as Clutter.InputMethod).disconnectObject(this);
 		this._ibusManager.disconnectObject(this);
 		this.ext.settings.disconnectObject(this);
@@ -422,6 +454,9 @@ export class ClipboardDialog extends St.Widget {
 
 	public open() {
 		if (this.opened || this._closing) return;
+
+		// Search, End/Home and scroll bounds must see the complete history on open.
+		this._historyLoader.flush();
 
 		this._updateCursor = false;
 		this._nextCursor = this._cursor;
@@ -536,7 +571,15 @@ export class ClipboardDialog extends St.Widget {
 		});
 	}
 
+	public loadEntries(entries: ClipboardEntry[], isCurrent: (entry: ClipboardEntry) => boolean): void {
+		if (this._disposed) return;
+		this._historyEntryIsCurrent = isCurrent;
+		this._historyLoader.replace(entries);
+		if (this.opened) this._historyLoader.flush();
+	}
+
 	public addEntry(entry: ClipboardEntry): void {
+		if (this._disposed || this._displayedEntries.has(entry)) return;
 		let item;
 		try {
 			item = (() => {
@@ -571,6 +614,19 @@ export class ClipboardDialog extends St.Widget {
 			return;
 		}
 
+		try {
+			this.attachEntry(item, entry);
+		} catch (error) {
+			this._displayedEntries.delete(entry);
+			item.destroy();
+			this.ext.logger.error(error);
+		}
+	}
+
+	private attachEntry(item: ClipboardItem, entry: ClipboardEntry): void {
+		this._displayedEntries.add(entry);
+		item.connect('destroy', () => this._displayedEntries.delete(entry));
+
 		// Connect edit
 		item.connectObject('edit', () => this._clipboardItemMenu.edit(entry), this);
 
@@ -579,11 +635,15 @@ export class ClipboardDialog extends St.Widget {
 			'open-menu',
 			(_: unknown, x: number, y: number, w: number, h: number) => {
 				// Connect the menu signal to update the hover state of the item and remove the signal when the menu is closed
-				const signalId = this._clipboardItemMenu.connect('open-state-changed', (_menu, state: boolean) => {
-					item.sync_hover();
-					if (!state) this._clipboardItemMenu.disconnect(signalId);
-					return true;
-				});
+				this._clipboardItemMenu.connectObject(
+					'open-state-changed',
+					(_menu: unknown, state: boolean) => {
+						item.sync_hover();
+						if (!state) this._clipboardItemMenu.disconnectObject(item);
+						return true;
+					},
+					item,
+				);
 
 				this._clipboardItemMenu.arrowAlignment = w === 0 && h === 0 ? 0 : 0.5;
 
@@ -639,6 +699,9 @@ export class ClipboardDialog extends St.Widget {
 	}
 
 	public clearEntries() {
+		this._historyEntryIsCurrent = null;
+		this._historyLoader.clear();
+		this._displayedEntries.clear();
 		this._scrollView.clearItems();
 	}
 

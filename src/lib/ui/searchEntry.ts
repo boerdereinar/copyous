@@ -18,6 +18,10 @@ import { Shortcut } from '../misc/shortcuts.js';
 import { TagsItem } from './components/tagsItem.js';
 
 function localeContains(collator: Intl.Collator, text: string, query: string): boolean {
+	if (query.length === 0) return true;
+	// Exact matches need no collation. Case folding is locale-dependent,
+	// so leave case-insensitive matches to the collator.
+	if (text.includes(query)) return true;
 	for (let offset = 0; offset <= text.length - query.length; offset++) {
 		const comparison = collator.compare(text.substring(offset, offset + query.length), query);
 		if (comparison === 0) return true;
@@ -267,6 +271,7 @@ export class SearchEntry extends St.Entry {
 	private _pinned: boolean = false;
 	private _tag: Tag | null = null;
 	private _type: ItemType | null = null;
+	private _searchSuspended: boolean = false;
 
 	private readonly _icons: { [type in ItemType | 'search']: Gio.Icon };
 	private readonly _itemButton: St.Button;
@@ -389,6 +394,7 @@ export class SearchEntry extends St.Entry {
 	}
 
 	set pinned(pinned: boolean) {
+		if (this._pinned === pinned) return;
 		this._pinned = pinned;
 		this.search();
 		this.notify('pinned');
@@ -399,6 +405,7 @@ export class SearchEntry extends St.Entry {
 	}
 
 	set tag(tag: Tag | null) {
+		if (this._tag === tag) return;
 		this._tag = tag;
 		this._menu.tag = tag;
 		this.search();
@@ -413,6 +420,7 @@ export class SearchEntry extends St.Entry {
 	}
 
 	set type(type: ItemType | null) {
+		if (this._type === type) return;
 		this._type = type;
 		this._menu.selected = type;
 		this.search();
@@ -494,6 +502,7 @@ export class SearchEntry extends St.Entry {
 	}
 
 	private search() {
+		if (this._searchSuspended) return;
 		this._prevSearch = this.searchQuery;
 		this.emit('search', this._prevSearch);
 	}
@@ -614,10 +623,20 @@ export class SearchEntry extends St.Entry {
 		super.vfunc_unmap();
 
 		if (!this.ext.settings.get_boolean('remember-search')) {
-			this.text = '';
-			this.pinned = false;
-			this.tag = null;
-			this.type = null;
+			// Clearing each filter individually would emit one full-list search
+			// per filter; suspend those and emit a single search instead.
+			if (this.text === '' && !this.pinned && this.tag === null && this.type === null) return;
+
+			this._searchSuspended = true;
+			try {
+				this.text = '';
+				this.pinned = false;
+				this.tag = null;
+				this.type = null;
+			} finally {
+				this._searchSuspended = false;
+			}
+			this.search();
 		}
 	}
 

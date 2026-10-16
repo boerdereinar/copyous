@@ -11,6 +11,7 @@ import { LinkMetadata } from '../database/database.js';
 import OutputStreamSpliceFlags = Gio.OutputStreamSpliceFlags;
 
 Gio._promisify(Soup.Session.prototype, 'send_async');
+Gio._promisify(Soup.Session.prototype, 'send_and_read_async');
 Gio._promisify(Gio.File.prototype, 'replace_async');
 Gio._promisify(Gio.File.prototype, 'replace_contents_async');
 Gio._promisify(Gio.OutputStream.prototype, 'splice_async');
@@ -51,13 +52,13 @@ export async function tryGetMetadata(
 					false,
 					Gio.FileCreateFlags.REPLACE_DESTINATION,
 					GLib.PRIORITY_DEFAULT,
-					null,
+					cancellable,
 				);
 				await out.splice_async(
 					response,
 					Gio.OutputStreamSpliceFlags.CLOSE_SOURCE | Gio.OutputStreamSpliceFlags.CLOSE_TARGET,
 					GLib.PRIORITY_DEFAULT,
-					null,
+					cancellable,
 				);
 			}
 
@@ -123,7 +124,7 @@ export async function tryGetMetadata(
 
 		return { title: title, description: description, image: image };
 	} catch (err) {
-		ext.logger.error('Failed to get metadata', err);
+		if (!cancellable.is_cancelled()) ext.logger.error('Failed to get metadata', err);
 	} finally {
 		session?.abort();
 	}
@@ -206,7 +207,7 @@ export async function tryGetLinkImage(
 		await imagePath.replace_contents_async(data, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, cancellable);
 		return imagePath;
 	} catch {
-		ext.logger.error('Failed to get link image');
+		if (!cancellable.is_cancelled()) ext.logger.error('Failed to get link image');
 	} finally {
 		session?.abort();
 	}

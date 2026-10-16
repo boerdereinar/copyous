@@ -45,11 +45,14 @@ export class FileItem extends ClipboardItem {
 	private _thumbnail?: Gio.File | null;
 	private _filePreview?: ContentPreview | null;
 	private _fileInfo?: ContentInfo;
+	private _previewUpdate: Promise<void> | null = null;
+	private _previewUpdateQueued: boolean = false;
 
 	private readonly _cancellable: Gio.Cancellable = new Gio.Cancellable();
 
 	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.File, _('File'));
+		this.connect('destroy', () => this._cancellable.cancel());
 
 		this.fileItemSettings = this.ext.settings.get_child('file-item');
 
@@ -66,8 +69,12 @@ export class FileItem extends ClipboardItem {
 		this._content.add_child(this._file);
 
 		// Bind properties
-		this.fileItemSettings.connectObject('changed', this.updateFilePreview.bind(this), this);
 		const logger = this.ext.logger;
+		this.fileItemSettings.connectObject(
+			'changed',
+			() => this.updateFilePreview().catch(logger.error.bind(logger)),
+			this,
+		);
 		this.updateFilePreview().catch(logger.error.bind(logger));
 	}
 
@@ -76,7 +83,31 @@ export class FileItem extends ClipboardItem {
 		this.visible = query.matchesEntry(this.visible, this.entry, file, this._file.text);
 	}
 
-	private async updateFilePreview() {
+	private updateFilePreview(): Promise<void> {
+		this._previewUpdateQueued = true;
+		this._previewUpdate ??= this.updateFilePreviewLoop().finally(() => {
+			this._previewUpdate = null;
+			// If an update failed while another settings change arrived, run
+			// the pending request rather than leaving it stranded.
+			if (this._previewUpdateQueued && !this._cancellable.is_cancelled()) {
+				this.updateFilePreview().catch(this.ext.logger.error.bind(this.ext.logger));
+			}
+		});
+		return this._previewUpdate;
+	}
+
+	private async updateFilePreviewLoop() {
+		// Settings can change while I/O is pending. Serialize actor creation,
+		// then apply the latest settings without starting duplicate previews.
+		while (this._previewUpdateQueued && !this._cancellable.is_cancelled()) {
+			this._previewUpdateQueued = false;
+			// eslint-disable-next-line no-await-in-loop -- actor creation must finish before another update
+			await this.queuePreview(this.ext.previewQueue, () => this.configureFile());
+		}
+	}
+
+	private async configureFile() {
+		if (this._cancellable.is_cancelled()) return;
 		this._filePreviewVisibility = this.fileItemSettings.get_enum('file-preview-visibility');
 		this._filePreviewTypes = this.fileItemSettings.get_flags('file-preview-types');
 		this._filePreviewExclusionPatterns = this.fileItemSettings.get_strv('file-preview-exclusion-patterns');
@@ -92,11 +123,15 @@ export class FileItem extends ClipboardItem {
 		}
 
 		await this.configureFilePreview();
+		if (this._cancellable.is_cancelled()) return;
 		await this.configureFileInfo();
+		if (this._cancellable.is_cancelled()) return;
 		this.configureVisibility();
 	}
 
 	private showFilePreview(): boolean {
+		if (this._filePreviewTypes === FilePreviewType.None) return false;
+		if (this._filePreviewExclusionRegex?.test(this.entry.content)) return false;
 		if (
 			this._filePreviewVisibility === FilePreviewVisibility.Hidden ||
 			this._filePreviewVisibility === FilePreviewVisibility.FileInfoOnly
@@ -122,29 +157,49 @@ export class FileItem extends ClipboardItem {
 			}
 		}
 
-		return !this._filePreviewExclusionRegex?.test(this.entry.content);
+		return true;
 	}
 
 	private async configureFilePreview() {
 		if (this._filePreview == null && this.showFilePreview()) {
 			const file = Gio.File.new_for_uri(this.entry.content);
-			if (this._fileType === undefined || this._thumbnail === undefined) {
-				[this._fileType, this._thumbnail] = await getFileType(file);
+			const wantThumbnail = (this._filePreviewTypes & FilePreviewType.Thumbnail) !== 0;
+			if (this._fileType === undefined || (wantThumbnail && this._thumbnail === undefined)) {
+				const [fileType, thumbnail] = await getFileType(file, wantThumbnail, this._cancellable);
+				if (this._cancellable.is_cancelled()) return;
+				this._fileType = fileType;
+				if (wantThumbnail) this._thumbnail = thumbnail;
 			}
 
-			this._filePreview = await tryCreateFilePreview(this.ext, file, this._fileType, this._thumbnail);
+			this._filePreview = await tryCreateFilePreview(
+				this.ext,
+				file,
+				this._fileType,
+				this._thumbnail ?? null,
+				this._cancellable,
+			);
+			if (this._cancellable.is_cancelled()) {
+				this._filePreview?.destroy();
+				return;
+			}
 			if (this._filePreview) {
 				this._content.insert_child_above(this._filePreview, this._file);
 				this.configureVisibility();
 
 				if (this._filePreview instanceof TextPreview) {
-					this.ext.settings.connectObject('changed::tab-width', this.configureFilePreview.bind(this), this);
+					this.ext.settings.connectObject(
+						'changed::tab-width',
+						() => this.updateFilePreview().catch(this.ext.logger.error.bind(this.ext.logger)),
+						this,
+					);
 				} else if (this._filePreview instanceof ImagePreview) {
 					// Hover effect
 					this.bind_property('active', this._filePreview, 'active', GObject.BindingFlags.DEFAULT);
 				}
 			}
-		} else if (this._filePreview !== null) {
+		}
+
+		if (this._filePreview != null) {
 			if (this._filePreview instanceof TextPreview) {
 				this._filePreview.syntaxHighlighting = this.fileItemSettings.get_boolean('syntax-highlighting');
 				this._filePreview.showLineNumbers = this.fileItemSettings.get_boolean('show-line-numbers');
@@ -162,11 +217,18 @@ export class FileItem extends ClipboardItem {
 			this._filePreviewVisibility !== FilePreviewVisibility.FilePreviewOnly
 		) {
 			const file = Gio.File.new_for_uri(this.entry.content);
-			if (this._fileType === undefined || this._thumbnail === undefined) {
-				[this._fileType, this._thumbnail] = await getFileType(file);
+			if (this._fileType === undefined) {
+				// File info never needs the thumbnail; don't enumerate it here.
+				const [fileType] = await getFileType(file, false, this._cancellable);
+				if (this._cancellable.is_cancelled()) return;
+				this._fileType = fileType;
 			}
 
 			this._fileInfo = await createFileInfo(this.ext, file, this._fileType, this._cancellable);
+			if (this._cancellable.is_cancelled()) {
+				this._fileInfo.destroy();
+				return;
+			}
 			this._content.add_child(this._fileInfo);
 			this.configureVisibility();
 		}
