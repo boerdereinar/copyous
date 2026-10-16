@@ -807,7 +807,10 @@ export class ClipboardDialog extends St.Widget {
 		}
 
 		// Navigate
-		if (global.focus_manager.navigate_from_event) {
+		// St.FocusManager.navigate_from_event was removed from libst in GNOME 51, but some
+		// builds still ship a typelib that declares it. A truthiness check then passes and
+		// the call aborts gnome-shell, so gate on the shell version instead.
+		if (VERSION < 51) {
 			if (global.focus_manager.navigate_from_event(event)) return Clutter.EVENT_STOP;
 		} else {
 			let direction: St.DirectionType | undefined;
