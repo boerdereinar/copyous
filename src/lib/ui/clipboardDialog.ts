@@ -431,7 +431,7 @@ export class ClipboardDialog extends St.Widget {
 		const grabFailed =
 			VERSION >= 50
 				? (grab as Clutter.Grab & { is_revoked(): boolean }).is_revoked()
-				: (grab as Clutter.Grab & { get_seat_state(): number }).get_seat_state() !== 1; // Clutter.GrabState.ALL
+				: (grab as Clutter.Grab & { get_seat_state(): number }).get_seat_state() !== 3; // Clutter.GrabState.ALL
 		if (grabFailed) {
 			Main.popModal(grab);
 			return;
