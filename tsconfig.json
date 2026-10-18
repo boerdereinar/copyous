@@ -3,24 +3,23 @@
 	"compilerOptions": {
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
-		"rootDir": "./src",
-		"outDir": "./dist",
-		"tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
-		"incremental": true,
-		"sourceMap": false,
 		"target": "ES2024",
 		"lib": ["ES2024"],
+		"incremental": true,
+		"sourceMap": false,
 		"experimentalDecorators": true,
 		"importHelpers": true,
 		"exactOptionalPropertyTypes": true,
 		"noFallthroughCasesInSwitch": false,
+		"tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
 		"types": [],
 		"paths": {
 			"tslib": ["./src/thirdparty/tslib.js"]
 		}
 	},
-	"include": [
-		"src",
-		"src/types/**/*.d.ts"
-    ]
+	"files": [],
+	"references": [
+		{ "path": "./tsconfig.src.json" },
+		{ "path": "./tsconfig.tests.json" }
+	]
 }

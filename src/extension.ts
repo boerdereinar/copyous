@@ -30,7 +30,7 @@ export default class CopyousExtension extends Extension {
 
 	public themeManager: ThemeManager | undefined;
 
-	private clipboardDialog: ClipboardDialog | undefined;
+	public clipboardDialog: ClipboardDialog | undefined;
 	private indicator: ClipboardIndicator | undefined;
 
 	private dbus: DbusService | undefined;

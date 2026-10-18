@@ -4,6 +4,7 @@ UUID := copyous@boerdereinar.dev
 
 # Directories
 SRC_DIR := src
+TESTS_DIR := tests
 DIST_DIR := dist
 DIST_ZIP := $(DIST_DIR)/$(UUID).zip
 
@@ -14,6 +15,7 @@ ICONS_PATH := $(shell pwd)/resources/icons
 DATABASE := $(DIST_PATH)/database/test.db
 
 SRC = $(shell find $(SRC_DIR) -name '*.ts')
+TESTS = $(shell find $(TESTS_DIR) -name '*.ts')
 
 # Load variables in .env file
 ifneq ($(RELEASE), 1)
@@ -37,6 +39,7 @@ endif
 .PHONY: pot po check-pot check-po
 .PHONY: build install uninstall
 .PHONY: launch launch-profile launch-settings
+.PHONY: test
 
 # Default target
 all: $(DIST_ZIP)
@@ -115,10 +118,10 @@ $(DIST_DIR)/metadata.json: resources/metadata.json | $(DIST_DIR)
 	jq '."version-name" = "$(VERSION)"' $< > $@
 
 # TypeScript
-$(DIST_DIR)/extension.js: $(SRC) tsconfig.json | $(DIST_DIR)
+$(DIST_DIR)/extension.js: $(SRC) tsconfig.json tsconfig.src.json | $(DIST_DIR)
 ifeq ($(RELEASE),1)
-	pnpm exec tsc
-	pnpm exec tsc-alias
+	pnpm exec tsc -p ./tsconfig.src.json
+	pnpm exec tsc-alias -p ./tsconfig.src.json
 	@touch $@
 # Remove code blocks commented with /* DEBUG-ONLY */ or lines ending with // DEBUG-ONLY
 	find $(@D) -name '*.js' -exec perl -0777 -i -pe 's/^(\s*)\/\* DEBUG-ONLY \*\/(?:.|\n)*?^\1\}|\/\/ DEBUG-ONLY.*\n.*$$//gm' {} \;
@@ -126,8 +129,8 @@ ifeq ($(RELEASE),1)
 	-pnpm exec eslint $(DIST_DIR) --config ./format.eslint.config.js --fix --cache --cache-location=$(DIST_DIR)/.eslintcache
 	pnpm exec prettier $(DIST_DIR) --ignore-path= --log-level=warn --write --cache --cache-location=$(DIST_DIR)/.prettiercache
 else
-	pnpm exec tsc --sourceMap --sourceRoot src
-	pnpm exec tsc-alias
+	pnpm exec tsc --sourceMap --sourceRoot src -p ./tsconfig.src.json
+	pnpm exec tsc-alias -p ./tsconfig.src.json
 	@touch $@
 # Move source maps to subdirectory
 	rsync -rv --include '*/' --exclude 'sourcemaps/**' --include '*.js.map' --exclude '*' --prune-empty-dirs --remove-source-files dist/ dist/sourcemaps/
@@ -243,3 +246,10 @@ launch-settings: install
 	trap 'kill $$JOURNAL_PID; kill $$DCONF_PID; kill $$PID; exit 0' TERM INT; \
     while kill -0 $$PID 2> /dev/null; do sleep .5; done; \
 	kill $$JOURNAL_PID; kill $$DCONF_PID;
+
+# Test
+$(DIST_DIR)/tests.tsbuildinfo: $(TESTS) tsconfig.json tsconfig.tests.json | $(DIST_DIR)
+	pnpm exec tsc -p ./tsconfig.tests.json
+
+test: $(DIST_DIR)/tests.tsbuildinfo $(DIST_ZIP) database
+	./tests/run-tests.sh
