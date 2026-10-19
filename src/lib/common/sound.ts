@@ -87,24 +87,22 @@ export class SoundManager {
 		if (!(sound in this._sounds)) return;
 
 		const file = this._sounds[sound];
+		const attrs: Record<string, string> = {
+			[this._GSound.ATTR_CANBERRA_VOLUME]: volume.toString(),
+		};
+
 		if (file == null) {
-			// Xdg sound
-			this._context.play_simple(
-				{
-					[this._GSound.ATTR_EVENT_ID]: sound,
-					[this._GSound.ATTR_CANBERRA_VOLUME]: volume.toString(),
-				},
-				null,
-			);
+			attrs[this._GSound.ATTR_EVENT_ID] = sound;
 		} else {
-			// Gnome sound
-			this._context.play_simple(
-				{
-					[this._GSound.ATTR_MEDIA_FILENAME]: file,
-					[this._GSound.ATTR_CANBERRA_VOLUME]: volume.toString(),
-				},
-				null,
-			);
+			attrs[this._GSound.ATTR_MEDIA_FILENAME] = file;
 		}
+
+		this._context.play_full(attrs, null, (ctx, res) => {
+			try {
+				ctx?.play_full_finish(res);
+			} catch {
+				// Silently ignore playback errors if audio subsystem is sleeping
+			}
+		});
 	}
 }
