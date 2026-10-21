@@ -578,13 +578,6 @@ export class ClipboardDialog extends St.Widget {
 		item.connectObject(
 			'open-menu',
 			(_: unknown, x: number, y: number, w: number, h: number) => {
-				// Connect the menu signal to update the hover state of the item and remove the signal when the menu is closed
-				const signalId = this._clipboardItemMenu.connect('open-state-changed', (_menu, state: boolean) => {
-					item.sync_hover();
-					if (!state) this._clipboardItemMenu.disconnect(signalId);
-					return true;
-				});
-
 				this._clipboardItemMenu.arrowAlignment = w === 0 && h === 0 ? 0 : 0.5;
 
 				// Slightly offset the menu to allow immediately clicking and closing the menu
