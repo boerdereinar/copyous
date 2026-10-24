@@ -3,7 +3,6 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
-import Gst from 'gi://Gst';
 import St from 'gi://St';
 
 import { Extension, gettext as _, ngettext } from 'resource:///org/gnome/shell/extensions/extension.js';
@@ -280,55 +279,60 @@ export function tryCreateImageInfo(file: Gio.File, size: number): ImageInfo | nu
 	}
 }
 
+// Plugin registry refresh can deadlock when Gst.init() runs in the compositor.
+// Probe in bounded child processes; URI data is passed as argv, never shell code.
+const MEDIA_PROBE = `
+const Gst = imports.gi.Gst;
+const GstPbutils = imports.gi.GstPbutils;
+Gst.init(null);
+const info = GstPbutils.Discoverer.new(3 * Gst.SECOND).discover_uri(ARGV[0]);
+if (info.get_result() !== GstPbutils.DiscovererResult.OK) throw new Error('Media discovery failed');
+print(info.get_duration() / Gst.SECOND);
+`;
+let activeMediaProbes = 0;
+const mediaProbeWaiters: (() => void)[] = [];
+Gio._promisify(Gio.Subprocess.prototype, 'communicate_utf8_async');
+
 export async function tryCreateMediaFileInfo(
 	ext: CopyousExtension,
 	file: Gio.File,
 	size: number,
 	cancellable: Gio.Cancellable,
 ): Promise<MediaInfo | null> {
+	if (cancellable.is_cancelled()) return null;
+	if (activeMediaProbes >= 2)
+		await new Promise<void>((resolve) => {
+			mediaProbeWaiters.push(resolve);
+		});
+	else activeMediaProbes++;
+	let process: Gio.Subprocess | null = null;
+	let timeoutId = 0;
 	try {
-		if (!Gst.is_initialized()) {
-			Gst.init(undefined);
-		}
-
-		// https://gitlab.freedesktop.org/gstreamer/gst-plugins-base/-/blob/ce69d1068af058425b083aaa1b8c268b1b2e5ddd/gst-libs/gst/pbutils/gstdiscoverer.c#L340
-		const pipeline = Gst.parse_launch(`uridecodebin uri="${file.get_uri()}"`);
-		pipeline.set_state(Gst.State.PAUSED);
-
-		// https://gitlab.freedesktop.org/gstreamer/gst-plugins-base/-/blob/ce69d1068af058425b083aaa1b8c268b1b2e5ddd/gst-libs/gst/pbutils/gstdiscoverer.c#L1417
-		let [success, duration] = pipeline.query_duration(Gst.Format.TIME);
-		if (!success) {
-			pipeline.set_state(Gst.State.PLAYING);
-
-			await new Promise<void>((resolve) => {
-				let i = 0;
-				const timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 50, () => {
-					[success, duration] = pipeline.query_duration(Gst.Format.TIME);
-					if (success || i >= 5) {
-						resolve();
-						cancellable.disconnect(cancellableId);
-						return GLib.SOURCE_REMOVE;
-					}
-
-					i++;
-					cancellable.disconnect(cancellableId);
-					return GLib.SOURCE_CONTINUE;
-				});
-
-				const cancellableId = cancellable.connect(() => GLib.source_remove(timeoutId));
-			});
-		}
-
-		pipeline.set_state(Gst.State.NULL);
-
-		if (success && duration >= 0) {
-			return new MediaInfo(ext, size, duration / (Gst.SECOND as unknown as number));
-		} else {
-			return null;
-		}
-	} catch (err) {
-		ext.logger.error(err);
+		if (cancellable.is_cancelled()) return null;
+		process = Gio.Subprocess.new(
+			['gjs', '-c', MEDIA_PROBE, file.get_uri()],
+			Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
+		);
+		const child = process;
+		timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 6000, () => {
+			timeoutId = 0;
+			child.force_exit();
+			return GLib.SOURCE_REMOVE;
+		});
+		const [stdout] = await process.communicate_utf8_async(null, cancellable);
+		if (cancellable.is_cancelled() || !process.get_successful() || !stdout?.trim()) return null;
+		const duration = Number(stdout.trim());
+		return Number.isFinite(duration) && duration >= 0 ? new MediaInfo(ext, size, duration) : null;
+	} catch {
+		// Unreadable/unsupported media and cancellation retain the existing size fallback.
 		return null;
+	} finally {
+		if (timeoutId) GLib.source_remove(timeoutId);
+		process?.force_exit();
+		const next = mediaProbeWaiters.shift();
+		if (next)
+			next(); // Transfer the occupied slot to the next waiter.
+		else activeMediaProbes--;
 	}
 }
 

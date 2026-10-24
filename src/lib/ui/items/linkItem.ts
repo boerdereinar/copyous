@@ -65,6 +65,8 @@ export class LinkPreview extends St.Widget {
 			y_align: Clutter.ActorAlign.FILL,
 		});
 
+		this.connect('destroy', () => this._cancellable.cancel());
+
 		this._title = new St.Label({ style_class: 'link-title', visible: false });
 		this.add_child(this._title);
 
@@ -91,6 +93,7 @@ export class LinkPreview extends St.Widget {
 	}
 
 	set metadata(metadata: LinkMetadata) {
+		if (this._cancellable.is_cancelled()) return;
 		this._metadata = metadata;
 		this._title.text = metadata.title ?? _('No Title');
 		this._title.style_class = metadata.title ? 'link-title' : 'link-title no-title';
@@ -145,6 +148,7 @@ export class LinkPreview extends St.Widget {
 	}
 
 	private configureMetadata() {
+		if (this._cancellable.is_cancelled()) return;
 		if (this._image) {
 			this._image.visible = this._showImage;
 		} else if (this._image === undefined && this._metadata?.image && this._showImage) {
@@ -152,9 +156,11 @@ export class LinkPreview extends St.Widget {
 
 			tryGetLinkImage(this.ext, this._metadata.image, this._cancellable)
 				.then((image) => {
+					if (this._cancellable.is_cancelled()) return;
 					if (image) {
 						this._image = new ImagePreview(this.ext, image);
 						this._image.backgroundSize = this._backgroundSize;
+						this._image.visible = this._showImage;
 						this.insert_child_at_index(this._image, 0);
 					} else {
 						this._image = null;
@@ -301,6 +307,7 @@ export class LinkItem extends ClipboardItem {
 
 	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Link, _('Link'));
+		this.connect('destroy', () => this._cancellable.cancel());
 
 		this.linkItemSettings = this.ext.settings.get_child('link-item');
 
@@ -332,6 +339,7 @@ export class LinkItem extends ClipboardItem {
 	}
 
 	private async updateLinkPreview() {
+		if (this._cancellable.is_cancelled()) return;
 		const patterns = this.linkItemSettings.get_strv('link-preview-exclusion-patterns');
 
 		let regex = null;
@@ -363,6 +371,7 @@ export class LinkItem extends ClipboardItem {
 			this._linkPreview.metadata ??= metadata;
 		} else if (show) {
 			const metadata = await tryGetMetadata(this.ext, url, this._cancellable);
+			if (this._cancellable.is_cancelled()) return;
 			this.entry.metadata = metadata;
 			this._linkPreview.metadata = metadata;
 		}

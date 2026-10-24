@@ -50,6 +50,7 @@ export class FileItem extends ClipboardItem {
 
 	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.File, _('File'));
+		this.connect('destroy', () => this._cancellable.cancel());
 
 		this.fileItemSettings = this.ext.settings.get_child('file-item');
 
@@ -77,6 +78,7 @@ export class FileItem extends ClipboardItem {
 	}
 
 	private async updateFilePreview() {
+		if (this._cancellable.is_cancelled()) return;
 		this._filePreviewVisibility = this.fileItemSettings.get_enum('file-preview-visibility');
 		this._filePreviewTypes = this.fileItemSettings.get_flags('file-preview-types');
 		this._filePreviewExclusionPatterns = this.fileItemSettings.get_strv('file-preview-exclusion-patterns');
@@ -93,6 +95,7 @@ export class FileItem extends ClipboardItem {
 
 		await this.configureFilePreview();
 		await this.configureFileInfo();
+		if (this._cancellable.is_cancelled()) return;
 		this.configureVisibility();
 	}
 
@@ -126,13 +129,26 @@ export class FileItem extends ClipboardItem {
 	}
 
 	private async configureFilePreview() {
+		if (this._cancellable.is_cancelled()) return;
 		if (this._filePreview == null && this.showFilePreview()) {
 			const file = Gio.File.new_for_uri(this.entry.content);
 			if (this._fileType === undefined || this._thumbnail === undefined) {
 				[this._fileType, this._thumbnail] = await getFileType(file);
+				if (this._cancellable.is_cancelled()) return;
 			}
 
-			this._filePreview = await tryCreateFilePreview(this.ext, file, this._fileType, this._thumbnail);
+			const preview = await tryCreateFilePreview(
+				this.ext,
+				file,
+				this._fileType,
+				this._thumbnail,
+				this._cancellable,
+			);
+			if (this._cancellable.is_cancelled()) {
+				preview?.destroy();
+				return;
+			}
+			this._filePreview = preview;
 			if (this._filePreview) {
 				this._content.insert_child_above(this._filePreview, this._file);
 				this.configureVisibility();
@@ -156,6 +172,7 @@ export class FileItem extends ClipboardItem {
 	}
 
 	private async configureFileInfo() {
+		if (this._cancellable.is_cancelled()) return;
 		if (
 			this._fileInfo === undefined &&
 			this._filePreviewVisibility !== FilePreviewVisibility.Hidden &&
@@ -164,9 +181,15 @@ export class FileItem extends ClipboardItem {
 			const file = Gio.File.new_for_uri(this.entry.content);
 			if (this._fileType === undefined || this._thumbnail === undefined) {
 				[this._fileType, this._thumbnail] = await getFileType(file);
+				if (this._cancellable.is_cancelled()) return;
 			}
 
-			this._fileInfo = await createFileInfo(this.ext, file, this._fileType, this._cancellable);
+			const info = await createFileInfo(this.ext, file, this._fileType, this._cancellable);
+			if (this._cancellable.is_cancelled()) {
+				info.destroy();
+				return;
+			}
+			this._fileInfo = info;
 			this._content.add_child(this._fileInfo);
 			this.configureVisibility();
 		}

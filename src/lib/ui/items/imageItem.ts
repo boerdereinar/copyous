@@ -36,6 +36,7 @@ export class ImageItem extends ClipboardItem {
 
 	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Image, _('Image'));
+		this.connect('destroy', () => this._cancellable.cancel());
 
 		this.imageItemSettings = this.ext.settings.get_child('image-item');
 
@@ -86,6 +87,10 @@ export class ImageItem extends ClipboardItem {
 		if (this._imageInfo === undefined && this.showImageInfo) {
 			createFileInfo(this.ext, Gio.File.new_for_uri(this.entry.content), FileType.Image, this._cancellable)
 				.then((imageInfo) => {
+					if (this._cancellable.is_cancelled()) {
+						imageInfo.destroy();
+						return;
+					}
 					this._imageInfo = imageInfo;
 					this._content.add_child(this._imageInfo);
 					this.configureImageInfo();
