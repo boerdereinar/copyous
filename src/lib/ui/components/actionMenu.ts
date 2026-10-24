@@ -120,6 +120,8 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 	private _menuActions: (ActionMenuItem | ActionSubmenuMenuItem)[];
 
 	private _monitor: Gio.FileMonitor;
+	private _disposed = false;
+	private _loadGeneration = 0;
 	private _tokens: Gio.Cancellable[] = [];
 
 	constructor(private ext: CopyousExtension) {
@@ -129,9 +131,10 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 		this._menuActions = [];
 
 		this._monitor = getActionsConfigPath(ext).monitor(Gio.FileMonitorFlags.NONE, null);
-		this._monitor.connect('changed', async (_source, _file, _otherFile, eventType) => {
+		const logger = ext.logger;
+		this._monitor.connect('changed', (_source, _file, _otherFile, eventType) => {
 			if (eventType === Gio.FileMonitorEvent.CHANGES_DONE_HINT) {
-				await this.updateActions();
+				this.updateActions().catch(logger.error.bind(logger));
 			}
 		});
 		this.updateActions(true).catch(() => {});
@@ -143,7 +146,11 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 	}
 
 	private async updateActions(save: boolean = false) {
-		this._config = await loadConfig(this.ext, save);
+		if (this._disposed) return;
+		const generation = ++this._loadGeneration;
+		const config = await loadConfig(this.ext, save);
+		if (this._disposed || generation !== this._loadGeneration) return;
+		this._config = config;
 
 		this._menuActions.forEach((a) => a.destroy());
 		this._menuActions = this._config.actions
@@ -266,6 +273,8 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 	}
 
 	override destroy(): void {
+		if (this._disposed) return;
+		this._disposed = true;
 		this._tokens.forEach((t) => t.cancel());
 		this._monitor.cancel();
 		super.destroy();
