@@ -343,6 +343,8 @@ export class ClipboardDialog extends St.Widget {
 
 		// Clipboard item menu
 		this._clipboardItemMenu = new ClipboardItemMenu(ext);
+		// Popup actors live in uiGroup, outside the dialog's native child tree.
+		this.connect('destroy', () => this._clipboardItemMenu.destroy());
 		const clipboardItemMenuManager = new PopupMenu.PopupMenuManager(this);
 		clipboardItemMenuManager.addMenu(this._clipboardItemMenu, 0);
 
@@ -579,11 +581,15 @@ export class ClipboardDialog extends St.Widget {
 			'open-menu',
 			(_: unknown, x: number, y: number, w: number, h: number) => {
 				// Connect the menu signal to update the hover state of the item and remove the signal when the menu is closed
-				const signalId = this._clipboardItemMenu.connect('open-state-changed', (_menu, state: boolean) => {
-					item.sync_hover();
-					if (!state) this._clipboardItemMenu.disconnect(signalId);
-					return true;
-				});
+				this._clipboardItemMenu.connectObject(
+					'open-state-changed',
+					(_menu: unknown, state: boolean) => {
+						item.sync_hover();
+						if (!state) this._clipboardItemMenu.disconnectObject(item);
+						return true;
+					},
+					item,
+				);
 
 				this._clipboardItemMenu.arrowAlignment = w === 0 && h === 0 ? 0 : 0.5;
 

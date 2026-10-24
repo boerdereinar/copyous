@@ -330,6 +330,8 @@ export class SearchEntry extends St.Entry {
 
 		// Menu
 		this._menu = new ItemPopupMenu(this._itemButton, 0.5, St.Side.TOP);
+		// Native parent destruction does not call this class's JS destroy override.
+		this.connect('destroy', () => this._menu.destroy());
 
 		const menuManager = new PopupMenu.PopupMenuManager(this);
 		menuManager.addMenu(this._menu, 0);
@@ -623,7 +625,6 @@ export class SearchEntry extends St.Entry {
 
 	override destroy() {
 		this.ext.settings.disconnectObject(this);
-		this._menu.destroy();
 		this._collator = undefined;
 
 		super.destroy();
