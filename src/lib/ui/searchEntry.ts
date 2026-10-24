@@ -267,6 +267,7 @@ export class SearchEntry extends St.Entry {
 	private _pinned: boolean = false;
 	private _tag: Tag | null = null;
 	private _type: ItemType | null = null;
+	private _searchSuspended = false;
 
 	private readonly _icons: { [type in ItemType | 'search']: Gio.Icon };
 	private readonly _itemButton: St.Button;
@@ -494,8 +495,22 @@ export class SearchEntry extends St.Entry {
 	}
 
 	private search() {
-		this._prevSearch = this.searchQuery;
-		this.emit('search', this._prevSearch);
+		if (this._searchSuspended) return;
+		const query = this.searchQuery;
+		const previous = this._prevSearch;
+		// Native notify::text may arrive after the synchronous reset has completed.
+		if (
+			previous &&
+			query.query === previous.query &&
+			query.pinned === previous.pinned &&
+			query.excludePinned === previous.excludePinned &&
+			query.tag === previous.tag &&
+			query.excludeTagged === previous.excludeTagged &&
+			query.type === previous.type
+		)
+			return;
+		this._prevSearch = query;
+		this.emit('search', query);
 	}
 
 	public selectTag(index: number) {
@@ -614,10 +629,20 @@ export class SearchEntry extends St.Entry {
 		super.vfunc_unmap();
 
 		if (!this.ext.settings.get_boolean('remember-search')) {
-			this.text = '';
-			this.pinned = false;
-			this.tag = null;
-			this.type = null;
+			// Clearing each filter individually would emit one full-list search
+			// per filter; suspend those and emit a single search instead.
+			if (this.text === '' && !this.pinned && this.tag === null && this.type === null) return;
+
+			this._searchSuspended = true;
+			try {
+				this.text = '';
+				this.pinned = false;
+				this.tag = null;
+				this.type = null;
+			} finally {
+				this._searchSuspended = false;
+			}
+			this.search();
 		}
 	}
 
