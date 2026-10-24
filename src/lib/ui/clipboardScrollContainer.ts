@@ -6,7 +6,6 @@ import { registerClass } from '../common/gjs.js';
 import {
 	get_first_visible_child,
 	get_last_visible_child,
-	get_n_visible_children,
 	get_next_visible_sibling,
 	get_previous_visible_sibling,
 } from '../misc/actor.js';
@@ -17,6 +16,7 @@ import { SearchChange, SearchQuery } from './searchEntry.js';
 @registerClass()
 export class ClipboardScrollContainer extends St.BoxLayout {
 	private readonly _statusItem: StatusItem;
+	private _statusItemDestroyed = false;
 	private _lastFocus: Clutter.Actor | null = null;
 	private _lastQuery: SearchQuery | null = null;
 
@@ -28,22 +28,30 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 		});
 
 		this._statusItem = new StatusItem(ext);
+		this._statusItem.connect('destroy', () => {
+			this._statusItemDestroyed = true;
+		});
+		this.connect('destroy', () => {
+			if (!this._statusItemDestroyed) this._statusItem.destroy();
+		});
 		this.updateVisible();
 	}
 
 	private updateVisible() {
-		const n = get_n_visible_children(this);
-		if (n === 0) {
-			this.add_child(this._statusItem);
+		let hasVisibleItem = false;
+		for (let child = this.get_first_child(); child; child = child.get_next_sibling()) {
+			if (child !== this._statusItem && child.visible) {
+				hasVisibleItem = true;
+				break;
+			}
+		}
+		const statusShown = this._statusItem.get_parent() !== null;
+		if (!hasVisibleItem) {
+			if (!statusShown) this.add_child(this._statusItem);
 			this.x_align = Clutter.ActorAlign.CENTER;
 			this.x_expand = true;
-
-			if (this.get_n_children() === 1) {
-				this._statusItem.state = State.Empty;
-			} else {
-				this._statusItem.state = State.NoResults;
-			}
-		} else if (n >= 2 && this._statusItem.get_parent() !== null) {
+			this._statusItem.state = this.get_n_children() === 1 ? State.Empty : State.NoResults;
+		} else if (statusShown) {
 			this.remove_child(this._statusItem);
 			this.x_align = Clutter.ActorAlign.START;
 			this.x_expand = false;
@@ -120,19 +128,26 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 	public addItem(item: ClipboardItem): void {
 		this.insertOrMoveItem(item);
 
-		// Move item when datetime changes
-		item.entry.connect('notify::datetime', () => this.insertOrMoveItem(item, false));
-
-		// Delete item when deleted
-		item.entry.connect('delete', () => this.removeItem(item));
-
-		// Update search only when properties used by search can change.
-		item.entry.connect('notify::content', () => this.updateSearch(item));
-		item.entry.connect('notify::pinned', () => this.updateSearch(item));
-		item.entry.connect('notify::tag', () => this.updateSearch(item));
-		item.entry.connect('notify::type', () => this.updateSearch(item));
-		item.entry.connect('notify::metadata', () => this.updateSearch(item));
-		item.entry.connect('notify::title', () => this.updateSearch(item));
+		// Tie entry callbacks to the actor so removed history cannot retain it.
+		item.entry.connectObject(
+			'notify::datetime',
+			() => this.insertOrMoveItem(item, false),
+			'delete',
+			() => this.removeItem(item),
+			'notify::content',
+			() => this.updateSearch(item),
+			'notify::pinned',
+			() => this.updateSearch(item),
+			'notify::tag',
+			() => this.updateSearch(item),
+			'notify::type',
+			() => this.updateSearch(item),
+			'notify::metadata',
+			() => this.updateSearch(item),
+			'notify::title',
+			() => this.updateSearch(item),
+			item,
+		);
 	}
 
 	private insertOrMoveItem(item: ClipboardItem, search: boolean = true): void {
@@ -140,17 +155,22 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 
 		if (item.get_parent() === this) this.remove_child(item);
 
-		let i = 0;
-		for (const c of this.get_children()) {
-			if (c instanceof ClipboardItem && c.entry.datetime.compare(item.entry.datetime) <= 0) {
-				this.insert_child_at_index(item, i);
-				break;
-			}
-			i++;
-		}
-
-		if (i === this.get_n_children()) {
+		// History arrives in timestamp order. Handle either end without copying
+		// and scanning the entire actor list for every entry.
+		const first = this.get_first_child();
+		const last = this.get_last_child();
+		if (first instanceof ClipboardItem && first.entry.datetime.compare(item.entry.datetime) <= 0) {
+			this.insert_child_below(item, first);
+		} else if (last instanceof ClipboardItem && last.entry.datetime.compare(item.entry.datetime) > 0) {
 			this.add_child(item);
+		} else {
+			let sibling = first;
+			while (sibling) {
+				if (sibling instanceof ClipboardItem && sibling.entry.datetime.compare(item.entry.datetime) <= 0) break;
+				sibling = sibling.get_next_sibling();
+			}
+			if (sibling) this.insert_child_below(item, sibling);
+			else this.add_child(item);
 		}
 
 		if (search && this._lastQuery) {
@@ -161,11 +181,12 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 	}
 
 	public clearItems(): void {
+		this._lastFocus = null;
 		let focus = false;
 		for (const child of this.get_children()) {
 			if (child instanceof ClipboardItem) {
 				focus ||= child.has_key_focus();
-				this.remove_child(child);
+				child.destroy();
 			}
 		}
 		this.updateVisible();
@@ -178,6 +199,7 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 
 	public removeItem(child: ClipboardItem): void {
 		if (child.get_parent() !== this) return;
+		if (this._lastFocus === child) this._lastFocus = null;
 
 		const hasKeyFocus = child.has_key_focus();
 		let newFocus = null;
@@ -198,6 +220,7 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 				global.focus_manager.get_group(this).navigate_focus(this, St.DirectionType.UP, true);
 			}
 		}
+		child.destroy();
 	}
 
 	public selectItem(index: number): boolean {

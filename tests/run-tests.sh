@@ -34,9 +34,17 @@ for test in "${tests[@]}"; do
 	test_name=${test_name%.js}
 	output="$OUTPUT_DIR/$test_name.json"
 
-	if dbus-run-session -- gnome-shell-test-tool --devkit --extension "$DIST_ZIP" "$test" --perf-output "$output"; then
-		successful_tests+=("$test_name")
+	log="$OUTPUT_DIR/$test_name.log"
+	if dbus-run-session -- gnome-shell-test-tool --"${SHELL_TEST_MODE:-devkit}" --extension "$DIST_ZIP" "$test" --perf-output "$output" >"$log" 2>&1; then
+		# Shell can exit successfully despite asynchronous native/JS failures.
+		# The optional highlighter is absent in the isolated profile.
+		if grep -E 'CRITICAL|JS ERROR:|Unhandled promise rejection' "$log" | grep -vE 'JS ERROR: ImportError:.*highlight[.]min[.]js'; then
+			status=1
+		else
+			successful_tests+=("$test_name")
+		fi
 	else
+		cat "$log"
 		status=1
 	fi
 done
