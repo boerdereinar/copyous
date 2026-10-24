@@ -27,6 +27,7 @@ export const Settings = {
 	ShowContentIndicator: 'show-content-indicator',
 	WiggleIndicator: 'wiggle-indicator',
 	SendNotification: 'send-notification',
+	NotificationPreviewLength: 'notification-preview-length',
 	Sound: 'sound',
 	Volume: 'volume',
 
@@ -159,6 +160,7 @@ export const SettingsTypes = {
 	[Settings.ShowContentIndicator]: 'boolean', // deprecated
 	[Settings.WiggleIndicator]: 'boolean',
 	[Settings.SendNotification]: 'boolean',
+	[Settings.NotificationPreviewLength]: 'int',
 	[Settings.Sound]: 'string',
 	[Settings.Volume]: 'double',
 

@@ -193,6 +193,11 @@
 			<default>false</default>
 			<summary>Send a notification when a clipboard item is copied</summary>
 		</key>
+		<key name="notification-preview-length" type="i">
+			<default>300</default>
+			<range min="50" max="2000"/>
+			<summary>Maximum preview length for notifications</summary>
+		</key>
 		<key name="sound" type="s">
 			<choices>
 				<choice value="none"/>

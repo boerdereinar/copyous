@@ -247,6 +247,19 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 		});
 		this.add(sendNotification);
 
+		const notificationPreviewLength = new Adw.SpinRow({
+			title: _('Notification Preview Length'),
+			subtitle: _('Maximum length of notification previews'),
+			adjustment: new Gtk.Adjustment({
+				lower: 50,
+				upper: 2000,
+				step_increment: 25,
+				page_increment: 100,
+				value: 300,
+			}),
+		});
+		this.add(notificationPreviewLength);
+
 		const playSound = new Adw.ActionRow({
 			title: _('Sound'),
 			subtitle: _('Sound to play when a clipboard item is copied'),
@@ -270,6 +283,13 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 		bind_enum(settings, 'indicator-display', indicatorDisplay, 'selected');
 		settings.bind('wiggle-indicator', wiggleIndicator, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('send-notification', sendNotification, 'active', Gio.SettingsBindFlags.DEFAULT);
+		settings.bind('notification-preview-length', notificationPreviewLength, 'value', Gio.SettingsBindFlags.DEFAULT);
+
+		const updateNotificationSensitivity = () => {
+			notificationPreviewLength.sensitive = sendNotification.active;
+		};
+		sendNotification.connect('notify::active', updateNotificationSensitivity);
+		updateNotificationSensitivity();
 
 		const updateWiggleSensitivity = () => {
 			wiggleIndicator.sensitive =
@@ -279,6 +299,7 @@ export class FeedbackSettings extends Adw.PreferencesGroup {
 		indicatorDisplay.connect('notify::selected', updateWiggleSensitivity);
 		updateWiggleSensitivity();
 
+		makeResettable(notificationPreviewLength, settings, 'notification-preview-length');
 		makeResettable(playSound, settings, 'sound', 'volume');
 
 		// Check if GSound is installed
