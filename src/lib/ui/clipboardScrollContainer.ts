@@ -241,10 +241,12 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 
 		this.removePseudoclasses();
 		let focusChild: ClipboardItem | null = null;
+		let hadFocus = false;
 		let firstVisible: ClipboardItem | null = null;
 		for (const child of this.get_children()) {
 			if (child instanceof ClipboardItem) {
 				const hasFocus = child.has_key_focus();
+				hadFocus ||= hasFocus;
 				child.search(query);
 				if (hasFocus) focusChild = child;
 				if (child.visible && firstVisible === null) firstVisible = child;
@@ -256,7 +258,9 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 			this.focusChild(focusChild, false);
 		} else if (this._lastFocus && this._lastFocus.visible) {
 			this.scrollToChild(this._lastFocus, false);
-		} else if (firstVisible !== null) {
+		} else if (hadFocus && firstVisible !== null) {
+			// Only steal focus onto another item if an item already had it (keyboard list
+			// navigation); never when the search entry itself is focused and the user is typing.
 			this.focusChild(firstVisible, false);
 		}
 	}
