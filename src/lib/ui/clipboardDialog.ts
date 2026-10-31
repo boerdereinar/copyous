@@ -763,8 +763,19 @@ export class ClipboardDialog extends St.Widget {
 
 		// Trigger search
 		if (!event.has_control_modifier() && this.shouldTriggerSearch(key)) {
-			this._header.searchEntry.clutter_text.grab_key_focus();
-			return this._header.searchEntry.clutter_text.event(event, false);
+			const text = this._header.searchEntry.clutter_text;
+			text.grab_key_focus();
+
+			// Clutter.Text handles key presses with a key controller since GNOME 51,
+			// which is not run by Clutter.Actor.event, so insert the character manually
+			const unicode = event.get_key_unicode();
+			if (VERSION >= 51 && unicode.trim().length > 0) {
+				text.delete_selection();
+				text.insert_unichar(unicode);
+				return Clutter.EVENT_STOP;
+			}
+
+			return text.event(event, false);
 		}
 
 		// Toggle pinned search
