@@ -17,6 +17,39 @@ GREEN=$'\033[32m'
 YELLOW=$'\033[33m'
 RESET=$'\033[0m'
 
+# Arguments
+verbose=false
+headless=false
+filter=''
+
+while (($# > 0)); do
+	case "$1" in
+		--verbose)
+			verbose=true
+			;;
+		--headless)
+			headless=true
+			;;
+		--filter)
+			if (($# < 2)); then
+				printf 'Option --filter requires a glob pattern.\n' >&2
+				exit 2
+			fi
+			filter=$2
+			shift
+			;;
+		--filter=*)
+			filter=${1#--filter=}
+			;;
+		*)
+			printf 'Unknown option: %s\n' "$1" >&2
+			exit 2
+			;;
+	esac
+	shift
+done
+
+# Find tests
 shopt -s nullglob
 tests=("$TESTS_DIR"/*.js)
 
@@ -25,16 +58,46 @@ if ((${#tests[@]} == 0)); then
 	exit 1
 fi
 
+if [[ -n "$filter" ]]; then
+	filtered_tests=()
+	for test in "${tests[@]}"; do
+		test_name=${test##*/}
+		test_name=${test_name%.js}
+		if [[ "$test_name" == $filter ]]; then
+			filtered_tests+=("$test")
+		fi
+	done
+	tests=("${filtered_tests[@]}")
+
+	if ((${#tests[@]} == 0)); then
+		printf 'No shell tests match filter: %s\n' "$filter" >&2
+		exit 1
+	fi
+fi
+
 mkdir -p "$OUTPUT_DIR"
 
+# Run tests
 status=0
 successful_tests=()
 for test in "${tests[@]}"; do
 	test_name=${test##*/}
 	test_name=${test_name%.js}
 	output="$OUTPUT_DIR/$test_name.json"
+	log="$OUTPUT_DIR/$test_name.txt"
 
-	if dbus-run-session -- gnome-shell-test-tool --devkit --extension "$DIST_ZIP" "$test" --perf-output "$output"; then
+	args=(--devkit --extension "$DIST_ZIP" "$test" --perf-output "$output")
+	if [[ "$headless" == true ]]; then
+		args+=(--headless)
+	fi
+
+	if [[ "$verbose" == true ]]; then
+		dbus-run-session -- gnome-shell-test-tool "${args[@]}" 2>&1 | tee "$log";
+	else
+		dbus-run-session -- gnome-shell-test-tool "${args[@]}" >"$log" 2>&1;
+	fi
+
+	if [[ $? -eq 0 ]]; then
 		successful_tests+=("$test_name")
 	else
 		status=1
