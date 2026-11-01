@@ -40,6 +40,7 @@
 		"install": "make install",
 		"launch": "make launch",
 		"launch-settings": "make launch-settings",
+		"launch-toolbox": "make launch-toolbox",
 		"test": "make test",
 		"lint": "make lint",
 		"lint-fix": "make lint-fix",

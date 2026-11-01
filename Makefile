@@ -1,6 +1,7 @@
 # Constants
 NAME := copyous
 UUID := copyous@boerdereinar.dev
+TOOLBOX_NAME ?= copyous-devel
 
 # Directories
 SRC_DIR := src
@@ -38,7 +39,7 @@ endif
 .PHONY: lint
 .PHONY: pot po check-pot check-po
 .PHONY: build install uninstall
-.PHONY: launch launch-profile launch-settings
+.PHONY: launch launch-settings launch-toolbox
 .PHONY: test
 
 # Default target
@@ -246,6 +247,17 @@ launch-settings: install
 	trap 'kill $$JOURNAL_PID; kill $$DCONF_PID; kill $$PID; exit 0' TERM INT; \
     while kill -0 $$PID 2> /dev/null; do sleep .5; done; \
 	kill $$JOURNAL_PID; kill $$DCONF_PID;
+
+# Launch GNOME Shell in the extension development toolbox
+HAS_TOOLBOX := $(shell command -V toolbox 2>/dev/null && echo 1)
+HAS_TOOLBOX_CONTAINER := $(shell toolbox list --containers 2>/dev/null | grep -Fq '$(TOOLBOX_NAME)' && echo 1)
+
+launch-toolbox: install
+	$(if $(HAS_TOOLBOX),,$(error toolbox is not installed))
+	$(if $(HAS_TOOLBOX_CONTAINER),,$(error toolbox container '$(TOOLBOX_NAME)' does not exist; create it with scripts/toolbox/create-toolbox.sh --version VERSION))
+	toolbox run -c '$(TOOLBOX_NAME)' \
+		env DEBUG_COPYOUS_SCHEMA='$(DEBUG_SCHEMA)' DEBUG_COPYOUS_DBPATH='$(DBPATH)' DEBUG_COPYOUS_GDA_VERSION='$(GDA_VERSION)' DEBUG_COPYOUS_ACTIONS='$(ACTIONS)' \
+		dbus-run-session -- gnome-shell --devkit --wayland
 
 # Test
 $(DIST_DIR)/tests.tsbuildinfo: $(TESTS) tsconfig.json tsconfig.tests.json | $(DIST_DIR)

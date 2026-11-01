@@ -45,6 +45,19 @@ Install the extension and launch extension settings while also observing gjs/gno
 make launch-settings
 ```
 
+#### Toolbox
+Create the toolbox once with the fedora version you want to test:
+```shell
+./scripts/toolbox/create-toolbox.sh --version 45
+```
+
+Then launch GNOME Shell in it:
+```shell
+make launch-toolbox
+```
+
+Remove the toolbox with `toolbox rm copyous-devel` when it is no longer needed.
+
 ### Useful Resources
 - https://gjs.guide/extensions/
 - https://gjs-docs.gnome.org/
