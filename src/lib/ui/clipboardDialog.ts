@@ -764,6 +764,15 @@ export class ClipboardDialog extends St.Widget {
 		// Trigger search
 		if (!event.has_control_modifier() && this.shouldTriggerSearch(key)) {
 			this._header.searchEntry.clutter_text.grab_key_focus();
+			if (VERSION >= 51) {
+				for (const action of this._header.searchEntry.clutter_text.get_actions()) {
+					if (action instanceof Clutter.KeyController) {
+						action.vfunc_handle_event(event);
+					}
+				}
+				return Clutter.EVENT_STOP;
+			}
+
 			return this._header.searchEntry.clutter_text.event(event, false);
 		}
 
