@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 17:07+0000\n"
+"POT-Creation-Date: 2026-11-02 00:42+0000\n"
 "PO-Revision-Date: 2025-12-19 18:30+0800\n"
 "Last-Translator: everyx <lunt.luo@gmail.com>\n"
 "Language-Team: Chinese (China)\n"
@@ -89,34 +89,34 @@ msgstr ""
 msgid "Copied Text"
 msgstr "已复制文本"
 
-#: src/lib/misc/notifications.ts:98 src/lib/misc/notifications.ts:123
+#: src/lib/misc/notifications.ts:98 src/lib/misc/notifications.ts:125
 msgid "Copied Image"
 msgstr "已复制图片"
 
-#: src/lib/misc/notifications.ts:99 src/lib/misc/notifications.ts:129
+#: src/lib/misc/notifications.ts:99 src/lib/misc/notifications.ts:131
 #, javascript-format
 msgid "Size: %d×%d px"
 msgstr "尺寸: %d×%d 像素"
 
-#: src/lib/misc/notifications.ts:118
+#: src/lib/misc/notifications.ts:119
 msgid "Copied Code"
 msgstr "已复制​​代码"
 
-#: src/lib/misc/notifications.ts:142
+#: src/lib/misc/notifications.ts:144
 #, javascript-format
 msgid "Copied %d File"
 msgid_plural "Copied %d Files"
 msgstr[0] "已复制 %d 个文件"
 
-#: src/lib/misc/notifications.ts:148
+#: src/lib/misc/notifications.ts:150
 msgid "Copied Link"
 msgstr "已复制链接"
 
-#: src/lib/misc/notifications.ts:152
+#: src/lib/misc/notifications.ts:154
 msgid "Copied Character"
 msgstr "已复制字符"
 
-#: src/lib/misc/notifications.ts:156
+#: src/lib/misc/notifications.ts:158
 msgid "Copied Color"
 msgstr "已复制颜色"
 

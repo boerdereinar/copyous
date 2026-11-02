@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-18 17:07+0000\n"
+"POT-Creation-Date: 2026-11-02 00:42+0000\n"
 "PO-Revision-Date: 2025-12-14 10:45+0100\n"
 "Last-Translator: Fabian Esposito <fabian.esposito@outlook.com>\n"
 "Language-Team: Italiano\n"
@@ -87,35 +87,35 @@ msgstr ""
 msgid "Copied Text"
 msgstr "Testo copiato"
 
-#: src/lib/misc/notifications.ts:98 src/lib/misc/notifications.ts:123
+#: src/lib/misc/notifications.ts:98 src/lib/misc/notifications.ts:125
 msgid "Copied Image"
 msgstr "Immagine copiata"
 
-#: src/lib/misc/notifications.ts:99 src/lib/misc/notifications.ts:129
+#: src/lib/misc/notifications.ts:99 src/lib/misc/notifications.ts:131
 #, javascript-format
 msgid "Size: %d×%d px"
 msgstr "Dimensione: %d×%d px"
 
-#: src/lib/misc/notifications.ts:118
+#: src/lib/misc/notifications.ts:119
 msgid "Copied Code"
 msgstr "Codice copiato"
 
-#: src/lib/misc/notifications.ts:142
+#: src/lib/misc/notifications.ts:144
 #, javascript-format
 msgid "Copied %d File"
 msgid_plural "Copied %d Files"
 msgstr[0] "Copiato %d file"
 msgstr[1] "Copiati %d file"
 
-#: src/lib/misc/notifications.ts:148
+#: src/lib/misc/notifications.ts:150
 msgid "Copied Link"
 msgstr "Link copiato"
 
-#: src/lib/misc/notifications.ts:152
+#: src/lib/misc/notifications.ts:154
 msgid "Copied Character"
 msgstr "Carattere copiato"
 
-#: src/lib/misc/notifications.ts:156
+#: src/lib/misc/notifications.ts:158
 msgid "Copied Color"
 msgstr "Colore copiato"
 
