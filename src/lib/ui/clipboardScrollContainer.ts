@@ -241,10 +241,12 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 
 		this.removePseudoclasses();
 		let focusChild: ClipboardItem | null = null;
+		let hadFocus = false;
 		let firstVisible: ClipboardItem | null = null;
 		for (const child of this.get_children()) {
 			if (child instanceof ClipboardItem) {
 				const hasFocus = child.has_key_focus();
+				hadFocus ||= hasFocus;
 				child.search(query);
 				if (hasFocus) focusChild = child;
 				if (child.visible && firstVisible === null) firstVisible = child;
@@ -256,7 +258,7 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 			this.focusChild(focusChild, false);
 		} else if (this._lastFocus && this._lastFocus.visible) {
 			this.scrollToChild(this._lastFocus, false);
-		} else if (firstVisible !== null) {
+		} else if (hadFocus && firstVisible !== null) {
 			this.focusChild(firstVisible, false);
 		}
 	}
