@@ -2,6 +2,8 @@
 [![GitHub License](https://img.shields.io/github/license/boerdereinar/copyous)](./LICENSE)
 [![GitHub Release](https://img.shields.io/github/v/release/boerdereinar/copyous)](https://github.com/boerdereinar/copyous/releases/latest)
 [![Extension Downloads](https://img.shields.io/gnome-extensions/dt/copyous%40boerdereinar.dev?logo=gnome&logoColor=white&cacheSeconds=86400)](https://extensions.gnome.org/extension/8834/copyous/)
+![Supported GNOME Versions](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fboerdereinar%2Fcopyous%2Frefs%2Fheads%2Fmain%2Fresources%2Fmetadata.json&search=%22shell-version%22%3A%20%5C%5B%22(%5Cd%2B)%22.*%22(%5Cd%2B)%22%5C%5D&replace=%241-%242&logo=gnome&logoColor=white&label=GNOME&cacheSeconds=86400
+)
 
 ![Screenshot](resources/images/screenshot.png)
 
