@@ -259,8 +259,6 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 		} else if (this._lastFocus && this._lastFocus.visible) {
 			this.scrollToChild(this._lastFocus, false);
 		} else if (hadFocus && firstVisible !== null) {
-			// Only steal focus onto another item if an item already had it (keyboard list
-			// navigation); never when the search entry itself is focused and the user is typing.
 			this.focusChild(firstVisible, false);
 		}
 	}

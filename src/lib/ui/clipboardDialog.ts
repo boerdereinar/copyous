@@ -1,5 +1,4 @@
 import Clutter from 'gi://Clutter';
-import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Graphene from 'gi://Graphene';
@@ -275,7 +274,6 @@ export class ClipboardDialog extends St.Widget {
 	private readonly _scrollView: ClipboardScrollView;
 	private readonly _footer: ClipboardDialogFooter;
 	private readonly _clipboardItemMenu: ClipboardItemMenu;
-	private _searchKeyIdleId: number | null = null;
 
 	constructor(private ext: CopyousExtension) {
 		super({
@@ -401,11 +399,6 @@ export class ClipboardDialog extends St.Widget {
 	}
 
 	override destroy() {
-		if (this._searchKeyIdleId !== null) {
-			GLib.source_remove(this._searchKeyIdleId);
-			this._searchKeyIdleId = null;
-		}
-
 		(Main.inputMethod as Clutter.InputMethod).disconnectObject(this);
 		this._ibusManager.disconnectObject(this);
 		this.ext.settings.disconnectObject(this);
@@ -771,15 +764,7 @@ export class ClipboardDialog extends St.Widget {
 		// Trigger search
 		if (!event.has_control_modifier() && this.shouldTriggerSearch(key)) {
 			this._header.searchEntry.clutter_text.grab_key_focus();
-			// Replaying immediately races the input method's focus handoff and can silently
-			// drop this keystroke; deferring to the next idle lets focus settle first.
-			if (this._searchKeyIdleId !== null) GLib.source_remove(this._searchKeyIdleId);
-			this._searchKeyIdleId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
-				this._searchKeyIdleId = null;
-				if (this.opened) this._header.searchEntry.clutter_text.event(event, false);
-				return GLib.SOURCE_REMOVE;
-			});
-			return Clutter.EVENT_STOP;
+			return this._header.searchEntry.clutter_text.event(event, false);
 		}
 
 		// Toggle pinned search
@@ -894,8 +879,10 @@ export class ClipboardDialog extends St.Widget {
 		// Update fit constraint
 		this.updateFitConstraint();
 
-		// Focus the search entry immediately so typing always lands there, instead of
-		// starting on the first item and racing/fighting a later focus handoff.
-		this._header.searchEntry.grab_key_focus();
+		// Navigate to first item
+		if (!this._scrollView.navigate_focus(null, St.DirectionType.DOWN, false)) {
+			this._header.updateHeader(true, false);
+			this._header.searchEntry.grab_key_focus();
+		}
 	}
 }
