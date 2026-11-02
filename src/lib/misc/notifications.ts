@@ -61,7 +61,7 @@ export class NotificationManager extends GObject.Object {
 		const notification = new MessageTray.Notification({
 			source,
 			title: _('Copied Text'),
-			body: text,
+			body: previewText(text),
 			gicon: loadIcon(this.ext, Icon.Text),
 			isTransient: true,
 		});
@@ -113,10 +113,12 @@ export class NotificationManager extends GObject.Object {
 			case ItemType.Text:
 				title = _('Copied Text');
 				gicon = loadIcon(this.ext, Icon.Text);
+				body = previewText(entry.content);
 				break;
 			case ItemType.Code:
 				title = _('Copied Code');
 				gicon = loadIcon(this.ext, Icon.Code);
+				body = previewText(entry.content);
 				break;
 			case ItemType.Image: {
 				const file = body.substring('file://'.length);
@@ -162,4 +164,17 @@ export class NotificationManager extends GObject.Object {
 		const notification = new MessageTray.Notification({ source, title, body, gicon, isTransient: true });
 		source.addNotification(notification);
 	}
+}
+
+function previewText(text: string, maxLength = 600, maxLines = 6): string {
+	if (!text) return '';
+
+	const lines = text.split('\n');
+	if (text.length <= maxLength && lines.length <= maxLength) return text;
+
+	text = lines.slice(0, maxLines).join('\n');
+	if (text.length <= maxLength) return text;
+
+	text = text.slice(0, maxLength);
+	return `${text}...`;
 }
