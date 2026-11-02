@@ -104,6 +104,17 @@ export class SearchQuery extends GObject.Object {
 			this.collator,
 		);
 	}
+
+	public equals(other: SearchQuery): boolean {
+		return (
+			this.query === other.query &&
+			this.pinned === other.pinned &&
+			this.excludePinned === other.excludePinned &&
+			this.tag === other.tag &&
+			this.excludeTagged === other.excludeTagged &&
+			this.type === other.type
+		);
+	}
 }
 
 @registerClass()
@@ -496,19 +507,12 @@ export class SearchEntry extends St.Entry {
 
 	private search() {
 		if (this._searchSuspended) return;
+
 		const query = this.searchQuery;
 		const previous = this._prevSearch;
-		// Native notify::text may arrive after the synchronous reset has completed.
-		if (
-			previous &&
-			query.query === previous.query &&
-			query.pinned === previous.pinned &&
-			query.excludePinned === previous.excludePinned &&
-			query.tag === previous.tag &&
-			query.excludeTagged === previous.excludeTagged &&
-			query.type === previous.type
-		)
-			return;
+		if (previous && query.equals(previous)) return;
+
+		this.ext.logger.log('search');
 		this._prevSearch = query;
 		this.emit('search', query);
 	}
@@ -629,19 +633,13 @@ export class SearchEntry extends St.Entry {
 		super.vfunc_unmap();
 
 		if (!this.ext.settings.get_boolean('remember-search')) {
-			// Clearing each filter individually would emit one full-list search
-			// per filter; suspend those and emit a single search instead.
-			if (this.text === '' && !this.pinned && this.tag === null && this.type === null) return;
-
 			this._searchSuspended = true;
-			try {
-				this.text = '';
-				this.pinned = false;
-				this.tag = null;
-				this.type = null;
-			} finally {
-				this._searchSuspended = false;
-			}
+			this.text = '';
+			this.pinned = false;
+			this.tag = null;
+			this.type = null;
+			this._searchSuspended = false;
+
 			this.search();
 		}
 	}
