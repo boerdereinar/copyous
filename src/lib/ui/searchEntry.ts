@@ -104,6 +104,17 @@ export class SearchQuery extends GObject.Object {
 			this.collator,
 		);
 	}
+
+	public equals(other: SearchQuery): boolean {
+		return (
+			this.query === other.query &&
+			this.pinned === other.pinned &&
+			this.excludePinned === other.excludePinned &&
+			this.tag === other.tag &&
+			this.excludeTagged === other.excludeTagged &&
+			this.type === other.type
+		);
+	}
 }
 
 @registerClass()
@@ -267,6 +278,7 @@ export class SearchEntry extends St.Entry {
 	private _pinned: boolean = false;
 	private _tag: Tag | null = null;
 	private _type: ItemType | null = null;
+	private _searchSuspended = false;
 
 	private readonly _icons: { [type in ItemType | 'search']: Gio.Icon };
 	private readonly _itemButton: St.Button;
@@ -494,8 +506,15 @@ export class SearchEntry extends St.Entry {
 	}
 
 	private search() {
-		this._prevSearch = this.searchQuery;
-		this.emit('search', this._prevSearch);
+		if (this._searchSuspended) return;
+
+		const query = this.searchQuery;
+		const previous = this._prevSearch;
+		if (previous && query.equals(previous)) return;
+
+		this.ext.logger.log('search');
+		this._prevSearch = query;
+		this.emit('search', query);
 	}
 
 	public selectTag(index: number) {
@@ -614,10 +633,14 @@ export class SearchEntry extends St.Entry {
 		super.vfunc_unmap();
 
 		if (!this.ext.settings.get_boolean('remember-search')) {
+			this._searchSuspended = true;
 			this.text = '';
 			this.pinned = false;
 			this.tag = null;
 			this.type = null;
+			this._searchSuspended = false;
+
+			this.search();
 		}
 	}
 
