@@ -275,7 +275,8 @@ export class ActionPopupMenuSection extends PopupMenu.PopupMenuSection<ActionPop
 	override destroy(): void {
 		if (this._disposed) return;
 		this._disposed = true;
-		this._tokens.forEach((t) => t.cancel());
+		// Cancellation callbacks remove tokens; empty the list before iterating.
+		this._tokens.splice(0).forEach((t) => t.cancel());
 		this._monitor.cancel();
 		super.destroy();
 	}
