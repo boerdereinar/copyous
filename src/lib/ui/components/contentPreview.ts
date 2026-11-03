@@ -227,12 +227,22 @@ Gio._promisify(Gio.InputStream.prototype, 'read_bytes_async');
  * Creates a text preview by reading the first 4096 bytes
  * @returns The text preview
  */
-async function createTextPreview(ext: CopyousExtension, file: Gio.File): Promise<TextPreview> {
+async function createTextPreview(
+	ext: CopyousExtension,
+	file: Gio.File,
+	cancellable: Gio.Cancellable | null,
+): Promise<TextPreview> {
 	const extension = file.get_uri().match(/\.(\w+)$/)?.[1];
-	const stream = await file.read_async(GLib.PRIORITY_DEFAULT, null);
-	const bytes = await stream.read_bytes_async(4096, GLib.PRIORITY_DEFAULT, null);
-	const text = new TextDecoder().decode(bytes.toArray());
-	return new TextPreview(ext, text, extension);
+
+	let stream: Gio.FileInputStream = null!;
+	try {
+		stream = await file.read_async(GLib.PRIORITY_DEFAULT, cancellable);
+		const bytes = await stream.read_bytes_async(4096, GLib.PRIORITY_DEFAULT, cancellable);
+		const text = new TextDecoder().decode(bytes.toArray());
+		return new TextPreview(ext, text, extension);
+	} finally {
+		stream.close(null);
+	}
 }
 
 /**
@@ -332,6 +342,7 @@ export async function getFileType(file: Gio.File): Promise<[FileType, Gio.File |
  * @param file The file to create a preview for
  * @param fileType The type of the file
  * @param thumbnail The thumbnail of the file if it exists
+ * @param cancellable The cancellable
  * @returns the created file preview or null if either the file preview could not be created or if it is not allowed
  */
 export async function tryCreateFilePreview(
@@ -339,7 +350,9 @@ export async function tryCreateFilePreview(
 	file: Gio.File,
 	fileType: FileType,
 	thumbnail: Gio.File | null,
+	cancellable: Gio.Cancellable | null = null,
 ): Promise<ContentPreview | null> {
+	if (cancellable?.is_cancelled()) return null;
 	const allowedTypes = ext.settings.get_child('file-item').get_flags('file-preview-types');
 
 	try {
@@ -347,14 +360,14 @@ export async function tryCreateFilePreview(
 
 		switch (fileType) {
 			case FileType.Text:
-				return allowedTypes & FilePreviewType.Text ? await createTextPreview(ext, file) : null;
+				return allowedTypes & FilePreviewType.Text ? await createTextPreview(ext, file, cancellable) : null;
 			case FileType.Image:
 				return allowedTypes & FilePreviewType.Image ? new ImagePreview(ext, file) : null;
 		}
 
 		return thumbnail && allowedTypes & FilePreviewType.Thumbnail ? new ThumbnailPreview(ext, file) : null;
 	} catch (error) {
-		ext.logger.error(error);
+		if (!cancellable?.is_cancelled()) ext.logger.error(error);
 		return null;
 	}
 }

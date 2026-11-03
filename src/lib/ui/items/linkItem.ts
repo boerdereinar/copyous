@@ -145,6 +145,8 @@ export class LinkPreview extends St.Widget {
 	}
 
 	private configureMetadata() {
+		if (this._cancellable.is_cancelled()) return;
+
 		if (this._image) {
 			this._image.visible = this._showImage;
 		} else if (this._image === undefined && this._metadata?.image && this._showImage) {
@@ -152,9 +154,12 @@ export class LinkPreview extends St.Widget {
 
 			tryGetLinkImage(this.ext, this._metadata.image, this._cancellable)
 				.then((image) => {
+					if (this._cancellable.is_cancelled()) return;
+
 					if (image) {
 						this._image = new ImagePreview(this.ext, image);
 						this._image.backgroundSize = this._backgroundSize;
+						this._image.visible = this._showImage;
 						this.insert_child_at_index(this._image, 0);
 					} else {
 						this._image = null;
@@ -332,8 +337,9 @@ export class LinkItem extends ClipboardItem {
 	}
 
 	private async updateLinkPreview() {
-		const patterns = this.linkItemSettings.get_strv('link-preview-exclusion-patterns');
+		if (this._cancellable.is_cancelled()) return;
 
+		const patterns = this.linkItemSettings.get_strv('link-preview-exclusion-patterns');
 		let regex = null;
 		if (patterns.length > 0) {
 			try {
@@ -363,6 +369,8 @@ export class LinkItem extends ClipboardItem {
 			this._linkPreview.metadata ??= metadata;
 		} else if (show) {
 			const metadata = await tryGetMetadata(this.ext, url, this._cancellable);
+			if (this._cancellable.is_cancelled()) return;
+
 			this.entry.metadata = metadata;
 			this._linkPreview.metadata = metadata;
 		}

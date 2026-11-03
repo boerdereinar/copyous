@@ -38,6 +38,9 @@ importers:
       '@girs/gst-1.0':
         specifier: 5.5.0
         version: 5.5.0
+      '@girs/gstpbutils-1.0':
+        specifier: 5.5.0
+        version: 5.5.0
       '@girs/soup-3.0':
         specifier: 5.5.0
         version: 5.5.0
@@ -434,6 +437,21 @@ packages:
 
   '@girs/gst-1.0@5.5.0':
     resolution: {integrity: sha512-mqGKrl59wXzqqkO02zA+n2CPC4gWioN6h6piglsjpoQWbINg+Utg8/feL4YyJN5cXnIdqXJqJY4FgOMQMUV+NQ==}
+
+  '@girs/gst-1.0@5.6.0':
+    resolution: {integrity: sha512-aoGLhSYQNn50xlSfrRIXlniGPUueYK2lYiwcHKZ98MMOCrkjFl0PyZvjlwpapWnKw+q1GWwChXg+9Mk9YOIoUQ==}
+
+  '@girs/gstaudio-1.0@5.6.0':
+    resolution: {integrity: sha512-dgWibjTPIP/CiF87fjTePQuSYHVYonPlgOsvcApthhGuoicUPEDvUmlDz7AmieKSKEWlT5QNsXdYYlRDQ2aeYA==}
+
+  '@girs/gstbase-1.0@5.6.0':
+    resolution: {integrity: sha512-Y1+TRyM75eVBnQhPLW5+qRMmqdOsN1YNGgqoD5X+vspkaoalXaYKwncDb2YZ5rcQo63qSRsUwQ21XneJ00jRiA==}
+
+  '@girs/gstpbutils-1.0@5.5.0':
+    resolution: {integrity: sha512-3285cKLGukmUNvjo7yrbJt9M7VBPDFSYNzA4bB4UWYXWGnKVxMWAbWqcwQEyYOyJiyIkCnmo6igtBAIu4U7zbg==}
+
+  '@girs/gstvideo-1.0@5.6.0':
+    resolution: {integrity: sha512-VEDcsXc9VZBk6hYAR7DXD5pElSF+bNMZJVQSqMbh9kr/N6r4knweVSO2p0qEF731bpIrcXPg2+CRR5qiJNqNlQ==}
 
   '@girs/gtk-4.0@4.9.0':
     resolution: {integrity: sha512-YuAbI8fVdZylJTvKfap8QQdATsB4s4zMcgkGm9Sro+ZwucUA0QAHSczsc/snqVtUvmpZoPOXan5+MKt7nMmPOg==}
@@ -1834,6 +1852,50 @@ snapshots:
       '@girs/glib-2.0': 5.5.0
       '@girs/gmodule-2.0': 5.5.0
       '@girs/gobject-2.0': 5.5.0
+
+  '@girs/gst-1.0@5.6.0':
+    dependencies:
+      '@girs/gjs': 5.5.0
+      '@girs/glib-2.0': 5.5.0
+      '@girs/gmodule-2.0': 5.5.0
+      '@girs/gobject-2.0': 5.5.0
+
+  '@girs/gstaudio-1.0@5.6.0':
+    dependencies:
+      '@girs/gjs': 5.5.0
+      '@girs/glib-2.0': 5.5.0
+      '@girs/gmodule-2.0': 5.5.0
+      '@girs/gobject-2.0': 5.5.0
+      '@girs/gst-1.0': 5.6.0
+      '@girs/gstbase-1.0': 5.6.0
+
+  '@girs/gstbase-1.0@5.6.0':
+    dependencies:
+      '@girs/gjs': 5.5.0
+      '@girs/glib-2.0': 5.5.0
+      '@girs/gmodule-2.0': 5.5.0
+      '@girs/gobject-2.0': 5.5.0
+      '@girs/gst-1.0': 5.6.0
+
+  '@girs/gstpbutils-1.0@5.5.0':
+    dependencies:
+      '@girs/gjs': 5.5.0
+      '@girs/glib-2.0': 5.5.0
+      '@girs/gmodule-2.0': 5.5.0
+      '@girs/gobject-2.0': 5.5.0
+      '@girs/gst-1.0': 5.5.0
+      '@girs/gstaudio-1.0': 5.6.0
+      '@girs/gstbase-1.0': 5.6.0
+      '@girs/gstvideo-1.0': 5.6.0
+
+  '@girs/gstvideo-1.0@5.6.0':
+    dependencies:
+      '@girs/gjs': 5.5.0
+      '@girs/glib-2.0': 5.5.0
+      '@girs/gmodule-2.0': 5.5.0
+      '@girs/gobject-2.0': 5.5.0
+      '@girs/gst-1.0': 5.6.0
+      '@girs/gstbase-1.0': 5.6.0
 
   '@girs/gtk-4.0@4.9.0':
     dependencies:

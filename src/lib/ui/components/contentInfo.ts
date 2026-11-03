@@ -3,7 +3,6 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
-import Gst from 'gi://Gst';
 import St from 'gi://St';
 
 import { Extension, gettext as _, ngettext } from 'resource:///org/gnome/shell/extensions/extension.js';
@@ -287,47 +286,12 @@ export async function tryCreateMediaFileInfo(
 	cancellable: Gio.Cancellable,
 ): Promise<MediaInfo | null> {
 	try {
-		if (!Gst.is_initialized()) {
-			Gst.init(undefined);
-		}
+		const { duration, success } = await ext.mediaProbe.probe(file.get_uri(), cancellable);
+		if (cancellable.is_cancelled() || !success || duration === undefined) return null;
 
-		// https://gitlab.freedesktop.org/gstreamer/gst-plugins-base/-/blob/ce69d1068af058425b083aaa1b8c268b1b2e5ddd/gst-libs/gst/pbutils/gstdiscoverer.c#L340
-		const pipeline = Gst.parse_launch(`uridecodebin uri="${file.get_uri()}"`);
-		pipeline.set_state(Gst.State.PAUSED);
-
-		// https://gitlab.freedesktop.org/gstreamer/gst-plugins-base/-/blob/ce69d1068af058425b083aaa1b8c268b1b2e5ddd/gst-libs/gst/pbutils/gstdiscoverer.c#L1417
-		let [success, duration] = pipeline.query_duration(Gst.Format.TIME);
-		if (!success) {
-			pipeline.set_state(Gst.State.PLAYING);
-
-			await new Promise<void>((resolve) => {
-				let i = 0;
-				const timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 50, () => {
-					[success, duration] = pipeline.query_duration(Gst.Format.TIME);
-					if (success || i >= 5) {
-						resolve();
-						cancellable.disconnect(cancellableId);
-						return GLib.SOURCE_REMOVE;
-					}
-
-					i++;
-					cancellable.disconnect(cancellableId);
-					return GLib.SOURCE_CONTINUE;
-				});
-
-				const cancellableId = cancellable.connect(() => GLib.source_remove(timeoutId));
-			});
-		}
-
-		pipeline.set_state(Gst.State.NULL);
-
-		if (success && duration >= 0) {
-			return new MediaInfo(ext, size, duration / (Gst.SECOND as unknown as number));
-		} else {
-			return null;
-		}
-	} catch (err) {
-		ext.logger.error(err);
+		return Number.isFinite(duration) && duration >= 0 ? new MediaInfo(ext, size, duration) : null;
+	} catch (error) {
+		ext.logger.error(error);
 		return null;
 	}
 }

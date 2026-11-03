@@ -123,7 +123,7 @@ export async function tryGetMetadata(
 
 		return { title: title, description: description, image: image };
 	} catch (err) {
-		ext.logger.error('Failed to get metadata', err);
+		if (!cancellable.is_cancelled()) ext.logger.error('Failed to get metadata', err);
 	} finally {
 		session?.abort();
 	}
@@ -206,7 +206,7 @@ export async function tryGetLinkImage(
 		await imagePath.replace_contents_async(data, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, cancellable);
 		return imagePath;
 	} catch {
-		ext.logger.error('Failed to get link image');
+		if (!cancellable.is_cancelled()) ext.logger.error('Failed to get link image');
 	} finally {
 		session?.abort();
 	}

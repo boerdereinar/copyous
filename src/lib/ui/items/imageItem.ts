@@ -86,6 +86,11 @@ export class ImageItem extends ClipboardItem {
 		if (this._imageInfo === undefined && this.showImageInfo) {
 			createFileInfo(this.ext, Gio.File.new_for_uri(this.entry.content), FileType.Image, this._cancellable)
 				.then((imageInfo) => {
+					if (this._cancellable.is_cancelled()) {
+						imageInfo.destroy();
+						return;
+					}
+
 					this._imageInfo = imageInfo;
 					this._content.add_child(this._imageInfo);
 					this.configureImageInfo();
