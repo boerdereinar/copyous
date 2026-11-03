@@ -52,6 +52,11 @@ export async function run() {
 		if (Main.uiGroup.get_children().some((actor) => !before.has(actor)))
 			throw new Error('Popup actors leaked into the shell stage');
 	}
+	const openDialog = new ClipboardDialog(extension.stateObj);
+	openDialog.open();
+	await Scripting.waitLeisure();
+	openDialog.destroy(); // Native unmapping must not reset already-destroyed controls.
+	await Scripting.waitLeisure();
 	const uri = extension.dir.get_uri();
 	const { ClipboardEntry } = await import(`${uri}/lib/database/database.js`);
 	const { ClipboardItem: Item } = await import(`${uri}/lib/ui/items/clipboardItem.js`);

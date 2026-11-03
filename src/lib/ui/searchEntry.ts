@@ -279,6 +279,7 @@ export class SearchEntry extends St.Entry {
 	private _tag: Tag | null = null;
 	private _type: ItemType | null = null;
 	private _searchSuspended = false;
+	private _disposed = false;
 
 	private readonly _icons: { [type in ItemType | 'search']: Gio.Icon };
 	private readonly _itemButton: St.Button;
@@ -343,7 +344,10 @@ export class SearchEntry extends St.Entry {
 		// Menu
 		this._menu = new ItemPopupMenu(this._itemButton, 0.5, St.Side.TOP);
 		// Native parent destruction does not call this class's JS destroy override.
-		this.connect('destroy', () => this._menu.destroy());
+		this.connect('destroy', () => {
+			this._disposed = true;
+			this._menu.destroy();
+		});
 
 		const menuManager = new PopupMenu.PopupMenuManager(this);
 		menuManager.addMenu(this._menu, 0);
@@ -633,6 +637,7 @@ export class SearchEntry extends St.Entry {
 
 	override vfunc_unmap(): void {
 		super.vfunc_unmap();
+		if (this._disposed) return;
 
 		if (!this.ext.settings.get_boolean('remember-search')) {
 			this._searchSuspended = true;
