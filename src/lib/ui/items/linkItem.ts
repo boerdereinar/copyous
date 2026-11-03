@@ -65,6 +65,8 @@ export class LinkPreview extends St.Widget {
 			y_align: Clutter.ActorAlign.FILL,
 		});
 
+		this.connect('destroy', () => this._cancellable.cancel());
+
 		this._title = new St.Label({ style_class: 'link-title', visible: false });
 		this.add_child(this._title);
 
@@ -91,6 +93,7 @@ export class LinkPreview extends St.Widget {
 	}
 
 	set metadata(metadata: LinkMetadata) {
+		if (this._cancellable.is_cancelled()) return;
 		this._metadata = metadata;
 		this._title.text = metadata.title ?? _('No Title');
 		this._title.style_class = metadata.title ? 'link-title' : 'link-title no-title';
@@ -306,6 +309,7 @@ export class LinkItem extends ClipboardItem {
 
 	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.Link, _('Link'));
+		this.connect('destroy', () => this._cancellable.cancel());
 
 		this.linkItemSettings = this.ext.settings.get_child('link-item');
 

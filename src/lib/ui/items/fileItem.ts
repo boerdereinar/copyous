@@ -50,6 +50,7 @@ export class FileItem extends ClipboardItem {
 
 	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.File, _('File'));
+		this.connect('destroy', () => this._cancellable.cancel());
 
 		this.fileItemSettings = this.ext.settings.get_child('file-item');
 
