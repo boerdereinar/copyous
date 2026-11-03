@@ -177,7 +177,13 @@ export class MediaProbe {
 	private disconnectCancellable(request: MediaProbeRequest) {
 		if (request.cancellableSignalId === undefined) return;
 
-		request.cancellable?.disconnect(request.cancellableSignalId);
+		const signalId = request.cancellableSignalId;
 		request.cancellableSignalId = undefined;
+		// Cancellation calls reject() from inside the handler. GIO disconnect()
+		// waits for an in-flight handler, so defer it until cancellation returns.
+		GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+			request.cancellable?.disconnect(signalId);
+			return GLib.SOURCE_REMOVE;
+		});
 	}
 }

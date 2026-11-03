@@ -1,5 +1,6 @@
 import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
 import St from 'gi://St';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
@@ -18,6 +19,19 @@ export async function run() {
 	}
 	if (extension?.state !== 1) throw new Error('Extension must be enabled');
 	const { ClipboardDialog } = await import(`${extension.dir.get_uri()}/lib/ui/clipboardDialog.js`);
+	const { MediaProbe } = await import(`${extension.dir.get_uri()}/lib/misc/mediaProbe.js`);
+	const probe = new MediaProbe(extension.stateObj);
+	const token = new Gio.Cancellable();
+	const result = probe.probe('file:///tmp/copyous-cancellation-fixture.wav', token).then(
+		() => {
+			throw new Error('A cancelled queued probe must reject');
+		},
+		() => undefined,
+	);
+	token.cancel(); // Must return without deadlocking on its own signal handler.
+	await result;
+	probe.destroy();
+	await Scripting.sleep(100);
 	const before = new Set(Main.uiGroup.get_children());
 	for (const native of [false, true, false, true]) {
 		const dialog = new ClipboardDialog(extension.stateObj);
