@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-02 01:06+0000\n"
+"POT-Creation-Date: 2026-11-03 16:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,7 +177,7 @@ msgstr ""
 #: src/lib/preferences/actions/actionDialog.ts:180
 #: src/lib/preferences/actions/actionDialog.ts:379
 #: src/lib/preferences/customization/items/linkItemCustomization.ts:45
-#: src/lib/ui/items/linkItem.ts:303
+#: src/lib/ui/items/linkItem.ts:308
 msgid "Link"
 msgstr ""
 
@@ -1693,47 +1693,47 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: src/lib/ui/components/contentInfo.ts:32
+#: src/lib/ui/components/contentInfo.ts:31
 #, javascript-format
 msgid "%dh"
 msgstr ""
 
-#: src/lib/ui/components/contentInfo.ts:33
+#: src/lib/ui/components/contentInfo.ts:32
 #, javascript-format
 msgid "%dm"
 msgstr ""
 
-#: src/lib/ui/components/contentInfo.ts:34
+#: src/lib/ui/components/contentInfo.ts:33
 #, javascript-format
 msgid "%ds"
 msgstr ""
 
-#: src/lib/ui/components/contentInfo.ts:114
+#: src/lib/ui/components/contentInfo.ts:113
 #, javascript-format
 msgid "%d char"
 msgid_plural "%d chars"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/lib/ui/components/contentInfo.ts:122
+#: src/lib/ui/components/contentInfo.ts:121
 #, javascript-format
 msgid "%d word"
 msgid_plural "%d words"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/lib/ui/components/contentInfo.ts:125
+#: src/lib/ui/components/contentInfo.ts:124
 #, javascript-format
 msgid "%d line"
 msgid_plural "%d lines"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/lib/ui/components/contentInfo.ts:185
+#: src/lib/ui/components/contentInfo.ts:184
 msgid "Missing File"
 msgstr ""
 
-#: src/lib/ui/components/contentInfo.ts:197
+#: src/lib/ui/components/contentInfo.ts:196
 msgid "Error"
 msgstr ""
 
