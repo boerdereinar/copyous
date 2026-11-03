@@ -13,6 +13,7 @@ import { SoundManager, tryCreateSoundManager } from './lib/common/sound.js';
 import { ClipboardEntry } from './lib/database/database.js';
 import { ClipboardEntryTracker } from './lib/database/entryTracker.js';
 import { ClipboardManager } from './lib/misc/clipboard.js';
+import { MediaProbe } from './lib/misc/mediaProbe.js';
 import { NotificationManager } from './lib/misc/notifications.js';
 import { ShortcutManager } from './lib/misc/shortcuts.js';
 import { ThemeManager } from './lib/misc/theme.js';
@@ -22,6 +23,8 @@ import { ClipboardIndicator } from './lib/ui/indicator.js';
 export default class CopyousExtension extends Extension {
 	public settings!: CopyousSettings;
 	public logger!: ConsoleLike;
+
+	public mediaProbe!: MediaProbe;
 
 	public hljs: HLJSApi | null | undefined;
 	private hljsMonitor: Gio.FileMonitor | undefined;
@@ -52,6 +55,9 @@ export default class CopyousExtension extends Extension {
 
 		this.logger = this.getLogger();
 		const error = this.logger.error.bind(this.logger);
+
+		// Workers
+		this.mediaProbe = new MediaProbe(this);
 
 		// Highlight.js
 		this.initHljs().catch(error);
@@ -337,6 +343,10 @@ export default class CopyousExtension extends Extension {
 		this.clipboardManager?.disconnectObject(this);
 		this.clipboardManager?.destroy();
 		this.clipboardManager = undefined;
+
+		// Workers
+		this.mediaProbe.destroy();
+		this.mediaProbe = undefined!;
 
 		// Globals
 		this.settings?.disconnectObject(this);

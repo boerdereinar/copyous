@@ -12,6 +12,7 @@
 		"@girs/gnome-shell": "50.0.4",
 		"@girs/gsound-1.0": "5.5.0",
 		"@girs/gst-1.0": "5.5.0",
+		"@girs/gstpbutils-1.0": "5.5.0",
 		"@girs/soup-3.0": "5.5.0",
 		"@stylistic/eslint-plugin": "5.10.0",
 		"@trivago/prettier-plugin-sort-imports": "6.0.2",

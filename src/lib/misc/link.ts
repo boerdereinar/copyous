@@ -11,7 +11,6 @@ import { LinkMetadata } from '../database/database.js';
 import OutputStreamSpliceFlags = Gio.OutputStreamSpliceFlags;
 
 Gio._promisify(Soup.Session.prototype, 'send_async');
-Gio._promisify(Soup.Session.prototype, 'send_and_read_async');
 Gio._promisify(Gio.File.prototype, 'replace_async');
 Gio._promisify(Gio.File.prototype, 'replace_contents_async');
 Gio._promisify(Gio.OutputStream.prototype, 'splice_async');

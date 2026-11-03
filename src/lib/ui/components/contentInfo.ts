@@ -279,60 +279,20 @@ export function tryCreateImageInfo(file: Gio.File, size: number): ImageInfo | nu
 	}
 }
 
-// Plugin registry refresh can deadlock when Gst.init() runs in the compositor.
-// Probe in bounded child processes; URI data is passed as argv, never shell code.
-const MEDIA_PROBE = `
-const Gst = imports.gi.Gst;
-const GstPbutils = imports.gi.GstPbutils;
-Gst.init(null);
-const info = GstPbutils.Discoverer.new(3 * Gst.SECOND).discover_uri(ARGV[0]);
-if (info.get_result() !== GstPbutils.DiscovererResult.OK) throw new Error('Media discovery failed');
-print(info.get_duration() / Gst.SECOND);
-`;
-let activeMediaProbes = 0;
-const mediaProbeWaiters: (() => void)[] = [];
-Gio._promisify(Gio.Subprocess.prototype, 'communicate_utf8_async');
-
 export async function tryCreateMediaFileInfo(
 	ext: CopyousExtension,
 	file: Gio.File,
 	size: number,
 	cancellable: Gio.Cancellable,
 ): Promise<MediaInfo | null> {
-	if (cancellable.is_cancelled()) return null;
-	if (activeMediaProbes >= 2)
-		await new Promise<void>((resolve) => {
-			mediaProbeWaiters.push(resolve);
-		});
-	else activeMediaProbes++;
-	let process: Gio.Subprocess | null = null;
-	let timeoutId = 0;
 	try {
-		if (cancellable.is_cancelled()) return null;
-		process = Gio.Subprocess.new(
-			['gjs', '-c', MEDIA_PROBE, file.get_uri()],
-			Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
-		);
-		const child = process;
-		timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 6000, () => {
-			timeoutId = 0;
-			child.force_exit();
-			return GLib.SOURCE_REMOVE;
-		});
-		const [stdout] = await process.communicate_utf8_async(null, cancellable);
-		if (cancellable.is_cancelled() || !process.get_successful() || !stdout?.trim()) return null;
-		const duration = Number(stdout.trim());
+		const { duration, success } = await ext.mediaProbe.probe(file.get_uri(), cancellable);
+		if (cancellable.is_cancelled() || !success || duration === undefined) return null;
+
 		return Number.isFinite(duration) && duration >= 0 ? new MediaInfo(ext, size, duration) : null;
-	} catch {
-		// Unreadable/unsupported media and cancellation retain the existing size fallback.
+	} catch (error) {
+		ext.logger.error(error);
 		return null;
-	} finally {
-		if (timeoutId) GLib.source_remove(timeoutId);
-		process?.force_exit();
-		const next = mediaProbeWaiters.shift();
-		if (next)
-			next(); // Transfer the occupied slot to the next waiter.
-		else activeMediaProbes--;
 	}
 }
 

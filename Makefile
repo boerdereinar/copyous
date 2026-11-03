@@ -194,6 +194,7 @@ $(DIST_ZIP): $(DIST_DIR)/metadata.json $(TSC) $(CSS) $(SCHEMAS) $(DEBUG_SCHEMAS)
 		--force \
 		--podir=$(PO_PATH) \
 		--extra-source="lib" \
+		--extra-source="scripts" \
 		--extra-source="thirdparty" \
 		--extra-source=$(ICONS_PATH) \
 		--extra-source="resources.gresource" \

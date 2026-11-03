@@ -6,4 +6,5 @@ import '@girs/gnome-shell/ambient';
 import '@girs/gnome-shell/extensions/global';
 import '@girs/gsound-1.0';
 import '@girs/gst-1.0';
+import '@girs/gstpbutils-1.0';
 import '@girs/soup-3.0';

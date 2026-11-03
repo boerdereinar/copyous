@@ -50,7 +50,6 @@ export class FileItem extends ClipboardItem {
 
 	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
 		super(ext, entry, Icon.File, _('File'));
-		this.connect('destroy', () => this._cancellable.cancel());
 
 		this.fileItemSettings = this.ext.settings.get_child('file-item');
 
@@ -79,6 +78,7 @@ export class FileItem extends ClipboardItem {
 
 	private async updateFilePreview() {
 		if (this._cancellable.is_cancelled()) return;
+
 		this._filePreviewVisibility = this.fileItemSettings.get_enum('file-preview-visibility');
 		this._filePreviewTypes = this.fileItemSettings.get_flags('file-preview-types');
 		this._filePreviewExclusionPatterns = this.fileItemSettings.get_strv('file-preview-exclusion-patterns');
@@ -95,7 +95,6 @@ export class FileItem extends ClipboardItem {
 
 		await this.configureFilePreview();
 		await this.configureFileInfo();
-		if (this._cancellable.is_cancelled()) return;
 		this.configureVisibility();
 	}
 
@@ -148,6 +147,7 @@ export class FileItem extends ClipboardItem {
 				preview?.destroy();
 				return;
 			}
+
 			this._filePreview = preview;
 			if (this._filePreview) {
 				this._content.insert_child_above(this._filePreview, this._file);
@@ -173,6 +173,7 @@ export class FileItem extends ClipboardItem {
 
 	private async configureFileInfo() {
 		if (this._cancellable.is_cancelled()) return;
+
 		if (
 			this._fileInfo === undefined &&
 			this._filePreviewVisibility !== FilePreviewVisibility.Hidden &&
@@ -189,6 +190,7 @@ export class FileItem extends ClipboardItem {
 				info.destroy();
 				return;
 			}
+
 			this._fileInfo = info;
 			this._content.add_child(this._fileInfo);
 			this.configureVisibility();
@@ -196,6 +198,8 @@ export class FileItem extends ClipboardItem {
 	}
 
 	private configureVisibility() {
+		if (this._cancellable.is_cancelled()) return;
+
 		// File preview
 		const showFilePreview = this.showFilePreview();
 		if (this._filePreview && showFilePreview) {
