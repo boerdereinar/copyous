@@ -27,6 +27,7 @@ export async function run() {
 	const { TextItem } = await import(`${uri}/lib/ui/items/textItem.js`);
 	const { ClipboardEntry } = await import(`${uri}/lib/database/database.js`);
 	const { ItemType } = await import(`${uri}/lib/common/constants.js`);
+	await Scripting.waitLeisure();
 	// The same script can measure upstream and the candidate without modifying either build.
 	for (const [direction, insertion, population] of [
 		[1, METRICS.historyInsertAscending, METRICS.historyPopulateAscending],
@@ -64,4 +65,8 @@ export async function run() {
 			container.destroy();
 		}
 	}
+	// Finish extension-owned async teardown while the compositor UI is still alive.
+	Main.extensionManager.disableExtension('copyous@boerdereinar.dev');
+	await Scripting.sleep(500);
+	await Scripting.waitLeisure();
 }
