@@ -60,32 +60,47 @@ export class ItemShortcuts extends Adw.PreferencesGroup {
 
 @registerClass()
 export class ItemActivationShortcuts extends Adw.PreferencesGroup {
+	private readonly _settings: CopyousSettings;
+
+	private readonly _swapCopyPasteRow: Adw.SwitchRow;
+	private readonly _pasteRow: ShortcutRow;
+	private readonly _copyRow: ShortcutRow;
+
 	constructor(prefs: Preferences) {
 		super();
 
-		const swapCopyPasteRow = new Adw.SwitchRow({
+		this._swapCopyPasteRow = new Adw.SwitchRow({
 			title: _('Swap Copy Shortcut'),
 			subtitle: _('Swap copy and paste shortcuts'),
 		});
-		this.add(swapCopyPasteRow);
+		this.add(this._swapCopyPasteRow);
+		this._swapCopyPasteRow.connect('notify::active', this.updateShortcuts.bind(this));
 
-		const pasteRow = new ShortcutRow(_('Paste Item'), 'Return space');
-		this.add(pasteRow);
-		const copyRow = new ShortcutRow(_('Copy Item'), '<Shift>Return space');
-		this.add(copyRow);
+		this._pasteRow = new ShortcutRow(_('Paste Item'), 'Return space');
+		this.add(this._pasteRow);
+		this._copyRow = new ShortcutRow(_('Copy Item'), '<Shift>Return space');
+		this.add(this._copyRow);
 		this.add(new ShortcutRow(_('Activate Default Action'), '<Ctrl>Return space'));
 
-		swapCopyPasteRow.connect('notify::active', () => {
-			if (swapCopyPasteRow.active) {
-				pasteRow.shortcuts = ['<Shift>Return space'];
-				copyRow.shortcuts = ['Return space'];
-			} else {
-				pasteRow.shortcuts = ['Return space'];
-				copyRow.shortcuts = ['<Shift>Return space'];
-			}
-		});
+		this._settings = prefs.getSettings();
+		this._settings.bind('swap-copy-shortcut', this._swapCopyPasteRow, 'active', null);
+		this._settings.connect('changed::paste-on-copy', this.updateShortcuts.bind(this));
 
-		const settings: CopyousSettings = prefs.getSettings();
-		settings.bind('swap-copy-shortcut', swapCopyPasteRow, 'active', null);
+		this.updateShortcuts();
+	}
+
+	private updateShortcuts() {
+		const pasteOnCopy = this._settings.get_boolean('paste-on-copy');
+		this._swapCopyPasteRow.sensitive = pasteOnCopy;
+		if (!pasteOnCopy) {
+			this._pasteRow.shortcuts = [];
+			this._copyRow.shortcuts = ['Return space'];
+		} else if (this._swapCopyPasteRow.active) {
+			this._pasteRow.shortcuts = ['<Shift>Return space'];
+			this._copyRow.shortcuts = ['Return space'];
+		} else {
+			this._pasteRow.shortcuts = ['Return space'];
+			this._copyRow.shortcuts = ['<Shift>Return space'];
+		}
 	}
 }
