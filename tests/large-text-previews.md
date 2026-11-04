@@ -43,3 +43,10 @@ or possible Unicode string. Inspect logs as well as process exit codes, because
 Shell can log asynchronous failures without failing the test tool. A missing
 optional `highlight.min.js` import in an empty profile is unrelated to these text
 checks.
+
+On upstream builds without PR #188, compositor shutdown can also report
+`clipboardItemMenu.destroy: this.ext.settings is undefined`. That existing popup
+ownership issue is separate from preview rendering. The text assertions and pixel
+comparisons pass on the standalone preview branch; the combined build with #188
+also completes shutdown without those errors. Do not silently treat unrelated
+shutdown errors as successful lifecycle validation.
