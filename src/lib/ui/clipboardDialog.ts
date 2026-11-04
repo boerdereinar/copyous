@@ -268,6 +268,7 @@ export class ClipboardDialog extends St.Widget {
 
 	private readonly _ibusManager: IBusManager.IBusManager;
 
+	private readonly _holder: Clutter.Actor;
 	private readonly _monitorConstraint: Layout.MonitorConstraint;
 	private readonly _fitConstraint: FitConstraint;
 	private readonly _widthConstraint: Clutter.BindConstraint;
@@ -292,7 +293,12 @@ export class ClipboardDialog extends St.Widget {
 		this._monitorConstraint = new Layout.MonitorConstraint({ workArea: true });
 		this.add_constraint(this._monitorConstraint);
 
-		Main.layoutManager.modalDialogGroup.add_child(this);
+		// Any style change on this actor restyles every item in the history. St toggles :first-child and
+		// :last-child on children of St widgets whenever their siblings change, so add this to a plain actor
+		// instead of directly to the modal dialog group.
+		this._holder = new Clutter.Actor();
+		Main.layoutManager.modalDialogGroup.add_child(this._holder);
+		this._holder.add_child(this);
 
 		// Dialog
 		this._dialog = new St.BoxLayout({
@@ -407,7 +413,14 @@ export class ClipboardDialog extends St.Widget {
 		this.ext.settings.disconnectObject(this);
 
 		super.destroy();
+		this._holder.destroy();
 	}
+
+	// St adds :focus when the modal grab focuses the dialog and removes it when the first item is focused,
+	// restyling every item twice per open. No style depends on it, so skip the St handlers.
+	override vfunc_key_focus_in(): void {}
+
+	override vfunc_key_focus_out(): void {}
 
 	get opened(): boolean {
 		return this._open;
