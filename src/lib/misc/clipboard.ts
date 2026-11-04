@@ -179,17 +179,9 @@ export class ClipboardManager extends GObject.Object {
 					return GLib.SOURCE_REMOVE;
 				}
 
-				this.keyboard.press(Clutter.KEY_Control_L);
-				this.keyboard.press(Clutter.KEY_Shift_L);
-				this.keyboard.press(Clutter.KEY_Insert);
-				this.keyboard.release(Clutter.KEY_Insert);
-				this.keyboard.release(Clutter.KEY_Shift_L);
-				this.keyboard.release(Clutter.KEY_Control_L);
+				this.keyboard.chord([Clutter.KEY_Control_L, Clutter.KEY_Shift_L, Clutter.KEY_Insert]);
 			} else {
-				this.keyboard.press(Clutter.KEY_Shift_L);
-				this.keyboard.press(Clutter.KEY_Insert);
-				this.keyboard.release(Clutter.KEY_Insert);
-				this.keyboard.release(Clutter.KEY_Shift_L);
+				this.keyboard.chord([Clutter.KEY_Shift_L, Clutter.KEY_Insert]);
 			}
 
 			this.pasteSignalId = -1;
