@@ -150,7 +150,7 @@ export const SettingsTypes = {
 	[Settings.ExcludeTagged]: 'boolean',
 	[Settings.ProtectPinned]: 'boolean',
 	[Settings.ProtectTagged]: 'boolean',
-	[Settings.PasteOnCopy]: 'boolean', // deprecated
+	[Settings.PasteOnCopy]: 'boolean',
 	[Settings.SyncPrimary]: 'boolean',
 	[Settings.UpdateDateOnCopy]: 'boolean',
 
@@ -543,11 +543,6 @@ function getIndicatorDisplay(showIcon: boolean, showContent: boolean): Indicator
 }
 
 export function migrateSettings(settings: CopyousSettings): void {
-	// inverted paste-on-copy -> swap-copy-shortcut
-	const pasteOnCopy = settings.get_user_value<'b'>('paste-on-copy');
-	if (pasteOnCopy !== null) settings.set_boolean('swap-copy-shortcut', !pasteOnCopy.get_boolean());
-	settings.reset('paste-on-copy');
-
 	// show-indicator + show-content-indicator -> indicator-display
 	const indicatorDisplay = settings.get_user_value('indicator-display');
 	const showIndicator = settings.get_user_value<'b'>('show-indicator');

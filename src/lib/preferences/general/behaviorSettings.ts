@@ -14,6 +14,12 @@ export class BehaviorSettings extends Adw.PreferencesGroup {
 			title: _('Behavior'),
 		});
 
+		const pasteOnCopy = new Adw.SwitchRow({
+			title: _('Paste on Copy'),
+			subtitle: _('Automatically paste clipboard items when selected from clipboard history'),
+		});
+		this.add(pasteOnCopy);
+
 		const rememberSearch = new Adw.SwitchRow({
 			title: _('Remember Search Query'),
 			subtitle: _('Remember the search query when closing and reopening the clipboard dialog'),
@@ -58,6 +64,7 @@ export class BehaviorSettings extends Adw.PreferencesGroup {
 
 		// Bind properties
 		const settings: CopyousSettings = prefs.getSettings();
+		settings.bind('paste-on-copy', pasteOnCopy, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('remember-search', rememberSearch, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('exclude-pinned', excludePinned, 'active', Gio.SettingsBindFlags.DEFAULT);
 		settings.bind('exclude-tagged', excludeTagged, 'active', Gio.SettingsBindFlags.DEFAULT);

@@ -144,6 +144,8 @@ export class ClipboardManager extends GObject.Object {
 	public pasteContent(content: ClipboardContent) {
 		this.copyContent(content);
 
+		if (!this.ext.settings.get_boolean('paste-on-copy')) return;
+
 		if (this.pasteSignalId >= 0) GLib.source_remove(this.pasteSignalId);
 		this.pasteSignalId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
 			this.keyboard ??= new Keyboard();
