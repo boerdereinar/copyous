@@ -50,7 +50,13 @@ export function textPreview(text: string, limit: number): string {
 	const boundaries = separators.map((separator) => text.indexOf(separator, end)).filter((index) => index >= 0);
 	const finish = boundaries.length > 0 ? Math.min(...boundaries) : text.length;
 	let direction = Pango.find_base_dir(text.slice(start, finish), -1);
-	if (direction === Pango.Direction.NEUTRAL) direction = Pango.find_base_dir(text, -1);
+	// A neutral paragraph inherits the preceding paragraph's direction. Only
+	// supply the overall fallback when the whole prefix is neutral too.
+	if (
+		direction === Pango.Direction.NEUTRAL &&
+		Pango.find_base_dir(text.slice(0, end), -1) === Pango.Direction.NEUTRAL
+	)
+		direction = Pango.find_base_dir(text, -1);
 	const mark = direction === Pango.Direction.RTL ? '\u200f' : direction === Pango.Direction.LTR ? '\u200e' : '';
 	return text.slice(0, end) + mark + '…';
 }

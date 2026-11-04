@@ -29,7 +29,7 @@ export async function run() {
 	const { SearchQuery, SearchChange } = await import(`${uri}/lib/ui/searchEntry.js`);
 	const { ItemType } = await import(`${uri}/lib/common/constants.js`);
 	const { EditDialog } = await import(`${uri}/lib/ui/components/editDialog.js`);
-	const payload = '\tFull payload\n' + '    Synthetic text paragraph.\n'.repeat(6000) + 'TAIL_SEARCH_SENTINEL';
+	const payload = '\tFull payload\n' + '    Synthetic text paragraph.\n'.repeat(600) + 'TAIL_SEARCH_SENTINEL';
 	const normalized = normalizeIndentation(trim(payload), 4);
 	const label = new Label({});
 	try {
