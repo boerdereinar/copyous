@@ -38,13 +38,13 @@ export class ContentPreview extends St.BoxLayout {
 }
 
 /**
- * Largest image edge that is passed to St as a background-image directly.
- * Anything larger gets a cached downscaled copy, since St crashes gnome-shell
- * when the texture cache fails to load an image (e.g. one that exceeds
- * GL_MAX_TEXTURE_SIZE, usually 16384px).
+ * Images up to this size are passed to St as a background-image directly. Anything larger gets a cached
+ * downscaled copy, since St crashes gnome-shell when the texture cache fails to load an image (e.g. one that
+ * exceeds GL_MAX_TEXTURE_SIZE, usually 16384px), and since the rounded image box is redrawn with cairo at the
+ * source resolution on every style change (~30ms for a 2516px wide screenshot vs ~2ms downscaled).
  */
-const MAX_PREVIEW_EDGE = 4096;
-const PREVIEW_TARGET_EDGE = 1024;
+const PREVIEW_MAX_WIDTH = 768;
+const PREVIEW_MAX_HEIGHT = 4096;
 
 /**
  * Gets the size of an image. PNG sizes are read from the header directly, since GdkPixbuf.get_file_info can go
@@ -84,22 +84,24 @@ function getImageSize(image: Gio.File): [number, number] {
  * @returns The original image if it is small enough, otherwise a cached downscaled copy
  */
 function getSafePreviewFile(ext: Extension, image: Gio.File, width: number, height: number): Gio.File {
-	if (width <= MAX_PREVIEW_EDGE && height <= MAX_PREVIEW_EDGE) return image;
+	if (width <= PREVIEW_MAX_WIDTH && height <= PREVIEW_MAX_HEIGHT) return image;
 
 	const uri = image.get_uri();
 	const key = GLib.compute_checksum_for_string(GLib.ChecksumType.MD5, uri, uri.length);
 	const previewDir = getCachePath(ext).get_child('previews');
 	if (!previewDir.query_exists(null)) previewDir.make_directory_with_parents(null);
 
-	const preview = previewDir.get_child(`${key}.png`);
+	const preview = previewDir.get_child(`${key}-w${PREVIEW_MAX_WIDTH}.png`);
 	if (!preview.query_exists(null)) {
+		// Scale to the maximum width, keeping the aspect ratio unless the image is extremely tall
+		const scale = Math.min(PREVIEW_MAX_WIDTH / width, PREVIEW_MAX_HEIGHT / height);
 		const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
 			image.get_path()!,
-			PREVIEW_TARGET_EDGE,
-			PREVIEW_TARGET_EDGE,
-			true,
+			Math.max(1, Math.round(width * scale)),
+			Math.max(1, Math.round(height * scale)),
+			false,
 		);
-		if (!pixbuf.savev(preview.get_path()!, 'png', [], [])) {
+		if (!pixbuf.savev(preview.get_path()!, 'png', ['compression'], ['1'])) {
 			throw new Error('Failed to save downscaled preview');
 		}
 	}
