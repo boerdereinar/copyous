@@ -8,7 +8,7 @@ import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensio
 import Preferences from '../../../prefs.js';
 import { DefaultColors } from '../../common/constants.js';
 import { registerClass } from '../../common/gjs.js';
-import { CopyousSettings, ThemeSettings, bind_enum } from '../../common/settings.js';
+import { CopyousSettings, Theme, ThemeSettings, bind_enum } from '../../common/settings.js';
 import { makeResettable } from '../utils.js';
 
 @registerClass({
@@ -72,11 +72,13 @@ export class ThemeCustomization extends Adw.PreferencesGroup {
 		const theme = new Adw.ComboRow({
 			title: _('Theme'),
 			subtitle: _('Set the preferred theme'),
-			model: Gtk.StringList.new([_('Default'), _('Yaru'), _('Custom')]),
+			model: Gtk.StringList.new([_('Default'), _('Yaru'), _('Custom'), _('Automatic')]),
 		});
 		this.add(theme);
 		theme.connect('notify::selected', () => {
-			const custom = theme.selected === 2;
+			const custom = theme.selected === Theme.Custom;
+			const auto = theme.selected === Theme.Auto;
+			colorScheme.sensitive = !auto;
 			colorScheme.visible = !custom;
 			customColorScheme.visible = custom;
 			bgColor.sensitive = custom;

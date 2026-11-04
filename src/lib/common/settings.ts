@@ -335,6 +335,7 @@ export const Theme = {
 	Default: 0,
 	Yaru: 1,
 	Custom: 2,
+	Auto: 3,
 } as const;
 
 export type Theme = (typeof Theme)[keyof typeof Theme];
