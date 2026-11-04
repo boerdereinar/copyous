@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 16:08+0000\n"
+"POT-Creation-Date: 2026-11-04 00:14+0000\n"
 "PO-Revision-Date: 2025-12-14 10:45+0100\n"
 "Last-Translator: Fabian Esposito <fabian.esposito@outlook.com>\n"
 "Language-Team: Italiano\n"
@@ -1303,65 +1303,76 @@ msgid "Behavior"
 msgstr "Comportamento"
 
 #: src/lib/preferences/general/behaviorSettings.ts:18
+msgid "Paste on Copy"
+msgstr "Incolla alla copia"
+
+#: src/lib/preferences/general/behaviorSettings.ts:19
+msgid ""
+"Automatically paste clipboard items when selected from clipboard history"
+msgstr ""
+"Incolla automaticamente gli elementi degli appunti quando vengono "
+"selezionati dalla cronologia degli appunti"
+
+#: src/lib/preferences/general/behaviorSettings.ts:24
 msgid "Remember Search Query"
 msgstr "Ricorda la query di ricerca"
 
-#: src/lib/preferences/general/behaviorSettings.ts:19
+#: src/lib/preferences/general/behaviorSettings.ts:25
 msgid ""
 "Remember the search query when closing and reopening the clipboard dialog"
 msgstr ""
 "Ricorda la query di ricerca quando si chiude e si riapre la finestra di "
 "dialogo degli appunti"
 
-#: src/lib/preferences/general/behaviorSettings.ts:24
+#: src/lib/preferences/general/behaviorSettings.ts:30
 msgid "Exclude Pinned Items from Main View"
 msgstr "Escludi gli elementi fissati dalla vista principale"
 
-#: src/lib/preferences/general/behaviorSettings.ts:25
+#: src/lib/preferences/general/behaviorSettings.ts:31
 msgid "Pinned items appear only when searching for pinned items"
 msgstr ""
 "Gli elementi appuntati vengono visualizzati solo durante la ricerca degli "
 "elementi appuntati"
 
-#: src/lib/preferences/general/behaviorSettings.ts:30
+#: src/lib/preferences/general/behaviorSettings.ts:36
 msgid "Exclude Tagged Items from Main View"
 msgstr "Escludi gli elementi contrassegnati dalla vista principale"
 
-#: src/lib/preferences/general/behaviorSettings.ts:31
+#: src/lib/preferences/general/behaviorSettings.ts:37
 msgid "Tagged items appear only when searching for tagged items"
 msgstr ""
 "Gli elementi contrassegnati appaiono solo quando si cercano gli elementi "
 "contrassegnati"
 
-#: src/lib/preferences/general/behaviorSettings.ts:36
+#: src/lib/preferences/general/behaviorSettings.ts:42
 msgid "Protect Pinned Items"
 msgstr "Proteggi gli elementi fissati"
 
-#: src/lib/preferences/general/behaviorSettings.ts:37
+#: src/lib/preferences/general/behaviorSettings.ts:43
 msgid "Prevents pinned clipboard items from being deleted"
 msgstr "Impedisce la cancellazione degli elementi fissati degli appunti"
 
-#: src/lib/preferences/general/behaviorSettings.ts:42
+#: src/lib/preferences/general/behaviorSettings.ts:48
 msgid "Protect Tagged Items"
 msgstr "Proteggi gli elementi contrassegnati"
 
-#: src/lib/preferences/general/behaviorSettings.ts:43
+#: src/lib/preferences/general/behaviorSettings.ts:49
 msgid "Prevents tagged clipboard items from being deleted"
 msgstr "Impedisce la cancellazione degli elementi contrassegnati degli appunti"
 
-#: src/lib/preferences/general/behaviorSettings.ts:48
+#: src/lib/preferences/general/behaviorSettings.ts:54
 msgid "Sync Primary Clipboard"
 msgstr "Sincronizza gli appunti primari"
 
-#: src/lib/preferences/general/behaviorSettings.ts:49
+#: src/lib/preferences/general/behaviorSettings.ts:55
 msgid "Also copy clipboard items to the primary clipboard"
 msgstr "Copia anche gli elementi degli appunti nella clipboard primaria"
 
-#: src/lib/preferences/general/behaviorSettings.ts:54
+#: src/lib/preferences/general/behaviorSettings.ts:60
 msgid "Update Date on Copy"
 msgstr "Aggiorna la data alla copia"
 
-#: src/lib/preferences/general/behaviorSettings.ts:55
+#: src/lib/preferences/general/behaviorSettings.ts:61
 msgid ""
 "Update the copied date of clipboard items when selected from clipboard "
 "history"
@@ -1629,23 +1640,23 @@ msgstr "Apri menu"
 msgid "Middle Click Action"
 msgstr "Azione clic centrale"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:67
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:73
 msgid "Swap Copy Shortcut"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:68
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:74
 msgid "Swap copy and paste shortcuts"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:72
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:79
 msgid "Paste Item"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:74
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:81
 msgid "Copy Item"
 msgstr "Copia elemento"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:76
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:83
 msgid "Activate Default Action"
 msgstr "Attiva azione predefinita"
 
@@ -1916,17 +1927,8 @@ msgstr "Personalizzazione"
 msgid "Shortcuts"
 msgstr "Scorciatoie"
 
-#~ msgid ""
-#~ "Automatically paste clipboard items when selected from clipboard history"
-#~ msgstr ""
-#~ "Incolla automaticamente gli elementi degli appunti quando vengono "
-#~ "selezionati dalla cronologia degli appunti"
-
 #~ msgid "Failed to load database"
 #~ msgstr "Impossibile caricare il database"
-
-#~ msgid "Paste on Copy"
-#~ msgstr "Incolla alla copia"
 
 #~ msgid "Set the color scheme of the custom theme"
 #~ msgstr "Imposta lo schema di colori del tema personalizzato"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 16:08+0000\n"
+"POT-Creation-Date: 2026-11-04 00:14+0000\n"
 "PO-Revision-Date: 2025-11-30 20:29+0700\n"
 "Last-Translator: Victor <firephantom303@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1288,61 +1288,70 @@ msgid "Behavior"
 msgstr "Поведение"
 
 #: src/lib/preferences/general/behaviorSettings.ts:18
+msgid "Paste on Copy"
+msgstr "Вставлять при копировании"
+
+#: src/lib/preferences/general/behaviorSettings.ts:19
+msgid ""
+"Automatically paste clipboard items when selected from clipboard history"
+msgstr "Автоматически вставлять элементы буфера обмена при выборе из истории"
+
+#: src/lib/preferences/general/behaviorSettings.ts:24
 msgid "Remember Search Query"
 msgstr "Запоминать поисковый запрос"
 
-#: src/lib/preferences/general/behaviorSettings.ts:19
+#: src/lib/preferences/general/behaviorSettings.ts:25
 msgid ""
 "Remember the search query when closing and reopening the clipboard dialog"
 msgstr ""
 "Запоминать поисковый запрос при закрытии и повторном открытии диалогового "
 "окна буфера обмена"
 
-#: src/lib/preferences/general/behaviorSettings.ts:24
+#: src/lib/preferences/general/behaviorSettings.ts:30
 msgid "Exclude Pinned Items from Main View"
 msgstr "Исключать закреплённые элементы из основного вида"
 
-#: src/lib/preferences/general/behaviorSettings.ts:25
+#: src/lib/preferences/general/behaviorSettings.ts:31
 msgid "Pinned items appear only when searching for pinned items"
 msgstr "Закреплённые элементы отображаются только при поиске по закреплённым"
 
-#: src/lib/preferences/general/behaviorSettings.ts:30
+#: src/lib/preferences/general/behaviorSettings.ts:36
 msgid "Exclude Tagged Items from Main View"
 msgstr "Исключать помеченные элементы из основного вида"
 
-#: src/lib/preferences/general/behaviorSettings.ts:31
+#: src/lib/preferences/general/behaviorSettings.ts:37
 msgid "Tagged items appear only when searching for tagged items"
 msgstr "Помеченные элементы отображаются только при поиске по меткам"
 
-#: src/lib/preferences/general/behaviorSettings.ts:36
+#: src/lib/preferences/general/behaviorSettings.ts:42
 msgid "Protect Pinned Items"
 msgstr "Защищать закреплённые элементы"
 
-#: src/lib/preferences/general/behaviorSettings.ts:37
+#: src/lib/preferences/general/behaviorSettings.ts:43
 msgid "Prevents pinned clipboard items from being deleted"
 msgstr "Не позволяет удалять закреплённые элементы буфера обмена"
 
-#: src/lib/preferences/general/behaviorSettings.ts:42
+#: src/lib/preferences/general/behaviorSettings.ts:48
 msgid "Protect Tagged Items"
 msgstr "Защищать помеченные элементы"
 
-#: src/lib/preferences/general/behaviorSettings.ts:43
+#: src/lib/preferences/general/behaviorSettings.ts:49
 msgid "Prevents tagged clipboard items from being deleted"
 msgstr "Не позволяет удалять помеченные элементы буфера обмена"
 
-#: src/lib/preferences/general/behaviorSettings.ts:48
+#: src/lib/preferences/general/behaviorSettings.ts:54
 msgid "Sync Primary Clipboard"
 msgstr "Синхронизировать основной буфер обмена"
 
-#: src/lib/preferences/general/behaviorSettings.ts:49
+#: src/lib/preferences/general/behaviorSettings.ts:55
 msgid "Also copy clipboard items to the primary clipboard"
 msgstr "Также копировать элементы в основной буфер обмена"
 
-#: src/lib/preferences/general/behaviorSettings.ts:54
+#: src/lib/preferences/general/behaviorSettings.ts:60
 msgid "Update Date on Copy"
 msgstr "Обновлять дату при копировании"
 
-#: src/lib/preferences/general/behaviorSettings.ts:55
+#: src/lib/preferences/general/behaviorSettings.ts:61
 msgid ""
 "Update the copied date of clipboard items when selected from clipboard "
 "history"
@@ -1606,23 +1615,23 @@ msgstr "Открыть меню"
 msgid "Middle Click Action"
 msgstr "Действие средней кнопки мыши"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:67
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:73
 msgid "Swap Copy Shortcut"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:68
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:74
 msgid "Swap copy and paste shortcuts"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:72
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:79
 msgid "Paste Item"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:74
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:81
 msgid "Copy Item"
 msgstr "Копировать элемент"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:76
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:83
 msgid "Activate Default Action"
 msgstr "Активировать действие по умолчанию"
 
@@ -1897,16 +1906,8 @@ msgstr "Настройка вида"
 msgid "Shortcuts"
 msgstr "Сочетания клавиш"
 
-#~ msgid ""
-#~ "Automatically paste clipboard items when selected from clipboard history"
-#~ msgstr ""
-#~ "Автоматически вставлять элементы буфера обмена при выборе из истории"
-
 #~ msgid "Failed to load database"
 #~ msgstr "Не удалось загрузить базу данных"
-
-#~ msgid "Paste on Copy"
-#~ msgstr "Вставлять при копировании"
 
 #~ msgid "Show Indicator"
 #~ msgstr "Показывать индикатор"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 16:08+0000\n"
+"POT-Creation-Date: 2026-11-04 00:14+0000\n"
 "PO-Revision-Date: 2025-12-01 18:02-0300\n"
 "Last-Translator: Murilo Leal <murilormleal@outlook.com>\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -1293,61 +1293,72 @@ msgid "Behavior"
 msgstr "Comportamento"
 
 #: src/lib/preferences/general/behaviorSettings.ts:18
+msgid "Paste on Copy"
+msgstr "Colar ao Copiar"
+
+#: src/lib/preferences/general/behaviorSettings.ts:19
+msgid ""
+"Automatically paste clipboard items when selected from clipboard history"
+msgstr ""
+"Colar automaticamente itens da área de transferência ao selecioná-los do "
+"histórico"
+
+#: src/lib/preferences/general/behaviorSettings.ts:24
 msgid "Remember Search Query"
 msgstr "Lembrar da consulta de pesquisa"
 
-#: src/lib/preferences/general/behaviorSettings.ts:19
+#: src/lib/preferences/general/behaviorSettings.ts:25
 msgid ""
 "Remember the search query when closing and reopening the clipboard dialog"
 msgstr ""
 "Lembrar a consulta de pesquisa ao fechar e reabrir o diálogo da área de "
 "transferência"
 
-#: src/lib/preferences/general/behaviorSettings.ts:24
+#: src/lib/preferences/general/behaviorSettings.ts:30
 msgid "Exclude Pinned Items from Main View"
 msgstr "Excluir itens marcados como favoritos da visualização principal"
 
-#: src/lib/preferences/general/behaviorSettings.ts:25
+#: src/lib/preferences/general/behaviorSettings.ts:31
 msgid "Pinned items appear only when searching for pinned items"
 msgstr "Itens fixados aparecem apenas ao pesquisar por itens fixados"
 
-#: src/lib/preferences/general/behaviorSettings.ts:30
+#: src/lib/preferences/general/behaviorSettings.ts:36
 msgid "Exclude Tagged Items from Main View"
 msgstr "Excluir itens marcados como favoritos da visualização principal"
 
-#: src/lib/preferences/general/behaviorSettings.ts:31
+#: src/lib/preferences/general/behaviorSettings.ts:37
 msgid "Tagged items appear only when searching for tagged items"
 msgstr "Itens marcados aparecem apenas ao pesquisar por itens marcados"
 
-#: src/lib/preferences/general/behaviorSettings.ts:36
+#: src/lib/preferences/general/behaviorSettings.ts:42
 msgid "Protect Pinned Items"
 msgstr "Proteger itens marcados como favoritos"
 
-#: src/lib/preferences/general/behaviorSettings.ts:37
+#: src/lib/preferences/general/behaviorSettings.ts:43
 msgid "Prevents pinned clipboard items from being deleted"
 msgstr "Impede que itens marcados como favoritos sejam excluídos"
 
-#: src/lib/preferences/general/behaviorSettings.ts:42
+#: src/lib/preferences/general/behaviorSettings.ts:48
 msgid "Protect Tagged Items"
 msgstr "Proteger itens marcados como favoritos"
 
-#: src/lib/preferences/general/behaviorSettings.ts:43
+#: src/lib/preferences/general/behaviorSettings.ts:49
 msgid "Prevents tagged clipboard items from being deleted"
 msgstr "Impede que itens marcados como favoritos sejam excluídos"
 
-#: src/lib/preferences/general/behaviorSettings.ts:48
+#: src/lib/preferences/general/behaviorSettings.ts:54
 msgid "Sync Primary Clipboard"
 msgstr "Sincronizar "
 
-#: src/lib/preferences/general/behaviorSettings.ts:49
+#: src/lib/preferences/general/behaviorSettings.ts:55
 msgid "Also copy clipboard items to the primary clipboard"
 msgstr "Também copiar itens copiados para a área de transferência primária"
 
-#: src/lib/preferences/general/behaviorSettings.ts:54
+#: src/lib/preferences/general/behaviorSettings.ts:60
 msgid "Update Date on Copy"
 msgstr "Atualizar Data ao Copiar"
 
-#: src/lib/preferences/general/behaviorSettings.ts:55
+#: src/lib/preferences/general/behaviorSettings.ts:61
 msgid ""
 "Update the copied date of clipboard items when selected from clipboard "
 "history"
@@ -1613,23 +1624,23 @@ msgstr "Abrir Menu"
 msgid "Middle Click Action"
 msgstr "Ação do clique do meio"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:67
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:73
 msgid "Swap Copy Shortcut"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:68
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:74
 msgid "Swap copy and paste shortcuts"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:72
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:79
 msgid "Paste Item"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:74
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:81
 msgid "Copy Item"
 msgstr "Copiar Item"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:76
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:83
 msgid "Activate Default Action"
 msgstr "Ativar ação padrão"
 
@@ -1898,17 +1909,8 @@ msgstr "Customização"
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#~ msgid ""
-#~ "Automatically paste clipboard items when selected from clipboard history"
-#~ msgstr ""
-#~ "Colar automaticamente itens da área de transferência ao selecioná-los do "
-#~ "histórico"
-
 #~ msgid "Failed to load database"
 #~ msgstr "Falha ao carregar banco de dados"
-
-#~ msgid "Paste on Copy"
-#~ msgstr "Colar ao Copiar"
 
 #~ msgid "Set the color scheme of the custom theme"
 #~ msgstr "Seleciona o esquema de cor do tema customizado"

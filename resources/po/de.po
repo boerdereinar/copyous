@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 16:08+0000\n"
+"POT-Creation-Date: 2026-11-04 00:14+0000\n"
 "PO-Revision-Date: 2026-03-26 22:19+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
@@ -1306,65 +1306,76 @@ msgid "Behavior"
 msgstr "Verhalten"
 
 #: src/lib/preferences/general/behaviorSettings.ts:18
+msgid "Paste on Copy"
+msgstr "Einfügen beim Kopieren"
+
+#: src/lib/preferences/general/behaviorSettings.ts:19
+msgid ""
+"Automatically paste clipboard items when selected from clipboard history"
+msgstr ""
+"Elemente aus der Zwischenablage automatisch einfügen, wenn sie aus dem "
+"Zwischenablageverlauf ausgewählt werden"
+
+#: src/lib/preferences/general/behaviorSettings.ts:24
 msgid "Remember Search Query"
 msgstr "Suchanfrage merken"
 
-#: src/lib/preferences/general/behaviorSettings.ts:19
+#: src/lib/preferences/general/behaviorSettings.ts:25
 msgid ""
 "Remember the search query when closing and reopening the clipboard dialog"
 msgstr ""
 "Die Suchanfrage beim Schließen und erneuten Öffnen des Zwischenablage-"
 "Dialogfelds merken"
 
-#: src/lib/preferences/general/behaviorSettings.ts:24
+#: src/lib/preferences/general/behaviorSettings.ts:30
 msgid "Exclude Pinned Items from Main View"
 msgstr "Angeheftete Elemente aus der Hauptansicht ausschließen"
 
-#: src/lib/preferences/general/behaviorSettings.ts:25
+#: src/lib/preferences/general/behaviorSettings.ts:31
 msgid "Pinned items appear only when searching for pinned items"
 msgstr ""
 "Angeheftete Elemente werden nur angezeigt, wenn nach angehefteten Elementen "
 "gesucht wird"
 
-#: src/lib/preferences/general/behaviorSettings.ts:30
+#: src/lib/preferences/general/behaviorSettings.ts:36
 msgid "Exclude Tagged Items from Main View"
 msgstr "Markierte Elemente aus der Hauptansicht ausschließen"
 
-#: src/lib/preferences/general/behaviorSettings.ts:31
+#: src/lib/preferences/general/behaviorSettings.ts:37
 msgid "Tagged items appear only when searching for tagged items"
 msgstr ""
 "Getaggte Elemente werden nur angezeigt, wenn nach getaggten Elementen "
 "gesucht wird"
 
-#: src/lib/preferences/general/behaviorSettings.ts:36
+#: src/lib/preferences/general/behaviorSettings.ts:42
 msgid "Protect Pinned Items"
 msgstr "Angeheftete Elemente schützen"
 
-#: src/lib/preferences/general/behaviorSettings.ts:37
+#: src/lib/preferences/general/behaviorSettings.ts:43
 msgid "Prevents pinned clipboard items from being deleted"
 msgstr "Verhindert das Löschen von angehefteten Zwischenablage-Elementen"
 
-#: src/lib/preferences/general/behaviorSettings.ts:42
+#: src/lib/preferences/general/behaviorSettings.ts:48
 msgid "Protect Tagged Items"
 msgstr "Markierte Elemente schützen"
 
-#: src/lib/preferences/general/behaviorSettings.ts:43
+#: src/lib/preferences/general/behaviorSettings.ts:49
 msgid "Prevents tagged clipboard items from being deleted"
 msgstr "Verhindert das Löschen von markierten Zwischenablage-Elementen"
 
-#: src/lib/preferences/general/behaviorSettings.ts:48
+#: src/lib/preferences/general/behaviorSettings.ts:54
 msgid "Sync Primary Clipboard"
 msgstr "Primäre Zwischenablage synchronisieren"
 
-#: src/lib/preferences/general/behaviorSettings.ts:49
+#: src/lib/preferences/general/behaviorSettings.ts:55
 msgid "Also copy clipboard items to the primary clipboard"
 msgstr "Auch Zwischenablage-Elemente in die primäre Zwischenablage kopieren"
 
-#: src/lib/preferences/general/behaviorSettings.ts:54
+#: src/lib/preferences/general/behaviorSettings.ts:60
 msgid "Update Date on Copy"
 msgstr "Aktualisiere Datum beim Kopieren"
 
-#: src/lib/preferences/general/behaviorSettings.ts:55
+#: src/lib/preferences/general/behaviorSettings.ts:61
 msgid ""
 "Update the copied date of clipboard items when selected from clipboard "
 "history"
@@ -1636,23 +1647,23 @@ msgstr "Menü öffnen"
 msgid "Middle Click Action"
 msgstr "Mittlere Maustaste"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:67
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:73
 msgid "Swap Copy Shortcut"
 msgstr "Tastenkombinationen für „Kopieren“ vertauschen"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:68
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:74
 msgid "Swap copy and paste shortcuts"
 msgstr "Tastenkombinationen für „Kopieren“ und „Einfügen“ vertauschen"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:72
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:79
 msgid "Paste Item"
 msgstr "Element einfügen"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:74
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:81
 msgid "Copy Item"
 msgstr "Element kopieren"
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:76
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:83
 msgid "Activate Default Action"
 msgstr "Standardaktion aktivieren"
 
@@ -1921,17 +1932,8 @@ msgstr "Anpassung"
 msgid "Shortcuts"
 msgstr "Tastenkürzel"
 
-#~ msgid ""
-#~ "Automatically paste clipboard items when selected from clipboard history"
-#~ msgstr ""
-#~ "Elemente aus der Zwischenablage automatisch einfügen, wenn sie aus dem "
-#~ "Zwischenablageverlauf ausgewählt werden"
-
 #~ msgid "Failed to load database"
 #~ msgstr "Datenbank konnte nicht geladen werden"
-
-#~ msgid "Paste on Copy"
-#~ msgstr "Einfügen beim Kopieren"
 
 #~ msgid "Set the color scheme of the custom theme"
 #~ msgstr "Legen Sie das Farbschema des benutzerdefinierten Designs fest"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 16:08+0000\n"
+"POT-Creation-Date: 2026-11-04 00:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1266,59 +1266,68 @@ msgid "Behavior"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:18
-msgid "Remember Search Query"
+msgid "Paste on Copy"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:19
 msgid ""
-"Remember the search query when closing and reopening the clipboard dialog"
+"Automatically paste clipboard items when selected from clipboard history"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:24
-msgid "Exclude Pinned Items from Main View"
+msgid "Remember Search Query"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:25
-msgid "Pinned items appear only when searching for pinned items"
+msgid ""
+"Remember the search query when closing and reopening the clipboard dialog"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:30
-msgid "Exclude Tagged Items from Main View"
+msgid "Exclude Pinned Items from Main View"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:31
-msgid "Tagged items appear only when searching for tagged items"
+msgid "Pinned items appear only when searching for pinned items"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:36
-msgid "Protect Pinned Items"
+msgid "Exclude Tagged Items from Main View"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:37
-msgid "Prevents pinned clipboard items from being deleted"
+msgid "Tagged items appear only when searching for tagged items"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:42
-msgid "Protect Tagged Items"
+msgid "Protect Pinned Items"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:43
-msgid "Prevents tagged clipboard items from being deleted"
+msgid "Prevents pinned clipboard items from being deleted"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:48
-msgid "Sync Primary Clipboard"
+msgid "Protect Tagged Items"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:49
-msgid "Also copy clipboard items to the primary clipboard"
+msgid "Prevents tagged clipboard items from being deleted"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:54
-msgid "Update Date on Copy"
+msgid "Sync Primary Clipboard"
 msgstr ""
 
 #: src/lib/preferences/general/behaviorSettings.ts:55
+msgid "Also copy clipboard items to the primary clipboard"
+msgstr ""
+
+#: src/lib/preferences/general/behaviorSettings.ts:60
+msgid "Update Date on Copy"
+msgstr ""
+
+#: src/lib/preferences/general/behaviorSettings.ts:61
 msgid ""
 "Update the copied date of clipboard items when selected from clipboard "
 "history"
@@ -1577,23 +1586,23 @@ msgstr ""
 msgid "Middle Click Action"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:67
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:73
 msgid "Swap Copy Shortcut"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:68
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:74
 msgid "Swap copy and paste shortcuts"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:72
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:79
 msgid "Paste Item"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:74
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:81
 msgid "Copy Item"
 msgstr ""
 
-#: src/lib/preferences/shortcuts/itemShortcuts.ts:76
+#: src/lib/preferences/shortcuts/itemShortcuts.ts:83
 msgid "Activate Default Action"
 msgstr ""
 
