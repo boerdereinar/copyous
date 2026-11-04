@@ -38,17 +38,31 @@ export class TextItem extends ClipboardItem {
 		this._content.add_child(this._text);
 
 		this.textItemSettings.connectObject('changed', this.updateTextInfo.bind(this), this);
-		this.ext.settings.connectObject('changed::tab-width', this.updateText.bind(this), this._text);
+		this.ext.settings.connectObject(
+			'changed::tab-width',
+			this.updateText.bind(this),
+			'changed::item-width',
+			this.updateText.bind(this),
+			'changed::item-height',
+			this.updateText.bind(this),
+			this._text,
+		);
 
+		this.updateText();
 		entry.bind_property('content', this._text, 'label', GObject.BindingFlags.SYNC_CREATE);
 		entry.connectObject('notify::content', this.updateTextInfo.bind(this), this);
 
-		this.updateText();
 		this.updateTextInfo();
 	}
 
 	private updateText() {
 		this._text.tabWidth = this.ext.settings.get_int('tab-width');
+		// The card cannot scroll its text. Keep generous space beyond the visible
+		// area, growing with both supported card dimensions, without laying out
+		// arbitrarily large clipboard contents whenever Clutter's cache is cold.
+		const width = this.ext.settings.get_int('item-width');
+		const height = this.ext.settings.get_int('item-height');
+		this._text.setPreviewLimit(Math.max(4096, Math.ceil((width * height) / 16)));
 	}
 
 	private updateTextInfo() {
