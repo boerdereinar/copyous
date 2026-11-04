@@ -47,6 +47,35 @@ const MAX_PREVIEW_EDGE = 4096;
 const PREVIEW_TARGET_EDGE = 1024;
 
 /**
+ * Gets the size of an image. PNG sizes are read from the header directly, since GdkPixbuf.get_file_info can go
+ * through a sandboxed glycin loader, which takes 100-150ms for a large screenshot.
+ * @param image The image
+ * @returns The width and height of the image
+ */
+function getImageSize(image: Gio.File): [number, number] {
+	try {
+		const stream = image.read(null);
+		const header = stream.read_bytes(24, null).toArray();
+		stream.close(null);
+
+		const signature = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+		const ihdr = String.fromCharCode(...header.slice(12, 16));
+		if (header.length === 24 && signature.every((b, i) => header[i] === b) && ihdr === 'IHDR') {
+			const view = new DataView(header.buffer, header.byteOffset, header.byteLength);
+			const width = view.getUint32(16);
+			const height = view.getUint32(20);
+			if (width > 0 && height > 0) return [width, height];
+		}
+	} catch {
+		// Fall back to GdkPixbuf
+	}
+
+	const [format, width, height] = GdkPixbuf.Pixbuf.get_file_info(image.get_path()!);
+	if (format === null) throw new Error('Unknown image format');
+	return [width, height];
+}
+
+/**
  * Gets a file that is safe to use as a preview background-image
  * @param ext The extension
  * @param image The original image
@@ -100,7 +129,7 @@ export class ImagePreview extends ContentPreview {
 
 		if (image.query_exists(null)) {
 			try {
-				const [, width, height] = GdkPixbuf.Pixbuf.get_file_info(image.get_path()!);
+				const [width, height] = getImageSize(image);
 				this._ratio = height / width;
 
 				const previewFile = getSafePreviewFile(ext, image, width, height);
