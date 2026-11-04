@@ -287,6 +287,14 @@ export function getCachePath(ext: Extension | ExtensionPreferences): Gio.File {
 	return Gio.file_new_build_filenamev([GLib.get_user_cache_dir(), ext.uuid]);
 }
 
+export const PREVIEW_MAX_WIDTH = 768;
+
+export function getImagePreviewPath(ext: Extension, image: Gio.File): Gio.File {
+	const uri = image.get_uri();
+	const key = GLib.compute_checksum_for_string(GLib.ChecksumType.MD5, uri, uri.length);
+	return getCachePath(ext).get_child('previews').get_child(`${key}-w${PREVIEW_MAX_WIDTH}.png`);
+}
+
 export function getDataPath(ext: Extension | ExtensionPreferences): Gio.File {
 	return Gio.file_new_build_filenamev([GLib.get_user_data_dir(), ext.uuid]);
 }

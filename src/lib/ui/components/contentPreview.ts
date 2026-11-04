@@ -8,7 +8,7 @@ import St from 'gi://St';
 import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
 import type CopyousExtension from '../../../extension.js';
-import { ActiveState, getCachePath } from '../../common/constants.js';
+import { ActiveState, PREVIEW_MAX_WIDTH, getImagePreviewPath } from '../../common/constants.js';
 import { enumParamSpec, flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon, loadIcon } from '../../common/icons.js';
 import { BackgroundSize, FilePreviewType } from '../../common/settings.js';
@@ -43,7 +43,6 @@ export class ContentPreview extends St.BoxLayout {
  * exceeds GL_MAX_TEXTURE_SIZE, usually 16384px), and since the rounded image box is redrawn with cairo at the
  * source resolution on every style change (~30ms for a 2516px wide screenshot vs ~2ms downscaled).
  */
-const PREVIEW_MAX_WIDTH = 768;
 const PREVIEW_MAX_HEIGHT = 4096;
 
 /**
@@ -86,9 +85,7 @@ function getImageSize(image: Gio.File): [number, number] {
 function getPreviewFile(ext: Extension, image: Gio.File, width: number, height: number): [Gio.File, boolean] {
 	if (width <= PREVIEW_MAX_WIDTH && height <= PREVIEW_MAX_HEIGHT) return [image, true];
 
-	const uri = image.get_uri();
-	const key = GLib.compute_checksum_for_string(GLib.ChecksumType.MD5, uri, uri.length);
-	const preview = getCachePath(ext).get_child('previews').get_child(`${key}-w${PREVIEW_MAX_WIDTH}.png`);
+	const preview = getImagePreviewPath(ext, image);
 	return [preview, preview.query_exists(null)];
 }
 
