@@ -426,6 +426,9 @@ export class ClipboardDialog extends St.Widget {
 		this._updateCursor = false;
 		this._nextCursor = this._cursor;
 
+		// Capture whether the focused application is a terminal
+		this.ext.clipboardManager?.savePasteTarget();
+
 		const grab = Main.pushModal(this, { actionMode: Shell.ActionMode.SYSTEM_MODAL }) as Clutter.Grab;
 		// GNOME 50 (Mutter 18) removed get_seat_state()/GrabState in favor of is_revoked()
 		const grabFailed =

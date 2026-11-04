@@ -3,6 +3,7 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Meta from 'gi://Meta';
+import Shell from 'gi://Shell';
 import St from 'gi://St';
 
 import type CopyousExtension from '../../extension.js';
@@ -52,6 +53,15 @@ function contentChecksum(content: ClipboardContent): string | null {
 	}
 }
 
+function isTerminalWindow(window: Meta.Window | null): boolean {
+	if (!window) return false;
+
+	const app = Shell.WindowTracker.get_default().get_window_app(window);
+	const info = app?.get_app_info();
+	const categories = info?.get_string('Categories') ?? '';
+	return categories.split(';').includes('TerminalEmulator');
+}
+
 const ClipboardManagerSignals = {
 	clipboard: {
 		param_types: [ClipboardEntry.$gtype as GObject.GType<ClipboardEntry>],
@@ -85,6 +95,9 @@ export class ClipboardManager extends GObject.Object {
 	private pasteSignalId: number = -1;
 
 	private prevClipboard: [ContentType, string] | null = null;
+
+	/** Whether the paste target captured when the dialog opened is a terminal. */
+	private savedTerminal: boolean | null = null;
 
 	constructor(
 		private ext: CopyousExtension,
@@ -141,7 +154,16 @@ export class ClipboardManager extends GObject.Object {
 		}
 	}
 
+	public savePasteTarget() {
+		this.savedTerminal =
+			isTerminalWindow(global.display.focus_window) ||
+			this.keyboard?.purpose === Clutter.InputContentPurpose.TERMINAL;
+	}
+
 	public pasteContent(content: ClipboardContent) {
+		const terminal = this.savedTerminal;
+		this.savedTerminal = null;
+
 		this.copyContent(content);
 
 		if (!this.ext.settings.get_boolean('paste-on-copy')) return;
@@ -151,7 +173,12 @@ export class ClipboardManager extends GObject.Object {
 			this.keyboard ??= new Keyboard();
 
 			// https://github.com/Tudmotu/gnome-shell-extension-clipboard-indicator/blob/89c57703641a9d5d15f899f6e780174641911d95/extension.js#L1094
-			if (this.keyboard.purpose === Clutter.InputContentPurpose.TERMINAL) {
+			if (terminal ?? this.keyboard.purpose === Clutter.InputContentPurpose.TERMINAL) {
+				if (content.type === ContentType.Image) {
+					this.pasteSignalId = -1;
+					return GLib.SOURCE_REMOVE;
+				}
+
 				this.keyboard.press(Clutter.KEY_Control_L);
 				this.keyboard.press(Clutter.KEY_Shift_L);
 				this.keyboard.press(Clutter.KEY_Insert);
