@@ -3,7 +3,7 @@ import type Gda from 'gi://Gda';
 import Gio from 'gi://Gio';
 
 import type CopyousExtension from '../../extension.js';
-import { ItemType, getDefaultDatabaseFile } from '../common/constants.js';
+import { ItemType, getDefaultDatabaseFile, getImagePreviewPath } from '../common/constants.js';
 import { ClipboardHistory, DatabaseBackend } from '../common/settings.js';
 import { getLinkImagePath } from '../misc/link.js';
 import { ClipboardEntry, Database, Metadata } from './database.js';
@@ -271,9 +271,13 @@ export class ClipboardEntryTracker {
 
 	private async delete(entry: ClipboardEntry) {
 		if (entry.type === ItemType.Image) {
-			// Delete image
+			// Delete image and its preview
 			try {
 				const file = Gio.File.new_for_uri(entry.content);
+				const preview = getImagePreviewPath(this.ext, file);
+				if (preview.query_exists(null)) {
+					preview.delete(null);
+				}
 				if (file.query_exists(null)) {
 					file.delete(null);
 				}
