@@ -250,6 +250,7 @@ class ClipboardDialogFooter extends St.BoxLayout {
 	Signals: {
 		'copy': { param_types: [GObject.TYPE_JSOBJECT] },
 		'paste': { param_types: [GObject.TYPE_JSOBJECT] },
+		'modal-released': {},
 		'clear-history': { param_types: [GObject.TYPE_INT] },
 	},
 })
@@ -532,6 +533,7 @@ export class ClipboardDialog extends St.Widget {
 				this._closing = false;
 				this.hide();
 				global.compositor.enable_unredirect();
+				this.emit('modal-released');
 			},
 		});
 	}
