@@ -512,7 +512,6 @@ export class SearchEntry extends St.Entry {
 		const previous = this._prevSearch;
 		if (previous && query.equals(previous)) return;
 
-		this.ext.logger.log('search');
 		this._prevSearch = query;
 		this.emit('search', query);
 	}
