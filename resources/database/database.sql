@@ -10,6 +10,7 @@
 - Image
     - Image
 	- Image above size limit
+	- Screenshot
     - Image that doesn't exist
 - File
     - Text file
@@ -140,6 +141,7 @@ file://{DIST_PATH}/metadata.json', 0, current_timestamp),
 	('Image', 'file://{DIST_PATH}/database/non-existent.png', 0, current_timestamp),
 	('Image', 'file://{DIST_PATH}/database/large-image.svg', 0, current_timestamp),
 	('Image', 'file://{DIST_PATH}/database/image.svg', 0, current_timestamp),
+	('Image', 'file://{DIST_PATH}/database/screenshot.png', 0, current_timestamp),
 
 -- Code
 	('Code', 'chr(round(ord(min(str(type(tuple))))*len(str(not()))*((ord(min(str(not())))+len(str(filter)))*sum(range(len(str(not(not())))))+sum(range(len(str(not(not())))))/(ord(min(str(not())))+len(str(filter))))))', 0, current_timestamp),
