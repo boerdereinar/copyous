@@ -76,36 +76,80 @@ function getImageSize(image: Gio.File): [number, number] {
 }
 
 /**
- * Gets a file that is safe to use as a preview background-image
+ * Gets the file to use as a preview background-image
  * @param ext The extension
  * @param image The original image
  * @param width The width of the original image
  * @param height The height of the original image
- * @returns The original image if it is small enough, otherwise a cached downscaled copy
+ * @returns The original image if it is small enough, otherwise the cached downscaled copy, and whether it exists
  */
-function getSafePreviewFile(ext: Extension, image: Gio.File, width: number, height: number): Gio.File {
-	if (width <= PREVIEW_MAX_WIDTH && height <= PREVIEW_MAX_HEIGHT) return image;
+function getPreviewFile(ext: Extension, image: Gio.File, width: number, height: number): [Gio.File, boolean] {
+	if (width <= PREVIEW_MAX_WIDTH && height <= PREVIEW_MAX_HEIGHT) return [image, true];
 
 	const uri = image.get_uri();
 	const key = GLib.compute_checksum_for_string(GLib.ChecksumType.MD5, uri, uri.length);
-	const previewDir = getCachePath(ext).get_child('previews');
+	const preview = getCachePath(ext).get_child('previews').get_child(`${key}-w${PREVIEW_MAX_WIDTH}.png`);
+	return [preview, preview.query_exists(null)];
+}
+
+/**
+ * Creates a downscaled copy of an image. Decoding and encoding run in worker threads, since a large
+ * screenshot would block the shell for several hundred milliseconds.
+ * @param image The original image
+ * @param preview The file to save the downscaled copy to
+ * @param width The width of the original image
+ * @param height The height of the original image
+ * @param cancellable The cancellable
+ */
+async function createPreviewFile(
+	image: Gio.File,
+	preview: Gio.File,
+	width: number,
+	height: number,
+	cancellable: Gio.Cancellable,
+): Promise<void> {
+	const previewDir = preview.get_parent()!;
 	if (!previewDir.query_exists(null)) previewDir.make_directory_with_parents(null);
 
-	const preview = previewDir.get_child(`${key}-w${PREVIEW_MAX_WIDTH}.png`);
-	if (!preview.query_exists(null)) {
-		// Scale to the maximum width, keeping the aspect ratio unless the image is extremely tall
-		const scale = Math.min(PREVIEW_MAX_WIDTH / width, PREVIEW_MAX_HEIGHT / height);
-		const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-			image.get_path()!,
+	// Scale to the maximum width, keeping the aspect ratio unless the image is extremely tall
+	const scale = Math.min(PREVIEW_MAX_WIDTH / width, PREVIEW_MAX_HEIGHT / height);
+	const input = await image.read_async(GLib.PRIORITY_DEFAULT, cancellable);
+	const pixbuf = await new Promise<GdkPixbuf.Pixbuf>((resolve, reject: (reason: Error) => void) => {
+		GdkPixbuf.Pixbuf.new_from_stream_at_scale_async(
+			input,
 			Math.max(1, Math.round(width * scale)),
 			Math.max(1, Math.round(height * scale)),
 			false,
+			cancellable,
+			(_source, result) => {
+				try {
+					resolve(GdkPixbuf.Pixbuf.new_from_stream_finish(result));
+				} catch (error) {
+					reject(error as Error);
+				}
+			},
 		);
-		if (!pixbuf.savev(preview.get_path()!, 'png', ['compression'], ['1'])) {
-			throw new Error('Failed to save downscaled preview');
-		}
-	}
-	return preview;
+	}).finally(() => input.close(null));
+
+	// replace() writes to a temporary file that is renamed on close, so a partial preview is never used
+	const output = await preview.replace_async(
+		null,
+		false,
+		Gio.FileCreateFlags.REPLACE_DESTINATION,
+		GLib.PRIORITY_DEFAULT,
+		cancellable,
+	);
+	await new Promise<void>((resolve, reject: (reason: Error) => void) => {
+		pixbuf.save_to_streamv_async(output, 'png', ['compression'], ['1'], cancellable, (_source, result) => {
+			try {
+				GdkPixbuf.Pixbuf.save_to_stream_finish(result);
+				resolve();
+			} catch (error) {
+				reject(error as Error);
+			}
+		});
+	});
+	await output.close_async(GLib.PRIORITY_DEFAULT, null);
 }
 
 @registerClass({
@@ -123,8 +167,9 @@ export class ImagePreview extends ContentPreview {
 	private _backgroundSize: BackgroundSize = BackgroundSize.Cover;
 	private readonly _ratio: number | null;
 	private readonly _effect?: Clutter.BrightnessContrastEffect;
+	private readonly _cancellable: Gio.Cancellable = new Gio.Cancellable();
 
-	constructor(ext: Extension, image: Gio.File) {
+	constructor(ext: CopyousExtension, image: Gio.File) {
 		super();
 
 		this.add_style_class_name('image-preview');
@@ -134,15 +179,26 @@ export class ImagePreview extends ContentPreview {
 				const [width, height] = getImageSize(image);
 				this._ratio = height / width;
 
-				const previewFile = getSafePreviewFile(ext, image, width, height);
+				const [previewFile, exists] = getPreviewFile(ext, image, width, height);
 				const imageBox = new St.Widget({
 					style_class: 'image-box',
 					x_align: Clutter.ActorAlign.FILL,
 					y_align: Clutter.ActorAlign.FILL,
 					x_expand: true,
 					y_expand: true,
-					style: `background-image: url("${previewFile.get_uri()}");`,
 				});
+				const setImage = () => (imageBox.style = `background-image: url("${previewFile.get_uri()}");`);
+				if (exists) {
+					setImage();
+				} else {
+					createPreviewFile(image, previewFile, width, height, this._cancellable)
+						.then(() => {
+							if (!this._cancellable.is_cancelled()) setImage();
+						})
+						.catch((error: unknown) => {
+							if (!this._cancellable.is_cancelled()) ext.logger.error(error);
+						});
+				}
 				this.add_child(imageBox);
 
 				this._effect = new Clutter.BrightnessContrastEffect();
@@ -165,6 +221,11 @@ export class ImagePreview extends ContentPreview {
 				min_height: 0,
 			}),
 		);
+	}
+
+	override destroy() {
+		this._cancellable.cancel();
+		super.destroy();
 	}
 
 	get backgroundSize() {
@@ -252,6 +313,8 @@ export class TextPreview extends ContentPreview {
 
 Gio._promisify(Gio.File.prototype, 'enumerate_children_async');
 Gio._promisify(Gio.File.prototype, 'read_async');
+Gio._promisify(Gio.File.prototype, 'replace_async');
+Gio._promisify(Gio.OutputStream.prototype, 'close_async');
 Gio._promisify(Gio.InputStream.prototype, 'read_bytes_async');
 
 /**
