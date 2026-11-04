@@ -164,8 +164,11 @@ class ClipboardDialogHeader extends St.Widget {
 
 		this._headerLayout.enableCollapse = this.ext.settings.get_boolean('auto-hide-search');
 
-		this._headerVisible = !this._headerVisible || show;
-		this.notify('header-visible');
+		// Only notify on changes, since the dialog restyles all items when the header visibility changes
+		if (this._headerVisible !== show) {
+			this._headerVisible = show;
+			this.notify('header-visible');
+		}
 
 		const value = Number(show);
 		if (animate) {
