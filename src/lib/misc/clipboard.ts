@@ -180,10 +180,10 @@ export class ClipboardManager extends GObject.Object {
 				}
 
 				this.keyboard.press(Clutter.KEY_Control_L);
-				this.keyboard.press(Clutter.KEY_Shift_L);
+				this.keyboard.press(Clutter.KEY_Shift_R);
 				this.keyboard.press(Clutter.KEY_Insert);
 				this.keyboard.release(Clutter.KEY_Insert);
-				this.keyboard.release(Clutter.KEY_Shift_L);
+				this.keyboard.release(Clutter.KEY_Shift_R);
 				this.keyboard.release(Clutter.KEY_Control_L);
 			} else {
 				this.keyboard.press(Clutter.KEY_Shift_L);
