@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-04 00:14+0000\n"
+"POT-Creation-Date: 2026-11-05 17:16+0000\n"
 "PO-Revision-Date: 2026-03-26 22:19+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
@@ -1521,7 +1521,7 @@ msgstr ""
 "Ihr System neu starten, sich abmelden oder herunterfahren"
 
 #: src/lib/preferences/general/historySettings.ts:137
-#: src/lib/ui/clipboardDialog.ts:131 src/lib/ui/clipboardDialog.ts:236
+#: src/lib/ui/clipboardDialog.ts:131 src/lib/ui/clipboardDialog.ts:239
 #: src/lib/ui/indicator.ts:54
 msgid "Clear"
 msgstr "Leeren"

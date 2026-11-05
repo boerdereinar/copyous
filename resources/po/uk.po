@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-04 00:14+0000\n"
+"POT-Creation-Date: 2026-11-05 17:16+0000\n"
 "PO-Revision-Date: 2026-09-25 12:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
@@ -1503,7 +1503,7 @@ msgstr ""
 "виходу із сеансу або вимкнення системи"
 
 #: src/lib/preferences/general/historySettings.ts:137
-#: src/lib/ui/clipboardDialog.ts:131 src/lib/ui/clipboardDialog.ts:236
+#: src/lib/ui/clipboardDialog.ts:131 src/lib/ui/clipboardDialog.ts:239
 #: src/lib/ui/indicator.ts:54
 msgid "Clear"
 msgstr "Очистити"
