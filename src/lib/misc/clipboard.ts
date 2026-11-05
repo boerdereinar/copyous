@@ -147,9 +147,11 @@ export class ClipboardManager extends GObject.Object {
 
 		// File
 		if (content.type === ContentType.File) {
-			const s = `${FileOperation.Copy}\n${content.paths.join('\n')}`;
+			// History entries are always restored as copies. Use the standard URI list
+			// understood by browsers and file managers, without a GNOME-only prefix.
+			const s = `${content.paths.join('\r\n')}\r\n`;
 			const bytes = this.textEncoder!.encode(s);
-			this.clipboard.set_content(St.ClipboardType.CLIPBOARD, MimeTypes.File[0], bytes);
+			this.clipboard.set_content(St.ClipboardType.CLIPBOARD, 'text/uri-list', bytes);
 			return;
 		}
 	}
