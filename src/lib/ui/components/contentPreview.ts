@@ -14,6 +14,12 @@ import { Icon, loadIcon } from '../../common/icons.js';
 import { BackgroundSize, FilePreviewType } from '../../common/settings.js';
 import { CodeLabel, CodeLabelConstructorProps } from './codeLabel.js';
 
+Gio._promisify(Gio.File.prototype, 'enumerate_children_async');
+Gio._promisify(Gio.File.prototype, 'read_async');
+Gio._promisify(Gio.File.prototype, 'replace_async');
+Gio._promisify(Gio.OutputStream.prototype, 'close_async');
+Gio._promisify(Gio.InputStream.prototype, 'read_bytes_async');
+
 export const FileType = {
 	Unknown: 'Unknown',
 	Directory: 'Directory',
@@ -94,29 +100,20 @@ function getPreviewFile(ext: Extension, image: Gio.File, width: number, height: 
  * screenshot would block the shell for several hundred milliseconds.
  * @param image The original image
  * @param preview The file to save the downscaled copy to
- * @param width The width of the original image
- * @param height The height of the original image
  * @param cancellable The cancellable
  */
-async function createPreviewFile(
-	image: Gio.File,
-	preview: Gio.File,
-	width: number,
-	height: number,
-	cancellable: Gio.Cancellable,
-): Promise<void> {
+async function createPreviewFile(image: Gio.File, preview: Gio.File, cancellable: Gio.Cancellable): Promise<void> {
 	const previewDir = preview.get_parent()!;
 	if (!previewDir.query_exists(null)) previewDir.make_directory_with_parents(null);
 
 	// Scale to the maximum width, keeping the aspect ratio unless the image is extremely tall
-	const scale = Math.min(PREVIEW_MAX_WIDTH / width, PREVIEW_MAX_HEIGHT / height);
 	const input = await image.read_async(GLib.PRIORITY_DEFAULT, cancellable);
 	const pixbuf = await new Promise<GdkPixbuf.Pixbuf>((resolve, reject: (reason: Error) => void) => {
 		GdkPixbuf.Pixbuf.new_from_stream_at_scale_async(
 			input,
-			Math.max(1, Math.round(width * scale)),
-			Math.max(1, Math.round(height * scale)),
-			false,
+			PREVIEW_MAX_WIDTH,
+			PREVIEW_MAX_HEIGHT,
+			true,
 			cancellable,
 			(_source, result) => {
 				try {
@@ -184,13 +181,16 @@ export class ImagePreview extends ContentPreview {
 					x_expand: true,
 					y_expand: true,
 				});
-				const setImage = () => (imageBox.style = `background-image: url("${previewFile.get_uri()}");`);
+
+				const style = `background-image: url("${previewFile.get_uri()}");`;
 				if (exists) {
-					setImage();
+					imageBox.style = style;
 				} else {
-					createPreviewFile(image, previewFile, width, height, this._cancellable)
+					createPreviewFile(image, previewFile, this._cancellable)
 						.then(() => {
-							if (!this._cancellable.is_cancelled()) setImage();
+							if (!this._cancellable.is_cancelled()) {
+								imageBox.style = style;
+							}
 						})
 						.catch((error: unknown) => {
 							if (!this._cancellable.is_cancelled()) ext.logger.error(error);
@@ -307,12 +307,6 @@ export class TextPreview extends ContentPreview {
 		this.bind_property('tab-width', label, 'tab-width', GObject.BindingFlags.DEFAULT);
 	}
 }
-
-Gio._promisify(Gio.File.prototype, 'enumerate_children_async');
-Gio._promisify(Gio.File.prototype, 'read_async');
-Gio._promisify(Gio.File.prototype, 'replace_async');
-Gio._promisify(Gio.OutputStream.prototype, 'close_async');
-Gio._promisify(Gio.InputStream.prototype, 'read_bytes_async');
 
 /**
  * Creates a text preview by reading the first 4096 bytes
