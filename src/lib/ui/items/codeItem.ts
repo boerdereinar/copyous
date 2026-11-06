@@ -20,13 +20,13 @@ export class CodeItem extends ClipboardItem {
 	private _codeInfo?: CodeInfo;
 
 	constructor(ext: CopyousExtension, entry: ClipboardEntry) {
-		super(ext, entry, Icon.Code, _('Code'));
+		const metadata: CodeMetadata = { language: null, ...entry.metadata };
+		const languageName = metadata.language?.name;
+		super(ext, entry, Icon.Code, languageName ? `${_('Code')} · ${languageName}` : _('Code'));
 
 		this.codeItemSettings = this.ext.settings.get_child('code-item');
 
 		this.add_style_class_name('code-item');
-
-		const metadata: CodeMetadata = { language: null, ...entry.metadata };
 
 		this._code = new CodeLabel(ext, {
 			style_class: 'code-item-content',
