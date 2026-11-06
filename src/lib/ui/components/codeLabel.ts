@@ -263,6 +263,8 @@ export class CodeLabel extends St.Label {
 	private _showLineNumbers = true;
 
 	private _highlighted: string = '';
+	private _highlightPending: boolean = false;
+	private _highlightIdleId: number = 0;
 
 	public constructor(
 		private ext: CopyousExtension,
@@ -292,6 +294,16 @@ export class CodeLabel extends St.Label {
 
 		// Update text after hljs is loaded
 		this.ext.connectHljsInit(this.updateText.bind(this));
+
+		// Highlighting is deferred until the label is shown
+		this.connect('notify::mapped', () => {
+			if (this.mapped && this._highlightPending) this.scheduleHighlight();
+		});
+
+		this.connect('destroy', () => {
+			if (this._highlightIdleId) GLib.source_remove(this._highlightIdleId);
+			this._highlightIdleId = 0;
+		});
 
 		this.updateText();
 	}
@@ -359,32 +371,58 @@ export class CodeLabel extends St.Label {
 		this.notify('tab-width');
 	}
 
+	private get shouldHighlight(): boolean {
+		return this.syntaxHighlighting && this.ext.hljs != null;
+	}
+
+	private normalizedText(): string {
+		// Trim indentation before highlighting to prevent empty lines
+		return normalizeIndentation(trim(this._code), this.tabWidth);
+	}
+
 	private updateText() {
 		if (this._code == null) return;
 
-		// Trim indentation before highlighting to prevent empty lines
-		let text = normalizeIndentation(trim(this._code), this.tabWidth);
-		if (this.syntaxHighlighting && this.ext.hljs != null) {
-			const language =
-				this.language && this.ext.hljs.getLanguage(this.language.id) != null ? this.language.id : null;
-
-			const result = language ? this.ext.hljs.highlight(text, { language }) : this.ext.hljs.highlightAuto(text);
-			text = applyTheme(this.ext.themeManager?.colorScheme, result.value);
-
-			// Store language
-			if (!language && result.language) {
-				const id = result.language;
-				const name = this.ext.hljs.getLanguage(id)?.name ?? id;
-
-				this._language = { id, name: id.length < name.length - 3 ? id.charAt(0) + id.slice(1) : name };
-				this.notify('language');
-			}
-		} else {
-			text = GLib.markup_escape_text(text, text.length);
-		}
-
-		this._highlighted = text;
+		// Show plain text immediately, highlighting is expensive and done once the label is shown
+		const text = this.normalizedText();
+		this._highlighted = GLib.markup_escape_text(text, -1);
 		this.updateLabel();
+
+		this._highlightPending = this.shouldHighlight;
+		if (this._highlightPending && this.mapped) this.scheduleHighlight();
+	}
+
+	private scheduleHighlight() {
+		if (this._highlightIdleId) return;
+
+		// Run each highlight in its own idle callback so that frames can be drawn in between
+		this._highlightIdleId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+			this._highlightIdleId = 0;
+			if (this._highlightPending && this.mapped) this.highlight();
+			return GLib.SOURCE_REMOVE;
+		});
+	}
+
+	private highlight() {
+		this._highlightPending = false;
+		const hljs = this.ext.hljs;
+		if (!this.shouldHighlight || !hljs) return;
+
+		const text = this.normalizedText();
+		const language = this.language && hljs.getLanguage(this.language.id) != null ? this.language.id : null;
+
+		const result = language ? hljs.highlight(text, { language }) : hljs.highlightAuto(text);
+		this._highlighted = applyTheme(this.ext.themeManager?.colorScheme, result.value);
+		this.updateLabel();
+
+		// Store language
+		if (!language && result.language) {
+			const id = result.language;
+			const name = hljs.getLanguage(id)?.name ?? id;
+
+			this._language = { id, name: id.length < name.length - 3 ? id.charAt(0) + id.slice(1) : name };
+			this.notify('language');
+		}
 	}
 
 	private updateLabel() {
