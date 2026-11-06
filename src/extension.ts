@@ -20,6 +20,9 @@ import { ThemeManager } from './lib/misc/theme.js';
 import { ClipboardDialog } from './lib/ui/clipboardDialog.js';
 import { ClipboardIndicator } from './lib/ui/indicator.js';
 
+/** Delay before highlight.js is loaded, so that it does not add to the work done at login */
+const HLJS_INIT_DELAY_S = 3;
+
 export default class CopyousExtension extends Extension {
 	public settings!: CopyousSettings;
 	public logger!: ConsoleLike;
@@ -30,6 +33,8 @@ export default class CopyousExtension extends Extension {
 	private hljsMonitor: Gio.FileMonitor | undefined;
 	private hljsLanguages: Map<string, boolean> | undefined;
 	private hljsCallbacks: (() => void)[] | undefined;
+	private hljsInitId: number = 0;
+	private hljsInitPromise: Promise<void> | undefined;
 
 	public themeManager: ThemeManager | undefined;
 
@@ -60,7 +65,12 @@ export default class CopyousExtension extends Extension {
 		this.mediaProbe = new MediaProbe(this);
 
 		// Highlight.js
-		this.initHljs().catch(error);
+		// Parsing highlight.js blocks the main loop, so it is loaded after login has settled down
+		this.hljsInitId = GLib.timeout_add_seconds(GLib.PRIORITY_LOW, HLJS_INIT_DELAY_S, () => {
+			this.hljsInitId = 0;
+			this.ensureHljs().catch(error);
+			return GLib.SOURCE_REMOVE;
+		});
 
 		// Theme
 		this.themeManager = new ThemeManager(this);
@@ -173,6 +183,19 @@ export default class CopyousExtension extends Extension {
 			},
 			this,
 		);
+	}
+
+	/**
+	 * Loads highlight.js if it has not been loaded yet
+	 */
+	public ensureHljs(): Promise<void> {
+		if (this.hljsInitId) {
+			GLib.source_remove(this.hljsInitId);
+			this.hljsInitId = 0;
+		}
+
+		this.hljsInitPromise ??= this.initHljs();
+		return this.hljsInitPromise;
 	}
 
 	private async initHljs() {
@@ -305,6 +328,9 @@ export default class CopyousExtension extends Extension {
 		this.indicator = undefined;
 
 		// Highlight.js
+		if (this.hljsInitId) GLib.source_remove(this.hljsInitId);
+		this.hljsInitId = 0;
+		this.hljsInitPromise = undefined;
 		this.hljs = undefined;
 		this.hljsMonitor?.disconnectObject(this);
 		this.hljsMonitor?.cancel();

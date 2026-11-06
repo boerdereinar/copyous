@@ -406,6 +406,8 @@ export class ClipboardManager extends GObject.Object {
 			}
 
 			// Code
+			// highlight.js is loaded lazily, make sure it is available before detecting the language
+			await this.ext.ensureHljs().catch(() => {});
 			const slice = trimmed.slice(0, 10000);
 			const n = Math.max(1, slice.length / 100);
 			const highlightResult = this.ext.hljs?.highlightAuto(slice);
