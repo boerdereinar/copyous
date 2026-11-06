@@ -3,7 +3,8 @@ import GObject from 'gi://GObject';
 import St from 'gi://St';
 
 import type CopyousExtension from '../../../extension.js';
-import { ActiveState } from '../../common/constants.js';
+import { ActiveState, ItemType } from '../../common/constants.js';
+import { getFilesCategory } from '../../common/fileCategory.js';
 import { flagsParamSpec, registerClass } from '../../common/gjs.js';
 import { Icon } from '../../common/icons.js';
 import { MiddleClickAction } from '../../common/settings.js';
@@ -74,6 +75,10 @@ export class ClipboardItem extends St.Button {
 			effect: new HoleEffect(this._header.buttons),
 		});
 		this._box.add_child(this._content);
+		this.add_style_class_name(`item-type-${entry.type.toLowerCase()}`);
+		if (entry.type === ItemType.File || entry.type === ItemType.Files) {
+			this.add_style_class_name(`file-category-${getFilesCategory(entry.content.split('\n'))}`);
+		}
 
 		// Bind properties
 		entry.bind_property(
@@ -103,6 +108,7 @@ export class ClipboardItem extends St.Button {
 			'changed::show-header', this.updateHeader.bind(this),
 			'changed::show-item-title', this.updateHeader.bind(this),
 			'changed::header-controls-visibility', this.updateHeader.bind(this),
+			'changed::color-by-item-type', this.updateTypeColors.bind(this),
 			this);
 
 		this.bind_property('active', this._header, 'active', GObject.BindingFlags.SYNC_CREATE);
@@ -117,6 +123,7 @@ export class ClipboardItem extends St.Button {
 		this.updateProtection();
 		this.updateMiddleClickAction();
 		this.updateHeader();
+		this.updateTypeColors();
 
 		// Connect signals
 		this.connect('notify::hover', () => this.notify('active'));
@@ -183,6 +190,14 @@ export class ClipboardItem extends St.Button {
 			this.add_style_class_name('no-header');
 			this._box.set_child_above_sibling(this._header, this._content);
 			this._box.layout_manager = new Clutter.BinLayout();
+		}
+	}
+
+	private updateTypeColors() {
+		if (this.ext.settings.get_boolean('color-by-item-type')) {
+			this.add_style_class_name('type-colors');
+		} else {
+			this.remove_style_class_name('type-colors');
 		}
 	}
 
