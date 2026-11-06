@@ -7,6 +7,7 @@ import Shell from 'gi://Shell';
 import St from 'gi://St';
 
 import type CopyousExtension from '../../extension.js';
+import { detectCode } from '../common/codeDetection.js';
 import { Color } from '../common/color.js';
 import { ItemType, getImagesPath } from '../common/constants.js';
 import type { SignalMethods } from '../common/gjs.js';
@@ -82,6 +83,7 @@ const ClipboardManagerSignals = {
 	Signals: ClipboardManagerSignals,
 })
 export class ClipboardManager extends GObject.Object {
+	declare connect: SignalMethods<this, typeof ClipboardManagerSignals>['connect'];
 	declare emit: SignalMethods<this, typeof ClipboardManagerSignals>['emit'];
 
 	private textDecoder: TextDecoder | undefined = new TextDecoder();
@@ -406,17 +408,9 @@ export class ClipboardManager extends GObject.Object {
 			}
 
 			// Code
-			const slice = trimmed.slice(0, 10000);
-			const n = Math.max(1, slice.length / 100);
-			const highlightResult = this.ext.hljs?.highlightAuto(slice);
-			if (highlightResult && highlightResult.language && highlightResult.relevance / n >= 3) {
-				const id = highlightResult.language;
-				const name = this.ext.hljs?.getLanguage(id)?.name ?? id;
-
-				const metadata = {
-					language: { id, name: id.length < name.length - 3 ? id.charAt(0) + id.slice(1) : name },
-				};
-				return [ItemType.Code, content.text, metadata];
+			const language = detectCode(trimmed, this.ext.hljs);
+			if (language) {
+				return [ItemType.Code, content.text, { language }];
 			}
 
 			// Text
