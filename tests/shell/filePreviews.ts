@@ -22,7 +22,8 @@ export async function run() {
 	let extension: CopyousExtension | undefined;
 	for (let i = 0; i < 50; i++) {
 		const info = Main.extensionManager.lookup('copyous@boerdereinar.dev');
-		if (info?.state === ExtensionState.ERROR) throw new Error(info.error);
+		const errors = (info as unknown as { errors?: string[] } | undefined)?.errors;
+		if (info?.state === ExtensionState.ERROR && errors?.length) throw new Error(errors.join('\n'));
 		if (info?.state === (1 as ExtensionState)) {
 			extension = info.stateObj as CopyousExtension;
 			break;
