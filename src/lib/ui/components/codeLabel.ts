@@ -5,6 +5,7 @@ import Pango from 'gi://Pango';
 import St from 'gi://St';
 
 import type CopyousExtension from '../../../extension.js';
+import { splitTerminalPrompt } from '../../common/codeDetection.js';
 import { registerClass } from '../../common/gjs.js';
 import { CustomColorScheme } from '../../common/settings.js';
 import { Language } from '../../database/database.js';
@@ -364,7 +365,25 @@ export class CodeLabel extends St.Label {
 
 		// Trim indentation before highlighting to prevent empty lines
 		let text = normalizeIndentation(trim(this._code), this.tabWidth);
-		if (this.syntaxHighlighting && this.ext.hljs != null) {
+		if (this.syntaxHighlighting && this.language?.id === 'shell') {
+			const light = this.ext.themeManager?.colorScheme === CustomColorScheme.Light;
+			text = text
+				.split('\n')
+				.map((line) => {
+					const prompt = splitTerminalPrompt(line);
+					if (!prompt)
+						return `<span fgcolor="${light ? Colors.dark_2 : Colors.light_6}">${GLib.markup_escape_text(line, -1)}</span>`;
+					const [prefix, command] = prompt;
+					const highlighted = this.ext.hljs?.getLanguage('bash')
+						? applyTheme(
+								this.ext.themeManager?.colorScheme,
+								this.ext.hljs.highlight(command, { language: 'bash' }).value,
+							)
+						: GLib.markup_escape_text(command, -1);
+					return `<span fgcolor="${light ? Colors.green_7 : Colors.green_1}">${GLib.markup_escape_text(prefix, -1)}</span><span fgcolor="${light ? Colors.blue_6 : Colors.blue_1}">${highlighted}</span>`;
+				})
+				.join('\n');
+		} else if (this.syntaxHighlighting && this.ext.hljs != null) {
 			const language =
 				this.language && this.ext.hljs.getLanguage(this.language.id) != null ? this.language.id : null;
 
@@ -380,7 +399,12 @@ export class CodeLabel extends St.Label {
 				this.notify('language');
 			}
 		} else {
-			text = GLib.markup_escape_text(text, text.length);
+			text = GLib.markup_escape_text(text, -1);
+		}
+		if (this.syntaxHighlighting && this.language?.id === 'bash') {
+			const color =
+				this.ext.themeManager?.colorScheme === CustomColorScheme.Light ? Colors.blue_6 : Colors.blue_1;
+			text = `<span fgcolor="${color}">${text}</span>`;
 		}
 
 		this._highlighted = text;
