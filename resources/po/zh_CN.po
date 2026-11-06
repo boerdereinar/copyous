@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-05 17:16+0000\n"
+"POT-Creation-Date: 2026-11-06 13:53+0000\n"
 "PO-Revision-Date: 2025-12-19 18:30+0800\n"
 "Last-Translator: everyx <lunt.luo@gmail.com>\n"
 "Language-Team: Chinese (China)\n"
@@ -1044,66 +1044,70 @@ msgid "Set the preferred theme"
 msgstr "设置偏好主题"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "Automatic"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
 msgid "Yaru"
 msgstr ""
 
-#: src/lib/preferences/customization/themeCustomization.ts:89
-#: src/lib/preferences/customization/themeCustomization.ts:96
+#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:98
 msgid "Color Scheme"
 msgstr "配色方案"
 
-#: src/lib/preferences/customization/themeCustomization.ts:90
-#: src/lib/preferences/customization/themeCustomization.ts:97
+#: src/lib/preferences/customization/themeCustomization.ts:92
+#: src/lib/preferences/customization/themeCustomization.ts:99
 msgid "Set the color scheme of the theme"
 msgstr ""
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
-#: src/lib/preferences/customization/themeCustomization.ts:98
+#: src/lib/preferences/customization/themeCustomization.ts:93
+#: src/lib/preferences/customization/themeCustomization.ts:100
 msgid "Dark"
 msgstr "暗色"
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:93
 msgid "High Contrast"
 msgstr ""
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
-#: src/lib/preferences/customization/themeCustomization.ts:98
+#: src/lib/preferences/customization/themeCustomization.ts:93
+#: src/lib/preferences/customization/themeCustomization.ts:100
 msgid "Light"
 msgstr "亮色"
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:93
 msgid "System"
 msgstr "跟随系统"
 
-#: src/lib/preferences/customization/themeCustomization.ts:104
+#: src/lib/preferences/customization/themeCustomization.ts:106
 msgid "Background Color"
 msgstr "背景色"
 
-#: src/lib/preferences/customization/themeCustomization.ts:105
+#: src/lib/preferences/customization/themeCustomization.ts:107
 msgid "Set the background color of the clipboard dialog"
 msgstr "设置剪贴板对话框的背景颜色"
 
-#: src/lib/preferences/customization/themeCustomization.ts:111
+#: src/lib/preferences/customization/themeCustomization.ts:113
 msgid "Text Color"
 msgstr "文本颜色"
 
-#: src/lib/preferences/customization/themeCustomization.ts:112
+#: src/lib/preferences/customization/themeCustomization.ts:114
 msgid "Set the text color of the clipboard dialog"
 msgstr "设置剪贴板对话框的文本颜色"
 
-#: src/lib/preferences/customization/themeCustomization.ts:118
+#: src/lib/preferences/customization/themeCustomization.ts:120
 msgid "Item Color"
 msgstr "项目颜色"
 
-#: src/lib/preferences/customization/themeCustomization.ts:119
+#: src/lib/preferences/customization/themeCustomization.ts:121
 msgid "Set the background color of clipboard items"
 msgstr "设置剪贴板项目的背景颜色"
 
-#: src/lib/preferences/customization/themeCustomization.ts:125
+#: src/lib/preferences/customization/themeCustomization.ts:127
 msgid "Search Color"
 msgstr "搜索框颜色"
 
-#: src/lib/preferences/customization/themeCustomization.ts:126
+#: src/lib/preferences/customization/themeCustomization.ts:128
 msgid "Set the background color of the search bar"
 msgstr "设置搜索栏的背景颜色"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-05 17:16+0000\n"
+"POT-Creation-Date: 2026-11-06 13:53+0000\n"
 "PO-Revision-Date: 2026-10-13 18:51+0200\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
@@ -1061,66 +1061,70 @@ msgid "Set the preferred theme"
 msgstr "Ustaw preferowany motyw"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
+msgid "Automatic"
+msgstr ""
+
+#: src/lib/preferences/customization/themeCustomization.ts:75
 msgid "Yaru"
 msgstr "Yaru"
 
-#: src/lib/preferences/customization/themeCustomization.ts:89
-#: src/lib/preferences/customization/themeCustomization.ts:96
+#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:98
 msgid "Color Scheme"
 msgstr "Schemat kolorów"
 
-#: src/lib/preferences/customization/themeCustomization.ts:90
-#: src/lib/preferences/customization/themeCustomization.ts:97
+#: src/lib/preferences/customization/themeCustomization.ts:92
+#: src/lib/preferences/customization/themeCustomization.ts:99
 msgid "Set the color scheme of the theme"
 msgstr "Ustaw schemat kolorów motywu"
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
-#: src/lib/preferences/customization/themeCustomization.ts:98
+#: src/lib/preferences/customization/themeCustomization.ts:93
+#: src/lib/preferences/customization/themeCustomization.ts:100
 msgid "Dark"
 msgstr "Ciemny"
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:93
 msgid "High Contrast"
 msgstr "Wysoki kontrast"
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
-#: src/lib/preferences/customization/themeCustomization.ts:98
+#: src/lib/preferences/customization/themeCustomization.ts:93
+#: src/lib/preferences/customization/themeCustomization.ts:100
 msgid "Light"
 msgstr "Jasny"
 
-#: src/lib/preferences/customization/themeCustomization.ts:91
+#: src/lib/preferences/customization/themeCustomization.ts:93
 msgid "System"
 msgstr "System"
 
-#: src/lib/preferences/customization/themeCustomization.ts:104
+#: src/lib/preferences/customization/themeCustomization.ts:106
 msgid "Background Color"
 msgstr "Kolor tła"
 
-#: src/lib/preferences/customization/themeCustomization.ts:105
+#: src/lib/preferences/customization/themeCustomization.ts:107
 msgid "Set the background color of the clipboard dialog"
 msgstr "Ustaw kolor tła okna dialogowego schowka"
 
-#: src/lib/preferences/customization/themeCustomization.ts:111
+#: src/lib/preferences/customization/themeCustomization.ts:113
 msgid "Text Color"
 msgstr "Kolor tekstu"
 
-#: src/lib/preferences/customization/themeCustomization.ts:112
+#: src/lib/preferences/customization/themeCustomization.ts:114
 msgid "Set the text color of the clipboard dialog"
 msgstr "Ustaw kolor tekstu okna dialogowego schowka"
 
-#: src/lib/preferences/customization/themeCustomization.ts:118
+#: src/lib/preferences/customization/themeCustomization.ts:120
 msgid "Item Color"
 msgstr "Kolor elementu"
 
-#: src/lib/preferences/customization/themeCustomization.ts:119
+#: src/lib/preferences/customization/themeCustomization.ts:121
 msgid "Set the background color of clipboard items"
 msgstr "Ustaw kolor tła elementów schowka"
 
-#: src/lib/preferences/customization/themeCustomization.ts:125
+#: src/lib/preferences/customization/themeCustomization.ts:127
 msgid "Search Color"
 msgstr "Kolor wyszukiwania"
 
-#: src/lib/preferences/customization/themeCustomization.ts:126
+#: src/lib/preferences/customization/themeCustomization.ts:128
 msgid "Set the background color of the search bar"
 msgstr "Ustaw kolor tła paska wyszukiwania"
 
