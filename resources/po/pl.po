@@ -150,7 +150,7 @@ msgstr "Tekst"
 #: src/lib/preferences/actions/actionDefaults.ts:136
 #: src/lib/preferences/actions/actionDialog.ts:176
 #: src/lib/preferences/actions/actionDialog.ts:367
-#: src/lib/ui/items/codeItem.ts:23
+#: src/lib/ui/items/codeItem.ts:25
 msgid "Code"
 msgstr "Kod"
 
