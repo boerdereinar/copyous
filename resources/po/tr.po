@@ -1024,9 +1024,17 @@ msgstr "Metin Bilgisini Göster"
 msgid "Show extra information in the text item"
 msgstr "Metin öğesinde ekstra bilgi göster"
 
-#: src/lib/preferences/customization/itemsCustomization.ts:23
+#: src/lib/preferences/customization/itemsCustomization.ts:24
 msgid "Items"
 msgstr "Öğeler"
+
+#: src/lib/preferences/customization/itemsCustomization.ts:37
+msgid "Color by Type"
+msgstr ""
+
+#: src/lib/preferences/customization/itemsCustomization.ts:38
+msgid "Use distinct colors for clipboard items and file formats"
+msgstr ""
 
 #: src/lib/preferences/customization/profiles.ts:208
 msgid "Profiles"

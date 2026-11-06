@@ -1008,9 +1008,17 @@ msgstr "显示文本信息"
 msgid "Show extra information in the text item"
 msgstr "在文本项目中显示额外信息"
 
-#: src/lib/preferences/customization/itemsCustomization.ts:23
+#: src/lib/preferences/customization/itemsCustomization.ts:24
 msgid "Items"
 msgstr "剪贴项"
+
+#: src/lib/preferences/customization/itemsCustomization.ts:37
+msgid "Color by Type"
+msgstr ""
+
+#: src/lib/preferences/customization/itemsCustomization.ts:38
+msgid "Use distinct colors for clipboard items and file formats"
+msgstr ""
 
 #: src/lib/preferences/customization/profiles.ts:208
 msgid "Profiles"
