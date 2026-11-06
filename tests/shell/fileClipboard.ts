@@ -22,7 +22,8 @@ function check(condition: boolean, message: string) {
 async function waitForExtension(): Promise<CopyousExtension> {
 	for (let i = 0; i < 50; i++) {
 		const extension = Main.extensionManager.lookup('copyous@boerdereinar.dev');
-		if (extension?.state === ExtensionState.ERROR) throw new Error(extension.error);
+		const errors = (extension as unknown as { errors?: string[] } | undefined)?.errors;
+		if (extension?.state === ExtensionState.ERROR && errors?.length) throw new Error(errors.join('\n'));
 		if (extension?.state === (1 as ExtensionState)) return extension.stateObj as CopyousExtension;
 		// eslint-disable-next-line no-await-in-loop
 		await Scripting.sleep(1000);
