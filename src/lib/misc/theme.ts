@@ -216,6 +216,6 @@ export class ThemeManager extends GObject.Object {
 		}
 
 		const color = fn(node);
-		return color.to_string().substring(0, 7);
+		return `rgb(${color.red},${color.green},${color.blue},${color.alpha / 255})`;
 	}
 }
