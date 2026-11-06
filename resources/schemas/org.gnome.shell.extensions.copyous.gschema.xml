@@ -38,6 +38,7 @@
 		<value nick="default" value="0"/>
 		<value nick="yaru" value="1"/>
 		<value nick="custom" value="2"/>
+		<value nick="auto" value="3"/>
 	</enum>
 
 	<enum id="org.gnome.shell.extensions.copyous.ColorScheme">

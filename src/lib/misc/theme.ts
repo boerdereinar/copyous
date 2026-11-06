@@ -1,3 +1,5 @@
+import Clutter from 'gi://Clutter';
+import Cogl from 'gi://Cogl';
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import St from 'gi://St';
@@ -26,8 +28,6 @@ export class ThemeManager extends GObject.Object {
 	private readonly _resource: Gio.Resource;
 	private readonly _themeSettings: ThemeSettings;
 	private readonly _settings: St.Settings;
-	private readonly _contrastChangedId: number;
-	private readonly _colorSchemeChangedId: number;
 
 	private _stylesheet: Gio.File | null = null;
 	private _colorScheme: CustomColorScheme = CustomColorScheme.Dark;
@@ -43,8 +43,20 @@ export class ThemeManager extends GObject.Object {
 
 		this._settings = St.Settings.get();
 
-		this._contrastChangedId = this._settings.connect('notify::high-contrast', this.updateTheme.bind(this));
-		this._colorSchemeChangedId = this._settings.connect('notify::color-scheme', this.updateTheme.bind(this));
+		this._settings.connectObject(
+			'notify::high-contrast',
+			this.updateTheme.bind(this),
+			'notify::color-scheme',
+			this.updateTheme.bind(this),
+			this,
+		);
+		this.theme.connectObject(
+			'notify::theme-stylesheet',
+			this.styleSheetChanged.bind(this),
+			'notify::default-stylesheet',
+			this.styleSheetChanged.bind(this),
+			this,
+		);
 
 		this.updateTheme().catch(() => {});
 	}
@@ -69,8 +81,15 @@ export class ThemeManager extends GObject.Object {
 		this._stylesheet = null;
 		Gio.resources_unregister(this._resource);
 		this._themeSettings.disconnectObject(this);
-		this._settings.disconnect(this._contrastChangedId);
-		this._settings.disconnect(this._colorSchemeChangedId);
+		this._settings.disconnectObject(this);
+		this.theme.disconnectObject(this);
+	}
+
+	private async styleSheetChanged() {
+		const theme = this._themeSettings.get_enum('theme');
+		if (theme === Theme.Auto) {
+			await this.updateTheme();
+		}
 	}
 
 	private async updateTheme() {
@@ -93,53 +112,35 @@ export class ThemeManager extends GObject.Object {
 			}
 		})();
 
-		const colorScheme = (['dark', 'light', 'high-contrast'] as const)[this.colorScheme];
-
 		// Custom Theme
 		if (theme === Theme.Custom) {
-			try {
-				// Load template
-				const uri = `resource:///org/gnome/shell/extensions/copyous/css/template-${colorScheme}.css`;
-				const template = Gio.File.new_for_uri(uri);
-				const [contents] = await template.load_contents_async(null);
-				const text = new TextDecoder().decode(contents);
-
-				// Fill template
-				const css = Object.entries(DefaultColors).reduce((s, [key, colors]) => {
-					const i = Math.min(this.colorScheme, colors.length - 1);
+			const colors = Object.fromEntries(
+				Object.entries(DefaultColors).map(([key, c]) => {
+					const i = Math.min(this.colorScheme, c.length - 1);
 					let color = this._themeSettings.get_string(key as keyof typeof DefaultColors);
-					color = color ? color : colors[i]!;
+					color = color ? color : c[i]!;
 
-					// custom-var-foo-bar -> var_foo_bar
-					const variable = key.substring('custom-'.length).replace(/-/g, '_');
-					return s.replaceAll(`$${variable}`, color);
-				}, text);
+					return [key, color];
+				}),
+			) as Record<keyof typeof DefaultColors, string>;
 
-				// Save theme
-				const path = getDataPath(this.ext);
-				const stylesheet = path.get_child('custom-theme.css');
+			const success = await this.loadCustomTheme(colors);
+			if (success) return;
 
-				const bytes = new TextEncoder().encode(css);
-				await stylesheet.replace_contents_async(
-					bytes,
-					null,
-					false,
-					Gio.FileCreateFlags.REPLACE_DESTINATION,
-					null,
-				);
+			theme = Theme.Default;
+		}
 
-				// Load theme
-				if (this._stylesheet) this.theme.unload_stylesheet(this._stylesheet);
-				this.theme.load_stylesheet(stylesheet);
-				this._stylesheet = stylesheet;
-				return;
-			} catch (err) {
-				theme = Theme.Default;
-				this.ext.logger.error(err);
-			}
+		// Automatic theme
+		if (theme === Theme.Auto) {
+			const colors = this.detectThemeColors();
+			const success = await this.loadCustomTheme(colors);
+			if (success) return;
+
+			theme = Theme.Default;
 		}
 
 		// GNOME Theme
+		const colorScheme = (['dark', 'light', 'high-contrast'] as const)[this.colorScheme];
 		const themeName = (['default', 'yaru'] as const)[theme];
 		const uri = `resource:///org/gnome/shell/extensions/copyous/css/stylesheet-${themeName}-${colorScheme}.css`;
 		const stylesheet = Gio.File.new_for_uri(uri);
@@ -153,5 +154,68 @@ export class ThemeManager extends GObject.Object {
 		} catch (err) {
 			this.ext.logger.error(err);
 		}
+	}
+
+	private async loadCustomTheme(colors: Record<keyof typeof DefaultColors, string>): Promise<boolean> {
+		const colorScheme = (['dark', 'light', 'high-contrast'] as const)[this.colorScheme];
+
+		try {
+			// Load template
+			const uri = `resource:///org/gnome/shell/extensions/copyous/css/template-${colorScheme}.css`;
+			const template = Gio.File.new_for_uri(uri);
+			const [contents] = await template.load_contents_async(null);
+			const text = new TextDecoder().decode(contents);
+
+			// Fill template
+			const css = Object.entries(colors).reduce((s, [key, color]) => {
+				// custom-var-foo-bar -> var_foo_bar
+				const variable = key.substring('custom-'.length).replace(/-/g, '_');
+				return s.replaceAll(`$${variable}`, color);
+			}, text);
+
+			// Save theme
+			const path = getDataPath(this.ext);
+			const stylesheet = path.get_child('custom-theme.css');
+
+			const bytes = new TextEncoder().encode(css);
+			await stylesheet.replace_contents_async(bytes, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
+
+			// Load theme
+			if (this._stylesheet) this.theme.unload_stylesheet(this._stylesheet);
+			this.theme.load_stylesheet(stylesheet);
+			this._stylesheet = stylesheet;
+			return true;
+		} catch (err) {
+			this.ext.logger.error(err);
+			return false;
+		}
+	}
+
+	private detectThemeColors(): Record<keyof typeof DefaultColors, string> {
+		const getBg = (node: St.ThemeNode) => node.get_background_color();
+		const getFg = (node: St.ThemeNode) => node.get_foreground_color();
+
+		const bgColor = this.detectColor(['popup-menu', 'popup-menu-content'], getBg);
+		const fgColor = this.detectColor(['popup-menu', 'popup-menu-content'], getFg);
+		const cardBgColor = this.detectColor(['message-list', 'message'], getBg);
+
+		return {
+			'custom-bg-color': bgColor,
+			'custom-fg-color': fgColor,
+			'custom-card-bg-color': cardBgColor,
+			'custom-search-bg-color': cardBgColor,
+		};
+	}
+
+	private detectColor(classes: string[], fn: (node: St.ThemeNode) => Cogl.Color): string {
+		const context = St.ThemeContext.get_for_stage(global.stage);
+
+		let node = context.get_root_node();
+		for (const clazz of classes) {
+			node = St.ThemeNode.new(context, node, null, Clutter.Actor.$gtype, null, clazz, null, '');
+		}
+
+		const color = fn(node);
+		return `rgb(${color.red},${color.green},${color.blue},${color.alpha / 255})`;
 	}
 }
