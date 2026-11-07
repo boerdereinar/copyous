@@ -336,26 +336,18 @@ async function createTextPreview(
  * @returns The thumbnail or null if no thumbnail was found
  */
 async function tryGetThumbnail(file: Gio.File): Promise<Gio.File | null> {
-	const uri = file.get_uri();
-	const md5 = GLib.compute_checksum_for_string(GLib.ChecksumType.MD5, uri, uri.length);
-
-	const homeDir = GLib.get_home_dir();
-	const thumbnailDir = Gio.File.new_build_filenamev([homeDir, '.cache', 'thumbnails']);
-
 	try {
-		const enumerator = await thumbnailDir.enumerate_children_async(
-			'standard::*',
+		// GIO resolves the configured thumbnail cache and validates it against the
+		// original file. Do not accidentally display a stale or failed thumbnail.
+		const info = await file.query_info_async(
+			'thumbnail::path,thumbnail::is-valid',
 			Gio.FileQueryInfoFlags.NONE,
 			GLib.PRIORITY_DEFAULT,
 			null,
 		);
-		for await (const f of enumerator) {
-			if (f.get_file_type() !== Gio.FileType.DIRECTORY) continue;
-
-			const thumbnailFile = thumbnailDir.get_child(f.get_name()).get_child(`${md5}.png`);
-			if (thumbnailFile.query_exists(null)) {
-				return thumbnailFile;
-			}
+		const path = info.get_attribute_byte_string('thumbnail::path');
+		if (path && info.get_attribute_boolean('thumbnail::is-valid')) {
+			return Gio.File.new_for_path(path);
 		}
 	} catch {
 		return null;
@@ -450,7 +442,7 @@ export async function tryCreateFilePreview(
 				return allowedTypes & FilePreviewType.Image ? new ImagePreview(ext, file) : null;
 		}
 
-		return thumbnail && allowedTypes & FilePreviewType.Thumbnail ? new ThumbnailPreview(ext, file) : null;
+		return thumbnail && allowedTypes & FilePreviewType.Thumbnail ? new ThumbnailPreview(ext, thumbnail) : null;
 	} catch (error) {
 		if (!cancellable?.is_cancelled()) ext.logger.error(error);
 		return null;
