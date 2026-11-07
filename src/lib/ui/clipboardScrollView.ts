@@ -102,6 +102,10 @@ export class ClipboardScrollView extends St.ScrollView {
 		this._scrollContainer.activateFirst();
 	}
 
+	public updateTimes() {
+		this._scrollContainer.updateTimes();
+	}
+
 	private updateSize() {
 		this._itemWidth = this.ext.settings.get_int('item-width');
 		this._itemHeight = this.ext.settings.get_int('item-height');

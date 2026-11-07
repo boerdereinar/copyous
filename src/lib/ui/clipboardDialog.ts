@@ -1,4 +1,5 @@
 import Clutter from 'gi://Clutter';
+import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Graphene from 'gi://Graphene';
@@ -36,6 +37,12 @@ import { CenterBox, CollapsibleHeaderLayout, FitConstraint } from './layout.js';
 import { SearchEntry, SearchQuery } from './searchEntry.js';
 
 const ANIMATION_TIME = 150;
+
+// Warm-up (see ClipboardDialog.scheduleWarmUp)
+const WARM_UP_DELAY = 3000; // ms after the history is loaded
+const WARM_UP_SLICE = 4000; // µs of style work per idle callback
+const WARM_UP_USER_IDLE_TIME = 1000; // ms without user input before the dialog is painted
+const WARM_UP_PAINT_TIMEOUT = 500; // ms
 
 @registerClass()
 class IncognitoButton extends St.Button {
@@ -266,6 +273,11 @@ export class ClipboardDialog extends Clutter.Actor {
 
 	private _orientation: Clutter.Orientation = Clutter.Orientation.HORIZONTAL;
 
+	private _warmUpSourceId: number = 0;
+	private _warmUpIdleWatchId: number = 0;
+	private _warmUpSignalIds: number[] = [];
+	private _warmingUp: boolean = false;
+
 	private readonly _ibusManager: IBusManager.IBusManager;
 
 	private readonly _monitorConstraint: Layout.MonitorConstraint;
@@ -402,11 +414,109 @@ export class ClipboardDialog extends Clutter.Actor {
 	}
 
 	override destroy() {
+		this.cancelWarmUp();
 		(Main.inputMethod as Clutter.InputMethod).disconnectObject(this);
 		this._ibusManager.disconnectObject(this);
 		this.ext.settings.disconnectObject(this);
 
 		super.destroy();
+	}
+
+	/**
+	 * Does the work of the first open ahead of time.
+	 *
+	 * The history items are created while the dialog is hidden, and St defers the style work of widgets that aren't
+	 * mapped. Without a warm-up, the first open styles, maps and paints the whole history inside the open animation.
+	 * This resolves the styles in short low-priority idle slices, then maps and paints the dialog invisibly once the
+	 * user has been idle for a moment. Idle inhibitors (e.g. a playing video) postpone the paint, since it blocks the
+	 * main loop for one frame.
+	 */
+	public scheduleWarmUp() {
+		this.cancelWarmUp();
+
+		// The items are mapped while the dialog is open, so opening does the work of the warm-up itself
+		if (this.opened || this._closing) return;
+
+		// The stack is kept between slices, so each slice continues where the previous one stopped
+		const stack: Clutter.Actor[] = [this];
+		const styleSlice = () => {
+			const end = GLib.get_monotonic_time() + WARM_UP_SLICE;
+			for (let actor = stack.pop(); actor; actor = stack.pop()) {
+				// Skip actors that were removed between slices, ensure_style() needs the widget to be on the stage
+				if (!actor.get_stage()) continue;
+				if (actor instanceof St.Widget) actor.ensure_style();
+				stack.push(...actor.get_children().reverse());
+				if (GLib.get_monotonic_time() >= end) return GLib.SOURCE_CONTINUE;
+			}
+
+			this._warmUpSourceId = 0;
+			const idleMonitor = global.backend.get_core_idle_monitor();
+			this._warmUpIdleWatchId = idleMonitor.add_idle_watch(WARM_UP_USER_IDLE_TIME, () => {
+				// Idle watches fire every time the user becomes idle, so remove it after the first time
+				idleMonitor.remove_watch(this._warmUpIdleWatchId);
+				this._warmUpIdleWatchId = 0;
+				this.paintInvisibly();
+			});
+			return GLib.SOURCE_REMOVE;
+		};
+
+		this._warmUpSourceId = GLib.timeout_add(GLib.PRIORITY_LOW, WARM_UP_DELAY, () => {
+			this._warmUpSourceId = GLib.idle_add(GLib.PRIORITY_LOW, styleSlice);
+			return GLib.SOURCE_REMOVE;
+		});
+	}
+
+	private paintInvisibly() {
+		// The monitor and fit constraints need a monitor
+		if (global.display.get_n_monitors() === 0) return;
+
+		this._warmingUp = true;
+
+		// Lay out the dialog like an open on the current monitor would
+		this._monitorConstraint.index = global.display.get_current_monitor();
+		this._scrollView.updateTimes();
+
+		this._dialog.opacity = 255;
+		this.opacity = 1;
+		this.show();
+
+		// Hide the dialog again after the first frame of a monitor that shows it. Every monitor has its own frame
+		// clock, so a frame of another monitor doesn't count.
+		const updatedViews = new Set<Clutter.StageView>();
+		this._warmUpSignalIds = [
+			global.stage.connect('before-update', (_stage, view: Clutter.StageView) => updatedViews.add(view)),
+			global.stage.connect('after-paint', (_stage, view: Clutter.StageView) => {
+				if (updatedViews.has(view) && this._dialog.peek_stage_views().includes(view)) this.finishWarmUp();
+			}),
+		];
+
+		// The monitor isn't painted while a fullscreen window is unredirected
+		this._warmUpSourceId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, WARM_UP_PAINT_TIMEOUT, () => {
+			this._warmUpSourceId = 0;
+			this.finishWarmUp();
+			return GLib.SOURCE_REMOVE;
+		});
+	}
+
+	private finishWarmUp() {
+		if (!this._warmingUp) return;
+		this._warmingUp = false;
+
+		for (const id of this._warmUpSignalIds) global.stage.disconnect(id);
+		this._warmUpSignalIds = [];
+		if (this._warmUpSourceId) GLib.source_remove(this._warmUpSourceId);
+		this._warmUpSourceId = 0;
+
+		this.hide();
+		this.opacity = 255;
+	}
+
+	private cancelWarmUp() {
+		this.finishWarmUp();
+		if (this._warmUpSourceId) GLib.source_remove(this._warmUpSourceId);
+		this._warmUpSourceId = 0;
+		if (this._warmUpIdleWatchId) global.backend.get_core_idle_monitor().remove_watch(this._warmUpIdleWatchId);
+		this._warmUpIdleWatchId = 0;
 	}
 
 	get opened(): boolean {
@@ -426,6 +536,10 @@ export class ClipboardDialog extends Clutter.Actor {
 	public open() {
 		if (this.opened || this._closing) return;
 
+		// Hide the dialog before taking the grab if the warm-up is painting it
+		const warmingUp = this._warmingUp;
+		this.finishWarmUp();
+
 		this._updateCursor = false;
 		this._nextCursor = this._cursor;
 
@@ -440,8 +554,13 @@ export class ClipboardDialog extends Clutter.Actor {
 				: (grab as Clutter.Grab & { get_seat_state(): number }).get_seat_state() !== 3; // Clutter.GrabState.ALL
 		if (grabFailed) {
 			Main.popModal(grab);
+			// The dialog wasn't shown, so a pending warm-up stays scheduled and an interrupted one starts over
+			if (warmingUp) this.scheduleWarmUp();
 			return;
 		}
+
+		// Opening does the work of the warm-up itself
+		this.cancelWarmUp();
 
 		this._grab = grab;
 		this._monitorConstraint.index = global.display.get_current_monitor();
@@ -487,6 +606,8 @@ export class ClipboardDialog extends Clutter.Actor {
 			scaleY: 1,
 			duration: ANIMATION_TIME,
 			mode,
+			// The items after the first page update their time label after the open animation
+			onComplete: () => this._scrollView.updateTimes(),
 		});
 	}
 
@@ -888,11 +1009,19 @@ export class ClipboardDialog extends Clutter.Actor {
 		return Clutter.EVENT_STOP;
 	}
 
+	override vfunc_pick(context: Clutter.PickContext): void {
+		// Nothing can be hovered or clicked during the warm-up
+		if (!this._warmingUp) super.vfunc_pick(context);
+	}
+
 	override vfunc_map(): void {
 		super.vfunc_map();
 
 		// Update fit constraint
 		this.updateFitConstraint();
+
+		// Don't take the key focus during the warm-up
+		if (this._warmingUp) return;
 
 		// Navigate to first item
 		if (!this._scrollView.navigate_focus(null, St.DirectionType.DOWN, false)) {

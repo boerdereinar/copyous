@@ -138,6 +138,14 @@ export class ClipboardItem extends St.Button {
 		this.visible = query.matchesEntry(this.visible, this.entry, this.entry.content);
 	}
 
+	public updateTime() {
+		this._header.updateTime();
+	}
+
+	public setUpdateTimeOnMap(update: boolean) {
+		this._header.setUpdateTimeOnMap(update);
+	}
+
 	private updateSize() {
 		const width = this.ext.settings.get_int('item-width');
 		const height = this.ext.settings.get_int('item-height');
