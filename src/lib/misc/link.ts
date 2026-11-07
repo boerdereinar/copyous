@@ -206,7 +206,7 @@ export async function tryGetLinkImage(
 		await imagePath.replace_contents_async(data, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, cancellable);
 		return imagePath;
 	} catch {
-		if (!cancellable.is_cancelled()) ext.logger.error('Failed to get link image');
+		if (!cancellable.is_cancelled()) ext.logger.debug('Failed to get link image');
 	} finally {
 		session?.abort();
 	}
