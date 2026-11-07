@@ -25,6 +25,39 @@
 	padding: 0;
 	margin: 0;
 
+	// Optional type accents leave the foreground colors of user tags intact.
+	@if $contrast != 'high' {
+		&.type-colors {
+			$types: (
+				'item-type-text': $tag_color_blue,
+				'item-type-code': $tag_color_purple,
+				'item-type-image': $tag_color_orange,
+				'item-type-file': $tag_color_teal,
+				'item-type-files': $tag_color_teal,
+				'item-type-link': $tag_color_green,
+				'item-type-character': $tag_color_pink,
+				'item-type-color': $tag_color_yellow,
+				'file-category-pdf': $tag_color_red,
+				'file-category-spreadsheet': $tag_color_green,
+				'file-category-document': $tag_color_blue,
+				'file-category-image': $tag_color_orange,
+				'file-category-audio': $tag_color_pink,
+				'file-category-video': $tag_color_purple,
+				'file-category-application': $tag_color_teal,
+				'file-category-archive': $tag_color_yellow,
+				'file-category-text': $tag_color_slate,
+			);
+			@each $type, $color in $types {
+				&.#{$type} {
+					border-left: 3px solid $color;
+					.clipboard-item-header {
+						background-color: transparentize($color, 0.88);
+					}
+				}
+			}
+		}
+	}
+
 	.clipboard-item-box {
 		padding: $base_padding * 0.75 0 $base_padding * 1.25 0;
 	}

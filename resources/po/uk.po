@@ -1025,9 +1025,17 @@ msgstr "Показувати відомості про текст"
 msgid "Show extra information in the text item"
 msgstr "Показувати додаткову інформацію в текстовому елементі"
 
-#: src/lib/preferences/customization/itemsCustomization.ts:23
+#: src/lib/preferences/customization/itemsCustomization.ts:24
 msgid "Items"
 msgstr "Елементи"
+
+#: src/lib/preferences/customization/itemsCustomization.ts:37
+msgid "Color by Type"
+msgstr ""
+
+#: src/lib/preferences/customization/itemsCustomization.ts:38
+msgid "Use distinct colors for clipboard items and file formats"
+msgstr ""
 
 #: src/lib/preferences/customization/profiles.ts:208
 msgid "Profiles"

@@ -317,6 +317,10 @@
 			<default>'visible'</default>
 			<summary>Visibility of the header controls of a clipboard item</summary>
 		</key>
+		<key name="color-by-item-type" type="b">
+			<default>false</default>
+			<summary>Use distinct colors for clipboard item types and file formats</summary>
+		</key>
 		<key name="show-item-title" type="b">
 			<default>true</default>
 			<summary>Show the title of a clipboard item</summary>

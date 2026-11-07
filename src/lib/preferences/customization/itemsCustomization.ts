@@ -1,5 +1,6 @@
 import Adw from 'gi://Adw';
 import GObject from 'gi://GObject';
+import Gio from 'gi://Gio';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
@@ -31,6 +32,13 @@ export class ItemsCustomization extends Adw.PreferencesGroup {
 		this.add(file);
 		this.add(new LinkItemCustomization(prefs, window));
 		this.add(new CharacterItemCustomization(prefs));
+
+		const colorByType = new Adw.SwitchRow({
+			title: _('Color by Type'),
+			subtitle: _('Use distinct colors for clipboard items and file formats'),
+		});
+		this.add(colorByType);
+		prefs.getSettings().bind('color-by-item-type', colorByType, 'active', Gio.SettingsBindFlags.DEFAULT);
 
 		this.bind_property('hljs', code, 'sensitive', GObject.BindingFlags.SYNC_CREATE);
 		this.bind_property('hljs', file, 'hljs', GObject.BindingFlags.SYNC_CREATE);

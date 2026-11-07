@@ -55,6 +55,7 @@ export const Settings = {
 	ShowHeader: 'show-header',
 	HeaderControlsVisibility: 'header-controls-visibility',
 	ShowItemTitle: 'show-item-title',
+	ColorByItemType: 'color-by-item-type',
 
 	TextItem: {
 		ShowTextInfo: 'show-text-info',
@@ -187,6 +188,7 @@ export const SettingsTypes = {
 	[Settings.ShowHeader]: 'boolean',
 	[Settings.HeaderControlsVisibility]: 'enum',
 	[Settings.ShowItemTitle]: 'boolean',
+	[Settings.ColorByItemType]: 'boolean',
 
 	[Settings.OpenClipboardDialogShortcut]: 'strv',
 	[Settings.ToggleIncognitoModeShortcut]: 'strv',
