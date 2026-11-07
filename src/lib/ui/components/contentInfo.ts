@@ -291,7 +291,7 @@ export async function tryCreateMediaFileInfo(
 
 		return Number.isFinite(duration) && duration >= 0 ? new MediaInfo(ext, size, duration) : null;
 	} catch (error) {
-		ext.logger.error(error);
+		if (!cancellable.is_cancelled()) ext.logger.error(error);
 		return null;
 	}
 }
