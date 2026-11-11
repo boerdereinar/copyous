@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Copyous\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-11-06 13:53+0000\n"
-"PO-Revision-Date: 2026-10-13 18:51+0200\n"
+"PO-Revision-Date: 2026-11-11 10:19+0100\n"
 "Last-Translator: Adam Lewicki <a.lewicki95@gmail.com>\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
 "|| n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #: src/lib/common/actions.ts:182
 msgid "Open"
@@ -1062,7 +1062,7 @@ msgstr "Ustaw preferowany motyw"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 msgid "Automatic"
-msgstr ""
+msgstr "Automatycznie"
 
 #: src/lib/preferences/customization/themeCustomization.ts:75
 msgid "Yaru"
@@ -1303,12 +1303,12 @@ msgstr "Zachowanie"
 
 #: src/lib/preferences/general/behaviorSettings.ts:18
 msgid "Paste on Copy"
-msgstr ""
+msgstr "Wklej przy kopiowaniu"
 
 #: src/lib/preferences/general/behaviorSettings.ts:19
 msgid ""
 "Automatically paste clipboard items when selected from clipboard history"
-msgstr ""
+msgstr "Automatycznie wklej elementy schowka podczas wybierania go z historii"
 
 #: src/lib/preferences/general/behaviorSettings.ts:24
 msgid "Remember Search Query"
@@ -1925,213 +1925,3 @@ msgstr "Personalizacja"
 #: src/prefs.ts:114
 msgid "Shortcuts"
 msgstr "Skróty klawiszowe"
-
-#~ msgid "Action to perform when the middle mouse button is clicked"
-#~ msgstr "Czynność wykonywana po kliknięciu środkowym przyciskiem myszy"
-
-#~ msgid "Apps that will be excluded from clipboard history"
-#~ msgstr "Programy, które będą wykluczone z historii schowka"
-
-#~ msgid ""
-#~ "Automatically paste clipboard items when selected from clipboard history "
-#~ "(Deprecated)"
-#~ msgstr ""
-#~ "Automatycznie wklejaj elementy po wybraniu ich z historii (Przestarzałe)"
-
-#~ msgid "Background size of the preview image of the link"
-#~ msgstr "Rozmiar tła obrazu podglądu odnośnika"
-
-#~ msgid ""
-#~ "Behavior of the open clipboard dialog shortcut when the dialog is open/"
-#~ "closed."
-#~ msgstr ""
-#~ "Zachowanie skrótu otwierania okna schowka, gdy okno jest otwarte/"
-#~ "zamknięte."
-
-#~ msgid "Bottom margin of the clipboard dialog"
-#~ msgstr "Dolny margines okna dialogowego schowka"
-
-#~ msgid "Disable Gda warning"
-#~ msgstr "Wyłącz ostrzeżenie GDA"
-
-#~ msgid ""
-#~ "Disable the hljs dialog from showing up when launching preferences if "
-#~ "hljs is not installed"
-#~ msgstr ""
-#~ "Wyłącz wyświetlanie okna hljs podczas otwierania ustawień, jeśli hljs nie "
-#~ "jest zainstalowany"
-
-#~ msgid "Do not record clipboard history"
-#~ msgstr "Nie zapisuj historii schowka"
-
-#~ msgid ""
-#~ "Dynamically adjust the height of the clipboard items based on their "
-#~ "content"
-#~ msgstr ""
-#~ "Dynamicznie dostosowuj wysokość elementów schowka na podstawie ich "
-#~ "zawartości"
-
-#~ msgid "Enable syntax highlighting"
-#~ msgstr "Włącz podświetlanie składni"
-
-#~ msgid "Enable syntax highlighting in the text preview"
-#~ msgstr "Włącz podświetlanie składni w podglądzie tekstu"
-
-#~ msgid ""
-#~ "File preview shows a preview of the contents of a file. File info shows "
-#~ "some information about the file."
-#~ msgstr ""
-#~ "Podgląd pliku wyświetla zawartość pliku. Informacje o pliku wyświetlają "
-#~ "podstawowe dane o pliku."
-
-#~ msgid "Files matching these glob patterns will not have a preview"
-#~ msgstr "Pliki pasujące do tych wzorców 'glob' nie będą miały podglądu"
-
-#~ msgid "Height of a clipboard item"
-#~ msgstr "Wysokość elementu schowka"
-
-#~ msgid "Horizontal position of the clipboard dialog"
-#~ msgstr "Poziome położenie okna dialogowego schowka"
-
-#~ msgid "Left margin of the clipboard dialog"
-#~ msgstr "Lewy margines okna dialogowego schowka"
-
-#~ msgid "Links matching these regex patterns will not have a preview"
-#~ msgstr ""
-#~ "Odnośniki pasujące do tych wyrażeń regularnych nie będą miały podglądu"
-
-#~ msgid "Maximum number of characters that are recognized as a character"
-#~ msgstr "Maksymalna liczba znaków rozpoznawana jako pojedynczy znak"
-
-#~ msgid ""
-#~ "Number of minutes to keep unpinned and untagged items in the clipboard "
-#~ "history. Set to 0 to disable the time limit"
-#~ msgstr ""
-#~ "Liczba minut przechowywania nieprzypiętych i nieoznaczonych elementów w "
-#~ "historii. Ustaw na 0, aby wyłączyć limit czasu"
-
-#~ msgid ""
-#~ "Number of unpinned and untagged items to keep in the clipboard history"
-#~ msgstr ""
-#~ "Liczba nieprzypiętych i nieoznaczonych elementów zachowywanych w historii "
-#~ "schowka"
-
-#~ msgid "Orientation of the clipboard dialog"
-#~ msgstr "Orientacja okna dialogowego schowka"
-
-#~ msgid ""
-#~ "Path to the database. When empty defaults to {XDG_DATA_HOME}/{EXTENSION "
-#~ "UUID}/clipboard.{db,json} depending on the backend."
-#~ msgstr ""
-#~ "Ścieżka do bazy danych. Jeśli pozostanie pusta, domyślnie zostanie użyte "
-#~ "{XDG_DATA_HOME}/{EXTENSION UUID}/clipboard.{db,json} w zależności od "
-#~ "silnika."
-
-#~ msgid "Remember the last search"
-#~ msgstr "Zapamiętaj ostatnie wyszukiwanie"
-
-#~ msgid "Right margin of the clipboard dialog"
-#~ msgstr "Prawy margines okna dialogowego schowka"
-
-#~ msgid "Selects which backend to use for the clipboard database."
-#~ msgstr "Wybiera silnik bazy danych używany dla historii schowka."
-
-#~ msgid "Shortcut to delete a clipboard item"
-#~ msgstr "Skrót do usuwania elementu schowka"
-
-#~ msgid "Shortcut to edit a clipboard item"
-#~ msgstr "Skrót do edycji elementu schowka"
-
-#~ msgid "Shortcut to edit the title of a clipboard item"
-#~ msgstr "Skrót do edycji tytułu elementu schowka"
-
-#~ msgid "Shortcut to open the clipboard dialog"
-#~ msgstr "Skrót do otwierania okna dialogowego schowka"
-
-#~ msgid "Shortcut to open the menu of a clipboard item"
-#~ msgstr "Skrót do otwierania menu elementu schowka"
-
-#~ msgid "Shortcut to pin a clipboard item"
-#~ msgstr "Skrót do przypinania elementu schowka"
-
-#~ msgid "Shortcut to toggle incognito mode"
-#~ msgstr "Skrót do przełączania trybu prywatnego"
-
-#~ msgid "Shortcut to toggle the pinned items search filter"
-#~ msgstr "Skrót do przełączenia filtru wyszukiwania przypiętych elementów"
-
-#~ msgid "Show a preview image of the link"
-#~ msgstr "Pokazuj obraz podglądu odnośnika"
-
-#~ msgid "Show a preview of the link"
-#~ msgstr "Pokazuj podgląd odnośnika"
-
-#~ msgid "Show extra information"
-#~ msgstr "Pokazuj dodatkowe informacje"
-
-#~ msgid "Show line numbers"
-#~ msgstr "Pokazuj numery linii"
-
-#~ msgid "Show the clipboard dialog at the text cursor position"
-#~ msgstr "Pokaż okno dialogowe schowka w pozycji kursora tekstowego"
-
-#~ msgid "Show the clipboard icon in the indicator (Deprecated)"
-#~ msgstr "Pokazuj ikonę schowka na wskaźniku (Przestarzałe)"
-
-#~ msgid "Show the current clipboard content in the indicator (Deprecated)"
-#~ msgstr "Pokazuj aktualną zawartość schowka na wskaźniku (Przestarzałe)"
-
-#~ msgid "Show the header of a clipboard item"
-#~ msgstr "Pokazuj nagłówek elementu schowka"
-
-#~ msgid "Show the title of a clipboard item"
-#~ msgstr "Pokazuj tytuł elementu schowka"
-
-#~ msgid "Store clipboard history in memory instead of on disk (Deprecated)"
-#~ msgstr ""
-#~ "Przechowuj historię schowka w pamięci zamiast na dysku (Przestarzałe)"
-
-#~ msgid "Swaps copy and paste shortcuts"
-#~ msgstr "Zamienia skróty kopiowania i wklejania"
-
-#~ msgid "Tab width"
-#~ msgstr "Szerokość tabulacji"
-
-#~ msgid "The background color of clipboard items"
-#~ msgstr "Kolor tła elementów schowka"
-
-#~ msgid "The background color of the clipboard dialog"
-#~ msgstr "Kolor tła okna dialogowego schowka"
-
-#~ msgid "The background color of the search bar"
-#~ msgstr "Kolor tła paska wyszukiwania"
-
-#~ msgid "The color scheme of the custom theme"
-#~ msgstr "Schemat kolorów motywu niestandardowego"
-
-#~ msgid "The color scheme of the theme"
-#~ msgstr "Schemat kolorów motywu"
-
-#~ msgid "The preferred theme"
-#~ msgstr "Preferowany motyw"
-
-#~ msgid "The text color of the clipboard dialog"
-#~ msgstr "Kolor tekstu okna dialogowego schowka"
-
-#~ msgid "Top margin of the clipboard dialog"
-#~ msgstr "Górny margines okna dialogowego schowka"
-
-#~ msgid "Vertical position of the clipboard dialog"
-#~ msgstr "Pionowe położenie okna dialogowego schowka"
-
-#~ msgid "Visibility of the header controls of a clipboard item"
-#~ msgstr "Widoczność kontrolek nagłówka elementu schowka"
-
-#~ msgid "Volume of the sound as a decibel offset"
-#~ msgstr "Głośność dźwięku jako przesunięcie w decybelach"
-
-#~ msgid "Width of a clipboard item"
-#~ msgstr "Szerokość elementu schowka"
-
-#~ msgid "Width or height of the clipboard dialog depending on the orientation"
-#~ msgstr "Szerokość lub wysokość okna schowka w zależności od orientacji"
