@@ -23,6 +23,20 @@ import { ClipboardHistory, IndicatorDisplay } from '../common/settings.js';
 import { ClipboardEntry } from '../database/database.js';
 import { VERSION } from '../misc/compatibility.js';
 
+const indicatorPreviewLimit = 4096;
+let indicatorSegmenter: Intl.Segmenter | undefined;
+
+function indicatorPreview(content: string): string {
+	// Keep indentation and blank lines from consuming the panel's limited width.
+	const text = content.replace(/[ \t\r\n\u0085\u2028\u2029]+/g, ' ').trim();
+	if (text.length <= indicatorPreviewLimit) return text;
+
+	// Bound the text layout work while keeping the last visible grapheme intact.
+	indicatorSegmenter ??= new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+	const end = indicatorSegmenter.segment(text).containing(indicatorPreviewLimit)?.index ?? indicatorPreviewLimit;
+	return text.slice(0, end) + '…';
+}
+
 @registerClass({
 	Signals: {
 		'clear-history': {
@@ -180,7 +194,7 @@ export class ClipboardIndicator extends PanelMenu.Button {
 			case ItemType.Code:
 			case ItemType.Link:
 			case ItemType.Character:
-				this.showText(entry.content.split('\n')[0] ?? '');
+				this.showText(indicatorPreview(entry.content));
 				break;
 			case ItemType.Image:
 				this.showImageFile(Gio.File.new_for_uri(entry.content));
