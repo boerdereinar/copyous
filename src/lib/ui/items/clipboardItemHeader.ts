@@ -17,6 +17,9 @@ import { HeaderControlsVisibility } from '../../common/settings.js';
 class TimeLabel extends St.Label {
 	private _datetime: GLib.DateTime;
 
+	// Whether mapping the label updates its text (see ClipboardScrollContainer.vfunc_map)
+	public updateOnMap: boolean = true;
+
 	constructor() {
 		super({
 			style_class: 'event-time',
@@ -39,15 +42,15 @@ class TimeLabel extends St.Label {
 
 		this._datetime = datetime;
 
-		if (this.mapped) this._updateText();
+		if (this.mapped) this.update();
 	}
 
-	private _updateText() {
+	public update() {
 		this.text = formatTimeSpan(this._datetime);
 	}
 
 	override vfunc_map() {
-		this._updateText();
+		if (this.updateOnMap) this.update();
 
 		super.vfunc_map();
 	}
@@ -241,6 +244,14 @@ export class ClipboardItemHeader extends St.BoxLayout {
 	set datetime(datetime) {
 		this._timeLabel.datetime = datetime;
 		this.notify('datetime');
+	}
+
+	public updateTime() {
+		this._timeLabel.update();
+	}
+
+	public setUpdateTimeOnMap(update: boolean) {
+		this._timeLabel.updateOnMap = update;
 	}
 
 	get forceDelete() {

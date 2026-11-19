@@ -375,11 +375,40 @@ export class ClipboardScrollContainer extends St.BoxLayout {
 		return res;
 	}
 
+	public updateTimes(): void {
+		for (const child of this.get_children()) {
+			if (child instanceof ClipboardItem && child.visible) child.updateTime();
+		}
+	}
+
+	// Uses the allocations from the last time the container was laid out
+	private getItemsAfterFirstPage(): ClipboardItem[] {
+		const vertical = this.orientation === Clutter.Orientation.VERTICAL;
+		const pageSize = (vertical ? this.vadjustment : this.hadjustment).page_size;
+		const items: ClipboardItem[] = [];
+		if (pageSize <= 0) return items;
+
+		let offset = 0;
+		for (const child of this.get_children()) {
+			if (!(child instanceof ClipboardItem) || !child.visible) continue;
+			if (offset >= pageSize) items.push(child);
+			const box = child.get_allocation_box();
+			offset += vertical ? box.get_height() : box.get_width();
+		}
+		return items;
+	}
+
 	override vfunc_map(): void {
 		this._lastFocus = null;
 		this.hadjustment.value = 0;
 		this.vadjustment.value = 0;
 
+		// A time label whose text changes relays out its item. The dialog opens at the first item, so only the items on
+		// the first page update their time label now. The dialog calls updateTimes() for the rest after the open
+		// animation.
+		const deferred = this.getItemsAfterFirstPage();
+		for (const item of deferred) item.setUpdateTimeOnMap(false);
 		super.vfunc_map();
+		for (const item of deferred) item.setUpdateTimeOnMap(true);
 	}
 }

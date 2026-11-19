@@ -273,6 +273,8 @@ export default class CopyousExtension extends Extension {
 		for (const entry of entries) {
 			this.clipboardDialog?.addEntry(entry);
 		}
+
+		this.clipboardDialog?.scheduleWarmUp();
 	}
 
 	private async initHistoryTimeout() {
