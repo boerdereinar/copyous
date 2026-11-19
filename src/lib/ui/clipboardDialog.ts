@@ -472,6 +472,9 @@ export class ClipboardDialog extends Clutter.Actor {
 
 		this._warmingUp = true;
 
+		// Nothing can be hovered or clicked during the warm-up
+		Shell.util_set_hidden_from_pick(this, true);
+
 		// Lay out the dialog like an open on the current monitor would
 		this._monitorConstraint.index = global.display.get_current_monitor();
 		this._scrollView.updateTimes();
@@ -501,6 +504,7 @@ export class ClipboardDialog extends Clutter.Actor {
 	private finishWarmUp() {
 		if (!this._warmingUp) return;
 		this._warmingUp = false;
+		Shell.util_set_hidden_from_pick(this, false);
 
 		for (const id of this._warmUpSignalIds) global.stage.disconnect(id);
 		this._warmUpSignalIds = [];
@@ -1007,11 +1011,6 @@ export class ClipboardDialog extends Clutter.Actor {
 
 		this.close();
 		return Clutter.EVENT_STOP;
-	}
-
-	override vfunc_pick(context: Clutter.PickContext): void {
-		// Nothing can be hovered or clicked during the warm-up
-		if (!this._warmingUp) super.vfunc_pick(context);
 	}
 
 	override vfunc_map(): void {
